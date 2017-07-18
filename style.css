@@ -1,96 +1,65 @@
 html {
-  height: 100%;
-}
+  height: 100%; }
 
 body {
-  margin: 0;
-}
+  margin: 0; }
 
 .invisible {
-  display: none !important;
-}
+  display: none !important; }
 
 .full-page {
   width: 100%;
-  height: 100%;
-}
+  height: 100%; }
 
 .login-wrapper {
   display: flex;
   align-items: center;
-  height: 100%;
-}
-
-.login-wrapper form {
-  border: #000 solid 1px;
-  padding: 15px;
-  border-radius: 5px;
-  margin: auto;
-}
-
-.login-wrapper form .form-input {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
-}
-
-.login-wrapper form button.submit {
-  float: right;
-}
-
-.login-wrapper form button.submit img.loading {
-  width: 11px;
-  position: relative;
-  top: 1px;
-}
-
-.login-wrapper form .form-input label {
-  margin-right: 5px;
-}
+  height: 100%; }
+  .login-wrapper form {
+    border: #000 solid 1px;
+    padding: 15px;
+    border-radius: 50px;
+    margin: auto; }
+    .login-wrapper form .form-input {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px; }
+      .login-wrapper form .form-input label {
+        margin-right: 5px; }
+    .login-wrapper form button.submit {
+      float: right; }
+      .login-wrapper form button.submit img.loading {
+        width: 11px;
+        position: relative;
+        top: 1px; }
 
 .viewer-wrapper {
-  display: flex;
-}
-
-.viewer-wrapper .left-sidebar {
-  flex: 0;
-}
-
-.viewer-wrapper .left-sidebar .viewer-tools{
-  width: 200px;
-}
-
-.viewer-wrapper .left-sidebar .viewer-tools a.active {
-  color: #efefef;
-}
-
-.viewer-wrapper .viewport {
-  flex: 1;
-  position: relative;
-}
-
-.viewer-wrapper #conerstoneViewport {
-  width: 100%;
-  height: calc(100% - 10px);
-  top: 0;
-  left: 0;
-  position: absolute;
-}
-
-.viewer-wrapper #conerstoneViewport canvas {
-  width: 100% !important;
-  height: 100% !important;
-}
+  display: flex; }
+  .viewer-wrapper .left-sidebar {
+    flex: 0; }
+    .viewer-wrapper .left-sidebar .viewer-tools {
+      width: 200px; }
+      .viewer-wrapper .left-sidebar .viewer-tools a.active {
+        color: #efefef; }
+  .viewer-wrapper .viewport {
+    flex: 1;
+    position: relative; }
+  .viewer-wrapper #conerstoneViewport {
+    width: 100%;
+    height: calc(100% - 10px);
+    top: 0;
+    left: 0;
+    position: absolute; }
+    .viewer-wrapper #conerstoneViewport canvas {
+      width: 100% !important;
+      height: 100% !important; }
 
 .scroll {
   background-color: #ff0000;
   height: 10px;
   bottom: 0px;
   position: absolute;
-  width: 100%;
-}
-
-.scroll .thumb {
-  background-color: #ffffff;
-  height: 10px;
-}
+  width: 100%; }
+  .scroll .thumb {
+    background-color: #ffffff;
+    height: 10px; }

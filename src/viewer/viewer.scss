@@ -1,0 +1,46 @@
+.viewer-wrapper {
+  display: flex;
+
+  .left-sidebar {
+    flex: 0;
+
+    .viewer-tools {
+      width: 200px;
+
+      a.active {
+        color: #efefef;
+      }
+    }
+  }
+
+  .viewport {
+    flex: 1;
+    position: relative;
+  }
+
+  #conerstoneViewport {
+    width: 100%;
+    height: calc(100% - 10px);
+    top: 0;
+    left: 0;
+    position: absolute;
+
+    canvas {
+      width: 100% !important;
+      height: 100% !important;
+    }
+  }
+}
+
+.scroll {
+  background-color: #ff0000;
+  height: 10px;
+  bottom: 0px;
+  position: absolute;
+  width: 100%;
+
+  .thumb {
+    background-color: #ffffff;
+    height: 10px;
+  }
+}

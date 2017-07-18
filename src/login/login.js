@@ -1,4 +1,4 @@
-var Viewer = require('./viewer');
+var Viewer = require('../viewer/viewer');
 
 $('.login-wrapper form').on('submit', function (evt) {
   evt.preventDefault();

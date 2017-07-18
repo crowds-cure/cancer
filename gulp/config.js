@@ -1,6 +1,8 @@
 module.exports = {
-  entry: 'src/login.js',
+  entry: 'src/login/login.js',
   dist: './',
   src: './src',
-  buildFileName: 'bundle.js'
+  sassEntry: './src/main.scss',
+  buildFileJsName: 'bundle.js',
+  buildFileCSSName: 'style.css'
 };

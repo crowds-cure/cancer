@@ -1,0 +1,32 @@
+.login-wrapper {
+  display: flex;
+  align-items: center;
+  height: 100%;
+
+  form {
+    border: #000 solid 1px;
+    padding: 15px;
+    border-radius: 50px;
+    margin: auto;
+
+    .form-input {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+
+      label {
+        margin-right: 5px;
+      }
+    }
+
+    button.submit {
+      float: right;
+
+      img.loading {
+        width: 11px;
+        position: relative;
+        top: 1px;
+      }
+    }
+  }
+}

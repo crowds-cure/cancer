@@ -6,6 +6,6 @@ const config = require('../config');
 gulp.task('build', function () {
   return gulp.src(config.entry)
     .pipe(browserify())
-    .pipe(rename(config.buildFileName))
+    .pipe(rename(config.buildFileJsName))
     .pipe(gulp.dest(config.dist));
 });
