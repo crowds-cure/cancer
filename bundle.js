@@ -101,42 +101,27 @@ module.exports = {
 };
 
 },{}],3:[function(require,module,exports){
+var Viewer = require('./viewer');
+
 $('.login-wrapper form').on('submit', function (evt) {
   evt.preventDefault();
 
+  var $loadingImg = $('.login-wrapper form button.submit img.loading');
+  var $loginForm = $('.login-wrapper');
+
+  $loadingImg.removeClass('invisible');
   
+  // Mocking login
+  setTimeout(function () {
+    $loadingImg.addClass('invisible');
+    $loginForm.addClass('invisible');
+
+    Viewer.initViewer();
+
+  }, 1000);
 });
 
-},{}],4:[function(require,module,exports){
-(function () {
-  var Files = require('./files');
-  var Tools = require('./tools');
-  var Login = require('./login');
-  var Commands = require('./commands');
-
-  cornerstone.registerImageLoader('example', Files.getExampleImage);
-
-  // THE LOARDER
-  var element = document.getElementById('conerstoneViewport');
-
-  Tools.element = element;
-  Commands.element = element;
-
-  $(window).on('resize', function () {
-    cornerstone.resize(element, true);
-  });
-
-  cornerstone.enable(element);
-
-  Tools.initTools(Files.imagesIds);
-  Commands.initCommands();
-
-  cornerstone.loadImage(Files.imagesIds[0]).then(function(image) {
-    cornerstone.displayImage(element, image);
-  });
-})();
-
-},{"./commands":1,"./files":2,"./login":3,"./tools":5}],5:[function(require,module,exports){
+},{"./viewer":5}],4:[function(require,module,exports){
 module.exports = {
   active: '',
   toolsSelector: '.viewer-tools',
@@ -215,4 +200,37 @@ module.exports = {
   }
 };
 
-},{}]},{},[4]);
+},{}],5:[function(require,module,exports){
+var Files = require('./files');
+var Tools = require('./tools');
+var Commands = require('./commands');
+
+module.exports = {
+  initViewer: function () {
+    var $viewer = $('.viewer-wrapper');
+    $viewer.removeClass('invisible');
+
+    cornerstone.registerImageLoader('example', Files.getExampleImage);
+
+    // THE LOARDER
+    var element = document.getElementById('conerstoneViewport');
+
+    Tools.element = element;
+    Commands.element = element;
+
+    $(window).on('resize', function () {
+      cornerstone.resize(element, true);
+    });
+
+    cornerstone.enable(element);
+
+    Tools.initTools(Files.imagesIds);
+    Commands.initCommands();
+
+    cornerstone.loadImage(Files.imagesIds[0]).then(function(image) {
+      cornerstone.displayImage(element, image);
+    });
+  }
+}
+
+},{"./commands":1,"./files":2,"./tools":4}]},{},[3]);

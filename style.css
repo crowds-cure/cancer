@@ -38,6 +38,12 @@ body {
   float: right;
 }
 
+.login-wrapper form button.submit img.loading {
+  width: 11px;
+  position: relative;
+  top: 1px;
+}
+
 .login-wrapper form .form-input label {
   margin-right: 5px;
 }

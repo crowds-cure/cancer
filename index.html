@@ -10,15 +10,16 @@
       <form>
         <div class="form-input">
           <label for="username">Username:</label>
-          <input type="text" name="username" id="username"/>
+          <input type="email" name="username" id="username" required/>
         </div>
         <div class="form-input">
           <label for="username">Password:</label>
-          <input type="password" name="password" id="password"/>
+          <input type="password" name="password" id="password" required/>
         </div>
 
         <button class="submit" type="submit">
-          login
+          Login
+          <img src="./imgs/spinner.gif" class="loading invisible">
         </button>
       </form>
     </div>
