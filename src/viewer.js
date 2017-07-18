@@ -9,7 +9,6 @@ module.exports = {
 
     cornerstone.registerImageLoader('example', Files.getExampleImage);
 
-    // THE LOARDER
     var element = document.getElementById('conerstoneViewport');
 
     Tools.element = element;
