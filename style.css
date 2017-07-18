@@ -18,7 +18,7 @@ body {
   .login-wrapper form {
     border: #000 solid 1px;
     padding: 15px;
-    border-radius: 50px;
+    border-radius: 5px;
     margin: auto; }
     .login-wrapper form .form-input {
       display: flex;
