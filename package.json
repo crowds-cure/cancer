@@ -1,0 +1,31 @@
+{
+  "name": "lightweigthviewer",
+  "version": "1.0.0",
+  "description": "TBD",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run build && http-server",
+    "build": "browserify src/main.js -o bundle.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "engines": {
+    "node": "4.6.2"
+  },
+  "author": "Andre Almeida",
+  "license": "MIT",
+  "dependencies": {
+    "cornerstone-core": "^0.12.0",
+    "cornerstone-math": "^0.1.6",
+    "cornerstone-tools": "^0.8.9",
+    "cornerstone-wado-image-loader": "^0.14.6",
+    "dicom-parser": "^1.7.5",
+    "hammerjs": "^2.0.8",
+    "jquery": "^2.1.0",
+    "jquery-hammerjs": "^2.0.0"
+  },
+  "devDependencies": {
+    "browserify": "^14.4.0",
+    "http": "0.0.0",
+    "http-server": "^0.10.0"
+  }
+}
