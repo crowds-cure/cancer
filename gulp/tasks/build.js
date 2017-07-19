@@ -1,7 +1,6 @@
 const gulp = require('gulp');
 const rename = require('gulp-rename');
 const browserify = require('gulp-browserify');
-const babel = require('gulp-babel');
 const config = require('../config');
 
 gulp.task('build', function () {
