@@ -1,13 +1,13 @@
-module.exports = {
+export default {
   active: '',
   toolsSelector: '.viewer-tools',
-  deactivateActiveTool: function () {
+  deactivateActiveTool() {
     if (this.active) {
       this.deactivate(this.active);
       this.active = '';
     }
   },
-  toggleTool: function (toolToActivate) {
+  toggleTool(toolToActivate) {
     if (!toolToActivate) {
       return;
     }
@@ -21,13 +21,13 @@ module.exports = {
 
     this.active = toolToActivate;
   },
-  deactivate: function (tool) {
+  deactivate(tool) {
     cornerstoneTools[tool].disable(this.element);
     cornerstoneTools[tool].deactivate(this.element, 1);
   },
-  initStackTool: function (imageIds) {
-    var $thumb = $('.thumb');
-    var stack = {
+  initStackTool(imageIds) {
+    const $thumb = $('.thumb');
+    const stack = {
       currentImageIdIndex: 0,
       imageIds: imageIds
     };
@@ -46,9 +46,7 @@ module.exports = {
       });
     });
   },
-  initTools: function (imageIds) {
-    var self = this;
-
+  initTools(imageIds) {
     cornerstoneTools.mouseInput.enable(this.element);
     cornerstoneTools.pan.activate(this.element, 2);
     cornerstoneTools.zoom.activate(this.element, 4);
@@ -57,19 +55,19 @@ module.exports = {
     this.initStackTool(imageIds);
 
     // removing default context menu
-    this.element.oncontextmenu = function (evt) {
-      evt.preventDefault();
+    this.element.oncontextmenu = function (event) {
+      event.preventDefault();
 
       return false;
     };
 
-    $(this.toolsSelector).on('click', 'a[data-tool]', function (evt) {
+    $(this.toolsSelector).on('click', 'a[data-tool]', event => {
+      const $element = $(event.currentTarget);
+      const tool = $element.attr('data-tool');
+
       $('.active').removeClass('active');
 
-      var $element = $(this);
-      var tool = $element.attr('data-tool');
-
-      self.toggleTool(tool);
+      this.toggleTool(tool);
 
       $element.addClass('active');
     });

@@ -1,22 +1,20 @@
-var Files = require('./files');
-var Tools = require('./tools');
-var Commands = require('./commands');
+import Files from './files';
+import Tools from './tools';
+import Commands from './commands';
 
-module.exports = {
-  initViewer: function () {
-    var $viewer = $('.viewer-wrapper');
+export default {
+  initViewer() {
+    const $viewer = $('.viewer-wrapper');
+    const element = $('#conerstoneViewport')[0];
+
     $viewer.removeClass('invisible');
 
     cornerstone.registerImageLoader('example', Files.getExampleImage);
 
-    var element = document.getElementById('conerstoneViewport');
-
     Tools.element = element;
     Commands.element = element;
 
-    $(window).on('resize', function () {
-      cornerstone.resize(element, true);
-    });
+    $(window).on('resize', () => cornerstone.resize(element, true));
 
     cornerstone.enable(element);
 

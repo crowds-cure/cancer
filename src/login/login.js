@@ -1,10 +1,10 @@
-var Viewer = require('../viewer/viewer');
+import Viewer from '../viewer/viewer';
 
 $('.login-wrapper form').on('submit', function (evt) {
   evt.preventDefault();
 
-  var $loadingImg = $('.login-wrapper form button.submit img.loading');
-  var $loginForm = $('.login-wrapper');
+  const $loadingImg = $('.login-wrapper form button.submit img.loading');
+  const $loginForm = $('.login-wrapper');
 
   $loadingImg.removeClass('invisible');
   

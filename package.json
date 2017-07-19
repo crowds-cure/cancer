@@ -24,6 +24,7 @@
     "jquery-hammerjs": "^2.0.0"
   },
   "devDependencies": {
+    "babelify": "^7.3.0",
     "browserify": "^14.4.0",
     "gulp": "^3.9.1",
     "gulp-browserify": "^0.5.1",
