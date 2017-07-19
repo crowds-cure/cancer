@@ -9,8 +9,6 @@ export default {
 
     $viewer.removeClass('invisible');
 
-    cornerstone.registerImageLoader('example', Files.getExampleImage);
-
     Tools.element = element;
     Commands.element = element;
 
@@ -18,11 +16,14 @@ export default {
 
     cornerstone.enable(element);
 
-    Tools.initTools(Files.imagesIds);
-    Commands.initCommands();
+    Files.getCaseImages().then(function (imagesIds) {
+      Tools.initTools(imagesIds);
+      Commands.initCommands();
 
-    cornerstone.loadImage(Files.imagesIds[0]).then(function(image) {
-      cornerstone.displayImage(element, image);
-    });
+      cornerstone.loadImage(imagesIds[0]).then(function(image) {
+        cornerstone.displayImage(element, image);
+      });
+    }).catch();
+
   }
 }
