@@ -36,14 +36,23 @@ body {
 .viewer-wrapper {
   display: flex; }
   .viewer-wrapper .left-sidebar {
-    flex: 0; }
+    flex: 0;
+    background-color: #000; }
     .viewer-wrapper .left-sidebar .viewer-tools {
-      width: 200px; }
+      width: 14.28571rem; }
+      .viewer-wrapper .left-sidebar .viewer-tools a {
+        stroke: #9ccef9;
+        text-decoration: none; }
+        .viewer-wrapper .left-sidebar .viewer-tools a svg {
+          width: 2.14286rem;
+          height: 2.14286rem; }
       .viewer-wrapper .left-sidebar .viewer-tools a.active {
-        color: #efefef; }
+        color: #efefef;
+        stroke: #efefef; }
   .viewer-wrapper .viewport {
     flex: 1;
-    position: relative; }
+    position: relative;
+    border: 0.07143rem solid #00a4d9; }
   .viewer-wrapper #conerstoneViewport {
     width: 100%;
     height: calc(100% - 10px);
@@ -56,10 +65,10 @@ body {
 
 .scroll {
   background-color: #ff0000;
-  height: 10px;
+  height: 0.71429rem;
   bottom: 0px;
   position: absolute;
   width: 100%; }
   .scroll .thumb {
     background-color: #ffffff;
-    height: 10px; }
+    height: 0.71429rem; }

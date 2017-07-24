@@ -15,5 +15,6 @@ body {
   height: 100%;
 }
 
+@import './mixins';
 @import './login/login';
 @import './viewer/viewer';

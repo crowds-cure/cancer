@@ -3,12 +3,24 @@
 
   .left-sidebar {
     flex: 0;
+    background-color: #000;
 
     .viewer-tools {
-      width: 200px;
+      width: rem(200);
+
+      a {
+        stroke: #9ccef9;
+        text-decoration: none;
+
+        svg {
+          width: rem(30);
+          height: rem(30);
+        }
+      }
 
       a.active {
         color: #efefef;
+        stroke: #efefef;
       }
     }
   }
@@ -16,6 +28,7 @@
   .viewport {
     flex: 1;
     position: relative;
+    border: rem(1) solid #00a4d9;
   }
 
   #conerstoneViewport {
@@ -34,13 +47,13 @@
 
 .scroll {
   background-color: #ff0000;
-  height: 10px;
+  height: rem(10);
   bottom: 0px;
   position: absolute;
   width: 100%;
 
   .thumb {
     background-color: #ffffff;
-    height: 10px;
+    height: rem(10);
   }
 }
