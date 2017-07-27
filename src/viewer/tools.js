@@ -1,3 +1,5 @@
+import Commands from './commands';
+
 export default {
   active: '',
   toolsSelector: '.viewer-tools',
@@ -70,6 +72,15 @@ export default {
       this.toggleTool(tool);
 
       $element.addClass('active');
+    });
+
+    $('#conerstoneViewport').on('mousedown', () => {
+      const lengths = cornerstoneTools.getToolState(this.element, 'length');
+
+      if (lengths.data.length === 2) {
+        lengths.data.shift();
+        cornerstone.updateImage(this.element);
+      }
     });
   }
 };
