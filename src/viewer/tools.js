@@ -48,21 +48,7 @@ export default {
       });
     });
   },
-  initTools(imageIds) {
-    cornerstoneTools.mouseInput.enable(this.element);
-    cornerstoneTools.pan.activate(this.element, 2);
-    cornerstoneTools.zoom.activate(this.element, 4);
-    cornerstoneTools.mouseWheelInput.enable(this.element);
-
-    this.initStackTool(imageIds);
-
-    // removing default context menu
-    this.element.oncontextmenu = function (event) {
-      event.preventDefault();
-
-      return false;
-    };
-
+  attachEvents() {
     $(this.toolsSelector).on('click', 'a[data-tool]', event => {
       const $element = $(event.currentTarget);
       const tool = $element.attr('data-tool');
@@ -82,5 +68,22 @@ export default {
         cornerstone.updateImage(this.element);
       }
     });
+  },
+  initTools(imageIds) {
+    cornerstoneTools.mouseInput.enable(this.element);
+    cornerstoneTools.pan.activate(this.element, 2);
+    cornerstoneTools.zoom.activate(this.element, 4);
+    cornerstoneTools.mouseWheelInput.enable(this.element);
+
+    this.initStackTool(imageIds);
+
+    // removing default context menu
+    this.element.oncontextmenu = function (event) {
+      event.preventDefault();
+
+      return false;
+    };
+
+    this.attachEvents();
   }
 };
