@@ -6,26 +6,9 @@
 
     <link rel="stylesheet" type="text/css" href="./style.css">
   </head>
-  <body class="full-page">
-    <div class="login-wrapper">
-      <form>
-        <div class="form-input">
-          <label for="username">Username:</label>
-          <input type="email" name="username" id="username" required/>
-        </div>
-        <div class="form-input">
-          <label for="username">Password:</label>
-          <input type="password" name="password" id="password" required/>
-        </div>
+  <body>
 
-        <button class="submit" type="submit">
-          Login
-          <img src="./imgs/spinner.gif" class="loading invisible">
-        </button>
-      </form>
-    </div>
-
-    <div class="viewer-wrapper full-page invisible">
+    <div class="viewer-wrapper">
       <div class="left-sidebar">
         <div class="viewer-tools">
           <ul>
@@ -35,10 +18,10 @@
             <li>
               <a href="/#" data-tool="length">
                 <div>
-                  <svg>
+                  <!-- <svg>
                     <use href="/imgs/icons.svg#icon-tools-measure-temp"></use>
                   </svg>
-                </div>
+                </div> -->
                 <div>
                   <span>Length</span>
                 </div>
@@ -49,8 +32,7 @@
         </div>
       </div>
       <div class="viewport">
-        <div id="conerstoneViewport">
-        </div>
+        <div id="conerstoneViewport"></div>
         <div class="scroll">
           <div class="thumb"></div>
         </div>

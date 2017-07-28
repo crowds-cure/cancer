@@ -1,15 +1,12 @@
-html {
-  height: 100%; }
-
-body {
-  margin: 0; }
+html, body {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  background: #000; }
 
 .invisible {
   display: none !important; }
-
-.full-page {
-  width: 100%;
-  height: 100%; }
 
 .login-wrapper {
   display: flex;
@@ -34,34 +31,18 @@ body {
         top: 1px; }
 
 .viewer-wrapper {
-  display: flex; }
-  .viewer-wrapper .left-sidebar {
-    flex: 0;
-    background-color: #000; }
-    .viewer-wrapper .left-sidebar .viewer-tools {
-      width: 14.28571rem; }
-      .viewer-wrapper .left-sidebar .viewer-tools a {
-        stroke: #9ccef9;
-        text-decoration: none; }
-        .viewer-wrapper .left-sidebar .viewer-tools a svg {
-          width: 2.14286rem;
-          height: 2.14286rem; }
-      .viewer-wrapper .left-sidebar .viewer-tools a.active {
-        color: #efefef;
-        stroke: #efefef; }
+  display: flex;
+  flex-flow: column;
+  height: 100%; }
   .viewer-wrapper .viewport {
-    flex: 1;
-    position: relative;
-    border: 0.07143rem solid #00a4d9; }
-  .viewer-wrapper #conerstoneViewport {
-    width: 100%;
-    height: calc(100% - 10px);
-    top: 0;
-    left: 0;
-    position: absolute; }
-    .viewer-wrapper #conerstoneViewport canvas {
-      width: 100% !important;
-      height: 100% !important; }
+    flex: 1 1 auto;
+    border: 0.07143rem solid #00a4d9;
+    margin: 5px;
+    position: relative; }
+    .viewer-wrapper .viewport #conerstoneViewport {
+      width: 100%;
+      height: calc(100% - 10px);
+      position: absolute; }
 
 .scroll {
   background-color: #ff0000;

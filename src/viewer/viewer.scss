@@ -1,46 +1,40 @@
 .viewer-wrapper {
   display: flex;
+  flex-flow: column;
+  height: 100%;
+  // .left-sidebar {
+  //   background-color: #000;
 
-  .left-sidebar {
-    flex: 0;
-    background-color: #000;
+  //   .viewer-tools {
+  //     width: rem(200);
 
-    .viewer-tools {
-      width: rem(200);
+  //     a {
+  //       stroke: #9ccef9;
+  //       text-decoration: none;
 
-      a {
-        stroke: #9ccef9;
-        text-decoration: none;
+  //       svg {
+  //         width: rem(30);
+  //         height: rem(30);
+  //       }
+  //     }
 
-        svg {
-          width: rem(30);
-          height: rem(30);
-        }
-      }
-
-      a.active {
-        color: #efefef;
-        stroke: #efefef;
-      }
-    }
-  }
+  //     a.active {
+  //       color: #efefef;
+  //       stroke: #efefef;
+  //     }
+  //   }
+  // }
 
   .viewport {
-    flex: 1;
-    position: relative;
+    flex: 1 1 auto;
     border: rem(1) solid #00a4d9;
-  }
+    margin: 5px;
+    position: relative;
 
-  #conerstoneViewport {
-    width: 100%;
-    height: calc(100% - 10px);
-    top: 0;
-    left: 0;
-    position: absolute;
-
-    canvas {
-      width: 100% !important;
-      height: 100% !important;
+    #conerstoneViewport {
+      width: 100%;
+      height: calc(100% - 10px);
+      position: absolute;
     }
   }
 }
