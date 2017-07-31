@@ -82,7 +82,9 @@ html, body {
   top: 0;
   z-index: 9999;
   margin: auto;
-  display: flex; }
+  display: flex;
+  background: #9ccef9;
+  opacity: 0.7; }
   .loading-overlay img {
     margin: auto; }
 
