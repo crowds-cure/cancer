@@ -49,6 +49,7 @@ export default {
     });
   },
   attachEvents() {
+    // Extract which tool we are using and activating it
     $(this.toolsSelector).on('click', 'a[data-tool]', event => {
       const $element = $(event.currentTarget);
       const tool = $element.attr('data-tool');
@@ -60,10 +61,11 @@ export default {
       $element.parent().addClass('active');
     });
 
+    // Limiting measurements to 1
     $('#conerstoneViewport').on('mousedown', () => {
       const lengths = cornerstoneTools.getToolState(this.element, 'length');
 
-      if (lengths.data.length === 2) {
+      if (lengths && lengths.data.length === 2) {
         lengths.data.shift();
         cornerstone.updateImage(this.element);
       }
