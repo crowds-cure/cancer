@@ -14,6 +14,12 @@ export default {
       return;
     }
 
+    if (toolToActivate === 'length') {
+      toolToActivate = `${toolToActivate}Touch`;
+    } else {
+      toolToActivate = `${toolToActivate}TouchDrag`;
+    }
+
     if (this.active) {
       this.deactivate(this.active);
     }
@@ -37,6 +43,7 @@ export default {
     cornerstoneTools.addStackStateManager(this.element, ['stack']);
     cornerstoneTools.addToolState(this.element, 'stack', stack);
     cornerstoneTools.stackScrollWheel.activate(this.element);
+    cornerstoneTools.stackScrollMultiTouch.activate(this.element);
 
     $thumb.css('width', (100/stack.imageIds.length) + '%');
 
@@ -73,8 +80,7 @@ export default {
   },
   initTools(imageIds) {
     cornerstoneTools.mouseInput.enable(this.element);
-    cornerstoneTools.pan.activate(this.element, 2);
-    cornerstoneTools.zoom.activate(this.element, 4);
+    cornerstoneTools.touchInput.enable(this.element);
     cornerstoneTools.mouseWheelInput.enable(this.element);
 
     this.initStackTool(imageIds);
