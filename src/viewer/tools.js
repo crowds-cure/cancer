@@ -1,5 +1,7 @@
 import Commands from './commands';
 
+const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
 export default {
   active: '',
   toolsSelector: '.viewer-tools',
@@ -14,10 +16,12 @@ export default {
       return;
     }
 
-    if (toolToActivate === 'length') {
-      toolToActivate = `${toolToActivate}Touch`;
-    } else {
-      toolToActivate = `${toolToActivate}TouchDrag`;
+    if (isMobile) {
+      if (toolToActivate === 'length') {
+        toolToActivate = `${toolToActivate}Touch`;
+      } else {
+        toolToActivate = `${toolToActivate}TouchDrag`;
+      }
     }
 
     if (this.active) {
