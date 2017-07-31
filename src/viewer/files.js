@@ -23,10 +23,15 @@ export default {
     });
   },
   getCaseImages() {
+    const $overlay = $('.loading-overlay');
+    $overlay.removeClass('invisible');
+
     return new Promise((resolve, reject) => {
       Connector.getCase().then((caseStudy) => {
         if (caseStudy && caseStudy.urls) {
           Promise.all(caseStudy.urls.map(this.getFile)).then(function (files) {
+            $overlay.addClass('invisible');
+
             resolve(files.map(cornerstoneWADOImageLoader.wadouri.fileManager.add));
           }).catch(reject);
         }
