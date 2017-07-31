@@ -11,33 +11,64 @@ html, body {
 .login-wrapper {
   display: flex;
   align-items: center;
-  height: 100%; }
+  height: 100%;
+  color: #efefef; }
   .login-wrapper form {
-    border: #000 solid 1px;
-    padding: 15px;
-    border-radius: 5px;
+    border: #00a4d9 solid 0.07143rem;
+    padding: 1.07143rem;
+    border-radius: 0.35714rem;
     margin: auto; }
     .login-wrapper form .form-input {
       display: flex;
       justify-content: space-between;
-      margin-bottom: 10px; }
+      margin-bottom: 0.71429rem;
+      color: #9ccef9; }
       .login-wrapper form .form-input label {
-        margin-right: 5px; }
+        margin-right: 0.35714rem; }
     .login-wrapper form button.submit {
-      float: right; }
+      float: right;
+      background-color: black;
+      border: 1px solid #00a4d9;
+      border-radius: 5px;
+      color: #9ccef9; }
       .login-wrapper form button.submit img.loading {
-        width: 11px;
+        width: 0.71429rem;
         position: relative;
-        top: 1px; }
+        top: 0.07143rem; }
 
 .viewer-wrapper {
   display: flex;
   flex-flow: column;
   height: 100%; }
+  .viewer-wrapper .top-bar .viewer-tools .tool {
+    display: inline-block;
+    text-align: -webkit-center; }
+    .viewer-wrapper .top-bar .viewer-tools .tool.active a {
+      color: #efefef; }
+    .viewer-wrapper .top-bar .viewer-tools .tool.active svg {
+      stroke: #efefef; }
+      .viewer-wrapper .top-bar .viewer-tools .tool.active svg.tool-img {
+        border: 0.07143rem solid #efefef;
+        border-radius: 1.21429rem;
+        width: 2.85714rem;
+        background-color: #16202b;
+        padding: 0.35714rem 0; }
+    .viewer-wrapper .top-bar .viewer-tools .tool svg {
+      stroke: #9ccef9;
+      fill: #9ccef9;
+      display: block;
+      width: 3rem;
+      height: 1.42857rem;
+      margin-bottom: 0.71429rem;
+      padding: 0.42857rem 0; }
+    .viewer-wrapper .top-bar .viewer-tools .tool a {
+      text-decoration: none;
+      color: #9ccef9;
+      margin: 0 0.35714rem 0 0.35714rem; }
   .viewer-wrapper .viewport {
     flex: 1 1 auto;
     border: 0.07143rem solid #00a4d9;
-    margin: 5px;
+    margin: 0.35714rem;
     position: relative; }
     .viewer-wrapper .viewport #conerstoneViewport {
       width: 100%;
@@ -45,11 +76,12 @@ html, body {
       position: absolute; }
 
 .scroll {
-  background-color: #ff0000;
+  background-color: #000;
   height: 0.71429rem;
   bottom: 0px;
   position: absolute;
   width: 100%; }
   .scroll .thumb {
-    background-color: #ffffff;
-    height: 0.71429rem; }
+    background-color: #00a4d9;
+    height: 0.71429rem;
+    border-radius: 10px; }

@@ -1,9 +1,15 @@
+$white: #efefef;
+$blue: #00a4d9;
+$light-blue: #9ccef9;
+$black: #000;
+$light-black: #16202b;
+
 html, body {
   padding: 0;
   margin: 0;
   height: 100%;
   width: 100%;
-  background: #000;
+  background: $black;
 }
 
 .invisible {

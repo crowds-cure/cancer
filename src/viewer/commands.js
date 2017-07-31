@@ -14,14 +14,15 @@ export default {
   initCommands() {
     $(this.commandSelector).on('click', 'a[data-command]', event => {
       const $element = $(event.currentTarget);
+      const $wrapper = $element.parent();
       const tool = $element.attr('data-command');
 
       this[tool]();
 
-      $element.addClass('active');
+      $wrapper.addClass('active');
 
       setTimeout(function() {
-        $element.removeClass('active');
+        $wrapper.removeClass('active');
       }, 300);
     });
   }

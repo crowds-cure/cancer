@@ -57,7 +57,7 @@ export default {
 
       this.toggleTool(tool);
 
-      $element.addClass('active');
+      $element.parent().addClass('active');
     });
 
     $('#conerstoneViewport').on('mousedown', () => {

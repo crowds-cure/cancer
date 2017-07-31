@@ -16,10 +16,3 @@ $('.login-wrapper form').on('submit', function (evt) {
     Viewer.initViewer();
   }, 1000);
 });
-
-setTimeout(function () {
-    // $loadingImg.addClass('invisible');
-    // $loginForm.addClass('invisible'); 
-
-    Viewer.initViewer();
-  }, 1000);

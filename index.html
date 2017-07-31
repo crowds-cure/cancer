@@ -7,28 +7,51 @@
     <link rel="stylesheet" type="text/css" href="./style.css">
   </head>
   <body>
+    <div class="login-wrapper">
+      <form>
+        <div class="form-input">
+          <label for="username">Username:</label>
+          <input type="email" name="username" id="username" required/>
+        </div>
+        <div class="form-input">
+          <label for="username">Password:</label>
+          <input type="password" name="password" id="password" required/>
+        </div>
 
-    <div class="viewer-wrapper">
-      <div class="left-sidebar">
+        <button class="submit" type="submit">
+          Login
+          <img src="./imgs/spinner.gif" class="loading invisible">
+        </button>
+      </form>
+    </div>
+
+    <div class="viewer-wrapper invisible">
+      <div class="top-bar">
         <div class="viewer-tools">
-          <ul>
-            <li>
-              <a href="/#" data-tool="wwwc">W/L</a>
-            </li>
-            <li>
-              <a href="/#" data-tool="length">
-                <div>
-                  <!-- <svg>
-                    <use href="/imgs/icons.svg#icon-tools-measure-temp"></use>
-                  </svg>
-                </div> -->
-                <div>
-                  <span>Length</span>
-                </div>
-              </a>
-            </li>
-            <li><a href="/#" data-command="clearAll">Clear Image</a></li>
-          </ul>
+          <div class="tool">
+            <a href="/#" data-tool="wwwc">
+              <svg class="tool-img">
+                <use href="/imgs/icons.svg#icon-tools-levels"></use>
+              </svg>
+              W/L
+            </a>
+          </div>
+          <div class="tool">
+            <a href="/#" data-tool="length">
+              <svg class="tool-img">
+                <use href="/imgs/icons.svg#icon-tools-measure-temp"></use>
+              </svg>
+              Length
+            </a>
+          </div>
+          <div class="tool">
+            <a href="/#" data-command="clearAll">
+              <svg>
+                <use href="/imgs/icons.svg#icon-ui-close"></use>
+              </svg>
+              Clear
+            </a>
+          </div>
         </div>
       </div>
       <div class="viewport">

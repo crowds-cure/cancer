@@ -2,30 +2,36 @@
   display: flex;
   align-items: center;
   height: 100%;
+  color: $white;
 
   form {
-    border: #000 solid 1px;
-    padding: 15px;
-    border-radius: 5px;
+    border: $blue solid rem(1);
+    padding: rem(15);
+    border-radius: rem(5);
     margin: auto;
 
     .form-input {
       display: flex;
       justify-content: space-between;
-      margin-bottom: 10px;
+      margin-bottom: rem(10);
+      color: $light-blue;
 
       label {
-        margin-right: 5px;
+        margin-right: rem(5);
       }
     }
 
     button.submit {
       float: right;
+      background-color: black;
+      border: 1px solid $blue;
+      border-radius: 5px;
+      color: $light-blue;
 
       img.loading {
-        width: 11px;
+        width: rem(10);
         position: relative;
-        top: 1px;
+        top: rem(1);
       }
     }
   }
