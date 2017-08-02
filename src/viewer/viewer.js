@@ -11,6 +11,12 @@ export default {
       $('.loading-overlay').removeClass('submitting');
     }, 2000);
   },
+  logout() {
+    $('.modal').removeClass('show');
+    $('.loading-overlay').addClass('invisible');
+    $('.login-wrapper').removeClass('invisible');
+    $('.viewer-wrapper').addClass('invisible');
+  },
   initViewer() {
     const $submit = $('.viewer-actions button.submit');
     const $viewer = $('.viewer-wrapper');
@@ -23,6 +29,7 @@ export default {
 
     $(window).on('resize', () => cornerstone.resize($element, true));
     $submit.on('click', () => this.submit());
+    $('.modal .logout').on('click', () => this.logout());
 
     cornerstone.enable($element);
 
@@ -34,6 +41,5 @@ export default {
         cornerstone.displayImage($element, image);
       });
     }).catch();
-
   }
 }
