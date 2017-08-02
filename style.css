@@ -91,8 +91,8 @@ button.submit {
   opacity: 0;
   pointer-events: none;
   transition: all 0.25s ease-out;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
-  border: 1px solid #bbb;
+  box-shadow: 0 0.21429rem 0.42857rem rgba(0, 0, 0, 0.25);
+  border: 0.07143rem solid #bbb;
   transform: translateY(-100%); }
   .modal.show {
     opacity: 1;
@@ -105,9 +105,9 @@ button.submit {
     .modal .button-holder button {
       flex: 1 0 auto; }
     .modal .button-holder .logout {
-      margin-right: 20px; }
+      margin-right: 1.42857rem; }
     .modal .button-holder .next-case {
-      margin-left: 20px; }
+      margin-left: 1.42857rem; }
 
 .loading-overlay {
   position: absolute;
@@ -118,11 +118,22 @@ button.submit {
   margin: auto;
   display: flex;
   background: #9ccef9;
-  opacity: 0.7; }
-  .loading-overlay .loading-img {
-    display: none;
-    margin: auto; }
-  .loading-overlay.loading .loading-img {
+  opacity: 0.7;
+  flex-flow: column;
+  justify-content: center; }
+  .loading-overlay .padding {
+    margin: auto;
+    flex: 1 0 auto; }
+  .loading-overlay .content {
+    margin: auto;
+    flex: 1 0 auto; }
+    .loading-overlay .content .spinner {
+      width: 5.92857rem; }
+    .loading-overlay .content .spinner, .loading-overlay .content .submit-text {
+      display: none; }
+  .loading-overlay.loading .content .spinner, .loading-overlay.submitting .content .spinner {
+    display: block; }
+  .loading-overlay.submitting .content .submit-text {
     display: block; }
 
 .scroll {
@@ -134,4 +145,4 @@ button.submit {
   .scroll .thumb {
     background-color: #00a4d9;
     height: 0.71429rem;
-    border-radius: 10px; }
+    border-radius: 0.71429rem; }

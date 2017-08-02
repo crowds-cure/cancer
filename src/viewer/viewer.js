@@ -4,8 +4,12 @@ import Commands from './commands';
 
 export default {
   submit() {
-    $('.modal').addClass('show');
-    $('.loading-overlay').removeClass('invisible');
+    $('.loading-overlay').removeClass('invisible').addClass('submitting');
+
+    setTimeout(function () {
+      $('.modal').addClass('show');
+      $('.loading-overlay').removeClass('submitting');
+    }, 2000);
   },
   initViewer() {
     const $submit = $('.viewer-actions button.submit');
