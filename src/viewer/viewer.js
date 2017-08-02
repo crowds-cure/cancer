@@ -1,35 +1,33 @@
 import Files from './files';
 import Tools from './tools';
 import Commands from './commands';
+import Modal from '../modal/modal';
 
 export default {
   submit() {
     $('.loading-overlay').removeClass('invisible').addClass('submitting');
 
     setTimeout(function () {
-      $('.modal').addClass('show');
+      Modal.show();
+
       $('.loading-overlay').removeClass('submitting');
     }, 2000);
   },
-  logout() {
-    $('.modal').removeClass('show');
-    $('.loading-overlay').addClass('invisible');
-    $('.login-wrapper').removeClass('invisible');
-    $('.viewer-wrapper').addClass('invisible');
-  },
   initViewer() {
+    const $window = $(window);
     const $submit = $('.viewer-actions button.submit');
     const $viewer = $('.viewer-wrapper');
     const $element = $('#conerstoneViewport')[0];
+
+    Modal.init();
 
     $viewer.removeClass('invisible');
 
     Tools.$element = $element;
     Commands.$element = $element;
 
-    $(window).on('resize', () => cornerstone.resize($element, true));
+    $window.on('resize', () => cornerstone.resize($element, true));
     $submit.on('click', () => this.submit());
-    $('.modal .logout').on('click', () => this.logout());
 
     cornerstone.enable($element);
 
