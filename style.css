@@ -8,6 +8,12 @@ html, body {
 .invisible {
   display: none !important; }
 
+button.submit {
+  background-color: black;
+  border: 1px solid #00a4d9;
+  border-radius: 5px;
+  color: #9ccef9; }
+
 .login-wrapper {
   display: flex;
   align-items: center;
@@ -26,11 +32,7 @@ html, body {
       .login-wrapper form .form-input label {
         margin-right: 0.35714rem; }
     .login-wrapper form button.submit {
-      float: right;
-      background-color: black;
-      border: 1px solid #00a4d9;
-      border-radius: 5px;
-      color: #9ccef9; }
+      float: right; }
       .login-wrapper form button.submit img.loading {
         width: 0.71429rem;
         position: relative;
@@ -40,31 +42,35 @@ html, body {
   display: flex;
   flex-flow: column;
   height: 100%; }
-  .viewer-wrapper .top-bar .viewer-tools .tool {
-    display: inline-block;
-    text-align: -webkit-center; }
-    .viewer-wrapper .top-bar .viewer-tools .tool.active a {
-      color: #efefef; }
-    .viewer-wrapper .top-bar .viewer-tools .tool.active svg {
-      stroke: #efefef; }
-      .viewer-wrapper .top-bar .viewer-tools .tool.active svg.tool-img {
-        border: 0.07143rem solid #efefef;
-        border-radius: 1.21429rem;
-        width: 2.85714rem;
-        background-color: #16202b;
-        padding: 0.35714rem 0; }
-    .viewer-wrapper .top-bar .viewer-tools .tool svg {
-      stroke: #9ccef9;
-      fill: #9ccef9;
-      display: block;
-      width: 3rem;
-      height: 1.42857rem;
-      margin-bottom: 0.71429rem;
-      padding: 0.42857rem 0; }
-    .viewer-wrapper .top-bar .viewer-tools .tool a {
-      text-decoration: none;
-      color: #9ccef9;
-      margin: 0 0.35714rem 0 0.35714rem; }
+  .viewer-wrapper .top-bar {
+    display: flex; }
+    .viewer-wrapper .top-bar .viewer-tools {
+      flex: 1 0 auto; }
+      .viewer-wrapper .top-bar .viewer-tools .tool {
+        display: inline-block;
+        text-align: -webkit-center; }
+        .viewer-wrapper .top-bar .viewer-tools .tool.active a {
+          color: #efefef; }
+        .viewer-wrapper .top-bar .viewer-tools .tool.active svg {
+          stroke: #efefef; }
+          .viewer-wrapper .top-bar .viewer-tools .tool.active svg.tool-img {
+            border: 0.07143rem solid #efefef;
+            border-radius: 1.21429rem;
+            width: 2.85714rem;
+            background-color: #16202b;
+            padding: 0.35714rem 0; }
+        .viewer-wrapper .top-bar .viewer-tools .tool svg {
+          stroke: #9ccef9;
+          fill: #9ccef9;
+          display: block;
+          width: 3rem;
+          height: 1.42857rem;
+          margin-bottom: 0.71429rem;
+          padding: 0.42857rem 0; }
+        .viewer-wrapper .top-bar .viewer-tools .tool a {
+          text-decoration: none;
+          color: #9ccef9;
+          margin: 0 0.35714rem 0 0.35714rem; }
   .viewer-wrapper .viewport {
     flex: 1 1 auto;
     border: 0.07143rem solid #00a4d9;
@@ -75,18 +81,49 @@ html, body {
       height: calc(100% - 10px);
       position: absolute; }
 
+.modal {
+  position: fixed;
+  top: 25%;
+  left: calc(50% - 102px);
+  padding: 1em;
+  background: #fff;
+  z-index: 100;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.25s ease-out;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
+  border: 1px solid #bbb;
+  transform: translateY(-100%); }
+  .modal.show {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0%); }
+  .modal .button-holder {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between; }
+    .modal .button-holder button {
+      flex: 1 0 auto; }
+    .modal .button-holder .logout {
+      margin-right: 20px; }
+    .modal .button-holder .next-case {
+      margin-left: 20px; }
+
 .loading-overlay {
   position: absolute;
   width: 100%;
   height: 100%;
   top: 0;
-  z-index: 9999;
+  z-index: 99;
   margin: auto;
   display: flex;
   background: #9ccef9;
   opacity: 0.7; }
-  .loading-overlay img {
+  .loading-overlay .loading-img {
+    display: none;
     margin: auto; }
+  .loading-overlay.loading .loading-img {
+    display: block; }
 
 .scroll {
   background-color: #000;

@@ -24,6 +24,7 @@ export default {
   },
   getCaseImages() {
     const $overlay = $('.loading-overlay');
+    $overlay.addClass('loading');
     $overlay.removeClass('invisible');
 
     return new Promise((resolve, reject) => {
@@ -31,6 +32,7 @@ export default {
         if (caseStudy && caseStudy.urls) {
           Promise.all(caseStudy.urls.map(this.getFile)).then(function (files) {
             $overlay.addClass('invisible');
+            $overlay.removeClass('loading');
 
             resolve(files.map(cornerstoneWADOImageLoader.wadouri.fileManager.add));
           }).catch(reject);

@@ -16,6 +16,13 @@ html, body {
   display: none !important;
 }
 
+button.submit {
+  background-color: black;
+  border: 1px solid $blue;
+  border-radius: 5px;
+  color: $light-blue;
+}
+
 @import './mixins';
 @import './login/login';
 @import './viewer/viewer';

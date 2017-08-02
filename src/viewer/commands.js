@@ -1,15 +1,15 @@
 export default {
   commandSelector: '.viewer-tools',
   clearAll() {
-    const enabledElemet = cornerstone.getEnabledElement(this.element);
-    const viewport = cornerstone.getViewport(this.element);
+    const enabledElemet = cornerstone.getEnabledElement(this.$element);
+    const viewport = cornerstone.getViewport(this.$element);
 
     viewport.voi.windowWidth = enabledElemet.image.windowWidth;
     viewport.voi.windowCenter = enabledElemet.image.windowCenter;
-    cornerstone.setViewport(this.element, viewport);
+    cornerstone.setViewport(this.$element, viewport);
 
-    cornerstoneTools.globalImageIdSpecificToolStateManager.clear(this.element);
-    cornerstone.updateImage(this.element);
+    cornerstoneTools.globalImageIdSpecificToolStateManager.clear(this.$element);
+    cornerstone.updateImage(this.$element);
   },
   initCommands() {
     $(this.commandSelector).on('click', 'a[data-command]', event => {
