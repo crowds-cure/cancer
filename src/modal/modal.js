@@ -1,14 +1,15 @@
+import Login from '../login/login';
+
 export default {
   $modal: $('.modal'),
   $overlay: $('.loading-overlay'),
   logout() {
     this.$modal.removeClass('show');
     this.$overlay.addClass('invisible');
-    $('.login-wrapper').removeClass('invisible');
-    $('.viewer-wrapper').addClass('invisible');
+    
+    Login.logout();
   },
   show() {
-    debugger;
     this.$modal.addClass('show');
     this.$overlay.removeClass('invisible');
   },

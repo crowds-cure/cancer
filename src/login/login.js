@@ -16,3 +16,14 @@ $('.login-wrapper form').on('submit', function (evt) {
     Viewer.initViewer();
   }, 1000);
 });
+
+export default {
+  $loginWrapper: $('.login-wrapper'),
+  $viewWrapper: $('.viewer-wrapper'),
+  $overlay: $('.loading-overlay'),
+  logout() {
+    this.$overlay.addClass('invisible');
+    this.$loginWrapper.removeClass('invisible');
+    this.$viewerWrapper.addClass('invisible');
+  }
+}
