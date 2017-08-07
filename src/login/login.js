@@ -1,6 +1,6 @@
 import Viewer from '../viewer/viewer';
 
-$('.login-wrapper form').on('submit', function (evt) {
+$('.login-wrapper form').off('submit').on('submit', function (evt) {
   evt.preventDefault();
 
   const $loadingImg = $('.login-wrapper form button.submit img.loading');
