@@ -1,4 +1,5 @@
 import Login from '../login/login';
+import Viewer from '../viewer/viewer';
 
 export default {
   $modal: $('.modal'),
@@ -8,6 +9,11 @@ export default {
     this.$overlay.addClass('invisible');
     
     Login.logout();
+  },
+  nextCase() {
+    this.hide();
+
+    Viewer.getNextCase();
   },
   show() {
     this.$modal.addClass('show');
@@ -19,5 +25,6 @@ export default {
   },
   init() {
     this.$modal.find('.logout').on('click', () => this.logout());
+    this.$modal.find('.next-case').on('click', () => this.nextCase());
   }
 }
