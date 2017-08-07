@@ -122,7 +122,7 @@ button.submit {
 .modal {
   position: fixed;
   top: 25%;
-  left: calc(50% - 102px);
+  left: 50%;
   padding: 1em;
   background: #fff;
   z-index: 100;
@@ -172,10 +172,10 @@ button.submit {
   border-left: 0.07143rem solid #9ccef9;
   background-color: #000;
   color: #9ccef9;
-  z-index: 100; }
+  z-index: 100;
+  transition: all 1s; }
   .menu-wrapper.opened {
-    width: 11.42857rem;
-    transition: 1s; }
+    width: 11.42857rem; }
   .menu-wrapper ul {
     list-style-type: none; }
     .menu-wrapper ul li {

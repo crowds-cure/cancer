@@ -29,10 +29,10 @@
   background-color: $black;
   color: $light-blue;
   z-index: 100;
+  transition: all 1s;
 
   &.opened {
     width: rem(160);
-    transition: 1s;
   }
 
   ul {

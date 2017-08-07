@@ -74,7 +74,7 @@ export default {
     });
 
     // Limiting measurements to 1
-    $conerstoneViewport.on('touchstart mousedown', () => {
+    this.$conerstoneViewport.on('touchstart mousedown', () => {
       const lengths = cornerstoneTools.getToolState(this.$element, 'length');
 
       if (lengths && lengths.data.length === 2) {

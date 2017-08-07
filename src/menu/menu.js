@@ -27,6 +27,10 @@ export default {
   closeMenu() {
     this.$overlay.addClass('invisible');
     this.$menuWrapper.removeClass('opened');
+
+    setTimeout(() => {
+      this.$menuWrapper.addClass('invisible');
+    }, 1200);
   },
   init() {
     Modal.init();
@@ -35,7 +39,12 @@ export default {
       event.preventDefault();
 
       this.$overlay.removeClass('invisible');
-      this.$menuWrapper.addClass('opened');
+      this.$menuWrapper.removeClass('invisible');
+
+      setTimeout(() => {
+        this.$menuWrapper.addClass('opened');
+        this.$overlay.removeClass('invisible');
+      }, 200);
     });
 
     this.$menuWrapper.on('click', 'a[data-menu]', (event) => {
@@ -51,8 +60,7 @@ export default {
 
     this.$overlay.on('click', (event) => {
       if (this.$menuWrapper.hasClass('opened')) {
-        this.$menuWrapper.removeClass('opened');
-        this.$overlay.addClass('invisible');
+        this.closeMenu();
       }
     });
   }
