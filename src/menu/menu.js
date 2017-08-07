@@ -1,5 +1,6 @@
 import Login from '../login/login';
 import Modal from '../modal/modal';
+import Viewer from '../viewer/viewer';
 
 export default {
   $hamburguerMenu: $('.humburguer-menu'),
@@ -14,6 +15,10 @@ export default {
 
       this.$overlay.removeClass('submitting');
     }, 2000);
+  },
+  nextCase() {
+    this.closeMenu();
+    Viewer.getNextCase();
   },
   logout(){
     this.closeMenu();

@@ -11,7 +11,7 @@ $('.login-wrapper form').on('submit', function (evt) {
   // Mocking login
   setTimeout(function () {
     $loadingImg.addClass('invisible');
-    $loginForm.addClass('invisible'); 
+    $loginForm.addClass('invisible');
 
     Viewer.initViewer();
   }, 1000);
