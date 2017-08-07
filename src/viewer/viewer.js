@@ -2,6 +2,7 @@ import Files from './files';
 import Tools from './tools';
 import Commands from './commands';
 import Modal from '../modal/modal';
+import Menu from '../menu/menu';
 
 export default {
   submit() {
@@ -20,6 +21,7 @@ export default {
     const $element = $('#conerstoneViewport')[0];
 
     Modal.init();
+    Menu.init();
 
     $viewer.removeClass('invisible');
 

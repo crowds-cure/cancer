@@ -1,0 +1,55 @@
+.humburguer-menu {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  padding-right: rem(5);
+
+  .menu {
+    flex: 0 1 auto;
+    height: rem(30);
+    cursor: pointer;
+
+    .humburguer-stroke {
+      width: rem(30);
+      border: rem(3) solid $light-blue;
+      border-radius: rem(10);
+      margin-bottom: rem(5);
+      background-color: $light-blue;
+    }
+  }
+}
+
+.menu-wrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 0px;
+  border-left: rem(1) solid $light-blue;
+  background-color: $black;
+  color: $light-blue;
+  z-index: 100;
+
+  &.opened {
+    width: rem(160);
+    transition: 1s;
+  }
+
+  ul {
+    list-style-type: none;
+
+    li {
+      margin-bottom: rem(10);
+
+      &.separator {
+        border: rem(1) solid $light-blue;
+        height: 0px;
+      }
+
+      a {
+        color: $light-blue;
+        text-decoration: none;
+      }
+    }
+  }
+}
