@@ -5,6 +5,7 @@ const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 export default {
   active: '',
   toolsSelector: '.viewer-tools',
+  $conerstoneViewport: $('#conerstoneViewport'),
   deactivateActiveTool() {
     if (this.active) {
       this.deactivate(this.active);
@@ -73,7 +74,7 @@ export default {
     });
 
     // Limiting measurements to 1
-    $('#conerstoneViewport').on('mousedown', () => {
+    $conerstoneViewport.on('touchstart mousedown', () => {
       const lengths = cornerstoneTools.getToolState(this.$element, 'length');
 
       if (lengths && lengths.data.length === 2) {
