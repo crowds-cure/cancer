@@ -1,6 +1,14 @@
 # crowdquant
 A responsive stripped down viewer for crowdsourcing measurements.
 
+## Features
+Tools available:
+* Window Level;
+* Length;
+* Pan;
+* Zoom;
+* Clear (For the current image).
+
 ## Install
 You have to install all projet's dependecies. Todo so execute this command in this repository root folder:
 ```
@@ -34,7 +42,7 @@ This URL is hard coded at `/src/viewer/connector.js` on line 2. Please change th
 This viewer expected that each time we request for the *mock.json* file we have a different set of DICOM files to evaluate.
 
 # What is missing?
-* The login/logout features are mocked. We have in place a dumb feature to just have the feel of a login being done;
+* The login/logout features are mocked. We have in place a dumb feature to just have the feel of a login being done. Any email and password will suffice for now;
 * Submitting measurements is mocked too. This is also another simple code to just mock the feel of submitting the measurements;
 * A better way to define which server will provide our DICOMs;
 * Tests.
