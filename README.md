@@ -1,5 +1,5 @@
 # crowdquant
-A stripped down viewer for crowdsourcing measurements 
+A responsive stripped down viewer for crowdsourcing measurements.
 
 ## Install
 You have to install all projet's dependecies. Todo so execute this command in this repository root folder:
@@ -12,6 +12,8 @@ After you have installed everything, execute this command in this repository roo
 ```
 $ npm start
 ```
+
+We are lifting a server to run this viewer because of `cornerstoneWADOImageLoader`. This package tries to load some of its depedencies using a hard code path that, if we open the `index.html` file with a browser, we have some load issues because of how the paths will be resolved. Using a server we create a virtual path which will solve this issue.
 
 ## DICOM Server
 This exaple expects a server running on `http://localhost:4000` which provides a file named *mock.json*. This JSON will contain a list of DICOM URLs to be downloaded by this viewer. Example below:
@@ -27,5 +29,12 @@ This exaple expects a server running on `http://localhost:4000` which provides a
   ]
 }
 ```
+This URL is hard coded at `/src/viewer/connector.js` on line 2. Please change this line to access the right server.
 
-OBS: This is not the final implementation. In the end we will expect only one server which will provide one endpoint giving random cases. This cases will contain a list of URLs to be used. All this URLs should be hosted somewhere this viewer can reach.
+This viewer expected that each time we request for the *mock.json* file we have a different set of DICOM files to evaluate.
+
+# What is missing?
+* The login/logout features are mocked. We have in place a dumb feature to just have the feel of a login being done;
+* Submitting measurements is mocked too. This is also another simple code to just mock the feel of submitting the measurements;
+* A better way to define which server will provide our DICOMs;
+* Tests.
