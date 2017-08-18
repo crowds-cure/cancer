@@ -1,0 +1,10 @@
+{
+  "name": "default case",
+  "urls": [
+    "http://localhost:4000/1.dcm",
+    "http://localhost:4000/2.dcm",
+    "http://localhost:4000/3.dcm",
+    "http://localhost:4000/4.dcm",
+    "http://localhost:4000/5.dcm"
+  ]
+}
