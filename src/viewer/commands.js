@@ -1,5 +1,9 @@
+import Menu from '../menu/menu'
+import Modal from '../modal/modal'
+
 export default {
   commandSelector: '.viewer-tools',
+  $overlay: $('.loading-overlay'),
   clearAll() {
     const enabledElemet = cornerstone.getEnabledElement(this.$element);
     const viewport = cornerstone.getViewport(this.$element);
@@ -10,6 +14,16 @@ export default {
 
     cornerstoneTools.globalImageIdSpecificToolStateManager.clear(this.$element);
     cornerstone.updateImage(this.$element);
+  },
+  save: function () {
+    Menu.closeMenu();
+    this.$overlay.removeClass('invisible').addClass('submitting');
+
+    setTimeout(() => {
+      Modal.show();
+
+       this.$overlay.removeClass('submitting');
+    }, 2000);
   },
   initCommands() {
     $(this.commandSelector).on('click', 'a[data-command]', event => {
