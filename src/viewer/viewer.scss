@@ -55,8 +55,8 @@
     position: relative;
 
     #conerstoneViewport {
-      width: 100%;
-      height: calc(100% - 10px);
+      width: calc(100% - 10px);
+      height: 100%;
       position: absolute;
     }
   }
@@ -64,14 +64,14 @@
 
 .scroll {
   background-color: $black;
-  height: rem(10);
-  bottom: 0px;
+  height: 100%;
+  right: 0px;
   position: absolute;
-  width: 100%;
+  width: rem(10);
 
   .thumb {
     background-color: $blue;
-    height: rem(10);
+    width: rem(10);
     border-radius: rem(10);
   }
 }

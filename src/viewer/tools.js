@@ -50,13 +50,13 @@ export default {
     cornerstoneTools.stackScrollWheel.activate(this.$element);
     cornerstoneTools.stackScrollMultiTouch.activate(this.$element);
 
-    $thumb.css('width', (100/stack.imageIds.length) + '%');
+    $thumb.css('height', `${(100/stack.imageIds.length)}%`);
 
     $(this.$element).on('CornerstoneNewImage', function () {
       var currentIndex = stack.currentImageIdIndex;
 
       $thumb.css({
-        'margin-left': ((100/stack.imageIds.length)*currentIndex) + '%'
+        'margin-top': `${($thumb.height()*(currentIndex))}px`
       });
     });
   },

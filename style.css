@@ -104,19 +104,19 @@ button.submit {
     margin: 0.35714rem;
     position: relative; }
     .viewer-wrapper .viewport #conerstoneViewport {
-      width: 100%;
-      height: calc(100% - 10px);
+      width: calc(100% - 10px);
+      height: 100%;
       position: absolute; }
 
 .scroll {
   background-color: #000;
-  height: 0.71429rem;
-  bottom: 0px;
+  height: 100%;
+  right: 0px;
   position: absolute;
-  width: 100%; }
+  width: 0.71429rem; }
   .scroll .thumb {
     background-color: #00a4d9;
-    height: 0.71429rem;
+    width: 0.71429rem;
     border-radius: 0.71429rem; }
 
 .modal {
