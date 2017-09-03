@@ -7,6 +7,7 @@ export default {
   $window: $(window),
   $viewer: $('.viewer-wrapper'),
   $overlay: $('.loading-overlay'),
+  
   getNextCase() {
     this.$overlay.removeClass('invisible').addClass('loading');
 
@@ -19,6 +20,7 @@ export default {
       });
     }).catch();
   },
+
   initViewer() {
     this.$element = $('#conerstoneViewport')[0];
 

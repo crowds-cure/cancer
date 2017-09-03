@@ -4,25 +4,44 @@
   height: 100%;
   color: $white;
 
-  form {
+  .login-box {
     border: $blue solid rem(1);
     padding: rem(15);
     border-radius: rem(5);
     margin: auto;
 
-    .form-input {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: rem(10);
-      color: $light-blue;
-
-      label {
-        margin-right: rem(5);
-      }
+    button.signup {
+      /*float: right;*/
+      height: 2rem;
+      width: 100%;
     }
 
+    .clear-both {
+      clear: both;
+    }
+
+    .signup-divider {
+      margin: 0.5rem 0 0.5rem 0;
+      color: #9ccef9;
+      text-align: center;
+    }
+
+    form {
+      .form-input {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: rem(10);
+        color: $light-blue;
+
+        label {
+          margin-right: rem(5);
+        }
+      }
+    }
+    
     button.submit {
       float: right;
+      width: 100%;
 
       img.loading {
         width: rem(10);

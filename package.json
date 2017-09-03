@@ -21,7 +21,8 @@
     "dicom-parser": "^1.7.5",
     "hammerjs": "^2.0.8",
     "jquery": "^2.1.0",
-    "jquery-hammerjs": "^2.0.0"
+    "jquery-hammerjs": "^2.0.0",
+    "pouchdb": "^6.3.4"
   },
   "devDependencies": {
     "babel-preset-es2015": "^6.24.1",
