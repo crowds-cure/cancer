@@ -29,22 +29,25 @@ export default {
     $overlay.addClass('loading');
     $overlay.removeClass('invisible');
 
-    return new Promise((resolve, reject) => {
+    // return new Promise((resolve, reject) => {
 
-      this.getChronicleImageIDs().then((caseStudy) => {
-        if (caseStudy && caseStudy.urls) {
-          console.log('getCaseImages0');
-          Promise.all(caseStudy.urls.map(this.getFile)).then(function (files) {
-            console.log('getCaseImages1');
-            $overlay.addClass('invisible');
-            $overlay.removeClass('loading');
+    return this.getChronicleImageIDs().then((caseStudy) => {
+      if (caseStudy && caseStudy.urls) {
+        console.log('getCaseImages0');
+        return Promise.all(caseStudy.urls.map(this.getFile)).then(function (files) {
+          console.log('getCaseImages1');
+          $overlay.addClass('invisible');
+          $overlay.removeClass('loading');
 
-            resolve(files.map(cornerstoneWADOImageLoader.wadouri.fileManager.add));
-          }).catch(reject);
-        }
-      }).catch(function(error) {
-        reject(error);
-      });
+          return Promise.all(files.map(cornerstoneWADOImageLoader.wadouri.fileManager.add));
+        }).then((imageIds) => {
+          return imageIds;
+          // resolve(files.map(cornerstoneWADOImageLoader.wadouri.fileManager.add));
+        });
+      }
+    }).catch(function(err) {
+      throw err;
+    });
 
       // Connector.getCase().then((caseStudy) => {
       //   if (caseStudy && caseStudy.urls) {
@@ -58,7 +61,7 @@ export default {
       // }).catch(function(error) {
       //   reject(error);
       // });
-    });
+    // });
   },
 
   getChronicleImageIDs () {
@@ -99,18 +102,42 @@ export default {
         reduce : false,
       });
     }).then((data) => {
-      console.log('instance data:', data);
-      let imageIDs = [];
+      // console.log('instance data:', data);
+      const instanceUIDs = [];
       data.rows.forEach((row) => {
         const instanceUID = row.value[1];
+        // const instanceURL = `${chronicleURL}/${instanceUID}/object.dcm`;
+        // imageIDs.push(instanceURL);
+        instanceUIDs.push(instanceUID);
+      });
+      // console.log('instanceUIDs:', instanceUIDs);
+
+      return Promise.all(instanceUIDs.map((uid) => {
+        return chronicleDB.get(uid);
+      }));
+    }).then((docs) => {
+      const instanceNumberTag = "00200013";
+      let instanceUIDsByImageNumber = {};
+      docs.forEach((doc) => {
+        const imageNumber = Number(doc.dataset[instanceNumberTag].Value);
+        instanceUIDsByImageNumber[imageNumber] = doc._id;
+      });
+
+      const imageNumbers = Object.keys(instanceUIDsByImageNumber);
+      imageNumbers.sort((a, b) => {
+        return a - b;
+      });
+
+      let instanceIDs = [];
+      imageNumbers.forEach((imageNumber) => {
+        const instanceUID = instanceUIDsByImageNumber[imageNumber];
         const instanceURL = `${chronicleURL}/${instanceUID}/object.dcm`;
-        imageIDs.push(instanceURL);
-      })
-      console.log('imageIDs:', imageIDs);
+        instanceIDs.push(instanceURL);
+      });
 
       return {
         name: "default_case",
-        urls: imageIDs
+        urls: instanceIDs
       };
     }).catch((err) => {
       throw err;

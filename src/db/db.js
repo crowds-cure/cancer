@@ -4,7 +4,7 @@ import PouchDB from 'pouchdb';
 const baseURL='http://rsnacrowdquant.cloudapp.net:5984';
 
 const uuidUrl = `${baseURL}/_uuids`;
-export const annotatorURL = `${baseURL}/annotators`;
+export const annotatorsURL = `${baseURL}/annotators`;
 export const adjectivesURL = `${baseURL}/adjectives`;
 export const animalsURL = `${baseURL}/animals`;
 export const chronicleURL = `${baseURL}/chronicle`;
@@ -13,5 +13,5 @@ export const chronicleURL = `${baseURL}/chronicle`;
 // var uuidDb = new PouchDB(uuidUrl);
 export const adjectivesDB = new PouchDB(adjectivesURL);
 export const animalsDB = new PouchDB(animalsURL);
-export const annotatorsDB = new PouchDB(annotatorURL);
+export const annotatorsDB = new PouchDB(annotatorsURL);
 export const chronicleDB = new PouchDB(chronicleURL);

@@ -7,7 +7,7 @@ export default {
   logout() {
     this.$modal.removeClass('show');
     this.$overlay.addClass('invisible');
-    
+
     Login.logout();
   },
   nextCase() {

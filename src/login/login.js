@@ -1,12 +1,15 @@
 import Viewer from '../viewer/viewer';
 import {annotatorsDB} from '../db/db';
-import Signup from '../signup/signup'; 
+import Signup from '../signup/signup';
+
+const $loadingImg = $('.login-wrapper form button.submit img.loading');
+const $loginForm = $('.login-wrapper');
+const $loginWrapper = $('.login-wrapper');
+const $viewWrapper = $('.viewer-wrapper');
+const $overlay = $('.loading-overlay');
 
 $('.login-wrapper form').off('submit').on('submit', function (evt) {
   evt.preventDefault();
-
-  const $loadingImg = $('.login-wrapper form button.submit img.loading');
-  const $loginForm = $('.login-wrapper');
 
   $loadingImg.removeClass('invisible');
   const username = $('#login-username').val();
@@ -34,19 +37,21 @@ $('.login-wrapper form').off('submit').on('submit', function (evt) {
   // }, 1000);
 });
 
-$('#open-signup-btn').click(function(event) {
+$('#open-signup-btn-new').off('click').click(function(event) {
   event.preventDefault();
 
   $loginWrapper.addClass('invisible');
 
-  Signup.init();
+  new Signup().init();
+  // console.log('sighnup is called');
+  // Signup.init();
 });
 
 
 export default {
-  $loginWrapper: $('.login-wrapper'),
-  $viewWrapper: $('.viewer-wrapper'),
-  $overlay: $('.loading-overlay'),
+  $loginWrapper,
+  $viewWrapper,
+  $overlay,
   logout() {
     this.$overlay.addClass('invisible');
     this.$loginWrapper.removeClass('invisible');

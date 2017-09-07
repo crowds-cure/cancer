@@ -7,16 +7,22 @@ export default {
   $window: $(window),
   $viewer: $('.viewer-wrapper'),
   $overlay: $('.loading-overlay'),
-  
+
   getNextCase() {
     this.$overlay.removeClass('invisible').addClass('loading');
 
     Files.getCaseImages().then((imagesIds) => {
+      console.log('test0');
       Tools.initTools(imagesIds);
+      console.log('test1');
       Commands.initCommands();
+      console.log('test2');
 
       cornerstone.loadImage(imagesIds[0]).then((image) => {
+        console.log('test3');
         cornerstone.displayImage(this.$element, image);
+        console.log('test4');
+
       });
     }).catch();
   },

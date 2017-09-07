@@ -1,123 +1,104 @@
+import {adjectivesDB, animalsDB, annotatorsDB, annotatorsURL} from '../db/db';
 import Viewer from '../viewer/viewer';
-import {annotatorsDB} from '../db/db';
 
+class Signup {
 
-var $loading = $('.signup-wrapper form button.submit img.loading');
-var $signup = $('.signup-wrapper');
-var $overlay = $('.loading-overlay');
+  constructor () {
 
-const getRandomUsername = () => {
-  let numOfAdjectives = 0;
-  let numOfAnimals = 0;
-  let name;
+  }
 
-  return adjectivesDb.info().then((doc) => {
-    numOfAdjectives = doc.doc_count;
-    // console.log('numOfAdjectives', numOfAdjectives);
-    const rand = Math.floor(numOfAdjectives*Math.random());
-    return adjectivesDb.get(rand);
-  }).then((doc) => {
-    // console.log(doc.name);
-    name = doc.name;
-    return animalsDb.info();
-  }).then((doc) => {
-    numOfAnimals = doc.doc_count;
-    // console.log('numOfAnimals', numOfAnimals);
-    const rand = Math.floor(numOfAnimals*Math.random());
-    return animalsDb.get(rand);
-  }).then((doc) => {
-    return name + `_${doc.name}`;
-  }).catch((err) => {
-    throw err;
-  });
-}
+  getRandomUsername () {
+    let numOfAdjectives = 0;
+    let numOfAnimals = 0;
+    let name;
 
-const getRandomUsernames = (num=0) => {
-  names = [];
-
-  const next = () => {
-    return getRandomUsername().then((name) => {
-      let accept = true;
-      names.forEach((n) => {
-        if(n === name){
-          accept = false;
-        }
-      });
-
-      if(accept){
-        return annotatorsDb.get(name).then((user) => {
-          console.log('username', name, 'already exist in the database');
-
-          return next();
-        }).catch((err) => {
-          names.push(name);
-
-          if(names.length !== num){
-            return next();
-          }
-        });
-      }else{
-        return next();
-      }
+    return adjectivesDB.info().then((doc) => {
+      numOfAdjectives = doc.doc_count;
+      // console.log('numOfAdjectives', numOfAdjectives);
+      const rand = Math.floor(numOfAdjectives*Math.random());
+      return adjectivesDB.get(rand);
+    }).then((doc) => {
+      // console.log(doc.name);
+      name = doc.name;
+      return animalsDB.info();
+    }).then((doc) => {
+      numOfAnimals = doc.doc_count;
+      // console.log('numOfAnimals', numOfAnimals);
+      const rand = Math.floor(numOfAnimals*Math.random());
+      return animalsDB.get(rand);
+    }).then((doc) => {
+      return name + `_${doc.name}`;
+    }).catch((err) => {
+      throw err;
     });
   }
 
-  return next().then(() => {
-    return names;
-  });
-}
+  getRandomUsernames (num=0) {
+    const names = [];
+    console.log('num:', num);
 
-// function uuidv4() {
-//   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-//     var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-//     return v.toString(16);
-//   });
-// }
+    const next = () => {
+      return this.getRandomUsername().then((name) => {
+        let accept = true;
+        names.forEach((n) => {
+          if(n === name){
+            accept = false;
+          }
+        });
 
-const getUuid = () => {
-  return new Promise((resolve, reject) => {
-    $.ajax({
-      url: uuidUrl,
-      type: 'GET',
-      dataType: 'json',
-      success: function(res){
-        console.log('res:', res);
-        resolve(res.uuids[0]);
-      },
-      error: function(err){
-        console.log(err);
-        reject(err);
-      }
+        if(accept){
+          return annotatorsDB.get(name).then((user) => {
+            console.log('username', name, 'already exist in the database');
+
+            return next();
+          }).catch((err) => {
+            names.push(name);
+
+            if(names.length !== num){
+              return next();
+            }
+          });
+        }else{
+          return next();
+        }
+      });
+    }
+
+    return next().then(() => {
+      return names;
     });
-  });
-}
+  }
 
-const createUser = (id, data) => {
-  return new Promise((resolve, reject) => {
-    $.ajax({
-      url: `${annotatorUrl}/${id}`,
-      type: 'PUT',
-      dataType: 'json',
-      data: data,
-      success: function(res){
-        // $loadingImg.addClass('invisible');
-        // $signupWrapper.addClass('invisible');
-        // Viewer.initViewer();
-        resolve(res);
-      },
-      error: function(err){
-        console.log(err);
-        reject(err);
-      }
+  createUser (id, data) {
+    return new Promise((resolve, reject) => {
+      $.ajax({
+        url: `${annotatorURL}/${id}`,
+        type: 'PUT',
+        dataType: 'json',
+        data: data,
+        success: function(res){
+          // $loadingImg.addClass('invisible');
+          // $signupWrapper.addClass('invisible');
+          // Viewer.initViewer();
+          resolve(res);
+        },
+        error: function(err){
+          console.log(err);
+          reject(err);
+        }
+      });
     });
-  });
-}
+  }
 
-export default {
   init () {
+    console.log('Signup.init() is called');
+    var $loading = $('.signup-wrapper form button.submit img.loading');
+    var $signup = $('.signup-wrapper');
+    var $overlay = $('.loading-overlay');
+
     $overlay.removeClass('invisible').addClass('loading');
 
-    getRandomUsernames(4).then((names) => {
+    this.getRandomUsernames(4).then((names) => {
       // console.log('usernames:', names);
       $overlay.removeClass('loading').addClass('invisible');
       $signup.removeClass('invisible');
@@ -231,7 +212,7 @@ export default {
       }
 
       console.log('data:', data);
-      annotatorsDb.put(data).then(() => {
+      annotatorsDB.put(data).then(() => {
         $loading.addClass('invisible');
         $signup.addClass('invisible');
 
@@ -262,3 +243,5 @@ export default {
     });
   }
 }
+
+export default Signup;
