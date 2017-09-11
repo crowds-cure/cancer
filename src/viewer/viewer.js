@@ -12,16 +12,16 @@ export default {
     this.$overlay.removeClass('invisible').addClass('loading');
 
     Files.getCaseImages().then((imagesIds) => {
-      console.log('test0');
+      // console.log('test0');
       Tools.initTools(imagesIds);
-      console.log('test1');
+      // console.log('test1');
       Commands.initCommands();
-      console.log('test2');
+      // console.log('test2');
 
       cornerstone.loadImage(imagesIds[0]).then((image) => {
-        console.log('test3');
+        // console.log('test3');
         cornerstone.displayImage(this.$element, image);
-        console.log('test4');
+        // console.log('test4');
 
       });
     }).catch();
@@ -41,6 +41,7 @@ export default {
 
     cornerstone.enable(this.$element);
 
+    // currentSeriesIndex = 0;//a hack to get series in order
     this.getNextCase();
   }
 }

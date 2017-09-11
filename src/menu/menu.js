@@ -1,5 +1,6 @@
 import Login from '../login/login';
 import Modal from '../modal/modal';
+import ErrorModal from '../errorModal/modal';
 import Viewer from '../viewer/viewer';
 
 export default {
@@ -34,6 +35,7 @@ export default {
   },
   init() {
     Modal.init();
+    ErrorModal.init();
 
     this.$hamburguerMenu.on('click', (event) => {
       event.preventDefault();

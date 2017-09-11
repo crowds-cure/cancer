@@ -740,6 +740,4471 @@ function race(iterable) {
 }
 
 },{"immediate":4}],7:[function(require,module,exports){
+//! moment.js
+//! version : 2.18.1
+//! authors : Tim Wood, Iskren Chernev, Moment.js contributors
+//! license : MIT
+//! momentjs.com
+
+;(function (global, factory) {
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+    typeof define === 'function' && define.amd ? define(factory) :
+    global.moment = factory()
+}(this, (function () { 'use strict';
+
+var hookCallback;
+
+function hooks () {
+    return hookCallback.apply(null, arguments);
+}
+
+// This is done to register the method called with moment()
+// without creating circular dependencies.
+function setHookCallback (callback) {
+    hookCallback = callback;
+}
+
+function isArray(input) {
+    return input instanceof Array || Object.prototype.toString.call(input) === '[object Array]';
+}
+
+function isObject(input) {
+    // IE8 will treat undefined and null as object if it wasn't for
+    // input != null
+    return input != null && Object.prototype.toString.call(input) === '[object Object]';
+}
+
+function isObjectEmpty(obj) {
+    var k;
+    for (k in obj) {
+        // even if its not own property I'd still call it non-empty
+        return false;
+    }
+    return true;
+}
+
+function isUndefined(input) {
+    return input === void 0;
+}
+
+function isNumber(input) {
+    return typeof input === 'number' || Object.prototype.toString.call(input) === '[object Number]';
+}
+
+function isDate(input) {
+    return input instanceof Date || Object.prototype.toString.call(input) === '[object Date]';
+}
+
+function map(arr, fn) {
+    var res = [], i;
+    for (i = 0; i < arr.length; ++i) {
+        res.push(fn(arr[i], i));
+    }
+    return res;
+}
+
+function hasOwnProp(a, b) {
+    return Object.prototype.hasOwnProperty.call(a, b);
+}
+
+function extend(a, b) {
+    for (var i in b) {
+        if (hasOwnProp(b, i)) {
+            a[i] = b[i];
+        }
+    }
+
+    if (hasOwnProp(b, 'toString')) {
+        a.toString = b.toString;
+    }
+
+    if (hasOwnProp(b, 'valueOf')) {
+        a.valueOf = b.valueOf;
+    }
+
+    return a;
+}
+
+function createUTC (input, format, locale, strict) {
+    return createLocalOrUTC(input, format, locale, strict, true).utc();
+}
+
+function defaultParsingFlags() {
+    // We need to deep clone this object.
+    return {
+        empty           : false,
+        unusedTokens    : [],
+        unusedInput     : [],
+        overflow        : -2,
+        charsLeftOver   : 0,
+        nullInput       : false,
+        invalidMonth    : null,
+        invalidFormat   : false,
+        userInvalidated : false,
+        iso             : false,
+        parsedDateParts : [],
+        meridiem        : null,
+        rfc2822         : false,
+        weekdayMismatch : false
+    };
+}
+
+function getParsingFlags(m) {
+    if (m._pf == null) {
+        m._pf = defaultParsingFlags();
+    }
+    return m._pf;
+}
+
+var some;
+if (Array.prototype.some) {
+    some = Array.prototype.some;
+} else {
+    some = function (fun) {
+        var t = Object(this);
+        var len = t.length >>> 0;
+
+        for (var i = 0; i < len; i++) {
+            if (i in t && fun.call(this, t[i], i, t)) {
+                return true;
+            }
+        }
+
+        return false;
+    };
+}
+
+var some$1 = some;
+
+function isValid(m) {
+    if (m._isValid == null) {
+        var flags = getParsingFlags(m);
+        var parsedParts = some$1.call(flags.parsedDateParts, function (i) {
+            return i != null;
+        });
+        var isNowValid = !isNaN(m._d.getTime()) &&
+            flags.overflow < 0 &&
+            !flags.empty &&
+            !flags.invalidMonth &&
+            !flags.invalidWeekday &&
+            !flags.nullInput &&
+            !flags.invalidFormat &&
+            !flags.userInvalidated &&
+            (!flags.meridiem || (flags.meridiem && parsedParts));
+
+        if (m._strict) {
+            isNowValid = isNowValid &&
+                flags.charsLeftOver === 0 &&
+                flags.unusedTokens.length === 0 &&
+                flags.bigHour === undefined;
+        }
+
+        if (Object.isFrozen == null || !Object.isFrozen(m)) {
+            m._isValid = isNowValid;
+        }
+        else {
+            return isNowValid;
+        }
+    }
+    return m._isValid;
+}
+
+function createInvalid (flags) {
+    var m = createUTC(NaN);
+    if (flags != null) {
+        extend(getParsingFlags(m), flags);
+    }
+    else {
+        getParsingFlags(m).userInvalidated = true;
+    }
+
+    return m;
+}
+
+// Plugins that add properties should also add the key here (null value),
+// so we can properly clone ourselves.
+var momentProperties = hooks.momentProperties = [];
+
+function copyConfig(to, from) {
+    var i, prop, val;
+
+    if (!isUndefined(from._isAMomentObject)) {
+        to._isAMomentObject = from._isAMomentObject;
+    }
+    if (!isUndefined(from._i)) {
+        to._i = from._i;
+    }
+    if (!isUndefined(from._f)) {
+        to._f = from._f;
+    }
+    if (!isUndefined(from._l)) {
+        to._l = from._l;
+    }
+    if (!isUndefined(from._strict)) {
+        to._strict = from._strict;
+    }
+    if (!isUndefined(from._tzm)) {
+        to._tzm = from._tzm;
+    }
+    if (!isUndefined(from._isUTC)) {
+        to._isUTC = from._isUTC;
+    }
+    if (!isUndefined(from._offset)) {
+        to._offset = from._offset;
+    }
+    if (!isUndefined(from._pf)) {
+        to._pf = getParsingFlags(from);
+    }
+    if (!isUndefined(from._locale)) {
+        to._locale = from._locale;
+    }
+
+    if (momentProperties.length > 0) {
+        for (i = 0; i < momentProperties.length; i++) {
+            prop = momentProperties[i];
+            val = from[prop];
+            if (!isUndefined(val)) {
+                to[prop] = val;
+            }
+        }
+    }
+
+    return to;
+}
+
+var updateInProgress = false;
+
+// Moment prototype object
+function Moment(config) {
+    copyConfig(this, config);
+    this._d = new Date(config._d != null ? config._d.getTime() : NaN);
+    if (!this.isValid()) {
+        this._d = new Date(NaN);
+    }
+    // Prevent infinite loop in case updateOffset creates new moment
+    // objects.
+    if (updateInProgress === false) {
+        updateInProgress = true;
+        hooks.updateOffset(this);
+        updateInProgress = false;
+    }
+}
+
+function isMoment (obj) {
+    return obj instanceof Moment || (obj != null && obj._isAMomentObject != null);
+}
+
+function absFloor (number) {
+    if (number < 0) {
+        // -0 -> 0
+        return Math.ceil(number) || 0;
+    } else {
+        return Math.floor(number);
+    }
+}
+
+function toInt(argumentForCoercion) {
+    var coercedNumber = +argumentForCoercion,
+        value = 0;
+
+    if (coercedNumber !== 0 && isFinite(coercedNumber)) {
+        value = absFloor(coercedNumber);
+    }
+
+    return value;
+}
+
+// compare two arrays, return the number of differences
+function compareArrays(array1, array2, dontConvert) {
+    var len = Math.min(array1.length, array2.length),
+        lengthDiff = Math.abs(array1.length - array2.length),
+        diffs = 0,
+        i;
+    for (i = 0; i < len; i++) {
+        if ((dontConvert && array1[i] !== array2[i]) ||
+            (!dontConvert && toInt(array1[i]) !== toInt(array2[i]))) {
+            diffs++;
+        }
+    }
+    return diffs + lengthDiff;
+}
+
+function warn(msg) {
+    if (hooks.suppressDeprecationWarnings === false &&
+            (typeof console !==  'undefined') && console.warn) {
+        console.warn('Deprecation warning: ' + msg);
+    }
+}
+
+function deprecate(msg, fn) {
+    var firstTime = true;
+
+    return extend(function () {
+        if (hooks.deprecationHandler != null) {
+            hooks.deprecationHandler(null, msg);
+        }
+        if (firstTime) {
+            var args = [];
+            var arg;
+            for (var i = 0; i < arguments.length; i++) {
+                arg = '';
+                if (typeof arguments[i] === 'object') {
+                    arg += '\n[' + i + '] ';
+                    for (var key in arguments[0]) {
+                        arg += key + ': ' + arguments[0][key] + ', ';
+                    }
+                    arg = arg.slice(0, -2); // Remove trailing comma and space
+                } else {
+                    arg = arguments[i];
+                }
+                args.push(arg);
+            }
+            warn(msg + '\nArguments: ' + Array.prototype.slice.call(args).join('') + '\n' + (new Error()).stack);
+            firstTime = false;
+        }
+        return fn.apply(this, arguments);
+    }, fn);
+}
+
+var deprecations = {};
+
+function deprecateSimple(name, msg) {
+    if (hooks.deprecationHandler != null) {
+        hooks.deprecationHandler(name, msg);
+    }
+    if (!deprecations[name]) {
+        warn(msg);
+        deprecations[name] = true;
+    }
+}
+
+hooks.suppressDeprecationWarnings = false;
+hooks.deprecationHandler = null;
+
+function isFunction(input) {
+    return input instanceof Function || Object.prototype.toString.call(input) === '[object Function]';
+}
+
+function set (config) {
+    var prop, i;
+    for (i in config) {
+        prop = config[i];
+        if (isFunction(prop)) {
+            this[i] = prop;
+        } else {
+            this['_' + i] = prop;
+        }
+    }
+    this._config = config;
+    // Lenient ordinal parsing accepts just a number in addition to
+    // number + (possibly) stuff coming from _dayOfMonthOrdinalParse.
+    // TODO: Remove "ordinalParse" fallback in next major release.
+    this._dayOfMonthOrdinalParseLenient = new RegExp(
+        (this._dayOfMonthOrdinalParse.source || this._ordinalParse.source) +
+            '|' + (/\d{1,2}/).source);
+}
+
+function mergeConfigs(parentConfig, childConfig) {
+    var res = extend({}, parentConfig), prop;
+    for (prop in childConfig) {
+        if (hasOwnProp(childConfig, prop)) {
+            if (isObject(parentConfig[prop]) && isObject(childConfig[prop])) {
+                res[prop] = {};
+                extend(res[prop], parentConfig[prop]);
+                extend(res[prop], childConfig[prop]);
+            } else if (childConfig[prop] != null) {
+                res[prop] = childConfig[prop];
+            } else {
+                delete res[prop];
+            }
+        }
+    }
+    for (prop in parentConfig) {
+        if (hasOwnProp(parentConfig, prop) &&
+                !hasOwnProp(childConfig, prop) &&
+                isObject(parentConfig[prop])) {
+            // make sure changes to properties don't modify parent config
+            res[prop] = extend({}, res[prop]);
+        }
+    }
+    return res;
+}
+
+function Locale(config) {
+    if (config != null) {
+        this.set(config);
+    }
+}
+
+var keys;
+
+if (Object.keys) {
+    keys = Object.keys;
+} else {
+    keys = function (obj) {
+        var i, res = [];
+        for (i in obj) {
+            if (hasOwnProp(obj, i)) {
+                res.push(i);
+            }
+        }
+        return res;
+    };
+}
+
+var keys$1 = keys;
+
+var defaultCalendar = {
+    sameDay : '[Today at] LT',
+    nextDay : '[Tomorrow at] LT',
+    nextWeek : 'dddd [at] LT',
+    lastDay : '[Yesterday at] LT',
+    lastWeek : '[Last] dddd [at] LT',
+    sameElse : 'L'
+};
+
+function calendar (key, mom, now) {
+    var output = this._calendar[key] || this._calendar['sameElse'];
+    return isFunction(output) ? output.call(mom, now) : output;
+}
+
+var defaultLongDateFormat = {
+    LTS  : 'h:mm:ss A',
+    LT   : 'h:mm A',
+    L    : 'MM/DD/YYYY',
+    LL   : 'MMMM D, YYYY',
+    LLL  : 'MMMM D, YYYY h:mm A',
+    LLLL : 'dddd, MMMM D, YYYY h:mm A'
+};
+
+function longDateFormat (key) {
+    var format = this._longDateFormat[key],
+        formatUpper = this._longDateFormat[key.toUpperCase()];
+
+    if (format || !formatUpper) {
+        return format;
+    }
+
+    this._longDateFormat[key] = formatUpper.replace(/MMMM|MM|DD|dddd/g, function (val) {
+        return val.slice(1);
+    });
+
+    return this._longDateFormat[key];
+}
+
+var defaultInvalidDate = 'Invalid date';
+
+function invalidDate () {
+    return this._invalidDate;
+}
+
+var defaultOrdinal = '%d';
+var defaultDayOfMonthOrdinalParse = /\d{1,2}/;
+
+function ordinal (number) {
+    return this._ordinal.replace('%d', number);
+}
+
+var defaultRelativeTime = {
+    future : 'in %s',
+    past   : '%s ago',
+    s  : 'a few seconds',
+    ss : '%d seconds',
+    m  : 'a minute',
+    mm : '%d minutes',
+    h  : 'an hour',
+    hh : '%d hours',
+    d  : 'a day',
+    dd : '%d days',
+    M  : 'a month',
+    MM : '%d months',
+    y  : 'a year',
+    yy : '%d years'
+};
+
+function relativeTime (number, withoutSuffix, string, isFuture) {
+    var output = this._relativeTime[string];
+    return (isFunction(output)) ?
+        output(number, withoutSuffix, string, isFuture) :
+        output.replace(/%d/i, number);
+}
+
+function pastFuture (diff, output) {
+    var format = this._relativeTime[diff > 0 ? 'future' : 'past'];
+    return isFunction(format) ? format(output) : format.replace(/%s/i, output);
+}
+
+var aliases = {};
+
+function addUnitAlias (unit, shorthand) {
+    var lowerCase = unit.toLowerCase();
+    aliases[lowerCase] = aliases[lowerCase + 's'] = aliases[shorthand] = unit;
+}
+
+function normalizeUnits(units) {
+    return typeof units === 'string' ? aliases[units] || aliases[units.toLowerCase()] : undefined;
+}
+
+function normalizeObjectUnits(inputObject) {
+    var normalizedInput = {},
+        normalizedProp,
+        prop;
+
+    for (prop in inputObject) {
+        if (hasOwnProp(inputObject, prop)) {
+            normalizedProp = normalizeUnits(prop);
+            if (normalizedProp) {
+                normalizedInput[normalizedProp] = inputObject[prop];
+            }
+        }
+    }
+
+    return normalizedInput;
+}
+
+var priorities = {};
+
+function addUnitPriority(unit, priority) {
+    priorities[unit] = priority;
+}
+
+function getPrioritizedUnits(unitsObj) {
+    var units = [];
+    for (var u in unitsObj) {
+        units.push({unit: u, priority: priorities[u]});
+    }
+    units.sort(function (a, b) {
+        return a.priority - b.priority;
+    });
+    return units;
+}
+
+function makeGetSet (unit, keepTime) {
+    return function (value) {
+        if (value != null) {
+            set$1(this, unit, value);
+            hooks.updateOffset(this, keepTime);
+            return this;
+        } else {
+            return get(this, unit);
+        }
+    };
+}
+
+function get (mom, unit) {
+    return mom.isValid() ?
+        mom._d['get' + (mom._isUTC ? 'UTC' : '') + unit]() : NaN;
+}
+
+function set$1 (mom, unit, value) {
+    if (mom.isValid()) {
+        mom._d['set' + (mom._isUTC ? 'UTC' : '') + unit](value);
+    }
+}
+
+// MOMENTS
+
+function stringGet (units) {
+    units = normalizeUnits(units);
+    if (isFunction(this[units])) {
+        return this[units]();
+    }
+    return this;
+}
+
+
+function stringSet (units, value) {
+    if (typeof units === 'object') {
+        units = normalizeObjectUnits(units);
+        var prioritized = getPrioritizedUnits(units);
+        for (var i = 0; i < prioritized.length; i++) {
+            this[prioritized[i].unit](units[prioritized[i].unit]);
+        }
+    } else {
+        units = normalizeUnits(units);
+        if (isFunction(this[units])) {
+            return this[units](value);
+        }
+    }
+    return this;
+}
+
+function zeroFill(number, targetLength, forceSign) {
+    var absNumber = '' + Math.abs(number),
+        zerosToFill = targetLength - absNumber.length,
+        sign = number >= 0;
+    return (sign ? (forceSign ? '+' : '') : '-') +
+        Math.pow(10, Math.max(0, zerosToFill)).toString().substr(1) + absNumber;
+}
+
+var formattingTokens = /(\[[^\[]*\])|(\\)?([Hh]mm(ss)?|Mo|MM?M?M?|Do|DDDo|DD?D?D?|ddd?d?|do?|w[o|w]?|W[o|W]?|Qo?|YYYYYY|YYYYY|YYYY|YY|gg(ggg?)?|GG(GGG?)?|e|E|a|A|hh?|HH?|kk?|mm?|ss?|S{1,9}|x|X|zz?|ZZ?|.)/g;
+
+var localFormattingTokens = /(\[[^\[]*\])|(\\)?(LTS|LT|LL?L?L?|l{1,4})/g;
+
+var formatFunctions = {};
+
+var formatTokenFunctions = {};
+
+// token:    'M'
+// padded:   ['MM', 2]
+// ordinal:  'Mo'
+// callback: function () { this.month() + 1 }
+function addFormatToken (token, padded, ordinal, callback) {
+    var func = callback;
+    if (typeof callback === 'string') {
+        func = function () {
+            return this[callback]();
+        };
+    }
+    if (token) {
+        formatTokenFunctions[token] = func;
+    }
+    if (padded) {
+        formatTokenFunctions[padded[0]] = function () {
+            return zeroFill(func.apply(this, arguments), padded[1], padded[2]);
+        };
+    }
+    if (ordinal) {
+        formatTokenFunctions[ordinal] = function () {
+            return this.localeData().ordinal(func.apply(this, arguments), token);
+        };
+    }
+}
+
+function removeFormattingTokens(input) {
+    if (input.match(/\[[\s\S]/)) {
+        return input.replace(/^\[|\]$/g, '');
+    }
+    return input.replace(/\\/g, '');
+}
+
+function makeFormatFunction(format) {
+    var array = format.match(formattingTokens), i, length;
+
+    for (i = 0, length = array.length; i < length; i++) {
+        if (formatTokenFunctions[array[i]]) {
+            array[i] = formatTokenFunctions[array[i]];
+        } else {
+            array[i] = removeFormattingTokens(array[i]);
+        }
+    }
+
+    return function (mom) {
+        var output = '', i;
+        for (i = 0; i < length; i++) {
+            output += isFunction(array[i]) ? array[i].call(mom, format) : array[i];
+        }
+        return output;
+    };
+}
+
+// format date using native date object
+function formatMoment(m, format) {
+    if (!m.isValid()) {
+        return m.localeData().invalidDate();
+    }
+
+    format = expandFormat(format, m.localeData());
+    formatFunctions[format] = formatFunctions[format] || makeFormatFunction(format);
+
+    return formatFunctions[format](m);
+}
+
+function expandFormat(format, locale) {
+    var i = 5;
+
+    function replaceLongDateFormatTokens(input) {
+        return locale.longDateFormat(input) || input;
+    }
+
+    localFormattingTokens.lastIndex = 0;
+    while (i >= 0 && localFormattingTokens.test(format)) {
+        format = format.replace(localFormattingTokens, replaceLongDateFormatTokens);
+        localFormattingTokens.lastIndex = 0;
+        i -= 1;
+    }
+
+    return format;
+}
+
+var match1         = /\d/;            //       0 - 9
+var match2         = /\d\d/;          //      00 - 99
+var match3         = /\d{3}/;         //     000 - 999
+var match4         = /\d{4}/;         //    0000 - 9999
+var match6         = /[+-]?\d{6}/;    // -999999 - 999999
+var match1to2      = /\d\d?/;         //       0 - 99
+var match3to4      = /\d\d\d\d?/;     //     999 - 9999
+var match5to6      = /\d\d\d\d\d\d?/; //   99999 - 999999
+var match1to3      = /\d{1,3}/;       //       0 - 999
+var match1to4      = /\d{1,4}/;       //       0 - 9999
+var match1to6      = /[+-]?\d{1,6}/;  // -999999 - 999999
+
+var matchUnsigned  = /\d+/;           //       0 - inf
+var matchSigned    = /[+-]?\d+/;      //    -inf - inf
+
+var matchOffset    = /Z|[+-]\d\d:?\d\d/gi; // +00:00 -00:00 +0000 -0000 or Z
+var matchShortOffset = /Z|[+-]\d\d(?::?\d\d)?/gi; // +00 -00 +00:00 -00:00 +0000 -0000 or Z
+
+var matchTimestamp = /[+-]?\d+(\.\d{1,3})?/; // 123456789 123456789.123
+
+// any word (or two) characters or numbers including two/three word month in arabic.
+// includes scottish gaelic two word and hyphenated months
+var matchWord = /[0-9]*['a-z\u00A0-\u05FF\u0700-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+|[\u0600-\u06FF\/]+(\s*?[\u0600-\u06FF]+){1,2}/i;
+
+
+var regexes = {};
+
+function addRegexToken (token, regex, strictRegex) {
+    regexes[token] = isFunction(regex) ? regex : function (isStrict, localeData) {
+        return (isStrict && strictRegex) ? strictRegex : regex;
+    };
+}
+
+function getParseRegexForToken (token, config) {
+    if (!hasOwnProp(regexes, token)) {
+        return new RegExp(unescapeFormat(token));
+    }
+
+    return regexes[token](config._strict, config._locale);
+}
+
+// Code from http://stackoverflow.com/questions/3561493/is-there-a-regexp-escape-function-in-javascript
+function unescapeFormat(s) {
+    return regexEscape(s.replace('\\', '').replace(/\\(\[)|\\(\])|\[([^\]\[]*)\]|\\(.)/g, function (matched, p1, p2, p3, p4) {
+        return p1 || p2 || p3 || p4;
+    }));
+}
+
+function regexEscape(s) {
+    return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+}
+
+var tokens = {};
+
+function addParseToken (token, callback) {
+    var i, func = callback;
+    if (typeof token === 'string') {
+        token = [token];
+    }
+    if (isNumber(callback)) {
+        func = function (input, array) {
+            array[callback] = toInt(input);
+        };
+    }
+    for (i = 0; i < token.length; i++) {
+        tokens[token[i]] = func;
+    }
+}
+
+function addWeekParseToken (token, callback) {
+    addParseToken(token, function (input, array, config, token) {
+        config._w = config._w || {};
+        callback(input, config._w, config, token);
+    });
+}
+
+function addTimeToArrayFromToken(token, input, config) {
+    if (input != null && hasOwnProp(tokens, token)) {
+        tokens[token](input, config._a, config, token);
+    }
+}
+
+var YEAR = 0;
+var MONTH = 1;
+var DATE = 2;
+var HOUR = 3;
+var MINUTE = 4;
+var SECOND = 5;
+var MILLISECOND = 6;
+var WEEK = 7;
+var WEEKDAY = 8;
+
+var indexOf;
+
+if (Array.prototype.indexOf) {
+    indexOf = Array.prototype.indexOf;
+} else {
+    indexOf = function (o) {
+        // I know
+        var i;
+        for (i = 0; i < this.length; ++i) {
+            if (this[i] === o) {
+                return i;
+            }
+        }
+        return -1;
+    };
+}
+
+var indexOf$1 = indexOf;
+
+function daysInMonth(year, month) {
+    return new Date(Date.UTC(year, month + 1, 0)).getUTCDate();
+}
+
+// FORMATTING
+
+addFormatToken('M', ['MM', 2], 'Mo', function () {
+    return this.month() + 1;
+});
+
+addFormatToken('MMM', 0, 0, function (format) {
+    return this.localeData().monthsShort(this, format);
+});
+
+addFormatToken('MMMM', 0, 0, function (format) {
+    return this.localeData().months(this, format);
+});
+
+// ALIASES
+
+addUnitAlias('month', 'M');
+
+// PRIORITY
+
+addUnitPriority('month', 8);
+
+// PARSING
+
+addRegexToken('M',    match1to2);
+addRegexToken('MM',   match1to2, match2);
+addRegexToken('MMM',  function (isStrict, locale) {
+    return locale.monthsShortRegex(isStrict);
+});
+addRegexToken('MMMM', function (isStrict, locale) {
+    return locale.monthsRegex(isStrict);
+});
+
+addParseToken(['M', 'MM'], function (input, array) {
+    array[MONTH] = toInt(input) - 1;
+});
+
+addParseToken(['MMM', 'MMMM'], function (input, array, config, token) {
+    var month = config._locale.monthsParse(input, token, config._strict);
+    // if we didn't find a month name, mark the date as invalid.
+    if (month != null) {
+        array[MONTH] = month;
+    } else {
+        getParsingFlags(config).invalidMonth = input;
+    }
+});
+
+// LOCALES
+
+var MONTHS_IN_FORMAT = /D[oD]?(\[[^\[\]]*\]|\s)+MMMM?/;
+var defaultLocaleMonths = 'January_February_March_April_May_June_July_August_September_October_November_December'.split('_');
+function localeMonths (m, format) {
+    if (!m) {
+        return isArray(this._months) ? this._months :
+            this._months['standalone'];
+    }
+    return isArray(this._months) ? this._months[m.month()] :
+        this._months[(this._months.isFormat || MONTHS_IN_FORMAT).test(format) ? 'format' : 'standalone'][m.month()];
+}
+
+var defaultLocaleMonthsShort = 'Jan_Feb_Mar_Apr_May_Jun_Jul_Aug_Sep_Oct_Nov_Dec'.split('_');
+function localeMonthsShort (m, format) {
+    if (!m) {
+        return isArray(this._monthsShort) ? this._monthsShort :
+            this._monthsShort['standalone'];
+    }
+    return isArray(this._monthsShort) ? this._monthsShort[m.month()] :
+        this._monthsShort[MONTHS_IN_FORMAT.test(format) ? 'format' : 'standalone'][m.month()];
+}
+
+function handleStrictParse(monthName, format, strict) {
+    var i, ii, mom, llc = monthName.toLocaleLowerCase();
+    if (!this._monthsParse) {
+        // this is not used
+        this._monthsParse = [];
+        this._longMonthsParse = [];
+        this._shortMonthsParse = [];
+        for (i = 0; i < 12; ++i) {
+            mom = createUTC([2000, i]);
+            this._shortMonthsParse[i] = this.monthsShort(mom, '').toLocaleLowerCase();
+            this._longMonthsParse[i] = this.months(mom, '').toLocaleLowerCase();
+        }
+    }
+
+    if (strict) {
+        if (format === 'MMM') {
+            ii = indexOf$1.call(this._shortMonthsParse, llc);
+            return ii !== -1 ? ii : null;
+        } else {
+            ii = indexOf$1.call(this._longMonthsParse, llc);
+            return ii !== -1 ? ii : null;
+        }
+    } else {
+        if (format === 'MMM') {
+            ii = indexOf$1.call(this._shortMonthsParse, llc);
+            if (ii !== -1) {
+                return ii;
+            }
+            ii = indexOf$1.call(this._longMonthsParse, llc);
+            return ii !== -1 ? ii : null;
+        } else {
+            ii = indexOf$1.call(this._longMonthsParse, llc);
+            if (ii !== -1) {
+                return ii;
+            }
+            ii = indexOf$1.call(this._shortMonthsParse, llc);
+            return ii !== -1 ? ii : null;
+        }
+    }
+}
+
+function localeMonthsParse (monthName, format, strict) {
+    var i, mom, regex;
+
+    if (this._monthsParseExact) {
+        return handleStrictParse.call(this, monthName, format, strict);
+    }
+
+    if (!this._monthsParse) {
+        this._monthsParse = [];
+        this._longMonthsParse = [];
+        this._shortMonthsParse = [];
+    }
+
+    // TODO: add sorting
+    // Sorting makes sure if one month (or abbr) is a prefix of another
+    // see sorting in computeMonthsParse
+    for (i = 0; i < 12; i++) {
+        // make the regex if we don't have it already
+        mom = createUTC([2000, i]);
+        if (strict && !this._longMonthsParse[i]) {
+            this._longMonthsParse[i] = new RegExp('^' + this.months(mom, '').replace('.', '') + '$', 'i');
+            this._shortMonthsParse[i] = new RegExp('^' + this.monthsShort(mom, '').replace('.', '') + '$', 'i');
+        }
+        if (!strict && !this._monthsParse[i]) {
+            regex = '^' + this.months(mom, '') + '|^' + this.monthsShort(mom, '');
+            this._monthsParse[i] = new RegExp(regex.replace('.', ''), 'i');
+        }
+        // test the regex
+        if (strict && format === 'MMMM' && this._longMonthsParse[i].test(monthName)) {
+            return i;
+        } else if (strict && format === 'MMM' && this._shortMonthsParse[i].test(monthName)) {
+            return i;
+        } else if (!strict && this._monthsParse[i].test(monthName)) {
+            return i;
+        }
+    }
+}
+
+// MOMENTS
+
+function setMonth (mom, value) {
+    var dayOfMonth;
+
+    if (!mom.isValid()) {
+        // No op
+        return mom;
+    }
+
+    if (typeof value === 'string') {
+        if (/^\d+$/.test(value)) {
+            value = toInt(value);
+        } else {
+            value = mom.localeData().monthsParse(value);
+            // TODO: Another silent failure?
+            if (!isNumber(value)) {
+                return mom;
+            }
+        }
+    }
+
+    dayOfMonth = Math.min(mom.date(), daysInMonth(mom.year(), value));
+    mom._d['set' + (mom._isUTC ? 'UTC' : '') + 'Month'](value, dayOfMonth);
+    return mom;
+}
+
+function getSetMonth (value) {
+    if (value != null) {
+        setMonth(this, value);
+        hooks.updateOffset(this, true);
+        return this;
+    } else {
+        return get(this, 'Month');
+    }
+}
+
+function getDaysInMonth () {
+    return daysInMonth(this.year(), this.month());
+}
+
+var defaultMonthsShortRegex = matchWord;
+function monthsShortRegex (isStrict) {
+    if (this._monthsParseExact) {
+        if (!hasOwnProp(this, '_monthsRegex')) {
+            computeMonthsParse.call(this);
+        }
+        if (isStrict) {
+            return this._monthsShortStrictRegex;
+        } else {
+            return this._monthsShortRegex;
+        }
+    } else {
+        if (!hasOwnProp(this, '_monthsShortRegex')) {
+            this._monthsShortRegex = defaultMonthsShortRegex;
+        }
+        return this._monthsShortStrictRegex && isStrict ?
+            this._monthsShortStrictRegex : this._monthsShortRegex;
+    }
+}
+
+var defaultMonthsRegex = matchWord;
+function monthsRegex (isStrict) {
+    if (this._monthsParseExact) {
+        if (!hasOwnProp(this, '_monthsRegex')) {
+            computeMonthsParse.call(this);
+        }
+        if (isStrict) {
+            return this._monthsStrictRegex;
+        } else {
+            return this._monthsRegex;
+        }
+    } else {
+        if (!hasOwnProp(this, '_monthsRegex')) {
+            this._monthsRegex = defaultMonthsRegex;
+        }
+        return this._monthsStrictRegex && isStrict ?
+            this._monthsStrictRegex : this._monthsRegex;
+    }
+}
+
+function computeMonthsParse () {
+    function cmpLenRev(a, b) {
+        return b.length - a.length;
+    }
+
+    var shortPieces = [], longPieces = [], mixedPieces = [],
+        i, mom;
+    for (i = 0; i < 12; i++) {
+        // make the regex if we don't have it already
+        mom = createUTC([2000, i]);
+        shortPieces.push(this.monthsShort(mom, ''));
+        longPieces.push(this.months(mom, ''));
+        mixedPieces.push(this.months(mom, ''));
+        mixedPieces.push(this.monthsShort(mom, ''));
+    }
+    // Sorting makes sure if one month (or abbr) is a prefix of another it
+    // will match the longer piece.
+    shortPieces.sort(cmpLenRev);
+    longPieces.sort(cmpLenRev);
+    mixedPieces.sort(cmpLenRev);
+    for (i = 0; i < 12; i++) {
+        shortPieces[i] = regexEscape(shortPieces[i]);
+        longPieces[i] = regexEscape(longPieces[i]);
+    }
+    for (i = 0; i < 24; i++) {
+        mixedPieces[i] = regexEscape(mixedPieces[i]);
+    }
+
+    this._monthsRegex = new RegExp('^(' + mixedPieces.join('|') + ')', 'i');
+    this._monthsShortRegex = this._monthsRegex;
+    this._monthsStrictRegex = new RegExp('^(' + longPieces.join('|') + ')', 'i');
+    this._monthsShortStrictRegex = new RegExp('^(' + shortPieces.join('|') + ')', 'i');
+}
+
+// FORMATTING
+
+addFormatToken('Y', 0, 0, function () {
+    var y = this.year();
+    return y <= 9999 ? '' + y : '+' + y;
+});
+
+addFormatToken(0, ['YY', 2], 0, function () {
+    return this.year() % 100;
+});
+
+addFormatToken(0, ['YYYY',   4],       0, 'year');
+addFormatToken(0, ['YYYYY',  5],       0, 'year');
+addFormatToken(0, ['YYYYYY', 6, true], 0, 'year');
+
+// ALIASES
+
+addUnitAlias('year', 'y');
+
+// PRIORITIES
+
+addUnitPriority('year', 1);
+
+// PARSING
+
+addRegexToken('Y',      matchSigned);
+addRegexToken('YY',     match1to2, match2);
+addRegexToken('YYYY',   match1to4, match4);
+addRegexToken('YYYYY',  match1to6, match6);
+addRegexToken('YYYYYY', match1to6, match6);
+
+addParseToken(['YYYYY', 'YYYYYY'], YEAR);
+addParseToken('YYYY', function (input, array) {
+    array[YEAR] = input.length === 2 ? hooks.parseTwoDigitYear(input) : toInt(input);
+});
+addParseToken('YY', function (input, array) {
+    array[YEAR] = hooks.parseTwoDigitYear(input);
+});
+addParseToken('Y', function (input, array) {
+    array[YEAR] = parseInt(input, 10);
+});
+
+// HELPERS
+
+function daysInYear(year) {
+    return isLeapYear(year) ? 366 : 365;
+}
+
+function isLeapYear(year) {
+    return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
+}
+
+// HOOKS
+
+hooks.parseTwoDigitYear = function (input) {
+    return toInt(input) + (toInt(input) > 68 ? 1900 : 2000);
+};
+
+// MOMENTS
+
+var getSetYear = makeGetSet('FullYear', true);
+
+function getIsLeapYear () {
+    return isLeapYear(this.year());
+}
+
+function createDate (y, m, d, h, M, s, ms) {
+    // can't just apply() to create a date:
+    // https://stackoverflow.com/q/181348
+    var date = new Date(y, m, d, h, M, s, ms);
+
+    // the date constructor remaps years 0-99 to 1900-1999
+    if (y < 100 && y >= 0 && isFinite(date.getFullYear())) {
+        date.setFullYear(y);
+    }
+    return date;
+}
+
+function createUTCDate (y) {
+    var date = new Date(Date.UTC.apply(null, arguments));
+
+    // the Date.UTC function remaps years 0-99 to 1900-1999
+    if (y < 100 && y >= 0 && isFinite(date.getUTCFullYear())) {
+        date.setUTCFullYear(y);
+    }
+    return date;
+}
+
+// start-of-first-week - start-of-year
+function firstWeekOffset(year, dow, doy) {
+    var // first-week day -- which january is always in the first week (4 for iso, 1 for other)
+        fwd = 7 + dow - doy,
+        // first-week day local weekday -- which local weekday is fwd
+        fwdlw = (7 + createUTCDate(year, 0, fwd).getUTCDay() - dow) % 7;
+
+    return -fwdlw + fwd - 1;
+}
+
+// https://en.wikipedia.org/wiki/ISO_week_date#Calculating_a_date_given_the_year.2C_week_number_and_weekday
+function dayOfYearFromWeeks(year, week, weekday, dow, doy) {
+    var localWeekday = (7 + weekday - dow) % 7,
+        weekOffset = firstWeekOffset(year, dow, doy),
+        dayOfYear = 1 + 7 * (week - 1) + localWeekday + weekOffset,
+        resYear, resDayOfYear;
+
+    if (dayOfYear <= 0) {
+        resYear = year - 1;
+        resDayOfYear = daysInYear(resYear) + dayOfYear;
+    } else if (dayOfYear > daysInYear(year)) {
+        resYear = year + 1;
+        resDayOfYear = dayOfYear - daysInYear(year);
+    } else {
+        resYear = year;
+        resDayOfYear = dayOfYear;
+    }
+
+    return {
+        year: resYear,
+        dayOfYear: resDayOfYear
+    };
+}
+
+function weekOfYear(mom, dow, doy) {
+    var weekOffset = firstWeekOffset(mom.year(), dow, doy),
+        week = Math.floor((mom.dayOfYear() - weekOffset - 1) / 7) + 1,
+        resWeek, resYear;
+
+    if (week < 1) {
+        resYear = mom.year() - 1;
+        resWeek = week + weeksInYear(resYear, dow, doy);
+    } else if (week > weeksInYear(mom.year(), dow, doy)) {
+        resWeek = week - weeksInYear(mom.year(), dow, doy);
+        resYear = mom.year() + 1;
+    } else {
+        resYear = mom.year();
+        resWeek = week;
+    }
+
+    return {
+        week: resWeek,
+        year: resYear
+    };
+}
+
+function weeksInYear(year, dow, doy) {
+    var weekOffset = firstWeekOffset(year, dow, doy),
+        weekOffsetNext = firstWeekOffset(year + 1, dow, doy);
+    return (daysInYear(year) - weekOffset + weekOffsetNext) / 7;
+}
+
+// FORMATTING
+
+addFormatToken('w', ['ww', 2], 'wo', 'week');
+addFormatToken('W', ['WW', 2], 'Wo', 'isoWeek');
+
+// ALIASES
+
+addUnitAlias('week', 'w');
+addUnitAlias('isoWeek', 'W');
+
+// PRIORITIES
+
+addUnitPriority('week', 5);
+addUnitPriority('isoWeek', 5);
+
+// PARSING
+
+addRegexToken('w',  match1to2);
+addRegexToken('ww', match1to2, match2);
+addRegexToken('W',  match1to2);
+addRegexToken('WW', match1to2, match2);
+
+addWeekParseToken(['w', 'ww', 'W', 'WW'], function (input, week, config, token) {
+    week[token.substr(0, 1)] = toInt(input);
+});
+
+// HELPERS
+
+// LOCALES
+
+function localeWeek (mom) {
+    return weekOfYear(mom, this._week.dow, this._week.doy).week;
+}
+
+var defaultLocaleWeek = {
+    dow : 0, // Sunday is the first day of the week.
+    doy : 6  // The week that contains Jan 1st is the first week of the year.
+};
+
+function localeFirstDayOfWeek () {
+    return this._week.dow;
+}
+
+function localeFirstDayOfYear () {
+    return this._week.doy;
+}
+
+// MOMENTS
+
+function getSetWeek (input) {
+    var week = this.localeData().week(this);
+    return input == null ? week : this.add((input - week) * 7, 'd');
+}
+
+function getSetISOWeek (input) {
+    var week = weekOfYear(this, 1, 4).week;
+    return input == null ? week : this.add((input - week) * 7, 'd');
+}
+
+// FORMATTING
+
+addFormatToken('d', 0, 'do', 'day');
+
+addFormatToken('dd', 0, 0, function (format) {
+    return this.localeData().weekdaysMin(this, format);
+});
+
+addFormatToken('ddd', 0, 0, function (format) {
+    return this.localeData().weekdaysShort(this, format);
+});
+
+addFormatToken('dddd', 0, 0, function (format) {
+    return this.localeData().weekdays(this, format);
+});
+
+addFormatToken('e', 0, 0, 'weekday');
+addFormatToken('E', 0, 0, 'isoWeekday');
+
+// ALIASES
+
+addUnitAlias('day', 'd');
+addUnitAlias('weekday', 'e');
+addUnitAlias('isoWeekday', 'E');
+
+// PRIORITY
+addUnitPriority('day', 11);
+addUnitPriority('weekday', 11);
+addUnitPriority('isoWeekday', 11);
+
+// PARSING
+
+addRegexToken('d',    match1to2);
+addRegexToken('e',    match1to2);
+addRegexToken('E',    match1to2);
+addRegexToken('dd',   function (isStrict, locale) {
+    return locale.weekdaysMinRegex(isStrict);
+});
+addRegexToken('ddd',   function (isStrict, locale) {
+    return locale.weekdaysShortRegex(isStrict);
+});
+addRegexToken('dddd',   function (isStrict, locale) {
+    return locale.weekdaysRegex(isStrict);
+});
+
+addWeekParseToken(['dd', 'ddd', 'dddd'], function (input, week, config, token) {
+    var weekday = config._locale.weekdaysParse(input, token, config._strict);
+    // if we didn't get a weekday name, mark the date as invalid
+    if (weekday != null) {
+        week.d = weekday;
+    } else {
+        getParsingFlags(config).invalidWeekday = input;
+    }
+});
+
+addWeekParseToken(['d', 'e', 'E'], function (input, week, config, token) {
+    week[token] = toInt(input);
+});
+
+// HELPERS
+
+function parseWeekday(input, locale) {
+    if (typeof input !== 'string') {
+        return input;
+    }
+
+    if (!isNaN(input)) {
+        return parseInt(input, 10);
+    }
+
+    input = locale.weekdaysParse(input);
+    if (typeof input === 'number') {
+        return input;
+    }
+
+    return null;
+}
+
+function parseIsoWeekday(input, locale) {
+    if (typeof input === 'string') {
+        return locale.weekdaysParse(input) % 7 || 7;
+    }
+    return isNaN(input) ? null : input;
+}
+
+// LOCALES
+
+var defaultLocaleWeekdays = 'Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday'.split('_');
+function localeWeekdays (m, format) {
+    if (!m) {
+        return isArray(this._weekdays) ? this._weekdays :
+            this._weekdays['standalone'];
+    }
+    return isArray(this._weekdays) ? this._weekdays[m.day()] :
+        this._weekdays[this._weekdays.isFormat.test(format) ? 'format' : 'standalone'][m.day()];
+}
+
+var defaultLocaleWeekdaysShort = 'Sun_Mon_Tue_Wed_Thu_Fri_Sat'.split('_');
+function localeWeekdaysShort (m) {
+    return (m) ? this._weekdaysShort[m.day()] : this._weekdaysShort;
+}
+
+var defaultLocaleWeekdaysMin = 'Su_Mo_Tu_We_Th_Fr_Sa'.split('_');
+function localeWeekdaysMin (m) {
+    return (m) ? this._weekdaysMin[m.day()] : this._weekdaysMin;
+}
+
+function handleStrictParse$1(weekdayName, format, strict) {
+    var i, ii, mom, llc = weekdayName.toLocaleLowerCase();
+    if (!this._weekdaysParse) {
+        this._weekdaysParse = [];
+        this._shortWeekdaysParse = [];
+        this._minWeekdaysParse = [];
+
+        for (i = 0; i < 7; ++i) {
+            mom = createUTC([2000, 1]).day(i);
+            this._minWeekdaysParse[i] = this.weekdaysMin(mom, '').toLocaleLowerCase();
+            this._shortWeekdaysParse[i] = this.weekdaysShort(mom, '').toLocaleLowerCase();
+            this._weekdaysParse[i] = this.weekdays(mom, '').toLocaleLowerCase();
+        }
+    }
+
+    if (strict) {
+        if (format === 'dddd') {
+            ii = indexOf$1.call(this._weekdaysParse, llc);
+            return ii !== -1 ? ii : null;
+        } else if (format === 'ddd') {
+            ii = indexOf$1.call(this._shortWeekdaysParse, llc);
+            return ii !== -1 ? ii : null;
+        } else {
+            ii = indexOf$1.call(this._minWeekdaysParse, llc);
+            return ii !== -1 ? ii : null;
+        }
+    } else {
+        if (format === 'dddd') {
+            ii = indexOf$1.call(this._weekdaysParse, llc);
+            if (ii !== -1) {
+                return ii;
+            }
+            ii = indexOf$1.call(this._shortWeekdaysParse, llc);
+            if (ii !== -1) {
+                return ii;
+            }
+            ii = indexOf$1.call(this._minWeekdaysParse, llc);
+            return ii !== -1 ? ii : null;
+        } else if (format === 'ddd') {
+            ii = indexOf$1.call(this._shortWeekdaysParse, llc);
+            if (ii !== -1) {
+                return ii;
+            }
+            ii = indexOf$1.call(this._weekdaysParse, llc);
+            if (ii !== -1) {
+                return ii;
+            }
+            ii = indexOf$1.call(this._minWeekdaysParse, llc);
+            return ii !== -1 ? ii : null;
+        } else {
+            ii = indexOf$1.call(this._minWeekdaysParse, llc);
+            if (ii !== -1) {
+                return ii;
+            }
+            ii = indexOf$1.call(this._weekdaysParse, llc);
+            if (ii !== -1) {
+                return ii;
+            }
+            ii = indexOf$1.call(this._shortWeekdaysParse, llc);
+            return ii !== -1 ? ii : null;
+        }
+    }
+}
+
+function localeWeekdaysParse (weekdayName, format, strict) {
+    var i, mom, regex;
+
+    if (this._weekdaysParseExact) {
+        return handleStrictParse$1.call(this, weekdayName, format, strict);
+    }
+
+    if (!this._weekdaysParse) {
+        this._weekdaysParse = [];
+        this._minWeekdaysParse = [];
+        this._shortWeekdaysParse = [];
+        this._fullWeekdaysParse = [];
+    }
+
+    for (i = 0; i < 7; i++) {
+        // make the regex if we don't have it already
+
+        mom = createUTC([2000, 1]).day(i);
+        if (strict && !this._fullWeekdaysParse[i]) {
+            this._fullWeekdaysParse[i] = new RegExp('^' + this.weekdays(mom, '').replace('.', '\.?') + '$', 'i');
+            this._shortWeekdaysParse[i] = new RegExp('^' + this.weekdaysShort(mom, '').replace('.', '\.?') + '$', 'i');
+            this._minWeekdaysParse[i] = new RegExp('^' + this.weekdaysMin(mom, '').replace('.', '\.?') + '$', 'i');
+        }
+        if (!this._weekdaysParse[i]) {
+            regex = '^' + this.weekdays(mom, '') + '|^' + this.weekdaysShort(mom, '') + '|^' + this.weekdaysMin(mom, '');
+            this._weekdaysParse[i] = new RegExp(regex.replace('.', ''), 'i');
+        }
+        // test the regex
+        if (strict && format === 'dddd' && this._fullWeekdaysParse[i].test(weekdayName)) {
+            return i;
+        } else if (strict && format === 'ddd' && this._shortWeekdaysParse[i].test(weekdayName)) {
+            return i;
+        } else if (strict && format === 'dd' && this._minWeekdaysParse[i].test(weekdayName)) {
+            return i;
+        } else if (!strict && this._weekdaysParse[i].test(weekdayName)) {
+            return i;
+        }
+    }
+}
+
+// MOMENTS
+
+function getSetDayOfWeek (input) {
+    if (!this.isValid()) {
+        return input != null ? this : NaN;
+    }
+    var day = this._isUTC ? this._d.getUTCDay() : this._d.getDay();
+    if (input != null) {
+        input = parseWeekday(input, this.localeData());
+        return this.add(input - day, 'd');
+    } else {
+        return day;
+    }
+}
+
+function getSetLocaleDayOfWeek (input) {
+    if (!this.isValid()) {
+        return input != null ? this : NaN;
+    }
+    var weekday = (this.day() + 7 - this.localeData()._week.dow) % 7;
+    return input == null ? weekday : this.add(input - weekday, 'd');
+}
+
+function getSetISODayOfWeek (input) {
+    if (!this.isValid()) {
+        return input != null ? this : NaN;
+    }
+
+    // behaves the same as moment#day except
+    // as a getter, returns 7 instead of 0 (1-7 range instead of 0-6)
+    // as a setter, sunday should belong to the previous week.
+
+    if (input != null) {
+        var weekday = parseIsoWeekday(input, this.localeData());
+        return this.day(this.day() % 7 ? weekday : weekday - 7);
+    } else {
+        return this.day() || 7;
+    }
+}
+
+var defaultWeekdaysRegex = matchWord;
+function weekdaysRegex (isStrict) {
+    if (this._weekdaysParseExact) {
+        if (!hasOwnProp(this, '_weekdaysRegex')) {
+            computeWeekdaysParse.call(this);
+        }
+        if (isStrict) {
+            return this._weekdaysStrictRegex;
+        } else {
+            return this._weekdaysRegex;
+        }
+    } else {
+        if (!hasOwnProp(this, '_weekdaysRegex')) {
+            this._weekdaysRegex = defaultWeekdaysRegex;
+        }
+        return this._weekdaysStrictRegex && isStrict ?
+            this._weekdaysStrictRegex : this._weekdaysRegex;
+    }
+}
+
+var defaultWeekdaysShortRegex = matchWord;
+function weekdaysShortRegex (isStrict) {
+    if (this._weekdaysParseExact) {
+        if (!hasOwnProp(this, '_weekdaysRegex')) {
+            computeWeekdaysParse.call(this);
+        }
+        if (isStrict) {
+            return this._weekdaysShortStrictRegex;
+        } else {
+            return this._weekdaysShortRegex;
+        }
+    } else {
+        if (!hasOwnProp(this, '_weekdaysShortRegex')) {
+            this._weekdaysShortRegex = defaultWeekdaysShortRegex;
+        }
+        return this._weekdaysShortStrictRegex && isStrict ?
+            this._weekdaysShortStrictRegex : this._weekdaysShortRegex;
+    }
+}
+
+var defaultWeekdaysMinRegex = matchWord;
+function weekdaysMinRegex (isStrict) {
+    if (this._weekdaysParseExact) {
+        if (!hasOwnProp(this, '_weekdaysRegex')) {
+            computeWeekdaysParse.call(this);
+        }
+        if (isStrict) {
+            return this._weekdaysMinStrictRegex;
+        } else {
+            return this._weekdaysMinRegex;
+        }
+    } else {
+        if (!hasOwnProp(this, '_weekdaysMinRegex')) {
+            this._weekdaysMinRegex = defaultWeekdaysMinRegex;
+        }
+        return this._weekdaysMinStrictRegex && isStrict ?
+            this._weekdaysMinStrictRegex : this._weekdaysMinRegex;
+    }
+}
+
+
+function computeWeekdaysParse () {
+    function cmpLenRev(a, b) {
+        return b.length - a.length;
+    }
+
+    var minPieces = [], shortPieces = [], longPieces = [], mixedPieces = [],
+        i, mom, minp, shortp, longp;
+    for (i = 0; i < 7; i++) {
+        // make the regex if we don't have it already
+        mom = createUTC([2000, 1]).day(i);
+        minp = this.weekdaysMin(mom, '');
+        shortp = this.weekdaysShort(mom, '');
+        longp = this.weekdays(mom, '');
+        minPieces.push(minp);
+        shortPieces.push(shortp);
+        longPieces.push(longp);
+        mixedPieces.push(minp);
+        mixedPieces.push(shortp);
+        mixedPieces.push(longp);
+    }
+    // Sorting makes sure if one weekday (or abbr) is a prefix of another it
+    // will match the longer piece.
+    minPieces.sort(cmpLenRev);
+    shortPieces.sort(cmpLenRev);
+    longPieces.sort(cmpLenRev);
+    mixedPieces.sort(cmpLenRev);
+    for (i = 0; i < 7; i++) {
+        shortPieces[i] = regexEscape(shortPieces[i]);
+        longPieces[i] = regexEscape(longPieces[i]);
+        mixedPieces[i] = regexEscape(mixedPieces[i]);
+    }
+
+    this._weekdaysRegex = new RegExp('^(' + mixedPieces.join('|') + ')', 'i');
+    this._weekdaysShortRegex = this._weekdaysRegex;
+    this._weekdaysMinRegex = this._weekdaysRegex;
+
+    this._weekdaysStrictRegex = new RegExp('^(' + longPieces.join('|') + ')', 'i');
+    this._weekdaysShortStrictRegex = new RegExp('^(' + shortPieces.join('|') + ')', 'i');
+    this._weekdaysMinStrictRegex = new RegExp('^(' + minPieces.join('|') + ')', 'i');
+}
+
+// FORMATTING
+
+function hFormat() {
+    return this.hours() % 12 || 12;
+}
+
+function kFormat() {
+    return this.hours() || 24;
+}
+
+addFormatToken('H', ['HH', 2], 0, 'hour');
+addFormatToken('h', ['hh', 2], 0, hFormat);
+addFormatToken('k', ['kk', 2], 0, kFormat);
+
+addFormatToken('hmm', 0, 0, function () {
+    return '' + hFormat.apply(this) + zeroFill(this.minutes(), 2);
+});
+
+addFormatToken('hmmss', 0, 0, function () {
+    return '' + hFormat.apply(this) + zeroFill(this.minutes(), 2) +
+        zeroFill(this.seconds(), 2);
+});
+
+addFormatToken('Hmm', 0, 0, function () {
+    return '' + this.hours() + zeroFill(this.minutes(), 2);
+});
+
+addFormatToken('Hmmss', 0, 0, function () {
+    return '' + this.hours() + zeroFill(this.minutes(), 2) +
+        zeroFill(this.seconds(), 2);
+});
+
+function meridiem (token, lowercase) {
+    addFormatToken(token, 0, 0, function () {
+        return this.localeData().meridiem(this.hours(), this.minutes(), lowercase);
+    });
+}
+
+meridiem('a', true);
+meridiem('A', false);
+
+// ALIASES
+
+addUnitAlias('hour', 'h');
+
+// PRIORITY
+addUnitPriority('hour', 13);
+
+// PARSING
+
+function matchMeridiem (isStrict, locale) {
+    return locale._meridiemParse;
+}
+
+addRegexToken('a',  matchMeridiem);
+addRegexToken('A',  matchMeridiem);
+addRegexToken('H',  match1to2);
+addRegexToken('h',  match1to2);
+addRegexToken('k',  match1to2);
+addRegexToken('HH', match1to2, match2);
+addRegexToken('hh', match1to2, match2);
+addRegexToken('kk', match1to2, match2);
+
+addRegexToken('hmm', match3to4);
+addRegexToken('hmmss', match5to6);
+addRegexToken('Hmm', match3to4);
+addRegexToken('Hmmss', match5to6);
+
+addParseToken(['H', 'HH'], HOUR);
+addParseToken(['k', 'kk'], function (input, array, config) {
+    var kInput = toInt(input);
+    array[HOUR] = kInput === 24 ? 0 : kInput;
+});
+addParseToken(['a', 'A'], function (input, array, config) {
+    config._isPm = config._locale.isPM(input);
+    config._meridiem = input;
+});
+addParseToken(['h', 'hh'], function (input, array, config) {
+    array[HOUR] = toInt(input);
+    getParsingFlags(config).bigHour = true;
+});
+addParseToken('hmm', function (input, array, config) {
+    var pos = input.length - 2;
+    array[HOUR] = toInt(input.substr(0, pos));
+    array[MINUTE] = toInt(input.substr(pos));
+    getParsingFlags(config).bigHour = true;
+});
+addParseToken('hmmss', function (input, array, config) {
+    var pos1 = input.length - 4;
+    var pos2 = input.length - 2;
+    array[HOUR] = toInt(input.substr(0, pos1));
+    array[MINUTE] = toInt(input.substr(pos1, 2));
+    array[SECOND] = toInt(input.substr(pos2));
+    getParsingFlags(config).bigHour = true;
+});
+addParseToken('Hmm', function (input, array, config) {
+    var pos = input.length - 2;
+    array[HOUR] = toInt(input.substr(0, pos));
+    array[MINUTE] = toInt(input.substr(pos));
+});
+addParseToken('Hmmss', function (input, array, config) {
+    var pos1 = input.length - 4;
+    var pos2 = input.length - 2;
+    array[HOUR] = toInt(input.substr(0, pos1));
+    array[MINUTE] = toInt(input.substr(pos1, 2));
+    array[SECOND] = toInt(input.substr(pos2));
+});
+
+// LOCALES
+
+function localeIsPM (input) {
+    // IE8 Quirks Mode & IE7 Standards Mode do not allow accessing strings like arrays
+    // Using charAt should be more compatible.
+    return ((input + '').toLowerCase().charAt(0) === 'p');
+}
+
+var defaultLocaleMeridiemParse = /[ap]\.?m?\.?/i;
+function localeMeridiem (hours, minutes, isLower) {
+    if (hours > 11) {
+        return isLower ? 'pm' : 'PM';
+    } else {
+        return isLower ? 'am' : 'AM';
+    }
+}
+
+
+// MOMENTS
+
+// Setting the hour should keep the time, because the user explicitly
+// specified which hour he wants. So trying to maintain the same hour (in
+// a new timezone) makes sense. Adding/subtracting hours does not follow
+// this rule.
+var getSetHour = makeGetSet('Hours', true);
+
+// months
+// week
+// weekdays
+// meridiem
+var baseConfig = {
+    calendar: defaultCalendar,
+    longDateFormat: defaultLongDateFormat,
+    invalidDate: defaultInvalidDate,
+    ordinal: defaultOrdinal,
+    dayOfMonthOrdinalParse: defaultDayOfMonthOrdinalParse,
+    relativeTime: defaultRelativeTime,
+
+    months: defaultLocaleMonths,
+    monthsShort: defaultLocaleMonthsShort,
+
+    week: defaultLocaleWeek,
+
+    weekdays: defaultLocaleWeekdays,
+    weekdaysMin: defaultLocaleWeekdaysMin,
+    weekdaysShort: defaultLocaleWeekdaysShort,
+
+    meridiemParse: defaultLocaleMeridiemParse
+};
+
+// internal storage for locale config files
+var locales = {};
+var localeFamilies = {};
+var globalLocale;
+
+function normalizeLocale(key) {
+    return key ? key.toLowerCase().replace('_', '-') : key;
+}
+
+// pick the locale from the array
+// try ['en-au', 'en-gb'] as 'en-au', 'en-gb', 'en', as in move through the list trying each
+// substring from most specific to least, but move to the next array item if it's a more specific variant than the current root
+function chooseLocale(names) {
+    var i = 0, j, next, locale, split;
+
+    while (i < names.length) {
+        split = normalizeLocale(names[i]).split('-');
+        j = split.length;
+        next = normalizeLocale(names[i + 1]);
+        next = next ? next.split('-') : null;
+        while (j > 0) {
+            locale = loadLocale(split.slice(0, j).join('-'));
+            if (locale) {
+                return locale;
+            }
+            if (next && next.length >= j && compareArrays(split, next, true) >= j - 1) {
+                //the next array item is better than a shallower substring of this one
+                break;
+            }
+            j--;
+        }
+        i++;
+    }
+    return null;
+}
+
+function loadLocale(name) {
+    var oldLocale = null;
+    // TODO: Find a better way to register and load all the locales in Node
+    if (!locales[name] && (typeof module !== 'undefined') &&
+            module && module.exports) {
+        try {
+            oldLocale = globalLocale._abbr;
+            require('./locale/' + name);
+            // because defineLocale currently also sets the global locale, we
+            // want to undo that for lazy loaded locales
+            getSetGlobalLocale(oldLocale);
+        } catch (e) { }
+    }
+    return locales[name];
+}
+
+// This function will load locale and then set the global locale.  If
+// no arguments are passed in, it will simply return the current global
+// locale key.
+function getSetGlobalLocale (key, values) {
+    var data;
+    if (key) {
+        if (isUndefined(values)) {
+            data = getLocale(key);
+        }
+        else {
+            data = defineLocale(key, values);
+        }
+
+        if (data) {
+            // moment.duration._locale = moment._locale = data;
+            globalLocale = data;
+        }
+    }
+
+    return globalLocale._abbr;
+}
+
+function defineLocale (name, config) {
+    if (config !== null) {
+        var parentConfig = baseConfig;
+        config.abbr = name;
+        if (locales[name] != null) {
+            deprecateSimple('defineLocaleOverride',
+                    'use moment.updateLocale(localeName, config) to change ' +
+                    'an existing locale. moment.defineLocale(localeName, ' +
+                    'config) should only be used for creating a new locale ' +
+                    'See http://momentjs.com/guides/#/warnings/define-locale/ for more info.');
+            parentConfig = locales[name]._config;
+        } else if (config.parentLocale != null) {
+            if (locales[config.parentLocale] != null) {
+                parentConfig = locales[config.parentLocale]._config;
+            } else {
+                if (!localeFamilies[config.parentLocale]) {
+                    localeFamilies[config.parentLocale] = [];
+                }
+                localeFamilies[config.parentLocale].push({
+                    name: name,
+                    config: config
+                });
+                return null;
+            }
+        }
+        locales[name] = new Locale(mergeConfigs(parentConfig, config));
+
+        if (localeFamilies[name]) {
+            localeFamilies[name].forEach(function (x) {
+                defineLocale(x.name, x.config);
+            });
+        }
+
+        // backwards compat for now: also set the locale
+        // make sure we set the locale AFTER all child locales have been
+        // created, so we won't end up with the child locale set.
+        getSetGlobalLocale(name);
+
+
+        return locales[name];
+    } else {
+        // useful for testing
+        delete locales[name];
+        return null;
+    }
+}
+
+function updateLocale(name, config) {
+    if (config != null) {
+        var locale, parentConfig = baseConfig;
+        // MERGE
+        if (locales[name] != null) {
+            parentConfig = locales[name]._config;
+        }
+        config = mergeConfigs(parentConfig, config);
+        locale = new Locale(config);
+        locale.parentLocale = locales[name];
+        locales[name] = locale;
+
+        // backwards compat for now: also set the locale
+        getSetGlobalLocale(name);
+    } else {
+        // pass null for config to unupdate, useful for tests
+        if (locales[name] != null) {
+            if (locales[name].parentLocale != null) {
+                locales[name] = locales[name].parentLocale;
+            } else if (locales[name] != null) {
+                delete locales[name];
+            }
+        }
+    }
+    return locales[name];
+}
+
+// returns locale data
+function getLocale (key) {
+    var locale;
+
+    if (key && key._locale && key._locale._abbr) {
+        key = key._locale._abbr;
+    }
+
+    if (!key) {
+        return globalLocale;
+    }
+
+    if (!isArray(key)) {
+        //short-circuit everything else
+        locale = loadLocale(key);
+        if (locale) {
+            return locale;
+        }
+        key = [key];
+    }
+
+    return chooseLocale(key);
+}
+
+function listLocales() {
+    return keys$1(locales);
+}
+
+function checkOverflow (m) {
+    var overflow;
+    var a = m._a;
+
+    if (a && getParsingFlags(m).overflow === -2) {
+        overflow =
+            a[MONTH]       < 0 || a[MONTH]       > 11  ? MONTH :
+            a[DATE]        < 1 || a[DATE]        > daysInMonth(a[YEAR], a[MONTH]) ? DATE :
+            a[HOUR]        < 0 || a[HOUR]        > 24 || (a[HOUR] === 24 && (a[MINUTE] !== 0 || a[SECOND] !== 0 || a[MILLISECOND] !== 0)) ? HOUR :
+            a[MINUTE]      < 0 || a[MINUTE]      > 59  ? MINUTE :
+            a[SECOND]      < 0 || a[SECOND]      > 59  ? SECOND :
+            a[MILLISECOND] < 0 || a[MILLISECOND] > 999 ? MILLISECOND :
+            -1;
+
+        if (getParsingFlags(m)._overflowDayOfYear && (overflow < YEAR || overflow > DATE)) {
+            overflow = DATE;
+        }
+        if (getParsingFlags(m)._overflowWeeks && overflow === -1) {
+            overflow = WEEK;
+        }
+        if (getParsingFlags(m)._overflowWeekday && overflow === -1) {
+            overflow = WEEKDAY;
+        }
+
+        getParsingFlags(m).overflow = overflow;
+    }
+
+    return m;
+}
+
+// iso 8601 regex
+// 0000-00-00 0000-W00 or 0000-W00-0 + T + 00 or 00:00 or 00:00:00 or 00:00:00.000 + +00:00 or +0000 or +00)
+var extendedIsoRegex = /^\s*((?:[+-]\d{6}|\d{4})-(?:\d\d-\d\d|W\d\d-\d|W\d\d|\d\d\d|\d\d))(?:(T| )(\d\d(?::\d\d(?::\d\d(?:[.,]\d+)?)?)?)([\+\-]\d\d(?::?\d\d)?|\s*Z)?)?$/;
+var basicIsoRegex = /^\s*((?:[+-]\d{6}|\d{4})(?:\d\d\d\d|W\d\d\d|W\d\d|\d\d\d|\d\d))(?:(T| )(\d\d(?:\d\d(?:\d\d(?:[.,]\d+)?)?)?)([\+\-]\d\d(?::?\d\d)?|\s*Z)?)?$/;
+
+var tzRegex = /Z|[+-]\d\d(?::?\d\d)?/;
+
+var isoDates = [
+    ['YYYYYY-MM-DD', /[+-]\d{6}-\d\d-\d\d/],
+    ['YYYY-MM-DD', /\d{4}-\d\d-\d\d/],
+    ['GGGG-[W]WW-E', /\d{4}-W\d\d-\d/],
+    ['GGGG-[W]WW', /\d{4}-W\d\d/, false],
+    ['YYYY-DDD', /\d{4}-\d{3}/],
+    ['YYYY-MM', /\d{4}-\d\d/, false],
+    ['YYYYYYMMDD', /[+-]\d{10}/],
+    ['YYYYMMDD', /\d{8}/],
+    // YYYYMM is NOT allowed by the standard
+    ['GGGG[W]WWE', /\d{4}W\d{3}/],
+    ['GGGG[W]WW', /\d{4}W\d{2}/, false],
+    ['YYYYDDD', /\d{7}/]
+];
+
+// iso time formats and regexes
+var isoTimes = [
+    ['HH:mm:ss.SSSS', /\d\d:\d\d:\d\d\.\d+/],
+    ['HH:mm:ss,SSSS', /\d\d:\d\d:\d\d,\d+/],
+    ['HH:mm:ss', /\d\d:\d\d:\d\d/],
+    ['HH:mm', /\d\d:\d\d/],
+    ['HHmmss.SSSS', /\d\d\d\d\d\d\.\d+/],
+    ['HHmmss,SSSS', /\d\d\d\d\d\d,\d+/],
+    ['HHmmss', /\d\d\d\d\d\d/],
+    ['HHmm', /\d\d\d\d/],
+    ['HH', /\d\d/]
+];
+
+var aspNetJsonRegex = /^\/?Date\((\-?\d+)/i;
+
+// date from iso format
+function configFromISO(config) {
+    var i, l,
+        string = config._i,
+        match = extendedIsoRegex.exec(string) || basicIsoRegex.exec(string),
+        allowTime, dateFormat, timeFormat, tzFormat;
+
+    if (match) {
+        getParsingFlags(config).iso = true;
+
+        for (i = 0, l = isoDates.length; i < l; i++) {
+            if (isoDates[i][1].exec(match[1])) {
+                dateFormat = isoDates[i][0];
+                allowTime = isoDates[i][2] !== false;
+                break;
+            }
+        }
+        if (dateFormat == null) {
+            config._isValid = false;
+            return;
+        }
+        if (match[3]) {
+            for (i = 0, l = isoTimes.length; i < l; i++) {
+                if (isoTimes[i][1].exec(match[3])) {
+                    // match[2] should be 'T' or space
+                    timeFormat = (match[2] || ' ') + isoTimes[i][0];
+                    break;
+                }
+            }
+            if (timeFormat == null) {
+                config._isValid = false;
+                return;
+            }
+        }
+        if (!allowTime && timeFormat != null) {
+            config._isValid = false;
+            return;
+        }
+        if (match[4]) {
+            if (tzRegex.exec(match[4])) {
+                tzFormat = 'Z';
+            } else {
+                config._isValid = false;
+                return;
+            }
+        }
+        config._f = dateFormat + (timeFormat || '') + (tzFormat || '');
+        configFromStringAndFormat(config);
+    } else {
+        config._isValid = false;
+    }
+}
+
+// RFC 2822 regex: For details see https://tools.ietf.org/html/rfc2822#section-3.3
+var basicRfcRegex = /^((?:Mon|Tue|Wed|Thu|Fri|Sat|Sun),?\s)?(\d?\d\s(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s(?:\d\d)?\d\d\s)(\d\d:\d\d)(\:\d\d)?(\s(?:UT|GMT|[ECMP][SD]T|[A-IK-Za-ik-z]|[+-]\d{4}))$/;
+
+// date and time from ref 2822 format
+function configFromRFC2822(config) {
+    var string, match, dayFormat,
+        dateFormat, timeFormat, tzFormat;
+    var timezones = {
+        ' GMT': ' +0000',
+        ' EDT': ' -0400',
+        ' EST': ' -0500',
+        ' CDT': ' -0500',
+        ' CST': ' -0600',
+        ' MDT': ' -0600',
+        ' MST': ' -0700',
+        ' PDT': ' -0700',
+        ' PST': ' -0800'
+    };
+    var military = 'YXWVUTSRQPONZABCDEFGHIKLM';
+    var timezone, timezoneIndex;
+
+    string = config._i
+        .replace(/\([^\)]*\)|[\n\t]/g, ' ') // Remove comments and folding whitespace
+        .replace(/(\s\s+)/g, ' ') // Replace multiple-spaces with a single space
+        .replace(/^\s|\s$/g, ''); // Remove leading and trailing spaces
+    match = basicRfcRegex.exec(string);
+
+    if (match) {
+        dayFormat = match[1] ? 'ddd' + ((match[1].length === 5) ? ', ' : ' ') : '';
+        dateFormat = 'D MMM ' + ((match[2].length > 10) ? 'YYYY ' : 'YY ');
+        timeFormat = 'HH:mm' + (match[4] ? ':ss' : '');
+
+        // TODO: Replace the vanilla JS Date object with an indepentent day-of-week check.
+        if (match[1]) { // day of week given
+            var momentDate = new Date(match[2]);
+            var momentDay = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][momentDate.getDay()];
+
+            if (match[1].substr(0,3) !== momentDay) {
+                getParsingFlags(config).weekdayMismatch = true;
+                config._isValid = false;
+                return;
+            }
+        }
+
+        switch (match[5].length) {
+            case 2: // military
+                if (timezoneIndex === 0) {
+                    timezone = ' +0000';
+                } else {
+                    timezoneIndex = military.indexOf(match[5][1].toUpperCase()) - 12;
+                    timezone = ((timezoneIndex < 0) ? ' -' : ' +') +
+                        (('' + timezoneIndex).replace(/^-?/, '0')).match(/..$/)[0] + '00';
+                }
+                break;
+            case 4: // Zone
+                timezone = timezones[match[5]];
+                break;
+            default: // UT or +/-9999
+                timezone = timezones[' GMT'];
+        }
+        match[5] = timezone;
+        config._i = match.splice(1).join('');
+        tzFormat = ' ZZ';
+        config._f = dayFormat + dateFormat + timeFormat + tzFormat;
+        configFromStringAndFormat(config);
+        getParsingFlags(config).rfc2822 = true;
+    } else {
+        config._isValid = false;
+    }
+}
+
+// date from iso format or fallback
+function configFromString(config) {
+    var matched = aspNetJsonRegex.exec(config._i);
+
+    if (matched !== null) {
+        config._d = new Date(+matched[1]);
+        return;
+    }
+
+    configFromISO(config);
+    if (config._isValid === false) {
+        delete config._isValid;
+    } else {
+        return;
+    }
+
+    configFromRFC2822(config);
+    if (config._isValid === false) {
+        delete config._isValid;
+    } else {
+        return;
+    }
+
+    // Final attempt, use Input Fallback
+    hooks.createFromInputFallback(config);
+}
+
+hooks.createFromInputFallback = deprecate(
+    'value provided is not in a recognized RFC2822 or ISO format. moment construction falls back to js Date(), ' +
+    'which is not reliable across all browsers and versions. Non RFC2822/ISO date formats are ' +
+    'discouraged and will be removed in an upcoming major release. Please refer to ' +
+    'http://momentjs.com/guides/#/warnings/js-date/ for more info.',
+    function (config) {
+        config._d = new Date(config._i + (config._useUTC ? ' UTC' : ''));
+    }
+);
+
+// Pick the first defined of two or three arguments.
+function defaults(a, b, c) {
+    if (a != null) {
+        return a;
+    }
+    if (b != null) {
+        return b;
+    }
+    return c;
+}
+
+function currentDateArray(config) {
+    // hooks is actually the exported moment object
+    var nowValue = new Date(hooks.now());
+    if (config._useUTC) {
+        return [nowValue.getUTCFullYear(), nowValue.getUTCMonth(), nowValue.getUTCDate()];
+    }
+    return [nowValue.getFullYear(), nowValue.getMonth(), nowValue.getDate()];
+}
+
+// convert an array to a date.
+// the array should mirror the parameters below
+// note: all values past the year are optional and will default to the lowest possible value.
+// [year, month, day , hour, minute, second, millisecond]
+function configFromArray (config) {
+    var i, date, input = [], currentDate, yearToUse;
+
+    if (config._d) {
+        return;
+    }
+
+    currentDate = currentDateArray(config);
+
+    //compute day of the year from weeks and weekdays
+    if (config._w && config._a[DATE] == null && config._a[MONTH] == null) {
+        dayOfYearFromWeekInfo(config);
+    }
+
+    //if the day of the year is set, figure out what it is
+    if (config._dayOfYear != null) {
+        yearToUse = defaults(config._a[YEAR], currentDate[YEAR]);
+
+        if (config._dayOfYear > daysInYear(yearToUse) || config._dayOfYear === 0) {
+            getParsingFlags(config)._overflowDayOfYear = true;
+        }
+
+        date = createUTCDate(yearToUse, 0, config._dayOfYear);
+        config._a[MONTH] = date.getUTCMonth();
+        config._a[DATE] = date.getUTCDate();
+    }
+
+    // Default to current date.
+    // * if no year, month, day of month are given, default to today
+    // * if day of month is given, default month and year
+    // * if month is given, default only year
+    // * if year is given, don't default anything
+    for (i = 0; i < 3 && config._a[i] == null; ++i) {
+        config._a[i] = input[i] = currentDate[i];
+    }
+
+    // Zero out whatever was not defaulted, including time
+    for (; i < 7; i++) {
+        config._a[i] = input[i] = (config._a[i] == null) ? (i === 2 ? 1 : 0) : config._a[i];
+    }
+
+    // Check for 24:00:00.000
+    if (config._a[HOUR] === 24 &&
+            config._a[MINUTE] === 0 &&
+            config._a[SECOND] === 0 &&
+            config._a[MILLISECOND] === 0) {
+        config._nextDay = true;
+        config._a[HOUR] = 0;
+    }
+
+    config._d = (config._useUTC ? createUTCDate : createDate).apply(null, input);
+    // Apply timezone offset from input. The actual utcOffset can be changed
+    // with parseZone.
+    if (config._tzm != null) {
+        config._d.setUTCMinutes(config._d.getUTCMinutes() - config._tzm);
+    }
+
+    if (config._nextDay) {
+        config._a[HOUR] = 24;
+    }
+}
+
+function dayOfYearFromWeekInfo(config) {
+    var w, weekYear, week, weekday, dow, doy, temp, weekdayOverflow;
+
+    w = config._w;
+    if (w.GG != null || w.W != null || w.E != null) {
+        dow = 1;
+        doy = 4;
+
+        // TODO: We need to take the current isoWeekYear, but that depends on
+        // how we interpret now (local, utc, fixed offset). So create
+        // a now version of current config (take local/utc/offset flags, and
+        // create now).
+        weekYear = defaults(w.GG, config._a[YEAR], weekOfYear(createLocal(), 1, 4).year);
+        week = defaults(w.W, 1);
+        weekday = defaults(w.E, 1);
+        if (weekday < 1 || weekday > 7) {
+            weekdayOverflow = true;
+        }
+    } else {
+        dow = config._locale._week.dow;
+        doy = config._locale._week.doy;
+
+        var curWeek = weekOfYear(createLocal(), dow, doy);
+
+        weekYear = defaults(w.gg, config._a[YEAR], curWeek.year);
+
+        // Default to current week.
+        week = defaults(w.w, curWeek.week);
+
+        if (w.d != null) {
+            // weekday -- low day numbers are considered next week
+            weekday = w.d;
+            if (weekday < 0 || weekday > 6) {
+                weekdayOverflow = true;
+            }
+        } else if (w.e != null) {
+            // local weekday -- counting starts from begining of week
+            weekday = w.e + dow;
+            if (w.e < 0 || w.e > 6) {
+                weekdayOverflow = true;
+            }
+        } else {
+            // default to begining of week
+            weekday = dow;
+        }
+    }
+    if (week < 1 || week > weeksInYear(weekYear, dow, doy)) {
+        getParsingFlags(config)._overflowWeeks = true;
+    } else if (weekdayOverflow != null) {
+        getParsingFlags(config)._overflowWeekday = true;
+    } else {
+        temp = dayOfYearFromWeeks(weekYear, week, weekday, dow, doy);
+        config._a[YEAR] = temp.year;
+        config._dayOfYear = temp.dayOfYear;
+    }
+}
+
+// constant that refers to the ISO standard
+hooks.ISO_8601 = function () {};
+
+// constant that refers to the RFC 2822 form
+hooks.RFC_2822 = function () {};
+
+// date from string and format string
+function configFromStringAndFormat(config) {
+    // TODO: Move this to another part of the creation flow to prevent circular deps
+    if (config._f === hooks.ISO_8601) {
+        configFromISO(config);
+        return;
+    }
+    if (config._f === hooks.RFC_2822) {
+        configFromRFC2822(config);
+        return;
+    }
+    config._a = [];
+    getParsingFlags(config).empty = true;
+
+    // This array is used to make a Date, either with `new Date` or `Date.UTC`
+    var string = '' + config._i,
+        i, parsedInput, tokens, token, skipped,
+        stringLength = string.length,
+        totalParsedInputLength = 0;
+
+    tokens = expandFormat(config._f, config._locale).match(formattingTokens) || [];
+
+    for (i = 0; i < tokens.length; i++) {
+        token = tokens[i];
+        parsedInput = (string.match(getParseRegexForToken(token, config)) || [])[0];
+        // console.log('token', token, 'parsedInput', parsedInput,
+        //         'regex', getParseRegexForToken(token, config));
+        if (parsedInput) {
+            skipped = string.substr(0, string.indexOf(parsedInput));
+            if (skipped.length > 0) {
+                getParsingFlags(config).unusedInput.push(skipped);
+            }
+            string = string.slice(string.indexOf(parsedInput) + parsedInput.length);
+            totalParsedInputLength += parsedInput.length;
+        }
+        // don't parse if it's not a known token
+        if (formatTokenFunctions[token]) {
+            if (parsedInput) {
+                getParsingFlags(config).empty = false;
+            }
+            else {
+                getParsingFlags(config).unusedTokens.push(token);
+            }
+            addTimeToArrayFromToken(token, parsedInput, config);
+        }
+        else if (config._strict && !parsedInput) {
+            getParsingFlags(config).unusedTokens.push(token);
+        }
+    }
+
+    // add remaining unparsed input length to the string
+    getParsingFlags(config).charsLeftOver = stringLength - totalParsedInputLength;
+    if (string.length > 0) {
+        getParsingFlags(config).unusedInput.push(string);
+    }
+
+    // clear _12h flag if hour is <= 12
+    if (config._a[HOUR] <= 12 &&
+        getParsingFlags(config).bigHour === true &&
+        config._a[HOUR] > 0) {
+        getParsingFlags(config).bigHour = undefined;
+    }
+
+    getParsingFlags(config).parsedDateParts = config._a.slice(0);
+    getParsingFlags(config).meridiem = config._meridiem;
+    // handle meridiem
+    config._a[HOUR] = meridiemFixWrap(config._locale, config._a[HOUR], config._meridiem);
+
+    configFromArray(config);
+    checkOverflow(config);
+}
+
+
+function meridiemFixWrap (locale, hour, meridiem) {
+    var isPm;
+
+    if (meridiem == null) {
+        // nothing to do
+        return hour;
+    }
+    if (locale.meridiemHour != null) {
+        return locale.meridiemHour(hour, meridiem);
+    } else if (locale.isPM != null) {
+        // Fallback
+        isPm = locale.isPM(meridiem);
+        if (isPm && hour < 12) {
+            hour += 12;
+        }
+        if (!isPm && hour === 12) {
+            hour = 0;
+        }
+        return hour;
+    } else {
+        // this is not supposed to happen
+        return hour;
+    }
+}
+
+// date from string and array of format strings
+function configFromStringAndArray(config) {
+    var tempConfig,
+        bestMoment,
+
+        scoreToBeat,
+        i,
+        currentScore;
+
+    if (config._f.length === 0) {
+        getParsingFlags(config).invalidFormat = true;
+        config._d = new Date(NaN);
+        return;
+    }
+
+    for (i = 0; i < config._f.length; i++) {
+        currentScore = 0;
+        tempConfig = copyConfig({}, config);
+        if (config._useUTC != null) {
+            tempConfig._useUTC = config._useUTC;
+        }
+        tempConfig._f = config._f[i];
+        configFromStringAndFormat(tempConfig);
+
+        if (!isValid(tempConfig)) {
+            continue;
+        }
+
+        // if there is any input that was not parsed add a penalty for that format
+        currentScore += getParsingFlags(tempConfig).charsLeftOver;
+
+        //or tokens
+        currentScore += getParsingFlags(tempConfig).unusedTokens.length * 10;
+
+        getParsingFlags(tempConfig).score = currentScore;
+
+        if (scoreToBeat == null || currentScore < scoreToBeat) {
+            scoreToBeat = currentScore;
+            bestMoment = tempConfig;
+        }
+    }
+
+    extend(config, bestMoment || tempConfig);
+}
+
+function configFromObject(config) {
+    if (config._d) {
+        return;
+    }
+
+    var i = normalizeObjectUnits(config._i);
+    config._a = map([i.year, i.month, i.day || i.date, i.hour, i.minute, i.second, i.millisecond], function (obj) {
+        return obj && parseInt(obj, 10);
+    });
+
+    configFromArray(config);
+}
+
+function createFromConfig (config) {
+    var res = new Moment(checkOverflow(prepareConfig(config)));
+    if (res._nextDay) {
+        // Adding is smart enough around DST
+        res.add(1, 'd');
+        res._nextDay = undefined;
+    }
+
+    return res;
+}
+
+function prepareConfig (config) {
+    var input = config._i,
+        format = config._f;
+
+    config._locale = config._locale || getLocale(config._l);
+
+    if (input === null || (format === undefined && input === '')) {
+        return createInvalid({nullInput: true});
+    }
+
+    if (typeof input === 'string') {
+        config._i = input = config._locale.preparse(input);
+    }
+
+    if (isMoment(input)) {
+        return new Moment(checkOverflow(input));
+    } else if (isDate(input)) {
+        config._d = input;
+    } else if (isArray(format)) {
+        configFromStringAndArray(config);
+    } else if (format) {
+        configFromStringAndFormat(config);
+    }  else {
+        configFromInput(config);
+    }
+
+    if (!isValid(config)) {
+        config._d = null;
+    }
+
+    return config;
+}
+
+function configFromInput(config) {
+    var input = config._i;
+    if (isUndefined(input)) {
+        config._d = new Date(hooks.now());
+    } else if (isDate(input)) {
+        config._d = new Date(input.valueOf());
+    } else if (typeof input === 'string') {
+        configFromString(config);
+    } else if (isArray(input)) {
+        config._a = map(input.slice(0), function (obj) {
+            return parseInt(obj, 10);
+        });
+        configFromArray(config);
+    } else if (isObject(input)) {
+        configFromObject(config);
+    } else if (isNumber(input)) {
+        // from milliseconds
+        config._d = new Date(input);
+    } else {
+        hooks.createFromInputFallback(config);
+    }
+}
+
+function createLocalOrUTC (input, format, locale, strict, isUTC) {
+    var c = {};
+
+    if (locale === true || locale === false) {
+        strict = locale;
+        locale = undefined;
+    }
+
+    if ((isObject(input) && isObjectEmpty(input)) ||
+            (isArray(input) && input.length === 0)) {
+        input = undefined;
+    }
+    // object construction must be done this way.
+    // https://github.com/moment/moment/issues/1423
+    c._isAMomentObject = true;
+    c._useUTC = c._isUTC = isUTC;
+    c._l = locale;
+    c._i = input;
+    c._f = format;
+    c._strict = strict;
+
+    return createFromConfig(c);
+}
+
+function createLocal (input, format, locale, strict) {
+    return createLocalOrUTC(input, format, locale, strict, false);
+}
+
+var prototypeMin = deprecate(
+    'moment().min is deprecated, use moment.max instead. http://momentjs.com/guides/#/warnings/min-max/',
+    function () {
+        var other = createLocal.apply(null, arguments);
+        if (this.isValid() && other.isValid()) {
+            return other < this ? this : other;
+        } else {
+            return createInvalid();
+        }
+    }
+);
+
+var prototypeMax = deprecate(
+    'moment().max is deprecated, use moment.min instead. http://momentjs.com/guides/#/warnings/min-max/',
+    function () {
+        var other = createLocal.apply(null, arguments);
+        if (this.isValid() && other.isValid()) {
+            return other > this ? this : other;
+        } else {
+            return createInvalid();
+        }
+    }
+);
+
+// Pick a moment m from moments so that m[fn](other) is true for all
+// other. This relies on the function fn to be transitive.
+//
+// moments should either be an array of moment objects or an array, whose
+// first element is an array of moment objects.
+function pickBy(fn, moments) {
+    var res, i;
+    if (moments.length === 1 && isArray(moments[0])) {
+        moments = moments[0];
+    }
+    if (!moments.length) {
+        return createLocal();
+    }
+    res = moments[0];
+    for (i = 1; i < moments.length; ++i) {
+        if (!moments[i].isValid() || moments[i][fn](res)) {
+            res = moments[i];
+        }
+    }
+    return res;
+}
+
+// TODO: Use [].sort instead?
+function min () {
+    var args = [].slice.call(arguments, 0);
+
+    return pickBy('isBefore', args);
+}
+
+function max () {
+    var args = [].slice.call(arguments, 0);
+
+    return pickBy('isAfter', args);
+}
+
+var now = function () {
+    return Date.now ? Date.now() : +(new Date());
+};
+
+var ordering = ['year', 'quarter', 'month', 'week', 'day', 'hour', 'minute', 'second', 'millisecond'];
+
+function isDurationValid(m) {
+    for (var key in m) {
+        if (!(ordering.indexOf(key) !== -1 && (m[key] == null || !isNaN(m[key])))) {
+            return false;
+        }
+    }
+
+    var unitHasDecimal = false;
+    for (var i = 0; i < ordering.length; ++i) {
+        if (m[ordering[i]]) {
+            if (unitHasDecimal) {
+                return false; // only allow non-integers for smallest unit
+            }
+            if (parseFloat(m[ordering[i]]) !== toInt(m[ordering[i]])) {
+                unitHasDecimal = true;
+            }
+        }
+    }
+
+    return true;
+}
+
+function isValid$1() {
+    return this._isValid;
+}
+
+function createInvalid$1() {
+    return createDuration(NaN);
+}
+
+function Duration (duration) {
+    var normalizedInput = normalizeObjectUnits(duration),
+        years = normalizedInput.year || 0,
+        quarters = normalizedInput.quarter || 0,
+        months = normalizedInput.month || 0,
+        weeks = normalizedInput.week || 0,
+        days = normalizedInput.day || 0,
+        hours = normalizedInput.hour || 0,
+        minutes = normalizedInput.minute || 0,
+        seconds = normalizedInput.second || 0,
+        milliseconds = normalizedInput.millisecond || 0;
+
+    this._isValid = isDurationValid(normalizedInput);
+
+    // representation for dateAddRemove
+    this._milliseconds = +milliseconds +
+        seconds * 1e3 + // 1000
+        minutes * 6e4 + // 1000 * 60
+        hours * 1000 * 60 * 60; //using 1000 * 60 * 60 instead of 36e5 to avoid floating point rounding errors https://github.com/moment/moment/issues/2978
+    // Because of dateAddRemove treats 24 hours as different from a
+    // day when working around DST, we need to store them separately
+    this._days = +days +
+        weeks * 7;
+    // It is impossible translate months into days without knowing
+    // which months you are are talking about, so we have to store
+    // it separately.
+    this._months = +months +
+        quarters * 3 +
+        years * 12;
+
+    this._data = {};
+
+    this._locale = getLocale();
+
+    this._bubble();
+}
+
+function isDuration (obj) {
+    return obj instanceof Duration;
+}
+
+function absRound (number) {
+    if (number < 0) {
+        return Math.round(-1 * number) * -1;
+    } else {
+        return Math.round(number);
+    }
+}
+
+// FORMATTING
+
+function offset (token, separator) {
+    addFormatToken(token, 0, 0, function () {
+        var offset = this.utcOffset();
+        var sign = '+';
+        if (offset < 0) {
+            offset = -offset;
+            sign = '-';
+        }
+        return sign + zeroFill(~~(offset / 60), 2) + separator + zeroFill(~~(offset) % 60, 2);
+    });
+}
+
+offset('Z', ':');
+offset('ZZ', '');
+
+// PARSING
+
+addRegexToken('Z',  matchShortOffset);
+addRegexToken('ZZ', matchShortOffset);
+addParseToken(['Z', 'ZZ'], function (input, array, config) {
+    config._useUTC = true;
+    config._tzm = offsetFromString(matchShortOffset, input);
+});
+
+// HELPERS
+
+// timezone chunker
+// '+10:00' > ['10',  '00']
+// '-1530'  > ['-15', '30']
+var chunkOffset = /([\+\-]|\d\d)/gi;
+
+function offsetFromString(matcher, string) {
+    var matches = (string || '').match(matcher);
+
+    if (matches === null) {
+        return null;
+    }
+
+    var chunk   = matches[matches.length - 1] || [];
+    var parts   = (chunk + '').match(chunkOffset) || ['-', 0, 0];
+    var minutes = +(parts[1] * 60) + toInt(parts[2]);
+
+    return minutes === 0 ?
+      0 :
+      parts[0] === '+' ? minutes : -minutes;
+}
+
+// Return a moment from input, that is local/utc/zone equivalent to model.
+function cloneWithOffset(input, model) {
+    var res, diff;
+    if (model._isUTC) {
+        res = model.clone();
+        diff = (isMoment(input) || isDate(input) ? input.valueOf() : createLocal(input).valueOf()) - res.valueOf();
+        // Use low-level api, because this fn is low-level api.
+        res._d.setTime(res._d.valueOf() + diff);
+        hooks.updateOffset(res, false);
+        return res;
+    } else {
+        return createLocal(input).local();
+    }
+}
+
+function getDateOffset (m) {
+    // On Firefox.24 Date#getTimezoneOffset returns a floating point.
+    // https://github.com/moment/moment/pull/1871
+    return -Math.round(m._d.getTimezoneOffset() / 15) * 15;
+}
+
+// HOOKS
+
+// This function will be called whenever a moment is mutated.
+// It is intended to keep the offset in sync with the timezone.
+hooks.updateOffset = function () {};
+
+// MOMENTS
+
+// keepLocalTime = true means only change the timezone, without
+// affecting the local hour. So 5:31:26 +0300 --[utcOffset(2, true)]-->
+// 5:31:26 +0200 It is possible that 5:31:26 doesn't exist with offset
+// +0200, so we adjust the time as needed, to be valid.
+//
+// Keeping the time actually adds/subtracts (one hour)
+// from the actual represented time. That is why we call updateOffset
+// a second time. In case it wants us to change the offset again
+// _changeInProgress == true case, then we have to adjust, because
+// there is no such time in the given timezone.
+function getSetOffset (input, keepLocalTime, keepMinutes) {
+    var offset = this._offset || 0,
+        localAdjust;
+    if (!this.isValid()) {
+        return input != null ? this : NaN;
+    }
+    if (input != null) {
+        if (typeof input === 'string') {
+            input = offsetFromString(matchShortOffset, input);
+            if (input === null) {
+                return this;
+            }
+        } else if (Math.abs(input) < 16 && !keepMinutes) {
+            input = input * 60;
+        }
+        if (!this._isUTC && keepLocalTime) {
+            localAdjust = getDateOffset(this);
+        }
+        this._offset = input;
+        this._isUTC = true;
+        if (localAdjust != null) {
+            this.add(localAdjust, 'm');
+        }
+        if (offset !== input) {
+            if (!keepLocalTime || this._changeInProgress) {
+                addSubtract(this, createDuration(input - offset, 'm'), 1, false);
+            } else if (!this._changeInProgress) {
+                this._changeInProgress = true;
+                hooks.updateOffset(this, true);
+                this._changeInProgress = null;
+            }
+        }
+        return this;
+    } else {
+        return this._isUTC ? offset : getDateOffset(this);
+    }
+}
+
+function getSetZone (input, keepLocalTime) {
+    if (input != null) {
+        if (typeof input !== 'string') {
+            input = -input;
+        }
+
+        this.utcOffset(input, keepLocalTime);
+
+        return this;
+    } else {
+        return -this.utcOffset();
+    }
+}
+
+function setOffsetToUTC (keepLocalTime) {
+    return this.utcOffset(0, keepLocalTime);
+}
+
+function setOffsetToLocal (keepLocalTime) {
+    if (this._isUTC) {
+        this.utcOffset(0, keepLocalTime);
+        this._isUTC = false;
+
+        if (keepLocalTime) {
+            this.subtract(getDateOffset(this), 'm');
+        }
+    }
+    return this;
+}
+
+function setOffsetToParsedOffset () {
+    if (this._tzm != null) {
+        this.utcOffset(this._tzm, false, true);
+    } else if (typeof this._i === 'string') {
+        var tZone = offsetFromString(matchOffset, this._i);
+        if (tZone != null) {
+            this.utcOffset(tZone);
+        }
+        else {
+            this.utcOffset(0, true);
+        }
+    }
+    return this;
+}
+
+function hasAlignedHourOffset (input) {
+    if (!this.isValid()) {
+        return false;
+    }
+    input = input ? createLocal(input).utcOffset() : 0;
+
+    return (this.utcOffset() - input) % 60 === 0;
+}
+
+function isDaylightSavingTime () {
+    return (
+        this.utcOffset() > this.clone().month(0).utcOffset() ||
+        this.utcOffset() > this.clone().month(5).utcOffset()
+    );
+}
+
+function isDaylightSavingTimeShifted () {
+    if (!isUndefined(this._isDSTShifted)) {
+        return this._isDSTShifted;
+    }
+
+    var c = {};
+
+    copyConfig(c, this);
+    c = prepareConfig(c);
+
+    if (c._a) {
+        var other = c._isUTC ? createUTC(c._a) : createLocal(c._a);
+        this._isDSTShifted = this.isValid() &&
+            compareArrays(c._a, other.toArray()) > 0;
+    } else {
+        this._isDSTShifted = false;
+    }
+
+    return this._isDSTShifted;
+}
+
+function isLocal () {
+    return this.isValid() ? !this._isUTC : false;
+}
+
+function isUtcOffset () {
+    return this.isValid() ? this._isUTC : false;
+}
+
+function isUtc () {
+    return this.isValid() ? this._isUTC && this._offset === 0 : false;
+}
+
+// ASP.NET json date format regex
+var aspNetRegex = /^(\-)?(?:(\d*)[. ])?(\d+)\:(\d+)(?:\:(\d+)(\.\d*)?)?$/;
+
+// from http://docs.closure-library.googlecode.com/git/closure_goog_date_date.js.source.html
+// somewhat more in line with 4.4.3.2 2004 spec, but allows decimal anywhere
+// and further modified to allow for strings containing both week and day
+var isoRegex = /^(-)?P(?:(-?[0-9,.]*)Y)?(?:(-?[0-9,.]*)M)?(?:(-?[0-9,.]*)W)?(?:(-?[0-9,.]*)D)?(?:T(?:(-?[0-9,.]*)H)?(?:(-?[0-9,.]*)M)?(?:(-?[0-9,.]*)S)?)?$/;
+
+function createDuration (input, key) {
+    var duration = input,
+        // matching against regexp is expensive, do it on demand
+        match = null,
+        sign,
+        ret,
+        diffRes;
+
+    if (isDuration(input)) {
+        duration = {
+            ms : input._milliseconds,
+            d  : input._days,
+            M  : input._months
+        };
+    } else if (isNumber(input)) {
+        duration = {};
+        if (key) {
+            duration[key] = input;
+        } else {
+            duration.milliseconds = input;
+        }
+    } else if (!!(match = aspNetRegex.exec(input))) {
+        sign = (match[1] === '-') ? -1 : 1;
+        duration = {
+            y  : 0,
+            d  : toInt(match[DATE])                         * sign,
+            h  : toInt(match[HOUR])                         * sign,
+            m  : toInt(match[MINUTE])                       * sign,
+            s  : toInt(match[SECOND])                       * sign,
+            ms : toInt(absRound(match[MILLISECOND] * 1000)) * sign // the millisecond decimal point is included in the match
+        };
+    } else if (!!(match = isoRegex.exec(input))) {
+        sign = (match[1] === '-') ? -1 : 1;
+        duration = {
+            y : parseIso(match[2], sign),
+            M : parseIso(match[3], sign),
+            w : parseIso(match[4], sign),
+            d : parseIso(match[5], sign),
+            h : parseIso(match[6], sign),
+            m : parseIso(match[7], sign),
+            s : parseIso(match[8], sign)
+        };
+    } else if (duration == null) {// checks for null or undefined
+        duration = {};
+    } else if (typeof duration === 'object' && ('from' in duration || 'to' in duration)) {
+        diffRes = momentsDifference(createLocal(duration.from), createLocal(duration.to));
+
+        duration = {};
+        duration.ms = diffRes.milliseconds;
+        duration.M = diffRes.months;
+    }
+
+    ret = new Duration(duration);
+
+    if (isDuration(input) && hasOwnProp(input, '_locale')) {
+        ret._locale = input._locale;
+    }
+
+    return ret;
+}
+
+createDuration.fn = Duration.prototype;
+createDuration.invalid = createInvalid$1;
+
+function parseIso (inp, sign) {
+    // We'd normally use ~~inp for this, but unfortunately it also
+    // converts floats to ints.
+    // inp may be undefined, so careful calling replace on it.
+    var res = inp && parseFloat(inp.replace(',', '.'));
+    // apply sign while we're at it
+    return (isNaN(res) ? 0 : res) * sign;
+}
+
+function positiveMomentsDifference(base, other) {
+    var res = {milliseconds: 0, months: 0};
+
+    res.months = other.month() - base.month() +
+        (other.year() - base.year()) * 12;
+    if (base.clone().add(res.months, 'M').isAfter(other)) {
+        --res.months;
+    }
+
+    res.milliseconds = +other - +(base.clone().add(res.months, 'M'));
+
+    return res;
+}
+
+function momentsDifference(base, other) {
+    var res;
+    if (!(base.isValid() && other.isValid())) {
+        return {milliseconds: 0, months: 0};
+    }
+
+    other = cloneWithOffset(other, base);
+    if (base.isBefore(other)) {
+        res = positiveMomentsDifference(base, other);
+    } else {
+        res = positiveMomentsDifference(other, base);
+        res.milliseconds = -res.milliseconds;
+        res.months = -res.months;
+    }
+
+    return res;
+}
+
+// TODO: remove 'name' arg after deprecation is removed
+function createAdder(direction, name) {
+    return function (val, period) {
+        var dur, tmp;
+        //invert the arguments, but complain about it
+        if (period !== null && !isNaN(+period)) {
+            deprecateSimple(name, 'moment().' + name  + '(period, number) is deprecated. Please use moment().' + name + '(number, period). ' +
+            'See http://momentjs.com/guides/#/warnings/add-inverted-param/ for more info.');
+            tmp = val; val = period; period = tmp;
+        }
+
+        val = typeof val === 'string' ? +val : val;
+        dur = createDuration(val, period);
+        addSubtract(this, dur, direction);
+        return this;
+    };
+}
+
+function addSubtract (mom, duration, isAdding, updateOffset) {
+    var milliseconds = duration._milliseconds,
+        days = absRound(duration._days),
+        months = absRound(duration._months);
+
+    if (!mom.isValid()) {
+        // No op
+        return;
+    }
+
+    updateOffset = updateOffset == null ? true : updateOffset;
+
+    if (milliseconds) {
+        mom._d.setTime(mom._d.valueOf() + milliseconds * isAdding);
+    }
+    if (days) {
+        set$1(mom, 'Date', get(mom, 'Date') + days * isAdding);
+    }
+    if (months) {
+        setMonth(mom, get(mom, 'Month') + months * isAdding);
+    }
+    if (updateOffset) {
+        hooks.updateOffset(mom, days || months);
+    }
+}
+
+var add      = createAdder(1, 'add');
+var subtract = createAdder(-1, 'subtract');
+
+function getCalendarFormat(myMoment, now) {
+    var diff = myMoment.diff(now, 'days', true);
+    return diff < -6 ? 'sameElse' :
+            diff < -1 ? 'lastWeek' :
+            diff < 0 ? 'lastDay' :
+            diff < 1 ? 'sameDay' :
+            diff < 2 ? 'nextDay' :
+            diff < 7 ? 'nextWeek' : 'sameElse';
+}
+
+function calendar$1 (time, formats) {
+    // We want to compare the start of today, vs this.
+    // Getting start-of-today depends on whether we're local/utc/offset or not.
+    var now = time || createLocal(),
+        sod = cloneWithOffset(now, this).startOf('day'),
+        format = hooks.calendarFormat(this, sod) || 'sameElse';
+
+    var output = formats && (isFunction(formats[format]) ? formats[format].call(this, now) : formats[format]);
+
+    return this.format(output || this.localeData().calendar(format, this, createLocal(now)));
+}
+
+function clone () {
+    return new Moment(this);
+}
+
+function isAfter (input, units) {
+    var localInput = isMoment(input) ? input : createLocal(input);
+    if (!(this.isValid() && localInput.isValid())) {
+        return false;
+    }
+    units = normalizeUnits(!isUndefined(units) ? units : 'millisecond');
+    if (units === 'millisecond') {
+        return this.valueOf() > localInput.valueOf();
+    } else {
+        return localInput.valueOf() < this.clone().startOf(units).valueOf();
+    }
+}
+
+function isBefore (input, units) {
+    var localInput = isMoment(input) ? input : createLocal(input);
+    if (!(this.isValid() && localInput.isValid())) {
+        return false;
+    }
+    units = normalizeUnits(!isUndefined(units) ? units : 'millisecond');
+    if (units === 'millisecond') {
+        return this.valueOf() < localInput.valueOf();
+    } else {
+        return this.clone().endOf(units).valueOf() < localInput.valueOf();
+    }
+}
+
+function isBetween (from, to, units, inclusivity) {
+    inclusivity = inclusivity || '()';
+    return (inclusivity[0] === '(' ? this.isAfter(from, units) : !this.isBefore(from, units)) &&
+        (inclusivity[1] === ')' ? this.isBefore(to, units) : !this.isAfter(to, units));
+}
+
+function isSame (input, units) {
+    var localInput = isMoment(input) ? input : createLocal(input),
+        inputMs;
+    if (!(this.isValid() && localInput.isValid())) {
+        return false;
+    }
+    units = normalizeUnits(units || 'millisecond');
+    if (units === 'millisecond') {
+        return this.valueOf() === localInput.valueOf();
+    } else {
+        inputMs = localInput.valueOf();
+        return this.clone().startOf(units).valueOf() <= inputMs && inputMs <= this.clone().endOf(units).valueOf();
+    }
+}
+
+function isSameOrAfter (input, units) {
+    return this.isSame(input, units) || this.isAfter(input,units);
+}
+
+function isSameOrBefore (input, units) {
+    return this.isSame(input, units) || this.isBefore(input,units);
+}
+
+function diff (input, units, asFloat) {
+    var that,
+        zoneDelta,
+        delta, output;
+
+    if (!this.isValid()) {
+        return NaN;
+    }
+
+    that = cloneWithOffset(input, this);
+
+    if (!that.isValid()) {
+        return NaN;
+    }
+
+    zoneDelta = (that.utcOffset() - this.utcOffset()) * 6e4;
+
+    units = normalizeUnits(units);
+
+    if (units === 'year' || units === 'month' || units === 'quarter') {
+        output = monthDiff(this, that);
+        if (units === 'quarter') {
+            output = output / 3;
+        } else if (units === 'year') {
+            output = output / 12;
+        }
+    } else {
+        delta = this - that;
+        output = units === 'second' ? delta / 1e3 : // 1000
+            units === 'minute' ? delta / 6e4 : // 1000 * 60
+            units === 'hour' ? delta / 36e5 : // 1000 * 60 * 60
+            units === 'day' ? (delta - zoneDelta) / 864e5 : // 1000 * 60 * 60 * 24, negate dst
+            units === 'week' ? (delta - zoneDelta) / 6048e5 : // 1000 * 60 * 60 * 24 * 7, negate dst
+            delta;
+    }
+    return asFloat ? output : absFloor(output);
+}
+
+function monthDiff (a, b) {
+    // difference in months
+    var wholeMonthDiff = ((b.year() - a.year()) * 12) + (b.month() - a.month()),
+        // b is in (anchor - 1 month, anchor + 1 month)
+        anchor = a.clone().add(wholeMonthDiff, 'months'),
+        anchor2, adjust;
+
+    if (b - anchor < 0) {
+        anchor2 = a.clone().add(wholeMonthDiff - 1, 'months');
+        // linear across the month
+        adjust = (b - anchor) / (anchor - anchor2);
+    } else {
+        anchor2 = a.clone().add(wholeMonthDiff + 1, 'months');
+        // linear across the month
+        adjust = (b - anchor) / (anchor2 - anchor);
+    }
+
+    //check for negative zero, return zero if negative zero
+    return -(wholeMonthDiff + adjust) || 0;
+}
+
+hooks.defaultFormat = 'YYYY-MM-DDTHH:mm:ssZ';
+hooks.defaultFormatUtc = 'YYYY-MM-DDTHH:mm:ss[Z]';
+
+function toString () {
+    return this.clone().locale('en').format('ddd MMM DD YYYY HH:mm:ss [GMT]ZZ');
+}
+
+function toISOString() {
+    if (!this.isValid()) {
+        return null;
+    }
+    var m = this.clone().utc();
+    if (m.year() < 0 || m.year() > 9999) {
+        return formatMoment(m, 'YYYYYY-MM-DD[T]HH:mm:ss.SSS[Z]');
+    }
+    if (isFunction(Date.prototype.toISOString)) {
+        // native implementation is ~50x faster, use it when we can
+        return this.toDate().toISOString();
+    }
+    return formatMoment(m, 'YYYY-MM-DD[T]HH:mm:ss.SSS[Z]');
+}
+
+/**
+ * Return a human readable representation of a moment that can
+ * also be evaluated to get a new moment which is the same
+ *
+ * @link https://nodejs.org/dist/latest/docs/api/util.html#util_custom_inspect_function_on_objects
+ */
+function inspect () {
+    if (!this.isValid()) {
+        return 'moment.invalid(/* ' + this._i + ' */)';
+    }
+    var func = 'moment';
+    var zone = '';
+    if (!this.isLocal()) {
+        func = this.utcOffset() === 0 ? 'moment.utc' : 'moment.parseZone';
+        zone = 'Z';
+    }
+    var prefix = '[' + func + '("]';
+    var year = (0 <= this.year() && this.year() <= 9999) ? 'YYYY' : 'YYYYYY';
+    var datetime = '-MM-DD[T]HH:mm:ss.SSS';
+    var suffix = zone + '[")]';
+
+    return this.format(prefix + year + datetime + suffix);
+}
+
+function format (inputString) {
+    if (!inputString) {
+        inputString = this.isUtc() ? hooks.defaultFormatUtc : hooks.defaultFormat;
+    }
+    var output = formatMoment(this, inputString);
+    return this.localeData().postformat(output);
+}
+
+function from (time, withoutSuffix) {
+    if (this.isValid() &&
+            ((isMoment(time) && time.isValid()) ||
+             createLocal(time).isValid())) {
+        return createDuration({to: this, from: time}).locale(this.locale()).humanize(!withoutSuffix);
+    } else {
+        return this.localeData().invalidDate();
+    }
+}
+
+function fromNow (withoutSuffix) {
+    return this.from(createLocal(), withoutSuffix);
+}
+
+function to (time, withoutSuffix) {
+    if (this.isValid() &&
+            ((isMoment(time) && time.isValid()) ||
+             createLocal(time).isValid())) {
+        return createDuration({from: this, to: time}).locale(this.locale()).humanize(!withoutSuffix);
+    } else {
+        return this.localeData().invalidDate();
+    }
+}
+
+function toNow (withoutSuffix) {
+    return this.to(createLocal(), withoutSuffix);
+}
+
+// If passed a locale key, it will set the locale for this
+// instance.  Otherwise, it will return the locale configuration
+// variables for this instance.
+function locale (key) {
+    var newLocaleData;
+
+    if (key === undefined) {
+        return this._locale._abbr;
+    } else {
+        newLocaleData = getLocale(key);
+        if (newLocaleData != null) {
+            this._locale = newLocaleData;
+        }
+        return this;
+    }
+}
+
+var lang = deprecate(
+    'moment().lang() is deprecated. Instead, use moment().localeData() to get the language configuration. Use moment().locale() to change languages.',
+    function (key) {
+        if (key === undefined) {
+            return this.localeData();
+        } else {
+            return this.locale(key);
+        }
+    }
+);
+
+function localeData () {
+    return this._locale;
+}
+
+function startOf (units) {
+    units = normalizeUnits(units);
+    // the following switch intentionally omits break keywords
+    // to utilize falling through the cases.
+    switch (units) {
+        case 'year':
+            this.month(0);
+            /* falls through */
+        case 'quarter':
+        case 'month':
+            this.date(1);
+            /* falls through */
+        case 'week':
+        case 'isoWeek':
+        case 'day':
+        case 'date':
+            this.hours(0);
+            /* falls through */
+        case 'hour':
+            this.minutes(0);
+            /* falls through */
+        case 'minute':
+            this.seconds(0);
+            /* falls through */
+        case 'second':
+            this.milliseconds(0);
+    }
+
+    // weeks are a special case
+    if (units === 'week') {
+        this.weekday(0);
+    }
+    if (units === 'isoWeek') {
+        this.isoWeekday(1);
+    }
+
+    // quarters are also special
+    if (units === 'quarter') {
+        this.month(Math.floor(this.month() / 3) * 3);
+    }
+
+    return this;
+}
+
+function endOf (units) {
+    units = normalizeUnits(units);
+    if (units === undefined || units === 'millisecond') {
+        return this;
+    }
+
+    // 'date' is an alias for 'day', so it should be considered as such.
+    if (units === 'date') {
+        units = 'day';
+    }
+
+    return this.startOf(units).add(1, (units === 'isoWeek' ? 'week' : units)).subtract(1, 'ms');
+}
+
+function valueOf () {
+    return this._d.valueOf() - ((this._offset || 0) * 60000);
+}
+
+function unix () {
+    return Math.floor(this.valueOf() / 1000);
+}
+
+function toDate () {
+    return new Date(this.valueOf());
+}
+
+function toArray () {
+    var m = this;
+    return [m.year(), m.month(), m.date(), m.hour(), m.minute(), m.second(), m.millisecond()];
+}
+
+function toObject () {
+    var m = this;
+    return {
+        years: m.year(),
+        months: m.month(),
+        date: m.date(),
+        hours: m.hours(),
+        minutes: m.minutes(),
+        seconds: m.seconds(),
+        milliseconds: m.milliseconds()
+    };
+}
+
+function toJSON () {
+    // new Date(NaN).toJSON() === null
+    return this.isValid() ? this.toISOString() : null;
+}
+
+function isValid$2 () {
+    return isValid(this);
+}
+
+function parsingFlags () {
+    return extend({}, getParsingFlags(this));
+}
+
+function invalidAt () {
+    return getParsingFlags(this).overflow;
+}
+
+function creationData() {
+    return {
+        input: this._i,
+        format: this._f,
+        locale: this._locale,
+        isUTC: this._isUTC,
+        strict: this._strict
+    };
+}
+
+// FORMATTING
+
+addFormatToken(0, ['gg', 2], 0, function () {
+    return this.weekYear() % 100;
+});
+
+addFormatToken(0, ['GG', 2], 0, function () {
+    return this.isoWeekYear() % 100;
+});
+
+function addWeekYearFormatToken (token, getter) {
+    addFormatToken(0, [token, token.length], 0, getter);
+}
+
+addWeekYearFormatToken('gggg',     'weekYear');
+addWeekYearFormatToken('ggggg',    'weekYear');
+addWeekYearFormatToken('GGGG',  'isoWeekYear');
+addWeekYearFormatToken('GGGGG', 'isoWeekYear');
+
+// ALIASES
+
+addUnitAlias('weekYear', 'gg');
+addUnitAlias('isoWeekYear', 'GG');
+
+// PRIORITY
+
+addUnitPriority('weekYear', 1);
+addUnitPriority('isoWeekYear', 1);
+
+
+// PARSING
+
+addRegexToken('G',      matchSigned);
+addRegexToken('g',      matchSigned);
+addRegexToken('GG',     match1to2, match2);
+addRegexToken('gg',     match1to2, match2);
+addRegexToken('GGGG',   match1to4, match4);
+addRegexToken('gggg',   match1to4, match4);
+addRegexToken('GGGGG',  match1to6, match6);
+addRegexToken('ggggg',  match1to6, match6);
+
+addWeekParseToken(['gggg', 'ggggg', 'GGGG', 'GGGGG'], function (input, week, config, token) {
+    week[token.substr(0, 2)] = toInt(input);
+});
+
+addWeekParseToken(['gg', 'GG'], function (input, week, config, token) {
+    week[token] = hooks.parseTwoDigitYear(input);
+});
+
+// MOMENTS
+
+function getSetWeekYear (input) {
+    return getSetWeekYearHelper.call(this,
+            input,
+            this.week(),
+            this.weekday(),
+            this.localeData()._week.dow,
+            this.localeData()._week.doy);
+}
+
+function getSetISOWeekYear (input) {
+    return getSetWeekYearHelper.call(this,
+            input, this.isoWeek(), this.isoWeekday(), 1, 4);
+}
+
+function getISOWeeksInYear () {
+    return weeksInYear(this.year(), 1, 4);
+}
+
+function getWeeksInYear () {
+    var weekInfo = this.localeData()._week;
+    return weeksInYear(this.year(), weekInfo.dow, weekInfo.doy);
+}
+
+function getSetWeekYearHelper(input, week, weekday, dow, doy) {
+    var weeksTarget;
+    if (input == null) {
+        return weekOfYear(this, dow, doy).year;
+    } else {
+        weeksTarget = weeksInYear(input, dow, doy);
+        if (week > weeksTarget) {
+            week = weeksTarget;
+        }
+        return setWeekAll.call(this, input, week, weekday, dow, doy);
+    }
+}
+
+function setWeekAll(weekYear, week, weekday, dow, doy) {
+    var dayOfYearData = dayOfYearFromWeeks(weekYear, week, weekday, dow, doy),
+        date = createUTCDate(dayOfYearData.year, 0, dayOfYearData.dayOfYear);
+
+    this.year(date.getUTCFullYear());
+    this.month(date.getUTCMonth());
+    this.date(date.getUTCDate());
+    return this;
+}
+
+// FORMATTING
+
+addFormatToken('Q', 0, 'Qo', 'quarter');
+
+// ALIASES
+
+addUnitAlias('quarter', 'Q');
+
+// PRIORITY
+
+addUnitPriority('quarter', 7);
+
+// PARSING
+
+addRegexToken('Q', match1);
+addParseToken('Q', function (input, array) {
+    array[MONTH] = (toInt(input) - 1) * 3;
+});
+
+// MOMENTS
+
+function getSetQuarter (input) {
+    return input == null ? Math.ceil((this.month() + 1) / 3) : this.month((input - 1) * 3 + this.month() % 3);
+}
+
+// FORMATTING
+
+addFormatToken('D', ['DD', 2], 'Do', 'date');
+
+// ALIASES
+
+addUnitAlias('date', 'D');
+
+// PRIOROITY
+addUnitPriority('date', 9);
+
+// PARSING
+
+addRegexToken('D',  match1to2);
+addRegexToken('DD', match1to2, match2);
+addRegexToken('Do', function (isStrict, locale) {
+    // TODO: Remove "ordinalParse" fallback in next major release.
+    return isStrict ?
+      (locale._dayOfMonthOrdinalParse || locale._ordinalParse) :
+      locale._dayOfMonthOrdinalParseLenient;
+});
+
+addParseToken(['D', 'DD'], DATE);
+addParseToken('Do', function (input, array) {
+    array[DATE] = toInt(input.match(match1to2)[0], 10);
+});
+
+// MOMENTS
+
+var getSetDayOfMonth = makeGetSet('Date', true);
+
+// FORMATTING
+
+addFormatToken('DDD', ['DDDD', 3], 'DDDo', 'dayOfYear');
+
+// ALIASES
+
+addUnitAlias('dayOfYear', 'DDD');
+
+// PRIORITY
+addUnitPriority('dayOfYear', 4);
+
+// PARSING
+
+addRegexToken('DDD',  match1to3);
+addRegexToken('DDDD', match3);
+addParseToken(['DDD', 'DDDD'], function (input, array, config) {
+    config._dayOfYear = toInt(input);
+});
+
+// HELPERS
+
+// MOMENTS
+
+function getSetDayOfYear (input) {
+    var dayOfYear = Math.round((this.clone().startOf('day') - this.clone().startOf('year')) / 864e5) + 1;
+    return input == null ? dayOfYear : this.add((input - dayOfYear), 'd');
+}
+
+// FORMATTING
+
+addFormatToken('m', ['mm', 2], 0, 'minute');
+
+// ALIASES
+
+addUnitAlias('minute', 'm');
+
+// PRIORITY
+
+addUnitPriority('minute', 14);
+
+// PARSING
+
+addRegexToken('m',  match1to2);
+addRegexToken('mm', match1to2, match2);
+addParseToken(['m', 'mm'], MINUTE);
+
+// MOMENTS
+
+var getSetMinute = makeGetSet('Minutes', false);
+
+// FORMATTING
+
+addFormatToken('s', ['ss', 2], 0, 'second');
+
+// ALIASES
+
+addUnitAlias('second', 's');
+
+// PRIORITY
+
+addUnitPriority('second', 15);
+
+// PARSING
+
+addRegexToken('s',  match1to2);
+addRegexToken('ss', match1to2, match2);
+addParseToken(['s', 'ss'], SECOND);
+
+// MOMENTS
+
+var getSetSecond = makeGetSet('Seconds', false);
+
+// FORMATTING
+
+addFormatToken('S', 0, 0, function () {
+    return ~~(this.millisecond() / 100);
+});
+
+addFormatToken(0, ['SS', 2], 0, function () {
+    return ~~(this.millisecond() / 10);
+});
+
+addFormatToken(0, ['SSS', 3], 0, 'millisecond');
+addFormatToken(0, ['SSSS', 4], 0, function () {
+    return this.millisecond() * 10;
+});
+addFormatToken(0, ['SSSSS', 5], 0, function () {
+    return this.millisecond() * 100;
+});
+addFormatToken(0, ['SSSSSS', 6], 0, function () {
+    return this.millisecond() * 1000;
+});
+addFormatToken(0, ['SSSSSSS', 7], 0, function () {
+    return this.millisecond() * 10000;
+});
+addFormatToken(0, ['SSSSSSSS', 8], 0, function () {
+    return this.millisecond() * 100000;
+});
+addFormatToken(0, ['SSSSSSSSS', 9], 0, function () {
+    return this.millisecond() * 1000000;
+});
+
+
+// ALIASES
+
+addUnitAlias('millisecond', 'ms');
+
+// PRIORITY
+
+addUnitPriority('millisecond', 16);
+
+// PARSING
+
+addRegexToken('S',    match1to3, match1);
+addRegexToken('SS',   match1to3, match2);
+addRegexToken('SSS',  match1to3, match3);
+
+var token;
+for (token = 'SSSS'; token.length <= 9; token += 'S') {
+    addRegexToken(token, matchUnsigned);
+}
+
+function parseMs(input, array) {
+    array[MILLISECOND] = toInt(('0.' + input) * 1000);
+}
+
+for (token = 'S'; token.length <= 9; token += 'S') {
+    addParseToken(token, parseMs);
+}
+// MOMENTS
+
+var getSetMillisecond = makeGetSet('Milliseconds', false);
+
+// FORMATTING
+
+addFormatToken('z',  0, 0, 'zoneAbbr');
+addFormatToken('zz', 0, 0, 'zoneName');
+
+// MOMENTS
+
+function getZoneAbbr () {
+    return this._isUTC ? 'UTC' : '';
+}
+
+function getZoneName () {
+    return this._isUTC ? 'Coordinated Universal Time' : '';
+}
+
+var proto = Moment.prototype;
+
+proto.add               = add;
+proto.calendar          = calendar$1;
+proto.clone             = clone;
+proto.diff              = diff;
+proto.endOf             = endOf;
+proto.format            = format;
+proto.from              = from;
+proto.fromNow           = fromNow;
+proto.to                = to;
+proto.toNow             = toNow;
+proto.get               = stringGet;
+proto.invalidAt         = invalidAt;
+proto.isAfter           = isAfter;
+proto.isBefore          = isBefore;
+proto.isBetween         = isBetween;
+proto.isSame            = isSame;
+proto.isSameOrAfter     = isSameOrAfter;
+proto.isSameOrBefore    = isSameOrBefore;
+proto.isValid           = isValid$2;
+proto.lang              = lang;
+proto.locale            = locale;
+proto.localeData        = localeData;
+proto.max               = prototypeMax;
+proto.min               = prototypeMin;
+proto.parsingFlags      = parsingFlags;
+proto.set               = stringSet;
+proto.startOf           = startOf;
+proto.subtract          = subtract;
+proto.toArray           = toArray;
+proto.toObject          = toObject;
+proto.toDate            = toDate;
+proto.toISOString       = toISOString;
+proto.inspect           = inspect;
+proto.toJSON            = toJSON;
+proto.toString          = toString;
+proto.unix              = unix;
+proto.valueOf           = valueOf;
+proto.creationData      = creationData;
+
+// Year
+proto.year       = getSetYear;
+proto.isLeapYear = getIsLeapYear;
+
+// Week Year
+proto.weekYear    = getSetWeekYear;
+proto.isoWeekYear = getSetISOWeekYear;
+
+// Quarter
+proto.quarter = proto.quarters = getSetQuarter;
+
+// Month
+proto.month       = getSetMonth;
+proto.daysInMonth = getDaysInMonth;
+
+// Week
+proto.week           = proto.weeks        = getSetWeek;
+proto.isoWeek        = proto.isoWeeks     = getSetISOWeek;
+proto.weeksInYear    = getWeeksInYear;
+proto.isoWeeksInYear = getISOWeeksInYear;
+
+// Day
+proto.date       = getSetDayOfMonth;
+proto.day        = proto.days             = getSetDayOfWeek;
+proto.weekday    = getSetLocaleDayOfWeek;
+proto.isoWeekday = getSetISODayOfWeek;
+proto.dayOfYear  = getSetDayOfYear;
+
+// Hour
+proto.hour = proto.hours = getSetHour;
+
+// Minute
+proto.minute = proto.minutes = getSetMinute;
+
+// Second
+proto.second = proto.seconds = getSetSecond;
+
+// Millisecond
+proto.millisecond = proto.milliseconds = getSetMillisecond;
+
+// Offset
+proto.utcOffset            = getSetOffset;
+proto.utc                  = setOffsetToUTC;
+proto.local                = setOffsetToLocal;
+proto.parseZone            = setOffsetToParsedOffset;
+proto.hasAlignedHourOffset = hasAlignedHourOffset;
+proto.isDST                = isDaylightSavingTime;
+proto.isLocal              = isLocal;
+proto.isUtcOffset          = isUtcOffset;
+proto.isUtc                = isUtc;
+proto.isUTC                = isUtc;
+
+// Timezone
+proto.zoneAbbr = getZoneAbbr;
+proto.zoneName = getZoneName;
+
+// Deprecations
+proto.dates  = deprecate('dates accessor is deprecated. Use date instead.', getSetDayOfMonth);
+proto.months = deprecate('months accessor is deprecated. Use month instead', getSetMonth);
+proto.years  = deprecate('years accessor is deprecated. Use year instead', getSetYear);
+proto.zone   = deprecate('moment().zone is deprecated, use moment().utcOffset instead. http://momentjs.com/guides/#/warnings/zone/', getSetZone);
+proto.isDSTShifted = deprecate('isDSTShifted is deprecated. See http://momentjs.com/guides/#/warnings/dst-shifted/ for more information', isDaylightSavingTimeShifted);
+
+function createUnix (input) {
+    return createLocal(input * 1000);
+}
+
+function createInZone () {
+    return createLocal.apply(null, arguments).parseZone();
+}
+
+function preParsePostFormat (string) {
+    return string;
+}
+
+var proto$1 = Locale.prototype;
+
+proto$1.calendar        = calendar;
+proto$1.longDateFormat  = longDateFormat;
+proto$1.invalidDate     = invalidDate;
+proto$1.ordinal         = ordinal;
+proto$1.preparse        = preParsePostFormat;
+proto$1.postformat      = preParsePostFormat;
+proto$1.relativeTime    = relativeTime;
+proto$1.pastFuture      = pastFuture;
+proto$1.set             = set;
+
+// Month
+proto$1.months            =        localeMonths;
+proto$1.monthsShort       =        localeMonthsShort;
+proto$1.monthsParse       =        localeMonthsParse;
+proto$1.monthsRegex       = monthsRegex;
+proto$1.monthsShortRegex  = monthsShortRegex;
+
+// Week
+proto$1.week = localeWeek;
+proto$1.firstDayOfYear = localeFirstDayOfYear;
+proto$1.firstDayOfWeek = localeFirstDayOfWeek;
+
+// Day of Week
+proto$1.weekdays       =        localeWeekdays;
+proto$1.weekdaysMin    =        localeWeekdaysMin;
+proto$1.weekdaysShort  =        localeWeekdaysShort;
+proto$1.weekdaysParse  =        localeWeekdaysParse;
+
+proto$1.weekdaysRegex       =        weekdaysRegex;
+proto$1.weekdaysShortRegex  =        weekdaysShortRegex;
+proto$1.weekdaysMinRegex    =        weekdaysMinRegex;
+
+// Hours
+proto$1.isPM = localeIsPM;
+proto$1.meridiem = localeMeridiem;
+
+function get$1 (format, index, field, setter) {
+    var locale = getLocale();
+    var utc = createUTC().set(setter, index);
+    return locale[field](utc, format);
+}
+
+function listMonthsImpl (format, index, field) {
+    if (isNumber(format)) {
+        index = format;
+        format = undefined;
+    }
+
+    format = format || '';
+
+    if (index != null) {
+        return get$1(format, index, field, 'month');
+    }
+
+    var i;
+    var out = [];
+    for (i = 0; i < 12; i++) {
+        out[i] = get$1(format, i, field, 'month');
+    }
+    return out;
+}
+
+// ()
+// (5)
+// (fmt, 5)
+// (fmt)
+// (true)
+// (true, 5)
+// (true, fmt, 5)
+// (true, fmt)
+function listWeekdaysImpl (localeSorted, format, index, field) {
+    if (typeof localeSorted === 'boolean') {
+        if (isNumber(format)) {
+            index = format;
+            format = undefined;
+        }
+
+        format = format || '';
+    } else {
+        format = localeSorted;
+        index = format;
+        localeSorted = false;
+
+        if (isNumber(format)) {
+            index = format;
+            format = undefined;
+        }
+
+        format = format || '';
+    }
+
+    var locale = getLocale(),
+        shift = localeSorted ? locale._week.dow : 0;
+
+    if (index != null) {
+        return get$1(format, (index + shift) % 7, field, 'day');
+    }
+
+    var i;
+    var out = [];
+    for (i = 0; i < 7; i++) {
+        out[i] = get$1(format, (i + shift) % 7, field, 'day');
+    }
+    return out;
+}
+
+function listMonths (format, index) {
+    return listMonthsImpl(format, index, 'months');
+}
+
+function listMonthsShort (format, index) {
+    return listMonthsImpl(format, index, 'monthsShort');
+}
+
+function listWeekdays (localeSorted, format, index) {
+    return listWeekdaysImpl(localeSorted, format, index, 'weekdays');
+}
+
+function listWeekdaysShort (localeSorted, format, index) {
+    return listWeekdaysImpl(localeSorted, format, index, 'weekdaysShort');
+}
+
+function listWeekdaysMin (localeSorted, format, index) {
+    return listWeekdaysImpl(localeSorted, format, index, 'weekdaysMin');
+}
+
+getSetGlobalLocale('en', {
+    dayOfMonthOrdinalParse: /\d{1,2}(th|st|nd|rd)/,
+    ordinal : function (number) {
+        var b = number % 10,
+            output = (toInt(number % 100 / 10) === 1) ? 'th' :
+            (b === 1) ? 'st' :
+            (b === 2) ? 'nd' :
+            (b === 3) ? 'rd' : 'th';
+        return number + output;
+    }
+});
+
+// Side effect imports
+hooks.lang = deprecate('moment.lang is deprecated. Use moment.locale instead.', getSetGlobalLocale);
+hooks.langData = deprecate('moment.langData is deprecated. Use moment.localeData instead.', getLocale);
+
+var mathAbs = Math.abs;
+
+function abs () {
+    var data           = this._data;
+
+    this._milliseconds = mathAbs(this._milliseconds);
+    this._days         = mathAbs(this._days);
+    this._months       = mathAbs(this._months);
+
+    data.milliseconds  = mathAbs(data.milliseconds);
+    data.seconds       = mathAbs(data.seconds);
+    data.minutes       = mathAbs(data.minutes);
+    data.hours         = mathAbs(data.hours);
+    data.months        = mathAbs(data.months);
+    data.years         = mathAbs(data.years);
+
+    return this;
+}
+
+function addSubtract$1 (duration, input, value, direction) {
+    var other = createDuration(input, value);
+
+    duration._milliseconds += direction * other._milliseconds;
+    duration._days         += direction * other._days;
+    duration._months       += direction * other._months;
+
+    return duration._bubble();
+}
+
+// supports only 2.0-style add(1, 's') or add(duration)
+function add$1 (input, value) {
+    return addSubtract$1(this, input, value, 1);
+}
+
+// supports only 2.0-style subtract(1, 's') or subtract(duration)
+function subtract$1 (input, value) {
+    return addSubtract$1(this, input, value, -1);
+}
+
+function absCeil (number) {
+    if (number < 0) {
+        return Math.floor(number);
+    } else {
+        return Math.ceil(number);
+    }
+}
+
+function bubble () {
+    var milliseconds = this._milliseconds;
+    var days         = this._days;
+    var months       = this._months;
+    var data         = this._data;
+    var seconds, minutes, hours, years, monthsFromDays;
+
+    // if we have a mix of positive and negative values, bubble down first
+    // check: https://github.com/moment/moment/issues/2166
+    if (!((milliseconds >= 0 && days >= 0 && months >= 0) ||
+            (milliseconds <= 0 && days <= 0 && months <= 0))) {
+        milliseconds += absCeil(monthsToDays(months) + days) * 864e5;
+        days = 0;
+        months = 0;
+    }
+
+    // The following code bubbles up values, see the tests for
+    // examples of what that means.
+    data.milliseconds = milliseconds % 1000;
+
+    seconds           = absFloor(milliseconds / 1000);
+    data.seconds      = seconds % 60;
+
+    minutes           = absFloor(seconds / 60);
+    data.minutes      = minutes % 60;
+
+    hours             = absFloor(minutes / 60);
+    data.hours        = hours % 24;
+
+    days += absFloor(hours / 24);
+
+    // convert days to months
+    monthsFromDays = absFloor(daysToMonths(days));
+    months += monthsFromDays;
+    days -= absCeil(monthsToDays(monthsFromDays));
+
+    // 12 months -> 1 year
+    years = absFloor(months / 12);
+    months %= 12;
+
+    data.days   = days;
+    data.months = months;
+    data.years  = years;
+
+    return this;
+}
+
+function daysToMonths (days) {
+    // 400 years have 146097 days (taking into account leap year rules)
+    // 400 years have 12 months === 4800
+    return days * 4800 / 146097;
+}
+
+function monthsToDays (months) {
+    // the reverse of daysToMonths
+    return months * 146097 / 4800;
+}
+
+function as (units) {
+    if (!this.isValid()) {
+        return NaN;
+    }
+    var days;
+    var months;
+    var milliseconds = this._milliseconds;
+
+    units = normalizeUnits(units);
+
+    if (units === 'month' || units === 'year') {
+        days   = this._days   + milliseconds / 864e5;
+        months = this._months + daysToMonths(days);
+        return units === 'month' ? months : months / 12;
+    } else {
+        // handle milliseconds separately because of floating point math errors (issue #1867)
+        days = this._days + Math.round(monthsToDays(this._months));
+        switch (units) {
+            case 'week'   : return days / 7     + milliseconds / 6048e5;
+            case 'day'    : return days         + milliseconds / 864e5;
+            case 'hour'   : return days * 24    + milliseconds / 36e5;
+            case 'minute' : return days * 1440  + milliseconds / 6e4;
+            case 'second' : return days * 86400 + milliseconds / 1000;
+            // Math.floor prevents floating point math errors here
+            case 'millisecond': return Math.floor(days * 864e5) + milliseconds;
+            default: throw new Error('Unknown unit ' + units);
+        }
+    }
+}
+
+// TODO: Use this.as('ms')?
+function valueOf$1 () {
+    if (!this.isValid()) {
+        return NaN;
+    }
+    return (
+        this._milliseconds +
+        this._days * 864e5 +
+        (this._months % 12) * 2592e6 +
+        toInt(this._months / 12) * 31536e6
+    );
+}
+
+function makeAs (alias) {
+    return function () {
+        return this.as(alias);
+    };
+}
+
+var asMilliseconds = makeAs('ms');
+var asSeconds      = makeAs('s');
+var asMinutes      = makeAs('m');
+var asHours        = makeAs('h');
+var asDays         = makeAs('d');
+var asWeeks        = makeAs('w');
+var asMonths       = makeAs('M');
+var asYears        = makeAs('y');
+
+function get$2 (units) {
+    units = normalizeUnits(units);
+    return this.isValid() ? this[units + 's']() : NaN;
+}
+
+function makeGetter(name) {
+    return function () {
+        return this.isValid() ? this._data[name] : NaN;
+    };
+}
+
+var milliseconds = makeGetter('milliseconds');
+var seconds      = makeGetter('seconds');
+var minutes      = makeGetter('minutes');
+var hours        = makeGetter('hours');
+var days         = makeGetter('days');
+var months       = makeGetter('months');
+var years        = makeGetter('years');
+
+function weeks () {
+    return absFloor(this.days() / 7);
+}
+
+var round = Math.round;
+var thresholds = {
+    ss: 44,         // a few seconds to seconds
+    s : 45,         // seconds to minute
+    m : 45,         // minutes to hour
+    h : 22,         // hours to day
+    d : 26,         // days to month
+    M : 11          // months to year
+};
+
+// helper function for moment.fn.from, moment.fn.fromNow, and moment.duration.fn.humanize
+function substituteTimeAgo(string, number, withoutSuffix, isFuture, locale) {
+    return locale.relativeTime(number || 1, !!withoutSuffix, string, isFuture);
+}
+
+function relativeTime$1 (posNegDuration, withoutSuffix, locale) {
+    var duration = createDuration(posNegDuration).abs();
+    var seconds  = round(duration.as('s'));
+    var minutes  = round(duration.as('m'));
+    var hours    = round(duration.as('h'));
+    var days     = round(duration.as('d'));
+    var months   = round(duration.as('M'));
+    var years    = round(duration.as('y'));
+
+    var a = seconds <= thresholds.ss && ['s', seconds]  ||
+            seconds < thresholds.s   && ['ss', seconds] ||
+            minutes <= 1             && ['m']           ||
+            minutes < thresholds.m   && ['mm', minutes] ||
+            hours   <= 1             && ['h']           ||
+            hours   < thresholds.h   && ['hh', hours]   ||
+            days    <= 1             && ['d']           ||
+            days    < thresholds.d   && ['dd', days]    ||
+            months  <= 1             && ['M']           ||
+            months  < thresholds.M   && ['MM', months]  ||
+            years   <= 1             && ['y']           || ['yy', years];
+
+    a[2] = withoutSuffix;
+    a[3] = +posNegDuration > 0;
+    a[4] = locale;
+    return substituteTimeAgo.apply(null, a);
+}
+
+// This function allows you to set the rounding function for relative time strings
+function getSetRelativeTimeRounding (roundingFunction) {
+    if (roundingFunction === undefined) {
+        return round;
+    }
+    if (typeof(roundingFunction) === 'function') {
+        round = roundingFunction;
+        return true;
+    }
+    return false;
+}
+
+// This function allows you to set a threshold for relative time strings
+function getSetRelativeTimeThreshold (threshold, limit) {
+    if (thresholds[threshold] === undefined) {
+        return false;
+    }
+    if (limit === undefined) {
+        return thresholds[threshold];
+    }
+    thresholds[threshold] = limit;
+    if (threshold === 's') {
+        thresholds.ss = limit - 1;
+    }
+    return true;
+}
+
+function humanize (withSuffix) {
+    if (!this.isValid()) {
+        return this.localeData().invalidDate();
+    }
+
+    var locale = this.localeData();
+    var output = relativeTime$1(this, !withSuffix, locale);
+
+    if (withSuffix) {
+        output = locale.pastFuture(+this, output);
+    }
+
+    return locale.postformat(output);
+}
+
+var abs$1 = Math.abs;
+
+function toISOString$1() {
+    // for ISO strings we do not use the normal bubbling rules:
+    //  * milliseconds bubble up until they become hours
+    //  * days do not bubble at all
+    //  * months bubble up until they become years
+    // This is because there is no context-free conversion between hours and days
+    // (think of clock changes)
+    // and also not between days and months (28-31 days per month)
+    if (!this.isValid()) {
+        return this.localeData().invalidDate();
+    }
+
+    var seconds = abs$1(this._milliseconds) / 1000;
+    var days         = abs$1(this._days);
+    var months       = abs$1(this._months);
+    var minutes, hours, years;
+
+    // 3600 seconds -> 60 minutes -> 1 hour
+    minutes           = absFloor(seconds / 60);
+    hours             = absFloor(minutes / 60);
+    seconds %= 60;
+    minutes %= 60;
+
+    // 12 months -> 1 year
+    years  = absFloor(months / 12);
+    months %= 12;
+
+
+    // inspired by https://github.com/dordille/moment-isoduration/blob/master/moment.isoduration.js
+    var Y = years;
+    var M = months;
+    var D = days;
+    var h = hours;
+    var m = minutes;
+    var s = seconds;
+    var total = this.asSeconds();
+
+    if (!total) {
+        // this is the same as C#'s (Noda) and python (isodate)...
+        // but not other JS (goog.date)
+        return 'P0D';
+    }
+
+    return (total < 0 ? '-' : '') +
+        'P' +
+        (Y ? Y + 'Y' : '') +
+        (M ? M + 'M' : '') +
+        (D ? D + 'D' : '') +
+        ((h || m || s) ? 'T' : '') +
+        (h ? h + 'H' : '') +
+        (m ? m + 'M' : '') +
+        (s ? s + 'S' : '');
+}
+
+var proto$2 = Duration.prototype;
+
+proto$2.isValid        = isValid$1;
+proto$2.abs            = abs;
+proto$2.add            = add$1;
+proto$2.subtract       = subtract$1;
+proto$2.as             = as;
+proto$2.asMilliseconds = asMilliseconds;
+proto$2.asSeconds      = asSeconds;
+proto$2.asMinutes      = asMinutes;
+proto$2.asHours        = asHours;
+proto$2.asDays         = asDays;
+proto$2.asWeeks        = asWeeks;
+proto$2.asMonths       = asMonths;
+proto$2.asYears        = asYears;
+proto$2.valueOf        = valueOf$1;
+proto$2._bubble        = bubble;
+proto$2.get            = get$2;
+proto$2.milliseconds   = milliseconds;
+proto$2.seconds        = seconds;
+proto$2.minutes        = minutes;
+proto$2.hours          = hours;
+proto$2.days           = days;
+proto$2.weeks          = weeks;
+proto$2.months         = months;
+proto$2.years          = years;
+proto$2.humanize       = humanize;
+proto$2.toISOString    = toISOString$1;
+proto$2.toString       = toISOString$1;
+proto$2.toJSON         = toISOString$1;
+proto$2.locale         = locale;
+proto$2.localeData     = localeData;
+
+// Deprecations
+proto$2.toIsoString = deprecate('toIsoString() is deprecated. Please use toISOString() instead (notice the capitals)', toISOString$1);
+proto$2.lang = lang;
+
+// Side effect imports
+
+// FORMATTING
+
+addFormatToken('X', 0, 0, 'unix');
+addFormatToken('x', 0, 0, 'valueOf');
+
+// PARSING
+
+addRegexToken('x', matchSigned);
+addRegexToken('X', matchTimestamp);
+addParseToken('X', function (input, array, config) {
+    config._d = new Date(parseFloat(input, 10) * 1000);
+});
+addParseToken('x', function (input, array, config) {
+    config._d = new Date(toInt(input));
+});
+
+// Side effect imports
+
+
+hooks.version = '2.18.1';
+
+setHookCallback(createLocal);
+
+hooks.fn                    = proto;
+hooks.min                   = min;
+hooks.max                   = max;
+hooks.now                   = now;
+hooks.utc                   = createUTC;
+hooks.unix                  = createUnix;
+hooks.months                = listMonths;
+hooks.isDate                = isDate;
+hooks.locale                = getSetGlobalLocale;
+hooks.invalid               = createInvalid;
+hooks.duration              = createDuration;
+hooks.isMoment              = isMoment;
+hooks.weekdays              = listWeekdays;
+hooks.parseZone             = createInZone;
+hooks.localeData            = getLocale;
+hooks.isDuration            = isDuration;
+hooks.monthsShort           = listMonthsShort;
+hooks.weekdaysMin           = listWeekdaysMin;
+hooks.defineLocale          = defineLocale;
+hooks.updateLocale          = updateLocale;
+hooks.locales               = listLocales;
+hooks.weekdaysShort         = listWeekdaysShort;
+hooks.normalizeUnits        = normalizeUnits;
+hooks.relativeTimeRounding = getSetRelativeTimeRounding;
+hooks.relativeTimeThreshold = getSetRelativeTimeThreshold;
+hooks.calendarFormat        = getCalendarFormat;
+hooks.prototype             = proto;
+
+return hooks;
+
+})));
+
+},{}],8:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -12930,7 +17395,7 @@ PouchDB$5.plugin(IDBPouch)
 module.exports = PouchDB$5;
 
 }).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"argsarray":1,"debug":8,"events":2,"immediate":4,"inherits":5,"lie":6,"spark-md5":11,"uuid":12,"vuvuzela":17}],8:[function(require,module,exports){
+},{"argsarray":1,"debug":9,"events":2,"immediate":4,"inherits":5,"lie":6,"spark-md5":12,"uuid":13,"vuvuzela":18}],9:[function(require,module,exports){
 (function (process){
 /**
  * This is the web browser implementation of `debug()`.
@@ -13119,7 +17584,7 @@ function localstorage() {
 }
 
 }).call(this,require("b55mWE"))
-},{"./debug":9,"b55mWE":3}],9:[function(require,module,exports){
+},{"./debug":10,"b55mWE":3}],10:[function(require,module,exports){
 
 /**
  * This is the common logic for both the Node.js and web browser
@@ -13323,7 +17788,7 @@ function coerce(val) {
   return val;
 }
 
-},{"ms":10}],10:[function(require,module,exports){
+},{"ms":11}],11:[function(require,module,exports){
 /**
  * Helpers.
  */
@@ -13474,7 +17939,7 @@ function plural(ms, n, name) {
   return Math.ceil(ms / n) + ' ' + name + 's'
 }
 
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 (function (factory) {
     if (typeof exports === 'object') {
         // Node/CommonJS
@@ -14227,7 +18692,7 @@ function plural(ms, n, name) {
     return SparkMD5;
 }));
 
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 var v1 = require('./v1');
 var v4 = require('./v4');
 
@@ -14237,7 +18702,7 @@ uuid.v4 = v4;
 
 module.exports = uuid;
 
-},{"./v1":15,"./v4":16}],13:[function(require,module,exports){
+},{"./v1":16,"./v4":17}],14:[function(require,module,exports){
 /**
  * Convert array of 16 byte values to UUID string format of the form:
  * XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
@@ -14262,7 +18727,7 @@ function bytesToUuid(buf, offset) {
 
 module.exports = bytesToUuid;
 
-},{}],14:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 (function (global){
 // Unique ID creation requires a high quality random # generator.  In the
 // browser this is a little complicated due to unknown quality of Math.random()
@@ -14299,7 +18764,7 @@ if (!rng) {
 module.exports = rng;
 
 }).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],15:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 var rng = require('./lib/rng');
 var bytesToUuid = require('./lib/bytesToUuid');
 
@@ -14401,7 +18866,7 @@ function v1(options, buf, offset) {
 
 module.exports = v1;
 
-},{"./lib/bytesToUuid":13,"./lib/rng":14}],16:[function(require,module,exports){
+},{"./lib/bytesToUuid":14,"./lib/rng":15}],17:[function(require,module,exports){
 var rng = require('./lib/rng');
 var bytesToUuid = require('./lib/bytesToUuid');
 
@@ -14432,7 +18897,7 @@ function v4(options, buf, offset) {
 
 module.exports = v4;
 
-},{"./lib/bytesToUuid":13,"./lib/rng":14}],17:[function(require,module,exports){
+},{"./lib/bytesToUuid":14,"./lib/rng":15}],18:[function(require,module,exports){
 'use strict';
 
 /**
@@ -14607,13 +19072,13 @@ exports.parse = function (str) {
   }
 };
 
-},{}],18:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.chronicleDB = exports.annotatorsDB = exports.animalsDB = exports.adjectivesDB = exports.chronicleURL = exports.animalsURL = exports.adjectivesURL = exports.annotatorsURL = undefined;
+exports.getUUID = exports.measurementsDB = exports.chronicleDB = exports.annotatorsDB = exports.animalsDB = exports.adjectivesDB = exports.measurementsURL = exports.chronicleURL = exports.animalsURL = exports.adjectivesURL = exports.annotatorsURL = exports.uuidURL = undefined;
 
 var _pouchdb = require('pouchdb');
 
@@ -14622,22 +19087,85 @@ var _pouchdb2 = _interopRequireDefault(_pouchdb);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var baseURL = 'http://rsnacrowdquant.cloudapp.net:5984'; // const baseUrl='http://127.0.0.1:5984';
-
-
-var uuidUrl = baseURL + '/_uuids';
+var uuidURL = exports.uuidURL = baseURL + '/_uuids';
 var annotatorsURL = exports.annotatorsURL = baseURL + '/annotators';
 var adjectivesURL = exports.adjectivesURL = baseURL + '/adjectives';
 var animalsURL = exports.animalsURL = baseURL + '/animals';
 var chronicleURL = exports.chronicleURL = baseURL + '/chronicle';
+var measurementsURL = exports.measurementsURL = baseURL + '/measurements';
+
 // console.log('url:', uuidUrl);
 
-// var uuidDb = new PouchDB(uuidUrl);
+// export const uuidDB = new PouchDB(uuidURL);
 var adjectivesDB = exports.adjectivesDB = new _pouchdb2.default(adjectivesURL);
 var animalsDB = exports.animalsDB = new _pouchdb2.default(animalsURL);
 var annotatorsDB = exports.annotatorsDB = new _pouchdb2.default(annotatorsURL);
 var chronicleDB = exports.chronicleDB = new _pouchdb2.default(chronicleURL);
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImRiLmpzIl0sIm5hbWVzIjpbImJhc2VVUkwiLCJ1dWlkVXJsIiwiYW5ub3RhdG9yc1VSTCIsImFkamVjdGl2ZXNVUkwiLCJhbmltYWxzVVJMIiwiY2hyb25pY2xlVVJMIiwiYWRqZWN0aXZlc0RCIiwiYW5pbWFsc0RCIiwiYW5ub3RhdG9yc0RCIiwiY2hyb25pY2xlREIiXSwibWFwcGluZ3MiOiI7Ozs7Ozs7QUFDQTs7Ozs7O0FBRUEsSUFBTUEsVUFBUSx5Q0FBZCxDLENBSEE7OztBQUtBLElBQU1DLFVBQWFELE9BQWIsWUFBTjtBQUNPLElBQU1FLHdDQUFtQkYsT0FBbkIsZ0JBQU47QUFDQSxJQUFNRyx3Q0FBbUJILE9BQW5CLGdCQUFOO0FBQ0EsSUFBTUksa0NBQWdCSixPQUFoQixhQUFOO0FBQ0EsSUFBTUssc0NBQWtCTCxPQUFsQixlQUFOO0FBQ1A7O0FBRUE7QUFDTyxJQUFNTSxzQ0FBZSxzQkFBWUgsYUFBWixDQUFyQjtBQUNBLElBQU1JLGdDQUFZLHNCQUFZSCxVQUFaLENBQWxCO0FBQ0EsSUFBTUksc0NBQWUsc0JBQVlOLGFBQVosQ0FBckI7QUFDQSxJQUFNTyxvQ0FBYyxzQkFBWUosWUFBWixDQUFwQiIsImZpbGUiOiJkYi5qcyIsInNvdXJjZXNDb250ZW50IjpbIi8vIGNvbnN0IGJhc2VVcmw9J2h0dHA6Ly8xMjcuMC4wLjE6NTk4NCc7XG5pbXBvcnQgUG91Y2hEQiBmcm9tICdwb3VjaGRiJztcblxuY29uc3QgYmFzZVVSTD0naHR0cDovL3JzbmFjcm93ZHF1YW50LmNsb3VkYXBwLm5ldDo1OTg0JztcblxuY29uc3QgdXVpZFVybCA9IGAke2Jhc2VVUkx9L191dWlkc2A7XG5leHBvcnQgY29uc3QgYW5ub3RhdG9yc1VSTCA9IGAke2Jhc2VVUkx9L2Fubm90YXRvcnNgO1xuZXhwb3J0IGNvbnN0IGFkamVjdGl2ZXNVUkwgPSBgJHtiYXNlVVJMfS9hZGplY3RpdmVzYDtcbmV4cG9ydCBjb25zdCBhbmltYWxzVVJMID0gYCR7YmFzZVVSTH0vYW5pbWFsc2A7XG5leHBvcnQgY29uc3QgY2hyb25pY2xlVVJMID0gYCR7YmFzZVVSTH0vY2hyb25pY2xlYDtcbi8vIGNvbnNvbGUubG9nKCd1cmw6JywgdXVpZFVybCk7XG5cbi8vIHZhciB1dWlkRGIgPSBuZXcgUG91Y2hEQih1dWlkVXJsKTtcbmV4cG9ydCBjb25zdCBhZGplY3RpdmVzREIgPSBuZXcgUG91Y2hEQihhZGplY3RpdmVzVVJMKTtcbmV4cG9ydCBjb25zdCBhbmltYWxzREIgPSBuZXcgUG91Y2hEQihhbmltYWxzVVJMKTtcbmV4cG9ydCBjb25zdCBhbm5vdGF0b3JzREIgPSBuZXcgUG91Y2hEQihhbm5vdGF0b3JzVVJMKTtcbmV4cG9ydCBjb25zdCBjaHJvbmljbGVEQiA9IG5ldyBQb3VjaERCKGNocm9uaWNsZVVSTCk7XG4iXX0=
-},{"pouchdb":7}],19:[function(require,module,exports){
+var measurementsDB = exports.measurementsDB = new _pouchdb2.default(measurementsURL);
+
+var getUUID = exports.getUUID = function getUUID() {
+  return new Promise(function (resolve, reject) {
+    $.get(uuidURL, function (_ref) {
+      var uuids = _ref.uuids;
+      resolve(uuids[0]);
+    });
+    // const uuid = doc.uuids[0];
+    // console.log('uuid:', uuid);
+  });
+};
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImRiLmpzIl0sIm5hbWVzIjpbImJhc2VVUkwiLCJ1dWlkVVJMIiwiYW5ub3RhdG9yc1VSTCIsImFkamVjdGl2ZXNVUkwiLCJhbmltYWxzVVJMIiwiY2hyb25pY2xlVVJMIiwibWVhc3VyZW1lbnRzVVJMIiwiYWRqZWN0aXZlc0RCIiwiYW5pbWFsc0RCIiwiYW5ub3RhdG9yc0RCIiwiY2hyb25pY2xlREIiLCJtZWFzdXJlbWVudHNEQiIsImdldFVVSUQiLCJQcm9taXNlIiwicmVzb2x2ZSIsInJlamVjdCIsIiQiLCJnZXQiLCJ1dWlkcyJdLCJtYXBwaW5ncyI6Ijs7Ozs7OztBQUNBOzs7Ozs7QUFFQSxJQUFNQSxVQUFRLHlDQUFkLEMsQ0FIQTtBQUtPLElBQU1DLDRCQUFhRCxPQUFiLFlBQU47QUFDQSxJQUFNRSx3Q0FBbUJGLE9BQW5CLGdCQUFOO0FBQ0EsSUFBTUcsd0NBQW1CSCxPQUFuQixnQkFBTjtBQUNBLElBQU1JLGtDQUFnQkosT0FBaEIsYUFBTjtBQUNBLElBQU1LLHNDQUFrQkwsT0FBbEIsZUFBTjtBQUNBLElBQU1NLDRDQUFxQk4sT0FBckIsa0JBQU47O0FBRVA7O0FBRUE7QUFDTyxJQUFNTyxzQ0FBZSxzQkFBWUosYUFBWixDQUFyQjtBQUNBLElBQU1LLGdDQUFZLHNCQUFZSixVQUFaLENBQWxCO0FBQ0EsSUFBTUssc0NBQWUsc0JBQVlQLGFBQVosQ0FBckI7QUFDQSxJQUFNUSxvQ0FBYyxzQkFBWUwsWUFBWixDQUFwQjtBQUNBLElBQU1NLDBDQUFpQixzQkFBWUwsZUFBWixDQUF2Qjs7QUFFQSxJQUFNTSw0QkFBVSxTQUFWQSxPQUFVLEdBQU07QUFDM0IsU0FBTyxJQUFJQyxPQUFKLENBQVksVUFBQ0MsT0FBRCxFQUFVQyxNQUFWLEVBQXFCO0FBQ3RDQyxNQUFFQyxHQUFGLENBQU1oQixPQUFOLEVBQWUsZ0JBQWE7QUFBQSxVQUFYaUIsS0FBVyxRQUFYQSxLQUFXO0FBQUNKLGNBQVFJLE1BQU0sQ0FBTixDQUFSO0FBQWtCLEtBQS9DO0FBQ0U7QUFDQTtBQUNILEdBSk0sQ0FBUDtBQUtELENBTk0iLCJmaWxlIjoiZGIuanMiLCJzb3VyY2VzQ29udGVudCI6WyIvLyBjb25zdCBiYXNlVXJsPSdodHRwOi8vMTI3LjAuMC4xOjU5ODQnO1xuaW1wb3J0IFBvdWNoREIgZnJvbSAncG91Y2hkYic7XG5cbmNvbnN0IGJhc2VVUkw9J2h0dHA6Ly9yc25hY3Jvd2RxdWFudC5jbG91ZGFwcC5uZXQ6NTk4NCc7XG5cbmV4cG9ydCBjb25zdCB1dWlkVVJMID0gYCR7YmFzZVVSTH0vX3V1aWRzYDtcbmV4cG9ydCBjb25zdCBhbm5vdGF0b3JzVVJMID0gYCR7YmFzZVVSTH0vYW5ub3RhdG9yc2A7XG5leHBvcnQgY29uc3QgYWRqZWN0aXZlc1VSTCA9IGAke2Jhc2VVUkx9L2FkamVjdGl2ZXNgO1xuZXhwb3J0IGNvbnN0IGFuaW1hbHNVUkwgPSBgJHtiYXNlVVJMfS9hbmltYWxzYDtcbmV4cG9ydCBjb25zdCBjaHJvbmljbGVVUkwgPSBgJHtiYXNlVVJMfS9jaHJvbmljbGVgO1xuZXhwb3J0IGNvbnN0IG1lYXN1cmVtZW50c1VSTCA9IGAke2Jhc2VVUkx9L21lYXN1cmVtZW50c2A7XG5cbi8vIGNvbnNvbGUubG9nKCd1cmw6JywgdXVpZFVybCk7XG5cbi8vIGV4cG9ydCBjb25zdCB1dWlkREIgPSBuZXcgUG91Y2hEQih1dWlkVVJMKTtcbmV4cG9ydCBjb25zdCBhZGplY3RpdmVzREIgPSBuZXcgUG91Y2hEQihhZGplY3RpdmVzVVJMKTtcbmV4cG9ydCBjb25zdCBhbmltYWxzREIgPSBuZXcgUG91Y2hEQihhbmltYWxzVVJMKTtcbmV4cG9ydCBjb25zdCBhbm5vdGF0b3JzREIgPSBuZXcgUG91Y2hEQihhbm5vdGF0b3JzVVJMKTtcbmV4cG9ydCBjb25zdCBjaHJvbmljbGVEQiA9IG5ldyBQb3VjaERCKGNocm9uaWNsZVVSTCk7XG5leHBvcnQgY29uc3QgbWVhc3VyZW1lbnRzREIgPSBuZXcgUG91Y2hEQihtZWFzdXJlbWVudHNVUkwpO1xuXG5leHBvcnQgY29uc3QgZ2V0VVVJRCA9ICgpID0+IHtcbiAgcmV0dXJuIG5ldyBQcm9taXNlKChyZXNvbHZlLCByZWplY3QpID0+IHtcbiAgICAkLmdldCh1dWlkVVJMLCAoe3V1aWRzfSkgPT4ge3Jlc29sdmUodXVpZHNbMF0pfSk7XG4gICAgICAvLyBjb25zdCB1dWlkID0gZG9jLnV1aWRzWzBdO1xuICAgICAgLy8gY29uc29sZS5sb2coJ3V1aWQ6JywgdXVpZCk7XG4gIH0pO1xufVxuIl19
+},{"pouchdb":8}],20:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _login = require('../login/login');
+
+var _login2 = _interopRequireDefault(_login);
+
+var _viewer = require('../viewer/viewer');
+
+var _viewer2 = _interopRequireDefault(_viewer);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
+  $modal: $('.error-modal'),
+  $overlay: $('.loading-overlay'),
+  logout: function logout() {
+    this.$modal.removeClass('show');
+    this.$overlay.addClass('invisible');
+
+    _login2.default.logout();
+  },
+  nextCase: function nextCase() {
+    this.hide();
+
+    _viewer2.default.getNextCase();
+  },
+  show: function show() {
+    console.log('inside show');
+
+    this.$modal.addClass('show');
+    this.$overlay.removeClass('invisible');
+  },
+  hide: function hide() {
+    this.$modal.removeClass('show');
+    this.$overlay.addClass('invisible');
+  },
+  init: function init() {
+    var _this = this;
+
+    this.$modal.find('.ok').on('click', function () {
+      return _this.hide();
+    });
+    // this.$modal.find('.next-case').on('click', () => this.nextCase());
+  }
+};
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIm1vZGFsLmpzIl0sIm5hbWVzIjpbIiRtb2RhbCIsIiQiLCIkb3ZlcmxheSIsImxvZ291dCIsInJlbW92ZUNsYXNzIiwiYWRkQ2xhc3MiLCJuZXh0Q2FzZSIsImhpZGUiLCJnZXROZXh0Q2FzZSIsInNob3ciLCJjb25zb2xlIiwibG9nIiwiaW5pdCIsImZpbmQiLCJvbiJdLCJtYXBwaW5ncyI6Ijs7Ozs7O0FBQUE7Ozs7QUFDQTs7Ozs7O2tCQUVlO0FBQ2JBLFVBQVFDLEVBQUUsY0FBRixDQURLO0FBRWJDLFlBQVVELEVBQUUsa0JBQUYsQ0FGRztBQUdiRSxRQUhhLG9CQUdKO0FBQ1AsU0FBS0gsTUFBTCxDQUFZSSxXQUFaLENBQXdCLE1BQXhCO0FBQ0EsU0FBS0YsUUFBTCxDQUFjRyxRQUFkLENBQXVCLFdBQXZCOztBQUVBLG9CQUFNRixNQUFOO0FBQ0QsR0FSWTtBQVNiRyxVQVRhLHNCQVNGO0FBQ1QsU0FBS0MsSUFBTDs7QUFFQSxxQkFBT0MsV0FBUDtBQUNELEdBYlk7QUFjYkMsTUFkYSxrQkFjTjtBQUNMQyxZQUFRQyxHQUFSLENBQVksYUFBWjs7QUFFQSxTQUFLWCxNQUFMLENBQVlLLFFBQVosQ0FBcUIsTUFBckI7QUFDQSxTQUFLSCxRQUFMLENBQWNFLFdBQWQsQ0FBMEIsV0FBMUI7QUFDRCxHQW5CWTtBQW9CYkcsTUFwQmEsa0JBb0JOO0FBQ0wsU0FBS1AsTUFBTCxDQUFZSSxXQUFaLENBQXdCLE1BQXhCO0FBQ0EsU0FBS0YsUUFBTCxDQUFjRyxRQUFkLENBQXVCLFdBQXZCO0FBQ0QsR0F2Qlk7QUF3QmJPLE1BeEJhLGtCQXdCTjtBQUFBOztBQUNMLFNBQUtaLE1BQUwsQ0FBWWEsSUFBWixDQUFpQixLQUFqQixFQUF3QkMsRUFBeEIsQ0FBMkIsT0FBM0IsRUFBb0M7QUFBQSxhQUFNLE1BQUtQLElBQUwsRUFBTjtBQUFBLEtBQXBDO0FBQ0E7QUFDRDtBQTNCWSxDIiwiZmlsZSI6Im1vZGFsLmpzIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IExvZ2luIGZyb20gJy4uL2xvZ2luL2xvZ2luJztcbmltcG9ydCBWaWV3ZXIgZnJvbSAnLi4vdmlld2VyL3ZpZXdlcic7XG5cbmV4cG9ydCBkZWZhdWx0IHtcbiAgJG1vZGFsOiAkKCcuZXJyb3ItbW9kYWwnKSxcbiAgJG92ZXJsYXk6ICQoJy5sb2FkaW5nLW92ZXJsYXknKSxcbiAgbG9nb3V0KCkge1xuICAgIHRoaXMuJG1vZGFsLnJlbW92ZUNsYXNzKCdzaG93Jyk7XG4gICAgdGhpcy4kb3ZlcmxheS5hZGRDbGFzcygnaW52aXNpYmxlJyk7XG5cbiAgICBMb2dpbi5sb2dvdXQoKTtcbiAgfSxcbiAgbmV4dENhc2UoKSB7XG4gICAgdGhpcy5oaWRlKCk7XG5cbiAgICBWaWV3ZXIuZ2V0TmV4dENhc2UoKTtcbiAgfSxcbiAgc2hvdygpIHtcbiAgICBjb25zb2xlLmxvZygnaW5zaWRlIHNob3cnKTtcbiAgICBcbiAgICB0aGlzLiRtb2RhbC5hZGRDbGFzcygnc2hvdycpO1xuICAgIHRoaXMuJG92ZXJsYXkucmVtb3ZlQ2xhc3MoJ2ludmlzaWJsZScpO1xuICB9LFxuICBoaWRlKCkge1xuICAgIHRoaXMuJG1vZGFsLnJlbW92ZUNsYXNzKCdzaG93Jyk7XG4gICAgdGhpcy4kb3ZlcmxheS5hZGRDbGFzcygnaW52aXNpYmxlJyk7XG4gIH0sXG4gIGluaXQoKSB7XG4gICAgdGhpcy4kbW9kYWwuZmluZCgnLm9rJykub24oJ2NsaWNrJywgKCkgPT4gdGhpcy5oaWRlKCkpO1xuICAgIC8vIHRoaXMuJG1vZGFsLmZpbmQoJy5uZXh0LWNhc2UnKS5vbignY2xpY2snLCAoKSA9PiB0aGlzLm5leHRDYXNlKCkpO1xuICB9XG59XG4iXX0=
+},{"../login/login":22,"../viewer/viewer":30}],21:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -14711,8 +19239,8 @@ exports.default = {
     this.$viewerWrapper.addClass('invisible');
   }
 };
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImZha2VfNGFlYWVlNTkuanMiXSwibmFtZXMiOlsiJGxvYWRpbmdJbWciLCIkIiwiJGxvZ2luRm9ybSIsIiRsb2dpbldyYXBwZXIiLCIkdmlld1dyYXBwZXIiLCIkb3ZlcmxheSIsIm9mZiIsIm9uIiwiZXZ0IiwicHJldmVudERlZmF1bHQiLCJyZW1vdmVDbGFzcyIsInVzZXJuYW1lIiwidmFsIiwiY29uc29sZSIsImxvZyIsImdldCIsInRoZW4iLCJ1c2VyIiwiYWRkQ2xhc3MiLCJpbml0Vmlld2VyIiwiY2F0Y2giLCJlcnIiLCJ0ZXh0IiwiY2xpY2siLCJldmVudCIsImluaXQiLCJsb2dvdXQiLCIkdmlld2VyV3JhcHBlciJdLCJtYXBwaW5ncyI6Ijs7Ozs7O0FBQUE7Ozs7QUFDQTs7QUFDQTs7Ozs7O0FBRUEsSUFBTUEsY0FBY0MsRUFBRSwrQ0FBRixDQUFwQjtBQUNBLElBQU1DLGFBQWFELEVBQUUsZ0JBQUYsQ0FBbkI7QUFDQSxJQUFNRSxnQkFBZ0JGLEVBQUUsZ0JBQUYsQ0FBdEI7QUFDQSxJQUFNRyxlQUFlSCxFQUFFLGlCQUFGLENBQXJCO0FBQ0EsSUFBTUksV0FBV0osRUFBRSxrQkFBRixDQUFqQjs7QUFFQUEsRUFBRSxxQkFBRixFQUF5QkssR0FBekIsQ0FBNkIsUUFBN0IsRUFBdUNDLEVBQXZDLENBQTBDLFFBQTFDLEVBQW9ELFVBQVVDLEdBQVYsRUFBZTtBQUNqRUEsTUFBSUMsY0FBSjs7QUFFQVQsY0FBWVUsV0FBWixDQUF3QixXQUF4QjtBQUNBLE1BQU1DLFdBQVdWLEVBQUUsaUJBQUYsRUFBcUJXLEdBQXJCLEVBQWpCO0FBQ0FDLFVBQVFDLEdBQVIsQ0FBWSxXQUFaLEVBQXlCSCxRQUF6Qjs7QUFFQSxtQkFBYUksR0FBYixDQUFpQkosUUFBakIsRUFBMkJLLElBQTNCLENBQWdDLFVBQUNDLElBQUQsRUFBVTtBQUN4Q0osWUFBUUMsR0FBUixDQUFZLFVBQVosRUFBd0JILFFBQXhCLEVBQWtDLE9BQWxDO0FBQ0FYLGdCQUFZa0IsUUFBWixDQUFxQixXQUFyQjtBQUNBaEIsZUFBV2dCLFFBQVgsQ0FBb0IsV0FBcEI7O0FBRUEscUJBQU9DLFVBQVA7QUFDRCxHQU5ELEVBTUdDLEtBTkgsQ0FNUyxVQUFDQyxHQUFELEVBQVM7QUFDaEJwQixNQUFFLGNBQUYsRUFBa0JxQixJQUFsQixlQUFtQ1gsUUFBbkM7QUFDQVYsTUFBRSxjQUFGLEVBQWtCUyxXQUFsQixDQUE4QixXQUE5QjtBQUNBVCxNQUFFLGlCQUFGLEVBQXFCVyxHQUFyQixDQUF5QixFQUF6QjtBQUNBWixnQkFBWWtCLFFBQVosQ0FBcUIsV0FBckI7QUFDRCxHQVhEOztBQWFBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0QsQ0EzQkQ7O0FBNkJBakIsRUFBRSxzQkFBRixFQUEwQkssR0FBMUIsQ0FBOEIsT0FBOUIsRUFBdUNpQixLQUF2QyxDQUE2QyxVQUFTQyxLQUFULEVBQWdCO0FBQzNEQSxRQUFNZixjQUFOOztBQUVBTixnQkFBY2UsUUFBZCxDQUF1QixXQUF2Qjs7QUFFQSx5QkFBYU8sSUFBYjtBQUNBO0FBQ0E7QUFDRCxDQVJEOztrQkFXZTtBQUNidEIsOEJBRGE7QUFFYkMsNEJBRmE7QUFHYkMsb0JBSGE7QUFJYnFCLFFBSmEsb0JBSUo7QUFDUCxTQUFLckIsUUFBTCxDQUFjYSxRQUFkLENBQXVCLFdBQXZCO0FBQ0EsU0FBS2YsYUFBTCxDQUFtQk8sV0FBbkIsQ0FBK0IsV0FBL0I7QUFDQSxTQUFLaUIsY0FBTCxDQUFvQlQsUUFBcEIsQ0FBNkIsV0FBN0I7QUFDRDtBQVJZLEMiLCJmaWxlIjoiZmFrZV80YWVhZWU1OS5qcyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBWaWV3ZXIgZnJvbSAnLi4vdmlld2VyL3ZpZXdlcic7XG5pbXBvcnQge2Fubm90YXRvcnNEQn0gZnJvbSAnLi4vZGIvZGInO1xuaW1wb3J0IFNpZ251cCBmcm9tICcuLi9zaWdudXAvc2lnbnVwJztcblxuY29uc3QgJGxvYWRpbmdJbWcgPSAkKCcubG9naW4td3JhcHBlciBmb3JtIGJ1dHRvbi5zdWJtaXQgaW1nLmxvYWRpbmcnKTtcbmNvbnN0ICRsb2dpbkZvcm0gPSAkKCcubG9naW4td3JhcHBlcicpO1xuY29uc3QgJGxvZ2luV3JhcHBlciA9ICQoJy5sb2dpbi13cmFwcGVyJyk7XG5jb25zdCAkdmlld1dyYXBwZXIgPSAkKCcudmlld2VyLXdyYXBwZXInKTtcbmNvbnN0ICRvdmVybGF5ID0gJCgnLmxvYWRpbmctb3ZlcmxheScpO1xuXG4kKCcubG9naW4td3JhcHBlciBmb3JtJykub2ZmKCdzdWJtaXQnKS5vbignc3VibWl0JywgZnVuY3Rpb24gKGV2dCkge1xuICBldnQucHJldmVudERlZmF1bHQoKTtcblxuICAkbG9hZGluZ0ltZy5yZW1vdmVDbGFzcygnaW52aXNpYmxlJyk7XG4gIGNvbnN0IHVzZXJuYW1lID0gJCgnI2xvZ2luLXVzZXJuYW1lJykudmFsKCk7XG4gIGNvbnNvbGUubG9nKCd1c2VybmFtZTonLCB1c2VybmFtZSk7XG5cbiAgYW5ub3RhdG9yc0RCLmdldCh1c2VybmFtZSkudGhlbigodXNlcikgPT4ge1xuICAgIGNvbnNvbGUubG9nKCd1c2VybmFtZScsIHVzZXJuYW1lLCAnZXhpc3QnKTtcbiAgICAkbG9hZGluZ0ltZy5hZGRDbGFzcygnaW52aXNpYmxlJyk7XG4gICAgJGxvZ2luRm9ybS5hZGRDbGFzcygnaW52aXNpYmxlJyk7XG5cbiAgICBWaWV3ZXIuaW5pdFZpZXdlcigpO1xuICB9KS5jYXRjaCgoZXJyKSA9PiB7XG4gICAgJCgnI2xvZ2luLWVycm9yJykudGV4dChgVXNlcm5hbWUgJHt1c2VybmFtZX0gaXMgbm90IGZvdW5kLiBUcnkgYW5vdGhlciB1c2VybmFtZSBvciBzaWduIHVwIGZvciBhIG5ldyBhY2NvdW50YClcbiAgICAkKCcjbG9naW4tZXJyb3InKS5yZW1vdmVDbGFzcygnaW52aXNpYmxlJyk7XG4gICAgJCgnI2xvZ2luLXVzZXJuYW1lJykudmFsKCcnKTtcbiAgICAkbG9hZGluZ0ltZy5hZGRDbGFzcygnaW52aXNpYmxlJyk7XG4gIH0pO1xuXG4gIC8vIE1vY2tpbmcgbG9naW5cbiAgLy8gc2V0VGltZW91dChmdW5jdGlvbiAoKSB7XG4gIC8vICAgJGxvYWRpbmdJbWcuYWRkQ2xhc3MoJ2ludmlzaWJsZScpO1xuICAvLyAgICRsb2dpbkZvcm0uYWRkQ2xhc3MoJ2ludmlzaWJsZScpO1xuICAvL1xuICAvLyAgIFZpZXdlci5pbml0Vmlld2VyKCk7XG4gIC8vIH0sIDEwMDApO1xufSk7XG5cbiQoJyNvcGVuLXNpZ251cC1idG4tbmV3Jykub2ZmKCdjbGljaycpLmNsaWNrKGZ1bmN0aW9uKGV2ZW50KSB7XG4gIGV2ZW50LnByZXZlbnREZWZhdWx0KCk7XG5cbiAgJGxvZ2luV3JhcHBlci5hZGRDbGFzcygnaW52aXNpYmxlJyk7XG5cbiAgbmV3IFNpZ251cCgpLmluaXQoKTtcbiAgLy8gY29uc29sZS5sb2coJ3NpZ2hudXAgaXMgY2FsbGVkJyk7XG4gIC8vIFNpZ251cC5pbml0KCk7XG59KTtcblxuXG5leHBvcnQgZGVmYXVsdCB7XG4gICRsb2dpbldyYXBwZXIsXG4gICR2aWV3V3JhcHBlcixcbiAgJG92ZXJsYXksXG4gIGxvZ291dCgpIHtcbiAgICB0aGlzLiRvdmVybGF5LmFkZENsYXNzKCdpbnZpc2libGUnKTtcbiAgICB0aGlzLiRsb2dpbldyYXBwZXIucmVtb3ZlQ2xhc3MoJ2ludmlzaWJsZScpO1xuICAgIHRoaXMuJHZpZXdlcldyYXBwZXIuYWRkQ2xhc3MoJ2ludmlzaWJsZScpO1xuICB9XG59XG4iXX0=
-},{"../db/db":18,"../signup/signup":23,"../viewer/viewer":28}],20:[function(require,module,exports){
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImZha2VfYmU4MTJiMjguanMiXSwibmFtZXMiOlsiJGxvYWRpbmdJbWciLCIkIiwiJGxvZ2luRm9ybSIsIiRsb2dpbldyYXBwZXIiLCIkdmlld1dyYXBwZXIiLCIkb3ZlcmxheSIsIm9mZiIsIm9uIiwiZXZ0IiwicHJldmVudERlZmF1bHQiLCJyZW1vdmVDbGFzcyIsInVzZXJuYW1lIiwidmFsIiwiY29uc29sZSIsImxvZyIsImdldCIsInRoZW4iLCJ1c2VyIiwiYWRkQ2xhc3MiLCJpbml0Vmlld2VyIiwiY2F0Y2giLCJlcnIiLCJ0ZXh0IiwiY2xpY2siLCJldmVudCIsImluaXQiLCJsb2dvdXQiLCIkdmlld2VyV3JhcHBlciJdLCJtYXBwaW5ncyI6Ijs7Ozs7O0FBQUE7Ozs7QUFDQTs7QUFDQTs7Ozs7O0FBRUEsSUFBTUEsY0FBY0MsRUFBRSwrQ0FBRixDQUFwQjtBQUNBLElBQU1DLGFBQWFELEVBQUUsZ0JBQUYsQ0FBbkI7QUFDQSxJQUFNRSxnQkFBZ0JGLEVBQUUsZ0JBQUYsQ0FBdEI7QUFDQSxJQUFNRyxlQUFlSCxFQUFFLGlCQUFGLENBQXJCO0FBQ0EsSUFBTUksV0FBV0osRUFBRSxrQkFBRixDQUFqQjs7QUFFQUEsRUFBRSxxQkFBRixFQUF5QkssR0FBekIsQ0FBNkIsUUFBN0IsRUFBdUNDLEVBQXZDLENBQTBDLFFBQTFDLEVBQW9ELFVBQVVDLEdBQVYsRUFBZTtBQUNqRUEsTUFBSUMsY0FBSjs7QUFFQVQsY0FBWVUsV0FBWixDQUF3QixXQUF4QjtBQUNBLE1BQU1DLFdBQVdWLEVBQUUsaUJBQUYsRUFBcUJXLEdBQXJCLEVBQWpCO0FBQ0FDLFVBQVFDLEdBQVIsQ0FBWSxXQUFaLEVBQXlCSCxRQUF6Qjs7QUFFQSxtQkFBYUksR0FBYixDQUFpQkosUUFBakIsRUFBMkJLLElBQTNCLENBQWdDLFVBQUNDLElBQUQsRUFBVTtBQUN4Q0osWUFBUUMsR0FBUixDQUFZLFVBQVosRUFBd0JILFFBQXhCLEVBQWtDLE9BQWxDO0FBQ0FYLGdCQUFZa0IsUUFBWixDQUFxQixXQUFyQjtBQUNBaEIsZUFBV2dCLFFBQVgsQ0FBb0IsV0FBcEI7O0FBRUEscUJBQU9DLFVBQVA7QUFDRCxHQU5ELEVBTUdDLEtBTkgsQ0FNUyxVQUFDQyxHQUFELEVBQVM7QUFDaEJwQixNQUFFLGNBQUYsRUFBa0JxQixJQUFsQixlQUFtQ1gsUUFBbkM7QUFDQVYsTUFBRSxjQUFGLEVBQWtCUyxXQUFsQixDQUE4QixXQUE5QjtBQUNBVCxNQUFFLGlCQUFGLEVBQXFCVyxHQUFyQixDQUF5QixFQUF6QjtBQUNBWixnQkFBWWtCLFFBQVosQ0FBcUIsV0FBckI7QUFDRCxHQVhEOztBQWFBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0QsQ0EzQkQ7O0FBNkJBakIsRUFBRSxzQkFBRixFQUEwQkssR0FBMUIsQ0FBOEIsT0FBOUIsRUFBdUNpQixLQUF2QyxDQUE2QyxVQUFTQyxLQUFULEVBQWdCO0FBQzNEQSxRQUFNZixjQUFOOztBQUVBTixnQkFBY2UsUUFBZCxDQUF1QixXQUF2Qjs7QUFFQSx5QkFBYU8sSUFBYjtBQUNBO0FBQ0E7QUFDRCxDQVJEOztrQkFXZTtBQUNidEIsOEJBRGE7QUFFYkMsNEJBRmE7QUFHYkMsb0JBSGE7QUFJYnFCLFFBSmEsb0JBSUo7QUFDUCxTQUFLckIsUUFBTCxDQUFjYSxRQUFkLENBQXVCLFdBQXZCO0FBQ0EsU0FBS2YsYUFBTCxDQUFtQk8sV0FBbkIsQ0FBK0IsV0FBL0I7QUFDQSxTQUFLaUIsY0FBTCxDQUFvQlQsUUFBcEIsQ0FBNkIsV0FBN0I7QUFDRDtBQVJZLEMiLCJmaWxlIjoiZmFrZV9iZTgxMmIyOC5qcyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBWaWV3ZXIgZnJvbSAnLi4vdmlld2VyL3ZpZXdlcic7XG5pbXBvcnQge2Fubm90YXRvcnNEQn0gZnJvbSAnLi4vZGIvZGInO1xuaW1wb3J0IFNpZ251cCBmcm9tICcuLi9zaWdudXAvc2lnbnVwJztcblxuY29uc3QgJGxvYWRpbmdJbWcgPSAkKCcubG9naW4td3JhcHBlciBmb3JtIGJ1dHRvbi5zdWJtaXQgaW1nLmxvYWRpbmcnKTtcbmNvbnN0ICRsb2dpbkZvcm0gPSAkKCcubG9naW4td3JhcHBlcicpO1xuY29uc3QgJGxvZ2luV3JhcHBlciA9ICQoJy5sb2dpbi13cmFwcGVyJyk7XG5jb25zdCAkdmlld1dyYXBwZXIgPSAkKCcudmlld2VyLXdyYXBwZXInKTtcbmNvbnN0ICRvdmVybGF5ID0gJCgnLmxvYWRpbmctb3ZlcmxheScpO1xuXG4kKCcubG9naW4td3JhcHBlciBmb3JtJykub2ZmKCdzdWJtaXQnKS5vbignc3VibWl0JywgZnVuY3Rpb24gKGV2dCkge1xuICBldnQucHJldmVudERlZmF1bHQoKTtcblxuICAkbG9hZGluZ0ltZy5yZW1vdmVDbGFzcygnaW52aXNpYmxlJyk7XG4gIGNvbnN0IHVzZXJuYW1lID0gJCgnI2xvZ2luLXVzZXJuYW1lJykudmFsKCk7XG4gIGNvbnNvbGUubG9nKCd1c2VybmFtZTonLCB1c2VybmFtZSk7XG5cbiAgYW5ub3RhdG9yc0RCLmdldCh1c2VybmFtZSkudGhlbigodXNlcikgPT4ge1xuICAgIGNvbnNvbGUubG9nKCd1c2VybmFtZScsIHVzZXJuYW1lLCAnZXhpc3QnKTtcbiAgICAkbG9hZGluZ0ltZy5hZGRDbGFzcygnaW52aXNpYmxlJyk7XG4gICAgJGxvZ2luRm9ybS5hZGRDbGFzcygnaW52aXNpYmxlJyk7XG5cbiAgICBWaWV3ZXIuaW5pdFZpZXdlcigpO1xuICB9KS5jYXRjaCgoZXJyKSA9PiB7XG4gICAgJCgnI2xvZ2luLWVycm9yJykudGV4dChgVXNlcm5hbWUgJHt1c2VybmFtZX0gaXMgbm90IGZvdW5kLiBUcnkgYW5vdGhlciB1c2VybmFtZSBvciBzaWduIHVwIGZvciBhIG5ldyBhY2NvdW50YClcbiAgICAkKCcjbG9naW4tZXJyb3InKS5yZW1vdmVDbGFzcygnaW52aXNpYmxlJyk7XG4gICAgJCgnI2xvZ2luLXVzZXJuYW1lJykudmFsKCcnKTtcbiAgICAkbG9hZGluZ0ltZy5hZGRDbGFzcygnaW52aXNpYmxlJyk7XG4gIH0pO1xuXG4gIC8vIE1vY2tpbmcgbG9naW5cbiAgLy8gc2V0VGltZW91dChmdW5jdGlvbiAoKSB7XG4gIC8vICAgJGxvYWRpbmdJbWcuYWRkQ2xhc3MoJ2ludmlzaWJsZScpO1xuICAvLyAgICRsb2dpbkZvcm0uYWRkQ2xhc3MoJ2ludmlzaWJsZScpO1xuICAvL1xuICAvLyAgIFZpZXdlci5pbml0Vmlld2VyKCk7XG4gIC8vIH0sIDEwMDApO1xufSk7XG5cbiQoJyNvcGVuLXNpZ251cC1idG4tbmV3Jykub2ZmKCdjbGljaycpLmNsaWNrKGZ1bmN0aW9uKGV2ZW50KSB7XG4gIGV2ZW50LnByZXZlbnREZWZhdWx0KCk7XG5cbiAgJGxvZ2luV3JhcHBlci5hZGRDbGFzcygnaW52aXNpYmxlJyk7XG5cbiAgbmV3IFNpZ251cCgpLmluaXQoKTtcbiAgLy8gY29uc29sZS5sb2coJ3NpZ2hudXAgaXMgY2FsbGVkJyk7XG4gIC8vIFNpZ251cC5pbml0KCk7XG59KTtcblxuXG5leHBvcnQgZGVmYXVsdCB7XG4gICRsb2dpbldyYXBwZXIsXG4gICR2aWV3V3JhcHBlcixcbiAgJG92ZXJsYXksXG4gIGxvZ291dCgpIHtcbiAgICB0aGlzLiRvdmVybGF5LmFkZENsYXNzKCdpbnZpc2libGUnKTtcbiAgICB0aGlzLiRsb2dpbldyYXBwZXIucmVtb3ZlQ2xhc3MoJ2ludmlzaWJsZScpO1xuICAgIHRoaXMuJHZpZXdlcldyYXBwZXIuYWRkQ2xhc3MoJ2ludmlzaWJsZScpO1xuICB9XG59XG4iXX0=
+},{"../db/db":19,"../signup/signup":25,"../viewer/viewer":30}],22:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -14787,7 +19315,7 @@ exports.default = {
   }
 };
 //# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImxvZ2luLmpzIl0sIm5hbWVzIjpbIiRsb2FkaW5nSW1nIiwiJCIsIiRsb2dpbkZvcm0iLCIkbG9naW5XcmFwcGVyIiwiJHZpZXdXcmFwcGVyIiwiJG92ZXJsYXkiLCJvZmYiLCJvbiIsImV2dCIsInByZXZlbnREZWZhdWx0IiwicmVtb3ZlQ2xhc3MiLCJ1c2VybmFtZSIsInZhbCIsImNvbnNvbGUiLCJsb2ciLCJnZXQiLCJ0aGVuIiwidXNlciIsImFkZENsYXNzIiwiaW5pdFZpZXdlciIsImNhdGNoIiwiZXJyIiwidGV4dCIsImNsaWNrIiwiZXZlbnQiLCJpbml0IiwibG9nb3V0IiwiJHZpZXdlcldyYXBwZXIiXSwibWFwcGluZ3MiOiI7Ozs7OztBQUFBOzs7O0FBQ0E7O0FBQ0E7Ozs7OztBQUVBLElBQU1BLGNBQWNDLEVBQUUsK0NBQUYsQ0FBcEI7QUFDQSxJQUFNQyxhQUFhRCxFQUFFLGdCQUFGLENBQW5CO0FBQ0EsSUFBTUUsZ0JBQWdCRixFQUFFLGdCQUFGLENBQXRCO0FBQ0EsSUFBTUcsZUFBZUgsRUFBRSxpQkFBRixDQUFyQjtBQUNBLElBQU1JLFdBQVdKLEVBQUUsa0JBQUYsQ0FBakI7O0FBRUFBLEVBQUUscUJBQUYsRUFBeUJLLEdBQXpCLENBQTZCLFFBQTdCLEVBQXVDQyxFQUF2QyxDQUEwQyxRQUExQyxFQUFvRCxVQUFVQyxHQUFWLEVBQWU7QUFDakVBLE1BQUlDLGNBQUo7O0FBRUFULGNBQVlVLFdBQVosQ0FBd0IsV0FBeEI7QUFDQSxNQUFNQyxXQUFXVixFQUFFLGlCQUFGLEVBQXFCVyxHQUFyQixFQUFqQjtBQUNBQyxVQUFRQyxHQUFSLENBQVksV0FBWixFQUF5QkgsUUFBekI7O0FBRUEsbUJBQWFJLEdBQWIsQ0FBaUJKLFFBQWpCLEVBQTJCSyxJQUEzQixDQUFnQyxVQUFDQyxJQUFELEVBQVU7QUFDeENKLFlBQVFDLEdBQVIsQ0FBWSxVQUFaLEVBQXdCSCxRQUF4QixFQUFrQyxPQUFsQztBQUNBWCxnQkFBWWtCLFFBQVosQ0FBcUIsV0FBckI7QUFDQWhCLGVBQVdnQixRQUFYLENBQW9CLFdBQXBCOztBQUVBLHFCQUFPQyxVQUFQO0FBQ0QsR0FORCxFQU1HQyxLQU5ILENBTVMsVUFBQ0MsR0FBRCxFQUFTO0FBQ2hCcEIsTUFBRSxjQUFGLEVBQWtCcUIsSUFBbEIsZUFBbUNYLFFBQW5DO0FBQ0FWLE1BQUUsY0FBRixFQUFrQlMsV0FBbEIsQ0FBOEIsV0FBOUI7QUFDQVQsTUFBRSxpQkFBRixFQUFxQlcsR0FBckIsQ0FBeUIsRUFBekI7QUFDQVosZ0JBQVlrQixRQUFaLENBQXFCLFdBQXJCO0FBQ0QsR0FYRDs7QUFhQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNELENBM0JEOztBQTZCQWpCLEVBQUUsc0JBQUYsRUFBMEJLLEdBQTFCLENBQThCLE9BQTlCLEVBQXVDaUIsS0FBdkMsQ0FBNkMsVUFBU0MsS0FBVCxFQUFnQjtBQUMzREEsUUFBTWYsY0FBTjs7QUFFQU4sZ0JBQWNlLFFBQWQsQ0FBdUIsV0FBdkI7O0FBRUEseUJBQWFPLElBQWI7QUFDQTtBQUNBO0FBQ0QsQ0FSRDs7a0JBV2U7QUFDYnRCLDhCQURhO0FBRWJDLDRCQUZhO0FBR2JDLG9CQUhhO0FBSWJxQixRQUphLG9CQUlKO0FBQ1AsU0FBS3JCLFFBQUwsQ0FBY2EsUUFBZCxDQUF1QixXQUF2QjtBQUNBLFNBQUtmLGFBQUwsQ0FBbUJPLFdBQW5CLENBQStCLFdBQS9CO0FBQ0EsU0FBS2lCLGNBQUwsQ0FBb0JULFFBQXBCLENBQTZCLFdBQTdCO0FBQ0Q7QUFSWSxDIiwiZmlsZSI6ImxvZ2luLmpzIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IFZpZXdlciBmcm9tICcuLi92aWV3ZXIvdmlld2VyJztcbmltcG9ydCB7YW5ub3RhdG9yc0RCfSBmcm9tICcuLi9kYi9kYic7XG5pbXBvcnQgU2lnbnVwIGZyb20gJy4uL3NpZ251cC9zaWdudXAnO1xuXG5jb25zdCAkbG9hZGluZ0ltZyA9ICQoJy5sb2dpbi13cmFwcGVyIGZvcm0gYnV0dG9uLnN1Ym1pdCBpbWcubG9hZGluZycpO1xuY29uc3QgJGxvZ2luRm9ybSA9ICQoJy5sb2dpbi13cmFwcGVyJyk7XG5jb25zdCAkbG9naW5XcmFwcGVyID0gJCgnLmxvZ2luLXdyYXBwZXInKTtcbmNvbnN0ICR2aWV3V3JhcHBlciA9ICQoJy52aWV3ZXItd3JhcHBlcicpO1xuY29uc3QgJG92ZXJsYXkgPSAkKCcubG9hZGluZy1vdmVybGF5Jyk7XG5cbiQoJy5sb2dpbi13cmFwcGVyIGZvcm0nKS5vZmYoJ3N1Ym1pdCcpLm9uKCdzdWJtaXQnLCBmdW5jdGlvbiAoZXZ0KSB7XG4gIGV2dC5wcmV2ZW50RGVmYXVsdCgpO1xuXG4gICRsb2FkaW5nSW1nLnJlbW92ZUNsYXNzKCdpbnZpc2libGUnKTtcbiAgY29uc3QgdXNlcm5hbWUgPSAkKCcjbG9naW4tdXNlcm5hbWUnKS52YWwoKTtcbiAgY29uc29sZS5sb2coJ3VzZXJuYW1lOicsIHVzZXJuYW1lKTtcblxuICBhbm5vdGF0b3JzREIuZ2V0KHVzZXJuYW1lKS50aGVuKCh1c2VyKSA9PiB7XG4gICAgY29uc29sZS5sb2coJ3VzZXJuYW1lJywgdXNlcm5hbWUsICdleGlzdCcpO1xuICAgICRsb2FkaW5nSW1nLmFkZENsYXNzKCdpbnZpc2libGUnKTtcbiAgICAkbG9naW5Gb3JtLmFkZENsYXNzKCdpbnZpc2libGUnKTtcblxuICAgIFZpZXdlci5pbml0Vmlld2VyKCk7XG4gIH0pLmNhdGNoKChlcnIpID0+IHtcbiAgICAkKCcjbG9naW4tZXJyb3InKS50ZXh0KGBVc2VybmFtZSAke3VzZXJuYW1lfSBpcyBub3QgZm91bmQuIFRyeSBhbm90aGVyIHVzZXJuYW1lIG9yIHNpZ24gdXAgZm9yIGEgbmV3IGFjY291bnRgKVxuICAgICQoJyNsb2dpbi1lcnJvcicpLnJlbW92ZUNsYXNzKCdpbnZpc2libGUnKTtcbiAgICAkKCcjbG9naW4tdXNlcm5hbWUnKS52YWwoJycpO1xuICAgICRsb2FkaW5nSW1nLmFkZENsYXNzKCdpbnZpc2libGUnKTtcbiAgfSk7XG5cbiAgLy8gTW9ja2luZyBsb2dpblxuICAvLyBzZXRUaW1lb3V0KGZ1bmN0aW9uICgpIHtcbiAgLy8gICAkbG9hZGluZ0ltZy5hZGRDbGFzcygnaW52aXNpYmxlJyk7XG4gIC8vICAgJGxvZ2luRm9ybS5hZGRDbGFzcygnaW52aXNpYmxlJyk7XG4gIC8vXG4gIC8vICAgVmlld2VyLmluaXRWaWV3ZXIoKTtcbiAgLy8gfSwgMTAwMCk7XG59KTtcblxuJCgnI29wZW4tc2lnbnVwLWJ0bi1uZXcnKS5vZmYoJ2NsaWNrJykuY2xpY2soZnVuY3Rpb24oZXZlbnQpIHtcbiAgZXZlbnQucHJldmVudERlZmF1bHQoKTtcblxuICAkbG9naW5XcmFwcGVyLmFkZENsYXNzKCdpbnZpc2libGUnKTtcblxuICBuZXcgU2lnbnVwKCkuaW5pdCgpO1xuICAvLyBjb25zb2xlLmxvZygnc2lnaG51cCBpcyBjYWxsZWQnKTtcbiAgLy8gU2lnbnVwLmluaXQoKTtcbn0pO1xuXG5cbmV4cG9ydCBkZWZhdWx0IHtcbiAgJGxvZ2luV3JhcHBlcixcbiAgJHZpZXdXcmFwcGVyLFxuICAkb3ZlcmxheSxcbiAgbG9nb3V0KCkge1xuICAgIHRoaXMuJG92ZXJsYXkuYWRkQ2xhc3MoJ2ludmlzaWJsZScpO1xuICAgIHRoaXMuJGxvZ2luV3JhcHBlci5yZW1vdmVDbGFzcygnaW52aXNpYmxlJyk7XG4gICAgdGhpcy4kdmlld2VyV3JhcHBlci5hZGRDbGFzcygnaW52aXNpYmxlJyk7XG4gIH1cbn1cbiJdfQ==
-},{"../db/db":18,"../signup/signup":23,"../viewer/viewer":28}],21:[function(require,module,exports){
+},{"../db/db":19,"../signup/signup":25,"../viewer/viewer":30}],23:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -14801,6 +19329,10 @@ var _login2 = _interopRequireDefault(_login);
 var _modal = require('../modal/modal');
 
 var _modal2 = _interopRequireDefault(_modal);
+
+var _modal3 = require('../errorModal/modal');
+
+var _modal4 = _interopRequireDefault(_modal3);
 
 var _viewer = require('../viewer/viewer');
 
@@ -14846,6 +19378,7 @@ exports.default = {
     var _this3 = this;
 
     _modal2.default.init();
+    _modal4.default.init();
 
     this.$hamburguerMenu.on('click', function (event) {
       event.preventDefault();
@@ -14877,8 +19410,8 @@ exports.default = {
     });
   }
 };
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIm1lbnUuanMiXSwibmFtZXMiOlsiJGhhbWJ1cmd1ZXJNZW51IiwiJCIsIiRtZW51V3JhcHBlciIsIiRvdmVybGF5Iiwic3VibWl0IiwiY2xvc2VNZW51IiwicmVtb3ZlQ2xhc3MiLCJhZGRDbGFzcyIsInNldFRpbWVvdXQiLCJzaG93IiwibmV4dENhc2UiLCJnZXROZXh0Q2FzZSIsImxvZ291dCIsImluaXQiLCJvbiIsImV2ZW50IiwicHJldmVudERlZmF1bHQiLCIkZWxlbWVudCIsImN1cnJlbnRUYXJnZXQiLCJtZW51IiwiYXR0ciIsImhhc0NsYXNzIl0sIm1hcHBpbmdzIjoiOzs7Ozs7QUFBQTs7OztBQUNBOzs7O0FBQ0E7Ozs7OztrQkFFZTtBQUNiQSxtQkFBaUJDLEVBQUUsa0JBQUYsQ0FESjtBQUViQyxnQkFBY0QsRUFBRSxlQUFGLENBRkQ7QUFHYkUsWUFBVUYsRUFBRSxrQkFBRixDQUhHO0FBSWJHLFFBSmEsb0JBSUo7QUFBQTs7QUFDUCxTQUFLQyxTQUFMO0FBQ0EsU0FBS0YsUUFBTCxDQUFjRyxXQUFkLENBQTBCLFdBQTFCLEVBQXVDQyxRQUF2QyxDQUFnRCxZQUFoRDs7QUFFQUMsZUFBVyxZQUFNO0FBQ2Ysc0JBQU1DLElBQU47O0FBRUEsWUFBS04sUUFBTCxDQUFjRyxXQUFkLENBQTBCLFlBQTFCO0FBQ0QsS0FKRCxFQUlHLElBSkg7QUFLRCxHQWJZO0FBY2JJLFVBZGEsc0JBY0Y7QUFDVCxTQUFLTCxTQUFMO0FBQ0EscUJBQU9NLFdBQVA7QUFDRCxHQWpCWTtBQWtCYkMsUUFsQmEsb0JBa0JMO0FBQ04sU0FBS1AsU0FBTDtBQUNBLG9CQUFNTyxNQUFOO0FBQ0QsR0FyQlk7QUFzQmJQLFdBdEJhLHVCQXNCRDtBQUFBOztBQUNWLFNBQUtGLFFBQUwsQ0FBY0ksUUFBZCxDQUF1QixXQUF2QjtBQUNBLFNBQUtMLFlBQUwsQ0FBa0JJLFdBQWxCLENBQThCLFFBQTlCOztBQUVBRSxlQUFXLFlBQU07QUFDZixhQUFLTixZQUFMLENBQWtCSyxRQUFsQixDQUEyQixXQUEzQjtBQUNELEtBRkQsRUFFRyxJQUZIO0FBR0QsR0E3Qlk7QUE4QmJNLE1BOUJhLGtCQThCTjtBQUFBOztBQUNMLG9CQUFNQSxJQUFOOztBQUVBLFNBQUtiLGVBQUwsQ0FBcUJjLEVBQXJCLENBQXdCLE9BQXhCLEVBQWlDLFVBQUNDLEtBQUQsRUFBVztBQUMxQ0EsWUFBTUMsY0FBTjs7QUFFQSxhQUFLYixRQUFMLENBQWNHLFdBQWQsQ0FBMEIsV0FBMUI7QUFDQSxhQUFLSixZQUFMLENBQWtCSSxXQUFsQixDQUE4QixXQUE5Qjs7QUFFQUUsaUJBQVcsWUFBTTtBQUNmLGVBQUtOLFlBQUwsQ0FBa0JLLFFBQWxCLENBQTJCLFFBQTNCO0FBQ0EsZUFBS0osUUFBTCxDQUFjRyxXQUFkLENBQTBCLFdBQTFCO0FBQ0QsT0FIRCxFQUdHLEdBSEg7QUFJRCxLQVZEOztBQVlBLFNBQUtKLFlBQUwsQ0FBa0JZLEVBQWxCLENBQXFCLE9BQXJCLEVBQThCLGNBQTlCLEVBQThDLFVBQUNDLEtBQUQsRUFBVztBQUN2RCxVQUFNRSxXQUFXaEIsRUFBRWMsTUFBTUcsYUFBUixDQUFqQjtBQUNBLFVBQU1DLE9BQU9GLFNBQVNHLElBQVQsQ0FBYyxXQUFkLENBQWI7O0FBRUFMLFlBQU1DLGNBQU47O0FBRUEsVUFBSUcsSUFBSixFQUFVO0FBQ1IsZUFBS0EsSUFBTDtBQUNEO0FBQ0YsS0FURDs7QUFXQSxTQUFLaEIsUUFBTCxDQUFjVyxFQUFkLENBQWlCLE9BQWpCLEVBQTBCLFVBQUNDLEtBQUQsRUFBVztBQUNuQyxVQUFJLE9BQUtiLFlBQUwsQ0FBa0JtQixRQUFsQixDQUEyQixRQUEzQixDQUFKLEVBQTBDO0FBQ3hDLGVBQUtoQixTQUFMO0FBQ0Q7QUFDRixLQUpEO0FBS0Q7QUE3RFksQyIsImZpbGUiOiJtZW51LmpzIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IExvZ2luIGZyb20gJy4uL2xvZ2luL2xvZ2luJztcbmltcG9ydCBNb2RhbCBmcm9tICcuLi9tb2RhbC9tb2RhbCc7XG5pbXBvcnQgVmlld2VyIGZyb20gJy4uL3ZpZXdlci92aWV3ZXInO1xuXG5leHBvcnQgZGVmYXVsdCB7XG4gICRoYW1idXJndWVyTWVudTogJCgnLmh1bWJ1cmd1ZXItbWVudScpLFxuICAkbWVudVdyYXBwZXI6ICQoJy5tZW51LXdyYXBwZXInKSxcbiAgJG92ZXJsYXk6ICQoJy5sb2FkaW5nLW92ZXJsYXknKSxcbiAgc3VibWl0KCkge1xuICAgIHRoaXMuY2xvc2VNZW51KCk7XG4gICAgdGhpcy4kb3ZlcmxheS5yZW1vdmVDbGFzcygnaW52aXNpYmxlJykuYWRkQ2xhc3MoJ3N1Ym1pdHRpbmcnKTtcblxuICAgIHNldFRpbWVvdXQoKCkgPT4ge1xuICAgICAgTW9kYWwuc2hvdygpO1xuXG4gICAgICB0aGlzLiRvdmVybGF5LnJlbW92ZUNsYXNzKCdzdWJtaXR0aW5nJyk7XG4gICAgfSwgMjAwMCk7XG4gIH0sXG4gIG5leHRDYXNlKCkge1xuICAgIHRoaXMuY2xvc2VNZW51KCk7XG4gICAgVmlld2VyLmdldE5leHRDYXNlKCk7XG4gIH0sXG4gIGxvZ291dCgpe1xuICAgIHRoaXMuY2xvc2VNZW51KCk7XG4gICAgTG9naW4ubG9nb3V0KCk7XG4gIH0sXG4gIGNsb3NlTWVudSgpIHtcbiAgICB0aGlzLiRvdmVybGF5LmFkZENsYXNzKCdpbnZpc2libGUnKTtcbiAgICB0aGlzLiRtZW51V3JhcHBlci5yZW1vdmVDbGFzcygnb3BlbmVkJyk7XG5cbiAgICBzZXRUaW1lb3V0KCgpID0+IHtcbiAgICAgIHRoaXMuJG1lbnVXcmFwcGVyLmFkZENsYXNzKCdpbnZpc2libGUnKTtcbiAgICB9LCAxMjAwKTtcbiAgfSxcbiAgaW5pdCgpIHtcbiAgICBNb2RhbC5pbml0KCk7XG5cbiAgICB0aGlzLiRoYW1idXJndWVyTWVudS5vbignY2xpY2snLCAoZXZlbnQpID0+IHtcbiAgICAgIGV2ZW50LnByZXZlbnREZWZhdWx0KCk7XG5cbiAgICAgIHRoaXMuJG92ZXJsYXkucmVtb3ZlQ2xhc3MoJ2ludmlzaWJsZScpO1xuICAgICAgdGhpcy4kbWVudVdyYXBwZXIucmVtb3ZlQ2xhc3MoJ2ludmlzaWJsZScpO1xuXG4gICAgICBzZXRUaW1lb3V0KCgpID0+IHtcbiAgICAgICAgdGhpcy4kbWVudVdyYXBwZXIuYWRkQ2xhc3MoJ29wZW5lZCcpO1xuICAgICAgICB0aGlzLiRvdmVybGF5LnJlbW92ZUNsYXNzKCdpbnZpc2libGUnKTtcbiAgICAgIH0sIDIwMCk7XG4gICAgfSk7XG5cbiAgICB0aGlzLiRtZW51V3JhcHBlci5vbignY2xpY2snLCAnYVtkYXRhLW1lbnVdJywgKGV2ZW50KSA9PiB7XG4gICAgICBjb25zdCAkZWxlbWVudCA9ICQoZXZlbnQuY3VycmVudFRhcmdldCk7XG4gICAgICBjb25zdCBtZW51ID0gJGVsZW1lbnQuYXR0cignZGF0YS1tZW51Jyk7XG5cbiAgICAgIGV2ZW50LnByZXZlbnREZWZhdWx0KCk7XG5cbiAgICAgIGlmIChtZW51KSB7XG4gICAgICAgIHRoaXNbbWVudV0oKTtcbiAgICAgIH1cbiAgICB9KTtcblxuICAgIHRoaXMuJG92ZXJsYXkub24oJ2NsaWNrJywgKGV2ZW50KSA9PiB7XG4gICAgICBpZiAodGhpcy4kbWVudVdyYXBwZXIuaGFzQ2xhc3MoJ29wZW5lZCcpKSB7XG4gICAgICAgIHRoaXMuY2xvc2VNZW51KCk7XG4gICAgICB9XG4gICAgfSk7XG4gIH1cbn1cbiJdfQ==
-},{"../login/login":20,"../modal/modal":22,"../viewer/viewer":28}],22:[function(require,module,exports){
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIm1lbnUuanMiXSwibmFtZXMiOlsiJGhhbWJ1cmd1ZXJNZW51IiwiJCIsIiRtZW51V3JhcHBlciIsIiRvdmVybGF5Iiwic3VibWl0IiwiY2xvc2VNZW51IiwicmVtb3ZlQ2xhc3MiLCJhZGRDbGFzcyIsInNldFRpbWVvdXQiLCJzaG93IiwibmV4dENhc2UiLCJnZXROZXh0Q2FzZSIsImxvZ291dCIsImluaXQiLCJvbiIsImV2ZW50IiwicHJldmVudERlZmF1bHQiLCIkZWxlbWVudCIsImN1cnJlbnRUYXJnZXQiLCJtZW51IiwiYXR0ciIsImhhc0NsYXNzIl0sIm1hcHBpbmdzIjoiOzs7Ozs7QUFBQTs7OztBQUNBOzs7O0FBQ0E7Ozs7QUFDQTs7Ozs7O2tCQUVlO0FBQ2JBLG1CQUFpQkMsRUFBRSxrQkFBRixDQURKO0FBRWJDLGdCQUFjRCxFQUFFLGVBQUYsQ0FGRDtBQUdiRSxZQUFVRixFQUFFLGtCQUFGLENBSEc7QUFJYkcsUUFKYSxvQkFJSjtBQUFBOztBQUNQLFNBQUtDLFNBQUw7QUFDQSxTQUFLRixRQUFMLENBQWNHLFdBQWQsQ0FBMEIsV0FBMUIsRUFBdUNDLFFBQXZDLENBQWdELFlBQWhEOztBQUVBQyxlQUFXLFlBQU07QUFDZixzQkFBTUMsSUFBTjs7QUFFQSxZQUFLTixRQUFMLENBQWNHLFdBQWQsQ0FBMEIsWUFBMUI7QUFDRCxLQUpELEVBSUcsSUFKSDtBQUtELEdBYlk7QUFjYkksVUFkYSxzQkFjRjtBQUNULFNBQUtMLFNBQUw7QUFDQSxxQkFBT00sV0FBUDtBQUNELEdBakJZO0FBa0JiQyxRQWxCYSxvQkFrQkw7QUFDTixTQUFLUCxTQUFMO0FBQ0Esb0JBQU1PLE1BQU47QUFDRCxHQXJCWTtBQXNCYlAsV0F0QmEsdUJBc0JEO0FBQUE7O0FBQ1YsU0FBS0YsUUFBTCxDQUFjSSxRQUFkLENBQXVCLFdBQXZCO0FBQ0EsU0FBS0wsWUFBTCxDQUFrQkksV0FBbEIsQ0FBOEIsUUFBOUI7O0FBRUFFLGVBQVcsWUFBTTtBQUNmLGFBQUtOLFlBQUwsQ0FBa0JLLFFBQWxCLENBQTJCLFdBQTNCO0FBQ0QsS0FGRCxFQUVHLElBRkg7QUFHRCxHQTdCWTtBQThCYk0sTUE5QmEsa0JBOEJOO0FBQUE7O0FBQ0wsb0JBQU1BLElBQU47QUFDQSxvQkFBV0EsSUFBWDs7QUFFQSxTQUFLYixlQUFMLENBQXFCYyxFQUFyQixDQUF3QixPQUF4QixFQUFpQyxVQUFDQyxLQUFELEVBQVc7QUFDMUNBLFlBQU1DLGNBQU47O0FBRUEsYUFBS2IsUUFBTCxDQUFjRyxXQUFkLENBQTBCLFdBQTFCO0FBQ0EsYUFBS0osWUFBTCxDQUFrQkksV0FBbEIsQ0FBOEIsV0FBOUI7O0FBRUFFLGlCQUFXLFlBQU07QUFDZixlQUFLTixZQUFMLENBQWtCSyxRQUFsQixDQUEyQixRQUEzQjtBQUNBLGVBQUtKLFFBQUwsQ0FBY0csV0FBZCxDQUEwQixXQUExQjtBQUNELE9BSEQsRUFHRyxHQUhIO0FBSUQsS0FWRDs7QUFZQSxTQUFLSixZQUFMLENBQWtCWSxFQUFsQixDQUFxQixPQUFyQixFQUE4QixjQUE5QixFQUE4QyxVQUFDQyxLQUFELEVBQVc7QUFDdkQsVUFBTUUsV0FBV2hCLEVBQUVjLE1BQU1HLGFBQVIsQ0FBakI7QUFDQSxVQUFNQyxPQUFPRixTQUFTRyxJQUFULENBQWMsV0FBZCxDQUFiOztBQUVBTCxZQUFNQyxjQUFOOztBQUVBLFVBQUlHLElBQUosRUFBVTtBQUNSLGVBQUtBLElBQUw7QUFDRDtBQUNGLEtBVEQ7O0FBV0EsU0FBS2hCLFFBQUwsQ0FBY1csRUFBZCxDQUFpQixPQUFqQixFQUEwQixVQUFDQyxLQUFELEVBQVc7QUFDbkMsVUFBSSxPQUFLYixZQUFMLENBQWtCbUIsUUFBbEIsQ0FBMkIsUUFBM0IsQ0FBSixFQUEwQztBQUN4QyxlQUFLaEIsU0FBTDtBQUNEO0FBQ0YsS0FKRDtBQUtEO0FBOURZLEMiLCJmaWxlIjoibWVudS5qcyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBMb2dpbiBmcm9tICcuLi9sb2dpbi9sb2dpbic7XG5pbXBvcnQgTW9kYWwgZnJvbSAnLi4vbW9kYWwvbW9kYWwnO1xuaW1wb3J0IEVycm9yTW9kYWwgZnJvbSAnLi4vZXJyb3JNb2RhbC9tb2RhbCc7XG5pbXBvcnQgVmlld2VyIGZyb20gJy4uL3ZpZXdlci92aWV3ZXInO1xuXG5leHBvcnQgZGVmYXVsdCB7XG4gICRoYW1idXJndWVyTWVudTogJCgnLmh1bWJ1cmd1ZXItbWVudScpLFxuICAkbWVudVdyYXBwZXI6ICQoJy5tZW51LXdyYXBwZXInKSxcbiAgJG92ZXJsYXk6ICQoJy5sb2FkaW5nLW92ZXJsYXknKSxcbiAgc3VibWl0KCkge1xuICAgIHRoaXMuY2xvc2VNZW51KCk7XG4gICAgdGhpcy4kb3ZlcmxheS5yZW1vdmVDbGFzcygnaW52aXNpYmxlJykuYWRkQ2xhc3MoJ3N1Ym1pdHRpbmcnKTtcblxuICAgIHNldFRpbWVvdXQoKCkgPT4ge1xuICAgICAgTW9kYWwuc2hvdygpO1xuXG4gICAgICB0aGlzLiRvdmVybGF5LnJlbW92ZUNsYXNzKCdzdWJtaXR0aW5nJyk7XG4gICAgfSwgMjAwMCk7XG4gIH0sXG4gIG5leHRDYXNlKCkge1xuICAgIHRoaXMuY2xvc2VNZW51KCk7XG4gICAgVmlld2VyLmdldE5leHRDYXNlKCk7XG4gIH0sXG4gIGxvZ291dCgpe1xuICAgIHRoaXMuY2xvc2VNZW51KCk7XG4gICAgTG9naW4ubG9nb3V0KCk7XG4gIH0sXG4gIGNsb3NlTWVudSgpIHtcbiAgICB0aGlzLiRvdmVybGF5LmFkZENsYXNzKCdpbnZpc2libGUnKTtcbiAgICB0aGlzLiRtZW51V3JhcHBlci5yZW1vdmVDbGFzcygnb3BlbmVkJyk7XG5cbiAgICBzZXRUaW1lb3V0KCgpID0+IHtcbiAgICAgIHRoaXMuJG1lbnVXcmFwcGVyLmFkZENsYXNzKCdpbnZpc2libGUnKTtcbiAgICB9LCAxMjAwKTtcbiAgfSxcbiAgaW5pdCgpIHtcbiAgICBNb2RhbC5pbml0KCk7XG4gICAgRXJyb3JNb2RhbC5pbml0KCk7XG5cbiAgICB0aGlzLiRoYW1idXJndWVyTWVudS5vbignY2xpY2snLCAoZXZlbnQpID0+IHtcbiAgICAgIGV2ZW50LnByZXZlbnREZWZhdWx0KCk7XG5cbiAgICAgIHRoaXMuJG92ZXJsYXkucmVtb3ZlQ2xhc3MoJ2ludmlzaWJsZScpO1xuICAgICAgdGhpcy4kbWVudVdyYXBwZXIucmVtb3ZlQ2xhc3MoJ2ludmlzaWJsZScpO1xuXG4gICAgICBzZXRUaW1lb3V0KCgpID0+IHtcbiAgICAgICAgdGhpcy4kbWVudVdyYXBwZXIuYWRkQ2xhc3MoJ29wZW5lZCcpO1xuICAgICAgICB0aGlzLiRvdmVybGF5LnJlbW92ZUNsYXNzKCdpbnZpc2libGUnKTtcbiAgICAgIH0sIDIwMCk7XG4gICAgfSk7XG5cbiAgICB0aGlzLiRtZW51V3JhcHBlci5vbignY2xpY2snLCAnYVtkYXRhLW1lbnVdJywgKGV2ZW50KSA9PiB7XG4gICAgICBjb25zdCAkZWxlbWVudCA9ICQoZXZlbnQuY3VycmVudFRhcmdldCk7XG4gICAgICBjb25zdCBtZW51ID0gJGVsZW1lbnQuYXR0cignZGF0YS1tZW51Jyk7XG5cbiAgICAgIGV2ZW50LnByZXZlbnREZWZhdWx0KCk7XG5cbiAgICAgIGlmIChtZW51KSB7XG4gICAgICAgIHRoaXNbbWVudV0oKTtcbiAgICAgIH1cbiAgICB9KTtcblxuICAgIHRoaXMuJG92ZXJsYXkub24oJ2NsaWNrJywgKGV2ZW50KSA9PiB7XG4gICAgICBpZiAodGhpcy4kbWVudVdyYXBwZXIuaGFzQ2xhc3MoJ29wZW5lZCcpKSB7XG4gICAgICAgIHRoaXMuY2xvc2VNZW51KCk7XG4gICAgICB9XG4gICAgfSk7XG4gIH1cbn1cbiJdfQ==
+},{"../errorModal/modal":20,"../login/login":22,"../modal/modal":24,"../viewer/viewer":30}],24:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -14929,7 +19462,7 @@ exports.default = {
   }
 };
 //# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIm1vZGFsLmpzIl0sIm5hbWVzIjpbIiRtb2RhbCIsIiQiLCIkb3ZlcmxheSIsImxvZ291dCIsInJlbW92ZUNsYXNzIiwiYWRkQ2xhc3MiLCJuZXh0Q2FzZSIsImhpZGUiLCJnZXROZXh0Q2FzZSIsInNob3ciLCJpbml0IiwiZmluZCIsIm9uIl0sIm1hcHBpbmdzIjoiOzs7Ozs7QUFBQTs7OztBQUNBOzs7Ozs7a0JBRWU7QUFDYkEsVUFBUUMsRUFBRSxRQUFGLENBREs7QUFFYkMsWUFBVUQsRUFBRSxrQkFBRixDQUZHO0FBR2JFLFFBSGEsb0JBR0o7QUFDUCxTQUFLSCxNQUFMLENBQVlJLFdBQVosQ0FBd0IsTUFBeEI7QUFDQSxTQUFLRixRQUFMLENBQWNHLFFBQWQsQ0FBdUIsV0FBdkI7O0FBRUEsb0JBQU1GLE1BQU47QUFDRCxHQVJZO0FBU2JHLFVBVGEsc0JBU0Y7QUFDVCxTQUFLQyxJQUFMOztBQUVBLHFCQUFPQyxXQUFQO0FBQ0QsR0FiWTtBQWNiQyxNQWRhLGtCQWNOO0FBQ0wsU0FBS1QsTUFBTCxDQUFZSyxRQUFaLENBQXFCLE1BQXJCO0FBQ0EsU0FBS0gsUUFBTCxDQUFjRSxXQUFkLENBQTBCLFdBQTFCO0FBQ0QsR0FqQlk7QUFrQmJHLE1BbEJhLGtCQWtCTjtBQUNMLFNBQUtQLE1BQUwsQ0FBWUksV0FBWixDQUF3QixNQUF4QjtBQUNBLFNBQUtGLFFBQUwsQ0FBY0csUUFBZCxDQUF1QixXQUF2QjtBQUNELEdBckJZO0FBc0JiSyxNQXRCYSxrQkFzQk47QUFBQTs7QUFDTCxTQUFLVixNQUFMLENBQVlXLElBQVosQ0FBaUIsU0FBakIsRUFBNEJDLEVBQTVCLENBQStCLE9BQS9CLEVBQXdDO0FBQUEsYUFBTSxNQUFLVCxNQUFMLEVBQU47QUFBQSxLQUF4QztBQUNBLFNBQUtILE1BQUwsQ0FBWVcsSUFBWixDQUFpQixZQUFqQixFQUErQkMsRUFBL0IsQ0FBa0MsT0FBbEMsRUFBMkM7QUFBQSxhQUFNLE1BQUtOLFFBQUwsRUFBTjtBQUFBLEtBQTNDO0FBQ0Q7QUF6QlksQyIsImZpbGUiOiJtb2RhbC5qcyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBMb2dpbiBmcm9tICcuLi9sb2dpbi9sb2dpbic7XG5pbXBvcnQgVmlld2VyIGZyb20gJy4uL3ZpZXdlci92aWV3ZXInO1xuXG5leHBvcnQgZGVmYXVsdCB7XG4gICRtb2RhbDogJCgnLm1vZGFsJyksXG4gICRvdmVybGF5OiAkKCcubG9hZGluZy1vdmVybGF5JyksXG4gIGxvZ291dCgpIHtcbiAgICB0aGlzLiRtb2RhbC5yZW1vdmVDbGFzcygnc2hvdycpO1xuICAgIHRoaXMuJG92ZXJsYXkuYWRkQ2xhc3MoJ2ludmlzaWJsZScpO1xuXG4gICAgTG9naW4ubG9nb3V0KCk7XG4gIH0sXG4gIG5leHRDYXNlKCkge1xuICAgIHRoaXMuaGlkZSgpO1xuXG4gICAgVmlld2VyLmdldE5leHRDYXNlKCk7XG4gIH0sXG4gIHNob3coKSB7XG4gICAgdGhpcy4kbW9kYWwuYWRkQ2xhc3MoJ3Nob3cnKTtcbiAgICB0aGlzLiRvdmVybGF5LnJlbW92ZUNsYXNzKCdpbnZpc2libGUnKTtcbiAgfSxcbiAgaGlkZSgpIHtcbiAgICB0aGlzLiRtb2RhbC5yZW1vdmVDbGFzcygnc2hvdycpO1xuICAgIHRoaXMuJG92ZXJsYXkuYWRkQ2xhc3MoJ2ludmlzaWJsZScpO1xuICB9LFxuICBpbml0KCkge1xuICAgIHRoaXMuJG1vZGFsLmZpbmQoJy5sb2dvdXQnKS5vbignY2xpY2snLCAoKSA9PiB0aGlzLmxvZ291dCgpKTtcbiAgICB0aGlzLiRtb2RhbC5maW5kKCcubmV4dC1jYXNlJykub24oJ2NsaWNrJywgKCkgPT4gdGhpcy5uZXh0Q2FzZSgpKTtcbiAgfVxufVxuIl19
-},{"../login/login":20,"../viewer/viewer":28}],23:[function(require,module,exports){
+},{"../login/login":22,"../viewer/viewer":30}],25:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -15203,7 +19736,7 @@ var Signup = function () {
 
 exports.default = Signup;
 //# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNpZ251cC5qcyJdLCJuYW1lcyI6WyJTaWdudXAiLCJudW1PZkFkamVjdGl2ZXMiLCJudW1PZkFuaW1hbHMiLCJuYW1lIiwiaW5mbyIsInRoZW4iLCJkb2MiLCJkb2NfY291bnQiLCJyYW5kIiwiTWF0aCIsImZsb29yIiwicmFuZG9tIiwiZ2V0IiwiY2F0Y2giLCJlcnIiLCJudW0iLCJuYW1lcyIsImNvbnNvbGUiLCJsb2ciLCJuZXh0IiwiZ2V0UmFuZG9tVXNlcm5hbWUiLCJhY2NlcHQiLCJmb3JFYWNoIiwibiIsInVzZXIiLCJwdXNoIiwibGVuZ3RoIiwiaWQiLCJkYXRhIiwiUHJvbWlzZSIsInJlc29sdmUiLCJyZWplY3QiLCIkIiwiYWpheCIsInVybCIsImFubm90YXRvclVSTCIsInR5cGUiLCJkYXRhVHlwZSIsInN1Y2Nlc3MiLCJyZXMiLCJlcnJvciIsIiRsb2FkaW5nIiwiJHNpZ251cCIsIiRvdmVybGF5IiwicmVtb3ZlQ2xhc3MiLCJhZGRDbGFzcyIsImdldFJhbmRvbVVzZXJuYW1lcyIsImFwcGVuZCIsInJhZGlvbG9naXN0IiwiY2hhbmdlIiwiaXNDaGVja2VkIiwiaXMiLCJpc1JhZGlvbG9naXN0IiwidmFsIiwiaGFzQ2xhc3MiLCJvZmYiLCJvbiIsImV2ZW50IiwicHJldmVudERlZmF1bHQiLCJ1c2VybmFtZSIsInRleHQiLCJ5ZWFyc09mRXhwZXJpZW5jZSIsInNwZWNpYWxpdHkiLCJlbWFpbCIsIl9pZCIsInB1dCIsImluaXRWaWV3ZXIiXSwibWFwcGluZ3MiOiI7Ozs7Ozs7O0FBQUE7O0FBQ0E7Ozs7Ozs7O0lBRU1BLE07QUFFSixvQkFBZTtBQUFBO0FBRWQ7Ozs7d0NBRW9CO0FBQ25CLFVBQUlDLGtCQUFrQixDQUF0QjtBQUNBLFVBQUlDLGVBQWUsQ0FBbkI7QUFDQSxVQUFJQyxhQUFKOztBQUVBLGFBQU8saUJBQWFDLElBQWIsR0FBb0JDLElBQXBCLENBQXlCLFVBQUNDLEdBQUQsRUFBUztBQUN2Q0wsMEJBQWtCSyxJQUFJQyxTQUF0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QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBLFlBQU1uQyxPQUFPO0FBQ1hvQyxlQUFLTCxRQURNO0FBRVhBLDRCQUZXO0FBR1g7QUFDQVA7QUFKVyxTQUFiOztBQU9BLFlBQUdVLFVBQUgsRUFBYztBQUNabEMsZUFBS2tDLFVBQUwsR0FBa0JBLFVBQWxCO0FBQ0Q7O0FBRUQsWUFBR0QsaUJBQUgsRUFBcUI7QUFDbkJqQyxlQUFLaUMsaUJBQUwsR0FBeUJBLGlCQUF6QjtBQUNEOztBQUVELFlBQUdFLEtBQUgsRUFBUztBQUNQbkMsZUFBS21DLEtBQUwsR0FBYUEsS0FBYjtBQUNEOztBQUVEOUMsZ0JBQVFDLEdBQVIsQ0FBWSxPQUFaLEVBQXFCVSxJQUFyQjtBQUNBLHlCQUFhcUMsR0FBYixDQUFpQnJDLElBQWpCLEVBQXVCdkIsSUFBdkIsQ0FBNEIsWUFBTTtBQUNoQ29DLG1CQUFTSSxRQUFULENBQWtCLFdBQWxCO0FBQ0FILGtCQUFRRyxRQUFSLENBQWlCLFdBQWpCOztBQUVBLDJCQUFPcUIsVUFBUDtBQUNELFNBTEQ7O0FBT0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDRCxPQXJHRDtBQXNHRDs7Ozs7O2tCQUdZbEUsTSIsImZpbGUiOiJzaWdudXAuanMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQge2FkamVjdGl2ZXNEQiwgYW5pbWFsc0RCLCBhbm5vdGF0b3JzREIsIGFubm90YXRvcnNVUkx9IGZyb20gJy4uL2RiL2RiJztcbmltcG9ydCBWaWV3ZXIgZnJvbSAnLi4vdmlld2VyL3ZpZXdlcic7XG5cbmNsYXNzIFNpZ251cCB7XG5cbiAgY29uc3RydWN0b3IgKCkge1xuXG4gIH1cblxuICBnZXRSYW5kb21Vc2VybmFtZSAoKSB7XG4gICAgbGV0IG51bU9mQWRqZWN0aXZlcyA9IDA7XG4gICAgbGV0IG51bU9mQW5pbWFscyA9IDA7XG4gICAgbGV0IG5hbWU7XG5cbiAgICByZXR1cm4gYWRqZWN0aXZlc0RCLmluZm8oKS50aGVuKChkb2MpID0+IHtcbiAgICAgIG51bU9mQWRqZWN0aXZlcyA9IGRvYy5kb2NfY291bnQ7XG4gICAgICAvLyBjb25zb2xlLmxvZygnbnVtT2ZBZGplY3RpdmVzJywgbnVtT2ZBZGplY3RpdmVzKTtcbiAgICAgIGNvbnN0IHJhbmQgPSBNYXRoLmZsb29yKG51bU9mQWRqZWN0aXZlcypNYXRoLnJhbmRvbSgpKTtcbiAgICAgIHJldHVybiBhZGplY3RpdmVzREIuZ2V0KHJhbmQpO1xuICAgIH0pLnRoZW4oKGRvYykgPT4ge1xuICAgICAgLy8gY29uc29sZS5sb2coZG9jLm5hbWUpO1xuICAgICAgbmFtZSA9IGRvYy5uYW1lO1xuICAgICAgcmV0dXJuIGFuaW1hbHNEQi5pbmZvKCk7XG4gICAgfSkudGhlbigoZG9jKSA9PiB7XG4gICAgICBudW1PZkFuaW1hbHMgPSBkb2MuZG9jX2NvdW50O1xuICAgICAgLy8gY29uc29sZS5sb2coJ251bU9mQW5pbWFscycsIG51bU9mQW5pbWFscyk7XG4gICAgICBjb25zdCByYW5kID0gTWF0aC5mbG9vcihudW1PZkFuaW1hbHMqTWF0aC5yYW5kb20oKSk7XG4gICAgICByZXR1cm4gYW5pbWFsc0RCLmdldChyYW5kKTtcbiAgICB9KS50aGVuKChkb2MpID0+IHtcbiAgICAgIHJldHVybiBuYW1lICsgYF8ke2RvYy5uYW1lfWA7XG4gICAgfSkuY2F0Y2goKGVycikgPT4ge1xuICAgICAgdGhyb3cgZXJyO1xuICAgIH0pO1xuICB9XG5cbiAgZ2V0UmFuZG9tVXNlcm5hbWVzIChudW09MCkge1xuICAgIGNvbnN0IG5hbWVzID0gW107XG4gICAgY29uc29sZS5sb2coJ251bTonLCBudW0pO1xuXG4gICAgY29uc3QgbmV4dCA9ICgpID0+IHtcbiAgICAgIHJldHVybiB0aGlzLmdldFJhbmRvbVVzZXJuYW1lKCkudGhlbigobmFtZSkgPT4ge1xuICAgICAgICBsZXQgYWNjZXB0ID0gdHJ1ZTtcbiAgICAgICAgbmFtZXMuZm9yRWFjaCgobikgPT4ge1xuICAgICAgICAgIGlmKG4gPT09IG5hbWUpe1xuICAgICAgICAgICAgYWNjZXB0ID0gZmFsc2U7XG4gICAgICAgICAgfVxuICAgICAgICB9KTtcblxuICAgICAgICBpZihhY2NlcHQpe1xuICAgICAgICAgIHJldHVybiBhbm5vdGF0b3JzREIuZ2V0KG5hbWUpLnRoZW4oKHVzZXIpID0+IHtcbiAgICAgICAgICAgIGNvbnNvbGUubG9nKCd1c2VybmFtZScsIG5hbWUsICdhbHJlYWR5IGV4aXN0IGluIHRoZSBkYXRhYmFzZScpO1xuXG4gICAgICAgICAgICByZXR1cm4gbmV4dCgpO1xuICAgICAgICAgIH0pLmNhdGNoKChlcnIpID0+IHtcbiAgICAgICAgICAgIG5hbWVzLnB1c2gobmFtZSk7XG5cbiAgICAgICAgICAgIGlmKG5hbWVzLmxlbmd0aCAhPT0gbnVtKXtcbiAgICAgICAgICAgICAgcmV0dXJuIG5leHQoKTtcbiAgICAgICAgICAgIH1cbiAgICAgICAgICB9KTtcbiAgICAgICAgfWVsc2V7XG4gICAgICAgICAgcmV0dXJuIG5leHQoKTtcbiAgICAgICAgfVxuICAgICAgfSk7XG4gICAgfVxuXG4gICAgcmV0dXJuIG5leHQoKS50aGVuKCgpID0+IHtcbiAgICAgIHJldHVybiBuYW1lcztcbiAgICB9KTtcbiAgfVxuXG4gIGNyZWF0ZVVzZXIgKGlkLCBkYXRhKSB7XG4gICAgcmV0dXJuIG5ldyBQcm9taXNlKChyZXNvbHZlLCByZWplY3QpID0+IHtcbiAgICAgICQuYWpheCh7XG4gICAgICAgIHVybDogYCR7YW5ub3RhdG9yVVJMfS8ke2lkfWAsXG4gICAgICAgIHR5cGU6ICdQVVQnLFxuICAgICAgICBkYXRhVHlwZTogJ2pzb24nLFxuICAgICAgICBkYXRhOiBkYXRhLFxuICAgICAgICBzdWNjZXNzOiBmdW5jdGlvbihyZXMpe1xuICAgICAgICAgIC8vICRsb2FkaW5nSW1nLmFkZENsYXNzKCdpbnZpc2libGUnKTtcbiAgICAgICAgICAvLyAkc2lnbnVwV3JhcHBlci5hZGRDbGFzcygnaW52aXNpYmxlJyk7XG4gICAgICAgICAgLy8gVmlld2VyLmluaXRWaWV3ZXIoKTtcbiAgICAgICAgICByZXNvbHZlKHJlcyk7XG4gICAgICAgIH0sXG4gICAgICAgIGVycm9yOiBmdW5jdGlvbihlcnIpe1xuICAgICAgICAgIGNvbnNvbGUubG9nKGVycik7XG4gICAgICAgICAgcmVqZWN0KGVycik7XG4gICAgICAgIH1cbiAgICAgIH0pO1xuICAgIH0pO1xuICB9XG5cbiAgaW5pdCAoKSB7XG4gICAgY29uc29sZS5sb2coJ1NpZ251cC5pbml0KCkgaXMgY2FsbGVkJyk7XG4gICAgdmFyICRsb2FkaW5nID0gJCgnLnNpZ251cC13cmFwcGVyIGZvcm0gYnV0dG9uLnN1Ym1pdCBpbWcubG9hZGluZycpO1xuICAgIHZhciAkc2lnbnVwID0gJCgnLnNpZ251cC13cmFwcGVyJyk7XG4gICAgdmFyICRvdmVybGF5ID0gJCgnLmxvYWRpbmctb3ZlcmxheScpO1xuXG4gICAgJG92ZXJsYXkucmVtb3ZlQ2xhc3MoJ2ludmlzaWJsZScpLmFkZENsYXNzKCdsb2FkaW5nJyk7XG5cbiAgICB0aGlzLmdldFJhbmRvbVVzZXJuYW1lcyg0KS50aGVuKChuYW1lcykgPT4ge1xuICAgICAgLy8gY29uc29sZS5sb2coJ3VzZXJuYW1lczonLCBuYW1lcyk7XG4gICAgICAkb3ZlcmxheS5yZW1vdmVDbGFzcygnbG9hZGluZycpLmFkZENsYXNzKCdpbnZpc2libGUnKTtcbiAgICAgICRzaWdudXAucmVtb3ZlQ2xhc3MoJ2ludmlzaWJsZScpO1xuXG4gICAgICAkKCcjc2lnbnVwLW5hbWUtc2VsZWN0JykuYXBwZW5kKGA8b3B0aW9uIHZhbHVlPSR7bmFtZXNbMF19PiR7bmFtZXNbMF19PC9vcHRpb24+YCk7XG4gICAgICAkKCcjc2lnbnVwLW5hbWUtc2VsZWN0JykuYXBwZW5kKGA8b3B0aW9uIHZhbHVlPSR7bmFtZXNbMV19PiR7bmFtZXNbMV19PC9vcHRpb24+YCk7XG4gICAgICAkKCcjc2lnbnVwLW5hbWUtc2VsZWN0JykuYXBwZW5kKGA8b3B0aW9uIHZhbHVlPSR7bmFtZXNbMl19PiR7bmFtZXNbMl19PC9vcHRpb24+YCk7XG4gICAgICAkKCcjc2lnbnVwLW5hbWUtc2VsZWN0JykuYXBwZW5kKGA8b3B0aW9uIHZhbHVlPSR7bmFtZXNbM119PiR7bmFtZXNbM119PC9vcHRpb24+YCk7XG4gICAgfSk7XG5cbiAgICBjb25zdCByYWRpb2xvZ2lzdCA9ICQoJ2lucHV0W25hbWU9XCJpcy1yYWRpb2xvZ2lzdFwiXScpO1xuICAgICQocmFkaW9sb2dpc3QpLmNoYW5nZSgoKSA9PiB7XG4gICAgICBjb25zdCBpc0NoZWNrZWQgPSByYWRpb2xvZ2lzdC5pcygnOmNoZWNrZWQnKTtcbiAgICAgIC8vIGNvbnNvbGUubG9nKCdpc0NoZWNrZWQ6JywgaXNDaGVja2VkKTtcbiAgICAgIGlmKGlzQ2hlY2tlZCkge1xuICAgICAgICBjb25zdCBpc1JhZGlvbG9naXN0ID0gKCQoJ2lucHV0W25hbWU9XCJpcy1yYWRpb2xvZ2lzdFwiXTpjaGVja2VkJykudmFsKCkgPT09ICd5ZXMnKTtcbiAgICAgICAgLy8gY29uc29sZS5sb2coJ2lzUmFkaW9sb2dpc3Q6JywgaXNSYWRpb2xvZ2lzdCk7XG4gICAgICAgIGlmKGlzUmFkaW9sb2dpc3Qpe1xuICAgICAgICAgIGlmKCEkKCcjc2lnbnVwLXNwZWNpYWxpdHknKS5oYXNDbGFzcygnaW52aXNpYmxlJykpe1xuICAgICAgICAgICAgJCgnI3NpZ251cC1zcGVjaWFsaXR5JykuYWRkQ2xhc3MoJ2ludmlzaWJsZScpO1xuICAgICAgICAgIH1cbiAgICAgICAgICAkKCcjc2lnbnVwLXllYXJzLW9mLWV4cGVyaWVuY2UnKS5yZW1vdmVDbGFzcygnaW52aXNpYmxlJyk7XG4gICAgICAgIH1lbHNle1xuICAgICAgICAgIGlmKCEkKCcjc2lnbnVwLXllYXJzLW9mLWV4cGVyaWVuY2UnKS5oYXNDbGFzcygnaW52aXNpYmxlJykpe1xuICAgICAgICAgICAgJCgnI3NpZ251cC15ZWFycy1vZi1leHBlcmllbmNlJykuYWRkQ2xhc3MoJ2ludmlzaWJsZScpO1xuICAgICAgICAgIH1cbiAgICAgICAgICAkKCcjc2lnbnVwLXNwZWNpYWxpdHknKS5yZW1vdmVDbGFzcygnaW52aXNpYmxlJyk7XG4gICAgICAgIH1cbiAgICAgIH1cbiAgICB9KTtcblxuXG4gICAgLy8gJCgnaW5wdXRbbmFtZT1cInllYXJzLW9mLWV4cGVyaWVuY2VcIl0nKS5mb2N1cyhmdW5jdGlvbigpIHtcbiAgICAvLyAgIGNvbnNvbGUubG9nKCd5ZWFycyBvZiBleHAnKTtcbiAgICAvLyAgIGlmKCEkKCcuc2lnbnVwLXdyYXBwZXIgLmVycm9yJykuaGFzQ2xhc3MoJ2ludmlzaWJsZScpKXtcbiAgICAvLyAgICAgJCgnLnNpZ251cC13cmFwcGVyIC5lcnJvcicpLnRleHQoJycpO1xuICAgIC8vICAgICAkKCcuc2lnbnVwLXdyYXBwZXIgLmVycm9yJykuYWRkQ2xhc3MoJ2ludmlzaWJsZScpO1xuICAgIC8vICAgfVxuICAgIC8vIH0pO1xuXG4gICAgJCgnLnNpZ251cC13cmFwcGVyIGZvcm0nKS5vZmYoJ3N1Ym1pdCcpLm9uKCdzdWJtaXQnLCBmdW5jdGlvbiAoZXZlbnQpIHtcbiAgICAgIGV2ZW50LnByZXZlbnREZWZhdWx0KCk7XG5cbiAgICAgICRsb2FkaW5nLnJlbW92ZUNsYXNzKCdpbnZpc2libGUnKTtcbiAgICAgIC8vICQoJy5zaWdudXAtd3JhcHBlciAuZXJyb3InKS5hZGRDbGFzcygnaW52aXNpYmxlJyk7XG5cbiAgICAgIGNvbnN0IHVzZXJuYW1lID0gJCgnI3NpZ251cC1uYW1lLXNlbGVjdCBvcHRpb246c2VsZWN0ZWQnKS50ZXh0KCk7XG4gICAgICAvLyBjb25zdCB1c2VybmFtZSA9ICQoJ2lucHV0W25hbWU9XCJ1c2VybmFtZVwiXScpLnZhbCgpO1xuICAgICAgLy8gY29uc3QgcGFzc3dvcmQgPSAkKCdpbnB1dFtuYW1lPVwicGFzc3dvcmRcIl0nKS52YWwoKTtcbiAgICAgIC8vIGNvbnN0IGNvbmZpcm1QYXNzd29yZCA9ICQoJ2lucHV0W25hbWU9XCJjb25maXJtLXBhc3N3b3JkXCJdJykudmFsKCk7XG4gICAgICBjb25zdCBpc1JhZGlvbG9naXN0ID0gKCQoJ2lucHV0W25hbWU9XCJpcy1yYWRpb2xvZ2lzdFwiXTpjaGVja2VkJykudmFsKCkgPT09ICd5ZXMnKTtcbiAgICAgIC8vIGNvbnN0IGlzQ2hlY2tlZCA9ICQoJ2lucHV0OnJhZGlvW25hbWU9XCJpcy1yYWRpb2xvZ2lzdFwiXScpLmlzKCc6Y2hlY2tlZCcpO1xuICAgICAgLy8gY29uc3QgaXNSYWRpb2xvZ2lzdDIgPSAkKCcjcmFkaW9sb2dpc3Qtbm8nKS52YWwoKTtcbiAgICAgIGxldCB5ZWFyc09mRXhwZXJpZW5jZTtcbiAgICAgIGxldCBzcGVjaWFsaXR5O1xuICAgICAgaWYoaXNSYWRpb2xvZ2lzdCl7XG4gICAgICAgIHllYXJzT2ZFeHBlcmllbmNlID0gJCgnI3NpZ251cC15ZWFycy1vZi1leHBlcmllbmNlIG9wdGlvbjpzZWxlY3RlZCcpLnZhbCgpO1xuICAgICAgfWVsc2V7XG4gICAgICAgIHNwZWNpYWxpdHkgPSAkKCcjc2lnbnVwLXNwZWNpYWxpdHkgb3B0aW9uOnNlbGVjdGVkJykudmFsKCk7XG4gICAgICB9XG5cbiAgICAgIGNvbnN0IGVtYWlsID0gJCgnI3NpZ251cC1lbWFpbCcpLnZhbCgpO1xuICAgICAgY29uc29sZS5sb2coJ2VtYWlsOicsIGVtYWlsKTtcblxuICAgICAgLy8gaWYoaXNSYWRpb2xvZ2lzdCAmJiBpc05hTih5ZWFyc09mRXhwZXJpZW5jZSkpe1xuICAgICAgLy8gICAgICQoJy5zaWdudXAtd3JhcHBlciAuZXJyb3InKS5yZW1vdmVDbGFzcygnaW52aXNpYmxlJyk7XG4gICAgICAvLyAgICAgJCgnLnNpZ251cC13cmFwcGVyIC5lcnJvcicpLnRleHQoJ1wiWWVhcnMgb2YgZXhwcmllbmNlXCIgbXVzdCBiZSBhIG51bWJlcicpO1xuICAgICAgLy9cbiAgICAgIC8vICAgICAkKCdpbnB1dFtuYW1lPVwieWVhcnMtb2YtZXhwZXJpZW5jZVwiXScpLnZhbCgnJyk7XG4gICAgICAvL1xuICAgICAgLy8gICAgICQoJyNzaWdudXAtYnV0dG9uJykuYmx1cigpO1xuICAgICAgLy9cbiAgICAgIC8vICAgICAkbG9hZGluZ0ltZy5hZGRDbGFzcygnaW52aXNpYmxlJyk7XG4gICAgICAvL1xuICAgICAgLy8gICAgIHJldHVybiBmYWxzZTtcbiAgICAgIC8vIH1cblxuICAgICAgLy8gdmFyIHZhbHVlcyA9ICQodGhpcykuc2VyaWFsaXplQXJyYXkoKTtcbiAgICAgIC8vIGNvbnNvbGUubG9nKCd2YWx1ZXMnLCB2YWx1ZXMpO1xuXG4gICAgICAvLyBpZihwYXNzd29yZCAhPT0gY29uZmlybVBhc3N3b3JkKXtcbiAgICAgIC8vICAgJCgnLnNpZ251cC13cmFwcGVyIC5lcnJvcicpLnJlbW92ZUNsYXNzKCdpbnZpc2libGUnKTtcbiAgICAgIC8vICAgJCgnLnNpZ251cC13cmFwcGVyIC5lcnJvcicpLnRleHQoJ1Bhc3N3b3JkcyBkb25cXCd0IG1hdGNoJyk7XG4gICAgICAvL1xuICAgICAgLy8gICBjb25zdCBwYXNzd29yZCA9ICQoJyNzaWdudXAtcGFzc3dvcmQnKS52YWwoJycpO1xuICAgICAgLy8gICBjb25zdCBjb25maXJtUGFzc3dvcmQgPSAkKCcjc2lnbnVwLWNvbmZpcm0tcGFzc3dvcmQnKS52YWwoJycpO1xuICAgICAgLy9cbiAgICAgIC8vICAgJCgnI3NpZ251cC1idXR0b24nKS5ibHVyKCk7XG4gICAgICAvL1xuICAgICAgLy8gICAkbG9hZGluZ0ltZy5hZGRDbGFzcygnaW52aXNpYmxlJyk7XG4gICAgICAvL1xuICAgICAgLy8gfVxuXG4gICAgICBjb25zdCBkYXRhID0ge1xuICAgICAgICBfaWQ6IHVzZXJuYW1lLFxuICAgICAgICB1c2VybmFtZSxcbiAgICAgICAgLy8gcGFzc3dvcmQsXG4gICAgICAgIGlzUmFkaW9sb2dpc3QsXG4gICAgICB9XG5cbiAgICAgIGlmKHNwZWNpYWxpdHkpe1xuICAgICAgICBkYXRhLnNwZWNpYWxpdHkgPSBzcGVjaWFsaXR5O1xuICAgICAgfVxuXG4gICAgICBpZih5ZWFyc09mRXhwZXJpZW5jZSl7XG4gICAgICAgIGRhdGEueWVhcnNPZkV4cGVyaWVuY2UgPSB5ZWFyc09mRXhwZXJpZW5jZTtcbiAgICAgIH1cblxuICAgICAgaWYoZW1haWwpe1xuICAgICAgICBkYXRhLmVtYWlsID0gZW1haWw7XG4gICAgICB9XG5cbiAgICAgIGNvbnNvbGUubG9nKCdkYXRhOicsIGRhdGEpO1xuICAgICAgYW5ub3RhdG9yc0RCLnB1dChkYXRhKS50aGVuKCgpID0+IHtcbiAgICAgICAgJGxvYWRpbmcuYWRkQ2xhc3MoJ2ludmlzaWJsZScpO1xuICAgICAgICAkc2lnbnVwLmFkZENsYXNzKCdpbnZpc2libGUnKTtcblxuICAgICAgICBWaWV3ZXIuaW5pdFZpZXdlcigpO1xuICAgICAgfSk7XG5cbiAgICAgIC8vIGdldFV1aWQoKS50aGVuKChpZCkgPT4ge1xuICAgICAgLy8gICBjb25zb2xlLmxvZygnaWQ6JywgaWQpO1xuICAgICAgLy8gICByZXR1cm4gY3JlYXRlVXNlcihpZCwgZGF0YSk7XG4gICAgICAvLyB9KS50aGVuKChyZXMpID0+IHtcbiAgICAgIC8vICAgY29uc29sZS5sb2coJ3JlczonLCByZXMpO1xuICAgICAgLy8gfSlcblxuICAgICAgLy8gICAvLyBNb2NraW5nIGxvZ2luXG4gICAgICAvLyAgIHNldFRpbWVvdXQoZnVuY3Rpb24gKCkge1xuICAgICAgLy8gICAgICRsb2FkaW5nSW1nLmFkZENsYXNzKCdpbnZpc2libGUnKTtcbiAgICAgIC8vICAgICAkbG9naW5XcmFwcGVyLmFkZENsYXNzKCdpbnZpc2libGUnKTtcbiAgICAgIC8vXG4gICAgICAvLyAgICAgVmlld2VyLmluaXRWaWV3ZXIoKTtcbiAgICAgIC8vICAgfSwgMTAwMCk7XG4gICAgICAvLyB9KTtcbiAgICAgIC8vXG4gICAgICAvLyAkKCcjb3Blbi1zaWdudXAtYnRuJykuY2xpY2soZnVuY3Rpb24oZXZlbnQpIHtcbiAgICAgIC8vICAgZXZlbnQucHJldmVudERlZmF1bHQoKTtcbiAgICAgIC8vICAgJGxvZ2luV3JhcHBlci5hZGRDbGFzcygnaW52aXNpYmxlJyk7XG4gICAgICAvL1xuICAgICAgLy8gICBTaWdudXAuaW5pdFNpZ251cCgpO1xuICAgIH0pO1xuICB9XG59XG5cbmV4cG9ydCBkZWZhdWx0IFNpZ251cDtcbiJdfQ==
-},{"../db/db":18,"../viewer/viewer":28}],24:[function(require,module,exports){
+},{"../db/db":19,"../viewer/viewer":30}],26:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -15217,6 +19750,16 @@ var _menu2 = _interopRequireDefault(_menu);
 var _modal = require('../modal/modal');
 
 var _modal2 = _interopRequireDefault(_modal);
+
+var _modal3 = require('../errorModal/modal');
+
+var _modal4 = _interopRequireDefault(_modal3);
+
+var _db = require('../db/db');
+
+var _moment = require('moment');
+
+var _moment2 = _interopRequireDefault(_moment);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -15235,18 +19778,44 @@ exports.default = {
     cornerstone.updateImage(this.$element);
   },
 
+
   save: function save() {
     var _this = this;
 
     _menu2.default.closeMenu();
     this.$overlay.removeClass('invisible').addClass('submitting');
 
-    setTimeout(function () {
-      _modal2.default.show();
+    var lengths = cornerstoneTools.getToolState(this.$element, 'length');
+    console.log('lengths:', lengths);
+    if (!lengths) {
+      // console.log('ErrorModal', ErrorModal);
+      _modal4.default.show();
+      this.$overlay.removeClass('submitting');
+      return;
+    }
 
+    (0, _db.getUUID)().then(function (uuid) {
+      var doc = {
+        '_id': uuid,
+        'length': lengths.data[0].length,
+        'annotator': $('#login-username').val(),
+        'date': (0, _moment2.default)().unix(),
+        'userAgent': navigator.userAgent
+      };
+      console.log('doc:', doc);
+      return _db.measurementsDB.put(doc);
+    }).then(function () {
+      _modal2.default.show();
       _this.$overlay.removeClass('submitting');
-    }, 2000);
+    });
+
+    // setTimeout(() => {
+    //   Modal.show();
+    //
+    //    this.$overlay.removeClass('submitting');
+    // }, 2000);
   },
+
   initCommands: function initCommands() {
     var _this2 = this;
 
@@ -15265,8 +19834,8 @@ exports.default = {
     });
   }
 };
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNvbW1hbmRzLmpzIl0sIm5hbWVzIjpbImNvbW1hbmRTZWxlY3RvciIsIiRvdmVybGF5IiwiJCIsImNsZWFyQWxsIiwiZW5hYmxlZEVsZW1ldCIsImNvcm5lcnN0b25lIiwiZ2V0RW5hYmxlZEVsZW1lbnQiLCIkZWxlbWVudCIsInZpZXdwb3J0IiwiZ2V0Vmlld3BvcnQiLCJ2b2kiLCJ3aW5kb3dXaWR0aCIsImltYWdlIiwid2luZG93Q2VudGVyIiwic2V0Vmlld3BvcnQiLCJjb3JuZXJzdG9uZVRvb2xzIiwiZ2xvYmFsSW1hZ2VJZFNwZWNpZmljVG9vbFN0YXRlTWFuYWdlciIsImNsZWFyIiwidXBkYXRlSW1hZ2UiLCJzYXZlIiwiY2xvc2VNZW51IiwicmVtb3ZlQ2xhc3MiLCJhZGRDbGFzcyIsInNldFRpbWVvdXQiLCJzaG93IiwiaW5pdENvbW1hbmRzIiwib24iLCJldmVudCIsImN1cnJlbnRUYXJnZXQiLCIkd3JhcHBlciIsInBhcmVudCIsInRvb2wiLCJhdHRyIl0sIm1hcHBpbmdzIjoiOzs7Ozs7QUFBQTs7OztBQUNBOzs7Ozs7a0JBRWU7QUFDYkEsbUJBQWlCLGVBREo7QUFFYkMsWUFBVUMsRUFBRSxrQkFBRixDQUZHO0FBR2JDLFVBSGEsc0JBR0Y7QUFDVCxRQUFNQyxnQkFBZ0JDLFlBQVlDLGlCQUFaLENBQThCLEtBQUtDLFFBQW5DLENBQXRCO0FBQ0EsUUFBTUMsV0FBV0gsWUFBWUksV0FBWixDQUF3QixLQUFLRixRQUE3QixDQUFqQjs7QUFFQUMsYUFBU0UsR0FBVCxDQUFhQyxXQUFiLEdBQTJCUCxjQUFjUSxLQUFkLENBQW9CRCxXQUEvQztBQUNBSCxhQUFTRSxHQUFULENBQWFHLFlBQWIsR0FBNEJULGNBQWNRLEtBQWQsQ0FBb0JDLFlBQWhEO0FBQ0FSLGdCQUFZUyxXQUFaLENBQXdCLEtBQUtQLFFBQTdCLEVBQXVDQyxRQUF2Qzs7QUFFQU8scUJBQWlCQyxxQ0FBakIsQ0FBdURDLEtBQXZELENBQTZELEtBQUtWLFFBQWxFO0FBQ0FGLGdCQUFZYSxXQUFaLENBQXdCLEtBQUtYLFFBQTdCO0FBQ0QsR0FiWTs7QUFjYlksUUFBTSxnQkFBWTtBQUFBOztBQUNoQixtQkFBS0MsU0FBTDtBQUNBLFNBQUtuQixRQUFMLENBQWNvQixXQUFkLENBQTBCLFdBQTFCLEVBQXVDQyxRQUF2QyxDQUFnRCxZQUFoRDs7QUFFQUMsZUFBVyxZQUFNO0FBQ2Ysc0JBQU1DLElBQU47O0FBRUMsWUFBS3ZCLFFBQUwsQ0FBY29CLFdBQWQsQ0FBMEIsWUFBMUI7QUFDRixLQUpELEVBSUcsSUFKSDtBQUtELEdBdkJZO0FBd0JiSSxjQXhCYSwwQkF3QkU7QUFBQTs7QUFDYnZCLE1BQUUsS0FBS0YsZUFBUCxFQUF3QjBCLEVBQXhCLENBQTJCLE9BQTNCLEVBQW9DLGlCQUFwQyxFQUF1RCxpQkFBUztBQUM5RCxVQUFNbkIsV0FBV0wsRUFBRXlCLE1BQU1DLGFBQVIsQ0FBakI7QUFDQSxVQUFNQyxXQUFXdEIsU0FBU3VCLE1BQVQsRUFBakI7QUFDQSxVQUFNQyxPQUFPeEIsU0FBU3lCLElBQVQsQ0FBYyxjQUFkLENBQWI7O0FBRUEsYUFBS0QsSUFBTDs7QUFFQUYsZUFBU1AsUUFBVCxDQUFrQixRQUFsQjs7QUFFQUMsaUJBQVcsWUFBVztBQUNwQk0saUJBQVNSLFdBQVQsQ0FBcUIsUUFBckI7QUFDRCxPQUZELEVBRUcsR0FGSDtBQUdELEtBWkQ7QUFhRDtBQXRDWSxDIiwiZmlsZSI6ImNvbW1hbmRzLmpzIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IE1lbnUgZnJvbSAnLi4vbWVudS9tZW51J1xuaW1wb3J0IE1vZGFsIGZyb20gJy4uL21vZGFsL21vZGFsJ1xuXG5leHBvcnQgZGVmYXVsdCB7XG4gIGNvbW1hbmRTZWxlY3RvcjogJy52aWV3ZXItdG9vbHMnLFxuICAkb3ZlcmxheTogJCgnLmxvYWRpbmctb3ZlcmxheScpLFxuICBjbGVhckFsbCgpIHtcbiAgICBjb25zdCBlbmFibGVkRWxlbWV0ID0gY29ybmVyc3RvbmUuZ2V0RW5hYmxlZEVsZW1lbnQodGhpcy4kZWxlbWVudCk7XG4gICAgY29uc3Qgdmlld3BvcnQgPSBjb3JuZXJzdG9uZS5nZXRWaWV3cG9ydCh0aGlzLiRlbGVtZW50KTtcblxuICAgIHZpZXdwb3J0LnZvaS53aW5kb3dXaWR0aCA9IGVuYWJsZWRFbGVtZXQuaW1hZ2Uud2luZG93V2lkdGg7XG4gICAgdmlld3BvcnQudm9pLndpbmRvd0NlbnRlciA9IGVuYWJsZWRFbGVtZXQuaW1hZ2Uud2luZG93Q2VudGVyO1xuICAgIGNvcm5lcnN0b25lLnNldFZpZXdwb3J0KHRoaXMuJGVsZW1lbnQsIHZpZXdwb3J0KTtcblxuICAgIGNvcm5lcnN0b25lVG9vbHMuZ2xvYmFsSW1hZ2VJZFNwZWNpZmljVG9vbFN0YXRlTWFuYWdlci5jbGVhcih0aGlzLiRlbGVtZW50KTtcbiAgICBjb3JuZXJzdG9uZS51cGRhdGVJbWFnZSh0aGlzLiRlbGVtZW50KTtcbiAgfSxcbiAgc2F2ZTogZnVuY3Rpb24gKCkge1xuICAgIE1lbnUuY2xvc2VNZW51KCk7XG4gICAgdGhpcy4kb3ZlcmxheS5yZW1vdmVDbGFzcygnaW52aXNpYmxlJykuYWRkQ2xhc3MoJ3N1Ym1pdHRpbmcnKTtcblxuICAgIHNldFRpbWVvdXQoKCkgPT4ge1xuICAgICAgTW9kYWwuc2hvdygpO1xuXG4gICAgICAgdGhpcy4kb3ZlcmxheS5yZW1vdmVDbGFzcygnc3VibWl0dGluZycpO1xuICAgIH0sIDIwMDApO1xuICB9LFxuICBpbml0Q29tbWFuZHMoKSB7XG4gICAgJCh0aGlzLmNvbW1hbmRTZWxlY3Rvcikub24oJ2NsaWNrJywgJ2FbZGF0YS1jb21tYW5kXScsIGV2ZW50ID0+IHtcbiAgICAgIGNvbnN0ICRlbGVtZW50ID0gJChldmVudC5jdXJyZW50VGFyZ2V0KTtcbiAgICAgIGNvbnN0ICR3cmFwcGVyID0gJGVsZW1lbnQucGFyZW50KCk7XG4gICAgICBjb25zdCB0b29sID0gJGVsZW1lbnQuYXR0cignZGF0YS1jb21tYW5kJyk7XG5cbiAgICAgIHRoaXNbdG9vbF0oKTtcblxuICAgICAgJHdyYXBwZXIuYWRkQ2xhc3MoJ2FjdGl2ZScpO1xuXG4gICAgICBzZXRUaW1lb3V0KGZ1bmN0aW9uKCkge1xuICAgICAgICAkd3JhcHBlci5yZW1vdmVDbGFzcygnYWN0aXZlJyk7XG4gICAgICB9LCAzMDApO1xuICAgIH0pO1xuICB9XG59O1xuIl19
-},{"../menu/menu":21,"../modal/modal":22}],25:[function(require,module,exports){
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNvbW1hbmRzLmpzIl0sIm5hbWVzIjpbImNvbW1hbmRTZWxlY3RvciIsIiRvdmVybGF5IiwiJCIsImNsZWFyQWxsIiwiZW5hYmxlZEVsZW1ldCIsImNvcm5lcnN0b25lIiwiZ2V0RW5hYmxlZEVsZW1lbnQiLCIkZWxlbWVudCIsInZpZXdwb3J0IiwiZ2V0Vmlld3BvcnQiLCJ2b2kiLCJ3aW5kb3dXaWR0aCIsImltYWdlIiwid2luZG93Q2VudGVyIiwic2V0Vmlld3BvcnQiLCJjb3JuZXJzdG9uZVRvb2xzIiwiZ2xvYmFsSW1hZ2VJZFNwZWNpZmljVG9vbFN0YXRlTWFuYWdlciIsImNsZWFyIiwidXBkYXRlSW1hZ2UiLCJzYXZlIiwiY2xvc2VNZW51IiwicmVtb3ZlQ2xhc3MiLCJhZGRDbGFzcyIsImxlbmd0aHMiLCJnZXRUb29sU3RhdGUiLCJjb25zb2xlIiwibG9nIiwic2hvdyIsInRoZW4iLCJ1dWlkIiwiZG9jIiwiZGF0YSIsImxlbmd0aCIsInZhbCIsInVuaXgiLCJuYXZpZ2F0b3IiLCJ1c2VyQWdlbnQiLCJwdXQiLCJpbml0Q29tbWFuZHMiLCJvbiIsImV2ZW50IiwiY3VycmVudFRhcmdldCIsIiR3cmFwcGVyIiwicGFyZW50IiwidG9vbCIsImF0dHIiLCJzZXRUaW1lb3V0Il0sIm1hcHBpbmdzIjoiOzs7Ozs7QUFBQTs7OztBQUNBOzs7O0FBQ0E7Ozs7QUFDQTs7QUFDQTs7Ozs7O2tCQUVlO0FBQ2JBLG1CQUFpQixlQURKO0FBRWJDLFlBQVVDLEVBQUUsa0JBQUYsQ0FGRztBQUdiQyxVQUhhLHNCQUdGO0FBQ1QsUUFBTUMsZ0JBQWdCQyxZQUFZQyxpQkFBWixDQUE4QixLQUFLQyxRQUFuQyxDQUF0QjtBQUNBLFFBQU1DLFdBQVdILFlBQVlJLFdBQVosQ0FBd0IsS0FBS0YsUUFBN0IsQ0FBakI7O0FBRUFDLGFBQVNFLEdBQVQsQ0FBYUMsV0FBYixHQUEyQlAsY0FBY1EsS0FBZCxDQUFvQkQsV0FBL0M7QUFDQUgsYUFBU0UsR0FBVCxDQUFhRyxZQUFiLEdBQTRCVCxjQUFjUSxLQUFkLENBQW9CQyxZQUFoRDtBQUNBUixnQkFBWVMsV0FBWixDQUF3QixLQUFLUCxRQUE3QixFQUF1Q0MsUUFBdkM7O0FBRUFPLHFCQUFpQkMscUNBQWpCLENBQXVEQyxLQUF2RCxDQUE2RCxLQUFLVixRQUFsRTtBQUNBRixnQkFBWWEsV0FBWixDQUF3QixLQUFLWCxRQUE3QjtBQUNELEdBYlk7OztBQWViWSxRQUFNLGdCQUFZO0FBQUE7O0FBRWhCLG1CQUFLQyxTQUFMO0FBQ0EsU0FBS25CLFFBQUwsQ0FBY29CLFdBQWQsQ0FBMEIsV0FBMUIsRUFBdUNDLFFBQXZDLENBQWdELFlBQWhEOztBQUVBLFFBQU1DLFVBQVVSLGlCQUFpQlMsWUFBakIsQ0FBOEIsS0FBS2pCLFFBQW5DLEVBQTZDLFFBQTdDLENBQWhCO0FBQ0FrQixZQUFRQyxHQUFSLENBQVksVUFBWixFQUF3QkgsT0FBeEI7QUFDQSxRQUFHLENBQUNBLE9BQUosRUFBWTtBQUNWO0FBQ0Esc0JBQVdJLElBQVg7QUFDQSxXQUFLMUIsUUFBTCxDQUFjb0IsV0FBZCxDQUEwQixZQUExQjtBQUNBO0FBQ0Q7O0FBRUQsdUJBQVVPLElBQVYsQ0FBZSxVQUFDQyxJQUFELEVBQVU7QUFDdkIsVUFBTUMsTUFBTTtBQUNWLGVBQU9ELElBREc7QUFFVixrQkFBVU4sUUFBUVEsSUFBUixDQUFhLENBQWIsRUFBZ0JDLE1BRmhCO0FBR1YscUJBQWE5QixFQUFFLGlCQUFGLEVBQXFCK0IsR0FBckIsRUFISDtBQUlWLGdCQUFRLHdCQUFTQyxJQUFULEVBSkU7QUFLVixxQkFBYUMsVUFBVUM7QUFMYixPQUFaO0FBT0FYLGNBQVFDLEdBQVIsQ0FBWSxNQUFaLEVBQW9CSSxHQUFwQjtBQUNBLGFBQU8sbUJBQWVPLEdBQWYsQ0FBbUJQLEdBQW5CLENBQVA7QUFDRCxLQVZELEVBVUdGLElBVkgsQ0FVUSxZQUFNO0FBQ1osc0JBQU1ELElBQU47QUFDQSxZQUFLMUIsUUFBTCxDQUFjb0IsV0FBZCxDQUEwQixZQUExQjtBQUNELEtBYkQ7O0FBZUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNELEdBakRZOztBQW1EYmlCLGNBbkRhLDBCQW1ERTtBQUFBOztBQUNicEMsTUFBRSxLQUFLRixlQUFQLEVBQXdCdUMsRUFBeEIsQ0FBMkIsT0FBM0IsRUFBb0MsaUJBQXBDLEVBQXVELGlCQUFTO0FBQzlELFVBQU1oQyxXQUFXTCxFQUFFc0MsTUFBTUMsYUFBUixDQUFqQjtBQUNBLFVBQU1DLFdBQVduQyxTQUFTb0MsTUFBVCxFQUFqQjtBQUNBLFVBQU1DLE9BQU9yQyxTQUFTc0MsSUFBVCxDQUFjLGNBQWQsQ0FBYjs7QUFFQSxhQUFLRCxJQUFMOztBQUVBRixlQUFTcEIsUUFBVCxDQUFrQixRQUFsQjs7QUFFQXdCLGlCQUFXLFlBQVc7QUFDcEJKLGlCQUFTckIsV0FBVCxDQUFxQixRQUFyQjtBQUNELE9BRkQsRUFFRyxHQUZIO0FBR0QsS0FaRDtBQWFEO0FBakVZLEMiLCJmaWxlIjoiY29tbWFuZHMuanMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgTWVudSBmcm9tICcuLi9tZW51L21lbnUnO1xuaW1wb3J0IE1vZGFsIGZyb20gJy4uL21vZGFsL21vZGFsJztcbmltcG9ydCBFcnJvck1vZGFsIGZyb20gJy4uL2Vycm9yTW9kYWwvbW9kYWwnO1xuaW1wb3J0IHttZWFzdXJlbWVudHNEQiwgZ2V0VVVJRH0gZnJvbSAnLi4vZGIvZGInO1xuaW1wb3J0IG1vbWVudCBmcm9tICdtb21lbnQnO1xuXG5leHBvcnQgZGVmYXVsdCB7XG4gIGNvbW1hbmRTZWxlY3RvcjogJy52aWV3ZXItdG9vbHMnLFxuICAkb3ZlcmxheTogJCgnLmxvYWRpbmctb3ZlcmxheScpLFxuICBjbGVhckFsbCgpIHtcbiAgICBjb25zdCBlbmFibGVkRWxlbWV0ID0gY29ybmVyc3RvbmUuZ2V0RW5hYmxlZEVsZW1lbnQodGhpcy4kZWxlbWVudCk7XG4gICAgY29uc3Qgdmlld3BvcnQgPSBjb3JuZXJzdG9uZS5nZXRWaWV3cG9ydCh0aGlzLiRlbGVtZW50KTtcblxuICAgIHZpZXdwb3J0LnZvaS53aW5kb3dXaWR0aCA9IGVuYWJsZWRFbGVtZXQuaW1hZ2Uud2luZG93V2lkdGg7XG4gICAgdmlld3BvcnQudm9pLndpbmRvd0NlbnRlciA9IGVuYWJsZWRFbGVtZXQuaW1hZ2Uud2luZG93Q2VudGVyO1xuICAgIGNvcm5lcnN0b25lLnNldFZpZXdwb3J0KHRoaXMuJGVsZW1lbnQsIHZpZXdwb3J0KTtcblxuICAgIGNvcm5lcnN0b25lVG9vbHMuZ2xvYmFsSW1hZ2VJZFNwZWNpZmljVG9vbFN0YXRlTWFuYWdlci5jbGVhcih0aGlzLiRlbGVtZW50KTtcbiAgICBjb3JuZXJzdG9uZS51cGRhdGVJbWFnZSh0aGlzLiRlbGVtZW50KTtcbiAgfSxcblxuICBzYXZlOiBmdW5jdGlvbiAoKSB7XG5cbiAgICBNZW51LmNsb3NlTWVudSgpO1xuICAgIHRoaXMuJG92ZXJsYXkucmVtb3ZlQ2xhc3MoJ2ludmlzaWJsZScpLmFkZENsYXNzKCdzdWJtaXR0aW5nJyk7XG5cbiAgICBjb25zdCBsZW5ndGhzID0gY29ybmVyc3RvbmVUb29scy5nZXRUb29sU3RhdGUodGhpcy4kZWxlbWVudCwgJ2xlbmd0aCcpO1xuICAgIGNvbnNvbGUubG9nKCdsZW5ndGhzOicsIGxlbmd0aHMpO1xuICAgIGlmKCFsZW5ndGhzKXtcbiAgICAgIC8vIGNvbnNvbGUubG9nKCdFcnJvck1vZGFsJywgRXJyb3JNb2RhbCk7XG4gICAgICBFcnJvck1vZGFsLnNob3coKTtcbiAgICAgIHRoaXMuJG92ZXJsYXkucmVtb3ZlQ2xhc3MoJ3N1Ym1pdHRpbmcnKTtcbiAgICAgIHJldHVybjtcbiAgICB9XG5cbiAgICBnZXRVVUlEKCkudGhlbigodXVpZCkgPT4ge1xuICAgICAgY29uc3QgZG9jID0ge1xuICAgICAgICAnX2lkJzogdXVpZCxcbiAgICAgICAgJ2xlbmd0aCc6IGxlbmd0aHMuZGF0YVswXS5sZW5ndGgsXG4gICAgICAgICdhbm5vdGF0b3InOiAkKCcjbG9naW4tdXNlcm5hbWUnKS52YWwoKSxcbiAgICAgICAgJ2RhdGUnOiBtb21lbnQoKS51bml4KCksXG4gICAgICAgICd1c2VyQWdlbnQnOiBuYXZpZ2F0b3IudXNlckFnZW50XG4gICAgICB9XG4gICAgICBjb25zb2xlLmxvZygnZG9jOicsIGRvYyk7XG4gICAgICByZXR1cm4gbWVhc3VyZW1lbnRzREIucHV0KGRvYyk7XG4gICAgfSkudGhlbigoKSA9PiB7XG4gICAgICBNb2RhbC5zaG93KCk7XG4gICAgICB0aGlzLiRvdmVybGF5LnJlbW92ZUNsYXNzKCdzdWJtaXR0aW5nJyk7XG4gICAgfSk7XG5cbiAgICAvLyBzZXRUaW1lb3V0KCgpID0+IHtcbiAgICAvLyAgIE1vZGFsLnNob3coKTtcbiAgICAvL1xuICAgIC8vICAgIHRoaXMuJG92ZXJsYXkucmVtb3ZlQ2xhc3MoJ3N1Ym1pdHRpbmcnKTtcbiAgICAvLyB9LCAyMDAwKTtcbiAgfSxcblxuICBpbml0Q29tbWFuZHMoKSB7XG4gICAgJCh0aGlzLmNvbW1hbmRTZWxlY3Rvcikub24oJ2NsaWNrJywgJ2FbZGF0YS1jb21tYW5kXScsIGV2ZW50ID0+IHtcbiAgICAgIGNvbnN0ICRlbGVtZW50ID0gJChldmVudC5jdXJyZW50VGFyZ2V0KTtcbiAgICAgIGNvbnN0ICR3cmFwcGVyID0gJGVsZW1lbnQucGFyZW50KCk7XG4gICAgICBjb25zdCB0b29sID0gJGVsZW1lbnQuYXR0cignZGF0YS1jb21tYW5kJyk7XG5cbiAgICAgIHRoaXNbdG9vbF0oKTtcblxuICAgICAgJHdyYXBwZXIuYWRkQ2xhc3MoJ2FjdGl2ZScpO1xuXG4gICAgICBzZXRUaW1lb3V0KGZ1bmN0aW9uKCkge1xuICAgICAgICAkd3JhcHBlci5yZW1vdmVDbGFzcygnYWN0aXZlJyk7XG4gICAgICB9LCAzMDApO1xuICAgIH0pO1xuICB9XG59O1xuIl19
+},{"../db/db":19,"../errorModal/modal":20,"../menu/menu":23,"../modal/modal":24,"moment":7}],27:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -15293,7 +19862,7 @@ exports.default = {
   }
 };
 //# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNvbm5lY3Rvci5qcyJdLCJuYW1lcyI6WyJtb2NrVXJsIiwiZ2V0Q2FzZSIsIlByb21pc2UiLCJyZXNvbHZlIiwicmVqZWN0Iiwic3VjY2Vzc0hhbmRsZXIiLCJyZXNwb25zZSIsImVycm9ySGFuZGxlciIsImVycm9yIiwiY29uc29sZSIsIiQiLCJhamF4IiwidGhlbiJdLCJtYXBwaW5ncyI6Ijs7Ozs7QUFBQSxJQUFNQSxVQUFVLGlDQUFoQjs7a0JBRWU7QUFDYkMsU0FEYSxxQkFDSDtBQUNSLFdBQU8sSUFBSUMsT0FBSixDQUFZLFVBQVVDLE9BQVYsRUFBbUJDLE1BQW5CLEVBQTJCO0FBQzVDLFVBQU1DLGlCQUFpQixTQUFqQkEsY0FBaUIsQ0FBQ0MsUUFBRCxFQUFjO0FBQ25DSCxnQkFBUUcsUUFBUjtBQUNELE9BRkQ7QUFHQSxVQUFNQyxlQUFlLFNBQWZBLFlBQWUsQ0FBQ0MsS0FBRCxFQUFXO0FBQzlCLFlBQUlBLEtBQUosRUFBVztBQUNUQyxrQkFBUUQsS0FBUixDQUFjQSxLQUFkO0FBQ0Q7O0FBRURKLGVBQU9JLEtBQVA7QUFDRCxPQU5EOztBQVFBRSxRQUFFQyxJQUFGLENBQU9YLE9BQVAsRUFBZ0JZLElBQWhCLENBQXFCUCxjQUFyQjtBQUNELEtBYk0sQ0FBUDtBQWNEO0FBaEJZLEMiLCJmaWxlIjoiY29ubmVjdG9yLmpzIiwic291cmNlc0NvbnRlbnQiOlsiY29uc3QgbW9ja1VybCA9ICdodHRwOi8vbG9jYWxob3N0OjQwMDAvbW9jay5qc29uJztcblxuZXhwb3J0IGRlZmF1bHQge1xuICBnZXRDYXNlKCkge1xuICAgIHJldHVybiBuZXcgUHJvbWlzZShmdW5jdGlvbiAocmVzb2x2ZSwgcmVqZWN0KSB7XG4gICAgICBjb25zdCBzdWNjZXNzSGFuZGxlciA9IChyZXNwb25zZSkgPT4ge1xuICAgICAgICByZXNvbHZlKHJlc3BvbnNlKTtcbiAgICAgIH07XG4gICAgICBjb25zdCBlcnJvckhhbmRsZXIgPSAoZXJyb3IpID0+IHtcbiAgICAgICAgaWYgKGVycm9yKSB7XG4gICAgICAgICAgY29uc29sZS5lcnJvcihlcnJvcik7XG4gICAgICAgIH1cblxuICAgICAgICByZWplY3QoZXJyb3IpO1xuICAgICAgfTtcblxuICAgICAgJC5hamF4KG1vY2tVcmwpLnRoZW4oc3VjY2Vzc0hhbmRsZXIpO1xuICAgIH0pO1xuICB9XG59O1xuIl19
-},{}],26:[function(require,module,exports){
+},{}],28:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -15371,7 +19940,13 @@ exports.default = {
     // });
     // });
   },
+
+
+  currentSeriesIndex: undefined,
+
   getChronicleImageIDs: function getChronicleImageIDs() {
+    var _this2 = this;
+
     return _db.chronicleDB.query("instances/context", {
       reduce: true,
       stale: 'update_after',
@@ -15390,18 +19965,28 @@ exports.default = {
       // ["UnspecifiedStudyDescription", "1.3.6.1.4.1.14519.5.2.1.7777.9002.242742387344636595876380532248"]
       // ["CT", "UnspecifiedSeriesDescription", "1.3.6.1.4.1.14519.5.2.1.7777.9002.106684271246229903146411807044"]
 
-      console.log('The number of series:', data.rows.length);
-      var rand = Math.floor(data.rows.length * Math.random());
-      console.log("random:", rand);
-      console.log('row:', data.rows[rand]);
+      // console.log('The number of series:', data.rows.length);
+      // const rand = Math.floor(data.rows.length*Math.random());
+      // console.log("random:", rand);
+      // console.log('row:', data.rows[rand]);
 
-      var key = data.rows[rand].key;
+      // const key = data.rows[rand].key;
+      if (!_this2.currentSeriesIndex) {
+        _this2.currentSeriesIndex = 0;
+      }
+      console.log('series Index:', _this2.currentSeriesIndex);
 
-      // return row;
-      // return chronicleDb.query("instances/context", {
-      //
+      var key = data.rows[_this2.currentSeriesIndex].key;
+
+      _this2.currentSeriesIndex++;
+
+      // if(currentSeriesIndex >= data.rows.length){
+      //   currentSeriesIndex=0;
       // }
+
       var seriesUID = key[2][2];
+      console.log('series UID:', seriesUID);
+
       return _db.chronicleDB.query("instances/seriesInstances", {
         startkey: seriesUID,
         endkey: seriesUID + '\u9999',
@@ -15451,8 +20036,8 @@ exports.default = {
     });
   }
 };
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImZpbGVzLmpzIl0sIm5hbWVzIjpbImdldEZpbGUiLCJ1cmwiLCJQcm9taXNlIiwicmVzb2x2ZSIsInJlamVjdCIsInJlcXVlc3QiLCJYTUxIdHRwUmVxdWVzdCIsIm9wZW4iLCJyZXNwb25zZVR5cGUiLCJvbmxvYWQiLCJvRXZlbnQiLCJhcnJheUJ1ZmZlciIsInJlc3BvbnNlIiwiQmxvYiIsInR5cGUiLCJlcnJvciIsInNlbmQiLCJnZXRDYXNlSW1hZ2VzIiwiJG92ZXJsYXkiLCIkIiwiYWRkQ2xhc3MiLCJyZW1vdmVDbGFzcyIsImdldENocm9uaWNsZUltYWdlSURzIiwidGhlbiIsImNhc2VTdHVkeSIsInVybHMiLCJjb25zb2xlIiwibG9nIiwiYWxsIiwibWFwIiwiZmlsZXMiLCJjb3JuZXJzdG9uZVdBRE9JbWFnZUxvYWRlciIsIndhZG91cmkiLCJmaWxlTWFuYWdlciIsImFkZCIsImltYWdlSWRzIiwiY2F0Y2giLCJlcnIiLCJxdWVyeSIsInJlZHVjZSIsInN0YWxlIiwiZ3JvdXBfbGV2ZWwiLCJkYXRhIiwicm93cyIsImxlbmd0aCIsInJhbmQiLCJNYXRoIiwiZmxvb3IiLCJyYW5kb20iLCJrZXkiLCJzZXJpZXNVSUQiLCJzdGFydGtleSIsImVuZGtleSIsImluc3RhbmNlVUlEcyIsImZvckVhY2giLCJyb3ciLCJpbnN0YW5jZVVJRCIsInZhbHVlIiwicHVzaCIsInVpZCIsImdldCIsImRvY3MiLCJpbnN0YW5jZU51bWJlclRhZyIsImluc3RhbmNlVUlEc0J5SW1hZ2VOdW1iZXIiLCJkb2MiLCJpbWFnZU51bWJlciIsIk51bWJlciIsImRhdGFzZXQiLCJWYWx1ZSIsIl9pZCIsImltYWdlTnVtYmVycyIsIk9iamVjdCIsImtleXMiLCJzb3J0IiwiYSIsImIiLCJpbnN0YW5jZUlEcyIsImluc3RhbmNlVVJMIiwibmFtZSJdLCJtYXBwaW5ncyI6Ijs7Ozs7O0FBQUE7Ozs7QUFDQTs7OztrQkFFZTtBQUNiQSxTQURhLG1CQUNMQyxHQURLLEVBQ0E7QUFD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Q0MsQ0FBRCxFQUFJQyxDQUFKLEVBQVU7QUFDMUIsZUFBT0QsSUFBSUMsQ0FBWDtBQUNELE9BRkQ7O0FBSUEsVUFBSUMsY0FBYyxFQUFsQjtBQUNBTixtQkFBYWhCLE9BQWIsQ0FBcUIsVUFBQ1csV0FBRCxFQUFpQjtBQUNwQyxZQUFNVCxjQUFjTywwQkFBMEJFLFdBQTFCLENBQXBCO0FBQ0EsWUFBTVksdUNBQWlDckIsV0FBakMsZ0JBQU47QUFDQW9CLG9CQUFZbEIsSUFBWixDQUFpQm1CLFdBQWpCO0FBQ0QsT0FKRDs7QUFNQSxhQUFPO0FBQ0xDLGNBQU0sY0FERDtBQUVMckQsY0FBTW1EO0FBRkQsT0FBUDtBQUlELEtBMUVNLEVBMEVKeEMsS0ExRUksQ0EwRUUsVUFBQ0MsR0FBRCxFQUFTO0FBQ2hCLFlBQU1BLEdBQU47QUFDRCxLQTVFTSxDQUFQO0FBNkVEO0FBN0lZLEMiLCJmaWxlIjoiZmlsZXMuanMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgQ29ubmVjdG9yIGZyb20gJy4vY29ubmVjdG9yJztcbmltcG9ydCB7Y2hyb25pY2xlVVJMLCBjaHJvbmljbGVEQn0gZnJvbSAnLi4vZGIvZGInO1xuXG5leHBvcnQgZGVmYXVsdCB7XG4gIGdldEZpbGUodXJsKSB7XG4gICAgcmV0dXJuIG5ldyBQcm9taXNlKGZ1bmN0aW9uIChyZXNvbHZlLCByZWplY3QpIHtcbiAgICAgIGNvbnN0IHJlcXVlc3QgPSBuZXcgWE1MSHR0cFJlcXVlc3QoKTtcblxuICAgICAgcmVxdWVzdC5vcGVuKCdHRVQnLCB1cmwsIHRydWUpO1xuICAgICAgcmVxdWVzdC5yZXNwb25zZVR5cGUgPSAnYXJyYXlidWZmZXInO1xuXG4gICAgICByZXF1ZXN0Lm9ubG9hZCA9IGZ1bmN0aW9uKG9FdmVudCkge1xuICAgICAgICBjb25zdCBhcnJheUJ1ZmZlciA9IHJlcXVlc3QucmVzcG9uc2U7XG4gICAgICAgIGlmIChhcnJheUJ1ZmZlcikge1xuICAgICAgICAgIHRyeSB7XG4gICAgICAgICAgICByZXNvbHZlKG5ldyBCbG9iKFthcnJheUJ1ZmZlcl0sIHsgdHlwZTogJ2FwcGxpY2F0aW9uL2RpY29tJyB9KSk7XG4gICAgICAgICAgfSBjYXRjaCAoZXJyb3IpIHtcbiAgICAgICAgICAgIHJlamVjdChlcnJvcik7XG4gICAgICAgICAgfVxuICAgICAgICB9XG4gICAgICB9O1xuXG4gICAgICByZXF1ZXN0LnNlbmQobnVsbCk7XG4gICAgfSk7XG4gIH0sXG5cbiAgZ2V0Q2FzZUltYWdlcygpIHtcbiAgICBjb25zdCAkb3ZlcmxheSA9ICQoJy5sb2FkaW5nLW92ZXJsYXknKTtcbiAgICAkb3ZlcmxheS5hZGRDbGFzcygnbG9hZGluZycpO1xuICAgICRvdmVybGF5LnJlbW92ZUNsYXNzKCdpbnZpc2libGUnKTtcblxuICAgIC8vIHJldHVybiBuZXcgUHJvbWlzZSgocmVzb2x2ZSwgcmVqZWN0KSA9PiB7XG5cbiAgICByZXR1cm4gdGhpcy5nZXRDaHJvbmljbGVJbWFnZUlEcygpLnRoZW4oKGNhc2VTdHVkeSkgPT4ge1xuICAgICAgaWYgKGNhc2VTdHVkeSAmJiBjYXNlU3R1ZHkudXJscykge1xuICAgICAgICBjb25zb2xlLmxvZygnZ2V0Q2FzZUltYWdlczAnKTtcbiAgICAgICAgcmV0dXJuIFByb21pc2UuYWxsKGNhc2VTdHVkeS51cmxzLm1hcCh0aGlzLmdldEZpbGUpKS50aGVuKGZ1bmN0aW9uIChmaWxlcykge1xuICAgICAgICAgIGNvbnNvbGUubG9nKCdnZXRDYXNlSW1hZ2VzMScpO1xuICAgICAgICAgICRvdmVybGF5LmFkZENsYXNzKCdpbnZpc2libGUnKTtcbiAgICAgICAgICAkb3ZlcmxheS5yZW1vdmVDbGFzcygnbG9hZGluZycpO1xuXG4gICAgICAgICAgcmV0dXJuIFByb21pc2UuYWxsKGZpbGVzLm1hcChjb3JuZXJzdG9uZVdBRE9JbWFnZUxvYWRlci53YWRvdXJpLmZpbGVNYW5hZ2VyLmFkZCkpO1xuICAgICAgICB9KS50aGVuKChpbWFnZUlkcykgPT4ge1xuICAgICAgICAgIHJldHVybiBpbWFnZUlkcztcbiAgICAgICAgICAvLyByZXNvbHZlKGZpbGVzLm1hcChjb3JuZXJzdG9uZVdBRE9JbWFnZUxvYWRlci53YWRvdXJpLmZpbGVNYW5hZ2VyLmFkZCkpO1xuICAgICAgICB9KTtcbiAgICAgIH1cbiAgICB9KS5jYXRjaChmdW5jdGlvbihlcnIpIHtcbiAgICAgIHRocm93IGVycjtcbiAgICB9KTtcblxuICAgICAgLy8gQ29ubmVjdG9yLmdldENhc2UoKS50aGVuKChjYXNlU3R1ZHkpID0+IHtcbiAgICAgIC8vICAgaWYgKGNhc2VTdHVkeSAmJiBjYXNlU3R1ZHkudXJscykge1xuICAgICAgLy8gICAgIFByb21pc2UuYWxsKGNhc2VTdHVkeS51cmxzLm1hcCh0aGlzLmdldEZpbGUpKS50aGVuKGZ1bmN0aW9uIChmaWxlcykge1xuICAgICAgLy8gICAgICAgJG92ZXJsYXkuYWRkQ2xhc3MoJ2ludmlzaWJsZScpO1xuICAgICAgLy8gICAgICAgJG92ZXJsYXkucmVtb3ZlQ2xhc3MoJ2xvYWRpbmcnKTtcbiAgICAgIC8vXG4gICAgICAvLyAgICAgICByZXNvbHZlKGZpbGVzLm1hcChjb3JuZXJzdG9uZVdBRE9JbWFnZUxvYWRlci53YWRvdXJpLmZpbGVNYW5hZ2VyLmFkZCkpO1xuICAgICAgLy8gICAgIH0pLmNhdGNoKHJlamVjdCk7XG4gICAgICAvLyAgIH1cbiAgICAgIC8vIH0pLmNhdGNoKGZ1bmN0aW9uKGVycm9yKSB7XG4gICAgICAvLyAgIHJlamVjdChlcnJvcik7XG4gICAgICAvLyB9KTtcbiAgICAvLyB9KTtcbiAgfSxcblxuICBnZXRDaHJvbmljbGVJbWFnZUlEcyAoKSB7XG4gICAgcmV0dXJuIGNocm9uaWNsZURCLnF1ZXJ5KFwiaW5zdGFuY2VzL2NvbnRleHRcIiwge1xuICAgICAgcmVkdWNlIDogdHJ1ZSxcbiAgICAgIHN0YWxlIDogJ3VwZGF0ZV9hZnRlcicsXG4gICAgICAvLyBrZXk6IFtbXCJVbnNwZWNpZmllZEluc3RpdHV0aW9uXCIsIFwiVENHQS0xNy1aMDExXCJdLCBbXCJVbnNwZWNpZmllZFN0dWR5RGVzY3JpcHRpb25cIiwgXCIxLjMuNi4xLjQuMS4xNDUxOS41LjIuMS43Nzc3LjkwMDIuMjQyNzQyMzg3MzQ0NjM2NTk1ODc2MzgwNTMyMjQ4XCJdXSxcbiAgICAgIC8vIHN0YXJ0a2V5IDogW1snVW5zcGVjaWZpZWRJbnN0aXR1dGlvbicsICdUQ0dBLTE3LVowMTEnXV0sIC8vIG9ubHkgc2hvdyB0aGUgcHJvc3RhdGVzIC0gdGhleSBiYXNpY2FsbHkgd29ya1xuICAgICAgLy8gZW5ka2V5OiBbWydVbnNwZWNpZmllZEluc3RpdHV0aW9uJywgJ1RDR0EtMTctWjAxMyddXSxcbiAgICAgIGdyb3VwX2xldmVsIDogMyxcbiAgICB9KS50aGVuKChkYXRhKSA9PiB7XG4gICAgICBjb25zb2xlLmxvZygnZGF0YTonLCBkYXRhKTtcbiAgICAgIC8vIFtrZXkuaW5zdGl0dXRpb24sa2V5LnBhdGllbnRJRF0sXG4gICAgICAvLyBba2V5LnN0dWR5RGVzY3JpcHRpb24sa2V5LnN0dWR5VUlEXSxcbiAgICAgIC8vIFtrZXkubW9kYWxpdHksa2V5LnNlcmllc0Rlc2NyaXB0aW9uLGtleS5zZXJpZXNVSURdLFxuICAgICAgLy8ga2V5Lmluc3RhbmNlVUlEXG4gICAgICAvL1xuICAgICAgLy8gW1wiVW5zcGVjaWZpZWRJbnN0aXR1dGlvblwiLCBcIlRDR0EtMTctWjAxMVwiXVxuICAgICAgLy8gW1wiVW5zcGVjaWZpZWRTdHVkeURlc2NyaXB0aW9uXCIsIFwiMS4zLjYuMS40LjEuMTQ1MTkuNS4yLjEuNzc3Ny45MDAyLjI0Mjc0MjM4NzM0NDYzNjU5NTg3NjM4MDUzMjI0OFwiXVxuICAgICAgLy8gW1wiQ1RcIiwgXCJVbnNwZWNpZmllZFNlcmllc0Rlc2NyaXB0aW9uXCIsIFwiMS4zLjYuMS40LjEuMTQ1MTkuNS4yLjEuNzc3Ny45MDAyLjEwNjY4NDI3MTI0NjIyOTkwMzE0NjQxMTgwNzA0NFwiXVxuXG4gICAgICBjb25zb2xlLmxvZygnVGhlIG51bWJlciBvZiBzZXJpZXM6JywgZGF0YS5yb3dzLmxlbmd0aCk7XG4gICAgICBjb25zdCByYW5kID0gTWF0aC5mbG9vcihkYXRhLnJvd3MubGVuZ3RoKk1hdGgucmFuZG9tKCkpO1xuICAgICAgY29uc29sZS5sb2coXCJyYW5kb206XCIsIHJhbmQpO1xuICAgICAgY29uc29sZS5sb2coJ3JvdzonLCBkYXRhLnJvd3NbcmFuZF0pO1xuXG4gICAgICBjb25zdCBrZXkgPSBkYXRhLnJvd3NbcmFuZF0ua2V5O1xuXG4gICAgICAvLyByZXR1cm4gcm93O1xuICAgICAgLy8gcmV0dXJuIGNocm9uaWNsZURiLnF1ZXJ5KFwiaW5zdGFuY2VzL2NvbnRleHRcIiwge1xuICAgICAgLy9cbiAgICAgIC8vIH1cbiAgICAgIGNvbnN0IHNlcmllc1VJRCA9IGtleVsyXVsyXTtcbiAgICAgIHJldHVybiBjaHJvbmljbGVEQi5xdWVyeShcImluc3RhbmNlcy9zZXJpZXNJbnN0YW5jZXNcIiwge1xuICAgICAgICBzdGFydGtleSA6IHNlcmllc1VJRCxcbiAgICAgICAgZW5ka2V5IDogc2VyaWVzVUlEICsgJ1xcdTk5OTknLFxuICAgICAgICBzdGFsZSA6ICd1cGRhdGVfYWZ0ZXInLFxuICAgICAgICByZWR1Y2UgOiBmYWxzZSxcbiAgICAgIH0pO1xuICAgIH0pLnRoZW4oKGRhdGEpID0+IHtcbiAgICAgIC8vIGNvbnNvbGUubG9nKCdpbnN0YW5jZSBkYXRhOicsIGRhdGEpO1xuICAgICAgY29uc3QgaW5zdGFuY2VVSURzID0gW107XG4gICAgICBkYXRhLnJvd3MuZm9yRWFjaCgocm93KSA9PiB7XG4gICAgICAgIGNvbnN0IGluc3RhbmNlVUlEID0gcm93LnZhbHVlWzFdO1xuICAgICAgICAvLyBjb25zdCBpbnN0YW5jZVVSTCA9IGAke2Nocm9uaWNsZVVSTH0vJHtpbnN0YW5jZVVJRH0vb2JqZWN0LmRjbWA7XG4gICAgICAgIC8vIGltYWdlSURzLnB1c2goaW5zdGFuY2VVUkwpO1xuICAgICAgICBpbnN0YW5jZVVJRHMucHVzaChpbnN0YW5jZVVJRCk7XG4gICAgICB9KTtcbiAgICAgIC8vIGNvbnNvbGUubG9nKCdpbnN0YW5jZVVJRHM6JywgaW5zdGFuY2VVSURzKTtcblxuICAgICAgcmV0dXJuIFByb21pc2UuYWxsKGluc3RhbmNlVUlEcy5tYXAoKHVpZCkgPT4ge1xuICAgICAgICByZXR1cm4gY2hyb25pY2xlREIuZ2V0KHVpZCk7XG4gICAgICB9KSk7XG4gICAgfSkudGhlbigoZG9jcykgPT4ge1xuICAgICAgY29uc3QgaW5zdGFuY2VOdW1iZXJUYWcgPSBcIjAwMjAwMDEzXCI7XG4gICAgICBsZXQgaW5zdGFuY2VVSURzQnlJbWFnZU51bWJlciA9IHt9O1xuICAgICAgZG9jcy5mb3JFYWNoKChkb2MpID0+IHtcbiAgICAgICAgY29uc3QgaW1hZ2VOdW1iZXIgPSBOdW1iZXIoZG9jLmRhdGFzZXRbaW5zdGFuY2VOdW1iZXJUYWddLlZhbHVlKTtcbiAgICAgICAgaW5zdGFuY2VVSURzQnlJbWFnZU51bWJlcltpbWFnZU51bWJlcl0gPSBkb2MuX2lkO1xuICAgICAgfSk7XG5cbiAgICAgIGNvbnN0IGltYWdlTnVtYmVycyA9IE9iamVjdC5rZXlzKGluc3RhbmNlVUlEc0J5SW1hZ2VOdW1iZXIpO1xuICAgICAgaW1hZ2VOdW1iZXJzLnNvcnQoKGEsIGIpID0+IHtcbiAgICAgICAgcmV0dXJuIGEgLSBiO1xuICAgICAgfSk7XG5cbiAgICAgIGxldCBpbnN0YW5jZUlEcyA9IFtdO1xuICAgICAgaW1hZ2VOdW1iZXJzLmZvckVhY2goKGltYWdlTnVtYmVyKSA9PiB7XG4gICAgICAgIGNvbnN0IGluc3RhbmNlVUlEID0gaW5zdGFuY2VVSURzQnlJbWFnZU51bWJlcltpbWFnZU51bWJlcl07XG4gICAgICAgIGNvbnN0IGluc3RhbmNlVVJMID0gYCR7Y2hyb25pY2xlVVJMfS8ke2luc3RhbmNlVUlEfS9vYmplY3QuZGNtYDtcbiAgICAgICAgaW5zdGFuY2VJRHMucHVzaChpbnN0YW5jZVVSTCk7XG4gICAgICB9KTtcblxuICAgICAgcmV0dXJuIHtcbiAgICAgICAgbmFtZTogXCJkZWZhdWx0X2Nhc2VcIixcbiAgICAgICAgdXJsczogaW5zdGFuY2VJRHNcbiAgICAgIH07XG4gICAgfSkuY2F0Y2goKGVycikgPT4ge1xuICAgICAgdGhyb3cgZXJyO1xuICAgIH0pO1xuICB9XG59O1xuIl19
-},{"../db/db":18,"./connector":25}],27:[function(require,module,exports){
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImZpbGVzLmpzIl0sIm5hbWVzIjpbImdldEZpbGUiLCJ1cmwiLCJQcm9taXNlIiwicmVzb2x2ZSIsInJlamVjdCIsInJlcXVlc3QiLCJYTUxIdHRwUmVxdWVzdCIsIm9wZW4iLCJyZXNwb25zZVR5cGUiLCJvbmxvYWQiLCJvRXZlbnQiLCJhcnJheUJ1ZmZlciIsInJlc3BvbnNlIiwiQmxvYiIsInR5cGUiLCJlcnJvciIsInNlbmQiLCJnZXRDYXNlSW1hZ2VzIiwiJG92ZXJsYXkiLCIkIiwiYWRkQ2xhc3MiLCJyZW1vdmVDbGFzcyIsImdldENocm9uaWNsZUltYWdlSURzIiwidGhlbiIsImNhc2VTdHVkeSIsInVybHMiLCJjb25zb2xlIiwibG9nIiwiYWxsIiwibWFwIiwiZmlsZXMiLCJjb3JuZXJzdG9uZVdBRE9JbWFnZUxvYWRlciIsIndhZG91cmkiLCJmaWxlTWFuYWdlciIsImFkZCIsImltYWdlSWRzIiwiY2F0Y2giLCJlcnIiLCJjdXJyZW50U2VyaWVzSW5kZXgiLCJ1bmRlZmluZWQiLCJxdWVyeSIsInJlZHVjZSIsInN0YWxlIiwiZ3JvdXBfbGV2ZWwiLCJkYXRhIiwia2V5Iiwicm93cyIsInNlcmllc1VJRCIsInN0YXJ0a2V5IiwiZW5ka2V5IiwiaW5zdGFuY2VVSURzIiwiZm9yRWFjaCIsInJvdyIsImluc3RhbmNlVUlEIiwidmFsdWUiLCJwdXNoIiwidWlkIiwiZ2V0IiwiZG9jcyIsImluc3RhbmNlTnVtYmVyVGFnIiwiaW5zdGFuY2VVSURzQnlJbWFnZU51bWJlciIsImRvYyIsImltYWdlTnVtYmVyIiwiTnVtYmVyIiwiZGF0YXNldCIsIlZhbHVlIiwiX2lkIiwiaW1hZ2VOdW1iZXJzIiwiT2JqZWN0Iiwia2V5cyIsInNvcnQiLCJhIiwiYiIsImluc3RhbmNlSURzIiwiaW5zdGFuY2VVUkwiLCJuYW1lIl0sIm1hcHBpbmdzIjoiOzs7Ozs7QUFBQTs7OztBQUNBOzs7O2tCQUVlO0FBQ2JBLFNBRGEsbUJBQ0xDLEdBREssRUFDQTtBQUNYLFdBQU8s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QVU7QUFDMUIsZUFBT0QsSUFBSUMsQ0FBWDtBQUNELE9BRkQ7O0FBSUEsVUFBSUMsY0FBYyxFQUFsQjtBQUNBTixtQkFBYWhCLE9BQWIsQ0FBcUIsVUFBQ1csV0FBRCxFQUFpQjtBQUNwQyxZQUFNVCxjQUFjTywwQkFBMEJFLFdBQTFCLENBQXBCO0FBQ0EsWUFBTVksdUNBQWlDckIsV0FBakMsZ0JBQU47QUFDQW9CLG9CQUFZbEIsSUFBWixDQUFpQm1CLFdBQWpCO0FBQ0QsT0FKRDs7QUFNQSxhQUFPO0FBQ0xDLGNBQU0sY0FERDtBQUVMbEQsY0FBTWdEO0FBRkQsT0FBUDtBQUlELEtBcEZNLEVBb0ZKckMsS0FwRkksQ0FvRkUsVUFBQ0MsR0FBRCxFQUFTO0FBQ2hCLFlBQU1BLEdBQU47QUFDRCxLQXRGTSxDQUFQO0FBdUZEO0FBekpZLEMiLCJmaWxlIjoiZmlsZXMuanMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgQ29ubmVjdG9yIGZyb20gJy4vY29ubmVjdG9yJztcbmltcG9ydCB7Y2hyb25pY2xlVVJMLCBjaHJvbmljbGVEQn0gZnJvbSAnLi4vZGIvZGInO1xuXG5leHBvcnQgZGVmYXVsdCB7XG4gIGdldEZpbGUodXJsKSB7XG4gICAgcmV0dXJuIG5ldyBQcm9taXNlKGZ1bmN0aW9uIChyZXNvbHZlLCByZWplY3QpIHtcbiAgICAgIGNvbnN0IHJlcXVlc3QgPSBuZXcgWE1MSHR0cFJlcXVlc3QoKTtcblxuICAgICAgcmVxdWVzdC5vcGVuKCdHRVQnLCB1cmwsIHRydWUpO1xuICAgICAgcmVxdWVzdC5yZXNwb25zZVR5cGUgPSAnYXJyYXlidWZmZXInO1xuXG4gICAgICByZXF1ZXN0Lm9ubG9hZCA9IGZ1bmN0aW9uKG9FdmVudCkge1xuICAgICAgICBjb25zdCBhcnJheUJ1ZmZlciA9IHJlcXVlc3QucmVzcG9uc2U7XG4gICAgICAgIGlmIChhcnJheUJ1ZmZlcikge1xuICAgICAgICAgIHRyeSB7XG4gICAgICAgICAgICByZXNvbHZlKG5ldyBCbG9iKFthcnJheUJ1ZmZlcl0sIHsgdHlwZTogJ2FwcGxpY2F0aW9uL2RpY29tJyB9KSk7XG4gICAgICAgICAgfSBjYXRjaCAoZXJyb3IpIHtcbiAgICAgICAgICAgIHJlamVjdChlcnJvcik7XG4gICAgICAgICAgfVxuICAgICAgICB9XG4gICAgICB9O1xuXG4gICAgICByZXF1ZXN0LnNlbmQobnVsbCk7XG4gICAgfSk7XG4gIH0sXG5cbiAgZ2V0Q2FzZUltYWdlcygpIHtcbiAgICBjb25zdCAkb3ZlcmxheSA9ICQoJy5sb2FkaW5nLW92ZXJsYXknKTtcbiAgICAkb3ZlcmxheS5hZGRDbGFzcygnbG9hZGluZycpO1xuICAgICRvdmVybGF5LnJlbW92ZUNsYXNzKCdpbnZpc2libGUnKTtcblxuICAgIC8vIHJldHVybiBuZXcgUHJvbWlzZSgocmVzb2x2ZSwgcmVqZWN0KSA9PiB7XG5cbiAgICByZXR1cm4gdGhpcy5nZXRDaHJvbmljbGVJbWFnZUlEcygpLnRoZW4oKGNhc2VTdHVkeSkgPT4ge1xuICAgICAgaWYgKGNhc2VTdHVkeSAmJiBjYXNlU3R1ZHkudXJscykge1xuICAgICAgICBjb25zb2xlLmxvZygnZ2V0Q2FzZUltYWdlczAnKTtcbiAgICAgICAgcmV0dXJuIFByb21pc2UuYWxsKGNhc2VTdHVkeS51cmxzLm1hcCh0aGlzLmdldEZpbGUpKS50aGVuKGZ1bmN0aW9uIChmaWxlcykge1xuICAgICAgICAgIGNvbnNvbGUubG9nKCdnZXRDYXNlSW1hZ2VzMScpO1xuICAgICAgICAgICRvdmVybGF5LmFkZENsYXNzKCdpbnZpc2libGUnKTtcbiAgICAgICAgICAkb3ZlcmxheS5yZW1vdmVDbGFzcygnbG9hZGluZycpO1xuXG4gICAgICAgICAgcmV0dXJuIFByb21pc2UuYWxsKGZpbGVzLm1hcChjb3JuZXJzdG9uZVdBRE9JbWFnZUxvYWRlci53YWRvdXJpLmZpbGVNYW5hZ2VyLmFkZCkpO1xuICAgICAgICB9KS50aGVuKChpbWFnZUlkcykgPT4ge1xuICAgICAgICAgIHJldHVybiBpbWFnZUlkcztcbiAgICAgICAgICAvLyByZXNvbHZlKGZpbGVzLm1hcChjb3JuZXJzdG9uZVdBRE9JbWFnZUxvYWRlci53YWRvdXJpLmZpbGVNYW5hZ2VyLmFkZCkpO1xuICAgICAgICB9KTtcbiAgICAgIH1cbiAgICB9KS5jYXRjaChmdW5jdGlvbihlcnIpIHtcbiAgICAgIHRocm93IGVycjtcbiAgICB9KTtcblxuICAgICAgLy8gQ29ubmVjdG9yLmdldENhc2UoKS50aGVuKChjYXNlU3R1ZHkpID0+IHtcbiAgICAgIC8vICAgaWYgKGNhc2VTdHVkeSAmJiBjYXNlU3R1ZHkudXJscykge1xuICAgICAgLy8gICAgIFByb21pc2UuYWxsKGNhc2VTdHVkeS51cmxzLm1hcCh0aGlzLmdldEZpbGUpKS50aGVuKGZ1bmN0aW9uIChmaWxlcykge1xuICAgICAgLy8gICAgICAgJG92ZXJsYXkuYWRkQ2xhc3MoJ2ludmlzaWJsZScpO1xuICAgICAgLy8gICAgICAgJG92ZXJsYXkucmVtb3ZlQ2xhc3MoJ2xvYWRpbmcnKTtcbiAgICAgIC8vXG4gICAgICAvLyAgICAgICByZXNvbHZlKGZpbGVzLm1hcChjb3JuZXJzdG9uZVdBRE9JbWFnZUxvYWRlci53YWRvdXJpLmZpbGVNYW5hZ2VyLmFkZCkpO1xuICAgICAgLy8gICAgIH0pLmNhdGNoKHJlamVjdCk7XG4gICAgICAvLyAgIH1cbiAgICAgIC8vIH0pLmNhdGNoKGZ1bmN0aW9uKGVycm9yKSB7XG4gICAgICAvLyAgIHJlamVjdChlcnJvcik7XG4gICAgICAvLyB9KTtcbiAgICAvLyB9KTtcbiAgfSxcblxuICBjdXJyZW50U2VyaWVzSW5kZXg6IHVuZGVmaW5lZCxcblxuICBnZXRDaHJvbmljbGVJbWFnZUlEcyAoKSB7XG4gICAgcmV0dXJuIGNocm9uaWNsZURCLnF1ZXJ5KFwiaW5zdGFuY2VzL2NvbnRleHRcIiwge1xuICAgICAgcmVkdWNlIDogdHJ1ZSxcbiAgICAgIHN0YWxlIDogJ3VwZGF0ZV9hZnRlcicsXG4gICAgICAvLyBrZXk6IFtbXCJVbnNwZWNpZmllZEluc3RpdHV0aW9uXCIsIFwiVENHQS0xNy1aMDExXCJdLCBbXCJVbnNwZWNpZmllZFN0dWR5RGVzY3JpcHRpb25cIiwgXCIxLjMuNi4xLjQuMS4xNDUxOS41LjIuMS43Nzc3LjkwMDIuMjQyNzQyMzg3MzQ0NjM2NTk1ODc2MzgwNTMyMjQ4XCJdXSxcbiAgICAgIC8vIHN0YXJ0a2V5IDogW1snVW5zcGVjaWZpZWRJbnN0aXR1dGlvbicsICdUQ0dBLTE3LVowMTEnXV0sIC8vIG9ubHkgc2hvdyB0aGUgcHJvc3RhdGVzIC0gdGhleSBiYXNpY2FsbHkgd29ya1xuICAgICAgLy8gZW5ka2V5OiBbWydVbnNwZWNpZmllZEluc3RpdHV0aW9uJywgJ1RDR0EtMTctWjAxMyddXSxcbiAgICAgIGdyb3VwX2xldmVsIDogMyxcbiAgICB9KS50aGVuKChkYXRhKSA9PiB7XG4gICAgICBjb25zb2xlLmxvZygnZGF0YTonLCBkYXRhKTtcbiAgICAgIC8vIFtrZXkuaW5zdGl0dXRpb24sa2V5LnBhdGllbnRJRF0sXG4gICAgICAvLyBba2V5LnN0dWR5RGVzY3JpcHRpb24sa2V5LnN0dWR5VUlEXSxcbiAgICAgIC8vIFtrZXkubW9kYWxpdHksa2V5LnNlcmllc0Rlc2NyaXB0aW9uLGtleS5zZXJpZXNVSURdLFxuICAgICAgLy8ga2V5Lmluc3RhbmNlVUlEXG4gICAgICAvL1xuICAgICAgLy8gW1wiVW5zcGVjaWZpZWRJbnN0aXR1dGlvblwiLCBcIlRDR0EtMTctWjAxMVwiXVxuICAgICAgLy8gW1wiVW5zcGVjaWZpZWRTdHVkeURlc2NyaXB0aW9uXCIsIFwiMS4zLjYuMS40LjEuMTQ1MTkuNS4yLjEuNzc3Ny45MDAyLjI0Mjc0MjM4NzM0NDYzNjU5NTg3NjM4MDUzMjI0OFwiXVxuICAgICAgLy8gW1wiQ1RcIiwgXCJVbnNwZWNpZmllZFNlcmllc0Rlc2NyaXB0aW9uXCIsIFwiMS4zLjYuMS40LjEuMTQ1MTkuNS4yLjEuNzc3Ny45MDAyLjEwNjY4NDI3MTI0NjIyOTkwMzE0NjQxMTgwNzA0NFwiXVxuXG4gICAgICAvLyBjb25zb2xlLmxvZygnVGhlIG51bWJlciBvZiBzZXJpZXM6JywgZGF0YS5yb3dzLmxlbmd0aCk7XG4gICAgICAvLyBjb25zdCByYW5kID0gTWF0aC5mbG9vcihkYXRhLnJvd3MubGVuZ3RoKk1hdGgucmFuZG9tKCkpO1xuICAgICAgLy8gY29uc29sZS5sb2coXCJyYW5kb206XCIsIHJhbmQpO1xuICAgICAgLy8gY29uc29sZS5sb2coJ3JvdzonLCBkYXRhLnJvd3NbcmFuZF0pO1xuXG4gICAgICAvLyBjb25zdCBrZXkgPSBkYXRhLnJvd3NbcmFuZF0ua2V5O1xuICAgICAgaWYoIXRoaXMuY3VycmVudFNlcmllc0luZGV4KXtcbiAgICAgICAgdGhpcy5jdXJyZW50U2VyaWVzSW5kZXggPSAwO1xuICAgICAgfVxuICAgICAgY29uc29sZS5sb2coJ3NlcmllcyBJbmRleDonLCB0aGlzLmN1cnJlbnRTZXJpZXNJbmRleCk7XG5cbiAgICAgIGNvbnN0IGtleSA9IGRhdGEucm93c1t0aGlzLmN1cnJlbnRTZXJpZXNJbmRleF0ua2V5O1xuXG4gICAgICB0aGlzLmN1cnJlbnRTZXJpZXNJbmRleCsrO1xuXG4gICAgICAvLyBpZihjdXJyZW50U2VyaWVzSW5kZXggPj0gZGF0YS5yb3dzLmxlbmd0aCl7XG4gICAgICAvLyAgIGN1cnJlbnRTZXJpZXNJbmRleD0wO1xuICAgICAgLy8gfVxuXG4gICAgICBjb25zdCBzZXJpZXNVSUQgPSBrZXlbMl1bMl07XG4gICAgICBjb25zb2xlLmxvZygnc2VyaWVzIFVJRDonLCBzZXJpZXNVSUQpO1xuXG4gICAgICByZXR1cm4gY2hyb25pY2xlREIucXVlcnkoXCJpbnN0YW5jZXMvc2VyaWVzSW5zdGFuY2VzXCIsIHtcbiAgICAgICAgc3RhcnRrZXkgOiBzZXJpZXNVSUQsXG4gICAgICAgIGVuZGtleSA6IHNlcmllc1VJRCArICdcXHU5OTk5JyxcbiAgICAgICAgc3RhbGUgOiAndXBkYXRlX2FmdGVyJyxcbiAgICAgICAgcmVkdWNlIDogZmFsc2UsXG4gICAgICB9KTtcbiAgICB9KS50aGVuKChkYXRhKSA9PiB7XG4gICAgICAvLyBjb25zb2xlLmxvZygnaW5zdGFuY2UgZGF0YTonLCBkYXRhKTtcbiAgICAgIGNvbnN0IGluc3RhbmNlVUlEcyA9IFtdO1xuICAgICAgZGF0YS5yb3dzLmZvckVhY2goKHJvdykgPT4ge1xuICAgICAgICBjb25zdCBpbnN0YW5jZVVJRCA9IHJvdy52YWx1ZVsxXTtcbiAgICAgICAgLy8gY29uc3QgaW5zdGFuY2VVUkwgPSBgJHtjaHJvbmljbGVVUkx9LyR7aW5zdGFuY2VVSUR9L29iamVjdC5kY21gO1xuICAgICAgICAvLyBpbWFnZUlEcy5wdXNoKGluc3RhbmNlVVJMKTtcbiAgICAgICAgaW5zdGFuY2VVSURzLnB1c2goaW5zdGFuY2VVSUQpO1xuICAgICAgfSk7XG4gICAgICAvLyBjb25zb2xlLmxvZygnaW5zdGFuY2VVSURzOicsIGluc3RhbmNlVUlEcyk7XG5cbiAgICAgIHJldHVybiBQcm9taXNlLmFsbChpbnN0YW5jZVVJRHMubWFwKCh1aWQpID0+IHtcbiAgICAgICAgcmV0dXJuIGNocm9uaWNsZURCLmdldCh1aWQpO1xuICAgICAgfSkpO1xuICAgIH0pLnRoZW4oKGRvY3MpID0+IHtcbiAgICAgIGNvbnN0IGluc3RhbmNlTnVtYmVyVGFnID0gXCIwMDIwMDAxM1wiO1xuICAgICAgbGV0IGluc3RhbmNlVUlEc0J5SW1hZ2VOdW1iZXIgPSB7fTtcbiAgICAgIGRvY3MuZm9yRWFjaCgoZG9jKSA9PiB7XG4gICAgICAgIGNvbnN0IGltYWdlTnVtYmVyID0gTnVtYmVyKGRvYy5kYXRhc2V0W2luc3RhbmNlTnVtYmVyVGFnXS5WYWx1ZSk7XG4gICAgICAgIGluc3RhbmNlVUlEc0J5SW1hZ2VOdW1iZXJbaW1hZ2VOdW1iZXJdID0gZG9jLl9pZDtcbiAgICAgIH0pO1xuXG4gICAgICBjb25zdCBpbWFnZU51bWJlcnMgPSBPYmplY3Qua2V5cyhpbnN0YW5jZVVJRHNCeUltYWdlTnVtYmVyKTtcbiAgICAgIGltYWdlTnVtYmVycy5zb3J0KChhLCBiKSA9PiB7XG4gICAgICAgIHJldHVybiBhIC0gYjtcbiAgICAgIH0pO1xuXG4gICAgICBsZXQgaW5zdGFuY2VJRHMgPSBbXTtcbiAgICAgIGltYWdlTnVtYmVycy5mb3JFYWNoKChpbWFnZU51bWJlcikgPT4ge1xuICAgICAgICBjb25zdCBpbnN0YW5jZVVJRCA9IGluc3RhbmNlVUlEc0J5SW1hZ2VOdW1iZXJbaW1hZ2VOdW1iZXJdO1xuICAgICAgICBjb25zdCBpbnN0YW5jZVVSTCA9IGAke2Nocm9uaWNsZVVSTH0vJHtpbnN0YW5jZVVJRH0vb2JqZWN0LmRjbWA7XG4gICAgICAgIGluc3RhbmNlSURzLnB1c2goaW5zdGFuY2VVUkwpO1xuICAgICAgfSk7XG5cbiAgICAgIHJldHVybiB7XG4gICAgICAgIG5hbWU6IFwiZGVmYXVsdF9jYXNlXCIsXG4gICAgICAgIHVybHM6IGluc3RhbmNlSURzXG4gICAgICB9O1xuICAgIH0pLmNhdGNoKChlcnIpID0+IHtcbiAgICAgIHRocm93IGVycjtcbiAgICB9KTtcbiAgfVxufTtcbiJdfQ==
+},{"../db/db":19,"./connector":27}],29:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -15531,6 +20116,7 @@ exports.default = {
     // Extract which tool we are using and activating it
     $(this.toolsSelector).on('click', 'a[data-tool]', function (event) {
       var $element = $(event.currentTarget);
+
       var tool = $element.attr('data-tool');
 
       $('.active').removeClass('active');
@@ -15567,8 +20153,8 @@ exports.default = {
     this.attachEvents();
   }
 };
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInRvb2xzLmpzIl0sIm5hbWVzIjpbImlzTW9iaWxlIiwidGVzdCIsIm5hdmlnYXRvciIsInVzZXJBZ2VudCIsImFjdGl2ZSIsInRvb2xzU2VsZWN0b3IiLCIkY29uZXJzdG9uZVZpZXdwb3J0IiwiJCIsImRlYWN0aXZhdGVBY3RpdmVUb29sIiwiZGVhY3RpdmF0ZSIsInRvZ2dsZVRvb2wiLCJ0b29sVG9BY3RpdmF0ZSIsImNvcm5lcnN0b25lVG9vbHMiLCJlbmFibGUiLCIkZWxlbWVudCIsImFjdGl2YXRlIiwidG9vbCIsImRpc2FibGUiLCJpbml0U3RhY2tUb29sIiwiaW1hZ2VJZHMiLCIkdGh1bWIiLCJzdGFjayIsImN1cnJlbnRJbWFnZUlkSW5kZXgiLCJhZGRTdGFja1N0YXRlTWFuYWdlciIsImFkZFRvb2xTdGF0ZSIsInN0YWNrU2Nyb2xsV2hlZWwiLCJzdGFja1Njcm9sbE11bHRpVG91Y2giLCJjc3MiLCJsZW5ndGgiLCJvbiIsImN1cnJlbnRJbmRleCIsImhlaWdodCIsImF0dGFjaEV2ZW50cyIsImV2ZW50IiwiY3VycmVudFRhcmdldCIsImF0dHIiLCJyZW1vdmVDbGFzcyIsInBhcmVudCIsImFkZENsYXNzIiwibGVuZ3RocyIsImdldFRvb2xTdGF0ZSIsImRhdGEiLCJzaGlmdCIsImNvcm5lcnN0b25lIiwidXBkYXRlSW1hZ2UiLCJpbml0VG9vbHMiLCJtb3VzZUlucHV0IiwidG91Y2hJbnB1dCIsIm1vdXNlV2hlZWxJbnB1dCIsIm9uY29udGV4dG1lbnUiLCJwcmV2ZW50RGVmYXVsdCJdLCJtYXBwaW5ncyI6Ijs7Ozs7O0FBQUE7Ozs7OztBQUVBLElBQU1BLFdBQVcsNEJBQTRCQyxJQUE1QixDQUFpQ0MsVUFBVUMsU0FBM0MsQ0FBakI7O2tCQUVlO0FBQ2JDLFVBQVEsRUFESztBQUViQyxpQkFBZSxlQUZGO0FBR2JDLHVCQUFxQkMsRUFBRSxxQkFBRixDQUhSO0FBSWJDLHNCQUphLGtDQUlVO0FBQ3JCLFFBQUksS0FBS0osTUFBVCxFQUFpQjtB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TUFBSzlCLFFBQTdCO0FBQ0Q7QUFDRixLQVBEO0FBUUQsR0FoRlk7QUFpRmIrQixXQWpGYSxxQkFpRkgxQixRQWpGRyxFQWlGTztBQUNsQlAscUJBQWlCa0MsVUFBakIsQ0FBNEJqQyxNQUE1QixDQUFtQyxLQUFLQyxRQUF4QztBQUNBRixxQkFBaUJtQyxVQUFqQixDQUE0QmxDLE1BQTVCLENBQW1DLEtBQUtDLFFBQXhDO0FBQ0FGLHFCQUFpQm9DLGVBQWpCLENBQWlDbkMsTUFBakMsQ0FBd0MsS0FBS0MsUUFBN0M7O0FBRUEsU0FBS0ksYUFBTCxDQUFtQkMsUUFBbkI7O0FBRUE7QUFDQSxTQUFLTCxRQUFMLENBQWNtQyxhQUFkLEdBQThCLFVBQVVoQixLQUFWLEVBQWlCO0FBQzdDQSxZQUFNaUIsY0FBTjs7QUFFQSxhQUFPLEtBQVA7QUFDRCxLQUpEOztBQU1BLFNBQUtsQixZQUFMO0FBQ0Q7QUFoR1ksQyIsImZpbGUiOiJ0b29scy5qcyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBDb21tYW5kcyBmcm9tICcuL2NvbW1hbmRzJztcblxuY29uc3QgaXNNb2JpbGUgPSAvaVBob25lfGlQYWR8aVBvZHxBbmRyb2lkL2kudGVzdChuYXZpZ2F0b3IudXNlckFnZW50KTtcblxuZXhwb3J0IGRlZmF1bHQge1xuICBhY3RpdmU6ICcnLFxuICB0b29sc1NlbGVjdG9yOiAnLnZpZXdlci10b29scycsXG4gICRjb25lcnN0b25lVmlld3BvcnQ6ICQoJyNjb25lcnN0b25lVmlld3BvcnQnKSxcbiAgZGVhY3RpdmF0ZUFjdGl2ZVRvb2woKSB7XG4gICAgaWYgKHRoaXMuYWN0aXZlKSB7XG4gICAgICB0aGlzLmRlYWN0aXZhdGUodGhpcy5hY3RpdmUpO1xuICAgICAgdGhpcy5hY3RpdmUgPSAnJztcbiAgICB9XG4gIH0sXG4gIHRvZ2dsZVRvb2wodG9vbFRvQWN0aXZhdGUpIHtcbiAgICBpZiAoIXRvb2xUb0FjdGl2YXRlKSB7XG4gICAgICByZXR1cm47XG4gICAgfVxuXG4gICAgaWYgKGlzTW9iaWxlKSB7XG4gICAgICBpZiAodG9vbFRvQWN0aXZhdGUgPT09ICdsZW5ndGgnKSB7XG4gICAgICAgIHRvb2xUb0FjdGl2YXRlID0gYCR7dG9vbFRvQWN0aXZhdGV9VG91Y2hgO1xuICAgICAgfSBlbHNlIHtcbiAgICAgICAgdG9vbFRvQWN0aXZhdGUgPSBgJHt0b29sVG9BY3RpdmF0ZX1Ub3VjaERyYWdgO1xuICAgICAgfVxuICAgIH1cblxuICAgIGlmICh0aGlzLmFjdGl2ZSkge1xuICAgICAgdGhpcy5kZWFjdGl2YXRlKHRoaXMuYWN0aXZlKTtcbiAgICB9XG5cbiAgICBjb3JuZXJzdG9uZVRvb2xzW3Rvb2xUb0FjdGl2YXRlXS5lbmFibGUodGhpcy4kZWxlbWVudCk7XG4gICAgY29ybmVyc3RvbmVUb29sc1t0b29sVG9BY3RpdmF0ZV0uYWN0aXZhdGUodGhpcy4kZWxlbWVudCwgMSk7XG5cbiAgICB0aGlzLmFjdGl2ZSA9IHRvb2xUb0FjdGl2YXRlO1xuICB9LFxuICBkZWFjdGl2YXRlKHRvb2wpIHtcbiAgICBjb3JuZXJzdG9uZVRvb2xzW3Rvb2xdLmRpc2FibGUodGhpcy4kZWxlbWVudCk7XG4gICAgY29ybmVyc3RvbmVUb29sc1t0b29sXS5kZWFjdGl2YXRlKHRoaXMuJGVsZW1lbnQsIDEpO1xuICB9LFxuICBpbml0U3RhY2tUb29sKGltYWdlSWRzKSB7XG4gICAgY29uc3QgJHRodW1iID0gJCgnLnRodW1iJyk7XG4gICAgY29uc3Qgc3RhY2sgPSB7XG4gICAgICBjdXJyZW50SW1hZ2VJZEluZGV4OiAwLFxuICAgICAgaW1hZ2VJZHM6IGltYWdlSWRzXG4gICAgfTtcblxuICAgIGNvcm5lcnN0b25lVG9vbHMuYWRkU3RhY2tTdGF0ZU1hbmFnZXIodGhpcy4kZWxlbWVudCwgWydzdGFjayddKTtcbiAgICBjb3JuZXJzdG9uZVRvb2xzLmFkZFRvb2xTdGF0ZSh0aGlzLiRlbGVtZW50LCAnc3RhY2snLCBzdGFjayk7XG4gICAgY29ybmVyc3RvbmVUb29scy5zdGFja1Njcm9sbFdoZWVsLmFjdGl2YXRlKHRoaXMuJGVsZW1lbnQpO1xuICAgIGNvcm5lcnN0b25lVG9vbHMuc3RhY2tTY3JvbGxNdWx0aVRvdWNoLmFjdGl2YXRlKHRoaXMuJGVsZW1lbnQpO1xuXG4gICAgJHRodW1iLmNzcygnaGVpZ2h0JywgYCR7KDEwMC9zdGFjay5pbWFnZUlkcy5sZW5ndGgpfSVgKTtcblxuICAgICQodGhpcy4kZWxlbWVudCkub24oJ0Nvcm5lcnN0b25lTmV3SW1hZ2UnLCBmdW5jdGlvbiAoKSB7XG4gICAgICB2YXIgY3VycmVudEluZGV4ID0gc3RhY2suY3VycmVudEltYWdlSWRJbmRleDtcblxuICAgICAgJHRodW1iLmNzcyh7XG4gICAgICAgICdtYXJnaW4tdG9wJzogYCR7KCR0aHVtYi5oZWlnaHQoKSooY3VycmVudEluZGV4KSl9cHhgXG4gICAgICB9KTtcbiAgICB9KTtcbiAgfSxcbiAgYXR0YWNoRXZlbnRzKCkge1xuICAgIC8vIEV4dHJhY3Qgd2hpY2ggdG9vbCB3ZSBhcmUgdXNpbmcgYW5kIGFjdGl2YXRpbmcgaXRcbiAgICAkKHRoaXMudG9vbHNTZWxlY3Rvcikub24oJ2NsaWNrJywgJ2FbZGF0YS10b29sXScsIGV2ZW50ID0+IHtcbiAgICAgIGNvbnN0ICRlbGVtZW50ID0gJChldmVudC5jdXJyZW50VGFyZ2V0KTtcbiAgICAgIGNvbnN0IHRvb2wgPSAkZWxlbWVudC5hdHRyKCdkYXRhLXRvb2wnKTtcblxuICAgICAgJCgnLmFjdGl2ZScpLnJlbW92ZUNsYXNzKCdhY3RpdmUnKTtcblxuICAgICAgdGhpcy50b2dnbGVUb29sKHRvb2wpO1xuXG4gICAgICAkZWxlbWVudC5wYXJlbnQoKS5hZGRDbGFzcygnYWN0aXZlJyk7XG4gICAgfSk7XG5cbiAgICAvLyBMaW1pdGluZyBtZWFzdXJlbWVudHMgdG8gMVxuICAgIHRoaXMuJGNvbmVyc3RvbmVWaWV3cG9ydC5vbigndG91Y2hzdGFydCBtb3VzZWRvd24nLCAoKSA9PiB7XG4gICAgICBjb25zdCBsZW5ndGhzID0gY29ybmVyc3RvbmVUb29scy5nZXRUb29sU3RhdGUodGhpcy4kZWxlbWVudCwgJ2xlbmd0aCcpO1xuXG4gICAgICBpZiAobGVuZ3RocyAmJiBsZW5ndGhzLmRhdGEubGVuZ3RoID09PSAyKSB7XG4gICAgICAgIGxlbmd0aHMuZGF0YS5zaGlmdCgpO1xuICAgICAgICBjb3JuZXJzdG9uZS51cGRhdGVJbWFnZSh0aGlzLiRlbGVtZW50KTtcbiAgICAgIH1cbiAgICB9KTtcbiAgfSxcbiAgaW5pdFRvb2xzKGltYWdlSWRzKSB7XG4gICAgY29ybmVyc3RvbmVUb29scy5tb3VzZUlucHV0LmVuYWJsZSh0aGlzLiRlbGVtZW50KTtcbiAgICBjb3JuZXJzdG9uZVRvb2xzLnRvdWNoSW5wdXQuZW5hYmxlKHRoaXMuJGVsZW1lbnQpO1xuICAgIGNvcm5lcnN0b25lVG9vbHMubW91c2VXaGVlbElucHV0LmVuYWJsZSh0aGlzLiRlbGVtZW50KTtcblxuICAgIHRoaXMuaW5pdFN0YWNrVG9vbChpbWFnZUlkcyk7XG5cbiAgICAvLyByZW1vdmluZyBkZWZhdWx0IGNvbnRleHQgbWVudVxuICAgIHRoaXMuJGVsZW1lbnQub25jb250ZXh0bWVudSA9IGZ1bmN0aW9uIChldmVudCkge1xuICAgICAgZXZlbnQucHJldmVudERlZmF1bHQoKTtcblxuICAgICAgcmV0dXJuIGZhbHNlO1xuICAgIH07XG5cbiAgICB0aGlzLmF0dGFjaEV2ZW50cygpO1xuICB9XG59O1xuIl19
-},{"./commands":24}],28:[function(require,module,exports){
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInRvb2xzLmpzIl0sIm5hbWVzIjpbImlzTW9iaWxlIiwidGVzdCIsIm5hdmlnYXRvciIsInVzZXJBZ2VudCIsImFjdGl2ZSIsInRvb2xzU2VsZWN0b3IiLCIkY29uZXJzdG9uZVZpZXdwb3J0IiwiJCIsImRlYWN0aXZhdGVBY3RpdmVUb29sIiwiZGVhY3RpdmF0ZSIsInRvZ2dsZVRvb2wiLCJ0b29sVG9BY3RpdmF0ZSIsImNvcm5lcnN0b25lVG9vbHMiLCJlbmFibGUiLCIkZWxlbWVudCIsImFjdGl2YXRlIiwidG9vbCIsImRpc2FibGUiLCJpbml0U3RhY2tUb29sIiwiaW1hZ2VJZHMiLCIkdGh1bWIiLCJzdGFjayIsImN1cnJlbnRJbWFnZUlkSW5kZXgiLCJhZGRTdGFja1N0YXRlTWFuYWdlciIsImFkZFRvb2xTdGF0ZSIsInN0YWNrU2Nyb2xsV2hlZWwiLCJzdGFja1Njcm9sbE11bHRpVG91Y2giLCJjc3MiLCJsZW5ndGgiLCJvbiIsImN1cnJlbnRJbmRleCIsImhlaWdodCIsImF0dGFjaEV2ZW50cyIsImV2ZW50IiwiY3VycmVudFRhcmdldCIsImF0dHIiLCJyZW1vdmVDbGFzcyIsInBhcmVudCIsImFkZENsYXNzIiwibGVuZ3RocyIsImdldFRvb2xTdGF0ZSIsImRhdGEiLCJzaGlmdCIsImNvcm5lcnN0b25lIiwidXBkYXRlSW1hZ2UiLCJpbml0VG9vbHMiLCJtb3VzZUlucHV0IiwidG91Y2hJbnB1dCIsIm1vdXNlV2hlZWxJbnB1dCIsIm9uY29udGV4dG1lbnUiLCJwcmV2ZW50RGVmYXVsdCJdLCJtYXBwaW5ncyI6Ijs7Ozs7O0FBQUE7Ozs7OztBQUVBLElBQU1BLFdBQVcsNEJBQTRCQyxJQUE1QixDQUFpQ0MsVUFBVUMsU0FBM0MsQ0FBakI7O2tCQUVlO0FBQ2JDLFVBQVEsRUFESztBQUViQyxpQkFBZSxlQUZGO0FBR2JDLHVCQUFxQkMsRUFBRSxxQkFBRixDQUhSO0FBSWJDLHNCQUphLGtDQUlVO0FBQ3JCLFFBQUksS0FBS0osTUFBVCxFQUFpQjtB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LE1BQUs5QixRQUE3QjtBQUNEO0FBQ0YsS0FQRDtBQVFELEdBckZZO0FBdUZiK0IsV0F2RmEscUJBdUZIMUIsUUF2RkcsRUF1Rk87QUFDbEJQLHFCQUFpQmtDLFVBQWpCLENBQTRCakMsTUFBNUIsQ0FBbUMsS0FBS0MsUUFBeEM7QUFDQUYscUJBQWlCbUMsVUFBakIsQ0FBNEJsQyxNQUE1QixDQUFtQyxLQUFLQyxRQUF4QztBQUNBRixxQkFBaUJvQyxlQUFqQixDQUFpQ25DLE1BQWpDLENBQXdDLEtBQUtDLFFBQTdDOztBQUVBLFNBQUtJLGFBQUwsQ0FBbUJDLFFBQW5COztBQUVBO0FBQ0EsU0FBS0wsUUFBTCxDQUFjbUMsYUFBZCxHQUE4QixVQUFVaEIsS0FBVixFQUFpQjtBQUM3Q0EsWUFBTWlCLGNBQU47O0FBRUEsYUFBTyxLQUFQO0FBQ0QsS0FKRDs7QUFNQSxTQUFLbEIsWUFBTDtBQUNEO0FBdEdZLEMiLCJmaWxlIjoidG9vbHMuanMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgQ29tbWFuZHMgZnJvbSAnLi9jb21tYW5kcyc7XG5cbmNvbnN0IGlzTW9iaWxlID0gL2lQaG9uZXxpUGFkfGlQb2R8QW5kcm9pZC9pLnRlc3QobmF2aWdhdG9yLnVzZXJBZ2VudCk7XG5cbmV4cG9ydCBkZWZhdWx0IHtcbiAgYWN0aXZlOiAnJyxcbiAgdG9vbHNTZWxlY3RvcjogJy52aWV3ZXItdG9vbHMnLFxuICAkY29uZXJzdG9uZVZpZXdwb3J0OiAkKCcjY29uZXJzdG9uZVZpZXdwb3J0JyksXG4gIGRlYWN0aXZhdGVBY3RpdmVUb29sKCkge1xuICAgIGlmICh0aGlzLmFjdGl2ZSkge1xuICAgICAgdGhpcy5kZWFjdGl2YXRlKHRoaXMuYWN0aXZlKTtcbiAgICAgIHRoaXMuYWN0aXZlID0gJyc7XG4gICAgfVxuICB9LFxuXG4gIHRvZ2dsZVRvb2wodG9vbFRvQWN0aXZhdGUpIHtcbiAgICBpZiAoIXRvb2xUb0FjdGl2YXRlKSB7XG4gICAgICByZXR1cm47XG4gICAgfVxuXG4gICAgaWYgKGlzTW9iaWxlKSB7XG4gICAgICBpZiAodG9vbFRvQWN0aXZhdGUgPT09ICdsZW5ndGgnKSB7XG4gICAgICAgIHRvb2xUb0FjdGl2YXRlID0gYCR7dG9vbFRvQWN0aXZhdGV9VG91Y2hgO1xuICAgICAgfSBlbHNlIHtcbiAgICAgICAgdG9vbFRvQWN0aXZhdGUgPSBgJHt0b29sVG9BY3RpdmF0ZX1Ub3VjaERyYWdgO1xuICAgICAgfVxuICAgIH1cblxuICAgIGlmICh0aGlzLmFjdGl2ZSkge1xuICAgICAgdGhpcy5kZWFjdGl2YXRlKHRoaXMuYWN0aXZlKTtcbiAgICB9XG5cbiAgICBjb3JuZXJzdG9uZVRvb2xzW3Rvb2xUb0FjdGl2YXRlXS5lbmFibGUodGhpcy4kZWxlbWVudCk7XG4gICAgY29ybmVyc3RvbmVUb29sc1t0b29sVG9BY3RpdmF0ZV0uYWN0aXZhdGUodGhpcy4kZWxlbWVudCwgMSk7XG5cbiAgICB0aGlzLmFjdGl2ZSA9IHRvb2xUb0FjdGl2YXRlO1xuICB9LFxuXG4gIGRlYWN0aXZhdGUodG9vbCkge1xuICAgIGNvcm5lcnN0b25lVG9vbHNbdG9vbF0uZGlzYWJsZSh0aGlzLiRlbGVtZW50KTtcbiAgICBjb3JuZXJzdG9uZVRvb2xzW3Rvb2xdLmRlYWN0aXZhdGUodGhpcy4kZWxlbWVudCwgMSk7XG4gIH0sXG5cbiAgaW5pdFN0YWNrVG9vbChpbWFnZUlkcykge1xuICAgIGNvbnN0ICR0aHVtYiA9ICQoJy50aHVtYicpO1xuICAgIGNvbnN0IHN0YWNrID0ge1xuICAgICAgY3VycmVudEltYWdlSWRJbmRleDogMCxcbiAgICAgIGltYWdlSWRzOiBpbWFnZUlkc1xuICAgIH07XG5cbiAgICBjb3JuZXJzdG9uZVRvb2xzLmFkZFN0YWNrU3RhdGVNYW5hZ2VyKHRoaXMuJGVsZW1lbnQsIFsnc3RhY2snXSk7XG4gICAgY29ybmVyc3RvbmVUb29scy5hZGRUb29sU3RhdGUodGhpcy4kZWxlbWVudCwgJ3N0YWNrJywgc3RhY2spO1xuICAgIGNvcm5lcnN0b25lVG9vbHMuc3RhY2tTY3JvbGxXaGVlbC5hY3RpdmF0ZSh0aGlzLiRlbGVtZW50KTtcbiAgICBjb3JuZXJzdG9uZVRvb2xzLnN0YWNrU2Nyb2xsTXVsdGlUb3VjaC5hY3RpdmF0ZSh0aGlzLiRlbGVtZW50KTtcblxuICAgICR0aHVtYi5jc3MoJ2hlaWdodCcsIGAkeygxMDAvc3RhY2suaW1hZ2VJZHMubGVuZ3RoKX0lYCk7XG5cbiAgICAkKHRoaXMuJGVsZW1lbnQpLm9uKCdDb3JuZXJzdG9uZU5ld0ltYWdlJywgZnVuY3Rpb24gKCkge1xuICAgICAgdmFyIGN1cnJlbnRJbmRleCA9IHN0YWNrLmN1cnJlbnRJbWFnZUlkSW5kZXg7XG5cbiAgICAgICR0aHVtYi5jc3Moe1xuICAgICAgICAnbWFyZ2luLXRvcCc6IGAkeygkdGh1bWIuaGVpZ2h0KCkqKGN1cnJlbnRJbmRleCkpfXB4YFxuICAgICAgfSk7XG4gICAgfSk7XG4gIH0sXG5cbiAgYXR0YWNoRXZlbnRzKCkge1xuICAgIC8vIEV4dHJhY3Qgd2hpY2ggdG9vbCB3ZSBhcmUgdXNpbmcgYW5kIGFjdGl2YXRpbmcgaXRcbiAgICAkKHRoaXMudG9vbHNTZWxlY3Rvcikub24oJ2NsaWNrJywgJ2FbZGF0YS10b29sXScsIGV2ZW50ID0+IHtcbiAgICAgIGNvbnN0ICRlbGVtZW50ID0gJChldmVudC5jdXJyZW50VGFyZ2V0KTtcblxuICAgICAgY29uc3QgdG9vbCA9ICRlbGVtZW50LmF0dHIoJ2RhdGEtdG9vbCcpO1xuXG4gICAgICAkKCcuYWN0aXZlJykucmVtb3ZlQ2xhc3MoJ2FjdGl2ZScpO1xuXG4gICAgICB0aGlzLnRvZ2dsZVRvb2wodG9vbCk7XG5cbiAgICAgICRlbGVtZW50LnBhcmVudCgpLmFkZENsYXNzKCdhY3RpdmUnKTtcbiAgICB9KTtcblxuICAgIC8vIExpbWl0aW5nIG1lYXN1cmVtZW50cyB0byAxXG4gICAgdGhpcy4kY29uZXJzdG9uZVZpZXdwb3J0Lm9uKCd0b3VjaHN0YXJ0IG1vdXNlZG93bicsICgpID0+IHtcbiAgICAgIGNvbnN0IGxlbmd0aHMgPSBjb3JuZXJzdG9uZVRvb2xzLmdldFRvb2xTdGF0ZSh0aGlzLiRlbGVtZW50LCAnbGVuZ3RoJyk7XG5cbiAgICAgIGlmIChsZW5ndGhzICYmIGxlbmd0aHMuZGF0YS5sZW5ndGggPT09IDIpIHtcbiAgICAgICAgbGVuZ3Rocy5kYXRhLnNoaWZ0KCk7XG4gICAgICAgIGNvcm5lcnN0b25lLnVwZGF0ZUltYWdlKHRoaXMuJGVsZW1lbnQpO1xuICAgICAgfVxuICAgIH0pO1xuICB9LFxuXG4gIGluaXRUb29scyhpbWFnZUlkcykge1xuICAgIGNvcm5lcnN0b25lVG9vbHMubW91c2VJbnB1dC5lbmFibGUodGhpcy4kZWxlbWVudCk7XG4gICAgY29ybmVyc3RvbmVUb29scy50b3VjaElucHV0LmVuYWJsZSh0aGlzLiRlbGVtZW50KTtcbiAgICBjb3JuZXJzdG9uZVRvb2xzLm1vdXNlV2hlZWxJbnB1dC5lbmFibGUodGhpcy4kZWxlbWVudCk7XG5cbiAgICB0aGlzLmluaXRTdGFja1Rvb2woaW1hZ2VJZHMpO1xuXG4gICAgLy8gcmVtb3ZpbmcgZGVmYXVsdCBjb250ZXh0IG1lbnVcbiAgICB0aGlzLiRlbGVtZW50Lm9uY29udGV4dG1lbnUgPSBmdW5jdGlvbiAoZXZlbnQpIHtcbiAgICAgIGV2ZW50LnByZXZlbnREZWZhdWx0KCk7XG5cbiAgICAgIHJldHVybiBmYWxzZTtcbiAgICB9O1xuXG4gICAgdGhpcy5hdHRhY2hFdmVudHMoKTtcbiAgfVxufTtcbiJdfQ==
+},{"./commands":26}],30:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -15604,16 +20190,16 @@ exports.default = {
     this.$overlay.removeClass('invisible').addClass('loading');
 
     _files2.default.getCaseImages().then(function (imagesIds) {
-      console.log('test0');
+      // console.log('test0');
       _tools2.default.initTools(imagesIds);
-      console.log('test1');
+      // console.log('test1');
       _commands2.default.initCommands();
-      console.log('test2');
+      // console.log('test2');
 
       cornerstone.loadImage(imagesIds[0]).then(function (image) {
-        console.log('test3');
+        // console.log('test3');
         cornerstone.displayImage(_this.$element, image);
-        console.log('test4');
+        // console.log('test4');
       });
     }).catch();
   },
@@ -15635,8 +20221,9 @@ exports.default = {
 
     cornerstone.enable(this.$element);
 
+    // currentSeriesIndex = 0;//a hack to get series in order
     this.getNextCase();
   }
 };
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInZpZXdlci5qcyJdLCJuYW1lcyI6WyIkd2luZG93IiwiJCIsIndpbmRvdyIsIiR2aWV3ZXIiLCIkb3ZlcmxheSIsImdldE5leHRDYXNlIiwicmVtb3ZlQ2xhc3MiLCJhZGRDbGFzcyIsImdldENhc2VJbWFnZXMiLCJ0aGVuIiwiaW1hZ2VzSWRzIiwiY29uc29sZSIsImxvZyIsImluaXRUb29scyIsImluaXRDb21tYW5kcyIsImNvcm5lcnN0b25lIiwibG9hZEltYWdlIiwiaW1hZ2UiLCJkaXNwbGF5SW1hZ2UiLCIkZWxlbWVudCIsImNhdGNoIiwiaW5pdFZpZXdlciIsImluaXQiLCJvbiIsInJlc2l6ZSIsImVuYWJsZSJdLCJtYXBwaW5ncyI6Ijs7Ozs7O0FBQUE7Ozs7QUFDQTs7OztBQUNBOzs7O0FBQ0E7Ozs7OztrQkFFZTtBQUNiQSxXQUFTQyxFQUFFQyxNQUFGLENBREk7QUFFYkMsV0FBU0YsRUFBRSxpQkFBRixDQUZJO0FBR2JHLFlBQVVILEVBQUUsa0JBQUYsQ0FIRzs7QUFLYkksYUFMYSx5QkFLQztBQUFBOztBQUNaLFNBQUtELFFBQUwsQ0FBY0UsV0FBZCxDQUEwQixXQUExQixFQUF1Q0MsUUFBdkMsQ0FBZ0QsU0FBaEQ7O0FBRUEsb0JBQU1DLGFBQU4sR0FBc0JDLElBQXRCLENBQTJCLFVBQUNDLFNBQUQsRUFBZTtBQUN4Q0MsY0FBUUMsR0FBUixDQUFZLE9BQVo7QUFDQSxzQkFBTUMsU0FBTixDQUFnQkgsU0FBaEI7QUFDQUMsY0FBUUMsR0FBUixDQUFZLE9BQVo7QUFDQSx5QkFBU0UsWUFBVDtBQUNBSCxjQUFRQyxHQUFSLENBQVksT0FBWjs7QUFFQUcsa0JBQVlDLFNBQVosQ0FBc0JOLFVBQVUsQ0FBVixDQUF0QixFQUFvQ0QsSUFBcEMsQ0FBeUMsVUFBQ1EsS0FBRCxFQUFXO0FBQ2xETixnQkFBUUMsR0FBUixDQUFZLE9BQVo7QUFDQUcsb0JBQVlHLFlBQVosQ0FBeUIsTUFBS0MsUUFBOUIsRUFBd0NGLEtBQXhDO0FBQ0FOLGdCQUFRQyxHQUFSLENBQVksT0FBWjtBQUVELE9BTEQ7QUFNRCxLQWJELEVBYUdRLEtBYkg7QUFjRCxHQXRCWTtBQXdCYkMsWUF4QmEsd0JBd0JBO0FBQUE7O0FBQ1gsU0FBS0YsUUFBTCxHQUFnQmxCLEVBQUUscUJBQUYsRUFBeUIsQ0FBekIsQ0FBaEI7O0FBRUEsbUJBQUtxQixJQUFMOztBQUVBLFNBQUtuQixPQUFMLENBQWFHLFdBQWIsQ0FBeUIsV0FBekI7O0FBRUEsb0JBQU1hLFFBQU4sR0FBaUIsS0FBS0EsUUFBdEI7QUFDQSx1QkFBU0EsUUFBVCxHQUFvQixLQUFLQSxRQUF6Qjs7QUFFQSxTQUFLbkIsT0FBTCxDQUFhdUIsRUFBYixDQUFnQixRQUFoQixFQUEwQjtBQUFBLGFBQU1SLFlBQVlTLE1BQVosQ0FBbUIsT0FBS0wsUUFBeEIsRUFBa0MsSUFBbEMsQ0FBTjtBQUFBLEtBQTFCOztBQUVBSixnQkFBWVUsTUFBWixDQUFtQixLQUFLTixRQUF4Qjs7QUFFQSxTQUFLZCxXQUFMO0FBQ0Q7QUF2Q1ksQyIsImZpbGUiOiJ2aWV3ZXIuanMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgRmlsZXMgZnJvbSAnLi9maWxlcyc7XG5pbXBvcnQgVG9vbHMgZnJvbSAnLi90b29scyc7XG5pbXBvcnQgQ29tbWFuZHMgZnJvbSAnLi9jb21tYW5kcyc7XG5pbXBvcnQgTWVudSBmcm9tICcuLi9tZW51L21lbnUnO1xuXG5leHBvcnQgZGVmYXVsdCB7XG4gICR3aW5kb3c6ICQod2luZG93KSxcbiAgJHZpZXdlcjogJCgnLnZpZXdlci13cmFwcGVyJyksXG4gICRvdmVybGF5OiAkKCcubG9hZGluZy1vdmVybGF5JyksXG5cbiAgZ2V0TmV4dENhc2UoKSB7XG4gICAgdGhpcy4kb3ZlcmxheS5yZW1vdmVDbGFzcygnaW52aXNpYmxlJykuYWRkQ2xhc3MoJ2xvYWRpbmcnKTtcblxuICAgIEZpbGVzLmdldENhc2VJbWFnZXMoKS50aGVuKChpbWFnZXNJZHMpID0+IHtcbiAgICAgIGNvbnNvbGUubG9nKCd0ZXN0MCcpO1xuICAgICAgVG9vbHMuaW5pdFRvb2xzKGltYWdlc0lkcyk7XG4gICAgICBjb25zb2xlLmxvZygndGVzdDEnKTtcbiAgICAgIENvbW1hbmRzLmluaXRDb21tYW5kcygpO1xuICAgICAgY29uc29sZS5sb2coJ3Rlc3QyJyk7XG5cbiAgICAgIGNvcm5lcnN0b25lLmxvYWRJbWFnZShpbWFnZXNJZHNbMF0pLnRoZW4oKGltYWdlKSA9PiB7XG4gICAgICAgIGNvbnNvbGUubG9nKCd0ZXN0MycpO1xuICAgICAgICBjb3JuZXJzdG9uZS5kaXNwbGF5SW1hZ2UodGhpcy4kZWxlbWVudCwgaW1hZ2UpO1xuICAgICAgICBjb25zb2xlLmxvZygndGVzdDQnKTtcblxuICAgICAgfSk7XG4gICAgfSkuY2F0Y2goKTtcbiAgfSxcblxuICBpbml0Vmlld2VyKCkge1xuICAgIHRoaXMuJGVsZW1lbnQgPSAkKCcjY29uZXJzdG9uZVZpZXdwb3J0JylbMF07XG5cbiAgICBNZW51LmluaXQoKTtcblxuICAgIHRoaXMuJHZpZXdlci5yZW1vdmVDbGFzcygnaW52aXNpYmxlJyk7XG5cbiAgICBUb29scy4kZWxlbWVudCA9IHRoaXMuJGVsZW1lbnQ7XG4gICAgQ29tbWFuZHMuJGVsZW1lbnQgPSB0aGlzLiRlbGVtZW50O1xuXG4gICAgdGhpcy4kd2luZG93Lm9uKCdyZXNpemUnLCAoKSA9PiBjb3JuZXJzdG9uZS5yZXNpemUodGhpcy4kZWxlbWVudCwgdHJ1ZSkpO1xuXG4gICAgY29ybmVyc3RvbmUuZW5hYmxlKHRoaXMuJGVsZW1lbnQpO1xuXG4gICAgdGhpcy5nZXROZXh0Q2FzZSgpO1xuICB9XG59XG4iXX0=
-},{"../menu/menu":21,"./commands":24,"./files":26,"./tools":27}]},{},[19])
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInZpZXdlci5qcyJdLCJuYW1lcyI6WyIkd2luZG93IiwiJCIsIndpbmRvdyIsIiR2aWV3ZXIiLCIkb3ZlcmxheSIsImdldE5leHRDYXNlIiwicmVtb3ZlQ2xhc3MiLCJhZGRDbGFzcyIsImdldENhc2VJbWFnZXMiLCJ0aGVuIiwiaW1hZ2VzSWRzIiwiaW5pdFRvb2xzIiwiaW5pdENvbW1hbmRzIiwiY29ybmVyc3RvbmUiLCJsb2FkSW1hZ2UiLCJpbWFnZSIsImRpc3BsYXlJbWFnZSIsIiRlbGVtZW50IiwiY2F0Y2giLCJpbml0Vmlld2VyIiwiaW5pdCIsIm9uIiwicmVzaXplIiwiZW5hYmxlIl0sIm1hcHBpbmdzIjoiOzs7Ozs7QUFBQTs7OztBQUNBOzs7O0FBQ0E7Ozs7QUFDQTs7Ozs7O2tCQUVlO0FBQ2JBLFdBQVNDLEVBQUVDLE1BQUYsQ0FESTtBQUViQyxXQUFTRixFQUFFLGlCQUFGLENBRkk7QUFHYkcsWUFBVUgsRUFBRSxrQkFBRixDQUhHOztBQUtiSSxhQUxhLHlCQUtDO0FBQUE7O0FBQ1osU0FBS0QsUUFBTCxDQUFjRSxXQUFkLENBQTBCLFdBQTFCLEVBQXVDQyxRQUF2QyxDQUFnRCxTQUFoRDs7QUFFQSxvQkFBTUMsYUFBTixHQUFzQkMsSUFBdEIsQ0FBMkIsVUFBQ0MsU0FBRCxFQUFlO0FBQ3hDO0FBQ0Esc0JBQU1DLFNBQU4sQ0FBZ0JELFNBQWhCO0FBQ0E7QUFDQSx5QkFBU0UsWUFBVDtBQUNBOztBQUVBQyxrQkFBWUMsU0FBWixDQUFzQkosVUFBVSxDQUFWLENBQXRCLEVBQW9DRCxJQUFwQyxDQUF5QyxVQUFDTSxLQUFELEVBQVc7QUFDbEQ7QUFDQUYsb0JBQVlHLFlBQVosQ0FBeUIsTUFBS0MsUUFBOUIsRUFBd0NGLEtBQXhDO0FBQ0E7QUFFRCxPQUxEO0FBTUQsS0FiRCxFQWFHRyxLQWJIO0FBY0QsR0F0Qlk7QUF3QmJDLFlBeEJhLHdCQXdCQTtBQUFBOztBQUNYLFNBQUtGLFFBQUwsR0FBZ0JoQixFQUFFLHFCQUFGLEVBQXlCLENBQXpCLENBQWhCOztBQUVBLG1CQUFLbUIsSUFBTDs7QUFFQSxTQUFLakIsT0FBTCxDQUFhRyxXQUFiLENBQXlCLFdBQXpCOztBQUVBLG9CQUFNVyxRQUFOLEdBQWlCLEtBQUtBLFFBQXRCO0FBQ0EsdUJBQVNBLFFBQVQsR0FBb0IsS0FBS0EsUUFBekI7O0FBRUEsU0FBS2pCLE9BQUwsQ0FBYXFCLEVBQWIsQ0FBZ0IsUUFBaEIsRUFBMEI7QUFBQSxhQUFNUixZQUFZUyxNQUFaLENBQW1CLE9BQUtMLFFBQXhCLEVBQWtDLElBQWxDLENBQU47QUFBQSxLQUExQjs7QUFFQUosZ0JBQVlVLE1BQVosQ0FBbUIsS0FBS04sUUFBeEI7O0FBRUE7QUFDQSxTQUFLWixXQUFMO0FBQ0Q7QUF4Q1ksQyIsImZpbGUiOiJ2aWV3ZXIuanMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgRmlsZXMgZnJvbSAnLi9maWxlcyc7XG5pbXBvcnQgVG9vbHMgZnJvbSAnLi90b29scyc7XG5pbXBvcnQgQ29tbWFuZHMgZnJvbSAnLi9jb21tYW5kcyc7XG5pbXBvcnQgTWVudSBmcm9tICcuLi9tZW51L21lbnUnO1xuXG5leHBvcnQgZGVmYXVsdCB7XG4gICR3aW5kb3c6ICQod2luZG93KSxcbiAgJHZpZXdlcjogJCgnLnZpZXdlci13cmFwcGVyJyksXG4gICRvdmVybGF5OiAkKCcubG9hZGluZy1vdmVybGF5JyksXG5cbiAgZ2V0TmV4dENhc2UoKSB7XG4gICAgdGhpcy4kb3ZlcmxheS5yZW1vdmVDbGFzcygnaW52aXNpYmxlJykuYWRkQ2xhc3MoJ2xvYWRpbmcnKTtcblxuICAgIEZpbGVzLmdldENhc2VJbWFnZXMoKS50aGVuKChpbWFnZXNJZHMpID0+IHtcbiAgICAgIC8vIGNvbnNvbGUubG9nKCd0ZXN0MCcpO1xuICAgICAgVG9vbHMuaW5pdFRvb2xzKGltYWdlc0lkcyk7XG4gICAgICAvLyBjb25zb2xlLmxvZygndGVzdDEnKTtcbiAgICAgIENvbW1hbmRzLmluaXRDb21tYW5kcygpO1xuICAgICAgLy8gY29uc29sZS5sb2coJ3Rlc3QyJyk7XG5cbiAgICAgIGNvcm5lcnN0b25lLmxvYWRJbWFnZShpbWFnZXNJZHNbMF0pLnRoZW4oKGltYWdlKSA9PiB7XG4gICAgICAgIC8vIGNvbnNvbGUubG9nKCd0ZXN0MycpO1xuICAgICAgICBjb3JuZXJzdG9uZS5kaXNwbGF5SW1hZ2UodGhpcy4kZWxlbWVudCwgaW1hZ2UpO1xuICAgICAgICAvLyBjb25zb2xlLmxvZygndGVzdDQnKTtcblxuICAgICAgfSk7XG4gICAgfSkuY2F0Y2goKTtcbiAgfSxcblxuICBpbml0Vmlld2VyKCkge1xuICAgIHRoaXMuJGVsZW1lbnQgPSAkKCcjY29uZXJzdG9uZVZpZXdwb3J0JylbMF07XG5cbiAgICBNZW51LmluaXQoKTtcblxuICAgIHRoaXMuJHZpZXdlci5yZW1vdmVDbGFzcygnaW52aXNpYmxlJyk7XG5cbiAgICBUb29scy4kZWxlbWVudCA9IHRoaXMuJGVsZW1lbnQ7XG4gICAgQ29tbWFuZHMuJGVsZW1lbnQgPSB0aGlzLiRlbGVtZW50O1xuXG4gICAgdGhpcy4kd2luZG93Lm9uKCdyZXNpemUnLCAoKSA9PiBjb3JuZXJzdG9uZS5yZXNpemUodGhpcy4kZWxlbWVudCwgdHJ1ZSkpO1xuXG4gICAgY29ybmVyc3RvbmUuZW5hYmxlKHRoaXMuJGVsZW1lbnQpO1xuXG4gICAgLy8gY3VycmVudFNlcmllc0luZGV4ID0gMDsvL2EgaGFjayB0byBnZXQgc2VyaWVzIGluIG9yZGVyXG4gICAgdGhpcy5nZXROZXh0Q2FzZSgpO1xuICB9XG59XG4iXX0=
+},{"../menu/menu":23,"./commands":26,"./files":28,"./tools":29}]},{},[21])

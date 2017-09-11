@@ -12,6 +12,7 @@ export default {
       this.active = '';
     }
   },
+
   toggleTool(toolToActivate) {
     if (!toolToActivate) {
       return;
@@ -34,10 +35,12 @@ export default {
 
     this.active = toolToActivate;
   },
+
   deactivate(tool) {
     cornerstoneTools[tool].disable(this.$element);
     cornerstoneTools[tool].deactivate(this.$element, 1);
   },
+
   initStackTool(imageIds) {
     const $thumb = $('.thumb');
     const stack = {
@@ -60,10 +63,12 @@ export default {
       });
     });
   },
+
   attachEvents() {
     // Extract which tool we are using and activating it
     $(this.toolsSelector).on('click', 'a[data-tool]', event => {
       const $element = $(event.currentTarget);
+
       const tool = $element.attr('data-tool');
 
       $('.active').removeClass('active');
@@ -83,6 +88,7 @@ export default {
       }
     });
   },
+
   initTools(imageIds) {
     cornerstoneTools.mouseInput.enable(this.$element);
     cornerstoneTools.touchInput.enable(this.$element);

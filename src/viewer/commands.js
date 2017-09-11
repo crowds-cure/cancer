@@ -1,5 +1,8 @@
-import Menu from '../menu/menu'
-import Modal from '../modal/modal'
+import Menu from '../menu/menu';
+import Modal from '../modal/modal';
+import ErrorModal from '../errorModal/modal';
+import {measurementsDB, getUUID} from '../db/db';
+import moment from 'moment';
 
 export default {
   commandSelector: '.viewer-tools',
@@ -15,16 +18,43 @@ export default {
     cornerstoneTools.globalImageIdSpecificToolStateManager.clear(this.$element);
     cornerstone.updateImage(this.$element);
   },
+
   save: function () {
+
     Menu.closeMenu();
     this.$overlay.removeClass('invisible').addClass('submitting');
 
-    setTimeout(() => {
-      Modal.show();
+    const lengths = cornerstoneTools.getToolState(this.$element, 'length');
+    console.log('lengths:', lengths);
+    if(!lengths){
+      // console.log('ErrorModal', ErrorModal);
+      ErrorModal.show();
+      this.$overlay.removeClass('submitting');
+      return;
+    }
 
-       this.$overlay.removeClass('submitting');
-    }, 2000);
+    getUUID().then((uuid) => {
+      const doc = {
+        '_id': uuid,
+        'length': lengths.data[0].length,
+        'annotator': $('#login-username').val(),
+        'date': moment().unix(),
+        'userAgent': navigator.userAgent
+      }
+      console.log('doc:', doc);
+      return measurementsDB.put(doc);
+    }).then(() => {
+      Modal.show();
+      this.$overlay.removeClass('submitting');
+    });
+
+    // setTimeout(() => {
+    //   Modal.show();
+    //
+    //    this.$overlay.removeClass('submitting');
+    // }, 2000);
   },
+
   initCommands() {
     $(this.commandSelector).on('click', 'a[data-command]', event => {
       const $element = $(event.currentTarget);

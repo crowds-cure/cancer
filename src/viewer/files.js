@@ -64,6 +64,8 @@ export default {
     // });
   },
 
+  currentSeriesIndex: undefined,
+
   getChronicleImageIDs () {
     return chronicleDB.query("instances/context", {
       reduce : true,
@@ -83,18 +85,28 @@ export default {
       // ["UnspecifiedStudyDescription", "1.3.6.1.4.1.14519.5.2.1.7777.9002.242742387344636595876380532248"]
       // ["CT", "UnspecifiedSeriesDescription", "1.3.6.1.4.1.14519.5.2.1.7777.9002.106684271246229903146411807044"]
 
-      console.log('The number of series:', data.rows.length);
-      const rand = Math.floor(data.rows.length*Math.random());
-      console.log("random:", rand);
-      console.log('row:', data.rows[rand]);
+      // console.log('The number of series:', data.rows.length);
+      // const rand = Math.floor(data.rows.length*Math.random());
+      // console.log("random:", rand);
+      // console.log('row:', data.rows[rand]);
 
-      const key = data.rows[rand].key;
+      // const key = data.rows[rand].key;
+      if(!this.currentSeriesIndex){
+        this.currentSeriesIndex = 0;
+      }
+      console.log('series Index:', this.currentSeriesIndex);
 
-      // return row;
-      // return chronicleDb.query("instances/context", {
-      //
+      const key = data.rows[this.currentSeriesIndex].key;
+
+      this.currentSeriesIndex++;
+
+      // if(currentSeriesIndex >= data.rows.length){
+      //   currentSeriesIndex=0;
       // }
+
       const seriesUID = key[2][2];
+      console.log('series UID:', seriesUID);
+
       return chronicleDB.query("instances/seriesInstances", {
         startkey : seriesUID,
         endkey : seriesUID + '\u9999',
