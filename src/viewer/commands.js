@@ -25,7 +25,7 @@ export default {
     this.$overlay.removeClass('invisible').addClass('submitting');
 
     const lengths = cornerstoneTools.getToolState(this.$element, 'length');
-    console.log('lengths:', lengths);
+    // console.log('lengths:', lengths);
     if(!lengths){
       // console.log('ErrorModal', ErrorModal);
       ErrorModal.show();
@@ -41,7 +41,7 @@ export default {
         'date': moment().unix(),
         'userAgent': navigator.userAgent
       }
-      console.log('doc:', doc);
+      // console.log('doc:', doc);
       return measurementsDB.put(doc);
     }).then(() => {
       Modal.show();

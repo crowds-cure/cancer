@@ -33,9 +33,9 @@ export default {
 
     return this.getChronicleImageIDs().then((caseStudy) => {
       if (caseStudy && caseStudy.urls) {
-        console.log('getCaseImages0');
+        // console.log('getCaseImages0');
         return Promise.all(caseStudy.urls.map(this.getFile)).then(function (files) {
-          console.log('getCaseImages1');
+          // console.log('getCaseImages1');
           $overlay.addClass('invisible');
           $overlay.removeClass('loading');
 
@@ -75,7 +75,7 @@ export default {
       // endkey: [['UnspecifiedInstitution', 'TCGA-17-Z013']],
       group_level : 3,
     }).then((data) => {
-      console.log('data:', data);
+      // console.log('data:', data);
       // [key.institution,key.patientID],
       // [key.studyDescription,key.studyUID],
       // [key.modality,key.seriesDescription,key.seriesUID],

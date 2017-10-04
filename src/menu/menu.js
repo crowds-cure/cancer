@@ -2,6 +2,8 @@ import Login from '../login/login';
 import Modal from '../modal/modal';
 import ErrorModal from '../errorModal/modal';
 import Viewer from '../viewer/viewer';
+import {measurementsDB, getUUID} from '../db/db';
+import moment from 'moment';
 
 export default {
   $hamburguerMenu: $('.humburguer-menu'),
@@ -11,11 +13,36 @@ export default {
     this.closeMenu();
     this.$overlay.removeClass('invisible').addClass('submitting');
 
-    setTimeout(() => {
-      Modal.show();
-
+    const lengths = cornerstoneTools.getToolState(this.$element, 'length');
+    // console.log('lengths:', lengths);
+    if(!lengths){
+      // console.log('ErrorModal', ErrorModal);
+      ErrorModal.show();
       this.$overlay.removeClass('submitting');
-    }, 2000);
+      return;
+    }
+
+    getUUID().then((uuid) => {
+      const doc = {
+        '_id': uuid,
+        'length': lengths.data[0].length,
+        'annotator': $('#login-username').val(),
+        'date': moment().unix(),
+        'userAgent': navigator.userAgent
+      }
+      // console.log('doc:', doc);
+      return measurementsDB.put(doc);
+    }).then(() => {
+      Modal.show();
+      this.$overlay.removeClass('submitting');
+    });
+
+    // setTimeout(() => {
+    //   Modal.show();
+    //   console.log('Fake submit done');
+    //
+    //   this.$overlay.removeClass('submitting');
+    // }, 2000);
   },
   nextCase() {
     this.closeMenu();

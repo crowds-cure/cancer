@@ -36,6 +36,7 @@ export default {
 
     Tools.$element = this.$element;
     Commands.$element = this.$element;
+    Menu.$element = this.$element;
 
     this.$window.on('resize', () => cornerstone.resize(this.$element, true));
 

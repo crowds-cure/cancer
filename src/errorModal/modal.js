@@ -16,8 +16,6 @@ export default {
     Viewer.getNextCase();
   },
   show() {
-    console.log('inside show');
-    
     this.$modal.addClass('show');
     this.$overlay.removeClass('invisible');
   },

@@ -12,7 +12,6 @@ export default {
   },
   nextCase() {
     this.hide();
-
     Viewer.getNextCase();
   },
   show() {
