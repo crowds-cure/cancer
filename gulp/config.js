@@ -1,5 +1,5 @@
 module.exports = {
-  entry: 'src/login/login.js',
+  entry: 'src/login/startLogin.js',
   dist: './',
   src: './src',
   sassEntry: './src/main.scss',

@@ -1,5 +1,6 @@
 import {adjectivesDB, animalsDB, annotatorsDB, annotatorsURL} from '../db/db';
 import Viewer from '../viewer/viewer';
+import Login from '../login/login';
 
 class Signup {
 
@@ -146,6 +147,8 @@ class Signup {
       // $('.signup-wrapper .error').addClass('invisible');
 
       const username = $('#signup-name-select option:selected').text();
+      Login.username = username;
+      // console.log('signup Login:', Login);
       // const username = $('input[name="username"]').val();
       // const password = $('input[name="password"]').val();
       // const confirmPassword = $('input[name="confirm-password"]').val();

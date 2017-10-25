@@ -2,6 +2,7 @@ import Menu from '../menu/menu';
 import Modal from '../modal/modal';
 import ErrorModal from '../errorModal/modal';
 import {measurementsDB, getUUID} from '../db/db';
+import Login from '../login/login';
 import moment from 'moment';
 
 export default {
@@ -37,11 +38,12 @@ export default {
       const doc = {
         '_id': uuid,
         'length': lengths.data[0].length,
-        'annotator': $('#login-username').val(),
+        'annotator': Login.username,
+        // 'annotator': $('#login-username').val(),
         'date': moment().unix(),
         'userAgent': navigator.userAgent
       }
-      // console.log('doc:', doc);
+      console.log('Login', Login);
       return measurementsDB.put(doc);
     }).then(() => {
       Modal.show();

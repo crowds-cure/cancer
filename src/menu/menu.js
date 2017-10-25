@@ -3,12 +3,15 @@ import Modal from '../modal/modal';
 import ErrorModal from '../errorModal/modal';
 import Viewer from '../viewer/viewer';
 import {measurementsDB, getUUID} from '../db/db';
+import {username} from '../login/login';
+
 import moment from 'moment';
 
 export default {
   $hamburguerMenu: $('.humburguer-menu'),
   $menuWrapper: $('.menu-wrapper'),
   $overlay: $('.loading-overlay'),
+
   submit() {
     this.closeMenu();
     this.$overlay.removeClass('invisible').addClass('submitting');
@@ -26,7 +29,8 @@ export default {
       const doc = {
         '_id': uuid,
         'length': lengths.data[0].length,
-        'annotator': $('#login-username').val(),
+        'annotator': username,
+        // 'annotator': $('#login-username').val(),
         'date': moment().unix(),
         'userAgent': navigator.userAgent
       }
