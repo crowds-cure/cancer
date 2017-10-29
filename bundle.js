@@ -19,6 +19,399 @@ function argsArray(fun) {
   };
 }
 },{}],2:[function(require,module,exports){
+(function (process){
+/**
+ * This is the web browser implementation of `debug()`.
+ *
+ * Expose `debug()` as the module.
+ */
+
+exports = module.exports = require('./debug');
+exports.log = log;
+exports.formatArgs = formatArgs;
+exports.save = save;
+exports.load = load;
+exports.useColors = useColors;
+exports.storage = 'undefined' != typeof chrome
+               && 'undefined' != typeof chrome.storage
+                  ? chrome.storage.local
+                  : localstorage();
+
+/**
+ * Colors.
+ */
+
+exports.colors = [
+  'lightseagreen',
+  'forestgreen',
+  'goldenrod',
+  'dodgerblue',
+  'darkorchid',
+  'crimson'
+];
+
+/**
+ * Currently only WebKit-based Web Inspectors, Firefox >= v31,
+ * and the Firebug extension (any Firefox version) are known
+ * to support "%c" CSS customizations.
+ *
+ * TODO: add a `localStorage` variable to explicitly enable/disable colors
+ */
+
+function useColors() {
+  // NB: In an Electron preload script, document will be defined but not fully
+  // initialized. Since we know we're in Chrome, we'll just detect this case
+  // explicitly
+  if (typeof window !== 'undefined' && window && typeof window.process !== 'undefined' && window.process.type === 'renderer') {
+    return true;
+  }
+
+  // is webkit? http://stackoverflow.com/a/16459606/376773
+  // document is undefined in react-native: https://github.com/facebook/react-native/pull/1632
+  return (typeof document !== 'undefined' && document && 'WebkitAppearance' in document.documentElement.style) ||
+    // is firebug? http://stackoverflow.com/a/398120/376773
+    (typeof window !== 'undefined' && window && window.console && (console.firebug || (console.exception && console.table))) ||
+    // is firefox >= v31?
+    // https://developer.mozilla.org/en-US/docs/Tools/Web_Console#Styling_messages
+    (typeof navigator !== 'undefined' && navigator && navigator.userAgent && navigator.userAgent.toLowerCase().match(/firefox\/(\d+)/) && parseInt(RegExp.$1, 10) >= 31) ||
+    // double check webkit in userAgent just in case we are in a worker
+    (typeof navigator !== 'undefined' && navigator && navigator.userAgent && navigator.userAgent.toLowerCase().match(/applewebkit\/(\d+)/));
+}
+
+/**
+ * Map %j to `JSON.stringify()`, since no Web Inspectors do that by default.
+ */
+
+exports.formatters.j = function(v) {
+  try {
+    return JSON.stringify(v);
+  } catch (err) {
+    return '[UnexpectedJSONParseError]: ' + err.message;
+  }
+};
+
+
+/**
+ * Colorize log arguments if enabled.
+ *
+ * @api public
+ */
+
+function formatArgs(args) {
+  var useColors = this.useColors;
+
+  args[0] = (useColors ? '%c' : '')
+    + this.namespace
+    + (useColors ? ' %c' : ' ')
+    + args[0]
+    + (useColors ? '%c ' : ' ')
+    + '+' + exports.humanize(this.diff);
+
+  if (!useColors) return;
+
+  var c = 'color: ' + this.color;
+  args.splice(1, 0, c, 'color: inherit')
+
+  // the final "%c" is somewhat tricky, because there could be other
+  // arguments passed either before or after the %c, so we need to
+  // figure out the correct index to insert the CSS into
+  var index = 0;
+  var lastC = 0;
+  args[0].replace(/%[a-zA-Z%]/g, function(match) {
+    if ('%%' === match) return;
+    index++;
+    if ('%c' === match) {
+      // we only are interested in the *last* %c
+      // (the user may have provided their own)
+      lastC = index;
+    }
+  });
+
+  args.splice(lastC, 0, c);
+}
+
+/**
+ * Invokes `console.log()` when available.
+ * No-op when `console.log` is not a "function".
+ *
+ * @api public
+ */
+
+function log() {
+  // this hackery is required for IE8/9, where
+  // the `console.log` function doesn't have 'apply'
+  return 'object' === typeof console
+    && console.log
+    && Function.prototype.apply.call(console.log, console, arguments);
+}
+
+/**
+ * Save `namespaces`.
+ *
+ * @param {String} namespaces
+ * @api private
+ */
+
+function save(namespaces) {
+  try {
+    if (null == namespaces) {
+      exports.storage.removeItem('debug');
+    } else {
+      exports.storage.debug = namespaces;
+    }
+  } catch(e) {}
+}
+
+/**
+ * Load `namespaces`.
+ *
+ * @return {String} returns the previously persisted debug modes
+ * @api private
+ */
+
+function load() {
+  var r;
+  try {
+    r = exports.storage.debug;
+  } catch(e) {}
+
+  // If debug isn't set in LS, and we're in Electron, try to load $DEBUG
+  if (!r && typeof process !== 'undefined' && 'env' in process) {
+    r = process.env.DEBUG;
+  }
+
+  return r;
+}
+
+/**
+ * Enable namespaces listed in `localStorage.debug` initially.
+ */
+
+exports.enable(load());
+
+/**
+ * Localstorage attempts to return the localstorage.
+ *
+ * This is necessary because safari throws
+ * when a user disables cookies/localstorage
+ * and you attempt to access it.
+ *
+ * @return {LocalStorage}
+ * @api private
+ */
+
+function localstorage() {
+  try {
+    return window.localStorage;
+  } catch (e) {}
+}
+
+}).call(this,require("b55mWE"))
+},{"./debug":3,"b55mWE":5}],3:[function(require,module,exports){
+
+/**
+ * This is the common logic for both the Node.js and web browser
+ * implementations of `debug()`.
+ *
+ * Expose `debug()` as the module.
+ */
+
+exports = module.exports = createDebug.debug = createDebug['default'] = createDebug;
+exports.coerce = coerce;
+exports.disable = disable;
+exports.enable = enable;
+exports.enabled = enabled;
+exports.humanize = require('ms');
+
+/**
+ * The currently active debug mode names, and names to skip.
+ */
+
+exports.names = [];
+exports.skips = [];
+
+/**
+ * Map of special "%n" handling functions, for the debug "format" argument.
+ *
+ * Valid key names are a single, lower or upper-case letter, i.e. "n" and "N".
+ */
+
+exports.formatters = {};
+
+/**
+ * Previous log timestamp.
+ */
+
+var prevTime;
+
+/**
+ * Select a color.
+ * @param {String} namespace
+ * @return {Number}
+ * @api private
+ */
+
+function selectColor(namespace) {
+  var hash = 0, i;
+
+  for (i in namespace) {
+    hash  = ((hash << 5) - hash) + namespace.charCodeAt(i);
+    hash |= 0; // Convert to 32bit integer
+  }
+
+  return exports.colors[Math.abs(hash) % exports.colors.length];
+}
+
+/**
+ * Create a debugger with the given `namespace`.
+ *
+ * @param {String} namespace
+ * @return {Function}
+ * @api public
+ */
+
+function createDebug(namespace) {
+
+  function debug() {
+    // disabled?
+    if (!debug.enabled) return;
+
+    var self = debug;
+
+    // set `diff` timestamp
+    var curr = +new Date();
+    var ms = curr - (prevTime || curr);
+    self.diff = ms;
+    self.prev = prevTime;
+    self.curr = curr;
+    prevTime = curr;
+
+    // turn the `arguments` into a proper Array
+    var args = new Array(arguments.length);
+    for (var i = 0; i < args.length; i++) {
+      args[i] = arguments[i];
+    }
+
+    args[0] = exports.coerce(args[0]);
+
+    if ('string' !== typeof args[0]) {
+      // anything else let's inspect with %O
+      args.unshift('%O');
+    }
+
+    // apply any `formatters` transformations
+    var index = 0;
+    args[0] = args[0].replace(/%([a-zA-Z%])/g, function(match, format) {
+      // if we encounter an escaped % then don't increase the array index
+      if (match === '%%') return match;
+      index++;
+      var formatter = exports.formatters[format];
+      if ('function' === typeof formatter) {
+        var val = args[index];
+        match = formatter.call(self, val);
+
+        // now we need to remove `args[index]` since it's inlined in the `format`
+        args.splice(index, 1);
+        index--;
+      }
+      return match;
+    });
+
+    // apply env-specific formatting (colors, etc.)
+    exports.formatArgs.call(self, args);
+
+    var logFn = debug.log || exports.log || console.log.bind(console);
+    logFn.apply(self, args);
+  }
+
+  debug.namespace = namespace;
+  debug.enabled = exports.enabled(namespace);
+  debug.useColors = exports.useColors();
+  debug.color = selectColor(namespace);
+
+  // env-specific initialization logic for debug instances
+  if ('function' === typeof exports.init) {
+    exports.init(debug);
+  }
+
+  return debug;
+}
+
+/**
+ * Enables a debug mode by namespaces. This can include modes
+ * separated by a colon and wildcards.
+ *
+ * @param {String} namespaces
+ * @api public
+ */
+
+function enable(namespaces) {
+  exports.save(namespaces);
+
+  exports.names = [];
+  exports.skips = [];
+
+  var split = (typeof namespaces === 'string' ? namespaces : '').split(/[\s,]+/);
+  var len = split.length;
+
+  for (var i = 0; i < len; i++) {
+    if (!split[i]) continue; // ignore empty strings
+    namespaces = split[i].replace(/\*/g, '.*?');
+    if (namespaces[0] === '-') {
+      exports.skips.push(new RegExp('^' + namespaces.substr(1) + '$'));
+    } else {
+      exports.names.push(new RegExp('^' + namespaces + '$'));
+    }
+  }
+}
+
+/**
+ * Disable debug output.
+ *
+ * @api public
+ */
+
+function disable() {
+  exports.enable('');
+}
+
+/**
+ * Returns true if the given mode name is enabled, false otherwise.
+ *
+ * @param {String} name
+ * @return {Boolean}
+ * @api public
+ */
+
+function enabled(name) {
+  var i, len;
+  for (i = 0, len = exports.skips.length; i < len; i++) {
+    if (exports.skips[i].test(name)) {
+      return false;
+    }
+  }
+  for (i = 0, len = exports.names.length; i < len; i++) {
+    if (exports.names[i].test(name)) {
+      return true;
+    }
+  }
+  return false;
+}
+
+/**
+ * Coerce `val`.
+ *
+ * @param {Mixed} val
+ * @return {Mixed}
+ * @api private
+ */
+
+function coerce(val) {
+  if (val instanceof Error) return val.stack || val.message;
+  return val;
+}
+
+},{"ms":10}],4:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -321,7 +714,7 @@ function isUndefined(arg) {
   return arg === void 0;
 }
 
-},{}],3:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -386,7 +779,7 @@ process.chdir = function (dir) {
     throw new Error('process.chdir is not supported');
 };
 
-},{}],4:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 (function (global){
 'use strict';
 var Mutation = global.MutationObserver || global.WebKitMutationObserver;
@@ -459,7 +852,7 @@ function immediate(task) {
 }
 
 }).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],5:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
   module.exports = function inherits(ctor, superCtor) {
@@ -484,7 +877,7 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],6:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 'use strict';
 var immediate = require('immediate');
 
@@ -739,9 +1132,9 @@ function race(iterable) {
   }
 }
 
-},{"immediate":4}],7:[function(require,module,exports){
+},{"immediate":6}],9:[function(require,module,exports){
 //! moment.js
-//! version : 2.18.1
+//! version : 2.19.1
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
 //! license : MIT
 //! momentjs.com
@@ -775,12 +1168,17 @@ function isObject(input) {
 }
 
 function isObjectEmpty(obj) {
-    var k;
-    for (k in obj) {
-        // even if its not own property I'd still call it non-empty
-        return false;
+    if (Object.getOwnPropertyNames) {
+        return (Object.getOwnPropertyNames(obj).length === 0);
+    } else {
+        var k;
+        for (k in obj) {
+            if (obj.hasOwnProperty(k)) {
+                return false;
+            }
+        }
+        return true;
     }
-    return true;
 }
 
 function isUndefined(input) {
@@ -874,12 +1272,10 @@ if (Array.prototype.some) {
     };
 }
 
-var some$1 = some;
-
 function isValid(m) {
     if (m._isValid == null) {
         var flags = getParsingFlags(m);
-        var parsedParts = some$1.call(flags.parsedDateParts, function (i) {
+        var parsedParts = some.call(flags.parsedDateParts, function (i) {
             return i != null;
         });
         var isNowValid = !isNaN(m._d.getTime()) &&
@@ -887,6 +1283,7 @@ function isValid(m) {
             !flags.empty &&
             !flags.invalidMonth &&
             !flags.invalidWeekday &&
+            !flags.weekdayMismatch &&
             !flags.nullInput &&
             !flags.invalidFormat &&
             !flags.userInvalidated &&
@@ -1152,8 +1549,6 @@ if (Object.keys) {
     };
 }
 
-var keys$1 = keys;
-
 var defaultCalendar = {
     sameDay : '[Today at] LT',
     nextDay : '[Tomorrow at] LT',
@@ -1277,56 +1672,6 @@ function getPrioritizedUnits(unitsObj) {
         return a.priority - b.priority;
     });
     return units;
-}
-
-function makeGetSet (unit, keepTime) {
-    return function (value) {
-        if (value != null) {
-            set$1(this, unit, value);
-            hooks.updateOffset(this, keepTime);
-            return this;
-        } else {
-            return get(this, unit);
-        }
-    };
-}
-
-function get (mom, unit) {
-    return mom.isValid() ?
-        mom._d['get' + (mom._isUTC ? 'UTC' : '') + unit]() : NaN;
-}
-
-function set$1 (mom, unit, value) {
-    if (mom.isValid()) {
-        mom._d['set' + (mom._isUTC ? 'UTC' : '') + unit](value);
-    }
-}
-
-// MOMENTS
-
-function stringGet (units) {
-    units = normalizeUnits(units);
-    if (isFunction(this[units])) {
-        return this[units]();
-    }
-    return this;
-}
-
-
-function stringSet (units, value) {
-    if (typeof units === 'object') {
-        units = normalizeObjectUnits(units);
-        var prioritized = getPrioritizedUnits(units);
-        for (var i = 0; i < prioritized.length; i++) {
-            this[prioritized[i].unit](units[prioritized[i].unit]);
-        }
-    } else {
-        units = normalizeUnits(units);
-        if (isFunction(this[units])) {
-            return this[units](value);
-        }
-    }
-    return this;
 }
 
 function zeroFill(number, targetLength, forceSign) {
@@ -1519,6 +1864,131 @@ var MILLISECOND = 6;
 var WEEK = 7;
 var WEEKDAY = 8;
 
+// FORMATTING
+
+addFormatToken('Y', 0, 0, function () {
+    var y = this.year();
+    return y <= 9999 ? '' + y : '+' + y;
+});
+
+addFormatToken(0, ['YY', 2], 0, function () {
+    return this.year() % 100;
+});
+
+addFormatToken(0, ['YYYY',   4],       0, 'year');
+addFormatToken(0, ['YYYYY',  5],       0, 'year');
+addFormatToken(0, ['YYYYYY', 6, true], 0, 'year');
+
+// ALIASES
+
+addUnitAlias('year', 'y');
+
+// PRIORITIES
+
+addUnitPriority('year', 1);
+
+// PARSING
+
+addRegexToken('Y',      matchSigned);
+addRegexToken('YY',     match1to2, match2);
+addRegexToken('YYYY',   match1to4, match4);
+addRegexToken('YYYYY',  match1to6, match6);
+addRegexToken('YYYYYY', match1to6, match6);
+
+addParseToken(['YYYYY', 'YYYYYY'], YEAR);
+addParseToken('YYYY', function (input, array) {
+    array[YEAR] = input.length === 2 ? hooks.parseTwoDigitYear(input) : toInt(input);
+});
+addParseToken('YY', function (input, array) {
+    array[YEAR] = hooks.parseTwoDigitYear(input);
+});
+addParseToken('Y', function (input, array) {
+    array[YEAR] = parseInt(input, 10);
+});
+
+// HELPERS
+
+function daysInYear(year) {
+    return isLeapYear(year) ? 366 : 365;
+}
+
+function isLeapYear(year) {
+    return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
+}
+
+// HOOKS
+
+hooks.parseTwoDigitYear = function (input) {
+    return toInt(input) + (toInt(input) > 68 ? 1900 : 2000);
+};
+
+// MOMENTS
+
+var getSetYear = makeGetSet('FullYear', true);
+
+function getIsLeapYear () {
+    return isLeapYear(this.year());
+}
+
+function makeGetSet (unit, keepTime) {
+    return function (value) {
+        if (value != null) {
+            set$1(this, unit, value);
+            hooks.updateOffset(this, keepTime);
+            return this;
+        } else {
+            return get(this, unit);
+        }
+    };
+}
+
+function get (mom, unit) {
+    return mom.isValid() ?
+        mom._d['get' + (mom._isUTC ? 'UTC' : '') + unit]() : NaN;
+}
+
+function set$1 (mom, unit, value) {
+    if (mom.isValid() && !isNaN(value)) {
+        if (unit === 'FullYear' && isLeapYear(mom.year())) {
+            mom._d['set' + (mom._isUTC ? 'UTC' : '') + unit](value, mom.month(), daysInMonth(value, mom.month()));
+        }
+        else {
+            mom._d['set' + (mom._isUTC ? 'UTC' : '') + unit](value);
+        }
+    }
+}
+
+// MOMENTS
+
+function stringGet (units) {
+    units = normalizeUnits(units);
+    if (isFunction(this[units])) {
+        return this[units]();
+    }
+    return this;
+}
+
+
+function stringSet (units, value) {
+    if (typeof units === 'object') {
+        units = normalizeObjectUnits(units);
+        var prioritized = getPrioritizedUnits(units);
+        for (var i = 0; i < prioritized.length; i++) {
+            this[prioritized[i].unit](units[prioritized[i].unit]);
+        }
+    } else {
+        units = normalizeUnits(units);
+        if (isFunction(this[units])) {
+            return this[units](value);
+        }
+    }
+    return this;
+}
+
+function mod(n, x) {
+    return ((n % x) + x) % x;
+}
+
 var indexOf;
 
 if (Array.prototype.indexOf) {
@@ -1536,10 +2006,13 @@ if (Array.prototype.indexOf) {
     };
 }
 
-var indexOf$1 = indexOf;
-
 function daysInMonth(year, month) {
-    return new Date(Date.UTC(year, month + 1, 0)).getUTCDate();
+    if (isNaN(year) || isNaN(month)) {
+        return NaN;
+    }
+    var modMonth = mod(month, 12);
+    year += (month - modMonth) / 12;
+    return modMonth === 1 ? (isLeapYear(year) ? 29 : 28) : (31 - modMonth % 7 % 2);
 }
 
 // FORMATTING
@@ -1628,26 +2101,26 @@ function handleStrictParse(monthName, format, strict) {
 
     if (strict) {
         if (format === 'MMM') {
-            ii = indexOf$1.call(this._shortMonthsParse, llc);
+            ii = indexOf.call(this._shortMonthsParse, llc);
             return ii !== -1 ? ii : null;
         } else {
-            ii = indexOf$1.call(this._longMonthsParse, llc);
+            ii = indexOf.call(this._longMonthsParse, llc);
             return ii !== -1 ? ii : null;
         }
     } else {
         if (format === 'MMM') {
-            ii = indexOf$1.call(this._shortMonthsParse, llc);
+            ii = indexOf.call(this._shortMonthsParse, llc);
             if (ii !== -1) {
                 return ii;
             }
-            ii = indexOf$1.call(this._longMonthsParse, llc);
+            ii = indexOf.call(this._longMonthsParse, llc);
             return ii !== -1 ? ii : null;
         } else {
-            ii = indexOf$1.call(this._longMonthsParse, llc);
+            ii = indexOf.call(this._longMonthsParse, llc);
             if (ii !== -1) {
                 return ii;
             }
-            ii = indexOf$1.call(this._shortMonthsParse, llc);
+            ii = indexOf.call(this._shortMonthsParse, llc);
             return ii !== -1 ? ii : null;
         }
     }
@@ -1804,72 +2277,6 @@ function computeMonthsParse () {
     this._monthsShortRegex = this._monthsRegex;
     this._monthsStrictRegex = new RegExp('^(' + longPieces.join('|') + ')', 'i');
     this._monthsShortStrictRegex = new RegExp('^(' + shortPieces.join('|') + ')', 'i');
-}
-
-// FORMATTING
-
-addFormatToken('Y', 0, 0, function () {
-    var y = this.year();
-    return y <= 9999 ? '' + y : '+' + y;
-});
-
-addFormatToken(0, ['YY', 2], 0, function () {
-    return this.year() % 100;
-});
-
-addFormatToken(0, ['YYYY',   4],       0, 'year');
-addFormatToken(0, ['YYYYY',  5],       0, 'year');
-addFormatToken(0, ['YYYYYY', 6, true], 0, 'year');
-
-// ALIASES
-
-addUnitAlias('year', 'y');
-
-// PRIORITIES
-
-addUnitPriority('year', 1);
-
-// PARSING
-
-addRegexToken('Y',      matchSigned);
-addRegexToken('YY',     match1to2, match2);
-addRegexToken('YYYY',   match1to4, match4);
-addRegexToken('YYYYY',  match1to6, match6);
-addRegexToken('YYYYYY', match1to6, match6);
-
-addParseToken(['YYYYY', 'YYYYYY'], YEAR);
-addParseToken('YYYY', function (input, array) {
-    array[YEAR] = input.length === 2 ? hooks.parseTwoDigitYear(input) : toInt(input);
-});
-addParseToken('YY', function (input, array) {
-    array[YEAR] = hooks.parseTwoDigitYear(input);
-});
-addParseToken('Y', function (input, array) {
-    array[YEAR] = parseInt(input, 10);
-});
-
-// HELPERS
-
-function daysInYear(year) {
-    return isLeapYear(year) ? 366 : 365;
-}
-
-function isLeapYear(year) {
-    return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
-}
-
-// HOOKS
-
-hooks.parseTwoDigitYear = function (input) {
-    return toInt(input) + (toInt(input) > 68 ? 1900 : 2000);
-};
-
-// MOMENTS
-
-var getSetYear = makeGetSet('FullYear', true);
-
-function getIsLeapYear () {
-    return isLeapYear(this.year());
 }
 
 function createDate (y, m, d, h, M, s, ms) {
@@ -2139,48 +2546,48 @@ function handleStrictParse$1(weekdayName, format, strict) {
 
     if (strict) {
         if (format === 'dddd') {
-            ii = indexOf$1.call(this._weekdaysParse, llc);
+            ii = indexOf.call(this._weekdaysParse, llc);
             return ii !== -1 ? ii : null;
         } else if (format === 'ddd') {
-            ii = indexOf$1.call(this._shortWeekdaysParse, llc);
+            ii = indexOf.call(this._shortWeekdaysParse, llc);
             return ii !== -1 ? ii : null;
         } else {
-            ii = indexOf$1.call(this._minWeekdaysParse, llc);
+            ii = indexOf.call(this._minWeekdaysParse, llc);
             return ii !== -1 ? ii : null;
         }
     } else {
         if (format === 'dddd') {
-            ii = indexOf$1.call(this._weekdaysParse, llc);
+            ii = indexOf.call(this._weekdaysParse, llc);
             if (ii !== -1) {
                 return ii;
             }
-            ii = indexOf$1.call(this._shortWeekdaysParse, llc);
+            ii = indexOf.call(this._shortWeekdaysParse, llc);
             if (ii !== -1) {
                 return ii;
             }
-            ii = indexOf$1.call(this._minWeekdaysParse, llc);
+            ii = indexOf.call(this._minWeekdaysParse, llc);
             return ii !== -1 ? ii : null;
         } else if (format === 'ddd') {
-            ii = indexOf$1.call(this._shortWeekdaysParse, llc);
+            ii = indexOf.call(this._shortWeekdaysParse, llc);
             if (ii !== -1) {
                 return ii;
             }
-            ii = indexOf$1.call(this._weekdaysParse, llc);
+            ii = indexOf.call(this._weekdaysParse, llc);
             if (ii !== -1) {
                 return ii;
             }
-            ii = indexOf$1.call(this._minWeekdaysParse, llc);
+            ii = indexOf.call(this._minWeekdaysParse, llc);
             return ii !== -1 ? ii : null;
         } else {
-            ii = indexOf$1.call(this._minWeekdaysParse, llc);
+            ii = indexOf.call(this._minWeekdaysParse, llc);
             if (ii !== -1) {
                 return ii;
             }
-            ii = indexOf$1.call(this._weekdaysParse, llc);
+            ii = indexOf.call(this._weekdaysParse, llc);
             if (ii !== -1) {
                 return ii;
             }
-            ii = indexOf$1.call(this._shortWeekdaysParse, llc);
+            ii = indexOf.call(this._shortWeekdaysParse, llc);
             return ii !== -1 ? ii : null;
         }
     }
@@ -2569,11 +2976,10 @@ function loadLocale(name) {
             module && module.exports) {
         try {
             oldLocale = globalLocale._abbr;
-            require('./locale/' + name);
-            // because defineLocale currently also sets the global locale, we
-            // want to undo that for lazy loaded locales
+            var aliasedRequire = require;
+            aliasedRequire('./locale/' + name);
             getSetGlobalLocale(oldLocale);
-        } catch (e) { }
+        } catch (e) {}
     }
     return locales[name];
 }
@@ -2699,7 +3105,7 @@ function getLocale (key) {
 }
 
 function listLocales() {
-    return keys$1(locales);
+    return keys(locales);
 }
 
 function checkOverflow (m) {
@@ -2730,6 +3136,154 @@ function checkOverflow (m) {
     }
 
     return m;
+}
+
+// Pick the first defined of two or three arguments.
+function defaults(a, b, c) {
+    if (a != null) {
+        return a;
+    }
+    if (b != null) {
+        return b;
+    }
+    return c;
+}
+
+function currentDateArray(config) {
+    // hooks is actually the exported moment object
+    var nowValue = new Date(hooks.now());
+    if (config._useUTC) {
+        return [nowValue.getUTCFullYear(), nowValue.getUTCMonth(), nowValue.getUTCDate()];
+    }
+    return [nowValue.getFullYear(), nowValue.getMonth(), nowValue.getDate()];
+}
+
+// convert an array to a date.
+// the array should mirror the parameters below
+// note: all values past the year are optional and will default to the lowest possible value.
+// [year, month, day , hour, minute, second, millisecond]
+function configFromArray (config) {
+    var i, date, input = [], currentDate, yearToUse;
+
+    if (config._d) {
+        return;
+    }
+
+    currentDate = currentDateArray(config);
+
+    //compute day of the year from weeks and weekdays
+    if (config._w && config._a[DATE] == null && config._a[MONTH] == null) {
+        dayOfYearFromWeekInfo(config);
+    }
+
+    //if the day of the year is set, figure out what it is
+    if (config._dayOfYear != null) {
+        yearToUse = defaults(config._a[YEAR], currentDate[YEAR]);
+
+        if (config._dayOfYear > daysInYear(yearToUse) || config._dayOfYear === 0) {
+            getParsingFlags(config)._overflowDayOfYear = true;
+        }
+
+        date = createUTCDate(yearToUse, 0, config._dayOfYear);
+        config._a[MONTH] = date.getUTCMonth();
+        config._a[DATE] = date.getUTCDate();
+    }
+
+    // Default to current date.
+    // * if no year, month, day of month are given, default to today
+    // * if day of month is given, default month and year
+    // * if month is given, default only year
+    // * if year is given, don't default anything
+    for (i = 0; i < 3 && config._a[i] == null; ++i) {
+        config._a[i] = input[i] = currentDate[i];
+    }
+
+    // Zero out whatever was not defaulted, including time
+    for (; i < 7; i++) {
+        config._a[i] = input[i] = (config._a[i] == null) ? (i === 2 ? 1 : 0) : config._a[i];
+    }
+
+    // Check for 24:00:00.000
+    if (config._a[HOUR] === 24 &&
+            config._a[MINUTE] === 0 &&
+            config._a[SECOND] === 0 &&
+            config._a[MILLISECOND] === 0) {
+        config._nextDay = true;
+        config._a[HOUR] = 0;
+    }
+
+    config._d = (config._useUTC ? createUTCDate : createDate).apply(null, input);
+    // Apply timezone offset from input. The actual utcOffset can be changed
+    // with parseZone.
+    if (config._tzm != null) {
+        config._d.setUTCMinutes(config._d.getUTCMinutes() - config._tzm);
+    }
+
+    if (config._nextDay) {
+        config._a[HOUR] = 24;
+    }
+
+    // check for mismatching day of week
+    if (config._w && typeof config._w.d !== 'undefined' && config._w.d !== config._d.getDay()) {
+        getParsingFlags(config).weekdayMismatch = true;
+    }
+}
+
+function dayOfYearFromWeekInfo(config) {
+    var w, weekYear, week, weekday, dow, doy, temp, weekdayOverflow;
+
+    w = config._w;
+    if (w.GG != null || w.W != null || w.E != null) {
+        dow = 1;
+        doy = 4;
+
+        // TODO: We need to take the current isoWeekYear, but that depends on
+        // how we interpret now (local, utc, fixed offset). So create
+        // a now version of current config (take local/utc/offset flags, and
+        // create now).
+        weekYear = defaults(w.GG, config._a[YEAR], weekOfYear(createLocal(), 1, 4).year);
+        week = defaults(w.W, 1);
+        weekday = defaults(w.E, 1);
+        if (weekday < 1 || weekday > 7) {
+            weekdayOverflow = true;
+        }
+    } else {
+        dow = config._locale._week.dow;
+        doy = config._locale._week.doy;
+
+        var curWeek = weekOfYear(createLocal(), dow, doy);
+
+        weekYear = defaults(w.gg, config._a[YEAR], curWeek.year);
+
+        // Default to current week.
+        week = defaults(w.w, curWeek.week);
+
+        if (w.d != null) {
+            // weekday -- low day numbers are considered next week
+            weekday = w.d;
+            if (weekday < 0 || weekday > 6) {
+                weekdayOverflow = true;
+            }
+        } else if (w.e != null) {
+            // local weekday -- counting starts from begining of week
+            weekday = w.e + dow;
+            if (w.e < 0 || w.e > 6) {
+                weekdayOverflow = true;
+            }
+        } else {
+            // default to begining of week
+            weekday = dow;
+        }
+    }
+    if (week < 1 || week > weeksInYear(weekYear, dow, doy)) {
+        getParsingFlags(config)._overflowWeeks = true;
+    } else if (weekdayOverflow != null) {
+        getParsingFlags(config)._overflowWeekday = true;
+    } else {
+        temp = dayOfYearFromWeeks(weekYear, week, weekday, dow, doy);
+        config._a[YEAR] = temp.year;
+        config._dayOfYear = temp.dayOfYear;
+    }
 }
 
 // iso 8601 regex
@@ -2823,70 +3377,94 @@ function configFromISO(config) {
 }
 
 // RFC 2822 regex: For details see https://tools.ietf.org/html/rfc2822#section-3.3
-var basicRfcRegex = /^((?:Mon|Tue|Wed|Thu|Fri|Sat|Sun),?\s)?(\d?\d\s(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s(?:\d\d)?\d\d\s)(\d\d:\d\d)(\:\d\d)?(\s(?:UT|GMT|[ECMP][SD]T|[A-IK-Za-ik-z]|[+-]\d{4}))$/;
+var rfc2822 = /^(?:(Mon|Tue|Wed|Thu|Fri|Sat|Sun),?\s)?(\d{1,2})\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s(\d{2,4})\s(\d\d):(\d\d)(?::(\d\d))?\s(?:(UT|GMT|[ECMP][SD]T)|([Zz])|([+-]\d{4}))$/;
+
+function extractFromRFC2822Strings(yearStr, monthStr, dayStr, hourStr, minuteStr, secondStr) {
+    var result = [
+        untruncateYear(yearStr),
+        defaultLocaleMonthsShort.indexOf(monthStr),
+        parseInt(dayStr, 10),
+        parseInt(hourStr, 10),
+        parseInt(minuteStr, 10)
+    ];
+
+    if (secondStr) {
+        result.push(parseInt(secondStr, 10));
+    }
+
+    return result;
+}
+
+function untruncateYear(yearStr) {
+    var year = parseInt(yearStr, 10);
+    if (year <= 49) {
+        return 2000 + year;
+    } else if (year <= 999) {
+        return 1900 + year;
+    }
+    return year;
+}
+
+function preprocessRFC2822(s) {
+    // Remove comments and folding whitespace and replace multiple-spaces with a single space
+    return s.replace(/\([^)]*\)|[\n\t]/g, ' ').replace(/(\s\s+)/g, ' ').trim();
+}
+
+function checkWeekday(weekdayStr, parsedInput, config) {
+    if (weekdayStr) {
+        // TODO: Replace the vanilla JS Date object with an indepentent day-of-week check.
+        var weekdayProvided = defaultLocaleWeekdaysShort.indexOf(weekdayStr),
+            weekdayActual = new Date(parsedInput[0], parsedInput[1], parsedInput[2]).getDay();
+        if (weekdayProvided !== weekdayActual) {
+            getParsingFlags(config).weekdayMismatch = true;
+            config._isValid = false;
+            return false;
+        }
+    }
+    return true;
+}
+
+var obsOffsets = {
+    UT: 0,
+    GMT: 0,
+    EDT: -4 * 60,
+    EST: -5 * 60,
+    CDT: -5 * 60,
+    CST: -6 * 60,
+    MDT: -6 * 60,
+    MST: -7 * 60,
+    PDT: -7 * 60,
+    PST: -8 * 60
+};
+
+function calculateOffset(obsOffset, militaryOffset, numOffset) {
+    if (obsOffset) {
+        return obsOffsets[obsOffset];
+    } else if (militaryOffset) {
+        // the only allowed military tz is Z
+        return 0;
+    } else {
+        var hm = parseInt(numOffset, 10);
+        var m = hm % 100, h = (hm - m) / 100;
+        return h * 60 + m;
+    }
+}
 
 // date and time from ref 2822 format
 function configFromRFC2822(config) {
-    var string, match, dayFormat,
-        dateFormat, timeFormat, tzFormat;
-    var timezones = {
-        ' GMT': ' +0000',
-        ' EDT': ' -0400',
-        ' EST': ' -0500',
-        ' CDT': ' -0500',
-        ' CST': ' -0600',
-        ' MDT': ' -0600',
-        ' MST': ' -0700',
-        ' PDT': ' -0700',
-        ' PST': ' -0800'
-    };
-    var military = 'YXWVUTSRQPONZABCDEFGHIKLM';
-    var timezone, timezoneIndex;
-
-    string = config._i
-        .replace(/\([^\)]*\)|[\n\t]/g, ' ') // Remove comments and folding whitespace
-        .replace(/(\s\s+)/g, ' ') // Replace multiple-spaces with a single space
-        .replace(/^\s|\s$/g, ''); // Remove leading and trailing spaces
-    match = basicRfcRegex.exec(string);
-
+    var match = rfc2822.exec(preprocessRFC2822(config._i));
     if (match) {
-        dayFormat = match[1] ? 'ddd' + ((match[1].length === 5) ? ', ' : ' ') : '';
-        dateFormat = 'D MMM ' + ((match[2].length > 10) ? 'YYYY ' : 'YY ');
-        timeFormat = 'HH:mm' + (match[4] ? ':ss' : '');
-
-        // TODO: Replace the vanilla JS Date object with an indepentent day-of-week check.
-        if (match[1]) { // day of week given
-            var momentDate = new Date(match[2]);
-            var momentDay = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][momentDate.getDay()];
-
-            if (match[1].substr(0,3) !== momentDay) {
-                getParsingFlags(config).weekdayMismatch = true;
-                config._isValid = false;
-                return;
-            }
+        var parsedArray = extractFromRFC2822Strings(match[4], match[3], match[2], match[5], match[6], match[7]);
+        if (!checkWeekday(match[1], parsedArray, config)) {
+            return;
         }
 
-        switch (match[5].length) {
-            case 2: // military
-                if (timezoneIndex === 0) {
-                    timezone = ' +0000';
-                } else {
-                    timezoneIndex = military.indexOf(match[5][1].toUpperCase()) - 12;
-                    timezone = ((timezoneIndex < 0) ? ' -' : ' +') +
-                        (('' + timezoneIndex).replace(/^-?/, '0')).match(/..$/)[0] + '00';
-                }
-                break;
-            case 4: // Zone
-                timezone = timezones[match[5]];
-                break;
-            default: // UT or +/-9999
-                timezone = timezones[' GMT'];
-        }
-        match[5] = timezone;
-        config._i = match.splice(1).join('');
-        tzFormat = ' ZZ';
-        config._f = dayFormat + dateFormat + timeFormat + tzFormat;
-        configFromStringAndFormat(config);
+        config._a = parsedArray;
+        config._tzm = calculateOffset(match[8], match[9], match[10]);
+
+        config._d = createUTCDate.apply(null, config._a);
+        config._d.setUTCMinutes(config._d.getUTCMinutes() - config._tzm);
+
         getParsingFlags(config).rfc2822 = true;
     } else {
         config._isValid = false;
@@ -2929,149 +3507,6 @@ hooks.createFromInputFallback = deprecate(
         config._d = new Date(config._i + (config._useUTC ? ' UTC' : ''));
     }
 );
-
-// Pick the first defined of two or three arguments.
-function defaults(a, b, c) {
-    if (a != null) {
-        return a;
-    }
-    if (b != null) {
-        return b;
-    }
-    return c;
-}
-
-function currentDateArray(config) {
-    // hooks is actually the exported moment object
-    var nowValue = new Date(hooks.now());
-    if (config._useUTC) {
-        return [nowValue.getUTCFullYear(), nowValue.getUTCMonth(), nowValue.getUTCDate()];
-    }
-    return [nowValue.getFullYear(), nowValue.getMonth(), nowValue.getDate()];
-}
-
-// convert an array to a date.
-// the array should mirror the parameters below
-// note: all values past the year are optional and will default to the lowest possible value.
-// [year, month, day , hour, minute, second, millisecond]
-function configFromArray (config) {
-    var i, date, input = [], currentDate, yearToUse;
-
-    if (config._d) {
-        return;
-    }
-
-    currentDate = currentDateArray(config);
-
-    //compute day of the year from weeks and weekdays
-    if (config._w && config._a[DATE] == null && config._a[MONTH] == null) {
-        dayOfYearFromWeekInfo(config);
-    }
-
-    //if the day of the year is set, figure out what it is
-    if (config._dayOfYear != null) {
-        yearToUse = defaults(config._a[YEAR], currentDate[YEAR]);
-
-        if (config._dayOfYear > daysInYear(yearToUse) || config._dayOfYear === 0) {
-            getParsingFlags(config)._overflowDayOfYear = true;
-        }
-
-        date = createUTCDate(yearToUse, 0, config._dayOfYear);
-        config._a[MONTH] = date.getUTCMonth();
-        config._a[DATE] = date.getUTCDate();
-    }
-
-    // Default to current date.
-    // * if no year, month, day of month are given, default to today
-    // * if day of month is given, default month and year
-    // * if month is given, default only year
-    // * if year is given, don't default anything
-    for (i = 0; i < 3 && config._a[i] == null; ++i) {
-        config._a[i] = input[i] = currentDate[i];
-    }
-
-    // Zero out whatever was not defaulted, including time
-    for (; i < 7; i++) {
-        config._a[i] = input[i] = (config._a[i] == null) ? (i === 2 ? 1 : 0) : config._a[i];
-    }
-
-    // Check for 24:00:00.000
-    if (config._a[HOUR] === 24 &&
-            config._a[MINUTE] === 0 &&
-            config._a[SECOND] === 0 &&
-            config._a[MILLISECOND] === 0) {
-        config._nextDay = true;
-        config._a[HOUR] = 0;
-    }
-
-    config._d = (config._useUTC ? createUTCDate : createDate).apply(null, input);
-    // Apply timezone offset from input. The actual utcOffset can be changed
-    // with parseZone.
-    if (config._tzm != null) {
-        config._d.setUTCMinutes(config._d.getUTCMinutes() - config._tzm);
-    }
-
-    if (config._nextDay) {
-        config._a[HOUR] = 24;
-    }
-}
-
-function dayOfYearFromWeekInfo(config) {
-    var w, weekYear, week, weekday, dow, doy, temp, weekdayOverflow;
-
-    w = config._w;
-    if (w.GG != null || w.W != null || w.E != null) {
-        dow = 1;
-        doy = 4;
-
-        // TODO: We need to take the current isoWeekYear, but that depends on
-        // how we interpret now (local, utc, fixed offset). So create
-        // a now version of current config (take local/utc/offset flags, and
-        // create now).
-        weekYear = defaults(w.GG, config._a[YEAR], weekOfYear(createLocal(), 1, 4).year);
-        week = defaults(w.W, 1);
-        weekday = defaults(w.E, 1);
-        if (weekday < 1 || weekday > 7) {
-            weekdayOverflow = true;
-        }
-    } else {
-        dow = config._locale._week.dow;
-        doy = config._locale._week.doy;
-
-        var curWeek = weekOfYear(createLocal(), dow, doy);
-
-        weekYear = defaults(w.gg, config._a[YEAR], curWeek.year);
-
-        // Default to current week.
-        week = defaults(w.w, curWeek.week);
-
-        if (w.d != null) {
-            // weekday -- low day numbers are considered next week
-            weekday = w.d;
-            if (weekday < 0 || weekday > 6) {
-                weekdayOverflow = true;
-            }
-        } else if (w.e != null) {
-            // local weekday -- counting starts from begining of week
-            weekday = w.e + dow;
-            if (w.e < 0 || w.e > 6) {
-                weekdayOverflow = true;
-            }
-        } else {
-            // default to begining of week
-            weekday = dow;
-        }
-    }
-    if (week < 1 || week > weeksInYear(weekYear, dow, doy)) {
-        getParsingFlags(config)._overflowWeeks = true;
-    } else if (weekdayOverflow != null) {
-        getParsingFlags(config)._overflowWeekday = true;
-    } else {
-        temp = dayOfYearFromWeeks(weekYear, week, weekday, dow, doy);
-        config._a[YEAR] = temp.year;
-        config._dayOfYear = temp.dayOfYear;
-    }
-}
 
 // constant that refers to the ISO standard
 hooks.ISO_8601 = function () {};
@@ -3397,7 +3832,7 @@ var ordering = ['year', 'quarter', 'month', 'week', 'day', 'hour', 'minute', 'se
 
 function isDurationValid(m) {
     for (var key in m) {
-        if (!(ordering.indexOf(key) !== -1 && (m[key] == null || !isNaN(m[key])))) {
+        if (!(indexOf.call(ordering, key) !== -1 && (m[key] == null || !isNaN(m[key])))) {
             return false;
         }
     }
@@ -3448,7 +3883,7 @@ function Duration (duration) {
     // day when working around DST, we need to store them separately
     this._days = +days +
         weeks * 7;
-    // It is impossible translate months into days without knowing
+    // It is impossible to translate months into days without knowing
     // which months you are are talking about, so we have to store
     // it separately.
     this._months = +months +
@@ -3695,12 +4130,12 @@ function isUtc () {
 }
 
 // ASP.NET json date format regex
-var aspNetRegex = /^(\-)?(?:(\d*)[. ])?(\d+)\:(\d+)(?:\:(\d+)(\.\d*)?)?$/;
+var aspNetRegex = /^(\-|\+)?(?:(\d*)[. ])?(\d+)\:(\d+)(?:\:(\d+)(\.\d*)?)?$/;
 
 // from http://docs.closure-library.googlecode.com/git/closure_goog_date_date.js.source.html
 // somewhat more in line with 4.4.3.2 2004 spec, but allows decimal anywhere
 // and further modified to allow for strings containing both week and day
-var isoRegex = /^(-)?P(?:(-?[0-9,.]*)Y)?(?:(-?[0-9,.]*)M)?(?:(-?[0-9,.]*)W)?(?:(-?[0-9,.]*)D)?(?:T(?:(-?[0-9,.]*)H)?(?:(-?[0-9,.]*)M)?(?:(-?[0-9,.]*)S)?)?$/;
+var isoRegex = /^(-|\+)?P(?:([-+]?[0-9,.]*)Y)?(?:([-+]?[0-9,.]*)M)?(?:([-+]?[0-9,.]*)W)?(?:([-+]?[0-9,.]*)D)?(?:T(?:([-+]?[0-9,.]*)H)?(?:([-+]?[0-9,.]*)M)?(?:([-+]?[0-9,.]*)S)?)?$/;
 
 function createDuration (input, key) {
     var duration = input,
@@ -3734,7 +4169,7 @@ function createDuration (input, key) {
             ms : toInt(absRound(match[MILLISECOND] * 1000)) * sign // the millisecond decimal point is included in the match
         };
     } else if (!!(match = isoRegex.exec(input))) {
-        sign = (match[1] === '-') ? -1 : 1;
+        sign = (match[1] === '-') ? -1 : (match[1] === '+') ? 1 : 1;
         duration = {
             y : parseIso(match[2], sign),
             M : parseIso(match[3], sign),
@@ -3837,14 +4272,14 @@ function addSubtract (mom, duration, isAdding, updateOffset) {
 
     updateOffset = updateOffset == null ? true : updateOffset;
 
-    if (milliseconds) {
-        mom._d.setTime(mom._d.valueOf() + milliseconds * isAdding);
+    if (months) {
+        setMonth(mom, get(mom, 'Month') + months * isAdding);
     }
     if (days) {
         set$1(mom, 'Date', get(mom, 'Date') + days * isAdding);
     }
-    if (months) {
-        setMonth(mom, get(mom, 'Month') + months * isAdding);
+    if (milliseconds) {
+        mom._d.setTime(mom._d.valueOf() + milliseconds * isAdding);
     }
     if (updateOffset) {
         hooks.updateOffset(mom, days || months);
@@ -3954,22 +4389,18 @@ function diff (input, units, asFloat) {
 
     units = normalizeUnits(units);
 
-    if (units === 'year' || units === 'month' || units === 'quarter') {
-        output = monthDiff(this, that);
-        if (units === 'quarter') {
-            output = output / 3;
-        } else if (units === 'year') {
-            output = output / 12;
-        }
-    } else {
-        delta = this - that;
-        output = units === 'second' ? delta / 1e3 : // 1000
-            units === 'minute' ? delta / 6e4 : // 1000 * 60
-            units === 'hour' ? delta / 36e5 : // 1000 * 60 * 60
-            units === 'day' ? (delta - zoneDelta) / 864e5 : // 1000 * 60 * 60 * 24, negate dst
-            units === 'week' ? (delta - zoneDelta) / 6048e5 : // 1000 * 60 * 60 * 24 * 7, negate dst
-            delta;
+    switch (units) {
+        case 'year': output = monthDiff(this, that) / 12; break;
+        case 'month': output = monthDiff(this, that); break;
+        case 'quarter': output = monthDiff(this, that) / 3; break;
+        case 'second': output = (this - that) / 1e3; break; // 1000
+        case 'minute': output = (this - that) / 6e4; break; // 1000 * 60
+        case 'hour': output = (this - that) / 36e5; break; // 1000 * 60 * 60
+        case 'day': output = (this - that - zoneDelta) / 864e5; break; // 1000 * 60 * 60 * 24, negate dst
+        case 'week': output = (this - that - zoneDelta) / 6048e5; break; // 1000 * 60 * 60 * 24 * 7, negate dst
+        default: output = this - that;
     }
+
     return asFloat ? output : absFloor(output);
 }
 
@@ -4947,6 +5378,10 @@ var asWeeks        = makeAs('w');
 var asMonths       = makeAs('M');
 var asYears        = makeAs('y');
 
+function clone$1 () {
+    return createDuration(this);
+}
+
 function get$2 (units) {
     units = normalizeUnits(units);
     return this.isValid() ? this[units + 's']() : NaN;
@@ -5056,6 +5491,10 @@ function humanize (withSuffix) {
 
 var abs$1 = Math.abs;
 
+function sign(x) {
+    return ((x > 0) - (x < 0)) || +x;
+}
+
 function toISOString$1() {
     // for ISO strings we do not use the normal bubbling rules:
     //  * milliseconds bubble up until they become hours
@@ -5090,7 +5529,7 @@ function toISOString$1() {
     var D = days;
     var h = hours;
     var m = minutes;
-    var s = seconds;
+    var s = seconds ? seconds.toFixed(3).replace(/\.?0+$/, '') : '';
     var total = this.asSeconds();
 
     if (!total) {
@@ -5099,15 +5538,19 @@ function toISOString$1() {
         return 'P0D';
     }
 
-    return (total < 0 ? '-' : '') +
-        'P' +
-        (Y ? Y + 'Y' : '') +
-        (M ? M + 'M' : '') +
-        (D ? D + 'D' : '') +
+    var totalSign = total < 0 ? '-' : '';
+    var ymSign = sign(this._months) !== sign(total) ? '-' : '';
+    var daysSign = sign(this._days) !== sign(total) ? '-' : '';
+    var hmsSign = sign(this._milliseconds) !== sign(total) ? '-' : '';
+
+    return totalSign + 'P' +
+        (Y ? ymSign + Y + 'Y' : '') +
+        (M ? ymSign + M + 'M' : '') +
+        (D ? daysSign + D + 'D' : '') +
         ((h || m || s) ? 'T' : '') +
-        (h ? h + 'H' : '') +
-        (m ? m + 'M' : '') +
-        (s ? s + 'S' : '');
+        (h ? hmsSign + h + 'H' : '') +
+        (m ? hmsSign + m + 'M' : '') +
+        (s ? hmsSign + s + 'S' : '');
 }
 
 var proto$2 = Duration.prototype;
@@ -5127,6 +5570,7 @@ proto$2.asMonths       = asMonths;
 proto$2.asYears        = asYears;
 proto$2.valueOf        = valueOf$1;
 proto$2._bubble        = bubble;
+proto$2.clone          = clone$1;
 proto$2.get            = get$2;
 proto$2.milliseconds   = milliseconds;
 proto$2.seconds        = seconds;
@@ -5168,7 +5612,7 @@ addParseToken('x', function (input, array, config) {
 // Side effect imports
 
 
-hooks.version = '2.18.1';
+hooks.version = '2.19.1';
 
 setHookCallback(createLocal);
 
@@ -5195,7 +5639,7 @@ hooks.updateLocale          = updateLocale;
 hooks.locales               = listLocales;
 hooks.weekdaysShort         = listWeekdaysShort;
 hooks.normalizeUnits        = normalizeUnits;
-hooks.relativeTimeRounding = getSetRelativeTimeRounding;
+hooks.relativeTimeRounding  = getSetRelativeTimeRounding;
 hooks.relativeTimeThreshold = getSetRelativeTimeThreshold;
 hooks.calendarFormat        = getCalendarFormat;
 hooks.prototype             = proto;
@@ -5204,7 +5648,158 @@ return hooks;
 
 })));
 
-},{}],8:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
+/**
+ * Helpers.
+ */
+
+var s = 1000
+var m = s * 60
+var h = m * 60
+var d = h * 24
+var y = d * 365.25
+
+/**
+ * Parse or format the given `val`.
+ *
+ * Options:
+ *
+ *  - `long` verbose formatting [false]
+ *
+ * @param {String|Number} val
+ * @param {Object} [options]
+ * @throws {Error} throw an error if val is not a non-empty string or a number
+ * @return {String|Number}
+ * @api public
+ */
+
+module.exports = function (val, options) {
+  options = options || {}
+  var type = typeof val
+  if (type === 'string' && val.length > 0) {
+    return parse(val)
+  } else if (type === 'number' && isNaN(val) === false) {
+    return options.long ?
+			fmtLong(val) :
+			fmtShort(val)
+  }
+  throw new Error('val is not a non-empty string or a valid number. val=' + JSON.stringify(val))
+}
+
+/**
+ * Parse the given `str` and return milliseconds.
+ *
+ * @param {String} str
+ * @return {Number}
+ * @api private
+ */
+
+function parse(str) {
+  str = String(str)
+  if (str.length > 10000) {
+    return
+  }
+  var match = /^((?:\d+)?\.?\d+) *(milliseconds?|msecs?|ms|seconds?|secs?|s|minutes?|mins?|m|hours?|hrs?|h|days?|d|years?|yrs?|y)?$/i.exec(str)
+  if (!match) {
+    return
+  }
+  var n = parseFloat(match[1])
+  var type = (match[2] || 'ms').toLowerCase()
+  switch (type) {
+    case 'years':
+    case 'year':
+    case 'yrs':
+    case 'yr':
+    case 'y':
+      return n * y
+    case 'days':
+    case 'day':
+    case 'd':
+      return n * d
+    case 'hours':
+    case 'hour':
+    case 'hrs':
+    case 'hr':
+    case 'h':
+      return n * h
+    case 'minutes':
+    case 'minute':
+    case 'mins':
+    case 'min':
+    case 'm':
+      return n * m
+    case 'seconds':
+    case 'second':
+    case 'secs':
+    case 'sec':
+    case 's':
+      return n * s
+    case 'milliseconds':
+    case 'millisecond':
+    case 'msecs':
+    case 'msec':
+    case 'ms':
+      return n
+    default:
+      return undefined
+  }
+}
+
+/**
+ * Short format for `ms`.
+ *
+ * @param {Number} ms
+ * @return {String}
+ * @api private
+ */
+
+function fmtShort(ms) {
+  if (ms >= d) {
+    return Math.round(ms / d) + 'd'
+  }
+  if (ms >= h) {
+    return Math.round(ms / h) + 'h'
+  }
+  if (ms >= m) {
+    return Math.round(ms / m) + 'm'
+  }
+  if (ms >= s) {
+    return Math.round(ms / s) + 's'
+  }
+  return ms + 'ms'
+}
+
+/**
+ * Long format for `ms`.
+ *
+ * @param {Number} ms
+ * @return {String}
+ * @api private
+ */
+
+function fmtLong(ms) {
+  return plural(ms, d, 'day') ||
+    plural(ms, h, 'hour') ||
+    plural(ms, m, 'minute') ||
+    plural(ms, s, 'second') ||
+    ms + ' ms'
+}
+
+/**
+ * Pluralization helper.
+ */
+
+function plural(ms, n, name) {
+  if (ms < n) {
+    return
+  }
+  if (ms < n * 1.5) {
+    return Math.floor(ms / n) + ' ' + name
+  }
+  return Math.ceil(ms / n) + ' ' + name + 's'
+}
+
+},{}],11:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -17395,551 +17990,7 @@ PouchDB$5.plugin(IDBPouch)
 module.exports = PouchDB$5;
 
 }).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"argsarray":1,"debug":9,"events":2,"immediate":4,"inherits":5,"lie":6,"spark-md5":12,"uuid":13,"vuvuzela":18}],9:[function(require,module,exports){
-(function (process){
-/**
- * This is the web browser implementation of `debug()`.
- *
- * Expose `debug()` as the module.
- */
-
-exports = module.exports = require('./debug');
-exports.log = log;
-exports.formatArgs = formatArgs;
-exports.save = save;
-exports.load = load;
-exports.useColors = useColors;
-exports.storage = 'undefined' != typeof chrome
-               && 'undefined' != typeof chrome.storage
-                  ? chrome.storage.local
-                  : localstorage();
-
-/**
- * Colors.
- */
-
-exports.colors = [
-  'lightseagreen',
-  'forestgreen',
-  'goldenrod',
-  'dodgerblue',
-  'darkorchid',
-  'crimson'
-];
-
-/**
- * Currently only WebKit-based Web Inspectors, Firefox >= v31,
- * and the Firebug extension (any Firefox version) are known
- * to support "%c" CSS customizations.
- *
- * TODO: add a `localStorage` variable to explicitly enable/disable colors
- */
-
-function useColors() {
-  // NB: In an Electron preload script, document will be defined but not fully
-  // initialized. Since we know we're in Chrome, we'll just detect this case
-  // explicitly
-  if (typeof window !== 'undefined' && window && typeof window.process !== 'undefined' && window.process.type === 'renderer') {
-    return true;
-  }
-
-  // is webkit? http://stackoverflow.com/a/16459606/376773
-  // document is undefined in react-native: https://github.com/facebook/react-native/pull/1632
-  return (typeof document !== 'undefined' && document && 'WebkitAppearance' in document.documentElement.style) ||
-    // is firebug? http://stackoverflow.com/a/398120/376773
-    (typeof window !== 'undefined' && window && window.console && (console.firebug || (console.exception && console.table))) ||
-    // is firefox >= v31?
-    // https://developer.mozilla.org/en-US/docs/Tools/Web_Console#Styling_messages
-    (typeof navigator !== 'undefined' && navigator && navigator.userAgent && navigator.userAgent.toLowerCase().match(/firefox\/(\d+)/) && parseInt(RegExp.$1, 10) >= 31) ||
-    // double check webkit in userAgent just in case we are in a worker
-    (typeof navigator !== 'undefined' && navigator && navigator.userAgent && navigator.userAgent.toLowerCase().match(/applewebkit\/(\d+)/));
-}
-
-/**
- * Map %j to `JSON.stringify()`, since no Web Inspectors do that by default.
- */
-
-exports.formatters.j = function(v) {
-  try {
-    return JSON.stringify(v);
-  } catch (err) {
-    return '[UnexpectedJSONParseError]: ' + err.message;
-  }
-};
-
-
-/**
- * Colorize log arguments if enabled.
- *
- * @api public
- */
-
-function formatArgs(args) {
-  var useColors = this.useColors;
-
-  args[0] = (useColors ? '%c' : '')
-    + this.namespace
-    + (useColors ? ' %c' : ' ')
-    + args[0]
-    + (useColors ? '%c ' : ' ')
-    + '+' + exports.humanize(this.diff);
-
-  if (!useColors) return;
-
-  var c = 'color: ' + this.color;
-  args.splice(1, 0, c, 'color: inherit')
-
-  // the final "%c" is somewhat tricky, because there could be other
-  // arguments passed either before or after the %c, so we need to
-  // figure out the correct index to insert the CSS into
-  var index = 0;
-  var lastC = 0;
-  args[0].replace(/%[a-zA-Z%]/g, function(match) {
-    if ('%%' === match) return;
-    index++;
-    if ('%c' === match) {
-      // we only are interested in the *last* %c
-      // (the user may have provided their own)
-      lastC = index;
-    }
-  });
-
-  args.splice(lastC, 0, c);
-}
-
-/**
- * Invokes `console.log()` when available.
- * No-op when `console.log` is not a "function".
- *
- * @api public
- */
-
-function log() {
-  // this hackery is required for IE8/9, where
-  // the `console.log` function doesn't have 'apply'
-  return 'object' === typeof console
-    && console.log
-    && Function.prototype.apply.call(console.log, console, arguments);
-}
-
-/**
- * Save `namespaces`.
- *
- * @param {String} namespaces
- * @api private
- */
-
-function save(namespaces) {
-  try {
-    if (null == namespaces) {
-      exports.storage.removeItem('debug');
-    } else {
-      exports.storage.debug = namespaces;
-    }
-  } catch(e) {}
-}
-
-/**
- * Load `namespaces`.
- *
- * @return {String} returns the previously persisted debug modes
- * @api private
- */
-
-function load() {
-  var r;
-  try {
-    r = exports.storage.debug;
-  } catch(e) {}
-
-  // If debug isn't set in LS, and we're in Electron, try to load $DEBUG
-  if (!r && typeof process !== 'undefined' && 'env' in process) {
-    r = process.env.DEBUG;
-  }
-
-  return r;
-}
-
-/**
- * Enable namespaces listed in `localStorage.debug` initially.
- */
-
-exports.enable(load());
-
-/**
- * Localstorage attempts to return the localstorage.
- *
- * This is necessary because safari throws
- * when a user disables cookies/localstorage
- * and you attempt to access it.
- *
- * @return {LocalStorage}
- * @api private
- */
-
-function localstorage() {
-  try {
-    return window.localStorage;
-  } catch (e) {}
-}
-
-}).call(this,require("b55mWE"))
-},{"./debug":10,"b55mWE":3}],10:[function(require,module,exports){
-
-/**
- * This is the common logic for both the Node.js and web browser
- * implementations of `debug()`.
- *
- * Expose `debug()` as the module.
- */
-
-exports = module.exports = createDebug.debug = createDebug['default'] = createDebug;
-exports.coerce = coerce;
-exports.disable = disable;
-exports.enable = enable;
-exports.enabled = enabled;
-exports.humanize = require('ms');
-
-/**
- * The currently active debug mode names, and names to skip.
- */
-
-exports.names = [];
-exports.skips = [];
-
-/**
- * Map of special "%n" handling functions, for the debug "format" argument.
- *
- * Valid key names are a single, lower or upper-case letter, i.e. "n" and "N".
- */
-
-exports.formatters = {};
-
-/**
- * Previous log timestamp.
- */
-
-var prevTime;
-
-/**
- * Select a color.
- * @param {String} namespace
- * @return {Number}
- * @api private
- */
-
-function selectColor(namespace) {
-  var hash = 0, i;
-
-  for (i in namespace) {
-    hash  = ((hash << 5) - hash) + namespace.charCodeAt(i);
-    hash |= 0; // Convert to 32bit integer
-  }
-
-  return exports.colors[Math.abs(hash) % exports.colors.length];
-}
-
-/**
- * Create a debugger with the given `namespace`.
- *
- * @param {String} namespace
- * @return {Function}
- * @api public
- */
-
-function createDebug(namespace) {
-
-  function debug() {
-    // disabled?
-    if (!debug.enabled) return;
-
-    var self = debug;
-
-    // set `diff` timestamp
-    var curr = +new Date();
-    var ms = curr - (prevTime || curr);
-    self.diff = ms;
-    self.prev = prevTime;
-    self.curr = curr;
-    prevTime = curr;
-
-    // turn the `arguments` into a proper Array
-    var args = new Array(arguments.length);
-    for (var i = 0; i < args.length; i++) {
-      args[i] = arguments[i];
-    }
-
-    args[0] = exports.coerce(args[0]);
-
-    if ('string' !== typeof args[0]) {
-      // anything else let's inspect with %O
-      args.unshift('%O');
-    }
-
-    // apply any `formatters` transformations
-    var index = 0;
-    args[0] = args[0].replace(/%([a-zA-Z%])/g, function(match, format) {
-      // if we encounter an escaped % then don't increase the array index
-      if (match === '%%') return match;
-      index++;
-      var formatter = exports.formatters[format];
-      if ('function' === typeof formatter) {
-        var val = args[index];
-        match = formatter.call(self, val);
-
-        // now we need to remove `args[index]` since it's inlined in the `format`
-        args.splice(index, 1);
-        index--;
-      }
-      return match;
-    });
-
-    // apply env-specific formatting (colors, etc.)
-    exports.formatArgs.call(self, args);
-
-    var logFn = debug.log || exports.log || console.log.bind(console);
-    logFn.apply(self, args);
-  }
-
-  debug.namespace = namespace;
-  debug.enabled = exports.enabled(namespace);
-  debug.useColors = exports.useColors();
-  debug.color = selectColor(namespace);
-
-  // env-specific initialization logic for debug instances
-  if ('function' === typeof exports.init) {
-    exports.init(debug);
-  }
-
-  return debug;
-}
-
-/**
- * Enables a debug mode by namespaces. This can include modes
- * separated by a colon and wildcards.
- *
- * @param {String} namespaces
- * @api public
- */
-
-function enable(namespaces) {
-  exports.save(namespaces);
-
-  exports.names = [];
-  exports.skips = [];
-
-  var split = (typeof namespaces === 'string' ? namespaces : '').split(/[\s,]+/);
-  var len = split.length;
-
-  for (var i = 0; i < len; i++) {
-    if (!split[i]) continue; // ignore empty strings
-    namespaces = split[i].replace(/\*/g, '.*?');
-    if (namespaces[0] === '-') {
-      exports.skips.push(new RegExp('^' + namespaces.substr(1) + '$'));
-    } else {
-      exports.names.push(new RegExp('^' + namespaces + '$'));
-    }
-  }
-}
-
-/**
- * Disable debug output.
- *
- * @api public
- */
-
-function disable() {
-  exports.enable('');
-}
-
-/**
- * Returns true if the given mode name is enabled, false otherwise.
- *
- * @param {String} name
- * @return {Boolean}
- * @api public
- */
-
-function enabled(name) {
-  var i, len;
-  for (i = 0, len = exports.skips.length; i < len; i++) {
-    if (exports.skips[i].test(name)) {
-      return false;
-    }
-  }
-  for (i = 0, len = exports.names.length; i < len; i++) {
-    if (exports.names[i].test(name)) {
-      return true;
-    }
-  }
-  return false;
-}
-
-/**
- * Coerce `val`.
- *
- * @param {Mixed} val
- * @return {Mixed}
- * @api private
- */
-
-function coerce(val) {
-  if (val instanceof Error) return val.stack || val.message;
-  return val;
-}
-
-},{"ms":11}],11:[function(require,module,exports){
-/**
- * Helpers.
- */
-
-var s = 1000
-var m = s * 60
-var h = m * 60
-var d = h * 24
-var y = d * 365.25
-
-/**
- * Parse or format the given `val`.
- *
- * Options:
- *
- *  - `long` verbose formatting [false]
- *
- * @param {String|Number} val
- * @param {Object} [options]
- * @throws {Error} throw an error if val is not a non-empty string or a number
- * @return {String|Number}
- * @api public
- */
-
-module.exports = function (val, options) {
-  options = options || {}
-  var type = typeof val
-  if (type === 'string' && val.length > 0) {
-    return parse(val)
-  } else if (type === 'number' && isNaN(val) === false) {
-    return options.long ?
-			fmtLong(val) :
-			fmtShort(val)
-  }
-  throw new Error('val is not a non-empty string or a valid number. val=' + JSON.stringify(val))
-}
-
-/**
- * Parse the given `str` and return milliseconds.
- *
- * @param {String} str
- * @return {Number}
- * @api private
- */
-
-function parse(str) {
-  str = String(str)
-  if (str.length > 10000) {
-    return
-  }
-  var match = /^((?:\d+)?\.?\d+) *(milliseconds?|msecs?|ms|seconds?|secs?|s|minutes?|mins?|m|hours?|hrs?|h|days?|d|years?|yrs?|y)?$/i.exec(str)
-  if (!match) {
-    return
-  }
-  var n = parseFloat(match[1])
-  var type = (match[2] || 'ms').toLowerCase()
-  switch (type) {
-    case 'years':
-    case 'year':
-    case 'yrs':
-    case 'yr':
-    case 'y':
-      return n * y
-    case 'days':
-    case 'day':
-    case 'd':
-      return n * d
-    case 'hours':
-    case 'hour':
-    case 'hrs':
-    case 'hr':
-    case 'h':
-      return n * h
-    case 'minutes':
-    case 'minute':
-    case 'mins':
-    case 'min':
-    case 'm':
-      return n * m
-    case 'seconds':
-    case 'second':
-    case 'secs':
-    case 'sec':
-    case 's':
-      return n * s
-    case 'milliseconds':
-    case 'millisecond':
-    case 'msecs':
-    case 'msec':
-    case 'ms':
-      return n
-    default:
-      return undefined
-  }
-}
-
-/**
- * Short format for `ms`.
- *
- * @param {Number} ms
- * @return {String}
- * @api private
- */
-
-function fmtShort(ms) {
-  if (ms >= d) {
-    return Math.round(ms / d) + 'd'
-  }
-  if (ms >= h) {
-    return Math.round(ms / h) + 'h'
-  }
-  if (ms >= m) {
-    return Math.round(ms / m) + 'm'
-  }
-  if (ms >= s) {
-    return Math.round(ms / s) + 's'
-  }
-  return ms + 'ms'
-}
-
-/**
- * Long format for `ms`.
- *
- * @param {Number} ms
- * @return {String}
- * @api private
- */
-
-function fmtLong(ms) {
-  return plural(ms, d, 'day') ||
-    plural(ms, h, 'hour') ||
-    plural(ms, m, 'minute') ||
-    plural(ms, s, 'second') ||
-    ms + ' ms'
-}
-
-/**
- * Pluralization helper.
- */
-
-function plural(ms, n, name) {
-  if (ms < n) {
-    return
-  }
-  if (ms < n * 1.5) {
-    return Math.floor(ms / n) + ' ' + name
-  }
-  return Math.ceil(ms / n) + ' ' + name + 's'
-}
-
-},{}],12:[function(require,module,exports){
+},{"argsarray":1,"debug":2,"events":4,"immediate":6,"inherits":7,"lie":8,"spark-md5":12,"uuid":13,"vuvuzela":18}],12:[function(require,module,exports){
 (function (factory) {
     if (typeof exports === 'object') {
         // Node/CommonJS
@@ -19114,7 +19165,7 @@ var getUUID = exports.getUUID = function getUUID() {
   });
 };
 //# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImRiLmpzIl0sIm5hbWVzIjpbImJhc2VVUkwiLCJ1dWlkVVJMIiwiYW5ub3RhdG9yc1VSTCIsImFkamVjdGl2ZXNVUkwiLCJhbmltYWxzVVJMIiwiY2hyb25pY2xlVVJMIiwibWVhc3VyZW1lbnRzVVJMIiwiYWRqZWN0aXZlc0RCIiwiYW5pbWFsc0RCIiwiYW5ub3RhdG9yc0RCIiwiY2hyb25pY2xlREIiLCJtZWFzdXJlbWVudHNEQiIsImdldFVVSUQiLCJQcm9taXNlIiwicmVzb2x2ZSIsInJlamVjdCIsIiQiLCJnZXQiLCJ1dWlkcyJdLCJtYXBwaW5ncyI6Ijs7Ozs7OztBQUNBOzs7Ozs7QUFFQSxJQUFNQSxVQUFRLHlDQUFkLEMsQ0FIQTtBQUtPLElBQU1DLDRCQUFhRCxPQUFiLFlBQU47QUFDQSxJQUFNRSx3Q0FBbUJGLE9BQW5CLGdCQUFOO0FBQ0EsSUFBTUcsd0NBQW1CSCxPQUFuQixnQkFBTjtBQUNBLElBQU1JLGtDQUFnQkosT0FBaEIsYUFBTjtBQUNBLElBQU1LLHNDQUFrQkwsT0FBbEIsZUFBTjtBQUNBLElBQU1NLDRDQUFxQk4sT0FBckIsa0JBQU47O0FBRVA7O0FBRUE7QUFDTyxJQUFNTyxzQ0FBZSxzQkFBWUosYUFBWixDQUFyQjtBQUNBLElBQU1LLGdDQUFZLHNCQUFZSixVQUFaLENBQWxCO0FBQ0EsSUFBTUssc0NBQWUsc0JBQVlQLGFBQVosQ0FBckI7QUFDQSxJQUFNUSxvQ0FBYyxzQkFBWUwsWUFBWixDQUFwQjtBQUNBLElBQU1NLDBDQUFpQixzQkFBWUwsZUFBWixDQUF2Qjs7QUFFQSxJQUFNTSw0QkFBVSxTQUFWQSxPQUFVLEdBQU07QUFDM0IsU0FBTyxJQUFJQyxPQUFKLENBQVksVUFBQ0MsT0FBRCxFQUFVQyxNQUFWLEVBQXFCO0FBQ3RDQyxNQUFFQyxHQUFGLENBQU1oQixPQUFOLEVBQWUsZ0JBQWE7QUFBQSxVQUFYaUIsS0FBVyxRQUFYQSxLQUFXO0FBQUNKLGNBQVFJLE1BQU0sQ0FBTixDQUFSO0FBQWtCLEtBQS9DO0FBQ0U7QUFDQTtBQUNILEdBSk0sQ0FBUDtBQUtELENBTk0iLCJmaWxlIjoiZGIuanMiLCJzb3VyY2VzQ29udGVudCI6WyIvLyBjb25zdCBiYXNlVXJsPSdodHRwOi8vMTI3LjAuMC4xOjU5ODQnO1xuaW1wb3J0IFBvdWNoREIgZnJvbSAncG91Y2hkYic7XG5cbmNvbnN0IGJhc2VVUkw9J2h0dHA6Ly9yc25hY3Jvd2RxdWFudC5jbG91ZGFwcC5uZXQ6NTk4NCc7XG5cbmV4cG9ydCBjb25zdCB1dWlkVVJMID0gYCR7YmFzZVVSTH0vX3V1aWRzYDtcbmV4cG9ydCBjb25zdCBhbm5vdGF0b3JzVVJMID0gYCR7YmFzZVVSTH0vYW5ub3RhdG9yc2A7XG5leHBvcnQgY29uc3QgYWRqZWN0aXZlc1VSTCA9IGAke2Jhc2VVUkx9L2FkamVjdGl2ZXNgO1xuZXhwb3J0IGNvbnN0IGFuaW1hbHNVUkwgPSBgJHtiYXNlVVJMfS9hbmltYWxzYDtcbmV4cG9ydCBjb25zdCBjaHJvbmljbGVVUkwgPSBgJHtiYXNlVVJMfS9jaHJvbmljbGVgO1xuZXhwb3J0IGNvbnN0IG1lYXN1cmVtZW50c1VSTCA9IGAke2Jhc2VVUkx9L21lYXN1cmVtZW50c2A7XG5cbi8vIGNvbnNvbGUubG9nKCd1cmw6JywgdXVpZFVybCk7XG5cbi8vIGV4cG9ydCBjb25zdCB1dWlkREIgPSBuZXcgUG91Y2hEQih1dWlkVVJMKTtcbmV4cG9ydCBjb25zdCBhZGplY3RpdmVzREIgPSBuZXcgUG91Y2hEQihhZGplY3RpdmVzVVJMKTtcbmV4cG9ydCBjb25zdCBhbmltYWxzREIgPSBuZXcgUG91Y2hEQihhbmltYWxzVVJMKTtcbmV4cG9ydCBjb25zdCBhbm5vdGF0b3JzREIgPSBuZXcgUG91Y2hEQihhbm5vdGF0b3JzVVJMKTtcbmV4cG9ydCBjb25zdCBjaHJvbmljbGVEQiA9IG5ldyBQb3VjaERCKGNocm9uaWNsZVVSTCk7XG5leHBvcnQgY29uc3QgbWVhc3VyZW1lbnRzREIgPSBuZXcgUG91Y2hEQihtZWFzdXJlbWVudHNVUkwpO1xuXG5leHBvcnQgY29uc3QgZ2V0VVVJRCA9ICgpID0+IHtcbiAgcmV0dXJuIG5ldyBQcm9taXNlKChyZXNvbHZlLCByZWplY3QpID0+IHtcbiAgICAkLmdldCh1dWlkVVJMLCAoe3V1aWRzfSkgPT4ge3Jlc29sdmUodXVpZHNbMF0pfSk7XG4gICAgICAvLyBjb25zdCB1dWlkID0gZG9jLnV1aWRzWzBdO1xuICAgICAgLy8gY29uc29sZS5sb2coJ3V1aWQ6JywgdXVpZCk7XG4gIH0pO1xufVxuIl19
-},{"pouchdb":8}],20:[function(require,module,exports){
+},{"pouchdb":11}],20:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -19234,7 +19285,7 @@ $('#open-signup-btn-new').off('click').click(function (event) {
 //     this.$viewerWrapper.addClass('invisible');
 //   }
 // }
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImZha2VfZGQ0MjczOTUuanMiXSwibmFtZXMiOlsiJCIsIm9mZiIsIm9uIiwiZXZ0IiwicHJldmVudERlZmF1bHQiLCIkbG9hZGluZ0ltZyIsInJlbW92ZUNsYXNzIiwidXNlcm5hbWUiLCJ2YWwiLCJjb25zb2xlIiwibG9nIiwiZ2V0IiwidGhlbiIsInVzZXIiLCJhZGRDbGFzcyIsIiRsb2dpbkZvcm0iLCJpbml0Vmlld2VyIiwiY2F0Y2giLCJlcnIiLCJ0ZXh0IiwiY2xpY2siLCJldmVudCIsIiRsb2dpbldyYXBwZXIiLCJpbml0Il0sIm1hcHBpbmdzIjoiOztBQUFBOzs7O0FBQ0E7Ozs7QUFDQTs7OztBQUNBOzs7O0FBRUFBLEVBQUUscUJBQUYsRUFBeUJDLEdBQXpCLENBQTZCLFFBQTdCLEVBQXVDQyxFQUF2QyxDQUEwQyxRQUExQyxFQUFvRCxVQUFVQyxHQUFWLEVBQWU7QUFDakVBLE1BQUlDLGNBQUo7O0FBRUEsa0JBQU1DLFdBQU4sQ0FBa0JDLFdBQWxCLENBQThCLFdBQTlCO0FBQ0EsTUFBTUMsV0FBV1AsRUFBRSxpQkFBRixFQUFxQlEsR0FBckIsRUFBakI7QUFDQVIsSUFBRSxpQkFBRixFQUFxQlEsR0FBckIsQ0FBeUIsRUFBekI7QUFDQSxrQkFBTUQsUUFBTixHQUFpQkEsUUFBakI7QUFDQUUsVUFBUUMsR0FBUixDQUFZLFdBQVosRUFBeUJILFFBQXpCO0FBQ0FFLFVBQVFDLEdBQVIsQ0FBWSxjQUFaOztBQUVBLG1CQUFhQyxHQUFiLENBQWlCSixRQUFqQixFQUEyQkssSUFBM0IsQ0FBZ0MsVUFBQ0MsSUFBRCxFQUFVO0FBQ3hDSixZQUFRQyxHQUFSLENBQVksVUFBWixFQUF3QkgsUUFBeEIsRUFBa0MsT0FBbEM7QUFDQSxvQkFBTUYsV0FBTixDQUFrQlMsUUFBbEIsQ0FBMkIsV0FBM0I7QUFDQSxvQkFBTUMsVUFBTixDQUFpQkQsUUFBakIsQ0FBMEIsV0FBMUI7O0FBRUEscUJBQU9FLFVBQVA7QUFDRCxHQU5ELEVBTUdDLEtBTkgsQ0FNUyxVQUFDQyxHQUFELEVBQVM7QUFDaEJsQixNQUFFLGNBQUYsRUFBa0JtQixJQUFsQixlQUFtQ1osUUFBbkM7QUFDQVAsTUFBRSxjQUFGLEVBQWtCTSxXQUFsQixDQUE4QixXQUE5QjtBQUNBLG9CQUFNRCxXQUFOLENBQWtCUyxRQUFsQixDQUEyQixXQUEzQjtBQUNELEdBVkQ7O0FBWUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDRCxDQTdCRDs7QUErQkFkLEVBQUUsc0JBQUYsRUFBMEJDLEdBQTFCLENBQThCLE9BQTlCLEVBQXVDbUIsS0FBdkMsQ0FBNkMsVUFBU0MsS0FBVCxFQUFnQjtBQUMzREEsUUFBTWpCLGNBQU47O0FBRUEsa0JBQU1rQixhQUFOLENBQW9CUixRQUFwQixDQUE2QixXQUE3Qjs7QUFFQSx5QkFBYVMsSUFBYjtBQUNBO0FBQ0E7QUFDRCxDQVJEOztBQVdBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0EiLCJmaWxlIjoiZmFrZV9kZDQyNzM5NS5qcyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBWaWV3ZXIgZnJvbSAnLi4vdmlld2VyL3ZpZXdlcic7XG5pbXBvcnQgTG9naW4gZnJvbSAnLi9sb2dpbic7XG5pbXBvcnQgU2lnbnVwIGZyb20gJy4uL3NpZ251cC9zaWdudXAnO1xuaW1wb3J0IHthbm5vdGF0b3JzREJ9IGZyb20gJy4uL2RiL2RiJztcblxuJCgnLmxvZ2luLXdyYXBwZXIgZm9ybScpLm9mZignc3VibWl0Jykub24oJ3N1Ym1pdCcsIGZ1bmN0aW9uIChldnQpIHtcbiAgZXZ0LnByZXZlbnREZWZhdWx0KCk7XG5cbiAgTG9naW4uJGxvYWRpbmdJbWcucmVtb3ZlQ2xhc3MoJ2ludmlzaWJsZScpO1xuICBjb25zdCB1c2VybmFtZSA9ICQoJyNsb2dpbi11c2VybmFtZScpLnZhbCgpO1xuICAkKCcjbG9naW4tdXNlcm5hbWUnKS52YWwoJycpO1xuICBMb2dpbi51c2VybmFtZSA9IHVzZXJuYW1lO1xuICBjb25zb2xlLmxvZygndXNlcm5hbWU6JywgdXNlcm5hbWUpO1xuICBjb25zb2xlLmxvZygnTG9naW4gTG9naW46JywgTG9naW4pO1xuXG4gIGFubm90YXRvcnNEQi5nZXQodXNlcm5hbWUpLnRoZW4oKHVzZXIpID0+IHtcbiAgICBjb25zb2xlLmxvZygndXNlcm5hbWUnLCB1c2VybmFtZSwgJ2V4aXN0Jyk7XG4gICAgTG9naW4uJGxvYWRpbmdJbWcuYWRkQ2xhc3MoJ2ludmlzaWJsZScpO1xuICAgIExvZ2luLiRsb2dpbkZvcm0uYWRkQ2xhc3MoJ2ludmlzaWJsZScpO1xuXG4gICAgVmlld2VyLmluaXRWaWV3ZXIoKTtcbiAgfSkuY2F0Y2goKGVycikgPT4ge1xuICAgICQoJyNsb2dpbi1lcnJvcicpLnRleHQoYFVzZXJuYW1lICR7dXNlcm5hbWV9IGlzIG5vdCBmb3VuZC4gVHJ5IGFub3RoZXIgdXNlcm5hbWUgb3Igc2lnbiB1cCBmb3IgYSBuZXcgYWNjb3VudGApXG4gICAgJCgnI2xvZ2luLWVycm9yJykucmVtb3ZlQ2xhc3MoJ2ludmlzaWJsZScpO1xuICAgIExvZ2luLiRsb2FkaW5nSW1nLmFkZENsYXNzKCdpbnZpc2libGUnKTtcbiAgfSk7XG5cbiAgLy8gTW9ja2luZyBsb2dpblxuICAvLyBzZXRUaW1lb3V0KGZ1bmN0aW9uICgpIHtcbiAgLy8gICAkbG9hZGluZ0ltZy5hZGRDbGFzcygnaW52aXNpYmxlJyk7XG4gIC8vICAgJGxvZ2luRm9ybS5hZGRDbGFzcygnaW52aXNpYmxlJyk7XG4gIC8vXG4gIC8vICAgVmlld2VyLmluaXRWaWV3ZXIoKTtcbiAgLy8gfSwgMTAwMCk7XG59KTtcblxuJCgnI29wZW4tc2lnbnVwLWJ0bi1uZXcnKS5vZmYoJ2NsaWNrJykuY2xpY2soZnVuY3Rpb24oZXZlbnQpIHtcbiAgZXZlbnQucHJldmVudERlZmF1bHQoKTtcblxuICBMb2dpbi4kbG9naW5XcmFwcGVyLmFkZENsYXNzKCdpbnZpc2libGUnKTtcblxuICBuZXcgU2lnbnVwKCkuaW5pdCgpO1xuICAvLyBjb25zb2xlLmxvZygnc2lnaG51cCBpcyBjYWxsZWQnKTtcbiAgLy8gU2lnbnVwLmluaXQoKTtcbn0pO1xuXG5cbi8vICB7XG4vLyAgICRsb2dpbldyYXBwZXIsXG4vLyAgICR2aWV3V3JhcHBlcixcbi8vICAgJG92ZXJsYXksXG4vLyAgIHVzZXJuYW1lLFxuLy8gICBsb2dvdXQoKSB7XG4vLyAgICAgdGhpcy4kb3ZlcmxheS5hZGRDbGFzcygnaW52aXNpYmxlJyk7XG4vLyAgICAgdGhpcy4kbG9naW5XcmFwcGVyLnJlbW92ZUNsYXNzKCdpbnZpc2libGUnKTtcbi8vICAgICB0aGlzLiR2aWV3ZXJXcmFwcGVyLmFkZENsYXNzKCdpbnZpc2libGUnKTtcbi8vICAgfVxuLy8gfVxuIl19
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImZha2VfNjMyYjI3NjcuanMiXSwibmFtZXMiOlsiJCIsIm9mZiIsIm9uIiwiZXZ0IiwicHJldmVudERlZmF1bHQiLCIkbG9hZGluZ0ltZyIsInJlbW92ZUNsYXNzIiwidXNlcm5hbWUiLCJ2YWwiLCJjb25zb2xlIiwibG9nIiwiZ2V0IiwidGhlbiIsInVzZXIiLCJhZGRDbGFzcyIsIiRsb2dpbkZvcm0iLCJpbml0Vmlld2VyIiwiY2F0Y2giLCJlcnIiLCJ0ZXh0IiwiY2xpY2siLCJldmVudCIsIiRsb2dpbldyYXBwZXIiLCJpbml0Il0sIm1hcHBpbmdzIjoiOztBQUFBOzs7O0FBQ0E7Ozs7QUFDQTs7OztBQUNBOzs7O0FBRUFBLEVBQUUscUJBQUYsRUFBeUJDLEdBQXpCLENBQTZCLFFBQTdCLEVBQXVDQyxFQUF2QyxDQUEwQyxRQUExQyxFQUFvRCxVQUFVQyxHQUFWLEVBQWU7QUFDakVBLE1BQUlDLGNBQUo7O0FBRUEsa0JBQU1DLFdBQU4sQ0FBa0JDLFdBQWxCLENBQThCLFdBQTlCO0FBQ0EsTUFBTUMsV0FBV1AsRUFBRSxpQkFBRixFQUFxQlEsR0FBckIsRUFBakI7QUFDQVIsSUFBRSxpQkFBRixFQUFxQlEsR0FBckIsQ0FBeUIsRUFBekI7QUFDQSxrQkFBTUQsUUFBTixHQUFpQkEsUUFBakI7QUFDQUUsVUFBUUMsR0FBUixDQUFZLFdBQVosRUFBeUJILFFBQXpCO0FBQ0FFLFVBQVFDLEdBQVIsQ0FBWSxjQUFaOztBQUVBLG1CQUFhQyxHQUFiLENBQWlCSixRQUFqQixFQUEyQkssSUFBM0IsQ0FBZ0MsVUFBQ0MsSUFBRCxFQUFVO0FBQ3hDSixZQUFRQyxHQUFSLENBQVksVUFBWixFQUF3QkgsUUFBeEIsRUFBa0MsT0FBbEM7QUFDQSxvQkFBTUYsV0FBTixDQUFrQlMsUUFBbEIsQ0FBMkIsV0FBM0I7QUFDQSxvQkFBTUMsVUFBTixDQUFpQkQsUUFBakIsQ0FBMEIsV0FBMUI7O0FBRUEscUJBQU9FLFVBQVA7QUFDRCxHQU5ELEVBTUdDLEtBTkgsQ0FNUyxVQUFDQyxHQUFELEVBQVM7QUFDaEJsQixNQUFFLGNBQUYsRUFBa0JtQixJQUFsQixlQUFtQ1osUUFBbkM7QUFDQVAsTUFBRSxjQUFGLEVBQWtCTSxXQUFsQixDQUE4QixXQUE5QjtBQUNBLG9CQUFNRCxXQUFOLENBQWtCUyxRQUFsQixDQUEyQixXQUEzQjtBQUNELEdBVkQ7O0FBWUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDRCxDQTdCRDs7QUErQkFkLEVBQUUsc0JBQUYsRUFBMEJDLEdBQTFCLENBQThCLE9BQTlCLEVBQXVDbUIsS0FBdkMsQ0FBNkMsVUFBU0MsS0FBVCxFQUFnQjtBQUMzREEsUUFBTWpCLGNBQU47O0FBRUEsa0JBQU1rQixhQUFOLENBQW9CUixRQUFwQixDQUE2QixXQUE3Qjs7QUFFQSx5QkFBYVMsSUFBYjtBQUNBO0FBQ0E7QUFDRCxDQVJEOztBQVdBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0EiLCJmaWxlIjoiZmFrZV82MzJiMjc2Ny5qcyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBWaWV3ZXIgZnJvbSAnLi4vdmlld2VyL3ZpZXdlcic7XG5pbXBvcnQgTG9naW4gZnJvbSAnLi9sb2dpbic7XG5pbXBvcnQgU2lnbnVwIGZyb20gJy4uL3NpZ251cC9zaWdudXAnO1xuaW1wb3J0IHthbm5vdGF0b3JzREJ9IGZyb20gJy4uL2RiL2RiJztcblxuJCgnLmxvZ2luLXdyYXBwZXIgZm9ybScpLm9mZignc3VibWl0Jykub24oJ3N1Ym1pdCcsIGZ1bmN0aW9uIChldnQpIHtcbiAgZXZ0LnByZXZlbnREZWZhdWx0KCk7XG5cbiAgTG9naW4uJGxvYWRpbmdJbWcucmVtb3ZlQ2xhc3MoJ2ludmlzaWJsZScpO1xuICBjb25zdCB1c2VybmFtZSA9ICQoJyNsb2dpbi11c2VybmFtZScpLnZhbCgpO1xuICAkKCcjbG9naW4tdXNlcm5hbWUnKS52YWwoJycpO1xuICBMb2dpbi51c2VybmFtZSA9IHVzZXJuYW1lO1xuICBjb25zb2xlLmxvZygndXNlcm5hbWU6JywgdXNlcm5hbWUpO1xuICBjb25zb2xlLmxvZygnTG9naW4gTG9naW46JywgTG9naW4pO1xuXG4gIGFubm90YXRvcnNEQi5nZXQodXNlcm5hbWUpLnRoZW4oKHVzZXIpID0+IHtcbiAgICBjb25zb2xlLmxvZygndXNlcm5hbWUnLCB1c2VybmFtZSwgJ2V4aXN0Jyk7XG4gICAgTG9naW4uJGxvYWRpbmdJbWcuYWRkQ2xhc3MoJ2ludmlzaWJsZScpO1xuICAgIExvZ2luLiRsb2dpbkZvcm0uYWRkQ2xhc3MoJ2ludmlzaWJsZScpO1xuXG4gICAgVmlld2VyLmluaXRWaWV3ZXIoKTtcbiAgfSkuY2F0Y2goKGVycikgPT4ge1xuICAgICQoJyNsb2dpbi1lcnJvcicpLnRleHQoYFVzZXJuYW1lICR7dXNlcm5hbWV9IGlzIG5vdCBmb3VuZC4gVHJ5IGFub3RoZXIgdXNlcm5hbWUgb3Igc2lnbiB1cCBmb3IgYSBuZXcgYWNjb3VudGApXG4gICAgJCgnI2xvZ2luLWVycm9yJykucmVtb3ZlQ2xhc3MoJ2ludmlzaWJsZScpO1xuICAgIExvZ2luLiRsb2FkaW5nSW1nLmFkZENsYXNzKCdpbnZpc2libGUnKTtcbiAgfSk7XG5cbiAgLy8gTW9ja2luZyBsb2dpblxuICAvLyBzZXRUaW1lb3V0KGZ1bmN0aW9uICgpIHtcbiAgLy8gICAkbG9hZGluZ0ltZy5hZGRDbGFzcygnaW52aXNpYmxlJyk7XG4gIC8vICAgJGxvZ2luRm9ybS5hZGRDbGFzcygnaW52aXNpYmxlJyk7XG4gIC8vXG4gIC8vICAgVmlld2VyLmluaXRWaWV3ZXIoKTtcbiAgLy8gfSwgMTAwMCk7XG59KTtcblxuJCgnI29wZW4tc2lnbnVwLWJ0bi1uZXcnKS5vZmYoJ2NsaWNrJykuY2xpY2soZnVuY3Rpb24oZXZlbnQpIHtcbiAgZXZlbnQucHJldmVudERlZmF1bHQoKTtcblxuICBMb2dpbi4kbG9naW5XcmFwcGVyLmFkZENsYXNzKCdpbnZpc2libGUnKTtcblxuICBuZXcgU2lnbnVwKCkuaW5pdCgpO1xuICAvLyBjb25zb2xlLmxvZygnc2lnaG51cCBpcyBjYWxsZWQnKTtcbiAgLy8gU2lnbnVwLmluaXQoKTtcbn0pO1xuXG5cbi8vICB7XG4vLyAgICRsb2dpbldyYXBwZXIsXG4vLyAgICR2aWV3V3JhcHBlcixcbi8vICAgJG92ZXJsYXksXG4vLyAgIHVzZXJuYW1lLFxuLy8gICBsb2dvdXQoKSB7XG4vLyAgICAgdGhpcy4kb3ZlcmxheS5hZGRDbGFzcygnaW52aXNpYmxlJyk7XG4vLyAgICAgdGhpcy4kbG9naW5XcmFwcGVyLnJlbW92ZUNsYXNzKCdpbnZpc2libGUnKTtcbi8vICAgICB0aGlzLiR2aWV3ZXJXcmFwcGVyLmFkZENsYXNzKCdpbnZpc2libGUnKTtcbi8vICAgfVxuLy8gfVxuIl19
 },{"../db/db":19,"../signup/signup":25,"../viewer/viewer":30,"./login":22}],22:[function(require,module,exports){
 'use strict';
 
@@ -19416,7 +19467,7 @@ exports.default = {
   }
 };
 //# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIm1lbnUuanMiXSwibmFtZXMiOlsiJGhhbWJ1cmd1ZXJNZW51IiwiJCIsIiRtZW51V3JhcHBlciIsIiRvdmVybGF5Iiwic3VibWl0IiwiY2xvc2VNZW51IiwicmVtb3ZlQ2xhc3MiLCJhZGRDbGFzcyIsImxlbmd0aHMiLCJjb3JuZXJzdG9uZVRvb2xzIiwiZ2V0VG9vbFN0YXRlIiwiJGVsZW1lbnQiLCJzaG93IiwidGhlbiIsInV1aWQiLCJkb2MiLCJkYXRhIiwibGVuZ3RoIiwidW5peCIsIm5hdmlnYXRvciIsInVzZXJBZ2VudCIsInB1dCIsIm5leHRDYXNlIiwiZ2V0TmV4dENhc2UiLCJsb2dvdXQiLCJzZXRUaW1lb3V0IiwiaW5pdCIsIm9uIiwiZXZlbnQiLCJwcmV2ZW50RGVmYXVsdCIsImN1cnJlbnRUYXJnZXQiLCJtZW51IiwiYXR0ciIsImhhc0NsYXNzIl0sIm1hcHBpbmdzIjoiOzs7Ozs7QUFBQTs7OztBQUNBOzs7O0FBQ0E7Ozs7QUFDQTs7OztBQUNBOztBQUdBOzs7Ozs7a0JBRWU7QUFDYkEsbUJBQWlCQyxFQUFFLGtCQUFGLENBREo7QUFFYkMsZ0JBQWNELEVBQUUsZUFBRixDQUZEO0FBR2JFLFlBQVVGLEVBQUUsa0JBQUYsQ0FIRzs7QUFLYkcsUUFMYSxvQkFLSjtBQUFBOztBQUNQLFNBQUtDLFNBQUw7QUFDQSxTQUFLRixRQUFMLENBQWNHLFdBQWQsQ0FBMEIsV0FBMUIsRUFBdUNDLFFBQXZDLENBQWdELFlBQWhEOztBQUVBLFFBQU1DLFVBQVVDLGlCQUFpQkMsWUFBakIsQ0FBOEIsS0FBS0MsUUFBbkMsRUFBNkMsUUFBN0MsQ0FBaEI7QUFDQTtBQUNBLFFBQUcsQ0FBQ0gsT0FBSixFQUFZO0FBQ1Y7QUFDQSxzQkFBV0ksSUFBWDtBQUNBLFdBQUtULFFBQUwsQ0FBY0csV0FBZCxDQUEwQixZQUExQjtBQUNBO0FBQ0Q7O0FBRUQsdUJBQVVPLElBQVYsQ0FBZSxVQUFDQyxJQUFELEVBQVU7QUFDdkIsVUFBTUMsTUFBTTtBQUNWLGVBQU9ELElBREc7QUFFVixrQkFBVU4sUUFBUVEsSUFBUixDQUFhLENBQWIsRUFBZ0JDLE1BRmhCO0FBR1Ysb0NBSFU7QUFJVjtBQUNBLGdCQUFRLHdCQUFTQyxJQUFULEVBTEU7QUFNVixxQkFBYUMsVUFBVUM7QUFFekI7QUFSWSxPQUFaLENBU0EsT0FBTyxtQkFBZUMsR0FBZixDQUFtQk4sR0FBbkIsQ0FBUDtBQUNELEtBWEQsRUFXR0YsSUFYSCxDQVdRLFlBQU07QUFDWixzQkFBTUQsSUFBTjtBQUNBLFlBQUtULFFBQUwsQ0FBY0csV0FBZCxDQUEwQixZQUExQjtBQUNELEtBZEQ7O0FBZ0JBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNELEdBeENZO0FBeUNiZ0IsVUF6Q2Esc0JBeUNGO0FBQ1QsU0FBS2pCLFNBQUw7QUFDQSxxQkFBT2tCLFdBQVA7QUFDRCxHQTVDWTtBQTZDYkMsUUE3Q2Esb0JBNkNMO0FBQ04sU0FBS25CLFNBQUw7QUFDQSxvQkFBTW1CLE1BQU47QUFDRCxHQWhEWTtBQWlEYm5CLFdBakRhLHVCQWlERDtBQUFBOztBQUNWLFNBQUtGLFFBQUwsQ0FBY0ksUUFBZCxDQUF1QixXQUF2QjtBQUNBLFNBQUtMLFlBQUwsQ0FBa0JJLFdBQWxCLENBQThCLFFBQTlCOztBQUVBbUIsZUFBVyxZQUFNO0FBQ2YsYUFBS3ZCLFlBQUwsQ0FBa0JLLFFBQWxCLENBQTJCLFdBQTNCO0FBQ0QsS0FGRCxFQUVHLElBRkg7QUFHRCxHQXhEWTtBQXlEYm1CLE1BekRhLGtCQXlETjtBQUFBOztBQUNMLG9CQUFNQSxJQUFOO0FBQ0Esb0JBQVdBLElBQVg7O0FBRUEsU0FBSzFCLGVBQUwsQ0FBcUIyQixFQUFyQixDQUF3QixPQUF4QixFQUFpQyxVQUFDQyxLQUFELEVBQVc7QUFDMUNBLFlBQU1DLGNBQU47O0FBRUEsYUFBSzFCLFFBQUwsQ0FBY0csV0FBZCxDQUEwQixXQUExQjtBQUNBLGFBQUtKLFlBQUwsQ0FBa0JJLFdBQWxCLENBQThCLFdBQTlCOztBQUVBbUIsaUJBQVcsWUFBTTtBQUNmLGVBQUt2QixZQUFMLENBQWtCSyxRQUFsQixDQUEyQixRQUEzQjtBQUNBLGVBQUtKLFFBQUwsQ0FBY0csV0FBZCxDQUEwQixXQUExQjtBQUNELE9BSEQsRUFHRyxHQUhIO0FBSUQsS0FWRDs7QUFZQSxTQUFLSixZQUFMLENBQWtCeUIsRUFBbEIsQ0FBcUIsT0FBckIsRUFBOEIsY0FBOUIsRUFBOEMsVUFBQ0MsS0FBRCxFQUFXO0FBQ3ZELFVBQU1qQixXQUFXVixFQUFFMkIsTUFBTUUsYUFBUixDQUFqQjtBQUNBLFVBQU1DLE9BQU9wQixTQUFTcUIsSUFBVCxDQUFjLFdBQWQsQ0FBYjs7QUFFQUosWUFBTUMsY0FBTjs7QUFFQSxVQUFJRSxJQUFKLEVBQVU7QUFDUixlQUFLQSxJQUFMO0FBQ0Q7QUFDRixLQVREOztBQVdBLFNBQUs1QixRQUFMLENBQWN3QixFQUFkLENBQWlCLE9BQWpCLEVBQTBCLFVBQUNDLEtBQUQsRUFBVztBQUNuQyxVQUFJLE9BQUsxQixZQUFMLENBQWtCK0IsUUFBbEIsQ0FBMkIsUUFBM0IsQ0FBSixFQUEwQztBQUN4QyxlQUFLNUIsU0FBTDtBQUNEO0FBQ0YsS0FKRDtBQUtEO0FBekZZLEMiLCJmaWxlIjoibWVudS5qcyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBMb2dpbiBmcm9tICcuLi9sb2dpbi9sb2dpbic7XG5pbXBvcnQgTW9kYWwgZnJvbSAnLi4vbW9kYWwvbW9kYWwnO1xuaW1wb3J0IEVycm9yTW9kYWwgZnJvbSAnLi4vZXJyb3JNb2RhbC9tb2RhbCc7XG5pbXBvcnQgVmlld2VyIGZyb20gJy4uL3ZpZXdlci92aWV3ZXInO1xuaW1wb3J0IHttZWFzdXJlbWVudHNEQiwgZ2V0VVVJRH0gZnJvbSAnLi4vZGIvZGInO1xuaW1wb3J0IHt1c2VybmFtZX0gZnJvbSAnLi4vbG9naW4vbG9naW4nO1xuXG5pbXBvcnQgbW9tZW50IGZyb20gJ21vbWVudCc7XG5cbmV4cG9ydCBkZWZhdWx0IHtcbiAgJGhhbWJ1cmd1ZXJNZW51OiAkKCcuaHVtYnVyZ3Vlci1tZW51JyksXG4gICRtZW51V3JhcHBlcjogJCgnLm1lbnUtd3JhcHBlcicpLFxuICAkb3ZlcmxheTogJCgnLmxvYWRpbmctb3ZlcmxheScpLFxuXG4gIHN1Ym1pdCgpIHtcbiAgICB0aGlzLmNsb3NlTWVudSgpO1xuICAgIHRoaXMuJG92ZXJsYXkucmVtb3ZlQ2xhc3MoJ2ludmlzaWJsZScpLmFkZENsYXNzKCdzdWJtaXR0aW5nJyk7XG5cbiAgICBjb25zdCBsZW5ndGhzID0gY29ybmVyc3RvbmVUb29scy5nZXRUb29sU3RhdGUodGhpcy4kZWxlbWVudCwgJ2xlbmd0aCcpO1xuICAgIC8vIGNvbnNvbGUubG9nKCdsZW5ndGhzOicsIGxlbmd0aHMpO1xuICAgIGlmKCFsZW5ndGhzKXtcbiAgICAgIC8vIGNvbnNvbGUubG9nKCdFcnJvck1vZGFsJywgRXJyb3JNb2RhbCk7XG4gICAgICBFcnJvck1vZGFsLnNob3coKTtcbiAgICAgIHRoaXMuJG92ZXJsYXkucmVtb3ZlQ2xhc3MoJ3N1Ym1pdHRpbmcnKTtcbiAgICAgIHJldHVybjtcbiAgICB9XG5cbiAgICBnZXRVVUlEKCkudGhlbigodXVpZCkgPT4ge1xuICAgICAgY29uc3QgZG9jID0ge1xuICAgICAgICAnX2lkJzogdXVpZCxcbiAgICAgICAgJ2xlbmd0aCc6IGxlbmd0aHMuZGF0YVswXS5sZW5ndGgsXG4gICAgICAgICdhbm5vdGF0b3InOiB1c2VybmFtZSxcbiAgICAgICAgLy8gJ2Fubm90YXRvcic6ICQoJyNsb2dpbi11c2VybmFtZScpLnZhbCgpLFxuICAgICAgICAnZGF0ZSc6IG1vbWVudCgpLnVuaXgoKSxcbiAgICAgICAgJ3VzZXJBZ2VudCc6IG5hdmlnYXRvci51c2VyQWdlbnRcbiAgICAgIH1cbiAgICAgIC8vIGNvbnNvbGUubG9nKCdkb2M6JywgZG9jKTtcbiAgICAgIHJldHVybiBtZWFzdXJlbWVudHNEQi5wdXQoZG9jKTtcbiAgICB9KS50aGVuKCgpID0+IHtcbiAgICAgIE1vZGFsLnNob3coKTtcbiAgICAgIHRoaXMuJG92ZXJsYXkucmVtb3ZlQ2xhc3MoJ3N1Ym1pdHRpbmcnKTtcbiAgICB9KTtcblxuICAgIC8vIHNldFRpbWVvdXQoKCkgPT4ge1xuICAgIC8vICAgTW9kYWwuc2hvdygpO1xuICAgIC8vICAgY29uc29sZS5sb2coJ0Zha2Ugc3VibWl0IGRvbmUnKTtcbiAgICAvL1xuICAgIC8vICAgdGhpcy4kb3ZlcmxheS5yZW1vdmVDbGFzcygnc3VibWl0dGluZycpO1xuICAgIC8vIH0sIDIwMDApO1xuICB9LFxuICBuZXh0Q2FzZSgpIHtcbiAgICB0aGlzLmNsb3NlTWVudSgpO1xuICAgIFZpZXdlci5nZXROZXh0Q2FzZSgpO1xuICB9LFxuICBsb2dvdXQoKXtcbiAgICB0aGlzLmNsb3NlTWVudSgpO1xuICAgIExvZ2luLmxvZ291dCgpO1xuICB9LFxuICBjbG9zZU1lbnUoKSB7XG4gICAgdGhpcy4kb3ZlcmxheS5hZGRDbGFzcygnaW52aXNpYmxlJyk7XG4gICAgdGhpcy4kbWVudVdyYXBwZXIucmVtb3ZlQ2xhc3MoJ29wZW5lZCcpO1xuXG4gICAgc2V0VGltZW91dCgoKSA9PiB7XG4gICAgICB0aGlzLiRtZW51V3JhcHBlci5hZGRDbGFzcygnaW52aXNpYmxlJyk7XG4gICAgfSwgMTIwMCk7XG4gIH0sXG4gIGluaXQoKSB7XG4gICAgTW9kYWwuaW5pdCgpO1xuICAgIEVycm9yTW9kYWwuaW5pdCgpO1xuXG4gICAgdGhpcy4kaGFtYnVyZ3Vlck1lbnUub24oJ2NsaWNrJywgKGV2ZW50KSA9PiB7XG4gICAgICBldmVudC5wcmV2ZW50RGVmYXVsdCgpO1xuXG4gICAgICB0aGlzLiRvdmVybGF5LnJlbW92ZUNsYXNzKCdpbnZpc2libGUnKTtcbiAgICAgIHRoaXMuJG1lbnVXcmFwcGVyLnJlbW92ZUNsYXNzKCdpbnZpc2libGUnKTtcblxuICAgICAgc2V0VGltZW91dCgoKSA9PiB7XG4gICAgICAgIHRoaXMuJG1lbnVXcmFwcGVyLmFkZENsYXNzKCdvcGVuZWQnKTtcbiAgICAgICAgdGhpcy4kb3ZlcmxheS5yZW1vdmVDbGFzcygnaW52aXNpYmxlJyk7XG4gICAgICB9LCAyMDApO1xuICAgIH0pO1xuXG4gICAgdGhpcy4kbWVudVdyYXBwZXIub24oJ2NsaWNrJywgJ2FbZGF0YS1tZW51XScsIChldmVudCkgPT4ge1xuICAgICAgY29uc3QgJGVsZW1lbnQgPSAkKGV2ZW50LmN1cnJlbnRUYXJnZXQpO1xuICAgICAgY29uc3QgbWVudSA9ICRlbGVtZW50LmF0dHIoJ2RhdGEtbWVudScpO1xuXG4gICAgICBldmVudC5wcmV2ZW50RGVmYXVsdCgpO1xuXG4gICAgICBpZiAobWVudSkge1xuICAgICAgICB0aGlzW21lbnVdKCk7XG4gICAgICB9XG4gICAgfSk7XG5cbiAgICB0aGlzLiRvdmVybGF5Lm9uKCdjbGljaycsIChldmVudCkgPT4ge1xuICAgICAgaWYgKHRoaXMuJG1lbnVXcmFwcGVyLmhhc0NsYXNzKCdvcGVuZWQnKSkge1xuICAgICAgICB0aGlzLmNsb3NlTWVudSgpO1xuICAgICAgfVxuICAgIH0pO1xuICB9XG59XG4iXX0=
-},{"../db/db":19,"../errorModal/modal":20,"../login/login":22,"../modal/modal":24,"../viewer/viewer":30,"moment":7}],24:[function(require,module,exports){
+},{"../db/db":19,"../errorModal/modal":20,"../login/login":22,"../modal/modal":24,"../viewer/viewer":30,"moment":9}],24:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -19850,7 +19901,7 @@ exports.default = {
   }
 };
 //# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNvbW1hbmRzLmpzIl0sIm5hbWVzIjpbImNvbW1hbmRTZWxlY3RvciIsIiRvdmVybGF5IiwiJCIsImNsZWFyQWxsIiwiZW5hYmxlZEVsZW1ldCIsImNvcm5lcnN0b25lIiwiZ2V0RW5hYmxlZEVsZW1lbnQiLCIkZWxlbWVudCIsInZpZXdwb3J0IiwiZ2V0Vmlld3BvcnQiLCJ2b2kiLCJ3aW5kb3dXaWR0aCIsImltYWdlIiwid2luZG93Q2VudGVyIiwic2V0Vmlld3BvcnQiLCJjb3JuZXJzdG9uZVRvb2xzIiwiZ2xvYmFsSW1hZ2VJZFNwZWNpZmljVG9vbFN0YXRlTWFuYWdlciIsImNsZWFyIiwidXBkYXRlSW1hZ2UiLCJzYXZlIiwiY2xvc2VNZW51IiwicmVtb3ZlQ2xhc3MiLCJhZGRDbGFzcyIsImxlbmd0aHMiLCJnZXRUb29sU3RhdGUiLCJzaG93IiwidGhlbiIsInV1aWQiLCJkb2MiLCJkYXRhIiwibGVuZ3RoIiwidXNlcm5hbWUiLCJ1bml4IiwibmF2aWdhdG9yIiwidXNlckFnZW50IiwiY29uc29sZSIsImxvZyIsInB1dCIsImluaXRDb21tYW5kcyIsIm9uIiwiZXZlbnQiLCJjdXJyZW50VGFyZ2V0IiwiJHdyYXBwZXIiLCJwYXJlbnQiLCJ0b29sIiwiYXR0ciIsInNldFRpbWVvdXQiXSwibWFwcGluZ3MiOiI7Ozs7OztBQUFBOzs7O0FBQ0E7Ozs7QUFDQTs7OztBQUNBOztBQUNBOzs7O0FBQ0E7Ozs7OztrQkFFZTtBQUNiQSxtQkFBaUIsZUFESjtBQUViQyxZQUFVQyxFQUFFLGtCQUFGLENBRkc7QUFHYkMsVUFIYSxzQkFHRjtBQUNULFFBQU1DLGdCQUFnQkMsWUFBWUMsaUJBQVosQ0FBOEIsS0FBS0MsUUFBbkMsQ0FBdEI7QUFDQSxRQUFNQyxXQUFXSCxZQUFZSSxXQUFaLENBQXdCLEtBQUtGLFFBQTdCLENBQWpCOztBQUVBQyxhQUFTRSxHQUFULENBQWFDLFdBQWIsR0FBMkJQLGNBQWNRLEtBQWQsQ0FBb0JELFdBQS9DO0FBQ0FILGFBQVNFLEdBQVQsQ0FBYUcsWUFBYixHQUE0QlQsY0FBY1EsS0FBZCxDQUFvQkMsWUFBaEQ7QUFDQVIsZ0JBQVlTLFdBQVosQ0FBd0IsS0FBS1AsUUFBN0IsRUFBdUNDLFFBQXZDOztBQUVBTyxxQkFBaUJDLHFDQUFqQixDQUF1REMsS0FBdkQsQ0FBNkQsS0FBS1YsUUFBbEU7QUFDQUYsZ0JBQVlhLFdBQVosQ0FBd0IsS0FBS1gsUUFBN0I7QUFDRCxHQWJZOzs7QUFlYlksUUFBTSxnQkFBWTtBQUFBOztBQUVoQixtQkFBS0MsU0FBTDtBQUNBLFNBQUtuQixRQUFMLENBQWNvQixXQUFkLENBQTBCLFdBQTFCLEVBQXVDQyxRQUF2QyxDQUFnRCxZQUFoRDs7QUFFQSxRQUFNQyxVQUFVUixpQkFBaUJTLFlBQWpCLENBQThCLEtBQUtqQixRQUFuQyxFQUE2QyxRQUE3QyxDQUFoQjtBQUNBO0FBQ0EsUUFBRyxDQUFDZ0IsT0FBSixFQUFZO0FBQ1Y7QUFDQSxzQkFBV0UsSUFBWDtBQUNBLFdBQUt4QixRQUFMLENBQWNvQixXQUFkLENBQTBCLFlBQTFCO0FBQ0E7QUFDRDs7QUFFRCx1QkFBVUssSUFBVixDQUFlLFVBQUNDLElBQUQsRUFBVTtBQUN2QixVQUFNQyxNQUFNO0FBQ1YsZUFBT0QsSUFERztBQUVWLGtCQUFVSixRQUFRTSxJQUFSLENBQWEsQ0FBYixFQUFnQkMsTUFGaEI7QUFHVixxQkFBYSxnQkFBTUMsUUFIVDtBQUlWO0FBQ0EsZ0JBQVEsd0JBQVNDLElBQVQsRUFMRTtBQU1WLHFCQUFhQyxVQUFVQztBQU5iLE9BQVo7QUFRQUMsY0FBUUMsR0FBUixDQUFZLE9BQVo7QUFDQSxhQUFPLG1CQUFlQyxHQUFmLENBQW1CVCxHQUFuQixDQUFQO0FBQ0QsS0FYRCxFQVdHRixJQVhILENBV1EsWUFBTTtBQUNaLHNCQUFNRCxJQUFOO0FBQ0EsWUFBS3hCLFFBQUwsQ0FBY29CLFdBQWQsQ0FBMEIsWUFBMUI7QUFDRCxLQWREOztBQWdCQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0QsR0FsRFk7O0FBb0RiaUIsY0FwRGEsMEJBb0RFO0FBQUE7O0FBQ2JwQyxNQUFFLEtBQUtGLGVBQVAsRUFBd0J1QyxFQUF4QixDQUEyQixPQUEzQixFQUFvQyxpQkFBcEMsRUFBdUQsaUJBQVM7QUFDOUQsVUFBTWhDLFdBQVdMLEVBQUVzQyxNQUFNQyxhQUFSLENBQWpCO0FBQ0EsVUFBTUMsV0FBV25DLFNBQVNvQyxNQUFULEVBQWpCO0FBQ0EsVUFBTUMsT0FBT3JDLFNBQVNzQyxJQUFULENBQWMsY0FBZCxDQUFiOztBQUVBLGFBQUtELElBQUw7O0FBRUFGLGVBQVNwQixRQUFULENBQWtCLFFBQWxCOztBQUVBd0IsaUJBQVcsWUFBVztBQUNwQkosaUJBQVNyQixXQUFULENBQXFCLFFBQXJCO0FBQ0QsT0FGRCxFQUVHLEdBRkg7QUFHRCxLQVpEO0FBYUQ7QUFsRVksQyIsImZpbGUiOiJjb21tYW5kcy5qcyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBNZW51IGZyb20gJy4uL21lbnUvbWVudSc7XG5pbXBvcnQgTW9kYWwgZnJvbSAnLi4vbW9kYWwvbW9kYWwnO1xuaW1wb3J0IEVycm9yTW9kYWwgZnJvbSAnLi4vZXJyb3JNb2RhbC9tb2RhbCc7XG5pbXBvcnQge21lYXN1cmVtZW50c0RCLCBnZXRVVUlEfSBmcm9tICcuLi9kYi9kYic7XG5pbXBvcnQgTG9naW4gZnJvbSAnLi4vbG9naW4vbG9naW4nO1xuaW1wb3J0IG1vbWVudCBmcm9tICdtb21lbnQnO1xuXG5leHBvcnQgZGVmYXVsdCB7XG4gIGNvbW1hbmRTZWxlY3RvcjogJy52aWV3ZXItdG9vbHMnLFxuICAkb3ZlcmxheTogJCgnLmxvYWRpbmctb3ZlcmxheScpLFxuICBjbGVhckFsbCgpIHtcbiAgICBjb25zdCBlbmFibGVkRWxlbWV0ID0gY29ybmVyc3RvbmUuZ2V0RW5hYmxlZEVsZW1lbnQodGhpcy4kZWxlbWVudCk7XG4gICAgY29uc3Qgdmlld3BvcnQgPSBjb3JuZXJzdG9uZS5nZXRWaWV3cG9ydCh0aGlzLiRlbGVtZW50KTtcblxuICAgIHZpZXdwb3J0LnZvaS53aW5kb3dXaWR0aCA9IGVuYWJsZWRFbGVtZXQuaW1hZ2Uud2luZG93V2lkdGg7XG4gICAgdmlld3BvcnQudm9pLndpbmRvd0NlbnRlciA9IGVuYWJsZWRFbGVtZXQuaW1hZ2Uud2luZG93Q2VudGVyO1xuICAgIGNvcm5lcnN0b25lLnNldFZpZXdwb3J0KHRoaXMuJGVsZW1lbnQsIHZpZXdwb3J0KTtcblxuICAgIGNvcm5lcnN0b25lVG9vbHMuZ2xvYmFsSW1hZ2VJZFNwZWNpZmljVG9vbFN0YXRlTWFuYWdlci5jbGVhcih0aGlzLiRlbGVtZW50KTtcbiAgICBjb3JuZXJzdG9uZS51cGRhdGVJbWFnZSh0aGlzLiRlbGVtZW50KTtcbiAgfSxcblxuICBzYXZlOiBmdW5jdGlvbiAoKSB7XG5cbiAgICBNZW51LmNsb3NlTWVudSgpO1xuICAgIHRoaXMuJG92ZXJsYXkucmVtb3ZlQ2xhc3MoJ2ludmlzaWJsZScpLmFkZENsYXNzKCdzdWJtaXR0aW5nJyk7XG5cbiAgICBjb25zdCBsZW5ndGhzID0gY29ybmVyc3RvbmVUb29scy5nZXRUb29sU3RhdGUodGhpcy4kZWxlbWVudCwgJ2xlbmd0aCcpO1xuICAgIC8vIGNvbnNvbGUubG9nKCdsZW5ndGhzOicsIGxlbmd0aHMpO1xuICAgIGlmKCFsZW5ndGhzKXtcbiAgICAgIC8vIGNvbnNvbGUubG9nKCdFcnJvck1vZGFsJywgRXJyb3JNb2RhbCk7XG4gICAgICBFcnJvck1vZGFsLnNob3coKTtcbiAgICAgIHRoaXMuJG92ZXJsYXkucmVtb3ZlQ2xhc3MoJ3N1Ym1pdHRpbmcnKTtcbiAgICAgIHJldHVybjtcbiAgICB9XG5cbiAgICBnZXRVVUlEKCkudGhlbigodXVpZCkgPT4ge1xuICAgICAgY29uc3QgZG9jID0ge1xuICAgICAgICAnX2lkJzogdXVpZCxcbiAgICAgICAgJ2xlbmd0aCc6IGxlbmd0aHMuZGF0YVswXS5sZW5ndGgsXG4gICAgICAgICdhbm5vdGF0b3InOiBMb2dpbi51c2VybmFtZSxcbiAgICAgICAgLy8gJ2Fubm90YXRvcic6ICQoJyNsb2dpbi11c2VybmFtZScpLnZhbCgpLFxuICAgICAgICAnZGF0ZSc6IG1vbWVudCgpLnVuaXgoKSxcbiAgICAgICAgJ3VzZXJBZ2VudCc6IG5hdmlnYXRvci51c2VyQWdlbnRcbiAgICAgIH1cbiAgICAgIGNvbnNvbGUubG9nKCdMb2dpbicsIExvZ2luKTtcbiAgICAgIHJldHVybiBtZWFzdXJlbWVudHNEQi5wdXQoZG9jKTtcbiAgICB9KS50aGVuKCgpID0+IHtcbiAgICAgIE1vZGFsLnNob3coKTtcbiAgICAgIHRoaXMuJG92ZXJsYXkucmVtb3ZlQ2xhc3MoJ3N1Ym1pdHRpbmcnKTtcbiAgICB9KTtcblxuICAgIC8vIHNldFRpbWVvdXQoKCkgPT4ge1xuICAgIC8vICAgTW9kYWwuc2hvdygpO1xuICAgIC8vXG4gICAgLy8gICAgdGhpcy4kb3ZlcmxheS5yZW1vdmVDbGFzcygnc3VibWl0dGluZycpO1xuICAgIC8vIH0sIDIwMDApO1xuICB9LFxuXG4gIGluaXRDb21tYW5kcygpIHtcbiAgICAkKHRoaXMuY29tbWFuZFNlbGVjdG9yKS5vbignY2xpY2snLCAnYVtkYXRhLWNvbW1hbmRdJywgZXZlbnQgPT4ge1xuICAgICAgY29uc3QgJGVsZW1lbnQgPSAkKGV2ZW50LmN1cnJlbnRUYXJnZXQpO1xuICAgICAgY29uc3QgJHdyYXBwZXIgPSAkZWxlbWVudC5wYXJlbnQoKTtcbiAgICAgIGNvbnN0IHRvb2wgPSAkZWxlbWVudC5hdHRyKCdkYXRhLWNvbW1hbmQnKTtcblxuICAgICAgdGhpc1t0b29sXSgpO1xuXG4gICAgICAkd3JhcHBlci5hZGRDbGFzcygnYWN0aXZlJyk7XG5cbiAgICAgIHNldFRpbWVvdXQoZnVuY3Rpb24oKSB7XG4gICAgICAgICR3cmFwcGVyLnJlbW92ZUNsYXNzKCdhY3RpdmUnKTtcbiAgICAgIH0sIDMwMCk7XG4gICAgfSk7XG4gIH1cbn07XG4iXX0=
-},{"../db/db":19,"../errorModal/modal":20,"../login/login":22,"../menu/menu":23,"../modal/modal":24,"moment":7}],27:[function(require,module,exports){
+},{"../db/db":19,"../errorModal/modal":20,"../login/login":22,"../menu/menu":23,"../modal/modal":24,"moment":9}],27:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -20205,16 +20256,14 @@ exports.default = {
     this.$overlay.removeClass('invisible').addClass('loading');
 
     _files2.default.getCaseImages().then(function (imagesIds) {
-      // console.log('test0');
+
+      // Seems like tools needs to be updated (not init'd) with new ids
       _tools2.default.initTools(imagesIds);
-      // console.log('test1');
-      _commands2.default.initCommands();
-      // console.log('test2');
+
+      // Commands.initCommands();
 
       cornerstone.loadImage(imagesIds[0]).then(function (image) {
-        // console.log('test3');
         cornerstone.displayImage(_this.$element, image);
-        // console.log('test4');
       });
     }).catch();
   },
@@ -20231,6 +20280,8 @@ exports.default = {
     _commands2.default.$element = this.$element;
     _menu2.default.$element = this.$element;
 
+    _commands2.default.initCommands();
+
     this.$window.on('resize', function () {
       return cornerstone.resize(_this2.$element, true);
     });
@@ -20241,5 +20292,5 @@ exports.default = {
     this.getNextCase();
   }
 };
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInZpZXdlci5qcyJdLCJuYW1lcyI6WyIkd2luZG93IiwiJCIsIndpbmRvdyIsIiR2aWV3ZXIiLCIkb3ZlcmxheSIsImdldE5leHRDYXNlIiwicmVtb3ZlQ2xhc3MiLCJhZGRDbGFzcyIsImdldENhc2VJbWFnZXMiLCJ0aGVuIiwiaW1hZ2VzSWRzIiwiaW5pdFRvb2xzIiwiaW5pdENvbW1hbmRzIiwiY29ybmVyc3RvbmUiLCJsb2FkSW1hZ2UiLCJpbWFnZSIsImRpc3BsYXlJbWFnZSIsIiRlbGVtZW50IiwiY2F0Y2giLCJpbml0Vmlld2VyIiwiaW5pdCIsIm9uIiwicmVzaXplIiwiZW5hYmxlIl0sIm1hcHBpbmdzIjoiOzs7Ozs7QUFBQTs7OztBQUNBOzs7O0FBQ0E7Ozs7QUFDQTs7Ozs7O2tCQUVlO0FBQ2JBLFdBQVNDLEVBQUVDLE1BQUYsQ0FESTtBQUViQyxXQUFTRixFQUFFLGlCQUFGLENBRkk7QUFHYkcsWUFBVUgsRUFBRSxrQkFBRixDQUhHOztBQUtiSSxhQUxhLHlCQUtDO0FBQUE7O0FBQ1osU0FBS0QsUUFBTCxDQUFjRSxXQUFkLENBQTBCLFdBQTFCLEVBQXVDQyxRQUF2QyxDQUFnRCxTQUFoRDs7QUFFQSxvQkFBTUMsYUFBTixHQUFzQkMsSUFBdEIsQ0FBMkIsVUFBQ0MsU0FBRCxFQUFlO0FBQ3hDO0FBQ0Esc0JBQU1DLFNBQU4sQ0FBZ0JELFNBQWhCO0FBQ0E7QUFDQSx5QkFBU0UsWUFBVDtBQUNBOztBQUVBQyxrQkFBWUMsU0FBWixDQUFzQkosVUFBVSxDQUFWLENBQXRCLEVBQW9DRCxJQUFwQyxDQUF5QyxVQUFDTSxLQUFELEVBQVc7QUFDbEQ7QUFDQUYsb0JBQVlHLFlBQVosQ0FBeUIsTUFBS0MsUUFBOUIsRUFBd0NGLEtBQXhDO0FBQ0E7QUFFRCxPQUxEO0FBTUQsS0FiRCxFQWFHRyxLQWJIO0FBY0QsR0F0Qlk7QUF3QmJDLFlBeEJhLHdCQXdCQTtBQUFBOztBQUNYLFNBQUtGLFFBQUwsR0FBZ0JoQixFQUFFLHFCQUFGLEVBQXlCLENBQXpCLENBQWhCOztBQUVBLG1CQUFLbUIsSUFBTDs7QUFFQSxTQUFLakIsT0FBTCxDQUFhRyxXQUFiLENBQXlCLFdBQXpCOztBQUVBLG9CQUFNVyxRQUFOLEdBQWlCLEtBQUtBLFFBQXRCO0FBQ0EsdUJBQVNBLFFBQVQsR0FBb0IsS0FBS0EsUUFBekI7QUFDQSxtQkFBS0EsUUFBTCxHQUFnQixLQUFLQSxRQUFyQjs7QUFFQSxTQUFLakIsT0FBTCxDQUFhcUIsRUFBYixDQUFnQixRQUFoQixFQUEwQjtBQUFBLGFBQU1SLFlBQVlTLE1BQVosQ0FBbUIsT0FBS0wsUUFBeEIsRUFBa0MsSUFBbEMsQ0FBTjtBQUFBLEtBQTFCOztBQUVBSixnQkFBWVUsTUFBWixDQUFtQixLQUFLTixRQUF4Qjs7QUFFQTtBQUNBLFNBQUtaLFdBQUw7QUFDRDtBQXpDWSxDIiwiZmlsZSI6InZpZXdlci5qcyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBGaWxlcyBmcm9tICcuL2ZpbGVzJztcbmltcG9ydCBUb29scyBmcm9tICcuL3Rvb2xzJztcbmltcG9ydCBDb21tYW5kcyBmcm9tICcuL2NvbW1hbmRzJztcbmltcG9ydCBNZW51IGZyb20gJy4uL21lbnUvbWVudSc7XG5cbmV4cG9ydCBkZWZhdWx0IHtcbiAgJHdpbmRvdzogJCh3aW5kb3cpLFxuICAkdmlld2VyOiAkKCcudmlld2VyLXdyYXBwZXInKSxcbiAgJG92ZXJsYXk6ICQoJy5sb2FkaW5nLW92ZXJsYXknKSxcblxuICBnZXROZXh0Q2FzZSgpIHtcbiAgICB0aGlzLiRvdmVybGF5LnJlbW92ZUNsYXNzKCdpbnZpc2libGUnKS5hZGRDbGFzcygnbG9hZGluZycpO1xuXG4gICAgRmlsZXMuZ2V0Q2FzZUltYWdlcygpLnRoZW4oKGltYWdlc0lkcykgPT4ge1xuICAgICAgLy8gY29uc29sZS5sb2coJ3Rlc3QwJyk7XG4gICAgICBUb29scy5pbml0VG9vbHMoaW1hZ2VzSWRzKTtcbiAgICAgIC8vIGNvbnNvbGUubG9nKCd0ZXN0MScpO1xuICAgICAgQ29tbWFuZHMuaW5pdENvbW1hbmRzKCk7XG4gICAgICAvLyBjb25zb2xlLmxvZygndGVzdDInKTtcblxuICAgICAgY29ybmVyc3RvbmUubG9hZEltYWdlKGltYWdlc0lkc1swXSkudGhlbigoaW1hZ2UpID0+IHtcbiAgICAgICAgLy8gY29uc29sZS5sb2coJ3Rlc3QzJyk7XG4gICAgICAgIGNvcm5lcnN0b25lLmRpc3BsYXlJbWFnZSh0aGlzLiRlbGVtZW50LCBpbWFnZSk7XG4gICAgICAgIC8vIGNvbnNvbGUubG9nKCd0ZXN0NCcpO1xuXG4gICAgICB9KTtcbiAgICB9KS5jYXRjaCgpO1xuICB9LFxuXG4gIGluaXRWaWV3ZXIoKSB7XG4gICAgdGhpcy4kZWxlbWVudCA9ICQoJyNjb25lcnN0b25lVmlld3BvcnQnKVswXTtcblxuICAgIE1lbnUuaW5pdCgpO1xuXG4gICAgdGhpcy4kdmlld2VyLnJlbW92ZUNsYXNzKCdpbnZpc2libGUnKTtcblxuICAgIFRvb2xzLiRlbGVtZW50ID0gdGhpcy4kZWxlbWVudDtcbiAgICBDb21tYW5kcy4kZWxlbWVudCA9IHRoaXMuJGVsZW1lbnQ7XG4gICAgTWVudS4kZWxlbWVudCA9IHRoaXMuJGVsZW1lbnQ7XG5cbiAgICB0aGlzLiR3aW5kb3cub24oJ3Jlc2l6ZScsICgpID0+IGNvcm5lcnN0b25lLnJlc2l6ZSh0aGlzLiRlbGVtZW50LCB0cnVlKSk7XG5cbiAgICBjb3JuZXJzdG9uZS5lbmFibGUodGhpcy4kZWxlbWVudCk7XG5cbiAgICAvLyBjdXJyZW50U2VyaWVzSW5kZXggPSAwOy8vYSBoYWNrIHRvIGdldCBzZXJpZXMgaW4gb3JkZXJcbiAgICB0aGlzLmdldE5leHRDYXNlKCk7XG4gIH1cbn1cbiJdfQ==
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInZpZXdlci5qcyJdLCJuYW1lcyI6WyIkd2luZG93IiwiJCIsIndpbmRvdyIsIiR2aWV3ZXIiLCIkb3ZlcmxheSIsImdldE5leHRDYXNlIiwicmVtb3ZlQ2xhc3MiLCJhZGRDbGFzcyIsImdldENhc2VJbWFnZXMiLCJ0aGVuIiwiaW1hZ2VzSWRzIiwiaW5pdFRvb2xzIiwiY29ybmVyc3RvbmUiLCJsb2FkSW1hZ2UiLCJpbWFnZSIsImRpc3BsYXlJbWFnZSIsIiRlbGVtZW50IiwiY2F0Y2giLCJpbml0Vmlld2VyIiwiaW5pdCIsImluaXRDb21tYW5kcyIsIm9uIiwicmVzaXplIiwiZW5hYmxlIl0sIm1hcHBpbmdzIjoiOzs7Ozs7QUFBQTs7OztBQUNBOzs7O0FBQ0E7Ozs7QUFDQTs7Ozs7O2tCQUVlO0FBQ2JBLFdBQVNDLEVBQUVDLE1BQUYsQ0FESTtBQUViQyxXQUFTRixFQUFFLGlCQUFGLENBRkk7QUFHYkcsWUFBVUgsRUFBRSxrQkFBRixDQUhHOztBQUtiSSxhQUxhLHlCQUtDO0FBQUE7O0FBQ1osU0FBS0QsUUFBTCxDQUFjRSxXQUFkLENBQTBCLFdBQTFCLEVBQXVDQyxRQUF2QyxDQUFnRCxTQUFoRDs7QUFFQSxvQkFBTUMsYUFBTixHQUFzQkMsSUFBdEIsQ0FBMkIsVUFBQ0MsU0FBRCxFQUFlOztBQUV0QztBQUNBLHNCQUFNQyxTQUFOLENBQWdCRCxTQUFoQjs7QUFFQTs7QUFFQUUsa0JBQVlDLFNBQVosQ0FBc0JILFVBQVUsQ0FBVixDQUF0QixFQUFvQ0QsSUFBcEMsQ0FBeUMsVUFBQ0ssS0FBRCxFQUFXO0FBQ2hERixvQkFBWUcsWUFBWixDQUF5QixNQUFLQyxRQUE5QixFQUF3Q0YsS0FBeEM7QUFDSCxPQUZEO0FBR0gsS0FWRCxFQVVHRyxLQVZIO0FBV0QsR0FuQlk7QUFxQmJDLFlBckJhLHdCQXFCQTtBQUFBOztBQUNYLFNBQUtGLFFBQUwsR0FBZ0JmLEVBQUUscUJBQUYsRUFBeUIsQ0FBekIsQ0FBaEI7O0FBRUEsbUJBQUtrQixJQUFMOztBQUVBLFNBQUtoQixPQUFMLENBQWFHLFdBQWIsQ0FBeUIsV0FBekI7O0FBRUEsb0JBQU1VLFFBQU4sR0FBaUIsS0FBS0EsUUFBdEI7QUFDQSx1QkFBU0EsUUFBVCxHQUFvQixLQUFLQSxRQUF6QjtBQUNBLG1CQUFLQSxRQUFMLEdBQWdCLEtBQUtBLFFBQXJCOztBQUVBLHVCQUFTSSxZQUFUOztBQUVBLFNBQUtwQixPQUFMLENBQWFxQixFQUFiLENBQWdCLFFBQWhCLEVBQTBCO0FBQUEsYUFBTVQsWUFBWVUsTUFBWixDQUFtQixPQUFLTixRQUF4QixFQUFrQyxJQUFsQyxDQUFOO0FBQUEsS0FBMUI7O0FBRUFKLGdCQUFZVyxNQUFaLENBQW1CLEtBQUtQLFFBQXhCOztBQUVBO0FBQ0EsU0FBS1gsV0FBTDtBQUNEO0FBeENZLEMiLCJmaWxlIjoidmlld2VyLmpzIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IEZpbGVzIGZyb20gJy4vZmlsZXMnO1xuaW1wb3J0IFRvb2xzIGZyb20gJy4vdG9vbHMnO1xuaW1wb3J0IENvbW1hbmRzIGZyb20gJy4vY29tbWFuZHMnO1xuaW1wb3J0IE1lbnUgZnJvbSAnLi4vbWVudS9tZW51JztcblxuZXhwb3J0IGRlZmF1bHQge1xuICAkd2luZG93OiAkKHdpbmRvdyksXG4gICR2aWV3ZXI6ICQoJy52aWV3ZXItd3JhcHBlcicpLFxuICAkb3ZlcmxheTogJCgnLmxvYWRpbmctb3ZlcmxheScpLFxuXG4gIGdldE5leHRDYXNlKCkge1xuICAgIHRoaXMuJG92ZXJsYXkucmVtb3ZlQ2xhc3MoJ2ludmlzaWJsZScpLmFkZENsYXNzKCdsb2FkaW5nJyk7XG5cbiAgICBGaWxlcy5nZXRDYXNlSW1hZ2VzKCkudGhlbigoaW1hZ2VzSWRzKSA9PiB7XG5cbiAgICAgICAgLy8gU2VlbXMgbGlrZSB0b29scyBuZWVkcyB0byBiZSB1cGRhdGVkIChub3QgaW5pdCdkKSB3aXRoIG5ldyBpZHNcbiAgICAgICAgVG9vbHMuaW5pdFRvb2xzKGltYWdlc0lkcyk7XG5cbiAgICAgICAgLy8gQ29tbWFuZHMuaW5pdENvbW1hbmRzKCk7XG5cbiAgICAgICAgY29ybmVyc3RvbmUubG9hZEltYWdlKGltYWdlc0lkc1swXSkudGhlbigoaW1hZ2UpID0+IHtcbiAgICAgICAgICAgIGNvcm5lcnN0b25lLmRpc3BsYXlJbWFnZSh0aGlzLiRlbGVtZW50LCBpbWFnZSk7XG4gICAgICAgIH0pO1xuICAgIH0pLmNhdGNoKCk7XG4gIH0sXG5cbiAgaW5pdFZpZXdlcigpIHtcbiAgICB0aGlzLiRlbGVtZW50ID0gJCgnI2NvbmVyc3RvbmVWaWV3cG9ydCcpWzBdO1xuXG4gICAgTWVudS5pbml0KCk7XG5cbiAgICB0aGlzLiR2aWV3ZXIucmVtb3ZlQ2xhc3MoJ2ludmlzaWJsZScpO1xuXG4gICAgVG9vbHMuJGVsZW1lbnQgPSB0aGlzLiRlbGVtZW50O1xuICAgIENvbW1hbmRzLiRlbGVtZW50ID0gdGhpcy4kZWxlbWVudDtcbiAgICBNZW51LiRlbGVtZW50ID0gdGhpcy4kZWxlbWVudDtcblxuICAgIENvbW1hbmRzLmluaXRDb21tYW5kcygpO1xuXG4gICAgdGhpcy4kd2luZG93Lm9uKCdyZXNpemUnLCAoKSA9PiBjb3JuZXJzdG9uZS5yZXNpemUodGhpcy4kZWxlbWVudCwgdHJ1ZSkpO1xuXG4gICAgY29ybmVyc3RvbmUuZW5hYmxlKHRoaXMuJGVsZW1lbnQpO1xuXG4gICAgLy8gY3VycmVudFNlcmllc0luZGV4ID0gMDsvL2EgaGFjayB0byBnZXQgc2VyaWVzIGluIG9yZGVyXG4gICAgdGhpcy5nZXROZXh0Q2FzZSgpO1xuICB9XG59XG4iXX0=
 },{"../menu/menu":23,"./commands":26,"./files":28,"./tools":29}]},{},[21])

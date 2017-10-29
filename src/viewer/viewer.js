@@ -12,18 +12,15 @@ export default {
     this.$overlay.removeClass('invisible').addClass('loading');
 
     Files.getCaseImages().then((imagesIds) => {
-      // console.log('test0');
-      Tools.initTools(imagesIds);
-      // console.log('test1');
-      Commands.initCommands();
-      // console.log('test2');
 
-      cornerstone.loadImage(imagesIds[0]).then((image) => {
-        // console.log('test3');
-        cornerstone.displayImage(this.$element, image);
-        // console.log('test4');
+        // Seems like tools needs to be updated (not init'd) with new ids
+        Tools.initTools(imagesIds);
 
-      });
+        // Commands.initCommands();
+
+        cornerstone.loadImage(imagesIds[0]).then((image) => {
+            cornerstone.displayImage(this.$element, image);
+        });
     }).catch();
   },
 
@@ -37,6 +34,8 @@ export default {
     Tools.$element = this.$element;
     Commands.$element = this.$element;
     Menu.$element = this.$element;
+
+    Commands.initCommands();
 
     this.$window.on('resize', () => cornerstone.resize(this.$element, true));
 
