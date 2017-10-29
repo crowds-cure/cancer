@@ -25,6 +25,5 @@ https://github.com/pieper/Chronicle/blob/master/design/views.py
 - include seriesUID with measurements (PR pending)
 - include slice index with measurements
 - select next image with tag and fewest measurements
-- livereload is timing out on the real site
-    fix or remove
+- livereload is timing out on the real site: Fix or Remove
 - (bug) in a session: first case sends 1 measurement, second sends 2, third 3, etc.
