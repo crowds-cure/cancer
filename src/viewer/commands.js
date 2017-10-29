@@ -39,7 +39,7 @@ export default {
         '_id': uuid,
         'length': lengths.data[0].length,
         'annotator': Login.username,
-        // 'annotator': $('#login-username').val(),
+        'seriesUID': window.rsnaCrowdQuantSeriesUID,
         'date': moment().unix(),
         'userAgent': navigator.userAgent
       }

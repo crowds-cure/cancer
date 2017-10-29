@@ -1,0 +1,36 @@
+NOTES
+
+Setup and Run
+-------------
+git clone https://github.com/abmnv/rsnaCrowdQuant.git
+npm install
+npm start
+
+
+DB at
+http://rsnacrowdquant.cloudapp.net:5984/_utils/
+
+
+To Build Views in DB
+run (somehow) https://github.com/pieper/Chronicle/blob/master/design/views.py
+
+
+TODO
+
+DB Support
+. (maybe) consolidate databases
+
+. tag (with collection-tag (by anatomy e.g. liver, lung)) images on upload to database
+. build view per collection-tag
+    by enhancing views.py
+
+
+Client
+. include case id with measurements
+. include slice index with measurements
+. select next image with tag and fewest measurements
+. livereload is timing out on the real site
+    fix or remove
+
+
+    
