@@ -28,7 +28,7 @@ https://github.com/pieper/Chronicle/blob/master/design/views.py
 - (bug) save in hamburger does not record annotator 
 - remove hamburger
 - (bug) logging in as existing user starts with series index 0 again (already measured cases)
-- need to record position of start/end of line drawn
+- need to record position of start/end of line drawn lengths.data[0].handles.end.y near line 40 commands.js
 - change browser tab title from "lightweight viewer" to "RSNA CrowdQuant"
 
 ### DONE
