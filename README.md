@@ -29,6 +29,8 @@ https://github.com/pieper/Chronicle/blob/master/design/views.py
 - remove hamburger
 - (bug) logging in as existing user starts with series index 0 again (already measured cases)
 - change browser tab title from "lightweight viewer" to "RSNA CrowdQuant"
+- investigate why scrolling is not working on iPad
+- investigate how "U" showed up a annotator in DB
 
 ### DONE
 - include seriesUID with measurements (still need to see if this is the right way)
