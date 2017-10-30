@@ -31,6 +31,7 @@ https://github.com/pieper/Chronicle/blob/master/design/views.py
 - change browser tab title from "lightweight viewer" to "RSNA CrowdQuant"
 - investigate why scrolling is not working on iPad
 - investigate how "U" showed up a annotator in DB
+- consolidate databases? 
 
 ### DONE
 - include seriesUID with measurements (still need to see if this is the right way)
