@@ -34,6 +34,11 @@ export default {
     return this.getChronicleImageIDs().then((caseStudy) => {
       if (caseStudy && caseStudy.urls) {
         // console.log('getCaseImages0');
+
+        // where to store the case id for access during save?
+        // I don't understand the model heirarchy, so let's stick it on the window
+        window.rsnaCrowdQuantSeriesUID = caseStudy.seriesUID;
+
         return Promise.all(caseStudy.urls.map(this.getFile)).then(function (files) {
           // console.log('getCaseImages1');
           $overlay.addClass('invisible');
@@ -65,6 +70,7 @@ export default {
   },
 
   currentSeriesIndex: undefined,
+  seriesUID_A: undefined,
 
   getChronicleImageIDs () {
     return chronicleDB.query("instances/context", {
@@ -105,6 +111,7 @@ export default {
       // }
 
       const seriesUID = key[2][2];
+      this.seriesUID_A = seriesUID;
       console.log('series UID:', seriesUID);
 
       return chronicleDB.query("instances/seriesInstances", {
@@ -149,6 +156,8 @@ export default {
 
       return {
         name: "default_case",
+        seriesUID: this.seriesUID_A,
+        currentSeriesIndex: this.currentSeriesIndex - 1,
         urls: instanceIDs
       };
     }).catch((err) => {
