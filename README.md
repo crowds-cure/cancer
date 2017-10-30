@@ -27,3 +27,5 @@ https://github.com/pieper/Chronicle/blob/master/design/views.py
 - select next image with tag and fewest measurements
 - livereload is timing out on the real site: Fix or Remove
 - (bug) in a session: first case sends 1 measurement, second sends 2, third 3, etc.
+- (bug) save in hamburger does not record annotator 
+- remove hamburger
