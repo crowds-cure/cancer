@@ -28,6 +28,7 @@ https://github.com/pieper/Chronicle/blob/master/design/views.py
 - (bug) save in hamburger does not record annotator 
 - remove hamburger
 - (bug) logging in as existing user starts with series index 0 again (already measured cases)
+- need to record position of start/end of line drawn
 
 ### DONE
 - include seriesUID with measurements (still need to see if this is the right way)
