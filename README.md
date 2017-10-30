@@ -29,6 +29,7 @@ https://github.com/pieper/Chronicle/blob/master/design/views.py
 - remove hamburger
 - (bug) logging in as existing user starts with series index 0 again (already measured cases)
 - need to record position of start/end of line drawn
+- change browser tab title from "lightweight viewer" to "RSNA CrowdQuant"
 
 ### DONE
 - include seriesUID with measurements (still need to see if this is the right way)
