@@ -26,24 +26,32 @@ export default {
     this.$overlay.removeClass('invisible').addClass('submitting');
 
     const lengths = cornerstoneTools.getToolState(this.$element, 'length');
+    const stack = cornerstoneTools.getToolState(this.$element, 'stack');
     // console.log('lengths:', lengths);
-    if(!lengths){
+    if(!lengths || !stack){
       // console.log('ErrorModal', ErrorModal);
       ErrorModal.show();
       this.$overlay.removeClass('submitting');
       return;
     }
 
+
     getUUID().then((uuid) => {
       const doc = {
         '_id': uuid,
         'length': lengths.data[0].length,
+        'start_x':lengths.data[0].handles.start.x,
+        'start_y':lengths.data[0].handles.start.y,
+        'end_x':lengths.data[0].handles.end.x,
+        'end_y':lengths.data[0].handles.end.y,
         'annotator': Login.username,
         'seriesUID': window.rsnaCrowdQuantSeriesUID,
+        'sliceIndex': stack.data[0].currentImageIdIndex,
         'date': moment().unix(),
         'userAgent': navigator.userAgent
       }
       console.log('Login', Login);
+  
       return measurementsDB.put(doc);
     }).then(() => {
       Modal.show();
