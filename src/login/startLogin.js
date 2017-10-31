@@ -15,6 +15,7 @@ $('.login-wrapper form').off('submit').on('submit', function (evt) {
 
   annotatorsDB.get(username).then((user) => {
     console.log('username', username, 'exist');
+    window.localStorage.setItem('username', username);
     Login.$loadingImg.addClass('invisible');
     Login.$loginForm.addClass('invisible');
 

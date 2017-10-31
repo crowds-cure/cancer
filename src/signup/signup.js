@@ -201,6 +201,7 @@ class Signup {
         // password,
         isRadiologist,
       }
+      window.localStorage.setItem('username', username);
 
       if(speciality){
         data.speciality = speciality;

@@ -238,6 +238,10 @@
     <script type="text/javascript" src="./bundle.js"></script>
     <script type="text/javascript">
 
+    $(document).ready(function() {
+      $('#login-username').val(window.localStorage.getItem('username'));
+    });
+
     </script>
   </body>
 </html>

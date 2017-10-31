@@ -39,3 +39,4 @@ https://github.com/pieper/Chronicle/blob/master/design/views.py
 - change browser tab title from "lightweight viewer" to "RSNA CrowdQuant"
 - (bug) save in hamburger does not record annotator (removed instead)
 - remove hamburger
+- remember username in localStorage for easier re-login
