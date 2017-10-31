@@ -19,15 +19,22 @@ https://github.com/pieper/Chronicle/blob/master/design/views.py
 
 ### TODO
 
-- tag (with collection-tag (by anatomy e.g. liver, lung)) images on upload to database
-- build view per collection-tag by enhancing views.py
-- select next image with tag and fewest measurements
+- tag (with collection-tag (by anatomy e.g. liver, lung)) images on upload to database - Jayashree
+- build view per collection-tag by enhancing views.py - Jayashree
+- select next image with tag and fewest measurements - Steve to make query function
 - livereload is timing out on the real site: Fix or Remove
-- (bug) logging in as existing user starts with series index 0 again (already measured cases)
-- investigate how "U" showed up a annotator in DB
-- consolidate databases? 
-- investigate 2 finger scrolling for mobile
-
+- (bug) logging in as existing user starts with series index 0 again (already measured cases) - Steve to provide query function to suggest next case that is least reviewed and not already reviewed by this user
+- investigate how "U" showed up a annotator in DB ?
+- consolidate databases? - probably not needed for now
+- investigate 2 finger scrolling for mobile - Rob
+- add kiosk mode as query parameter
+-- don't the username
+-- login times out after 2 minute
+- improve the registration form with a few big buttons for the categories
+- statistics page - Steve to make stubs, Jayashree to create infovis
+- continuous replication to a backed up disk - operational plan TBD with RSNA docent
+- about box with acknowledgements
+- tutorial info
 
 ### DONE
 - include seriesUID with measurements (still need to see if this is the right way)
