@@ -20,9 +20,7 @@ https://github.com/pieper/Chronicle/blob/master/design/views.py
 ### TODO
 
 - tag (with collection-tag (by anatomy e.g. liver, lung)) images on upload to database
-- build view per collection-tag
-    by enhancing views.py
-- include slice UID with measurement
+- build view per collection-tag by enhancing views.py
 - select next image with tag and fewest measurements
 - livereload is timing out on the real site: Fix or Remove
 - (bug) logging in as existing user starts with series index 0 again (already measured cases)
@@ -40,3 +38,4 @@ https://github.com/pieper/Chronicle/blob/master/design/views.py
 - (bug) save in hamburger does not record annotator (removed instead)
 - remove hamburger
 - remember username in localStorage for easier re-login
+- include slice UID with measurement

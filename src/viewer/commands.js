@@ -37,6 +37,7 @@ export default {
 
 
     getUUID().then((uuid) => {
+      const sliceIndex = stack.data[0].currentImageIdIndex;
       const doc = {
         '_id': uuid,
         'length': lengths.data[0].length,
@@ -46,11 +47,14 @@ export default {
         'end_y':lengths.data[0].handles.end.y,
         'annotator': Login.username,
         'seriesUID': window.rsnaCrowdQuantSeriesUID,
-        'sliceIndex': stack.data[0].currentImageIdIndex,
+        'instanceUID': window.rsnaCrowdQuantCaseStudy.instanceUIDs[sliceIndex],
+        'instanceURL': window.rsnaCrowdQuantCaseStudy.urls[sliceIndex],
+        'sliceIndex': sliceIndex,
         'date': moment().unix(),
         'userAgent': navigator.userAgent
       }
       console.log('Login', Login);
+      console.log('doc', doc);
   
       return measurementsDB.put(doc);
     }).then(() => {
