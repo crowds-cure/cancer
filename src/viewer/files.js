@@ -38,6 +38,7 @@ export default {
         // where to store the case id for access during save?
         // I don't understand the model heirarchy, so let's stick it on the window
         window.rsnaCrowdQuantSeriesUID = caseStudy.seriesUID;
+        window.rsnaCrowdQuantCaseStudy = caseStudy;
 
         return Promise.all(caseStudy.urls.map(this.getFile)).then(function (files) {
           // console.log('getCaseImages1');
@@ -147,18 +148,21 @@ export default {
         return a - b;
       });
 
-      let instanceIDs = [];
+      let instanceURLs = [];
+      let instanceUIDs = [];
       imageNumbers.forEach((imageNumber) => {
         const instanceUID = instanceUIDsByImageNumber[imageNumber];
         const instanceURL = `${chronicleURL}/${instanceUID}/object.dcm`;
-        instanceIDs.push(instanceURL);
+        instanceURLs.push(instanceURL);
+        instanceUIDs.push(instanceUID);
       });
 
       return {
         name: "default_case",
         seriesUID: this.seriesUID_A,
         currentSeriesIndex: this.currentSeriesIndex - 1,
-        urls: instanceIDs
+        urls: instanceURLs,
+        instanceUIDs: instanceUIDs
       };
     }).catch((err) => {
       throw err;

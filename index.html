@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Lightweight Viewer</title>
+    <title>RSNA CrowdQuant</title>
     <meta name="viewport" content="initial-scale=1">
 
     <link rel="stylesheet" type="text/css" href="./style.css">
@@ -187,13 +187,6 @@
           </div>
         </div>
 
-        <div class="humburguer-menu">
-          <a class="menu">
-            <div class="humburguer-stroke"></div>
-            <div class="humburguer-stroke"></div>
-            <div class="humburguer-stroke"></div>
-          </a>
-        </div>
       </div>
       <div class="viewport">
         <div id="conerstoneViewport"></div>
@@ -244,6 +237,10 @@
     <script type="text/javascript" src="../node_modules/cornerstone-wado-image-loader/dist/cornerstoneWADOImageLoader.min.js"></script>
     <script type="text/javascript" src="./bundle.js"></script>
     <script type="text/javascript">
+
+    $(document).ready(function() {
+      $('#login-username').val(window.localStorage.getItem('username'));
+    });
 
     </script>
   </body>
