@@ -24,9 +24,9 @@ https://github.com/pieper/Chronicle/blob/master/design/views.py
 - select next image with tag and fewest measurements
 - livereload is timing out on the real site: Fix or Remove
 - (bug) logging in as existing user starts with series index 0 again (already measured cases)
-- investigate why scrolling is not working on iPad
 - investigate how "U" showed up a annotator in DB
 - consolidate databases? 
+- investigate 2 finger scrolling for mobile
 
 
 ### DONE
@@ -39,3 +39,4 @@ https://github.com/pieper/Chronicle/blob/master/design/views.py
 - remove hamburger
 - remember username in localStorage for easier re-login
 - include slice UID with measurement
+- investigate why scrolling is not working on iPad - works with 3 finger scrolling
