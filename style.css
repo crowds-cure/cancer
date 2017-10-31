@@ -210,22 +210,6 @@ button.submit {
     .error-modal .button-holder .next-case {
       margin-left: 1.42857rem; }
 
-.humburguer-menu {
-  display: flex;
-  flex-flow: column;
-  justify-content: center;
-  padding-right: 0.35714rem; }
-  .humburguer-menu .menu {
-    flex: 0 1 auto;
-    height: 2.14286rem;
-    cursor: pointer; }
-    .humburguer-menu .menu .humburguer-stroke {
-      width: 2.14286rem;
-      border: 0.21429rem solid #9ccef9;
-      border-radius: 0.71429rem;
-      margin-bottom: 0.35714rem;
-      background-color: #9ccef9; }
-
 .menu-wrapper {
   position: absolute;
   top: 0;

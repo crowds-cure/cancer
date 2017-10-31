@@ -1,24 +1,3 @@
-.humburguer-menu {
-  display: flex;
-  flex-flow: column;
-  justify-content: center;
-  padding-right: rem(5);
-
-  .menu {
-    flex: 0 1 auto;
-    height: rem(30);
-    cursor: pointer;
-
-    .humburguer-stroke {
-      width: rem(30);
-      border: rem(3) solid $light-blue;
-      border-radius: rem(10);
-      margin-bottom: rem(5);
-      background-color: $light-blue;
-    }
-  }
-}
-
 .menu-wrapper {
   position: absolute;
   top: 0;

@@ -8,7 +8,6 @@ import {username} from '../login/login';
 import moment from 'moment';
 
 export default {
-  $hamburguerMenu: $('.humburguer-menu'),
   $menuWrapper: $('.menu-wrapper'),
   $overlay: $('.loading-overlay'),
 
@@ -67,18 +66,6 @@ export default {
   init() {
     Modal.init();
     ErrorModal.init();
-
-    this.$hamburguerMenu.on('click', (event) => {
-      event.preventDefault();
-
-      this.$overlay.removeClass('invisible');
-      this.$menuWrapper.removeClass('invisible');
-
-      setTimeout(() => {
-        this.$menuWrapper.addClass('opened');
-        this.$overlay.removeClass('invisible');
-      }, 200);
-    });
 
     this.$menuWrapper.on('click', 'a[data-menu]', (event) => {
       const $element = $(event.currentTarget);
