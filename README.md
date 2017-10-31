@@ -35,6 +35,9 @@ https://github.com/pieper/Chronicle/blob/master/design/views.py
 - continuous replication to a backed up disk - operational plan TBD with RSNA docent
 - about box with acknowledgements
 - tutorial info
+- see if we can save a screenshot with measurement document - Steve
+- add ability to skip the case (e.g. when there is no tumor)
+- auto window/level to get lung window? - Rob
 
 ### DONE
 - include seriesUID with measurements (still need to see if this is the right way)
