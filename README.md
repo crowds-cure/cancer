@@ -28,7 +28,6 @@ https://github.com/pieper/Chronicle/blob/master/design/views.py
 - (bug) save in hamburger does not record annotator 
 - remove hamburger
 - (bug) logging in as existing user starts with series index 0 again (already measured cases)
-- change browser tab title from "lightweight viewer" to "RSNA CrowdQuant"
 - investigate why scrolling is not working on iPad
 - investigate how "U" showed up a annotator in DB
 - consolidate databases? 
@@ -38,3 +37,4 @@ https://github.com/pieper/Chronicle/blob/master/design/views.py
 - (bug) in a session: first case sends 1 measurement, second sends 2, third 3, etc.
 - need to record position of start/end of line drawn lengths.data[0].handles.end.y near line 40 commands.js
 - include slice index with measurements
+- change browser tab title from "lightweight viewer" to "RSNA CrowdQuant"
