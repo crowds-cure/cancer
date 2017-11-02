@@ -93,19 +93,20 @@ export default {
       // ["CT", "UnspecifiedSeriesDescription", "1.3.6.1.4.1.14519.5.2.1.7777.9002.106684271246229903146411807044"]
 
       // console.log('The number of series:', data.rows.length);
-      // const rand = Math.floor(data.rows.length*Math.random());
-      // console.log("random:", rand);
-      // console.log('row:', data.rows[rand]);
+      const rand = Math.floor(data.rows.length*Math.random());
+      console.log("random:", rand);
+      console.log('row:', data.rows[rand]);
 
-      // const key = data.rows[rand].key;
-      if(!this.currentSeriesIndex){
+      const key = data.rows[rand].key;
+
+      // this is now the number of cases viewed in this session
+      if(!this.currentSeriesIndex) {
         this.currentSeriesIndex = 0;
       }
+      this.currentSeriesIndex++;
       console.log('series Index:', this.currentSeriesIndex);
 
-      const key = data.rows[this.currentSeriesIndex].key;
-
-      this.currentSeriesIndex++;
+      //const key = data.rows[this.currentSeriesIndex].key;
 
       // if(currentSeriesIndex >= data.rows.length){
       //   currentSeriesIndex=0;
