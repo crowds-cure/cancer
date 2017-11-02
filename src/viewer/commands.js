@@ -20,6 +20,10 @@ export default {
     cornerstone.updateImage(this.$element);
   },
 
+  next: function() {
+    Modal.nextCase();
+  },
+
   save: function () {
 
     Menu.closeMenu();
