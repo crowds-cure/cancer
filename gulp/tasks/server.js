@@ -4,7 +4,5 @@ const config = require('../config');
 
 gulp.task('server', function() {
   return gulp.src(config.dist)
-    .pipe(server({
-      livereload: true
-    }));
+    .pipe(server());
 });
