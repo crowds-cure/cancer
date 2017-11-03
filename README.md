@@ -22,7 +22,6 @@ https://github.com/pieper/Chronicle/blob/master/design/views.py
 - tag (with collection-tag (by anatomy e.g. liver, lung)) images on upload to database - Jayashree
 - build view per collection-tag by enhancing views.py - Jayashree
 - select next image with tag and fewest measurements - Steve to make query function
-- livereload is timing out on the real site: Fix or Remove
 - (bug) logging in as existing user starts with series index 0 again (already measured cases) - Steve to provide query function to suggest next case that is least reviewed and not already reviewed by this user
 - investigate how "U" showed up a annotator in DB ?
 - consolidate databases? - probably not needed for now
@@ -35,8 +34,6 @@ https://github.com/pieper/Chronicle/blob/master/design/views.py
 - continuous replication to a backed up disk - operational plan TBD with RSNA docent
 - about box with acknowledgements
 - tutorial info
-- see if we can save a screenshot with measurement document - Steve
-- add ability to skip the case (e.g. when there is no tumor)
 - auto window/level to get lung window? - Rob
 - address "Uncaught Error: image has not been loaded yet"
 
@@ -51,3 +48,6 @@ https://github.com/pieper/Chronicle/blob/master/design/views.py
 - remember username in localStorage for easier re-login
 - include slice UID with measurement
 - investigate why scrolling is not working on iPad - works with 3 finger scrolling
+- livereload is timing out on the real site: Fix or Remove
+- see if we can save a screenshot with measurement document - Steve
+- add ability to skip the case (e.g. when there is no tumor)
