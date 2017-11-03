@@ -20,7 +20,7 @@ export default {
     cornerstone.updateImage(this.$element);
   },
 
-  next: function() {
+  skip: function() {
     Modal.nextCase();
   },
 
