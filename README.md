@@ -38,6 +38,7 @@ https://github.com/pieper/Chronicle/blob/master/design/views.py
 - see if we can save a screenshot with measurement document - Steve
 - add ability to skip the case (e.g. when there is no tumor)
 - auto window/level to get lung window? - Rob
+- address "Uncaught Error: image has not been loaded yet"
 
 ### DONE
 - include seriesUID with measurements (still need to see if this is the right way)
