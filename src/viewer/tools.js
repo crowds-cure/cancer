@@ -47,12 +47,19 @@ export default {
       currentImageIdIndex: 0,
       imageIds: imageIds
     };
+    var configuration = {
+         testPointers: function (eventData) {
+           return (eventData.numPointers >= 2);
+         }
+    };
 
     cornerstoneTools.addStackStateManager(this.$element, ['stack']);
     cornerstoneTools.addToolState(this.$element, 'stack', stack);
     cornerstoneTools.stackScrollWheel.activate(this.$element);
-    cornerstoneTools.stackScrollMultiTouch.activate(this.$element);
 
+    cornerstoneTools.stackScrollMultiTouch.activate(this.$element);
+    cornerstoneTools.stackScrollMultiTouch.setConfiguration(configuration);
+    
     $thumb.css('height', `${(100/stack.imageIds.length)}%`);
 
     $(this.$element).on('CornerstoneNewImage', function () {
