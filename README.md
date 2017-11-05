@@ -36,6 +36,7 @@ https://github.com/pieper/Chronicle/blob/master/design/views.py
 - tutorial info
 - auto window/level to get lung window? - Rob
 - address "Uncaught Error: image has not been loaded yet"
+- Android (maybe ios?) Can make 2 Length Measurements on the same image
 
 ### DONE
 - include seriesUID with measurements (still need to see if this is the right way)
