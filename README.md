@@ -34,7 +34,7 @@ https://github.com/pieper/Chronicle/blob/master/design/views.py
 - continuous replication to a backed up disk - operational plan TBD with RSNA docent
 - about box with acknowledgements
 - tutorial info
-- auto window/level to get lung window? - Rob
+- auto window/level to get lung window/liver ? - Rob
 - address "Uncaught Error: image has not been loaded yet"
 - Android (maybe ios?) Can make 2 Length Measurements on the same image
 
