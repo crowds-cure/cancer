@@ -38,6 +38,7 @@ https://github.com/pieper/Chronicle/blob/master/design/views.py
 - address "Uncaught Error: image has not been loaded yet"
 - Android (maybe ios?) Can make 2 Length Measurements on the same image
 - Potentially change least measured to be an array of all "least measured" and select one at random
+- log skipped cases
 
 ### DONE
 - include seriesUID with measurements (still need to see if this is the right way)
