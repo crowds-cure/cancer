@@ -82,27 +82,9 @@ export default {
       // endkey: [['UnspecifiedInstitution', 'TCGA-17-Z013']],
       group_level : 3,
     }).then((data) => {
-      // console.log('data:', data);
-      // [key.institution,key.patientID],
-      // [key.studyDescription,key.studyUID],
-      // [key.modality,key.seriesDescription,key.seriesUID],
-      // key.instanceUID
-      //
-      // ["UnspecifiedInstitution", "TCGA-17-Z011"]
-      // ["UnspecifiedStudyDescription", "1.3.6.1.4.1.14519.5.2.1.7777.9002.242742387344636595876380532248"]
-      // ["CT", "UnspecifiedSeriesDescription", "1.3.6.1.4.1.14519.5.2.1.7777.9002.106684271246229903146411807044"]
-
-      // console.log('The number of series:', data.rows.length);
-      // const rand = Math.floor(data.rows.length*Math.random());
-      // console.log("random:", rand);
-      // console.log('row:', data.rows[rand]);
-      //
-      // const key = data.rows[rand].key;
-      //
-      // // this is now the number of cases viewed in this session
       var annotatorID='dismal_caribou';
       return this.getNextSeriesForAnnotator(annotatorID);
-    }).then ((seriesId) => {
+  }).then ((seriesUID) => {
 
       if(!this.currentSeriesIndex) {
         this.currentSeriesIndex = 0;
@@ -116,7 +98,6 @@ export default {
       //   currentSeriesIndex=0;
       // }
 
-      const seriesUID = key[2][2];
       this.seriesUID_A = seriesUID;
       console.log('series UID:', seriesUID);
 
@@ -176,75 +157,64 @@ export default {
 
   getNextSeriesForAnnotator(annotatorID) {
 
+    let measurementsPerSeries = {};
+    let annotatorMeasuredSeries = {};
+    let seriesUIDs = [];
+
     // first, get list of all series (this should be factored out to be global and only queried once)
     return chronicleDB.query('instances/context', {
       reduce: true,
       group: true,
       group_level: 3,
     }).then(function (result) {
-      let seriesUIDs = [];
+
       result.rows.forEach(row => {
         seriesUIDs.push(row.key[2][2]);
       });
 
       // then get the list of all measurements per series and how many measurements
       // (not all series will have been measured)
-      let measurementsPerSeries = {};
-      measurementsDB.query('by/seriesUID', {
+      return measurementsDB.query('by/seriesUID', {
         reduce: true,
         group: true,
         level: 'exact',
-      }).then(function (result) {
+      })
+    }).then(function (result) {
         result.rows.forEach(row => {
           measurementsPerSeries[row.key] = row.value;
         });
 
-        measurementsDB.query('by/annotators', {
+        return measurementsDB.query('by/annotators', {
           reduce: false,
           include_docs: true,
           start_key: annotatorID,
           end_key: annotatorID,
-        }).then(function (result) {
-          let annotatorMeasuredSeries = {}
-          result.rows.forEach(row => {
-            annotatorMeasuredSeries[row.doc.seriesUID] = true;
-          });
+        })
+    }).then(function (result) {
 
-          // now reconcile the data
-          // - look through each available series
-          // -- if nobody has measured it then use it
-          // - if the user already measured it, ignore it
-          // - otherwise find the least measured one
-          let leastMeasured = {seriesUID: undefined, measurementCount: Number.MAX_SAFE_INTEGER};
-          for (let seriesIndex = 0; seriesIndex < seriesUIDs.length; seriesIndex++) {
-            let seriesUID = seriesUIDs[seriesIndex];
-            if ( ! (seriesUID in measurementsPerSeries) ) {
-              return seriesUID;
-
-            }
-            if ( (! (seriesUID in annotatorMeasuredSeries)) &&
-                  (measurementsPerSeries[seriesUID] < leastMeasured.measurementCount) ) {
-              leastMeasured.seriesUID = seriesUID;
-              leastMeasured.measurementCount = measurementsPerSeries[seriesUID];
-            }
-          }
-          return leastMeasured.seriesUID;
-
-        }).catch(function (err) {
-          alert('Could not fetch detailed statistics');
-          console.error(err);
-        });
-
-
-      }).catch(function (err) {
-        alert('Could not fetch statistics');
-        console.error(err);
+      result.rows.forEach(row => {
+        annotatorMeasuredSeries[row.doc.seriesUID] = true;
       });
 
-    }).catch('error', function (err) {
-      console.error(err);
-    });
+      // now reconcile the data
+      // - look through each available series
+      // -- if nobody has measured it then use it
+      // - if the user already measured it, ignore it
+      // - otherwise find the least measured one
+      let leastMeasured = {seriesUID: undefined, measurementCount: Number.MAX_SAFE_INTEGER};
+      for (let seriesIndex = 0; seriesIndex < seriesUIDs.length; seriesIndex++) {
+        let seriesUID = seriesUIDs[seriesIndex];
+        if ( ! (seriesUID in measurementsPerSeries) ) {
+          return seriesUID;
 
+        }
+        if ( (! (seriesUID in annotatorMeasuredSeries)) &&
+              (measurementsPerSeries[seriesUID] < leastMeasured.measurementCount) ) {
+          leastMeasured.seriesUID = seriesUID;
+          leastMeasured.measurementCount = measurementsPerSeries[seriesUID];
+        }
+      }
+      return leastMeasured.seriesUID;
+    })
   }
-
-};
+}
