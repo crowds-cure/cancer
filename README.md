@@ -46,6 +46,7 @@ https://github.com/pieper/Chronicle/blob/master/design/views.py
 - (bug) If you zoom out extremely far until the original image looks like a dot, it is very hard to zoom back in because the center of the image changes. This might be done by accident, so when someone presses Clear, zoom should reset -- but it isn't. We should fix this. (ALB)
 - Zoom resets when the windows is resized - not sure if intentional (ALB)
 - Map up/down keyboard keys to change slice, in case mouse wheel/pad not available
+- You can't submit a measurement if you're not on the same slice as your measurement. Given people's tendencies to "check their work" on other slices, and the difficulty of navigating back to one particular slice, perhaps we should lift this requirement (ALB)
 
 ### DONE
 - include seriesUID with measurements (still need to see if this is the right way)
