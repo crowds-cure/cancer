@@ -5,6 +5,7 @@ Based on crowdQuant
 ### Setup and Run
 - git clone https://github.com/QTIM-Lab/rsnaCrowdQuant
 - npm install
+- npm install connect-livereload --save-dev (?)
 - npm start
 
 This will start a local server that communicates with a live Couch DB. 
