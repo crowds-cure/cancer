@@ -43,6 +43,8 @@ https://github.com/pieper/Chronicle/blob/master/design/views.py
 - annotator is hardcoded -fix that
 - skip case does not work
 - make getNextSeriesForAnnotator call parallel
+- (bug) If you zoom out extremely far until the original image looks like a dot, it is very hard to zoom back in because the center of the image changes. This might be done by accident, so when someone presses Clear, zoom should reset -- but it isn't. We should fix this. (ALB)
+- Zoom resets when the windows is resized - not sure if intentional (ALB)
 
 ### DONE
 - include seriesUID with measurements (still need to see if this is the right way)
