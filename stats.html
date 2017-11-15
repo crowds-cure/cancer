@@ -53,17 +53,17 @@
       updateStatsDisplay();
 
       // then watch the database for changes and update the display when needed
-      var progressFeed = measurementsDB.changes({
-        since: 'now',
-        live: true,
-        include_docs: true
-      }).on('change', function(change) {
-        updateStatsDisplay();
-      }).on('complete', function(info) {
-        // changes() was canceled
-      }).on('error', function (err) {
-        console.error(err);
-      });
+      // var progressFeed = measurementsDB.changes({
+      //   since: 'now',
+      //   live: true,
+      //   include_docs: true
+      // }).on('change', function(change) {
+      //   updateStatsDisplay();
+      // }).on('complete', function(info) {
+      //   // changes() was canceled
+      // }).on('error', function (err) {
+      //   console.error(err);
+      // });
 
       // pick a series with the least measurements that this user hasn't measured yet
       // calls callback with seriesUID
@@ -159,10 +159,14 @@
                 end_key: event.target.id,
               }).then(function (result) {
                 result.rows.forEach(row => {
+                  var date=new Date(0);
+                  date.setUTCSeconds(row.doc.date);
+                  var dateStr=(date.getMonth()+1)+"-"+date.getDate();
                   $('#seriesMeasurements').after(`
                     <div class='seriesMeasurement'>
                       <p>Annotator: ${row.doc.annotator}</p>
                       <p>Length: ${row.doc.length}</p>
+                      <p>Date: ${dateStr}</p>
                       <a href='${measurementsURL}/${row.id}/screenshot.png'>screenshot</a>
                     </div>
                   `);
