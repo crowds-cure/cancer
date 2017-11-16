@@ -42,6 +42,7 @@ https://github.com/pieper/Chronicle/blob/master/design/views.py
 - You can't submit a measurement if you're not on the same slice as your measurement. Given people's tendencies to "check their work" on other slices, and the difficulty of navigating back to one particular slice, perhaps we should lift this requirement (ALB)
 - consider moving save button to avoid accidental selection of skip button instead.
 - pinch zoom on mobile?
+- add progress bar of some sort on download
 
 #### after RSNA??
 - investigate how "U" showed up a annotator in DB ?
