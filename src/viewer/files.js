@@ -1,4 +1,5 @@
 import Connector from './connector';
+import Login from '../login/login';
 import {chronicleURL, chronicleDB, measurementsDB} from '../db/db';
 
 export default {
@@ -82,7 +83,8 @@ export default {
       // endkey: [['UnspecifiedInstitution', 'TCGA-17-Z013']],
       group_level : 3,
     }).then((data) => {
-      var annotatorID='dismal_caribou';
+
+      var annotatorID = Login.username;
       return this.getNextSeriesForAnnotator(annotatorID);
   }).then ((seriesUID) => {
 
