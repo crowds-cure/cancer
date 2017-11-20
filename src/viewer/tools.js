@@ -55,7 +55,7 @@ export default {
 
 
     // TODO: Replace this with an HTML5 Range Input
-    const $thumb = $('.thumb');
+    /*const $thumb = $('.thumb');
     $thumb.css('height', `${(100/stack.imageIds.length)}%`);
     $(this.element).on('CornerstoneNewImage', function () {
       var currentIndex = stack.currentImageIdIndex;
@@ -63,7 +63,7 @@ export default {
       $thumb.css({
         'margin-top': `${($thumb.height()*(currentIndex))}px`
       });
-    });
+    });*/
   },
 
   initInteractionTools() {
@@ -82,10 +82,12 @@ export default {
 
     /* For mouse devices, by default we turn on:
     - Stack scrolling by mouse wheel
+    - Stack scrolling by keyboard up / down arrow keys
     - Pan with middle click
     - Zoom with right click
      */
     cornerstoneTools.stackScrollWheel.activate(this.element);
+    cornerstoneTools.stackScrollKeyboard.activate(this.element);
     cornerstoneTools.pan.activate(this.element, 2);
     cornerstoneTools.zoom.activate(this.element, 4);
 
@@ -131,8 +133,13 @@ export default {
     cornerstoneTools.mouseInput.enable(this.element);
     cornerstoneTools.touchInput.enable(this.element);
     cornerstoneTools.mouseWheelInput.enable(this.element);
+    cornerstoneTools.keyboardInput.enable(this.element);
 
     this.initStackTool(imageIds);
+
+    // Set the element to focused, so we can properly handle keyboard events
+    $(this.element).attr("tabindex", 0).focus();
+
     this.initInteractionTools();
 
     // removing default context menu
