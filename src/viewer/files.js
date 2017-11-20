@@ -3,14 +3,29 @@ import Login from '../login/login';
 import {chronicleURL, chronicleDB, measurementsDB} from '../db/db';
 
 export default {
+
+  openRequests : 0,
+
   getFile(url) {
-    return new Promise(function (resolve, reject) {
+    const promiseFunction = function (resolve, reject) {
+
+      this.openRequests += 1;
+      $('#loading-progress').text(`${this.openRequests} images requested`);
+
       const request = new XMLHttpRequest();
 
       request.open('GET', url, true);
       request.responseType = 'arraybuffer';
 
-      request.onload = function(oEvent) {
+      const onImageLoad = function(oEvent) {
+
+        this.openRequests -= 1;
+        $('#loading-progress').text(`${this.openRequests} images remaining`);
+
+        if (this.openRequests == 0) {
+          $('#loading-progress').text(``);
+        }
+
         const arrayBuffer = request.response;
         if (arrayBuffer) {
           try {
@@ -21,8 +36,10 @@ export default {
         }
       };
 
+      request.onload = onImageLoad.bind(this);
       request.send(null);
-    });
+    };
+    return new Promise(promiseFunction.bind(this));
   },
 
   getCaseImages() {
@@ -41,7 +58,7 @@ export default {
         window.rsnaCrowdQuantSeriesUID = caseStudy.seriesUID;
         window.rsnaCrowdQuantCaseStudy = caseStudy;
 
-        return Promise.all(caseStudy.urls.map(this.getFile)).then(function (files) {
+        return Promise.all(caseStudy.urls.map(this.getFile.bind(this))).then(function (files) {
           // console.log('getCaseImages1');
           $overlay.addClass('invisible');
           $overlay.removeClass('loading');

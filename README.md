@@ -5,6 +5,7 @@ Based on crowdQuant
 ### Setup and Run
 - git clone https://github.com/QTIM-Lab/rsnaCrowdQuant
 - npm install
+- npm install connect-livereload --save-dev (?)
 - npm start
 
 This will start a local server that communicates with a live Couch DB. 
@@ -18,14 +19,8 @@ https://github.com/pieper/Chronicle/blob/master/design/views.py
 
 
 ### TODO
-
 - tag (with collection-tag (by anatomy e.g. liver, lung)) images on upload to database - Jayashree
-- build view per collection-tag by enhancing views.py - Jayashree
-- select next image with tag and fewest measurements - Steve to make query function
-- (bug) logging in as existing user starts with series index 0 again (already measured cases) - Steve to provide query function to suggest next case that is least reviewed and not already reviewed by this user
-- investigate how "U" showed up a annotator in DB ?
-- consolidate databases? - probably not needed for now
-- investigate 2 finger scrolling for mobile - Rob
+- build view per collection-tag by enhancing views.py - Jayashree -> use filename path to create view
 - add kiosk mode as query parameter
 -- don't the username
 -- login times out after 2 minute
@@ -40,8 +35,19 @@ https://github.com/pieper/Chronicle/blob/master/design/views.py
 - Potentially change least measured to be an array of all "least measured" and select one at random
 - log skipped cases
 - annotator is hardcoded -fix that
-- skip case does not work
 - make getNextSeriesForAnnotator call parallel
+- (bug) If you zoom out extremely far until the original image looks like a dot, it is very hard to zoom back in because the center of the image changes. This might be done by accident, so when someone presses Clear, zoom should reset -- but it isn't. We should fix this. (ALB)
+- Zoom resets when the windows is resized - not sure if intentional (ALB)
+- Map up/down keyboard keys to change slice, in case mouse wheel/pad not available
+- You can't submit a measurement if you're not on the same slice as your measurement. Given people's tendencies to "check their work" on other slices, and the difficulty of navigating back to one particular slice, perhaps we should lift this requirement (ALB)
+- consider moving save button to avoid accidental selection of skip button instead.
+- pinch zoom on mobile?
+- add progress sort on download -Steve
+- measurement disappears under certain window - maybe make measurement a different color/line width
+
+#### after RSNA??
+- investigate how "U" showed up a annotator in DB ?
+- consolidate databases? - probably not needed for now
 
 ### DONE
 - include seriesUID with measurements (still need to see if this is the right way)
@@ -57,3 +63,7 @@ https://github.com/pieper/Chronicle/blob/master/design/views.py
 - livereload is timing out on the real site: Fix or Remove
 - see if we can save a screenshot with measurement document - Steve
 - add ability to skip the case (e.g. when there is no tumor)
+- select next image with tag and fewest measurements - Steve to make query function
+- (bug) logging in as existing user starts with series index 0 again (already measured cases) - Steve to provide query function to suggest next case that is least reviewed and not already reviewed by this user
+- investigate 2 finger scrolling for mobile - Rob
+- skip case does not work
