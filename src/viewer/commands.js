@@ -21,6 +21,24 @@ export default {
   },
 
   skip: function() {
+
+      const stack = cornerstoneTools.getToolState(this.$element, 'stack');
+      getUUID().then((uuid) => {
+        const sliceIndex = stack.data[0].currentImageIdIndex;
+        const doc = {
+          '_id': uuid,
+          'skip': true,
+          'annotator': Login.username,
+          'seriesUID': window.rsnaCrowdQuantSeriesUID,
+          'instanceUID': window.rsnaCrowdQuantCaseStudy.instanceUIDs[sliceIndex],
+          'instanceURL': window.rsnaCrowdQuantCaseStudy.urls[sliceIndex],
+          'sliceIndex': sliceIndex,
+          'date': moment().unix(),
+          'userAgent': navigator.userAgent
+        }
+        return measurementsDB.put(doc);
+      })
+
     Modal.nextCase();
   },
 
