@@ -3,7 +3,8 @@ import Modal from '../modal/modal';
 import ErrorModal from '../errorModal/modal';
 import {measurementsDB, getUUID} from '../db/db';
 import Login from '../login/login';
-import moment from 'moment';
+//import moment from 'moment';
+// TODO: Seems like overkill to pull in momentjs
 
 // helper from https://stackoverflow.com/questions/12168909/blob-from-dataurl
 function dataURItoBlob(dataURI) {
@@ -65,7 +66,7 @@ export default {
     this.$overlay.removeClass('invisible').addClass('submitting');
 
     // Retrieve the tool state manager for this element
-    const toolStateManager = cornerstoneTools.getElementToolStateManager(this.element);
+    const toolStateManager = cornerstoneTools.globalImageIdSpecificToolStateManager;
 
     // Dump all of its tool state into an Object
     const toolState = toolStateManager.saveToolState();
@@ -90,22 +91,22 @@ export default {
     }
 
     getUUID().then((uuid) => {
-      console.log(lengthData);
       const measurement = lengthData[0];
+      const lengthMeasurement = measurement.data.data[0];
 
       const doc = {
         '_id': uuid,
-        'length': measurement.data.length,
-        'start_x': measurement.data.handles.start.x,
-        'start_y': measurement.data.handles.start.y,
-        'end_x': measurement.data.handles.end.x,
-        'end_y': measurement.data.handles.end.y,
+        'length': lengthMeasurement.length,
+        'start_x': lengthMeasurement.handles.start.x,
+        'start_y': lengthMeasurement.handles.start.y,
+        'end_x': lengthMeasurement.handles.end.x,
+        'end_y': lengthMeasurement.handles.end.y,
         'annotator': Login.username,
         'seriesUID': window.rsnaCrowdQuantSeriesUID,
         'instanceUID': window.rsnaCrowdQuantCaseStudy.instanceUIDs[measurement.imageIndex],
         'instanceURL': window.rsnaCrowdQuantCaseStudy.urls[measurement.imageIndex],
         'sliceIndex': measurement.imageIndex,
-        'date': moment().unix(),
+        'date': Math.floor(Date.now() / 1000), //moment().unix(),
         'userAgent': navigator.userAgent
       };
 
