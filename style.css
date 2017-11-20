@@ -138,7 +138,7 @@ button.submit {
     border: 0.07143rem solid #00a4d9;
     margin: 0.35714rem;
     position: relative; }
-    .viewer-wrapper .viewport #conerstoneViewport {
+    .viewer-wrapper .viewport #cornerstoneViewport {
       width: calc(100% - 10px);
       height: 100%;
       position: absolute; }

@@ -1,11 +1,9 @@
-import Commands from './commands';
-
 const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
 export default {
   active: '',
   toolsSelector: '.viewer-tools',
-  $conerstoneViewport: $('#conerstoneViewport'),
+  $cornerstoneViewport: $('#cornerstoneViewport'),
   deactivateActiveTool() {
     if (this.active) {
       this.deactivate(this.active);
@@ -30,45 +28,67 @@ export default {
       this.deactivate(this.active);
     }
 
-    cornerstoneTools[toolToActivate].enable(this.$element);
-    cornerstoneTools[toolToActivate].activate(this.$element, 1);
+    cornerstoneTools[toolToActivate].activate(this.element, 1);
 
     this.active = toolToActivate;
   },
 
   deactivate(tool) {
-    cornerstoneTools[tool].disable(this.$element);
-    cornerstoneTools[tool].deactivate(this.$element, 1);
+    cornerstoneTools[tool].deactivate(this.element, 1);
   },
 
   initStackTool(imageIds) {
-    const $thumb = $('.thumb');
     const stack = {
       currentImageIdIndex: 0,
       imageIds: imageIds
     };
-    var configuration = {
-         testPointers: function (eventData) {
-           return (eventData.numPointers >= 2);
-         }
-    };
 
-    cornerstoneTools.addStackStateManager(this.$element, ['stack']);
-    cornerstoneTools.addToolState(this.$element, 'stack', stack);
-    cornerstoneTools.stackScrollWheel.activate(this.$element);
+    cornerstoneTools.addStackStateManager(this.element, ['stack']);
+    cornerstoneTools.addToolState(this.element, 'stack', stack);
+    cornerstoneTools.stackPrefetch.enable(this.element);
 
-    cornerstoneTools.stackScrollMultiTouch.activate(this.$element);
-    cornerstoneTools.stackScrollMultiTouch.setConfiguration(configuration);
-    
+
+    // TODO: Replace this with an HTML5 Range Input
+    const $thumb = $('.thumb');
     $thumb.css('height', `${(100/stack.imageIds.length)}%`);
-
-    $(this.$element).on('CornerstoneNewImage', function () {
+    $(this.element).on('CornerstoneNewImage', function () {
       var currentIndex = stack.currentImageIdIndex;
 
       $thumb.css({
         'margin-top': `${($thumb.height()*(currentIndex))}px`
       });
     });
+  },
+
+  initInteractionTools() {
+    /*
+    For touch devices, by default we activate:
+    - Pinch to zoom
+    - Two-finger Pan
+    - Three (or more) finger Stack Scroll
+
+    We also enable the Length tool so it is always visible
+     */
+    cornerstoneTools.zoomTouchPinch.activate(this.element);
+    cornerstoneTools.panMultiTouch.activate(this.element);
+    cornerstoneTools.stackScrollMultiTouch.activate(this.element);
+    cornerstoneTools.length.enable(this.element);
+
+    /* For mouse devices, by default we turn on:
+    - Stack scrolling by mouse wheel
+    - Pan with middle click
+    - Zoom with right click
+     */
+    cornerstoneTools.stackScrollWheel.activate(this.element);
+    cornerstoneTools.pan.activate(this.element, 2);
+    cornerstoneTools.zoom.activate(this.element, 4);
+
+
+    /*
+    Set the tool color
+     */
+    cornerstoneTools.toolColors.setActiveColor('greenyellow');
+    cornerstoneTools.toolColors.setToolColor('white');
   },
 
   attachEvents() {
@@ -86,25 +106,28 @@ export default {
     });
 
     // Limiting measurements to 1
-    this.$conerstoneViewport.on('touchstart mousedown', () => {
-      const lengths = cornerstoneTools.getToolState(this.$element, 'length');
+    this.$cornerstoneViewport.on('touchstart mousedown', () => {
+      const toolStateManager = cornerstoneTools.getElementToolStateManager(this.element);
+      const toolState = toolStateManager.saveToolState();
+      const lengths = toolState['length'];
 
       if (lengths && lengths.data.length === 2) {
         lengths.data.shift();
-        cornerstone.updateImage(this.$element);
+        cornerstone.updateImage(this.element);
       }
     });
   },
 
   initTools(imageIds) {
-    cornerstoneTools.mouseInput.enable(this.$element);
-    cornerstoneTools.touchInput.enable(this.$element);
-    cornerstoneTools.mouseWheelInput.enable(this.$element);
+    cornerstoneTools.mouseInput.enable(this.element);
+    cornerstoneTools.touchInput.enable(this.element);
+    cornerstoneTools.mouseWheelInput.enable(this.element);
 
     this.initStackTool(imageIds);
+    this.initInteractionTools();
 
     // removing default context menu
-    this.$element.oncontextmenu = function (event) {
+    this.element.oncontextmenu = function (event) {
       event.preventDefault();
 
       return false;

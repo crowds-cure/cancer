@@ -14,7 +14,7 @@ export default {
         reject(error);
       };
 
-      $.ajax(mockUrl).then(successHandler);
+      $.ajax(mockUrl).then(successHandler, errorHandler);
     });
   }
 };

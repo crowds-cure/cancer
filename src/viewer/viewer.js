@@ -3,6 +3,12 @@ import Tools from './tools';
 import Commands from './commands';
 import Menu from '../menu/menu';
 
+cornerstoneWADOImageLoader.external.cornerstone = cornerstone;
+cornerstoneWADOImageLoader.external.$ = $;
+cornerstoneTools.external.$ = $;
+cornerstoneTools.external.cornerstone = cornerstone;
+cornerstone.external.$ = $;
+
 export default {
   $window: $(window),
   $viewer: $('.viewer-wrapper'),
@@ -11,35 +17,46 @@ export default {
   getNextCase() {
     this.$overlay.removeClass('invisible').addClass('loading');
 
-    Files.getCaseImages().then((imagesIds) => {
-
-        // Seems like tools needs to be updated (not init'd) with new ids
-        Tools.initTools(imagesIds);
-
-        // Commands.initCommands();
-
-        cornerstone.loadImage(imagesIds[0]).then((image) => {
-            cornerstone.displayImage(this.$element, image);
+    Files.getCaseImages().then((imageIds) => {
+        cornerstone.events.removeEventListener('CornerstoneImageLoaded');
+        cornerstone.events.addEventListener('CornerstoneImageLoaded', e => {
+          console.log(e.detail);
+          console.log(imageIds.length);
         });
-    }).catch();
+
+        cornerstone.loadImage(imageIds[0]).then((image) => {
+            this.$overlay.removeClass('loading').addClass('invisible');
+
+            // Set the default viewport parameters
+            const viewport = cornerstone.getDefaultViewport(this.element, image);
+            // e.g. lung window
+            //viewport.voi.windowWidth = 1500;
+            //viewport.voi.windowCenter = -300;
+
+            cornerstone.displayImage(this.element, image, viewport);
+            Tools.initTools(imageIds);
+        });
+    });
   },
 
   initViewer() {
-    this.$element = $('#conerstoneViewport')[0];
+    this.element = $('#cornerstoneViewport')[0];
 
     Menu.init();
 
     this.$viewer.removeClass('invisible');
 
-    Tools.$element = this.$element;
-    Commands.$element = this.$element;
-    Menu.$element = this.$element;
+    Tools.element = this.element;
+    Commands.element = this.element;
+    Menu.element = this.element;
 
     Commands.initCommands();
 
-    this.$window.on('resize', () => cornerstone.resize(this.$element, true));
+    // TODO: Debounce the call to cornerstone.resize so this doesn't fire
+    // too often
+    this.$window.on('resize', () => cornerstone.resize(this.element, true));
 
-    cornerstone.enable(this.$element);
+    cornerstone.enable(this.element);
 
     // currentSeriesIndex = 0;//a hack to get series in order
     this.getNextCase();
