@@ -15,7 +15,7 @@ export default {
     this.closeMenu();
     this.$overlay.removeClass('invisible').addClass('submitting');
 
-    const lengths = cornerstoneTools.getToolState(this.$element, 'length');
+    const lengths = cornerstoneTools.getToolState(this.element, 'length');
     // console.log('lengths:', lengths);
     if(!lengths){
       // console.log('ErrorModal', ErrorModal);

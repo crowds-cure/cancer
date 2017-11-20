@@ -1,11 +1,10 @@
-import Connector from './connector';
 import {chronicleURL, chronicleDB, measurementsDB} from '../db/db';
 
 export default {
 
-  openRequests : 0,
+  //openRequests : 0,
 
-  getFile(url) {
+  /*getFile(url) {
     const promiseFunction = function (resolve, reject) {
 
       this.openRequests += 1;
@@ -39,52 +38,27 @@ export default {
       request.send(null);
     };
     return new Promise(promiseFunction.bind(this));
-  },
+  },*/
 
   getCaseImages() {
     const $overlay = $('.loading-overlay');
     $overlay.addClass('loading');
     $overlay.removeClass('invisible');
 
-    // return new Promise((resolve, reject) => {
-
     return this.getChronicleImageIDs().then((caseStudy) => {
-      if (caseStudy && caseStudy.urls) {
-        // console.log('getCaseImages0');
-
-        // where to store the case id for access during save?
-        // I don't understand the model heirarchy, so let's stick it on the window
-        window.rsnaCrowdQuantSeriesUID = caseStudy.seriesUID;
-        window.rsnaCrowdQuantCaseStudy = caseStudy;
-
-        return Promise.all(caseStudy.urls.map(this.getFile.bind(this))).then(function (files) {
-          // console.log('getCaseImages1');
-          $overlay.addClass('invisible');
-          $overlay.removeClass('loading');
-
-          return Promise.all(files.map(cornerstoneWADOImageLoader.wadouri.fileManager.add));
-        }).then((imageIds) => {
-          return imageIds;
-          // resolve(files.map(cornerstoneWADOImageLoader.wadouri.fileManager.add));
-        });
+      if (!caseStudy || !caseStudy.urls) {
+        throw new Error('No case study or no URLs provided');
       }
-    }).catch(function(err) {
-      throw err;
-    });
 
-      // Connector.getCase().then((caseStudy) => {
-      //   if (caseStudy && caseStudy.urls) {
-      //     Promise.all(caseStudy.urls.map(this.getFile)).then(function (files) {
-      //       $overlay.addClass('invisible');
-      //       $overlay.removeClass('loading');
-      //
-      //       resolve(files.map(cornerstoneWADOImageLoader.wadouri.fileManager.add));
-      //     }).catch(reject);
-      //   }
-      // }).catch(function(error) {
-      //   reject(error);
-      // });
-    // });
+      // where to store the case id for access during save?
+      // I don't understand the model hierarchy, so let's stick it on the window
+      window.rsnaCrowdQuantSeriesUID = caseStudy.seriesUID;
+      window.rsnaCrowdQuantCaseStudy = caseStudy;
+
+      console.log(caseStudy.urls);
+
+      return caseStudy.urls.map(url => url.replace('http', 'wadouri'));
+    });
   },
 
   currentSeriesIndex: undefined,
