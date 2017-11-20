@@ -55,8 +55,6 @@ export default {
       window.rsnaCrowdQuantSeriesUID = caseStudy.seriesUID;
       window.rsnaCrowdQuantCaseStudy = caseStudy;
 
-      console.log(caseStudy.urls);
-
       return caseStudy.urls.map(url => url.replace('http', 'wadouri'));
     });
   },
@@ -103,16 +101,18 @@ export default {
       const instanceUIDs = [];
       data.rows.forEach((row) => {
         const instanceUID = row.value[1];
-        // const instanceURL = `${chronicleURL}/${instanceUID}/object.dcm`;
-        // imageIDs.push(instanceURL);
         instanceUIDs.push(instanceUID);
       });
-      // console.log('instanceUIDs:', instanceUIDs);
 
+      console.time('Metadata Retrieval from Chronicle DB');
+      // TODO: Switch to some study or series-level call
+      // It is quite slow to wait on metadata for every single image
+      // each retrieved in separate calls
       return Promise.all(instanceUIDs.map((uid) => {
         return chronicleDB.get(uid);
       }));
     }).then((docs) => {
+      console.timeEnd('Metadata Retrieval from Chronicle DB');
       const instanceNumberTag = "00200013";
       let instanceUIDsByImageNumber = {};
       docs.forEach((doc) => {

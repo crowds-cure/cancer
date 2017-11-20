@@ -43,6 +43,12 @@ export default {
       imageIds: imageIds
     };
 
+    // Clear any previous tool state
+    cornerstoneTools.clearToolState(this.element, 'stack');
+
+    // Disable stack prefetch in case there are still queued requests
+    cornerstoneTools.stackPrefetch.disable(this.element);
+
     cornerstoneTools.addStackStateManager(this.element, ['stack']);
     cornerstoneTools.addToolState(this.element, 'stack', stack);
     cornerstoneTools.stackPrefetch.enable(this.element);
@@ -107,7 +113,7 @@ export default {
 
     // Limiting measurements to 1
     this.$cornerstoneViewport.on('touchstart mousedown', () => {
-      const toolStateManager = cornerstoneTools.getElementToolStateManager(this.element);
+      const toolStateManager = cornerstoneTools.globalImageIdSpecificToolStateManager;
       const toolState = toolStateManager.saveToolState();
       const lengths = toolState['length'];
 
@@ -119,6 +125,9 @@ export default {
   },
 
   initTools(imageIds) {
+    // Clear all old tool data
+    cornerstoneTools.globalImageIdSpecificToolStateManager.restoreToolState({});
+
     cornerstoneTools.mouseInput.enable(this.element);
     cornerstoneTools.touchInput.enable(this.element);
     cornerstoneTools.mouseWheelInput.enable(this.element);
