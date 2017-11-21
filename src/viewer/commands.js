@@ -40,6 +40,24 @@ export default {
     Modal.nextCase();
   },
 
+  setWL: function (windowWidth, windowCenter) {
+    const enabledElement = cornerstone.getEnabledElement(this.element);
+    const viewport = enabledElement.viewport;
+
+    viewport.voi.windowWidth = windowWidth;
+    viewport.voi.windowCenter = windowCenter;
+
+    cornerstone.updateImage(this.element);
+  },
+
+  setLungWL: function() {
+    this.setWL(1600, -600);
+  },
+
+  setLiverWL: function() {
+    this.setWL(150, 30);
+  },
+
   save: function () {
 
     Menu.closeMenu();
