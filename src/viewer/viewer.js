@@ -65,9 +65,7 @@ export default {
 
     Commands.initCommands();
 
-    // TODO: Debounce the call to cornerstone.resize so this doesn't fire
-    // too often
-    this.$window.on('resize', () => cornerstone.resize(this.element, true));
+    this.$window.on('resize', _.throttle(() => cornerstone.resize(this.element, true), 300));
 
     cornerstone.enable(this.element);
 
