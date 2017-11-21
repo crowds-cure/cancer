@@ -114,16 +114,46 @@ export default {
     });
 
     // Limiting measurements to 1
-    this.$cornerstoneViewport.on('touchstart mousedown', () => {
+    const handleMeasurementAdded = (event) => {
+      // Retrieve the current image
+      const image = cornerstone.getImage(event.detail.element);
+      const currentImageId = image.imageId;
+      const toolType = 'length';
+
+      // When a new measurement is added, retrieve the current tool state
       const toolStateManager = cornerstoneTools.globalImageIdSpecificToolStateManager;
       const toolState = toolStateManager.saveToolState();
-      const lengths = toolState['length'];
 
-      if (lengths && lengths.data.length === 2) {
-        lengths.data.shift();
-        cornerstone.updateImage(this.element);
+      // Loop through all of the images (toolState is keyed by imageId)
+      let allLengths = [];
+      Object.keys(toolState).forEach(imageId => {
+        // Delete all length measurements on images that are not the
+        // current image
+        if (imageId !== currentImageId) {
+          delete toolState[imageId][toolType];
+        }
+      });
+
+      // Retrieve all of the length measurements on the current image
+      const lengthMeasurements = toolState[currentImageId][toolType].data;
+
+      // If there is more than length measurement, remove the oldest one
+      if (lengthMeasurements.length > 1) {
+        lengthMeasurements.shift();
+
+        // Re-save this data into the toolState object
+        toolState[currentImageId][toolType].data = lengthMeasurements;
       }
-    });
+
+      // Restore toolState into the toolStateManager
+      toolStateManager.restoreToolState(toolState);
+
+      // Update the image
+      cornerstone.updateImage(this.element);
+    };
+
+    this.element.removeEventListener('cornerstonetoolsmeasurementadded', handleMeasurementAdded);
+    this.element.addEventListener('cornerstonetoolsmeasurementadded', handleMeasurementAdded);
   },
 
   initTools(imageIds) {
