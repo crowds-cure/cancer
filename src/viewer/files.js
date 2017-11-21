@@ -120,6 +120,11 @@ export default {
       this.seriesUID_A = seriesUID;
       console.log('series UID:', seriesUID);
 
+      if (seriesUID === undefined) {
+        alert('Congratulations - you have looked at all the series');
+        window.location.reload();
+      }
+
       return chronicleDB.query("instances/seriesInstances", {
         startkey : seriesUID,
         endkey : seriesUID + '\u9999',
