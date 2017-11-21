@@ -55,7 +55,7 @@ export default {
 
 
     // TODO: Replace this with an HTML5 Range Input
-    /*const $thumb = $('.thumb');
+    const $thumb = $('.thumb');
     $thumb.css('height', `${(100/stack.imageIds.length)}%`);
     $(this.element).on('CornerstoneNewImage', function () {
       var currentIndex = stack.currentImageIdIndex;
@@ -63,7 +63,7 @@ export default {
       $thumb.css({
         'margin-top': `${($thumb.height()*(currentIndex))}px`
       });
-    });*/
+    });
   },
 
   initInteractionTools() {

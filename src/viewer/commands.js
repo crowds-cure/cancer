@@ -40,7 +40,7 @@ export default {
 
   skip: function() {
 
-      const stack = cornerstoneTools.getToolState(this.$element, 'stack');
+      const stack = cornerstoneTools.getToolState(this.element, 'stack');
       getUUID().then((uuid) => {
         const sliceIndex = stack.data[0].currentImageIdIndex;
         const doc = {
@@ -51,7 +51,7 @@ export default {
           'instanceUID': window.rsnaCrowdQuantCaseStudy.instanceUIDs[sliceIndex],
           'instanceURL': window.rsnaCrowdQuantCaseStudy.urls[sliceIndex],
           'sliceIndex': sliceIndex,
-          'date': moment().unix(),
+          'date': Math.floor(Date.now() / 1000),
           'userAgent': navigator.userAgent
         }
         return measurementsDB.put(doc);
