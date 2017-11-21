@@ -37,11 +37,40 @@ export default {
     cornerstoneTools[tool].deactivate(this.element, 1);
   },
 
+  selectImage(event) {
+    // Get the range input value
+    const newImageIdIndex = parseInt(event.currentTarget.value, 10);
+    const stackToolDataSource = cornerstoneTools.getToolState(this.$cornerstoneViewport[0], 'stack');
+
+    if (stackToolDataSource === undefined) {
+      return;
+    }
+
+    const stackData = stackToolDataSource.data[0];
+
+    // Switch images, if necessary
+    if(newImageIdIndex !== stackData.currentImageIdIndex && stackData.imageIds[newImageIdIndex] !== undefined) {
+      cornerstone.loadAndCacheImage(stackData.imageIds[newImageIdIndex]).then((image) => {
+        const viewport = cornerstone.getViewport(this.$cornerstoneViewport[0]);
+
+        stackData.currentImageIdIndex = newImageIdIndex;
+        cornerstone.displayImage(this.$cornerstoneViewport[0], image, viewport);
+      });
+    }
+  },
+
   initStackTool(imageIds) {
+    const slider = $('.imageSlider')[0];
     const stack = {
       currentImageIdIndex: 0,
       imageIds: imageIds
     };
+
+    // Init slider configurations
+    slider.min = 0;
+    slider.max = stack.imageIds.length;
+    slider.step = 1;
+    slider.value = stack.currentImageIdIndex;
 
     // Clear any previous tool state
     cornerstoneTools.clearToolState(this.element, 'stack');
@@ -53,17 +82,15 @@ export default {
     cornerstoneTools.addToolState(this.element, 'stack', stack);
     cornerstoneTools.stackPrefetch.enable(this.element);
 
+    $(slider).on('input', this.selectImage.bind(this));
+    this.$cornerstoneViewport.on('cornerstonenewimage', function (event) {
+      const eventData = event.detail;
+      const newImageIdIndex = stack.currentImageIdIndex;
 
-    // TODO: Replace this with an HTML5 Range Input
-    /*const $thumb = $('.thumb');
-    $thumb.css('height', `${(100/stack.imageIds.length)}%`);
-    $(this.element).on('CornerstoneNewImage', function () {
-      var currentIndex = stack.currentImageIdIndex;
-
-      $thumb.css({
-        'margin-top': `${($thumb.height()*(currentIndex))}px`
-      });
-    });*/
+      // Update the slider value
+      $(slider).value = newImageIdIndex;
+    });
+    $(slider).css('width', `${this.$cornerstoneViewport.height()}px`);
   },
 
   initInteractionTools() {

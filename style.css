@@ -144,15 +144,33 @@ button.submit {
       position: absolute; }
 
 .scroll {
-  background-color: #000;
-  height: 100%;
-  right: 0px;
   position: absolute;
-  width: 0.71429rem; }
-  .scroll .thumb {
-    background-color: #00a4d9;
-    width: 0.71429rem;
-    border-radius: 0.71429rem; }
+  right: 0;
+  width: 0.71429rem;
+  height: 100%;
+  top: 0; }
+  .scroll .scroll-holder {
+    position: relative;
+    height: 100%; }
+    .scroll .scroll-holder .imageSlider {
+      transform: rotate(90deg);
+      transform-origin: top left;
+      position: absolute;
+      width: 57.14286rem;
+      margin-left: 10px;
+      -webkit-appearance: none;
+      background-color: transparent; }
+      .scroll .scroll-holder .imageSlider:focus {
+        outline: none; }
+      .scroll .scroll-holder .imageSlider::-moz-focus-outer {
+        border: none; }
+      .scroll .scroll-holder .imageSlider::-webkit-slider-thumb {
+        cursor: pointer;
+        background: #00a4d9;
+        -webkit-appearance: none;
+        width: 30px;
+        height: 10px;
+        border-radius: 10px; }
 
 .modal {
   position: fixed;

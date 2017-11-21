@@ -63,15 +63,41 @@
 }
 
 .scroll {
-  background-color: $black;
-  height: 100%;
-  right: 0px;
   position: absolute;
+  right: 0;
   width: rem(10);
+  height: 100%;
+  top: 0;
 
-  .thumb {
-    background-color: $blue;
-    width: rem(10);
-    border-radius: rem(10);
+  .scroll-holder {
+    position: relative;
+    height: 100%;
+
+    .imageSlider {
+      transform: rotate(90deg);
+      transform-origin: top left;
+      position: absolute;
+      width: rem(800);
+      margin-left: 10px;
+      -webkit-appearance: none;
+      background-color: rgba(0,0,0,0);
+
+      &:focus {
+        outline: none;
+      }
+
+      &::-moz-focus-outer {
+        border: none
+      }
+
+      &::-webkit-slider-thumb {
+        cursor: pointer;
+        background: $blue;
+        -webkit-appearance: none;
+        width: 30px;
+        height: 10px;
+        border-radius: 10px
+      }
+    }
   }
 }
