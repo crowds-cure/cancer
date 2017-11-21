@@ -102,6 +102,8 @@ export default {
       const measurement = lengthData[0];
       const lengthMeasurement = measurement.data.data[0];
 
+      cornerstoneTools.scrollToIndex(this.element, measurement.imageIndex);
+
       const doc = {
         '_id': uuid,
         'length': lengthMeasurement.length,
