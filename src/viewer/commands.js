@@ -3,8 +3,6 @@ import Modal from '../modal/modal';
 import ErrorModal from '../errorModal/modal';
 import {measurementsDB, getUUID} from '../db/db';
 import Login from '../login/login';
-//import moment from 'moment';
-// TODO: Seems like overkill to pull in momentjs
 
 // helper from https://stackoverflow.com/questions/12168909/blob-from-dataurl
 function dataURItoBlob(dataURI) {
@@ -88,7 +86,7 @@ export default {
         'instanceUID': window.rsnaCrowdQuantCaseStudy.instanceUIDs[measurement.imageIndex],
         'instanceURL': window.rsnaCrowdQuantCaseStudy.urls[measurement.imageIndex],
         'sliceIndex': measurement.imageIndex,
-        'date': Math.floor(Date.now() / 1000), //moment().unix(),
+        'date': Math.floor(Date.now() / 1000),
         'userAgent': navigator.userAgent
       };
 

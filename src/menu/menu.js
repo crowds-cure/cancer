@@ -4,10 +4,6 @@ import ErrorModal from '../errorModal/modal';
 import Viewer from '../viewer/viewer';
 import {measurementsDB, getUUID} from '../db/db';
 import {username} from '../login/login';
-//import moment from 'moment';
-// TODO: Momentjs is 20% of the bundle.js size (100kb).
-// This seems unnecessary since we are only using it to get UNIX timestamps
-// in seconds which you can just do with Math.floor(Date.now() / 1000)
 
 export default {
   $menuWrapper: $('.menu-wrapper'),
@@ -32,7 +28,7 @@ export default {
         'length': lengths.data[0].length,
         'annotator': username,
         // 'annotator': $('#login-username').val(),
-        'date': Math.floor(Date.now() / 1000), //moment().unix(),
+        'date': Math.floor(Date.now() / 1000),
         'userAgent': navigator.userAgent
       };
 
