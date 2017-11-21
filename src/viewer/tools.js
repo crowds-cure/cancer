@@ -1,3 +1,5 @@
+import debounce from './debounce';
+
 const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
 export default {
@@ -86,7 +88,7 @@ export default {
     $(slider).on('input', this.selectImage.bind(this));
     // Setting the slider size
     $(slider).css('width', `${this.$cornerstoneViewport.height()}px`)
-    $(window).on('resize', _.throttle(() => $(slider).css('width', `${this.$cornerstoneViewport.height()}px`), 150));
+    $(window).on('resize', debounce(() => $(slider).css('width', `${this.$cornerstoneViewport.height()}px`), 150));
 
     // Listening to viewport stack image change, so the slider is synced
     this.$cornerstoneViewport[0].addEventListener('cornerstonenewimage', function (event) {

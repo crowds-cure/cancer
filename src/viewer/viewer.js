@@ -2,6 +2,7 @@ import Files from './files';
 import Tools from './tools';
 import Commands from './commands';
 import Menu from '../menu/menu';
+import debounce from './debounce';
 
 cornerstoneWADOImageLoader.external.cornerstone = cornerstone;
 cornerstoneWADOImageLoader.external.$ = $;
@@ -64,8 +65,8 @@ export default {
     Menu.element = this.element;
 
     Commands.initCommands();
-
-    this.$window.on('resize', _.throttle(() => cornerstone.resize(this.element, true), 300));
+    
+    this.$window.on('resize', debounce(() => cornerstone.resize(this.element, true), 300));
 
     cornerstone.enable(this.element);
 

@@ -23,8 +23,7 @@
     "jquery": "^3.2.1",
     "jquery-hammerjs": "^2.0.0",
     "moment": "^2.19.2",
-    "pouchdb": "^6.3.4",
-    "underscore": "^1.8.3"
+    "pouchdb": "^6.3.4"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
