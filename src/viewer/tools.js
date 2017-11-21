@@ -82,15 +82,19 @@ export default {
     cornerstoneTools.addToolState(this.element, 'stack', stack);
     cornerstoneTools.stackPrefetch.enable(this.element);
 
+    // Adding input listener
     $(slider).on('input', this.selectImage.bind(this));
-    this.$cornerstoneViewport.on('cornerstonenewimage', function (event) {
+    // Setting the slider size
+    $(slider).css('width', `${this.$cornerstoneViewport.height()}px`);
+
+    // Listening to viewport stack image change, so the slider is synced
+    this.$cornerstoneViewport[0].addEventListener('cornerstonenewimage', function (event) {
       const eventData = event.detail;
       const newImageIdIndex = stack.currentImageIdIndex;
 
       // Update the slider value
-      $(slider).value = newImageIdIndex;
+      slider.value = newImageIdIndex;
     });
-    $(slider).css('width', `${this.$cornerstoneViewport.height()}px`);
   },
 
   initInteractionTools() {
