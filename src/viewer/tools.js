@@ -1,13 +1,13 @@
 const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
 export default {
-  active: '',
+  active: undefined,
   toolsSelector: '.viewer-tools',
   $cornerstoneViewport: $('#cornerstoneViewport'),
   deactivateActiveTool() {
     if (this.active) {
       this.deactivate(this.active);
-      this.active = '';
+      this.active = undefined;
     }
   },
 
@@ -115,10 +115,15 @@ export default {
 
     // Limiting measurements to 1
     const handleMeasurementAdded = (event) => {
+      // Only handle Length measurements
+      const toolType = 'length';
+      if (event.detail.toolType !== toolType) {
+        return;
+      }
+
       // Retrieve the current image
       const image = cornerstone.getImage(event.detail.element);
       const currentImageId = image.imageId;
-      const toolType = 'length';
 
       // When a new measurement is added, retrieve the current tool state
       const toolStateManager = cornerstoneTools.globalImageIdSpecificToolStateManager;

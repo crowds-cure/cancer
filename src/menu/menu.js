@@ -4,10 +4,6 @@ import ErrorModal from '../errorModal/modal';
 import Viewer from '../viewer/viewer';
 import {measurementsDB, getUUID} from '../db/db';
 import {username} from '../login/login';
-//import moment from 'moment';
-// TODO: Momentjs is 20% of the bundle.js size (100kb).
-// This seems unnecessary since we are only using it to get UNIX timestamps
-// in seconds which you can just do with Math.floor(Date.now() / 1000)
 
 export default {
   $menuWrapper: $('.menu-wrapper'),
@@ -15,32 +11,7 @@ export default {
 
   submit() {
     this.closeMenu();
-    this.$overlay.removeClass('invisible').addClass('submitting');
-
-    const lengths = cornerstoneTools.getToolState(this.element, 'length');
-    // console.log('lengths:', lengths);
-    if(!lengths){
-      // console.log('ErrorModal', ErrorModal);
-      ErrorModal.show();
-      this.$overlay.removeClass('submitting');
-      return;
-    }
-
-    getUUID().then((uuid) => {
-      const doc = {
-        '_id': uuid,
-        'length': lengths.data[0].length,
-        'annotator': username,
-        'date': Math.floor(Date.now() / 1000), //moment().unix(),
-        'userAgent': navigator.userAgent
-      };
-
-      // console.log('doc:', doc);
-      return measurementsDB.put(doc);
-    }).then(() => {
-      Modal.show();
-      this.$overlay.removeClass('submitting');
-    });
+    Commands.save();
   },
   nextCase() {
     this.closeMenu();
