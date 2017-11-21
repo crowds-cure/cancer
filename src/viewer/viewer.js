@@ -18,7 +18,7 @@ const config = {
     decodeTask: {
       loadCodecsOnStartup: true,
       initializeCodecsOnStartup: false,
-      codecsPath: 'cornerstoneWADOImageLoaderCodecs.min.js',
+      codecsPath: 'cornerstoneWADOImageLoaderCodecs.js',
       usePDFJS: false,
       strict: false,
     }
@@ -27,20 +27,28 @@ const config = {
 
 cornerstoneWADOImageLoader.webWorkerManager.initialize(config);
 
+const IMAGE_LOADED_EVENT = 'cornerstoneimageloaded';
+
 export default {
   $window: $(window),
   $viewer: $('.viewer-wrapper'),
   $overlay: $('.loading-overlay'),
-
+  numImagesLoaded: 0,
   getNextCase() {
     this.$overlay.removeClass('invisible').addClass('loading');
     const enabledElement = cornerstone.getEnabledElement(this.element);
 
     Files.getCaseImages().then((imageIds) => {
-        cornerstone.events.removeEventListener('CornerstoneImageLoaded');
-        cornerstone.events.addEventListener('CornerstoneImageLoaded', e => {
-          console.log(e.detail);
-          console.log(imageIds.length);
+        console.time('Loading All Images');
+        
+        this.numImagesLoaded = 0;
+        cornerstone.events.removeEventListener(IMAGE_LOADED_EVENT);
+        cornerstone.events.addEventListener(IMAGE_LOADED_EVENT, e => {
+          this.numImagesLoaded += 1;
+          console.log(this.numImagesLoaded / imageIds.length * 100);
+          if (this.numImagesLoaded === imageIds.length) {
+            console.timeEnd('Loading All Images');
+          }
         });
 
         cornerstone.loadImage(imageIds[0]).then((image) => {

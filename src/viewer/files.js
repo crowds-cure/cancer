@@ -7,45 +7,6 @@ cornerstone.events.addEventListener('CornerstoneImageLoaded', e => {
 });
 
 export default {
-
-  //openRequests : 0,
-
-  /*getFile(url) {
-    const promiseFunction = function (resolve, reject) {
-
-      this.openRequests += 1;
-      $('#loading-progress').text(`${this.openRequests} images requested`);
-
-      const request = new XMLHttpRequest();
-
-      request.open('GET', url, true);
-      request.responseType = 'arraybuffer';
-
-      const onImageLoad = function(oEvent) {
-
-        this.openRequests -= 1;
-        $('#loading-progress').text(`${this.openRequests} images remaining`);
-
-        if (this.openRequests == 0) {
-          $('#loading-progress').text(``);
-        }
-
-        const arrayBuffer = request.response;
-        if (arrayBuffer) {
-          try {
-            resolve(new Blob([arrayBuffer], { type: 'application/dicom' }));
-          } catch (error) {
-            reject(error);
-          }
-        }
-      };
-
-      request.onload = onImageLoad.bind(this);
-      request.send(null);
-    };
-    return new Promise(promiseFunction.bind(this));
-  },*/
-
   getCaseImages() {
     const $overlay = $('.loading-overlay');
     $overlay.addClass('loading');
