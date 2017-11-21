@@ -30,18 +30,14 @@ https://github.com/pieper/Chronicle/blob/master/design/views.py
 - about box with acknowledgements
 - tutorial info
 - auto window/level to get lung window/liver ? - Rob
-- address "Uncaught Error: image has not been loaded yet"
 - Android (maybe ios?) Can make 2 Length Measurements on the same image
 - Potentially change least measured to be an array of all "least measured" and select one at random
 - log skipped cases
 - annotator is hardcoded -fix that
 - make getNextSeriesForAnnotator call parallel
-- (bug) If you zoom out extremely far until the original image looks like a dot, it is very hard to zoom back in because the center of the image changes. This might be done by accident, so when someone presses Clear, zoom should reset -- but it isn't. We should fix this. (ALB)
 - Zoom resets when the windows is resized - not sure if intentional (ALB)
-- Map up/down keyboard keys to change slice, in case mouse wheel/pad not available
-- You can't submit a measurement if you're not on the same slice as your measurement. Given people's tendencies to "check their work" on other slices, and the difficulty of navigating back to one particular slice, perhaps we should lift this requirement (ALB)
+- address "Uncaught Error: image has not been loaded yet"
 - consider moving save button to avoid accidental selection of skip button instead.
-- pinch zoom on mobile?
 - add progress sort on download -Steve
 - measurement disappears under certain window - maybe make measurement a different color/line width
 
@@ -50,6 +46,10 @@ https://github.com/pieper/Chronicle/blob/master/design/views.py
 - consolidate databases? - probably not needed for now
 
 ### DONE
+- (bug) If you zoom out extremely far until the original image looks like a dot, it is very hard to zoom back in because the center of the image changes. This might be done by accident, so when someone presses Clear, zoom should reset -- but it isn't. We should fix this. (ALB)
+- Map up/down keyboard keys to change slice, in case mouse wheel/pad not available
+- You can't submit a measurement if you're not on the same slice as your measurement. Given people's tendencies to "check their work" on other slices, and the difficulty of navigating back to one particular slice, perhaps we should lift this requirement (ALB)
+- pinch zoom on mobile?
 - include seriesUID with measurements (still need to see if this is the right way)
 - (bug) in a session: first case sends 1 measurement, second sends 2, third 3, etc.
 - need to record position of start/end of line drawn lengths.data[0].handles.end.y near line 40 commands.js
