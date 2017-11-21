@@ -2,10 +2,6 @@ import Connector from './connector';
 import Login from '../login/login';
 import {chronicleURL, chronicleDB, measurementsDB} from '../db/db';
 
-cornerstone.events.addEventListener('CornerstoneImageLoaded', e => {
-  console.log(e.detail)
-});
-
 export default {
   getCaseImages() {
     const $overlay = $('.loading-overlay');
@@ -89,9 +85,7 @@ export default {
       });
 
       const imageNumbers = Object.keys(instanceUIDsByImageNumber);
-      imageNumbers.sort((a, b) => {
-        return a - b;
-      });
+      imageNumbers.sort((a, b) => a - b);
 
       let instanceURLs = [];
       let instanceUIDs = [];
@@ -107,7 +101,7 @@ export default {
         seriesUID: this.seriesUID_A,
         currentSeriesIndex: this.currentSeriesIndex - 1,
         urls: instanceURLs,
-        instanceUIDs: instanceUIDs
+        instanceUIDs
       };
     }).catch((err) => {
       throw err;
