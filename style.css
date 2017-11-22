@@ -145,10 +145,16 @@ button.submit {
             display: none; }
           .viewer-wrapper .top-bar .viewer-tools .tool.save, .viewer-wrapper .top-bar .viewer-tools .tool.skip, .viewer-wrapper .top-bar .viewer-tools .tool.clearAll {
             display: inline-block; } }
+        .viewer-wrapper .top-bar .viewer-tools .tool.active:hover a {
+          color: #20a5d6; }
+        .viewer-wrapper .top-bar .viewer-tools .tool.active:hover svg {
+          stroke: #20a5d6;
+          fill: #20a5d6; }
         .viewer-wrapper .top-bar .viewer-tools .tool.active a {
-          color: #efefef; }
+          color: #20a5d6; }
         .viewer-wrapper .top-bar .viewer-tools .tool.active svg {
-          stroke: #efefef; }
+          stroke: #20a5d6;
+          fill: #20a5d6; }
           .viewer-wrapper .top-bar .viewer-tools .tool.active svg.tool-img {
             border: 0.07143rem solid #efefef;
             border-radius: 1.21429rem;

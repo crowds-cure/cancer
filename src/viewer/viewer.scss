@@ -50,11 +50,23 @@
         }
 
         &.active {
-          a {
-            color: $white;
+          &:hover {
+            a {
+              color: $dark-blue;
+            }
+            svg {
+              stroke: $dark-blue;
+              fill: $dark-blue;
+            }
           }
+
+          a {
+            color: $dark-blue;
+          }
+
           svg {
-            stroke: $white;
+            stroke: $dark-blue;
+            fill: $dark-blue;
 
             &.tool-img {
               border: rem(1) solid $white;
