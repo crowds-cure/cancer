@@ -140,7 +140,7 @@ button.submit {
         cursor: pointer; }
         .viewer-wrapper .top-bar .viewer-tools .tool.save, .viewer-wrapper .top-bar .viewer-tools .tool.skip, .viewer-wrapper .top-bar .viewer-tools .tool.clearAll {
           display: none; }
-        @media (min-width: 768px) {
+        @media (min-width: 400px) {
           .viewer-wrapper .top-bar .viewer-tools .tool.more {
             display: none; }
           .viewer-wrapper .top-bar .viewer-tools .tool.save, .viewer-wrapper .top-bar .viewer-tools .tool.skip, .viewer-wrapper .top-bar .viewer-tools .tool.clearAll {
