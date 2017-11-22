@@ -110,7 +110,8 @@ button.submit {
       flex: 1 0 auto; }
       .viewer-wrapper .top-bar .viewer-tools .tool {
         display: inline-block;
-        text-align: -webkit-center; }
+        text-align: -webkit-center;
+        cursor: pointer; }
         .viewer-wrapper .top-bar .viewer-tools .tool.active a {
           color: #efefef; }
         .viewer-wrapper .top-bar .viewer-tools .tool.active svg {

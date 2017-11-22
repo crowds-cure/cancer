@@ -159,17 +159,16 @@ export default {
   },
 
   initCommands() {
-    $(this.commandSelector).on('click', 'a[data-command]', event => {
+    $(this.commandSelector).on('click', 'div[data-command]', event => {
       const $element = $(event.currentTarget);
-      const $wrapper = $element.parent();
       const tool = $element.attr('data-command');
 
       this[tool]();
 
-      $wrapper.addClass('active');
+      $element.addClass('active');
 
       setTimeout(function() {
-        $wrapper.removeClass('active');
+        $element.removeClass('active');
       }, 300);
     });
   }

@@ -141,7 +141,7 @@ export default {
 
   attachEvents() {
     // Extract which tool we are using and activating it
-    $(this.toolsSelector).on('click', 'a[data-tool]', event => {
+    $(this.toolsSelector).on('click', 'div[data-tool]', event => {
       const $element = $(event.currentTarget);
 
       const tool = $element.attr('data-tool');
@@ -150,7 +150,7 @@ export default {
 
       this.toggleTool(tool);
 
-      $element.parent().addClass('active');
+      $element.addClass('active');
     });
 
     // Limiting measurements to 1
@@ -214,7 +214,7 @@ export default {
     this.initStackTool(imageIds);
 
     // Set the element to focused, so we can properly handle keyboard events
-    $(this.element).attr("tabindex", 0).focus();
+    $(this.element).attr('tabindex', 0).focus();
 
     this.initInteractionTools();
 
@@ -227,7 +227,7 @@ export default {
     $(`${this.toolsSelector} .active`).removeClass('.active');
 
     // Add it to our desired tool
-    $(`${this.toolsSelector} a[data-tool=${toolToActivate}]`).parent().addClass('active');
+    $(`${this.toolsSelector} div[data-tool=${toolToActivate}]`).addClass('active');
 
     // removing default context menu
     this.element.oncontextmenu = function (event) {

@@ -11,6 +11,7 @@
       .tool {
         display: inline-block;
         text-align: -webkit-center;
+        cursor: pointer;
 
         &.active {
           a {
