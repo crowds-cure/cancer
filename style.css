@@ -170,8 +170,8 @@ button.submit {
         cursor: pointer;
         background: #00a4d9;
         -webkit-appearance: none;
-        width: 30px;
-        height: 10px;
+        width: 40px;
+        height: 20px;
         border-radius: 10px; }
 
 .modal {
