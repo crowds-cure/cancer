@@ -41,17 +41,24 @@ export default {
     Files.getCaseImages().then((imageIds) => {
         console.time('Loading All Images');
         
-        this.numImagesLoaded = 0;
-        cornerstone.events.removeEventListener(IMAGE_LOADED_EVENT);
-        cornerstone.events.addEventListener(IMAGE_LOADED_EVENT, e => {
-          this.numImagesLoaded += 1;
-          console.log(this.numImagesLoaded / imageIds.length * 100);
-          if (this.numImagesLoaded === imageIds.length) {
-            console.timeEnd('Loading All Images');
-          }
-        });
+        console.log('Resetting counter')
+        const loadingProgress = $('#loading-progress');
+        let numImagesLoaded = 0;
 
-        cornerstone.loadImage(imageIds[0]).then((image) => {
+        function handleImageLoaded() {
+          numImagesLoaded += 1;
+          const imagesLeft = imageIds.length - numImagesLoaded;
+          loadingProgress.text(`${imagesLeft} images requested`);
+          if (numImagesLoaded === imageIds.length) {
+            console.timeEnd('Loading All Images');
+            loadingProgress.text('');
+          }
+        }
+
+        cornerstone.events.removeEventListener(IMAGE_LOADED_EVENT, handleImageLoaded);
+        cornerstone.events.addEventListener(IMAGE_LOADED_EVENT, handleImageLoaded);
+
+        cornerstone.loadAndCacheImage(imageIds[0]).then((image) => {
             this.$overlay.removeClass('loading').addClass('invisible');
 
             // Set the default viewport parameters
