@@ -127,13 +127,13 @@ button.submit {
         z-index: 9;
         padding: 0;
         background: rgba(20, 25, 30, 0.95);
-        transition: height 1s, padding 1s;
+        transition: height 1s;
         overflow: auto; }
         .viewer-wrapper .top-bar .viewer-tools .commands-wrapper.open {
-          height: 6.42857rem;
-          padding: 0 0.71429rem 0.71429rem 0.71429rem; }
+          height: 6.42857rem; }
         .viewer-wrapper .top-bar .viewer-tools .commands-wrapper.border {
-          border: solid 0.07143rem #00a4d9; }
+          border: solid 0.07143rem #00a4d9;
+          padding: 0 0.71429rem 0.71429rem 0.71429rem; }
       .viewer-wrapper .top-bar .viewer-tools .tool {
         display: inline-block;
         text-align: -webkit-center;

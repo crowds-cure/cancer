@@ -17,16 +17,16 @@
         z-index: 9;
         padding: 0;
         background: rgba(20,25,30,0.95);
-        transition: height 1s, padding 1s;
+        transition: height 1s;
         overflow: auto;
 
         &.open {
           height: rem(90);
-          padding: 0 rem(10) rem(10) rem(10);
         }
 
         &.border {
           border: solid rem(1) $blue;
+          padding: 0 rem(10) rem(10) rem(10);
         }
       }
 
