@@ -4,7 +4,8 @@ html, body {
   height: 100%;
   width: 100%;
   background: #000;
-  overflow: hidden; }
+  overflow: hidden;
+  font-size: 16px; }
 
 .invisible {
   display: none !important; }
@@ -52,6 +53,9 @@ button.submit {
     padding: 1.07143rem;
     border-radius: 0.35714rem;
     margin: auto; }
+    @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+      .login-wrapper .login-box {
+        font-size: 2.14286rem; } }
     .login-wrapper .login-box button.signup {
       /*float: right;*/
       height: 2rem;
@@ -67,11 +71,17 @@ button.submit {
       justify-content: space-between;
       margin-bottom: 0.71429rem;
       color: #9ccef9; }
+      @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+        .login-wrapper .login-box form .form-input input {
+          font-size: 2.14286rem; } }
       .login-wrapper .login-box form .form-input label {
         margin-right: 0.35714rem; }
     .login-wrapper .login-box button.submit {
       float: right;
       width: 100%; }
+      @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+        .login-wrapper .login-box button.submit {
+          font-size: 2.14286rem; } }
       .login-wrapper .login-box button.submit img.loading {
         width: 0.71429rem;
         position: relative;

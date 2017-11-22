@@ -39,7 +39,7 @@
           display: none;
         }
 
-        @media (min-width: $tablet-size) {
+        @media (min-width: $tablet-size-min) {
           &.more {
             display: none;
           }
