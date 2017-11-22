@@ -127,6 +127,9 @@ export default {
      */
     cornerstoneTools.zoomTouchPinch.activate(this.element);
     cornerstoneTools.panMultiTouch.activate(this.element);
+    cornerstoneTools.panMultiTouch.setConfiguration({
+        testPointers: (eventData) => (eventData.numPointers === 2)
+    });
     cornerstoneTools.stackScrollMultiTouch.activate(this.element);
     cornerstoneTools.length.enable(this.element);
 
