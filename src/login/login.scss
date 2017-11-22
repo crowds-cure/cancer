@@ -57,6 +57,7 @@ $tablet-font-size: rem(30);
 
       @media only screen and (min-device-width : $tablet-size-min) and (max-device-width : $tablet-size-max) {
         font-size: $tablet-font-size;
+        padding: 10px;
       }
 
       img.loading {

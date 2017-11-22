@@ -81,7 +81,8 @@ button.submit {
       width: 100%; }
       @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
         .login-wrapper .login-box button.submit {
-          font-size: 2.14286rem; } }
+          font-size: 2.14286rem;
+          padding: 10px; } }
       .login-wrapper .login-box button.submit img.loading {
         width: 0.71429rem;
         position: relative;
@@ -92,6 +93,9 @@ button.submit {
   align-items: center;
   height: 100%;
   color: #efefef; }
+  @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+    .signup-wrapper {
+      font-size: 2.14286rem; } }
   .signup-wrapper form {
     border: #00a4d9 solid 0.07143rem;
     padding: 1.07143rem;
@@ -104,8 +108,19 @@ button.submit {
       color: #9ccef9; }
       .signup-wrapper form .form-input label {
         margin-right: 0.35714rem; }
+      @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+        .signup-wrapper form .form-input input, .signup-wrapper form .form-input select {
+          font-size: 2.14286rem; }
+        .signup-wrapper form .form-input input[type=radio] {
+          transform: scale(1.5);
+          margin: 15px 5px 0 0; } }
     .signup-wrapper form button.submit {
       float: right; }
+      @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+        .signup-wrapper form button.submit {
+          font-size: 2.14286rem;
+          margin-top: 20px;
+          padding: 15px; } }
       .signup-wrapper form button.submit img.loading {
         width: 0.71429rem;
         position: relative;
@@ -129,6 +144,9 @@ button.submit {
         background: rgba(20, 25, 30, 0.95);
         transition: height 1s;
         overflow: auto; }
+        @media (min-width: 380px) {
+          .viewer-wrapper .top-bar .viewer-tools .commands-wrapper {
+            display: none; } }
         .viewer-wrapper .top-bar .viewer-tools .commands-wrapper.open {
           height: 6.42857rem; }
         .viewer-wrapper .top-bar .viewer-tools .commands-wrapper.border {

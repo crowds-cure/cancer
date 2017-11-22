@@ -20,6 +20,10 @@
         transition: height 1s;
         overflow: auto;
 
+        @media (min-width: 380px) {
+          display: none;
+        }
+
         &.open {
           height: rem(90);
         }
