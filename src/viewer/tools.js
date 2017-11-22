@@ -55,28 +55,6 @@ export default {
     cornerstoneTools[tool].deactivate(this.element, 1);
   },
 
-  selectImage(event) {
-    // Get the range input value
-    const newImageIdIndex = parseInt(event.currentTarget.value, 10);
-    const stackToolDataSource = cornerstoneTools.getToolState(this.$cornerstoneViewport[0], 'stack');
-
-    if (stackToolDataSource === undefined) {
-      return;
-    }
-
-    const stackData = stackToolDataSource.data[0];
-
-    // Switch images, if necessary
-    if(newImageIdIndex !== stackData.currentImageIdIndex && stackData.imageIds[newImageIdIndex] !== undefined) {
-      cornerstone.loadAndCacheImage(stackData.imageIds[newImageIdIndex]).then((image) => {
-        const viewport = cornerstone.getViewport(this.$cornerstoneViewport[0]);
-
-        stackData.currentImageIdIndex = newImageIdIndex;
-        cornerstone.displayImage(this.$cornerstoneViewport[0], image, viewport);
-      });
-    }
-  },
-
   initStackTool(imageIds) {
     const slider = $('.imageSlider')[0];
     const stack = {
@@ -100,10 +78,20 @@ export default {
     cornerstoneTools.addToolState(this.element, 'stack', stack);
     cornerstoneTools.stackPrefetch.enable(this.element);
 
+    const element = this.element;
+
     // Adding input listener
-    $(slider).on('input', this.selectImage.bind(this));
+    function selectImage(event) {
+      const newImageIdIndex = parseInt(event.currentTarget.value, 10);
+      cornerstoneTools.scrollToIndex(element, newImageIdIndex);
+    }
+
+    $(slider).off('input', selectImage);
+    $(slider).on('input', selectImage);
+
     // Setting the slider size
     $(slider).css('width', `${this.$cornerstoneViewport.height()}px`)
+
     $(window).on('resize', debounce(() => $(slider).css('width', `${this.$cornerstoneViewport.height()}px`), 150));
 
     // Listening to viewport stack image change, so the slider is synced
