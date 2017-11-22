@@ -30,35 +30,29 @@ export default {
       this.deactivate(this.active);
     }
 
-    cornerstoneTools[toolToActivate].activate(this.element, 1);
+    const element = this.element;
+    if (toolToActivate === 'pan') {
+      // If the user has selected the pan tool, activate it for both left and middle
+      // 3 means left mouse button and middle mouse button
+      cornerstoneTools.pan.activate(element, 3);
+      cornerstoneTools.zoom.activate(element, 4);
+    } else if (toolToActivate === 'zoom') {
+      // If the user has selected the zoom tool, activate it for both left and right
+      // 5 means left mouse button and right mouse button
+      cornerstoneTools.zoom.activate(element, 5);
+      cornerstoneTools.pan.activate(element, 2);
+    } else {
+      // Otherwise, active the tool on left mouse, pan on middle, and zoom on right
+      cornerstoneTools[toolToActivate].activate(element, 1);
+      cornerstoneTools.pan.activate(element, 2);
+      cornerstoneTools.zoom.activate(element, 4);
+    }
 
     this.active = toolToActivate;
   },
 
   deactivate(tool) {
     cornerstoneTools[tool].deactivate(this.element, 1);
-  },
-
-  selectImage(event) {
-    // Get the range input value
-    const newImageIdIndex = parseInt(event.currentTarget.value, 10);
-    const stackToolDataSource = cornerstoneTools.getToolState(this.$cornerstoneViewport[0], 'stack');
-
-    if (stackToolDataSource === undefined) {
-      return;
-    }
-
-    const stackData = stackToolDataSource.data[0];
-
-    // Switch images, if necessary
-    if(newImageIdIndex !== stackData.currentImageIdIndex && stackData.imageIds[newImageIdIndex] !== undefined) {
-      cornerstone.loadAndCacheImage(stackData.imageIds[newImageIdIndex]).then((image) => {
-        const viewport = cornerstone.getViewport(this.$cornerstoneViewport[0]);
-
-        stackData.currentImageIdIndex = newImageIdIndex;
-        cornerstone.displayImage(this.$cornerstoneViewport[0], image, viewport);
-      });
-    }
   },
 
   initStackTool(imageIds) {
@@ -84,10 +78,20 @@ export default {
     cornerstoneTools.addToolState(this.element, 'stack', stack);
     cornerstoneTools.stackPrefetch.enable(this.element);
 
+    const element = this.element;
+
     // Adding input listener
-    $(slider).on('input', this.selectImage.bind(this));
+    function selectImage(event) {
+      const newImageIdIndex = parseInt(event.currentTarget.value, 10);
+      cornerstoneTools.scrollToIndex(element, newImageIdIndex);
+    }
+
+    $(slider).off('input', selectImage);
+    $(slider).on('input', selectImage);
+
     // Setting the slider size
     $(slider).css('width', `${this.$cornerstoneViewport.height()}px`)
+
     $(window).on('resize', debounce(() => $(slider).css('width', `${this.$cornerstoneViewport.height()}px`), 150));
 
     // Listening to viewport stack image change, so the slider is synced
@@ -111,6 +115,9 @@ export default {
      */
     cornerstoneTools.zoomTouchPinch.activate(this.element);
     cornerstoneTools.panMultiTouch.activate(this.element);
+    cornerstoneTools.panMultiTouch.setConfiguration({
+        testPointers: (eventData) => (eventData.numPointers === 2)
+    });
     cornerstoneTools.stackScrollMultiTouch.activate(this.element);
     cornerstoneTools.length.enable(this.element);
 
@@ -131,11 +138,13 @@ export default {
      */
     cornerstoneTools.toolColors.setActiveColor('greenyellow');
     cornerstoneTools.toolColors.setToolColor('white');
+    cornerstoneTools.length.setConfiguration({shadow: true});
 
     // Stop users from zooming in or out too far
     cornerstoneTools.zoom.setConfiguration({
         minScale: 0.3,
-        maxScale: 10
+        maxScale: 10,
+        preventZoomOutsideImage: true
     });
   },
 
@@ -228,13 +237,6 @@ export default {
 
     // Add it to our desired tool
     $(`${this.toolsSelector} div[data-tool=${toolToActivate}]`).addClass('active');
-
-    // removing default context menu
-    this.element.oncontextmenu = function (event) {
-      event.preventDefault();
-
-      return false;
-    };
 
     this.attachEvents();
   }
