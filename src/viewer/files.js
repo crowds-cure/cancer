@@ -3,89 +3,23 @@ import Login from '../login/login';
 import {chronicleURL, chronicleDB, measurementsDB} from '../db/db';
 
 export default {
-
-  openRequests : 0,
-
-  getFile(url) {
-    const promiseFunction = function (resolve, reject) {
-
-      this.openRequests += 1;
-      $('#loading-progress').text(`${this.openRequests} images requested`);
-
-      const request = new XMLHttpRequest();
-
-      request.open('GET', url, true);
-      request.responseType = 'arraybuffer';
-
-      const onImageLoad = function(oEvent) {
-
-        this.openRequests -= 1;
-        $('#loading-progress').text(`${this.openRequests} images remaining`);
-
-        if (this.openRequests == 0) {
-          $('#loading-progress').text(``);
-        }
-
-        const arrayBuffer = request.response;
-        if (arrayBuffer) {
-          try {
-            resolve(new Blob([arrayBuffer], { type: 'application/dicom' }));
-          } catch (error) {
-            reject(error);
-          }
-        }
-      };
-
-      request.onload = onImageLoad.bind(this);
-      request.send(null);
-    };
-    return new Promise(promiseFunction.bind(this));
-  },
-
   getCaseImages() {
     const $overlay = $('.loading-overlay');
     $overlay.addClass('loading');
     $overlay.removeClass('invisible');
 
-    // return new Promise((resolve, reject) => {
-
     return this.getChronicleImageIDs().then((caseStudy) => {
-      if (caseStudy && caseStudy.urls) {
-        // console.log('getCaseImages0');
-
-        // where to store the case id for access during save?
-        // I don't understand the model heirarchy, so let's stick it on the window
-        window.rsnaCrowdQuantSeriesUID = caseStudy.seriesUID;
-        window.rsnaCrowdQuantCaseStudy = caseStudy;
-
-        return Promise.all(caseStudy.urls.map(this.getFile.bind(this))).then(function (files) {
-          // console.log('getCaseImages1');
-          $overlay.addClass('invisible');
-          $overlay.removeClass('loading');
-
-          return Promise.all(files.map(cornerstoneWADOImageLoader.wadouri.fileManager.add));
-        }).then((imageIds) => {
-          return imageIds;
-          // resolve(files.map(cornerstoneWADOImageLoader.wadouri.fileManager.add));
-        });
+      if (!caseStudy || !caseStudy.urls) {
+        throw new Error('No case study or no URLs provided');
       }
-    }).catch(function(err) {
-      throw err;
-    });
 
-      // Connector.getCase().then((caseStudy) => {
-      //   if (caseStudy && caseStudy.urls) {
-      //     Promise.all(caseStudy.urls.map(this.getFile)).then(function (files) {
-      //       $overlay.addClass('invisible');
-      //       $overlay.removeClass('loading');
-      //
-      //       resolve(files.map(cornerstoneWADOImageLoader.wadouri.fileManager.add));
-      //     }).catch(reject);
-      //   }
-      // }).catch(function(error) {
-      //   reject(error);
-      // });
-    // });
+      // where to store the case id for access during save?
+      // I don't understand the model hierarchy, so let's stick it on the window
+      window.rsnaCrowdQuantSeriesUID = caseStudy.seriesUID;
+      window.rsnaCrowdQuantCaseStudy = caseStudy;
+
+      return caseStudy.urls.map(url => url.replace('http', 'wadouri'));
+    });
   },
 
   currentSeriesIndex: undefined,
@@ -131,16 +65,18 @@ export default {
       const instanceUIDs = [];
       data.rows.forEach((row) => {
         const instanceUID = row.value[1];
-        // const instanceURL = `${chronicleURL}/${instanceUID}/object.dcm`;
-        // imageIDs.push(instanceURL);
         instanceUIDs.push(instanceUID);
       });
-      // console.log('instanceUIDs:', instanceUIDs);
 
+      console.time('Metadata Retrieval from Chronicle DB');
+      // TODO: Switch to some study or series-level call
+      // It is quite slow to wait on metadata for every single image
+      // each retrieved in separate calls
       return Promise.all(instanceUIDs.map((uid) => {
         return chronicleDB.get(uid);
       }));
     }).then((docs) => {
+      console.timeEnd('Metadata Retrieval from Chronicle DB');
       const instanceNumberTag = "00200013";
       let instanceUIDsByImageNumber = {};
       docs.forEach((doc) => {
@@ -149,9 +85,7 @@ export default {
       });
 
       const imageNumbers = Object.keys(instanceUIDsByImageNumber);
-      imageNumbers.sort((a, b) => {
-        return a - b;
-      });
+      imageNumbers.sort((a, b) => a - b);
 
       let instanceURLs = [];
       let instanceUIDs = [];
@@ -167,7 +101,7 @@ export default {
         seriesUID: this.seriesUID_A,
         currentSeriesIndex: this.currentSeriesIndex - 1,
         urls: instanceURLs,
-        instanceUIDs: instanceUIDs
+        instanceUIDs
       };
     }).catch((err) => {
       throw err;

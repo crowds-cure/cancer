@@ -140,7 +140,7 @@
           <div class="tool">
             <a href="/#" data-tool="wwwc">
               <svg class="tool-img">
-                <use xlink:href="/imgs/icons.svg#icon-status-complete" href="/imgs/icons.svg#icon-status-complete"></use>
+                <use xlink:href="/imgs/icons.svg#icon-tools-levels" href="/imgs/icons.svg#icon-tools-levels"></use>
               </svg>
               W/L
             </a>
@@ -170,6 +170,22 @@
             </a>
           </div>
           <div class="tool">
+            <a href="/#" data-command="setLiverWL">
+              <svg>
+                <use xlink:href="./imgs/icons.svg#icon-tools-levels" href="./imgs/icons.svg#icon-tools-levels"></use>
+              </svg>
+              Liver W/L
+            </a>
+          </div>
+          <div class="tool">
+            <a href="/#" data-command="setLungWL">
+              <svg>
+                <use xlink:href="./imgs/icons.svg#icon-tools-levels" href="./imgs/icons.svg#icon-tools-levels"></use>
+              </svg>
+              Lung W/L
+            </a>
+          </div>
+          <div class="tool">
             <a href="/#" data-command="save">
               <svg>
                 <use xlink:href="./imgs/icons.svg#icon-status-complete" href="./imgs/icons.svg#icon-status-complete"></use>
@@ -194,12 +210,17 @@
             </a>
           </div>
         </div>
-
+        <div id='loading-progress'></div>
       </div>
-      <div class="viewport">
-        <div id="conerstoneViewport"></div>
+      <div class="viewport"
+           oncontextmenu="return false"
+           unselectable='on'
+           onselectstart='return false;'>
+        <div id="cornerstoneViewport"></div>
         <div class="scroll">
-          <div class="thumb"></div>
+          <div class="scroll-holder">
+            <input class="imageSlider" type="range" min="1">
+          </div>
         </div>
       </div>
     </div>
@@ -224,7 +245,6 @@
       <div class="content">
         <img src="./imgs/spinner.gif" class="spinner">
         <div class="submit-text">Submitting...</div>
-        <div id='loading-progress'></div>
       </div>
     </div>
 
