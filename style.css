@@ -4,7 +4,9 @@ html, body {
   height: 100%;
   width: 100%;
   background: #000;
-  overflow: hidden; }
+  overflow: hidden;
+  position: fixed;
+}
 
 .invisible {
   display: none !important; }
@@ -143,7 +145,14 @@ button.submit {
     .viewer-wrapper .viewport #cornerstoneViewport {
       width: 100%;
       height: 100%;
-      position: absolute; }
+      position: absolute;
+      outline: none;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none; }
 
 .scroll {
   position: absolute;
