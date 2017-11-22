@@ -123,6 +123,11 @@ button.submit {
             width: 2.85714rem;
             background-color: #16202b;
             padding: 0.35714rem 0; }
+        .viewer-wrapper .top-bar .viewer-tools .tool:hover a {
+          color: #efefef; }
+        .viewer-wrapper .top-bar .viewer-tools .tool:hover svg {
+          stroke: #efefef;
+          fill: #efefef; }
         .viewer-wrapper .top-bar .viewer-tools .tool svg {
           stroke: #9ccef9;
           fill: #9ccef9;

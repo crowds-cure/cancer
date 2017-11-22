@@ -30,6 +30,17 @@
           }
         }
 
+        &:hover {
+          a {
+            color: $white;
+          }
+
+          svg {
+            stroke: $white;
+            fill: $white;
+          }
+        }
+
         svg {
           stroke: $light-blue;
           fill: $light-blue;
