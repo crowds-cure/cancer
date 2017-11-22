@@ -8,10 +8,46 @@
 
     .viewer-tools {
       flex: 1 0 auto;
+
+      .commands-wrapper {
+        position: absolute;
+        top: rem(77);
+        left: rem(60);
+        height: 0;
+        z-index: 9;
+        padding: 0;
+        background: rgba(20,25,30,0.95);
+        transition: height 1s, padding 1s;
+        overflow: auto;
+
+        &.open {
+          height: rem(90);
+          padding: 0 rem(10) rem(10) rem(10);
+        }
+
+        &.border {
+          border: solid rem(1) $blue;
+        }
+      }
+
       .tool {
         display: inline-block;
         text-align: -webkit-center;
         cursor: pointer;
+
+        &.save, &.skip, &.clearAll {
+          display: none;
+        }
+
+        @media (min-width: $tablet-size) {
+          &.more {
+            display: none;
+          }
+
+          &.save, &.skip, &.clearAll {
+            display: inline-block;
+          }
+        }
 
         &.active {
           a {

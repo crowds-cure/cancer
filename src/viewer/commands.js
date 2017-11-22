@@ -3,6 +3,7 @@ import Modal from '../modal/modal';
 import ErrorModal from '../errorModal/modal';
 import {measurementsDB, getUUID} from '../db/db';
 import Login from '../login/login';
+import { setTimeout } from 'timers';
 
 // helper from https://stackoverflow.com/questions/12168909/blob-from-dataurl
 function dataURItoBlob(dataURI) {
@@ -25,8 +26,10 @@ function dataURItoBlob(dataURI) {
 }
 
 export default {
+  isMenuOpened: false,
   commandSelector: '.viewer-tools',
   $overlay: $('.loading-overlay'),
+  $commandMenu: $('.commands-wrapper'),
 
   clearAll() {
     // Remove all imageId-specific measurements associated with this element
@@ -74,6 +77,19 @@ export default {
 
   setLiverWL: function() {
     this.setWL(150, 30);
+  },
+
+  toggleMoreMenu: function () {
+    if (this.isMenuOpened) {
+      this.$commandMenu.removeClass('open');
+      setTimeout(() => {
+        this.$commandMenu.removeClass('border');
+      }, 1100);
+    } else {
+      this.$commandMenu.addClass('open border');
+    }
+
+    this.isMenuOpened = !this.isMenuOpened;
   },
 
   save: function () {
@@ -160,6 +176,9 @@ export default {
 
   initCommands() {
     $(this.commandSelector).on('click', 'div[data-command]', event => {
+      event.preventDefault();
+      event.stopPropagation();
+
       const $element = $(event.currentTarget);
       const tool = $element.attr('data-command');
 
@@ -170,6 +189,12 @@ export default {
       setTimeout(function() {
         $element.removeClass('active');
       }, 300);
+    });
+
+    $(document).on('click', event => {
+      if (this.isMenuOpened) {
+        this.toggleMoreMenu();
+      }
     });
   }
 };

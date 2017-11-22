@@ -109,10 +109,32 @@ button.submit {
     display: flex; }
     .viewer-wrapper .top-bar .viewer-tools {
       flex: 1 0 auto; }
+      .viewer-wrapper .top-bar .viewer-tools .commands-wrapper {
+        position: absolute;
+        top: 5.5rem;
+        left: 4.28571rem;
+        height: 0;
+        z-index: 9;
+        padding: 0;
+        background: rgba(20, 25, 30, 0.95);
+        transition: height 1s, padding 1s;
+        overflow: auto; }
+        .viewer-wrapper .top-bar .viewer-tools .commands-wrapper.open {
+          height: 6.42857rem;
+          padding: 0 0.71429rem 0.71429rem 0.71429rem; }
+        .viewer-wrapper .top-bar .viewer-tools .commands-wrapper.border {
+          border: solid 0.07143rem #00a4d9; }
       .viewer-wrapper .top-bar .viewer-tools .tool {
         display: inline-block;
         text-align: -webkit-center;
         cursor: pointer; }
+        .viewer-wrapper .top-bar .viewer-tools .tool.save, .viewer-wrapper .top-bar .viewer-tools .tool.skip, .viewer-wrapper .top-bar .viewer-tools .tool.clearAll {
+          display: none; }
+        @media (min-width: 768px) {
+          .viewer-wrapper .top-bar .viewer-tools .tool.more {
+            display: none; }
+          .viewer-wrapper .top-bar .viewer-tools .tool.save, .viewer-wrapper .top-bar .viewer-tools .tool.skip, .viewer-wrapper .top-bar .viewer-tools .tool.clearAll {
+            display: inline-block; } }
         .viewer-wrapper .top-bar .viewer-tools .tool.active a {
           color: #efefef; }
         .viewer-wrapper .top-bar .viewer-tools .tool.active svg {
