@@ -41,7 +41,6 @@ export default {
     Files.getCaseImages().then((imageIds) => {
         console.time('Loading All Images');
         
-        console.log('Resetting counter')
         const loadingProgress = $('#loading-progress');
         let numImagesLoaded = 0;
 

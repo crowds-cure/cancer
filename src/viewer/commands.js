@@ -3,8 +3,6 @@ import Modal from '../modal/modal';
 import ErrorModal from '../errorModal/modal';
 import {measurementsDB, getUUID} from '../db/db';
 import Login from '../login/login';
-//import moment from 'moment';
-// TODO: Seems like overkill to pull in momentjs
 
 // helper from https://stackoverflow.com/questions/12168909/blob-from-dataurl
 function dataURItoBlob(dataURI) {
@@ -98,37 +96,48 @@ export default {
       throw new Error('Only one length measurement should be in the lengthData');
     }
 
-    getUUID().then((uuid) => {
-      const measurement = lengthData[0];
-      const lengthMeasurement = measurement.data.data[0];
+    const savingPromise = new Promise((resolve, reject) => {
+      console.time('getUUID');
+      getUUID().then((uuid) => {
+        console.timeEnd('getUUID');
+        console.time('PUT to Measurement DB');
+        const measurement = lengthData[0];
+        const lengthMeasurement = measurement.data.data[0];
 
-      cornerstoneTools.scrollToIndex(this.element, measurement.imageIndex);
+        cornerstoneTools.scrollToIndex(this.element, measurement.imageIndex);
 
-      const doc = {
-        '_id': uuid,
-        'length': lengthMeasurement.length,
-        'start_x': lengthMeasurement.handles.start.x,
-        'start_y': lengthMeasurement.handles.start.y,
-        'end_x': lengthMeasurement.handles.end.x,
-        'end_y': lengthMeasurement.handles.end.y,
-        'annotator': Login.username,
-        'seriesUID': window.rsnaCrowdQuantSeriesUID,
-        'instanceUID': window.rsnaCrowdQuantCaseStudy.instanceUIDs[measurement.imageIndex],
-        'instanceURL': window.rsnaCrowdQuantCaseStudy.urls[measurement.imageIndex],
-        'sliceIndex': measurement.imageIndex,
-        'date': Math.floor(Date.now() / 1000), //moment().unix(),
-        'userAgent': navigator.userAgent
-      };
+        const doc = {
+          '_id': uuid,
+          'length': lengthMeasurement.length,
+          'start_x': lengthMeasurement.handles.start.x,
+          'start_y': lengthMeasurement.handles.start.y,
+          'end_x': lengthMeasurement.handles.end.x,
+          'end_y': lengthMeasurement.handles.end.y,
+          'annotator': Login.username,
+          'seriesUID': window.rsnaCrowdQuantSeriesUID,
+          'instanceUID': window.rsnaCrowdQuantCaseStudy.instanceUIDs[measurement.imageIndex],
+          'instanceURL': window.rsnaCrowdQuantCaseStudy.urls[measurement.imageIndex],
+          'sliceIndex': measurement.imageIndex,
+          'date': Math.floor(Date.now() / 1000),
+          'userAgent': navigator.userAgent
+        };
 
-      return measurementsDB.put(doc);
-    }).then((response) => {
-      const canvas = document.querySelector('#cornerstoneViewport canvas');
-      const imageBlob = dataURItoBlob(canvas.toDataURL());
-      return measurementsDB.putAttachment(response.id, 'screenshot.png', response.rev, imageBlob, 'image/png');
-    }).then(() => {
-      Modal.show();
-      this.$overlay.removeClass('submitting');
+        return measurementsDB.put(doc);
+      }).then((response) => {
+        console.timeEnd('PUT to Measurement DB');
+        console.time('PUT putAttachment');
+        const canvas = document.querySelector('#cornerstoneViewport canvas');
+        const imageBlob = dataURItoBlob(canvas.toDataURL());
+        return measurementsDB.putAttachment(response.id, 'screenshot.png', response.rev, imageBlob, 'image/png');
+      }).then(() => {
+        console.timeEnd('PUT putAttachment');
+      });
     });
+
+    Modal.show();
+    this.$overlay.removeClass('submitting');
+
+    return savingPromise;
   },
 
   initCommands() {
