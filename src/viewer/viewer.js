@@ -26,19 +26,37 @@ const config = {
   }
 };
 
-cornerstoneWADOImageLoader.webWorkerManager.initialize(config);
+const IMAGE_LOADED_EVENT = 'cornerstoneimageloaded';
 
 export default {
   $window: $(window),
   $viewer: $('.viewer-wrapper'),
   $overlay: $('.loading-overlay'),
-
+  numImagesLoaded: 0,
   getNextCase() {
     this.$overlay.removeClass('invisible').addClass('loading');
     const enabledElement = cornerstone.getEnabledElement(this.element);
 
     Files.getCaseImages().then((imageIds) => {
-        cornerstone.loadImage(imageIds[0]).then((image) => {
+        console.time('Loading All Images');
+
+        const loadingProgress = $('#loading-progress');
+        let numImagesLoaded = 0;
+
+        function handleImageLoaded() {
+          numImagesLoaded += 1;
+          const imagesLeft = imageIds.length - numImagesLoaded;
+          loadingProgress.text(`${imagesLeft} images requested`);
+          if (numImagesLoaded === imageIds.length) {
+            console.timeEnd('Loading All Images');
+            loadingProgress.text('');
+          }
+        }
+
+        cornerstone.events.removeEventListener(IMAGE_LOADED_EVENT, handleImageLoaded);
+        cornerstone.events.addEventListener(IMAGE_LOADED_EVENT, handleImageLoaded);
+
+        cornerstone.loadAndCacheImage(imageIds[0]).then((image) => {
             this.$overlay.removeClass('loading').addClass('invisible');
 
             // Set the default viewport parameters

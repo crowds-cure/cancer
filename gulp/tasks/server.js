@@ -4,5 +4,7 @@ const config = require('../config');
 
 gulp.task('server', function() {
   return gulp.src(config.dist)
-    .pipe(server());
+    .pipe(server({
+    	host: '0.0.0.0'
+    }));
 });

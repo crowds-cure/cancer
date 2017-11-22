@@ -29,14 +29,32 @@ export default {
   $overlay: $('.loading-overlay'),
 
   clearAll() {
-    // Remove all measurements associated with this element
-    cornerstoneTools.clearToolState(this.element, 'length');
+    // Remove all imageId-specific measurements associated with this element
+    cornerstoneTools.globalImageIdSpecificToolStateManager.restoreToolState({});
 
     // Reset the viewport parameters (i.e. VOI LUT, scale, translation)
     cornerstone.reset(this.element);
   },
 
   skip: function() {
+    const stack = cornerstoneTools.getToolState(this.element, 'stack');
+
+    getUUID().then((uuid) => {
+      const sliceIndex = stack.data[0].currentImageIdIndex;
+      const doc = {
+        '_id': uuid,
+        'skip': true,
+        'annotator': Login.username,
+        'seriesUID': window.rsnaCrowdQuantSeriesUID,
+        'instanceUID': window.rsnaCrowdQuantCaseStudy.instanceUIDs[sliceIndex],
+        'instanceURL': window.rsnaCrowdQuantCaseStudy.urls[sliceIndex],
+        'sliceIndex': sliceIndex,
+        'date': Math.floor(Date.now() / 1000),
+        'userAgent': navigator.userAgent
+      }
+      return measurementsDB.put(doc);
+    });
+
     Modal.nextCase();
   },
 
@@ -59,7 +77,6 @@ export default {
   },
 
   save: function () {
-
     Menu.closeMenu();
     this.$overlay.removeClass('invisible').addClass('submitting');
 
@@ -74,49 +91,71 @@ export default {
     const stack = stackData.data[0];
 
     // Retrieve the length data from this Object
-    const lengthData = Object.keys(toolState).map(imageId => {
-      return {
+    let lengthData = [];
+    Object.keys(toolState).forEach(imageId => {
+      if (!toolState[imageId]['length'] || !toolState[imageId]['length'].data.length) {
+        return;
+      }
+
+      lengthData.push({
         imageIndex: stack.imageIds.indexOf(imageId),
         data: toolState[imageId].length
-      }
+      });
     });
 
-    if(!lengthData.length){
+    if (!lengthData.length){
       // console.log('ErrorModal', ErrorModal);
       ErrorModal.show();
       this.$overlay.removeClass('submitting');
       return;
     }
 
-    getUUID().then((uuid) => {
-      const measurement = lengthData[0];
-      const lengthMeasurement = measurement.data.data[0];
+    if (lengthData.length > 1) {
+      throw new Error('Only one length measurement should be in the lengthData');
+    }
 
-      const doc = {
-        '_id': uuid,
-        'length': lengthMeasurement.length,
-        'start_x': lengthMeasurement.handles.start.x,
-        'start_y': lengthMeasurement.handles.start.y,
-        'end_x': lengthMeasurement.handles.end.x,
-        'end_y': lengthMeasurement.handles.end.y,
-        'annotator': Login.username,
-        'seriesUID': window.rsnaCrowdQuantSeriesUID,
-        'instanceUID': window.rsnaCrowdQuantCaseStudy.instanceUIDs[measurement.imageIndex],
-        'instanceURL': window.rsnaCrowdQuantCaseStudy.urls[measurement.imageIndex],
-        'sliceIndex': measurement.imageIndex,
-        'date': Math.floor(Date.now() / 1000),
-        'userAgent': navigator.userAgent
-      };
+    const savingPromise = new Promise((resolve, reject) => {
+      console.time('getUUID');
+      getUUID().then((uuid) => {
+        console.timeEnd('getUUID');
+        console.time('PUT to Measurement DB');
+        const measurement = lengthData[0];
+        const lengthMeasurement = measurement.data.data[0];
 
-      return measurementsDB.put(doc);
-    }).then((response) => {
-      const canvas = document.querySelector('#cornerstoneViewport canvas');
-      const imageBlob = dataURItoBlob(canvas.toDataURL());
-      return measurementsDB.putAttachment(response.id, 'screenshot.png', response.rev, imageBlob, 'image/png');
-    }).then(() => {
-      Modal.show();
-      this.$overlay.removeClass('submitting');
+        cornerstoneTools.scrollToIndex(this.element, measurement.imageIndex);
+
+        const doc = {
+          '_id': uuid,
+          'length': lengthMeasurement.length,
+          'start_x': lengthMeasurement.handles.start.x,
+          'start_y': lengthMeasurement.handles.start.y,
+          'end_x': lengthMeasurement.handles.end.x,
+          'end_y': lengthMeasurement.handles.end.y,
+          'annotator': Login.username,
+          'seriesUID': window.rsnaCrowdQuantSeriesUID,
+          'instanceUID': window.rsnaCrowdQuantCaseStudy.instanceUIDs[measurement.imageIndex],
+          'instanceURL': window.rsnaCrowdQuantCaseStudy.urls[measurement.imageIndex],
+          'sliceIndex': measurement.imageIndex,
+          'date': Math.floor(Date.now() / 1000),
+          'userAgent': navigator.userAgent
+        };
+
+        return measurementsDB.put(doc);
+      }).then((response) => {
+        console.timeEnd('PUT to Measurement DB');
+        console.time('PUT putAttachment');
+        const canvas = document.querySelector('#cornerstoneViewport canvas');
+        const imageBlob = dataURItoBlob(canvas.toDataURL());
+        return measurementsDB.putAttachment(response.id, 'screenshot.png', response.rev, imageBlob, 'image/png');
+      }).then(() => {
+        console.timeEnd('PUT putAttachment');
+      });
     });
+
+    Modal.show();
+    this.$overlay.removeClass('submitting');
+
+    return savingPromise;
   },
 
   initCommands() {

@@ -3,13 +3,13 @@ import debounce from './debounce';
 const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
 export default {
-  active: '',
+  active: undefined,
   toolsSelector: '.viewer-tools',
   $cornerstoneViewport: $('#cornerstoneViewport'),
   deactivateActiveTool() {
     if (this.active) {
       this.deactivate(this.active);
-      this.active = '';
+      this.active = undefined;
     }
   },
 
@@ -131,6 +131,12 @@ export default {
      */
     cornerstoneTools.toolColors.setActiveColor('greenyellow');
     cornerstoneTools.toolColors.setToolColor('white');
+
+    // Stop users from zooming in or out too far
+    cornerstoneTools.zoom.setConfiguration({
+        minScale: 0.3,
+        maxScale: 10
+    });
   },
 
   attachEvents() {
@@ -148,16 +154,52 @@ export default {
     });
 
     // Limiting measurements to 1
-    this.$cornerstoneViewport.on('touchstart mousedown', () => {
+    function handleMeasurementAdded (event) {
+      // Only handle Length measurements
+      const toolType = 'length';
+      if (event.detail.toolType !== toolType) {
+        return;
+      }
+
+      // Retrieve the current image
+      const element = event.detail.element;
+      const image = cornerstone.getImage(element);
+      const currentImageId = image.imageId;
+
+      // When a new measurement is added, retrieve the current tool state
       const toolStateManager = cornerstoneTools.globalImageIdSpecificToolStateManager;
       const toolState = toolStateManager.saveToolState();
-      const lengths = toolState['length'];
 
-      if (lengths && lengths.data.length === 2) {
-        lengths.data.shift();
-        cornerstone.updateImage(this.element);
+      // Loop through all of the images (toolState is keyed by imageId)
+      let allLengths = [];
+      Object.keys(toolState).forEach(imageId => {
+        // Delete all length measurements on images that are not the
+        // current image
+        if (imageId !== currentImageId) {
+          delete toolState[imageId][toolType];
+        }
+      });
+
+      // Retrieve all of the length measurements on the current image
+      const lengthMeasurements = toolState[currentImageId][toolType].data;
+
+      // If there is more than length measurement, remove the oldest one
+      if (lengthMeasurements.length > 1) {
+        lengthMeasurements.shift();
+
+        // Re-save this data into the toolState object
+        toolState[currentImageId][toolType].data = lengthMeasurements;
       }
-    });
+
+      // Restore toolState into the toolStateManager
+      toolStateManager.restoreToolState(toolState);
+
+      // Update the image
+      cornerstone.updateImage(element);
+    };
+
+    this.element.removeEventListener('cornerstonetoolsmeasurementadded', handleMeasurementAdded);
+    this.element.addEventListener('cornerstonetoolsmeasurementadded', handleMeasurementAdded);
   },
 
   initTools(imageIds) {
@@ -175,6 +217,17 @@ export default {
     $(this.element).attr("tabindex", 0).focus();
 
     this.initInteractionTools();
+
+    // If a previously active tool exists, re-enable it.
+    // If not, use wwwc
+    const toolToActivate = this.active || 'wwwc'
+    this.toggleTool(toolToActivate);
+
+    // Remove the 'active' highlight from the other tools
+    $(`${this.toolsSelector} .active`).removeClass('.active');
+
+    // Add it to our desired tool
+    $(`${this.toolsSelector} a[data-tool=${toolToActivate}]`).parent().addClass('active');
 
     // removing default context menu
     this.element.oncontextmenu = function (event) {

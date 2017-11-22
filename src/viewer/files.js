@@ -1,45 +1,8 @@
+import Connector from './connector';
+import Login from '../login/login';
 import {chronicleURL, chronicleDB, measurementsDB} from '../db/db';
 
 export default {
-
-  //openRequests : 0,
-
-  /*getFile(url) {
-    const promiseFunction = function (resolve, reject) {
-
-      this.openRequests += 1;
-      $('#loading-progress').text(`${this.openRequests} images requested`);
-
-      const request = new XMLHttpRequest();
-
-      request.open('GET', url, true);
-      request.responseType = 'arraybuffer';
-
-      const onImageLoad = function(oEvent) {
-
-        this.openRequests -= 1;
-        $('#loading-progress').text(`${this.openRequests} images remaining`);
-
-        if (this.openRequests == 0) {
-          $('#loading-progress').text(``);
-        }
-
-        const arrayBuffer = request.response;
-        if (arrayBuffer) {
-          try {
-            resolve(new Blob([arrayBuffer], { type: 'application/dicom' }));
-          } catch (error) {
-            reject(error);
-          }
-        }
-      };
-
-      request.onload = onImageLoad.bind(this);
-      request.send(null);
-    };
-    return new Promise(promiseFunction.bind(this));
-  },*/
-
   getCaseImages() {
     const $overlay = $('.loading-overlay');
     $overlay.addClass('loading');
@@ -71,7 +34,8 @@ export default {
       // endkey: [['UnspecifiedInstitution', 'TCGA-17-Z013']],
       group_level : 3,
     }).then((data) => {
-      var annotatorID='dismal_caribou';
+
+      var annotatorID = Login.username;
       return this.getNextSeriesForAnnotator(annotatorID);
   }).then ((seriesUID) => {
 
@@ -121,9 +85,7 @@ export default {
       });
 
       const imageNumbers = Object.keys(instanceUIDsByImageNumber);
-      imageNumbers.sort((a, b) => {
-        return a - b;
-      });
+      imageNumbers.sort((a, b) => a - b);
 
       let instanceURLs = [];
       let instanceUIDs = [];
@@ -139,7 +101,7 @@ export default {
         seriesUID: this.seriesUID_A,
         currentSeriesIndex: this.currentSeriesIndex - 1,
         urls: instanceURLs,
-        instanceUIDs: instanceUIDs
+        instanceUIDs
       };
     }).catch((err) => {
       throw err;

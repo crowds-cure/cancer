@@ -11,40 +11,7 @@ export default {
 
   submit() {
     this.closeMenu();
-    this.$overlay.removeClass('invisible').addClass('submitting');
-
-    const lengths = cornerstoneTools.getToolState(this.element, 'length');
-    // console.log('lengths:', lengths);
-    if(!lengths){
-      // console.log('ErrorModal', ErrorModal);
-      ErrorModal.show();
-      this.$overlay.removeClass('submitting');
-      return;
-    }
-
-    getUUID().then((uuid) => {
-      const doc = {
-        '_id': uuid,
-        'length': lengths.data[0].length,
-        'annotator': username,
-        // 'annotator': $('#login-username').val(),
-        'date': Math.floor(Date.now() / 1000),
-        'userAgent': navigator.userAgent
-      };
-
-      // console.log('doc:', doc);
-      return measurementsDB.put(doc);
-    }).then(() => {
-      Modal.show();
-      this.$overlay.removeClass('submitting');
-    });
-
-    // setTimeout(() => {
-    //   Modal.show();
-    //   console.log('Fake submit done');
-    //
-    //   this.$overlay.removeClass('submitting');
-    // }, 2000);
+    Commands.save();
   },
   nextCase() {
     this.closeMenu();

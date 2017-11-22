@@ -251,3 +251,6 @@ button.submit {
       .menu-wrapper ul li a {
         color: #9ccef9;
         text-decoration: none; }
+
+#loading-progress {
+  color: #9ccef9; }
