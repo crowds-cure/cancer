@@ -3,7 +3,8 @@ html, body {
   margin: 0;
   height: 100%;
   width: 100%;
-  background: #000; }
+  background: #000;
+  overflow: hidden; }
 
 .invisible {
   display: none !important; }
@@ -135,11 +136,11 @@ button.submit {
           margin: 0 0.35714rem 0 0.35714rem; }
   .viewer-wrapper .viewport {
     flex: 1 1 auto;
-    border: 0.07143rem solid #00a4d9;
-    margin: 0.35714rem;
+    border: 1px solid #00a4d9;
+    margin: 2px;
     position: relative; }
     .viewer-wrapper .viewport #cornerstoneViewport {
-      width: calc(100% - 10px);
+      width: 100%;
       height: 100%;
       position: absolute; }
 

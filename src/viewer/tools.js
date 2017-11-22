@@ -131,11 +131,13 @@ export default {
      */
     cornerstoneTools.toolColors.setActiveColor('greenyellow');
     cornerstoneTools.toolColors.setToolColor('white');
+    cornerstoneTools.length.setConfiguration({shadow: true});
 
     // Stop users from zooming in or out too far
     cornerstoneTools.zoom.setConfiguration({
         minScale: 0.3,
-        maxScale: 10
+        maxScale: 10,
+        preventZoomOutsideImage: true
     });
   },
 
@@ -228,13 +230,6 @@ export default {
 
     // Add it to our desired tool
     $(`${this.toolsSelector} a[data-tool=${toolToActivate}]`).parent().addClass('active');
-
-    // removing default context menu
-    this.element.oncontextmenu = function (event) {
-      event.preventDefault();
-
-      return false;
-    };
 
     this.attachEvents();
   }

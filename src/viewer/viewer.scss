@@ -50,12 +50,12 @@
 
   .viewport {
     flex: 1 1 auto;
-    border: rem(1) solid $blue;
-    margin: rem(5);
+    border: 1px solid $blue;
+    margin: 2px;
     position: relative;
 
     #cornerstoneViewport {
-      width: calc(100% - 10px);
+      width: 100%;
       height: 100%;
       position: absolute;
     }
