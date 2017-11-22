@@ -133,7 +133,8 @@ export default {
       }
 
       // Retrieve the current image
-      const image = cornerstone.getImage(event.detail.element);
+      const element = event.detail.element;
+      const image = cornerstone.getImage(element);
       const currentImageId = image.imageId;
 
       // When a new measurement is added, retrieve the current tool state
@@ -165,7 +166,7 @@ export default {
       toolStateManager.restoreToolState(toolState);
 
       // Update the image
-      cornerstone.updateImage(this.element);
+      cornerstone.updateImage(element);
     };
 
     this.element.removeEventListener('cornerstonetoolsmeasurementadded', handleMeasurementAdded);
@@ -187,6 +188,17 @@ export default {
     $(this.element).attr("tabindex", 0).focus();
 
     this.initInteractionTools();
+
+    // If a previously active tool exists, re-enable it.
+    // If not, use wwwc
+    const toolToActivate = this.active || 'wwwc'
+    this.toggleTool(toolToActivate);
+
+    // Remove the 'active' highlight from the other tools
+    $(`${this.toolsSelector} .active`).removeClass('.active');
+
+    // Add it to our desired tool
+    $(`${this.toolsSelector} a[data-tool=${toolToActivate}]`).parent().addClass('active');
 
     // removing default context menu
     this.element.oncontextmenu = function (event) {
