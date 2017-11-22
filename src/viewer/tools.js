@@ -102,6 +102,12 @@ export default {
      */
     cornerstoneTools.toolColors.setActiveColor('greenyellow');
     cornerstoneTools.toolColors.setToolColor('white');
+
+    // Stop users from zooming in or out too far
+    cornerstoneTools.zoom.setConfiguration({
+        minScale: 0.3,
+        maxScale: 10
+    });
   },
 
   attachEvents() {
@@ -119,7 +125,7 @@ export default {
     });
 
     // Limiting measurements to 1
-    const handleMeasurementAdded = (event) => {
+    function handleMeasurementAdded (event) {
       // Only handle Length measurements
       const toolType = 'length';
       if (event.detail.toolType !== toolType) {
