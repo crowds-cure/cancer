@@ -30,7 +30,23 @@ export default {
       this.deactivate(this.active);
     }
 
-    cornerstoneTools[toolToActivate].activate(this.element, 1);
+    const element = this.element;
+    if (toolToActivate === 'pan') {
+      // If the user has selected the pan tool, activate it for both left and middle
+      // 3 means left mouse button and middle mouse button
+      cornerstoneTools.pan.activate(element, 3);
+      cornerstoneTools.zoom.activate(element, 4);
+    } else if (toolToActivate === 'zoom') {
+      // If the user has selected the zoom tool, activate it for both left and right
+      // 5 means left mouse button and right mouse button
+      cornerstoneTools.zoom.activate(element, 5);
+      cornerstoneTools.pan.activate(element, 2);
+    } else {
+      // Otherwise, active the tool on left mouse, pan on middle, and zoom on right
+      cornerstoneTools[toolToActivate].activate(element, 1);
+      cornerstoneTools.pan.activate(element, 2);
+      cornerstoneTools.zoom.activate(element, 4);
+    }
 
     this.active = toolToActivate;
   },
