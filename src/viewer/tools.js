@@ -92,16 +92,21 @@ export default {
     // Setting the slider size
     $(slider).css('width', `${this.$cornerstoneViewport.height()}px`)
 
-    $(window).on('resize', debounce(() => $(slider).css('width', `${this.$cornerstoneViewport.height()}px`), 150));
+    const debounceWindowResizeHandler = debounce(() => $(slider).css('width', `${this.$cornerstoneViewport.height()}px`), 150);
+    $(window).off('resize', debounceWindowResizeHandler);
+    $(window).on('resize', debounceWindowResizeHandler);
 
     // Listening to viewport stack image change, so the slider is synced
-    this.$cornerstoneViewport[0].addEventListener('cornerstonenewimage', function (event) {
+    const cornerstoneNewImageHandler = function (event) {
       const eventData = event.detail;
       const newImageIdIndex = stack.currentImageIdIndex;
 
       // Update the slider value
       slider.value = newImageIdIndex;
-    });
+    };
+
+    this.$cornerstoneViewport[0].removeEventListener('cornerstonenewimage', cornerstoneNewImageHandler);
+    this.$cornerstoneViewport[0].addEventListener('cornerstonenewimage', cornerstoneNewImageHandler);
   },
 
   initInteractionTools() {
@@ -148,19 +153,21 @@ export default {
     });
   },
 
+  toolClickHandler(event) {
+    const $element = $(event.currentTarget);
+    const tool = $element.attr('data-tool');
+
+    $('.active').removeClass('active');
+
+    this.toggleTool(tool);
+
+    $element.addClass('active');
+  },
+
   attachEvents() {
     // Extract which tool we are using and activating it
-    $(this.toolsSelector).on('click', 'div[data-tool]', event => {
-      const $element = $(event.currentTarget);
-
-      const tool = $element.attr('data-tool');
-
-      $('.active').removeClass('active');
-
-      this.toggleTool(tool);
-
-      $element.addClass('active');
-    });
+    $(this.toolsSelector).off('click', 'div[data-tool]', this.toolClickHandler.bind(this));
+    $(this.toolsSelector).on('click', 'div[data-tool]', this.toolClickHandler.bind(this));
 
     // Limiting measurements to 1
     function handleMeasurementAdded (event) {
