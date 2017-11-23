@@ -73,14 +73,6 @@ $max-screen-size-for-more-option: 500px;
           svg {
             stroke: $dark-blue;
             fill: $dark-blue;
-
-            &.tool-img {
-              border: rem(1) solid $white;
-              border-radius: rem(17);
-              width: rem(40);
-              background-color: $light-black;
-              padding: rem(5) 0;
-            }
           }
         }
 

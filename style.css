@@ -174,12 +174,6 @@ button.submit {
         .viewer-wrapper .top-bar .viewer-tools .tool.active svg {
           stroke: #20a5d6;
           fill: #20a5d6; }
-          .viewer-wrapper .top-bar .viewer-tools .tool.active svg.tool-img {
-            border: 0.07143rem solid #efefef;
-            border-radius: 1.21429rem;
-            width: 2.85714rem;
-            background-color: #16202b;
-            padding: 0.35714rem 0; }
         .viewer-wrapper .top-bar .viewer-tools .tool:hover a {
           color: #efefef; }
         .viewer-wrapper .top-bar .viewer-tools .tool:hover svg {
