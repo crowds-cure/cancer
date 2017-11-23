@@ -7,6 +7,7 @@ Login.$loginForm.off('submit').on('submit', function (evt) {
   evt.preventDefault();
 
   Login.$loadingImg.removeClass('invisible');
+  Login.$loginWrapper.addClass('invisible');
   const $loginUsername = $('#login-username');
   const username = $loginUsername.val();
   $loginUsername.val('');
