@@ -20,10 +20,11 @@
   </head>
   <body>
 
-    <div class="rsna-title">RSNA CrowdQuant</div>
     <div class="login-wrapper">
       <div class="login-form">
         <form>
+          <div class="error invisible" id="login-error"></div>
+
           <div class="form-input">
             <svg class="input-icon">
               <use xlink:href="/imgs/icons.svg#icon-user" href="/imgs/icons.svg#icon-user"></use>
@@ -37,67 +38,74 @@
             </svg>
           </button>
         </form>
-  
+
         <button id="open-signup-btn-new" class="sign-up">or sign up for a new account</button>
       </div>
     </div>
 
-    <div class="signup-wrapper invisible">
-      <form>
-        <div class="error invisible"></div>
+    <div class="login-wrapper sign invisible">
+      <div class="login-form">
+        <form>
+          <div class="error invisible"></div>
 
-        <div class="form-input">
-          <span>Select a username:</span>
-          <select id="signup-name-select"></select>
-        </div>
+          <div class="form-input">
+            <svg class="input-icon">
+              <use xlink:href="/imgs/icons.svg#icon-user" href="/imgs/icons.svg#icon-user"></use>
+            </svg>
+            <select id="signup-name-select">
+            </select>
+          </div>
 
-        <div class="form-input">
-          <span>Are you a practicing Radiologist?:</span>
-          <label for="signup-radiologist-yes">Yes</label>
-          <input type="radio" name="is-radiologist" id="signup-radiologist-yes" value="yes" required/>
-          <label for="signup-radiologist-no">No</label>
-          <input type="radio" name="is-radiologist" id="signup-radiologist-no" value="no" required/>
-        </div>
+          <div class="form-checkbox">
+            <div>Are you a practicing Radiologist?:</div>
+            <input type="radio" name="is-radiologist" id="signup-radiologist-yes" checked value="yes" required/>
+            <label for="signup-radiologist-yes">Yes</label>
+            <input type="radio" name="is-radiologist" id="signup-radiologist-no" value="no" required/>
+            <label for="signup-radiologist-no">No</label>
+          </div>
 
-        <div id="signup-speciality" class="form-input invisible">
-          <span>Speciality:</span>
-          <select>
-            <option value="medicalPhysicist">Practicing Medical Physicist</option>
-            <option value="researcher">Researcher</option>
-            <option value="resident">Resident</option>
-            <option value="student">Student</option>
-            <option value="technicianOrDosimetrist">Technician / Dosimetrist</option>
-            <option value="other">Other</option>
-          </select>
-        </div>
+          <div class="form-input invisible speciality">
+            <svg class="input-icon">
+              <use xlink:href="/imgs/icons.svg#icon-doctor" href="/imgs/icons.svg#icon-doctor"></use>
+            </svg>
+            <select id="signup-name-select">
+              <option>Select a speciality...</option>
+              <option value="medicalPhysicist">Practicing Medical Physicist</option>
+              <option value="researcher">Researcher</option>
+              <option value="resident">Resident</option>
+              <option value="student">Student</option>
+              <option value="technicianOrDosimetrist">Technician / Dosimetrist</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
 
-        <div id="signup-years-of-experience" class="form-input invisible">
-          <span>Years of experience:</span>
-          <select>
-            <option value="<5">< 5 years</option>
-            <option value="5-10">5-10 years</option>
-            <option value=">10">> 10 years</option>
-          </select>
-        </div>
+          <div class="form-input years-of-experience">
+            <svg class="input-icon">
+              <use xlink:href="/imgs/icons.svg#icon-calendar" href="/imgs/icons.svg#icon-calendar"></use>
+            </svg>
+            <select id="signup-name-select">
+              <option>Years of experience...</option>
+              <option value="<5">< 5 years</option>
+              <option value="5-10">5-10 years</option>
+              <option value=">10">> 10 years</option>
+            </select>
+          </div>
 
-        <div class="form-input">
-          <label for="signup-email">Email (not required)</label>
-          <input type="email" name="email" id="signup-email"/>
-        </div>
+          <div class="form-input">
+            <svg class="input-icon">
+              <use xlink:href="/imgs/icons.svg#icon-mail" href="/imgs/icons.svg#icon-mail"></use>
+            </svg>
+            <input id="signup-email" type="text" placeholder="Email (not required)">
+          </div>
 
-        <button class="submit" type="submit" id="signup-button">
-          Sign Up
-          <img src="./imgs/spinner.gif" class="loading invisible">
-        </button>
-      </form>
-      <!--
-      <div class="signup-divider">
-        Already have an account?
+          <button class="submit" type="submit" id="signup-button">
+            Sign Up
+            <svg class="loading invisible">
+              <use xlink:href="/imgs/icons.svg#icon-spinner" href="/imgs/icons.svg#icon-spinner"></use>
+            </svg>
+          </button>
+        </form>
       </div>
-      <button id="open-signup-btn" class="submit">
-        Sign Up
-      </button>
-      -->
     </div>
 
     <div class="viewer-wrapper invisible">

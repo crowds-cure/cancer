@@ -19,7 +19,6 @@ Login.$loginForm.off('submit').on('submit', function (evt) {
     window.localStorage.setItem('username', username);
     Login.$loadingImg.addClass('invisible');
     Login.$loginWrapper.addClass('invisible');
-    Login.$title.addClass('invisible');
 
     Viewer.initViewer();
   }).catch((err) => {
