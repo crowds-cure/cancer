@@ -36,11 +36,7 @@ button.submit {
     flex: 1 0 auto; }
     .loading-overlay .content .spinner {
       width: rem(83); }
-    .loading-overlay .content .spinner, .loading-overlay .content .submit-text {
-      display: none; }
-  .loading-overlay.loading .content .spinner, .loading-overlay.submitting .content .spinner {
-    display: block; }
-  .loading-overlay.submitting .content .submit-text {
+  .loading-overlay.loading .content .spinner {
     display: block; }
 
 .login-wrapper {

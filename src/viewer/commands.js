@@ -1,9 +1,8 @@
-import Menu from '../menu/menu';
-import Modal from '../modal/modal';
-import ErrorModal from '../errorModal/modal';
-import {measurementsDB, getUUID} from '../db/db';
+import Menu from '../menu/menu.js';
+import Viewer from '../viewer/viewer.js';
+import ErrorModal from '../errorModal/modal.js';
+import {measurementsDB, getUUID} from '../db/db.js';
 import Login from '../login/login';
-import { setTimeout } from 'timers';
 
 // helper from https://stackoverflow.com/questions/12168909/blob-from-dataurl
 function dataURItoBlob(dataURI) {
@@ -29,6 +28,7 @@ export default {
   isMenuOpened: false,
   commandSelector: '.viewer-tools',
   $overlay: $('.loading-overlay'),
+  $loadingText: $('.loading-overlay .content .submit-text'),
   $commandMenu: $('.commands-wrapper'),
 
   clearAll() {
@@ -40,6 +40,8 @@ export default {
   },
 
   skip: function() {
+    this.$overlay.removeClass('invisible').addClass('loading');
+
     const stack = cornerstoneTools.getToolState(this.element, 'stack');
 
     getUUID().then((uuid) => {
@@ -54,11 +56,13 @@ export default {
         'sliceIndex': sliceIndex,
         'date': Math.floor(Date.now() / 1000),
         'userAgent': navigator.userAgent
-      }
+      };
       return measurementsDB.put(doc);
     });
 
-    Modal.nextCase();
+    Viewer.getNextCase().then(() => {
+      this.$overlay.removeClass('loading').addClass('invisible');
+    });
   },
 
   setWL: function (windowWidth, windowCenter) {
@@ -93,8 +97,8 @@ export default {
   },
 
   save: function () {
-    Menu.closeMenu();
-    this.$overlay.removeClass('invisible').addClass('submitting');
+    this.$overlay.removeClass('invisible').addClass('loading');
+    this.$loadingText.text('Submitting your measurement...');
 
     // Retrieve the tool state manager for this element
     const toolStateManager = cornerstoneTools.globalImageIdSpecificToolStateManager;
@@ -122,7 +126,8 @@ export default {
     if (!lengthData.length){
       // console.log('ErrorModal', ErrorModal);
       ErrorModal.show();
-      this.$overlay.removeClass('submitting');
+      this.$loadingText.text('');
+      this.$overlay.removeClass('loading').addClass('invisible');
       return;
     }
 
@@ -165,16 +170,22 @@ export default {
         return measurementsDB.putAttachment(response.id, 'screenshot.png', response.rev, imageBlob, 'image/png');
       }).then(() => {
         console.timeEnd('PUT putAttachment');
+        resolve();
+      }).catch((error) => {
+        reject(error)
       });
     });
 
-    Modal.show();
-    this.$overlay.removeClass('submitting');
+    Viewer.getNextCase().then(() => {
+      this.$loadingText.text('');
+      this.$overlay.removeClass('loading').addClass('invisible');
+    });
 
     return savingPromise;
   },
 
   initCommands() {
+    $(this.commandSelector).off('click');
     $(this.commandSelector).on('click', 'div[data-command]', event => {
       event.preventDefault();
       event.stopPropagation();
@@ -191,6 +202,7 @@ export default {
       }, 300);
     });
 
+    $(document).off('click');
     $(document).on('click', event => {
       if (this.isMenuOpened) {
         this.toggleMoreMenu();

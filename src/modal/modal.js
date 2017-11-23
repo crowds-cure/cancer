@@ -10,10 +10,6 @@ export default {
 
     Login.logout();
   },
-  nextCase() {
-    this.hide();
-    Viewer.getNextCase();
-  },
   show() {
     this.$modal.addClass('show');
     this.$overlay.removeClass('invisible');

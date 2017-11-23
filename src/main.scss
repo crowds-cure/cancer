@@ -53,23 +53,11 @@ button.submit {
     .spinner {
       width: rem(83);
     }
-
-    .spinner, .submit-text {
-      display: none;
-    }
   }
 
-  &.loading, &.submitting {
+  &.loading {
     .content {
       .spinner {
-        display: block;
-      }
-    }
-  }
-
-  &.submitting {
-    .content {
-      .submit-text {
         display: block;
       }
     }

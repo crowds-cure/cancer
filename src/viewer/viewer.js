@@ -32,12 +32,27 @@ export default {
   $window: $(window),
   $viewer: $('.viewer-wrapper'),
   $overlay: $('.loading-overlay'),
+  $loadingText: $('.loading-overlay .content .submit-text'),
   numImagesLoaded: 0,
   getNextCase() {
-    this.$overlay.removeClass('invisible').addClass('loading');
-    const enabledElement = cornerstone.getEnabledElement(this.element);
+    // Purge the old image cache, we don't expect to ever load the same case again
+    cornerstone.imageCache.purgeCache();
 
-    Files.getCaseImages().then((imageIds) => {
+    // Clear any old requests in the request pool
+    cornerstoneTools.requestPoolManager.clearRequestStack('interaction');
+    cornerstoneTools.requestPoolManager.clearRequestStack('prefetch');
+
+    // TODO: Cancel all ongoing requests
+
+    // Remove all tool data in the tool state manager
+    cornerstoneTools.globalImageIdSpecificToolStateManager.restoreToolState({});
+
+    return new Promise((resolve, reject) => {
+      const enabledElement = cornerstone.getEnabledElement(this.element);
+
+      this.$loadingText.text('Retrieving case metadata...');
+      Files.getCaseImages().then((imageIds) => {
+        this.$loadingText.text('Loading images...');
         console.time('Loading All Images');
 
         const loadingProgress = $('#loading-progress');
@@ -57,21 +72,26 @@ export default {
         cornerstone.events.addEventListener(IMAGE_LOADED_EVENT, handleImageLoaded);
 
         cornerstone.loadAndCacheImage(imageIds[0]).then((image) => {
-            this.$overlay.removeClass('loading').addClass('invisible');
+          resolve();
 
-            // Set the default viewport parameters
-            const viewport = cornerstone.getDefaultViewport(enabledElement.canvas, image);
-            // e.g. lung window
-            //viewport.voi.windowWidth = 1500;
-            //viewport.voi.windowCenter = -300;
+          // Set the default viewport parameters
+          const viewport = cornerstone.getDefaultViewport(enabledElement.canvas, image);
+          // e.g. lung window
+          //viewport.voi.windowWidth = 1500;
+          //viewport.voi.windowCenter = -300;
 
-            cornerstone.displayImage(this.element, image, viewport);
-            Tools.initTools(imageIds);
-        });
+          cornerstone.displayImage(this.element, image, viewport);
+          Tools.initTools(imageIds);
+
+          this.$loadingText.text('');
+        }, reject);
+      }, reject);
     });
   },
 
   initViewer() {
+    this.$overlay.removeClass('invisible').addClass('loading');
+    this.$loadingText.text('Initializing Viewer');
     this.element = $('#cornerstoneViewport')[0];
 
     Menu.init();
@@ -83,12 +103,17 @@ export default {
     Menu.element = this.element;
 
     Commands.initCommands();
-    
-    this.$window.on('resize', debounce(() => cornerstone.resize(this.element, true), 300));
+
+    const debounceCornerstoneResize = debounce(() => cornerstone.resize(this.element, true), 300);
+
+    this.$window.off('resize', debounceCornerstoneResize);
+    this.$window.on('resize', debounceCornerstoneResize);
 
     cornerstone.enable(this.element);
 
     // currentSeriesIndex = 0;//a hack to get series in order
-    this.getNextCase();
+    this.getNextCase().then(() => {
+      this.$overlay.removeClass('loading').addClass('invisible');
+    });
   }
 }
