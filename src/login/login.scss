@@ -1,19 +1,5 @@
 $tablet-font-size: rem(30);
 
-.rsna-title {
-  color: #ffffff;
-  text-align: center;
-  font-size: rem(45);
-  font-weight: bolder;
-  position: absolute;
-  width: 100%;
-  margin-top: 5%;
-
-  @media only screen and (min-device-width: $tablet-size-min) {
-    font-size: rem(60);
-  }
-}
-
 .sign-up {
   border: none;
   padding: rem(15);
@@ -61,6 +47,11 @@ $tablet-font-size: rem(30);
       }
     }
 
+    .form-checkbox {
+      font-size: rem(25);
+      margin-bottom: rem(15);
+    }
+
     .form-input {
       background-color: #ffffff;
       padding: rem(10);
@@ -77,9 +68,9 @@ $tablet-font-size: rem(30);
         float: left;
       }
 
-      input {
+      input, select {
         border: none;
-        font-size: rem(25);
+        font-size: rem(23);
         width: 80%;
 
         &:focus {
