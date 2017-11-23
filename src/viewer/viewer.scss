@@ -157,12 +157,17 @@ $max-screen-size-for-more-option: 500px;
       }
 
       &::-webkit-slider-thumb {
-        cursor: move;
-        background: $blue;
+        cursor: -webkit-grab;
+        background: rgb(82, 69, 69);
         -webkit-appearance: none;
         width: 40px;
         height: 20px;
-        border-radius: 10px
+        border-radius: 10px;
+
+        &:active {
+          background: $blue;
+          cursor: -webkit-grabbing;
+        }
       }
     }
   }
