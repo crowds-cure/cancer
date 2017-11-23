@@ -38,6 +38,9 @@ export default {
     // Purge the old image cache, we don't expect to ever load the same case again
     cornerstone.imageCache.purgeCache();
 
+    // TODO: Check this. Not sure this is necessary, actually, since things should be decached anyway
+    cornerstoneWADOImageLoader.wadouri.dataSetCacheManager.purge();
+
     // Clear any old requests in the request pool
     cornerstoneTools.requestPoolManager.clearRequestStack('interaction');
     cornerstoneTools.requestPoolManager.clearRequestStack('prefetch');
