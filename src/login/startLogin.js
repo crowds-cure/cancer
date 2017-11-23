@@ -7,7 +7,6 @@ Login.$loginForm.off('submit').on('submit', function (evt) {
   evt.preventDefault();
 
   Login.$loadingImg.removeClass('invisible');
-  Login.$loginWrapper.addClass('invisible');
   const $loginUsername = $('#login-username');
   const username = $loginUsername.val();
   $loginUsername.val('');
@@ -19,7 +18,8 @@ Login.$loginForm.off('submit').on('submit', function (evt) {
     console.log('username', username, 'exist');
     window.localStorage.setItem('username', username);
     Login.$loadingImg.addClass('invisible');
-    Login.$loginForm.addClass('invisible');
+    Login.$loginWrapper.addClass('invisible');
+    Login.$title.addClass('invisible');
 
     Viewer.initViewer();
   }).catch((err) => {

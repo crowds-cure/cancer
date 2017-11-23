@@ -13,6 +13,7 @@
     padding: rem(15);
     border-radius: rem(5);
     margin: auto;
+    font-size: rem(27);
 
     .form-input {
       display: flex;
@@ -33,6 +34,15 @@
           transform: scale(1.5);
           margin: 15px 5px 0 0;
         }
+      }
+
+      select {
+        font-size: rem(20);
+        border-radius: rem(5);
+      }
+
+      input[type=radio] {
+        transform: scale(1.5);
       }
     }
 

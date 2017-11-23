@@ -20,30 +20,25 @@
   </head>
   <body>
 
+    <div class="rsna-title">RSNA CrowdQuant</div>
     <div class="login-wrapper">
-      <div class="login-box">
+      <div class="login-form">
         <form>
-          <div class="error invisible" id="login-error"></div>
-
           <div class="form-input">
-            <label for="login-username">Username:</label>
-            <input type="text" name="username" id="login-username" required/>
+            <svg class="input-icon">
+              <use xlink:href="/imgs/icons.svg#icon-user" href="/imgs/icons.svg#icon-user"></use>
+            </svg>
+            <input id="login-username" type="text" placeholder="Username">
           </div>
-
           <button class="submit" type="submit">
             Login
-            <img src="./imgs/spinner.gif" class="loading invisible">
+            <svg class="loading invisible">
+              <use xlink:href="/imgs/icons.svg#icon-spinner" href="/imgs/icons.svg#icon-spinner"></use>
+            </svg>
           </button>
-          <div class="clear-both"></div>
         </form>
-
-        <div class="signup-divider">
-           Or sign up for a new account
-        </div>
-
-        <button id="open-signup-btn-new" class="submit">
-          Sign Up
-        </button>
+  
+        <button id="open-signup-btn-new" class="sign-up">or sign up for a new account</button>
       </div>
     </div>
 
@@ -54,22 +49,7 @@
         <div class="form-input">
           <span>Select a username:</span>
           <select id="signup-name-select"></select>
-          <!--
-          <input type="text" name="username" id="signup-username" required/>
-          -->
         </div>
-
-        <!--
-        <div class="form-input">
-          <label for="password">Password:</label>
-          <input type="password" name="password" id="signup-password" required/>
-        </div>
-
-        <div class="form-input">
-          <label for="password">Confirm password:</label>
-          <input type="password" name="confirm-password" id="signup-confirm-password" required/>
-        </div>
-        -->
 
         <div class="form-input">
           <span>Are you a practicing Radiologist?:</span>

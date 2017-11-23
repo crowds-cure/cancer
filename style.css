@@ -6,7 +6,7 @@ html, body {
   background: #000;
   overflow: hidden;
   font-size: 16px;
-  font-family: 'Roboto', sans-serif; }
+  font-family: "Roboto", sans-serif; }
 
 .invisible {
   display: none !important; }
@@ -52,54 +52,73 @@ button.submit {
   100% {
     transform: rotate(360deg); } }
 
+.rsna-title {
+  color: #ffffff;
+  text-align: center;
+  font-size: 3.21429rem;
+  font-weight: bolder;
+  position: absolute;
+  width: 100%;
+  margin-top: 5%; }
+  @media only screen and (min-device-width: 768px) {
+    .rsna-title {
+      font-size: 4.28571rem; } }
+
+.sign-up {
+  border: none;
+  padding: 1.07143rem;
+  font-size: 1.42857rem;
+  width: 100%;
+  background-color: #aaaaaa;
+  color: #FFFFFF;
+  border-radius: 0px;
+  margin-top: 15px;
+  cursor: pointer; }
+  .sign-up:hover {
+    background-color: #605f5f; }
+
 .login-wrapper {
   display: flex;
   align-items: center;
   height: 100%;
-  color: #efefef; }
-  .login-wrapper .login-box {
-    border: #00a4d9 solid 0.07143rem;
-    padding: 1.07143rem;
-    border-radius: 0.35714rem;
+  color: #efefef;
+  padding: 0 5px 0 5px; }
+  .login-wrapper .login-form {
     margin: auto; }
-    @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-      .login-wrapper .login-box {
-        font-size: 2.14286rem; } }
-    .login-wrapper .login-box button.signup {
-      /*float: right;*/
-      height: 2rem;
-      width: 100%; }
-    .login-wrapper .login-box .clear-both {
-      clear: both; }
-    .login-wrapper .login-box .signup-divider {
-      margin: 0.5rem 0 0.5rem 0;
-      color: #9ccef9;
-      text-align: center; }
-    .login-wrapper .login-box form .form-input {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 0.71429rem;
-      color: #9ccef9; }
-      @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-        .login-wrapper .login-box form .form-input input {
-          font-size: 2.14286rem; } }
-      .login-wrapper .login-box form .form-input label {
-        margin-right: 0.35714rem; }
-    .login-wrapper .login-box button.submit {
-      float: right;
-      width: 100%; }
-      @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-        .login-wrapper .login-box button.submit {
-          font-size: 2.14286rem;
-          padding: 10px; } }
-      .login-wrapper .login-box button.submit img.loading {
-        width: 0.71429rem;
-        position: relative;
-        top: 0.07143rem; }
-        @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-          .login-wrapper .login-box button.submit img.loading {
-            width: 2.14286rem;
-            top: 0.35714rem; } }
+    .login-wrapper .login-form .submit {
+      border: none;
+      padding: 1.07143rem;
+      font-size: 1.42857rem;
+      width: 100%;
+      background: #337ab7;
+      color: #FFFFFF;
+      border-radius: 0px;
+      cursor: pointer; }
+      .login-wrapper .login-form .submit:hover {
+        background-color: #286090; }
+      .login-wrapper .login-form .submit .loading {
+        animation: rotate 1.2s linear infinite;
+        width: 1.42857rem;
+        height: 1.07143rem; }
+    .login-wrapper .login-form .form-input {
+      background-color: #ffffff;
+      padding: 0.71429rem;
+      border: 0.07143rem solid #808080;
+      margin-bottom: 1.07143rem; }
+      .login-wrapper .login-form .form-input .input-icon {
+        fill: #9ccef9;
+        stroke: #9ccef9;
+        width: 2.5rem;
+        height: 2.14286rem;
+        margin-right: 0.71429rem;
+        background-color: white;
+        float: left; }
+      .login-wrapper .login-form .form-input input {
+        border: none;
+        font-size: 1.78571rem;
+        width: 80%; }
+        .login-wrapper .login-form .form-input input:focus {
+          outline-width: 0; }
 
 .signup-wrapper {
   display: flex;
@@ -113,7 +132,8 @@ button.submit {
     border: #00a4d9 solid 0.07143rem;
     padding: 1.07143rem;
     border-radius: 0.35714rem;
-    margin: auto; }
+    margin: auto;
+    font-size: 1.92857rem; }
     .signup-wrapper form .form-input {
       display: flex;
       justify-content: space-between;
@@ -127,6 +147,11 @@ button.submit {
         .signup-wrapper form .form-input input[type=radio] {
           transform: scale(1.5);
           margin: 15px 5px 0 0; } }
+      .signup-wrapper form .form-input select {
+        font-size: 1.42857rem;
+        border-radius: 0.35714rem; }
+      .signup-wrapper form .form-input input[type=radio] {
+        transform: scale(1.5); }
     .signup-wrapper form button.submit {
       float: right; }
       @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
