@@ -228,7 +228,7 @@ button.submit {
       .scroll .scroll-holder .imageSlider::-moz-focus-outer {
         border: none; }
       .scroll .scroll-holder .imageSlider::-webkit-slider-thumb {
-        cursor: pointer;
+        cursor: move;
         background: #00a4d9;
         -webkit-appearance: none;
         width: 40px;
