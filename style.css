@@ -5,7 +5,8 @@ html, body {
   width: 100%;
   background: #000;
   overflow: hidden;
-  font-size: 16px; }
+  font-size: 16px;
+  font-family: 'Roboto', sans-serif; }
 
 .invisible {
   display: none !important; }
@@ -228,12 +229,15 @@ button.submit {
       .scroll .scroll-holder .imageSlider::-moz-focus-outer {
         border: none; }
       .scroll .scroll-holder .imageSlider::-webkit-slider-thumb {
-        cursor: move;
-        background: #00a4d9;
+        cursor: -webkit-grab;
+        background: #524545;
         -webkit-appearance: none;
         width: 40px;
         height: 20px;
         border-radius: 10px; }
+        .scroll .scroll-holder .imageSlider::-webkit-slider-thumb:active {
+          background: #00a4d9;
+          cursor: -webkit-grabbing; }
 
 .modal {
   position: fixed;
