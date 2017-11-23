@@ -40,6 +40,17 @@ button.submit {
   .loading-overlay.loading .content .spinner {
     display: block;
     margin: auto; }
+  .loading-overlay.loading .content .spin {
+    animation: rotate 1.2s linear infinite;
+    display: block;
+    margin: auto;
+    width: 90px; }
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg); }
+  100% {
+    transform: rotate(360deg); } }
 
 .login-wrapper {
   display: flex;
