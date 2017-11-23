@@ -38,7 +38,8 @@ button.submit {
     .loading-overlay .content .spinner {
       width: rem(83); }
   .loading-overlay.loading .content .spinner {
-    display: block; }
+    display: block;
+    margin: auto; }
 
 .login-wrapper {
   display: flex;
