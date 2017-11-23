@@ -35,7 +35,7 @@ export default {
       group_level : 3,
     }).then((data) => {
 
-      var annotatorID = Login.username;
+      const annotatorID = Login.username;
       return this.getNextSeriesForAnnotator(annotatorID);
   }).then ((seriesUID) => {
 

@@ -8,6 +8,13 @@ Based on crowdQuant
 - npm install connect-livereload --save-dev (?)
 - npm start
 
+### Build
+To build the application you can run this command in the root filder:
+```
+$ npm run build
+```
+This will create the `bundle.js` and the `style.css` files.
+
 This will start a local server that communicates with a live Couch DB. 
 
 ### DB 

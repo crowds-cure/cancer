@@ -1,8 +1,11 @@
 $white: #efefef;
 $blue: #00a4d9;
 $light-blue: #9ccef9;
+$dark-blue: #20a5d6;
 $black: #000;
 $light-black: #16202b;
+$tablet-size-min: 768px;
+$tablet-size-max: 1024px;
 
 html, body {
   padding: 0;
@@ -11,6 +14,7 @@ html, body {
   width: 100%;
   background: $black;
   overflow: hidden;
+  font-size: 16px;
 }
 
 .invisible {
@@ -49,23 +53,11 @@ button.submit {
     .spinner {
       width: rem(83);
     }
-
-    .spinner, .submit-text {
-      display: none;
-    }
   }
 
-  &.loading, &.submitting {
+  &.loading {
     .content {
       .spinner {
-        display: block;
-      }
-    }
-  }
-
-  &.submitting {
-    .content {
-      .submit-text {
         display: block;
       }
     }

@@ -1,5 +1,5 @@
 export default function (action, timeWindow) {
-  var timeout;
+  let timeout;
 
   return function() {
     clearTimeout(timeout);
