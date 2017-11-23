@@ -157,7 +157,7 @@ $max-screen-size-for-more-option: 500px;
       }
 
       &::-webkit-slider-thumb {
-        cursor: pointer;
+        cursor: move;
         background: $blue;
         -webkit-appearance: none;
         width: 40px;
