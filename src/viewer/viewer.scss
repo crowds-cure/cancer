@@ -1,3 +1,5 @@
+$max-screen-size-for-more-option: 500px;
+
 .viewer-wrapper {
   display: flex;
   flex-flow: column;
@@ -20,7 +22,7 @@
         transition: height 1s;
         overflow: auto;
 
-        @media (min-width: 380px) {
+        @media (min-width: $max-screen-size-for-more-option) {
           display: none;
         }
 
@@ -43,7 +45,7 @@
           display: none;
         }
 
-        @media (min-width: 400px) {
+        @media (min-width: $max-screen-size-for-more-option) {
           &.more {
             display: none;
           }

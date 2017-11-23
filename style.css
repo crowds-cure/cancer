@@ -144,7 +144,7 @@ button.submit {
         background: rgba(20, 25, 30, 0.95);
         transition: height 1s;
         overflow: auto; }
-        @media (min-width: 380px) {
+        @media (min-width: 500px) {
           .viewer-wrapper .top-bar .viewer-tools .commands-wrapper {
             display: none; } }
         .viewer-wrapper .top-bar .viewer-tools .commands-wrapper.open {
@@ -158,7 +158,7 @@ button.submit {
         cursor: pointer; }
         .viewer-wrapper .top-bar .viewer-tools .tool.save, .viewer-wrapper .top-bar .viewer-tools .tool.skip, .viewer-wrapper .top-bar .viewer-tools .tool.clearAll {
           display: none; }
-        @media (min-width: 400px) {
+        @media (min-width: 500px) {
           .viewer-wrapper .top-bar .viewer-tools .tool.more {
             display: none; }
           .viewer-wrapper .top-bar .viewer-tools .tool.save, .viewer-wrapper .top-bar .viewer-tools .tool.skip, .viewer-wrapper .top-bar .viewer-tools .tool.clearAll {
@@ -238,7 +238,7 @@ button.submit {
 .modal {
   position: fixed;
   top: 25%;
-  left: calc(50% - 135px);
+  left: calc(50% - 158px);
   padding: 1em;
   background: #fff;
   z-index: 100;
