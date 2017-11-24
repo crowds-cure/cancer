@@ -80,14 +80,23 @@ export default {
         const imageIndex = 1;
         bottomRight.text(`Image: ${imageIndex}/${imageIds.length}`);
 
+        const currentViewport = cornerstone.getViewport(this.element);
+
         cornerstone.loadAndCacheImage(imageIds[0]).then((image) => {
           resolve();
 
           // Set the default viewport parameters
+          // We need the new scale and translation parameters so the image fits properly
           const viewport = cornerstone.getDefaultViewport(enabledElement.canvas, image);
           // e.g. lung window
           //viewport.voi.windowWidth = 1500;
           //viewport.voi.windowCenter = -300;
+
+          // Retain current window width and center
+          if (currentViewport) {
+            viewport.voi.windowWidth = currentViewport.voi.windowWidth;
+            viewport.voi.windowCenter = currentViewport.voi.windowCenter;
+          }
 
           cornerstone.displayImage(this.element, image, viewport);
           Tools.initTools(imageIds);
