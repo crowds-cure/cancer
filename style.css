@@ -80,6 +80,8 @@ button.submit {
   height: 100%;
   color: #efefef;
   padding: 0 5px 0 5px; }
+  .login-wrapper .info-section {
+    margin: auto; }
   .login-wrapper .login-form {
     margin: auto; }
     .login-wrapper .login-form .submit {
