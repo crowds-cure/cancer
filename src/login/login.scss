@@ -1,4 +1,8 @@
 $tablet-font-size: rem(30);
+$white: #efefef;
+$blue: #00a4d9;
+$light-blue: #9ccef9;
+$dark-blue: #20a5d6;
 
 .sign-up {
   border: none;
@@ -25,6 +29,85 @@ $tablet-font-size: rem(30);
 
   .info-section {
     margin: auto;
+    margin-bottom: rem(30);
+
+    a {
+      text-decoration: none;
+      color: $light-blue;
+
+      &:hover {
+        color: $dark-blue;
+      }
+
+      &:active {
+        color: $white;
+      }
+    }
+  }
+
+  .logo-header {
+    font-family: 'Montserrat', 'Roboto', sans-serif;
+    font-weight: 400;
+  }
+
+  h1.logo-header {
+    font-weight: 700;
+  }
+
+  .qtim-logo {
+    cursor: pointer;
+    text-decoration: none;
+    color: $white;
+
+    h3 {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-weight: 600;
+      font-size: 30px;
+      margin: 0;
+    }
+  }
+
+  .tcia-logo {
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .ohif-logo {
+    display: block;
+    margin: rem(15) auto;
+    cursor: pointer;
+    width: 265px;
+    height: 30px;
+    text-decoration: none;
+
+    .ohif-icon {
+      float: left;
+      display: inline-block;
+      fill: transparent;
+      height: 100%;
+      margin: 0 8px 0 0;
+      width: 30px;
+    }
+
+    .ohif-logo-text {
+      float: left;
+      display: inline-block;
+      font-family: "Sanchez";
+      color: white;
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 30px;
+      text-decoration: none;
+    }
+  }
+  
+  .logo-section {
+    padding: rem(40);
+    text-align: center;
+
+    img {
+      margin: 0 auto;
+    }
   }
 
   .login-form {
@@ -70,7 +153,7 @@ $tablet-font-size: rem(30);
         width: rem(35);
         height: rem(30);
         margin-right: rem(10);
-        background-color: white;
+        background-color: $white;
         float: left;
 
         &.caret {

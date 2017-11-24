@@ -113,11 +113,11 @@ export default {
     $slider.on('input', selectImage);
 
     // Setting the slider size
-    const height = this.$cornerstoneViewport.height() - 35;
+    const height = this.$cornerstoneViewport.height() - 60;
     $slider.css('width', `${height}px`);
 
     const debounceWindowResizeHandler = debounce(() => {
-      const height = this.$cornerstoneViewport.height() - 35;
+      const height = this.$cornerstoneViewport.height() - 60;
       $slider.css('width', `${height}px`)
     }, 150);
 

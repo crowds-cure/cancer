@@ -130,7 +130,7 @@ export default {
     cornerstone.enable(this.element);
 
     // Listen for changes to the viewport so we can update the text overlays in the corner
-    const bottomLeft = $('.viewport #mrbottomleft');
+    const bottomLeft = $('.viewport #mrbottomrightWWWC');
     function onImageRendered(e) {
         const viewport = e.detail.viewport;
         bottomLeft.text("WW/WC: " + Math.round(viewport.voi.windowWidth) + "/" + Math.round(viewport.voi.windowCenter));
@@ -139,7 +139,7 @@ export default {
     this.element.removeEventListener('cornerstoneimagerendered', onImageRendered);
     this.element.addEventListener('cornerstoneimagerendered', onImageRendered);
 
-    const bottomRight = $('.viewport #mrbottomright');
+    const bottomRight = $('.viewport #mrbottomrightImageIndex');
     function onStackScroll(e) {
       const element = e.target;
       const stack = cornerstoneTools.getToolState(element, 'stack');
