@@ -81,11 +81,17 @@ $dark-blue: #20a5d6;
       font-size: 30px;
       margin: 0;
     }
+
+    p {
+      margin: rem(5)
+    }
   }
 
-  .tcia-logo {
+  .logo-img {
+    display: block;
     cursor: pointer;
     text-decoration: none;
+    margin: rem(20);
   }
 
   .ohif-logo {

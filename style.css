@@ -115,9 +115,13 @@ button.submit {
       font-weight: 600;
       font-size: 30px;
       margin: 0; }
-  .login-wrapper .tcia-logo {
+    .login-wrapper .qtim-logo p {
+      margin: 0.35714rem; }
+  .login-wrapper .logo-img {
+    display: block;
     cursor: pointer;
-    text-decoration: none; }
+    text-decoration: none;
+    margin: 1.42857rem; }
   .login-wrapper .ohif-logo {
     display: block;
     margin: 1.07143rem auto;
