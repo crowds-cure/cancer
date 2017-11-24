@@ -29,26 +29,27 @@ function populateLeaderBoard(rows) {
     d3.select('.leaderboard .annotator-count')
             .text(rows.length);
 
-    displayTopAnnotators(rows);
+    displayTopAnnotators(rows, 10);
 }
 
-function displayTopAnnotators(rows) {
-    var topAnnotatorCt = 10; // top N
+function displayTopAnnotators(rows, numToDisplay) {
+
     var topAnnotators = d3.select('.top-annotators');
-    var annotatorContainer = topAnnotators.selectAll('.annotator')
+
+    var annotatorContainers = topAnnotators.selectAll('.annotator')
         .data(rows)
       .enter()
-      .filter(function(d, i) { return i < topAnnotatorCt; })
+      .filter(function(d, i) { return i < numToDisplay; })
         .append('div')
         .classed('annotator', true);
 
-    annotatorContainer
+    annotatorContainers
         .append('text')
         .text(function(d) {
             return d.key ? d.key : '< null >';
         });
 
-    annotatorContainer
+    annotatorContainers
         .append('text')
         .text(function(d){
             return d.value;
