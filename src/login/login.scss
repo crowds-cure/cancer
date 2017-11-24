@@ -29,6 +29,7 @@ $tablet-font-size: rem(30);
 
   .login-form {
     margin: auto;
+    max-width: rem(600);
 
     .submit {
       border: none;
@@ -61,6 +62,7 @@ $tablet-font-size: rem(30);
       padding: rem(10);
       border: rem(1) solid #808080;
       margin-bottom: rem(15);
+      position: relative;
   
       .input-icon {
         fill: $light-blue;
@@ -70,16 +72,30 @@ $tablet-font-size: rem(30);
         margin-right: rem(10);
         background-color: white;
         float: left;
+
+        &.caret {
+          position: absolute;
+          right: 0px;
+        }
       }
 
       input, select {
         border: none;
         font-size: rem(23);
-        width: 80%;
 
         &:focus {
           outline-width: 0;
         }
+      }
+
+      input {
+        width: 75%;
+      }
+
+      select {
+        background-color: #ffffff;
+        -webkit-appearance: none;
+        width: 69%;
       }
     }
   }

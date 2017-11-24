@@ -83,7 +83,8 @@ button.submit {
   .login-wrapper .info-section {
     margin: auto; }
   .login-wrapper .login-form {
-    margin: auto; }
+    margin: auto;
+    max-width: 42.85714rem; }
     .login-wrapper .login-form .submit {
       border: none;
       padding: 1.07143rem;
@@ -106,7 +107,8 @@ button.submit {
       background-color: #ffffff;
       padding: 0.71429rem;
       border: 0.07143rem solid #808080;
-      margin-bottom: 1.07143rem; }
+      margin-bottom: 1.07143rem;
+      position: relative; }
       .login-wrapper .login-form .form-input .input-icon {
         fill: #9ccef9;
         stroke: #9ccef9;
@@ -115,12 +117,20 @@ button.submit {
         margin-right: 0.71429rem;
         background-color: white;
         float: left; }
+        .login-wrapper .login-form .form-input .input-icon.caret {
+          position: absolute;
+          right: 0px; }
       .login-wrapper .login-form .form-input input, .login-wrapper .login-form .form-input select {
         border: none;
-        font-size: 1.64286rem;
-        width: 80%; }
+        font-size: 1.64286rem; }
         .login-wrapper .login-form .form-input input:focus, .login-wrapper .login-form .form-input select:focus {
           outline-width: 0; }
+      .login-wrapper .login-form .form-input input {
+        width: 75%; }
+      .login-wrapper .login-form .form-input select {
+        background-color: #ffffff;
+        -webkit-appearance: none;
+        width: 69%; }
 
 .viewer-wrapper {
   display: flex;
