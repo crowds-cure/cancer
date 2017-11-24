@@ -1,10 +1,15 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>RSNA CrowdQuant</title>
+    <title>Crowds Cure Cancer</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
+    <meta name="theme-color" content="#9ccef9">
+
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Sanchez" rel="stylesheet">
+
     <link rel="stylesheet" type="text/css" href="./style.css">
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -23,21 +28,22 @@
     <div class="login-wrapper">
       <div class="login-form">
         <div class="info-section">
-          <h1>Crowds Cure Cancer</h1>
-          <h2>Help Annotate Data from The Cancer Imaging Archive</h2>
+          <h1 class="logo-header">Crowds Cure Cancer</h1>
+          <h2 class="logo-header">Help Annotate Data from The Cancer Imaging Archive</h2>
           
-          <h3>What is this?</h3>
+          <h3 class="logo-header">What is this?</h3>
           <p>A crowd-sourcing experiment to accelerate quantitative imaging research.</p>
 
-          <h4>What do I do?</h4>
+          <h4 class="logo-header">What do I do?</h4>
           <p>Visually mark tumor locations on scans from The National Cancer Institute's <a href="http://www.cancerimagingarchive.net/">Cancer Imaging Archive</a></p>
 
-          <h4>Why should I help?</h4>
+          <h4 class="logo-header">Why should I help?</h4>
           <p>These cases lack tumor-location labels needed for machine learning. By assisting, you are providing valuable data to cancer researchers working in deep learning, radiomics and radiogenomics.</a></p>
         </div>
         <form>
           <div class="error invisible" id="login-error"></div>
 
+          <h3 class="logo-header">Sign In</h3>
           <div class="form-input">
             <svg class="input-icon">
               <use xlink:href="/imgs/icons.svg#icon-user" href="/imgs/icons.svg#icon-user"></use>
@@ -52,15 +58,39 @@
           </button>
         </form>
 
-        <button id="open-signup-btn-new" class="sign-up">or sign up for a new account</button>
+        <button id="open-signup-btn-new" class="sign-up">Create a New Account</button>
+        <div class='logo-section'>
+          <h2>Collaborators</h2>
+          <a class='qtim-logo' href="https://qtim-lab.github.io/">
+            <h3>QTIM @ MGH</h3>
+            <p>The Quantitative Tumor Imaging Lab at the Martinos Center</p>
+          </a>
+          
+          <a class='tcia-logo' href="http://www.cancerimagingarchive.net">
+            <img src="/imgs/tcia_logo.png" alt="The Cancer Imaging Archive (TCIA)" width="202">
+          </a>
+
+          <a class='ohif-logo' href="http://www.ohif.org">
+            <svg class="ohif-icon">
+                <use xlink:href="/imgs/icons.svg#icon-ohif-logo" href="/imgs/icons.svg#icon-ohif-logo"></use>
+              </svg>
+            <div class='ohif-logo-text'>Open Health Imaging Foundation</div>
+          </a>
+        </div>
       </div>
     </div>
 
     <div class="login-wrapper sign invisible">
       <div class="login-form">
+        <div class="info-section">
+          <h1 class="logo-header">Crowds Cure Cancer</h1>
+          <h2 class="logo-header">Help Annotate Data from The Cancer Imaging Archive</h2>
+        </div>
         <form>
           <div class="error invisible"></div>
 
+        <div class="signup-section">
+          <h3 class="logo-header">Select a username</h3>
           <div class="form-input">
             <svg class="input-icon">
               <use xlink:href="/imgs/icons.svg#icon-user" href="/imgs/icons.svg#icon-user"></use>
@@ -70,16 +100,22 @@
               <use xlink:href="/imgs/icons.svg#icon-caret" href="/imgs/icons.svg#icon-caret"></use>
             </svg>
           </div>
-
-          <div class="form-checkbox">
-            <div>Are you a practicing Radiologist?:</div>
-            <input type="radio" name="is-radiologist" id="signup-radiologist-yes" checked value="yes" required/>
-            <label for="signup-radiologist-yes">Yes</label>
+        </div>
+        <div class='signup-section'>
+          <h3 class="logo-header">Are you a practicing Radiologist?</h3>
+          <label class="signup-option noselect">
+            <input type="radio" name="is-radiologist" id="signup-radiologist-yes" value="yes" required checked/>
+            Yes
+          </label>
+          <label class="signup-option noselect">
             <input type="radio" name="is-radiologist" id="signup-radiologist-no" value="no" required/>
-            <label for="signup-radiologist-no">No</label>
-          </div>
+            No
+          </label>
+        </div>
 
-          <div class="form-input invisible speciality">
+        <div class="signup-section invisible speciality">
+          <h3 class="logo-header">What is your speciality?</h3>
+          <div class="form-input">
             <svg class="input-icon">
               <use xlink:href="/imgs/icons.svg#icon-doctor" href="/imgs/icons.svg#icon-doctor"></use>
             </svg>
@@ -96,35 +132,63 @@
               <use xlink:href="/imgs/icons.svg#icon-caret" href="/imgs/icons.svg#icon-caret"></use>
             </svg>
           </div>
+        </div>
 
-          <div class="form-input years-of-experience">
-            <svg class="input-icon">
-              <use xlink:href="/imgs/icons.svg#icon-calendar" href="/imgs/icons.svg#icon-calendar"></use>
-            </svg>
-            <select id="signup-name-select">
-              <option>Years of experience...</option>
-              <option value="<5">< 5 years</option>
-              <option value="5-10">5-10 years</option>
-              <option value=">10">> 10 years</option>
-            </select>
-            <svg class="input-icon caret">
-              <use xlink:href="/imgs/icons.svg#icon-caret" href="/imgs/icons.svg#icon-caret"></use>
-            </svg>
+        <div class="signup-section years-of-experience">
+            <h3 class="logo-header">How many years of experience do you have?</h3>
+            <div class="form-input">
+              <svg class="input-icon">
+                <use xlink:href="/imgs/icons.svg#icon-calendar" href="/imgs/icons.svg#icon-calendar"></use>
+              </svg>
+              <select id="signup-name-select">
+                <option>Years of experience...</option>
+                <option value="<5">< 5 years</option>
+                <option value="5-10">5-10 years</option>
+                <option value=">10">> 10 years</option>
+              </select>
+              <svg class="input-icon caret">
+                <use xlink:href="/imgs/icons.svg#icon-caret" href="/imgs/icons.svg#icon-caret"></use>
+              </svg>
+            </div>
           </div>
 
+          <div id="anatomy-choices" class="signup-section">
+            <h3 class="logo-header">Which Cancer Types would you like to see?</h3>
+            <label class='noselect signup-option'>
+              <input type="checkbox" name="anatomy-choice" value="Liver" checked/>
+              Liver
+            </label>
+            <label class='noselect signup-option'>
+              <input type="checkbox" name="anatomy-choice" value="Lung" checked/>
+              Lung
+            </label>
+            <label class='noselect signup-option'>
+              <input type="checkbox" name="anatomy-choice" value="Kidney" checked/>
+              Renal
+            </label>
+            <label class='noselect signup-option'>
+              <input type="checkbox" name="anatomy-choice" value="Ovary" checked/>
+              Ovarian
+            </label>
+          </div>
+
+          <div class="signup-section">
+            <h3 class="logo-header">Provide your email to receive news about Crowds Cure Cancer</h3>
           <div class="form-input">
             <svg class="input-icon">
-              <use xlink:href="/imgs/icons.svg#icon-mail" href="/imgs/icons.svg#icon-mail"></use>
+                <use xlink:href="/imgs/icons.svg#icon-mail" href="/imgs/icons.svg#icon-mail"></use>
             </svg>
-            <input id="signup-email" type="text" placeholder="Email (not required)">
+            <input id="signup-email" type="email" name="email" placeholder="Email (Optional)">
           </div>
+        </div>
 
-          <button class="submit" type="submit" id="signup-button">
-            Sign Up
-            <svg class="loading invisible">
-              <use xlink:href="/imgs/icons.svg#icon-spinner" href="/imgs/icons.svg#icon-spinner"></use>
-            </svg>
-          </button>
+
+        <button class="submit" type="submit" id="signup-button">
+          Sign Up
+          <svg class="loading invisible">
+            <use xlink:href="/imgs/icons.svg#icon-spinner" href="/imgs/icons.svg#icon-spinner"></use>
+          </svg>
+        </button>
         </form>
       </div>
     </div>
@@ -213,12 +277,15 @@
           </svg>
         </div>
         <div id="cornerstoneViewport"></div>
-        <div id="mrbottomright" class="dicomTag">
+        <div id="mrbottomrightImageIndex" class="dicomTag">
             Image:
         </div>
-        <div id="mrbottomleft" class="dicomTag">
+        <div id="mrbottomrightWWWC" class="dicomTag">
             WW/WC:
         </div>
+        <a id="logo-bottom-left" href="https://github.com/QTIM-Lab/rsnaCrowdQuant" target="_blank">
+            Crowds Cure Cancer
+        </a>
         <div class="scroll">
           <div class="scroll-holder">
             <input class="imageSlider" type="range" min="1">

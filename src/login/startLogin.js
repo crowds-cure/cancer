@@ -36,3 +36,8 @@ $('#open-signup-btn-new').off('click').click(function(event) {
 
   new Signup().init();
 });
+
+$(document.body).css({
+  position: 'relative',
+  overflow: 'auto'
+});

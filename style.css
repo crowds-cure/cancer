@@ -4,10 +4,8 @@ html, body {
   height: 100%;
   width: 100%;
   background: #000;
-  overflow: hidden;
   font-size: 16px;
-  font-family: "Roboto", sans-serif;
-  position: fixed; }
+  font-family: "Roboto", sans-serif; }
 
 .invisible {
   display: none !important; }
@@ -74,14 +72,80 @@ button.submit {
   .sign-up:hover {
     background-color: #605f5f; }
 
+.sign-up {
+  border: none;
+  padding: 1.07143rem;
+  font-size: 1.42857rem;
+  width: 100%;
+  background-color: #aaaaaa;
+  color: #FFFFFF;
+  border-radius: 0px;
+  margin-top: 15px;
+  cursor: pointer; }
+  .sign-up:hover {
+    background-color: #605f5f; }
+
 .login-wrapper {
   display: flex;
   align-items: center;
   height: 100%;
   color: #efefef;
-  padding: 0 5px 0 5px; }
+  padding: 10px; }
   .login-wrapper .info-section {
-    margin: auto; }
+    margin: auto;
+    margin-bottom: 2.14286rem; }
+    .login-wrapper .info-section a {
+      text-decoration: none;
+      color: #9ccef9; }
+      .login-wrapper .info-section a:hover {
+        color: #20a5d6; }
+      .login-wrapper .info-section a:active {
+        color: #efefef; }
+  .login-wrapper .logo-header {
+    font-family: 'Montserrat', 'Roboto', sans-serif;
+    font-weight: 400; }
+  .login-wrapper h1.logo-header {
+    font-weight: 700; }
+  .login-wrapper .qtim-logo {
+    cursor: pointer;
+    text-decoration: none;
+    color: #efefef; }
+    .login-wrapper .qtim-logo h3 {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-weight: 600;
+      font-size: 30px;
+      margin: 0; }
+  .login-wrapper .tcia-logo {
+    cursor: pointer;
+    text-decoration: none; }
+  .login-wrapper .ohif-logo {
+    display: block;
+    margin: 1.07143rem auto;
+    cursor: pointer;
+    width: 265px;
+    height: 30px;
+    text-decoration: none; }
+    .login-wrapper .ohif-logo .ohif-icon {
+      float: left;
+      display: inline-block;
+      fill: transparent;
+      height: 100%;
+      margin: 0 8px 0 0;
+      width: 30px; }
+    .login-wrapper .ohif-logo .ohif-logo-text {
+      float: left;
+      display: inline-block;
+      font-family: "Sanchez";
+      color: white;
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 30px;
+      text-decoration: none; }
+  .login-wrapper .logo-section {
+    padding: 2.85714rem;
+    text-align: center; }
+    .login-wrapper .logo-section img {
+      margin: 0 auto; }
   .login-wrapper .login-form {
     margin: auto;
     max-width: 42.85714rem; }
@@ -103,8 +167,18 @@ button.submit {
     .login-wrapper .login-form .form-checkbox {
       font-size: 1.78571rem;
       margin-bottom: 1.07143rem; }
+    .login-wrapper .login-form .signup-section {
+      padding: 0.35714rem;
+      margin: 0.71429rem; }
+      .login-wrapper .login-form .signup-section .signup-option {
+        cursor: pointer;
+        font-size: 16pt;
+        margin: 0 10px; }
+        .login-wrapper .login-form .signup-section .signup-option input {
+          height: 1rem;
+          width: 1.5rem; }
     .login-wrapper .login-form .form-input {
-      background-color: #ffffff;
+      background-color: #efefef;
       padding: 0.71429rem;
       border: 0.07143rem solid #808080;
       margin-bottom: 1.07143rem;
@@ -115,22 +189,23 @@ button.submit {
         width: 2.5rem;
         height: 2.14286rem;
         margin-right: 0.71429rem;
-        background-color: white;
+        background-color: #efefef;
         float: left; }
         .login-wrapper .login-form .form-input .input-icon.caret {
           position: absolute;
           right: 0px; }
       .login-wrapper .login-form .form-input input, .login-wrapper .login-form .form-input select {
+        background-color: #efefef;
         border: none;
         font-size: 1.64286rem; }
         .login-wrapper .login-form .form-input input:focus, .login-wrapper .login-form .form-input select:focus {
           outline-width: 0; }
       .login-wrapper .login-form .form-input input {
-        width: 75%; }
+        width: calc(100% - 90px); }
       .login-wrapper .login-form .form-input select {
-        background-color: #ffffff;
+        background-color: #efefef;
         -webkit-appearance: none;
-        width: 69%; }
+        width: calc(100% - 60px); }
 
 .viewer-wrapper {
   display: flex;
@@ -212,12 +287,26 @@ button.submit {
       color: #9ccef9;
       z-index: 2;
       text-shadow: 1px 1px black; }
-    .viewer-wrapper .viewport #mrbottomright {
+    .viewer-wrapper .viewport #mrbottomrightImageIndex {
       bottom: 0.71429rem;
       right: 0.71429rem; }
-    .viewer-wrapper .viewport #mrbottomleft {
+    .viewer-wrapper .viewport #mrbottomrightWWWC {
+      bottom: 2.14286rem;
+      right: 0.71429rem; }
+    .viewer-wrapper .viewport #logo-bottom-left {
+      position: absolute;
+      font-family: 'Montserrat', 'Roboto', sans-serif;
+      font-size: 16pt;
+      font-weight: 700;
+      color: rgba(211, 211, 211, 0.7);
+      z-index: 2;
+      text-shadow: 1px 1px black;
       bottom: 0.71429rem;
-      left: 0.71429rem; }
+      left: 0.71429rem;
+      text-decoration: none;
+      cursor: pointer; }
+      .viewer-wrapper .viewport #logo-bottom-left:hover {
+        color: rgba(211, 211, 211, 0.9); }
     .viewer-wrapper .viewport #loadingIndicator {
       position: absolute;
       width: 100%;

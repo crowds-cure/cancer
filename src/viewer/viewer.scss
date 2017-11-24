@@ -127,14 +127,32 @@ $max-screen-size-for-more-option: 500px;
       text-shadow: 1px 1px black;
     }
 
-    #mrbottomright {
+    #mrbottomrightImageIndex {
       bottom: rem(10);
       right: rem(10);
     }
 
-    #mrbottomleft {
+    #mrbottomrightWWWC {
+      bottom: rem(30);
+      right: rem(10);
+    }
+
+    #logo-bottom-left {
+      position: absolute;
+      font-family: 'Montserrat', 'Roboto', sans-serif;
+      font-size: 16pt;
+      font-weight: 700;
+      color: rgba(211,211,211, 0.7);
+      z-index: 2;
+      text-shadow: 1px 1px black;
       bottom: rem(10);
       left: rem(10);
+      text-decoration: none;
+      cursor: pointer;
+
+      &:hover {
+        color: rgba(211,211,211, 0.9);
+      }
     }
 
     #loadingIndicator {
