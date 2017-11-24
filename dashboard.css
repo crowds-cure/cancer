@@ -15,3 +15,7 @@ body {
     display: flex;
     justify-content: space-between;
 }
+
+svg {
+    border: 1px solid black;
+}

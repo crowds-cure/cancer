@@ -22,7 +22,75 @@ document.addEventListener("DOMContentLoaded", function(e) {
         populateLeaderBoard(rows);
     });
 
+    measurementsDB.query('by/seriesUID', {
+        reduce: true,
+        group: true,
+        level: 'exact',
+    }).then (function(res) {
+
+        var rows = res.rows;
+        rows.sort(function(a, b) { return b.value - a.value; });
+        populateHistogram(rows);
+
+    });
+
 });
+
+
+function populateHistogram(rows) {
+
+    var svg = d3.select('#annos-by-case-histogram');
+
+    var data = rows.map(function(d) { return d.value; });
+
+    var margin = {top: 20, right: 20, bottom: 30, left: 40},
+        width = +svg.attr('width')- margin.left - margin.right,
+        height = +svg.attr('height')- margin.top - margin.bottom;
+
+    // set the ranges
+    var x = d3.scaleLinear()
+              .range([0, width]);
+              //.padding(0.1);
+
+    var y = d3.scaleLinear()
+              .range([height, 0]);
+
+    var svgg = svg.append("g")
+        .attr("transform",
+              "translate(" + margin.left + "," + margin.top + ")");
+
+    // // format the data
+    // data.forEach(function(d) {
+    //   d.sales = +d.sales;
+    // });
+
+    // Scale the range of the data in the domains
+    x.domain([0, data.length]);
+    y.domain([0, d3.max(data)]);
+
+    // append the rectangles for the bar chart
+    svgg.selectAll(".bar")
+      .data(data)
+    .enter().append("rect")
+      .attr("class", "bar")
+      .attr("x", function(d, i) { return x(i); })
+      .attr("width", 2)
+      .attr("y", function(d) { return y(d); })
+      .attr("height", function(d) { return height - y(d); });
+
+      // add the x Axis
+      var axisBuffer = 5;
+      svgg.append("g")
+          .attr("transform", "translate(0," + (height + axisBuffer) + ")")
+          .call(d3.axisBottom(x));
+      //
+      // // add the y Axis
+      svgg.append("g")
+          .call(d3.axisLeft(y))
+          .attr('transform', 'translate (' + (-axisBuffer) + ', 0)');
+
+
+}
 
 function populateLeaderBoard(rows) {
 
