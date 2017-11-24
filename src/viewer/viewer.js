@@ -112,6 +112,11 @@ export default {
     this.$loadingText.text('Initializing Viewer');
     this.element = $('#cornerstoneViewport')[0];
 
+    $(document.body).css({
+      position: 'fixed',
+      overflow: 'hidden'
+    });
+
     Menu.init();
 
     this.$viewer.removeClass('invisible');

@@ -77,7 +77,7 @@ button.submit {
   align-items: center;
   height: 100%;
   color: #efefef;
-  padding: 0 5px 0 5px; }
+  padding: 10px; }
   .login-wrapper .info-section {
     margin: auto;
     margin-bottom: 2.14286rem; }
