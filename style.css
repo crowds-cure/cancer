@@ -218,18 +218,19 @@ button.submit {
       .viewer-wrapper .top-bar .viewer-tools .commands-wrapper {
         position: absolute;
         top: 5.5rem;
-        left: 4.28571rem;
+        left: 1.21429rem;
         height: 0;
         z-index: 9;
         padding: 0;
         background: rgba(20, 25, 30, 0.95);
         transition: height 1s;
-        overflow: auto; }
+        overflow: auto;
+        width: 23.64286rem; }
         @media (min-width: 500px) {
           .viewer-wrapper .top-bar .viewer-tools .commands-wrapper {
             display: none; } }
         .viewer-wrapper .top-bar .viewer-tools .commands-wrapper.open {
-          height: 6.42857rem; }
+          height: 5.35714rem; }
         .viewer-wrapper .top-bar .viewer-tools .commands-wrapper.border {
           border: solid 0.07143rem #00a4d9;
           padding: 0 0.71429rem 0.71429rem 0.71429rem; }
@@ -238,12 +239,12 @@ button.submit {
         text-align: -webkit-center;
         cursor: pointer;
         padding: 0.35714rem; }
-        .viewer-wrapper .top-bar .viewer-tools .tool.save, .viewer-wrapper .top-bar .viewer-tools .tool.skip, .viewer-wrapper .top-bar .viewer-tools .tool.clearAll {
+        .viewer-wrapper .top-bar .viewer-tools .tool.save, .viewer-wrapper .top-bar .viewer-tools .tool.skip, .viewer-wrapper .top-bar .viewer-tools .tool.clearAll, .viewer-wrapper .top-bar .viewer-tools .tool.stackScroll {
           display: none; }
         @media (min-width: 500px) {
           .viewer-wrapper .top-bar .viewer-tools .tool.more {
             display: none; }
-          .viewer-wrapper .top-bar .viewer-tools .tool.save, .viewer-wrapper .top-bar .viewer-tools .tool.skip, .viewer-wrapper .top-bar .viewer-tools .tool.clearAll {
+          .viewer-wrapper .top-bar .viewer-tools .tool.save, .viewer-wrapper .top-bar .viewer-tools .tool.skip, .viewer-wrapper .top-bar .viewer-tools .tool.clearAll, .viewer-wrapper .top-bar .viewer-tools .tool.stackScroll {
             display: inline-block; } }
         .viewer-wrapper .top-bar .viewer-tools .tool.active:hover a {
           color: #20a5d6; }

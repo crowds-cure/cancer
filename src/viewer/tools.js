@@ -20,6 +20,10 @@ const tools = {
   zoom: {
     mouse: cornerstoneTools.zoom,
     touch: cornerstoneTools.zoomTouchDrag
+  },
+  stackScroll: {
+    mouse: cornerstoneTools.stackScroll,
+    touch: cornerstoneTools.stackScrollTouchDrag
   }
 };
 
