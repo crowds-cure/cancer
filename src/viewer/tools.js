@@ -20,6 +20,10 @@ const tools = {
   zoom: {
     mouse: cornerstoneTools.zoom,
     touch: cornerstoneTools.zoomTouchDrag
+  },
+  stackScroll: {
+    mouse: cornerstoneTools.stackScroll,
+    touch: cornerstoneTools.stackScrollTouchDrag
   }
 };
 
@@ -65,10 +69,14 @@ export default {
     touchTool.activate(element);
 
     this.active = toolToActivate;
+
+    // Set the element to focused, so we can properly handle keyboard events
+    $(this.element).attr('tabindex', 0).focus();
   },
 
   initStackTool(imageIds) {
-    const slider = $('.imageSlider')[0];
+    const $slider = $('.imageSlider');
+    const slider = $slider[0];
     const stack = {
       currentImageIdIndex: 0,
       imageIds: imageIds
@@ -91,7 +99,7 @@ export default {
     cornerstoneTools.stackPrefetch.enable(this.element);
 
     const element = this.element;
-    const slideTimeoutTime = 40;
+    const slideTimeoutTime = 5;
     let slideTimeout;
 
     // Adding input listener
@@ -105,24 +113,29 @@ export default {
       }, slideTimeoutTime);
     }
 
-    $(slider).off('input', selectImage);
-    $(slider).on('input', selectImage);
+    $slider.off('input', selectImage);
+    $slider.on('input', selectImage);
 
     // Setting the slider size
-    $(slider).css('width', `${this.$cornerstoneViewport.height()}px`);
+    const height = this.$cornerstoneViewport.height() - 60;
+    $slider.css('width', `${height}px`);
 
-    const debounceWindowResizeHandler = debounce(() => $(slider).css('width', `${this.$cornerstoneViewport.height()}px`), 150);
+    const debounceWindowResizeHandler = debounce(() => {
+      const height = this.$cornerstoneViewport.height() - 60;
+      $slider.css('width', `${height}px`)
+    }, 150);
+
     $(window).off('resize', debounceWindowResizeHandler);
     $(window).on('resize', debounceWindowResizeHandler);
 
     // Listening to viewport stack image change, so the slider is synced
-    const cornerstoneNewImageHandler = function () {
+    const cornerstoneStackScrollHandler = function () {
       // Update the slider value
       slider.value = stack.currentImageIdIndex;
     };
 
-    this.$cornerstoneViewport[0].removeEventListener('cornerstonenewimage', cornerstoneNewImageHandler);
-    this.$cornerstoneViewport[0].addEventListener('cornerstonenewimage', cornerstoneNewImageHandler);
+    this.$cornerstoneViewport[0].removeEventListener('cornerstonestackscroll', cornerstoneStackScrollHandler);
+    this.$cornerstoneViewport[0].addEventListener('cornerstonestackscroll', cornerstoneStackScrollHandler);
   },
 
   initInteractionTools() {
@@ -153,12 +166,20 @@ export default {
     cornerstoneTools.pan.activate(this.element, 2);
     cornerstoneTools.zoom.activate(this.element, 4);
 
+    // Set the tool font and font size
+    // context.font = "[style] [variant] [weight] [size]/[line height] [font family]";
+    const fontFamily = 'Roboto, OpenSans, HelveticaNeue-Light, Helvetica Neue Light, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif';
+    cornerstoneTools.textStyle.setFont('15px ' + fontFamily);
 
-    /*
-    Set the tool color
-     */
-    cornerstoneTools.toolColors.setActiveColor('greenyellow');
-    cornerstoneTools.toolColors.setToolColor('white');
+    // Set the tool width
+    cornerstoneTools.toolStyle.setToolWidth(2);
+
+    // Set color for inactive tools
+    cornerstoneTools.toolColors.setToolColor('rgb(255, 255, 0)');
+
+    // Set color for active tools
+    cornerstoneTools.toolColors.setActiveColor('rgb(0, 255, 0)');
+
     cornerstoneTools.length.setConfiguration({shadow: true});
 
     // Stop users from zooming in or out too far
@@ -238,11 +259,6 @@ export default {
     cornerstoneTools.touchInput.enable(this.element);
     cornerstoneTools.mouseWheelInput.enable(this.element);
     cornerstoneTools.keyboardInput.enable(this.element);
-
-    this.initStackTool(imageIds);
-
-    // Set the element to focused, so we can properly handle keyboard events
-    $(this.element).attr('tabindex', 0).focus();
 
     this.initInteractionTools();
 

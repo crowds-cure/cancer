@@ -1,3 +1,5 @@
+$max-screen-size-for-more-option: 500px;
+
 .viewer-wrapper {
   display: flex;
   flex-flow: column;
@@ -12,20 +14,21 @@
       .commands-wrapper {
         position: absolute;
         top: rem(77);
-        left: rem(60);
+        left: rem(17);
         height: 0;
         z-index: 9;
         padding: 0;
         background: rgba(20,25,30,0.95);
         transition: height 1s;
         overflow: auto;
+        width: rem(331);
 
-        @media (min-width: 380px) {
+        @media (min-width: $max-screen-size-for-more-option) {
           display: none;
         }
 
         &.open {
-          height: rem(90);
+          height: rem(75);
         }
 
         &.border {
@@ -38,17 +41,18 @@
         display: inline-block;
         text-align: -webkit-center;
         cursor: pointer;
+        padding: rem(5);
 
-        &.save, &.skip, &.clearAll {
+        &.save, &.skip, &.clearAll, &.stackScroll {
           display: none;
         }
 
-        @media (min-width: 400px) {
+        @media (min-width: $max-screen-size-for-more-option) {
           &.more {
             display: none;
           }
 
-          &.save, &.skip, &.clearAll {
+          &.save, &.skip, &.clearAll, &.stackScroll {
             display: inline-block;
           }
         }
@@ -71,14 +75,6 @@
           svg {
             stroke: $dark-blue;
             fill: $dark-blue;
-
-            &.tool-img {
-              border: rem(1) solid $white;
-              border-radius: rem(17);
-              width: rem(40);
-              background-color: $light-black;
-              padding: rem(5) 0;
-            }
           }
         }
 
@@ -99,7 +95,7 @@
           display: block;
           width: rem(42);
           height: rem(20);
-          margin-bottom: rem(10);
+          margin-bottom: rem(5);
           padding: rem(6) 0;
         }
 
@@ -122,6 +118,65 @@
       width: 100%;
       height: 100%;
       position: absolute;
+      outline: none;
+    }
+
+    .dicomTag {
+      position: absolute;
+      color: $light-blue;
+      z-index: 2;
+      text-shadow: 1px 1px black;
+    }
+
+    #mrbottomrightImageIndex {
+      bottom: rem(10);
+      right: rem(10);
+    }
+
+    #mrbottomrightWWWC {
+      bottom: rem(30);
+      right: rem(10);
+    }
+
+    #logo-bottom-left {
+      position: absolute;
+      font-family: 'Montserrat', 'Roboto', sans-serif;
+      font-size: 16pt;
+      font-weight: 700;
+      color: rgba(211,211,211, 0.7);
+      z-index: 2;
+      text-shadow: 1px 1px black;
+      bottom: rem(10);
+      left: rem(10);
+      text-decoration: none;
+      cursor: pointer;
+
+      &:hover {
+        color: rgba(211,211,211, 0.9);
+      }
+    }
+
+    #loadingIndicator {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      stroke: $light-blue;
+      fill: $light-blue;
+      background-color: rgba(0,0,0,0.75);
+      display: none;
+      pointer-events: none; // Necessary for click-through to cornerstone element below
+      z-index: 1;
+
+      svg {
+        height: 45px;
+        position: absolute;
+        margin: auto;
+        top: 0px;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+        animation: rotate 1.2s linear infinite;
+      }
     }
   }
 }
@@ -132,6 +187,7 @@
   width: rem(10);
   height: 100%;
   top: 0;
+  z-index: 2;
 
   .scroll-holder {
     position: relative;
@@ -141,7 +197,7 @@
       transform: rotate(90deg);
       transform-origin: top left;
       position: absolute;
-      width: rem(800);
+      width: 100%;
       margin-left: 10px;
       -webkit-appearance: none;
       background-color: rgba(0,0,0,0);
@@ -151,16 +207,21 @@
       }
 
       &::-moz-focus-outer {
-        border: none
+        border: none;
       }
 
       &::-webkit-slider-thumb {
-        cursor: pointer;
-        background: $blue;
+        cursor: -webkit-grab;
+        background: rgb(82, 69, 69);
         -webkit-appearance: none;
-        width: 40px;
+        width: 45px;
         height: 20px;
-        border-radius: 10px
+        border-radius: 10px;
+
+        &:active {
+          background: $blue;
+          cursor: -webkit-grabbing;
+        }
       }
     }
   }

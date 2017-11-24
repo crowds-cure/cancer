@@ -34,5 +34,8 @@
 }
 
 #loading-progress {
-  color: #9ccef9
+  color: #9ccef9;
+  z-index: 2;
+  position: absolute;
+  padding: 5px;
 }

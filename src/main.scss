@@ -6,6 +6,7 @@ $black: #000;
 $light-black: #16202b;
 $tablet-size-min: 768px;
 $tablet-size-max: 1024px;
+$default-font: 'Roboto', sans-serif;
 
 html, body {
   padding: 0;
@@ -13,8 +14,8 @@ html, body {
   height: 100%;
   width: 100%;
   background: $black;
-  overflow: hidden;
   font-size: 16px;
+  font-family: $default-font;
 }
 
 .invisible {
@@ -59,14 +60,39 @@ button.submit {
     .content {
       .spinner {
         display: block;
+        margin: auto;
+      }
+
+      .spin {
+        animation: rotate 1.2s linear infinite;
+        display: block;
+        margin: auto;
+        width: 90px;
       }
     }
   }
 }
 
+@keyframes rotate {
+  0% {
+      transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(360deg);
+  }
+}
+
+.noselect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
 @import './mixins';
 @import './login/login';
-@import './signup/signup';
 @import './viewer/viewer';
 @import './modal/modal';
 @import './errorModal/modal';

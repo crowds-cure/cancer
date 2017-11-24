@@ -4,8 +4,8 @@ html, body {
   height: 100%;
   width: 100%;
   background: #000;
-  overflow: hidden;
-  font-size: 16px; }
+  font-size: 16px;
+  font-family: "Roboto", sans-serif; }
 
 .invisible {
   display: none !important; }
@@ -37,94 +37,179 @@ button.submit {
     .loading-overlay .content .spinner {
       width: rem(83); }
   .loading-overlay.loading .content .spinner {
-    display: block; }
+    display: block;
+    margin: auto; }
+  .loading-overlay.loading .content .spin {
+    animation: rotate 1.2s linear infinite;
+    display: block;
+    margin: auto;
+    width: 90px; }
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg); }
+  100% {
+    transform: rotate(360deg); } }
+
+.noselect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
+
+.sign-up {
+  border: none;
+  padding: 1.07143rem;
+  font-size: 1.42857rem;
+  width: 100%;
+  background-color: #aaaaaa;
+  color: #FFFFFF;
+  border-radius: 0px;
+  margin-top: 15px;
+  cursor: pointer; }
+  .sign-up:hover {
+    background-color: #605f5f; }
+
+.sign-up {
+  border: none;
+  padding: 1.07143rem;
+  font-size: 1.42857rem;
+  width: 100%;
+  background-color: #aaaaaa;
+  color: #FFFFFF;
+  border-radius: 0px;
+  margin-top: 15px;
+  cursor: pointer; }
+  .sign-up:hover {
+    background-color: #605f5f; }
 
 .login-wrapper {
   display: flex;
   align-items: center;
   height: 100%;
-  color: #efefef; }
-  .login-wrapper .login-box {
-    border: #00a4d9 solid 0.07143rem;
-    padding: 1.07143rem;
-    border-radius: 0.35714rem;
-    margin: auto; }
-    @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-      .login-wrapper .login-box {
-        font-size: 2.14286rem; } }
-    .login-wrapper .login-box button.signup {
-      /*float: right;*/
-      height: 2rem;
-      width: 100%; }
-    .login-wrapper .login-box .clear-both {
-      clear: both; }
-    .login-wrapper .login-box .signup-divider {
-      margin: 0.5rem 0 0.5rem 0;
-      color: #9ccef9;
-      text-align: center; }
-    .login-wrapper .login-box form .form-input {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 0.71429rem;
+  color: #efefef;
+  padding: 10px; }
+  .login-wrapper .info-section {
+    margin: auto;
+    margin-bottom: 2.14286rem; }
+    .login-wrapper .info-section a {
+      text-decoration: none;
       color: #9ccef9; }
-      @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-        .login-wrapper .login-box form .form-input input {
-          font-size: 2.14286rem; } }
-      .login-wrapper .login-box form .form-input label {
-        margin-right: 0.35714rem; }
-    .login-wrapper .login-box button.submit {
-      float: right;
-      width: 100%; }
-      @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-        .login-wrapper .login-box button.submit {
-          font-size: 2.14286rem;
-          padding: 10px; } }
-      .login-wrapper .login-box button.submit img.loading {
-        width: 0.71429rem;
-        position: relative;
-        top: 0.07143rem; }
-        @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-          .login-wrapper .login-box button.submit img.loading {
-            width: 2.14286rem;
-            top: 0.35714rem; } }
-
-.signup-wrapper {
-  display: flex;
-  align-items: center;
-  height: 100%;
-  color: #efefef; }
-  @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-    .signup-wrapper {
-      font-size: 2.14286rem; } }
-  .signup-wrapper form {
-    border: #00a4d9 solid 0.07143rem;
-    padding: 1.07143rem;
-    border-radius: 0.35714rem;
-    margin: auto; }
-    .signup-wrapper form .form-input {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 0.71429rem;
-      color: #9ccef9; }
-      .signup-wrapper form .form-input label {
-        margin-right: 0.35714rem; }
-      @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-        .signup-wrapper form .form-input input, .signup-wrapper form .form-input select {
-          font-size: 2.14286rem; }
-        .signup-wrapper form .form-input input[type=radio] {
-          transform: scale(1.5);
-          margin: 15px 5px 0 0; } }
-    .signup-wrapper form button.submit {
-      float: right; }
-      @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-        .signup-wrapper form button.submit {
-          font-size: 2.14286rem;
-          margin-top: 20px;
-          padding: 15px; } }
-      .signup-wrapper form button.submit img.loading {
-        width: 0.71429rem;
-        position: relative;
-        top: 0.07143rem; }
+      .login-wrapper .info-section a:hover {
+        color: #20a5d6; }
+      .login-wrapper .info-section a:active {
+        color: #efefef; }
+  .login-wrapper .logo-header {
+    font-family: 'Montserrat', 'Roboto', sans-serif;
+    font-weight: 400; }
+  .login-wrapper h1.logo-header {
+    font-weight: 700; }
+  .login-wrapper .qtim-logo {
+    cursor: pointer;
+    text-decoration: none;
+    color: #efefef; }
+    .login-wrapper .qtim-logo h3 {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-weight: 600;
+      font-size: 30px;
+      margin: 0; }
+    .login-wrapper .qtim-logo p {
+      margin: 0.35714rem; }
+  .login-wrapper .logo-img {
+    display: block;
+    cursor: pointer;
+    text-decoration: none;
+    margin: 1.42857rem; }
+  .login-wrapper .ohif-logo {
+    display: block;
+    margin: 1.07143rem auto;
+    cursor: pointer;
+    width: 265px;
+    height: 30px;
+    text-decoration: none; }
+    .login-wrapper .ohif-logo .ohif-icon {
+      float: left;
+      display: inline-block;
+      fill: transparent;
+      height: 100%;
+      margin: 0 8px 0 0;
+      width: 30px; }
+    .login-wrapper .ohif-logo .ohif-logo-text {
+      float: left;
+      display: inline-block;
+      font-family: "Sanchez";
+      color: white;
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 30px;
+      text-decoration: none; }
+  .login-wrapper .logo-section {
+    padding: 2.85714rem;
+    text-align: center; }
+    .login-wrapper .logo-section img {
+      margin: 0 auto; }
+  .login-wrapper .login-form {
+    margin: auto;
+    max-width: 42.85714rem; }
+    .login-wrapper .login-form .submit {
+      border: none;
+      padding: 1.07143rem;
+      font-size: 1.42857rem;
+      width: 100%;
+      background: #337ab7;
+      color: #FFFFFF;
+      border-radius: 0px;
+      cursor: pointer; }
+      .login-wrapper .login-form .submit:hover {
+        background-color: #286090; }
+      .login-wrapper .login-form .submit .loading {
+        animation: rotate 1.2s linear infinite;
+        width: 1.42857rem;
+        height: 1.07143rem; }
+    .login-wrapper .login-form .form-checkbox {
+      font-size: 1.78571rem;
+      margin-bottom: 1.07143rem; }
+    .login-wrapper .login-form .signup-section {
+      padding: 0.35714rem;
+      margin: 0.71429rem; }
+      .login-wrapper .login-form .signup-section .signup-option {
+        cursor: pointer;
+        font-size: 16pt;
+        margin: 0 10px; }
+        .login-wrapper .login-form .signup-section .signup-option input {
+          height: 1rem;
+          width: 1.5rem; }
+    .login-wrapper .login-form .form-input {
+      background-color: #efefef;
+      padding: 0.71429rem;
+      border: 0.07143rem solid #808080;
+      margin-bottom: 1.07143rem;
+      position: relative; }
+      .login-wrapper .login-form .form-input .input-icon {
+        fill: #9ccef9;
+        stroke: #9ccef9;
+        width: 2.5rem;
+        height: 2.14286rem;
+        margin-right: 0.71429rem;
+        background-color: #efefef;
+        float: left; }
+        .login-wrapper .login-form .form-input .input-icon.caret {
+          position: absolute;
+          right: 0px; }
+      .login-wrapper .login-form .form-input input, .login-wrapper .login-form .form-input select {
+        background-color: #efefef;
+        border: none;
+        font-size: 1.64286rem; }
+        .login-wrapper .login-form .form-input input:focus, .login-wrapper .login-form .form-input select:focus {
+          outline-width: 0; }
+      .login-wrapper .login-form .form-input input {
+        width: calc(100% - 90px); }
+      .login-wrapper .login-form .form-input select {
+        background-color: #efefef;
+        -webkit-appearance: none;
+        width: calc(100% - 60px); }
 
 .viewer-wrapper {
   display: flex;
@@ -137,31 +222,33 @@ button.submit {
       .viewer-wrapper .top-bar .viewer-tools .commands-wrapper {
         position: absolute;
         top: 5.5rem;
-        left: 4.28571rem;
+        left: 1.21429rem;
         height: 0;
         z-index: 9;
         padding: 0;
         background: rgba(20, 25, 30, 0.95);
         transition: height 1s;
-        overflow: auto; }
-        @media (min-width: 380px) {
+        overflow: auto;
+        width: 23.64286rem; }
+        @media (min-width: 500px) {
           .viewer-wrapper .top-bar .viewer-tools .commands-wrapper {
             display: none; } }
         .viewer-wrapper .top-bar .viewer-tools .commands-wrapper.open {
-          height: 6.42857rem; }
+          height: 5.35714rem; }
         .viewer-wrapper .top-bar .viewer-tools .commands-wrapper.border {
           border: solid 0.07143rem #00a4d9;
           padding: 0 0.71429rem 0.71429rem 0.71429rem; }
       .viewer-wrapper .top-bar .viewer-tools .tool {
         display: inline-block;
         text-align: -webkit-center;
-        cursor: pointer; }
-        .viewer-wrapper .top-bar .viewer-tools .tool.save, .viewer-wrapper .top-bar .viewer-tools .tool.skip, .viewer-wrapper .top-bar .viewer-tools .tool.clearAll {
+        cursor: pointer;
+        padding: 0.35714rem; }
+        .viewer-wrapper .top-bar .viewer-tools .tool.save, .viewer-wrapper .top-bar .viewer-tools .tool.skip, .viewer-wrapper .top-bar .viewer-tools .tool.clearAll, .viewer-wrapper .top-bar .viewer-tools .tool.stackScroll {
           display: none; }
-        @media (min-width: 400px) {
+        @media (min-width: 500px) {
           .viewer-wrapper .top-bar .viewer-tools .tool.more {
             display: none; }
-          .viewer-wrapper .top-bar .viewer-tools .tool.save, .viewer-wrapper .top-bar .viewer-tools .tool.skip, .viewer-wrapper .top-bar .viewer-tools .tool.clearAll {
+          .viewer-wrapper .top-bar .viewer-tools .tool.save, .viewer-wrapper .top-bar .viewer-tools .tool.skip, .viewer-wrapper .top-bar .viewer-tools .tool.clearAll, .viewer-wrapper .top-bar .viewer-tools .tool.stackScroll {
             display: inline-block; } }
         .viewer-wrapper .top-bar .viewer-tools .tool.active:hover a {
           color: #20a5d6; }
@@ -173,12 +260,6 @@ button.submit {
         .viewer-wrapper .top-bar .viewer-tools .tool.active svg {
           stroke: #20a5d6;
           fill: #20a5d6; }
-          .viewer-wrapper .top-bar .viewer-tools .tool.active svg.tool-img {
-            border: 0.07143rem solid #efefef;
-            border-radius: 1.21429rem;
-            width: 2.85714rem;
-            background-color: #16202b;
-            padding: 0.35714rem 0; }
         .viewer-wrapper .top-bar .viewer-tools .tool:hover a {
           color: #efefef; }
         .viewer-wrapper .top-bar .viewer-tools .tool:hover svg {
@@ -190,7 +271,7 @@ button.submit {
           display: block;
           width: 3rem;
           height: 1.42857rem;
-          margin-bottom: 0.71429rem;
+          margin-bottom: 0.35714rem;
           padding: 0.42857rem 0; }
         .viewer-wrapper .top-bar .viewer-tools .tool a {
           text-decoration: none;
@@ -204,14 +285,60 @@ button.submit {
     .viewer-wrapper .viewport #cornerstoneViewport {
       width: 100%;
       height: 100%;
-      position: absolute; }
+      position: absolute;
+      outline: none; }
+    .viewer-wrapper .viewport .dicomTag {
+      position: absolute;
+      color: #9ccef9;
+      z-index: 2;
+      text-shadow: 1px 1px black; }
+    .viewer-wrapper .viewport #mrbottomrightImageIndex {
+      bottom: 0.71429rem;
+      right: 0.71429rem; }
+    .viewer-wrapper .viewport #mrbottomrightWWWC {
+      bottom: 2.14286rem;
+      right: 0.71429rem; }
+    .viewer-wrapper .viewport #logo-bottom-left {
+      position: absolute;
+      font-family: 'Montserrat', 'Roboto', sans-serif;
+      font-size: 16pt;
+      font-weight: 700;
+      color: rgba(211, 211, 211, 0.7);
+      z-index: 2;
+      text-shadow: 1px 1px black;
+      bottom: 0.71429rem;
+      left: 0.71429rem;
+      text-decoration: none;
+      cursor: pointer; }
+      .viewer-wrapper .viewport #logo-bottom-left:hover {
+        color: rgba(211, 211, 211, 0.9); }
+    .viewer-wrapper .viewport #loadingIndicator {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      stroke: #9ccef9;
+      fill: #9ccef9;
+      background-color: rgba(0, 0, 0, 0.75);
+      display: none;
+      pointer-events: none;
+      z-index: 1; }
+      .viewer-wrapper .viewport #loadingIndicator svg {
+        height: 45px;
+        position: absolute;
+        margin: auto;
+        top: 0px;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+        animation: rotate 1.2s linear infinite; }
 
 .scroll {
   position: absolute;
   right: 0;
   width: 0.71429rem;
   height: 100%;
-  top: 0; }
+  top: 0;
+  z-index: 2; }
   .scroll .scroll-holder {
     position: relative;
     height: 100%; }
@@ -219,7 +346,7 @@ button.submit {
       transform: rotate(90deg);
       transform-origin: top left;
       position: absolute;
-      width: 57.14286rem;
+      width: 100%;
       margin-left: 10px;
       -webkit-appearance: none;
       background-color: transparent; }
@@ -228,17 +355,20 @@ button.submit {
       .scroll .scroll-holder .imageSlider::-moz-focus-outer {
         border: none; }
       .scroll .scroll-holder .imageSlider::-webkit-slider-thumb {
-        cursor: pointer;
-        background: #00a4d9;
+        cursor: -webkit-grab;
+        background: #524545;
         -webkit-appearance: none;
-        width: 40px;
+        width: 45px;
         height: 20px;
         border-radius: 10px; }
+        .scroll .scroll-holder .imageSlider::-webkit-slider-thumb:active {
+          background: #00a4d9;
+          cursor: -webkit-grabbing; }
 
 .modal {
   position: fixed;
   top: 25%;
-  left: calc(50% - 135px);
+  left: calc(50% - 158px);
   padding: 1em;
   background: #fff;
   z-index: 100;
@@ -316,4 +446,7 @@ button.submit {
         text-decoration: none; }
 
 #loading-progress {
-  color: #9ccef9; }
+  color: #9ccef9;
+  z-index: 2;
+  position: absolute;
+  padding: 5px; }
