@@ -162,12 +162,20 @@ export default {
     cornerstoneTools.pan.activate(this.element, 2);
     cornerstoneTools.zoom.activate(this.element, 4);
 
+    // Set the tool font and font size
+    // context.font = "[style] [variant] [weight] [size]/[line height] [font family]";
+    const fontFamily = 'Roboto, OpenSans, HelveticaNeue-Light, Helvetica Neue Light, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif';
+    cornerstoneTools.textStyle.setFont('15px ' + fontFamily);
 
-    /*
-    Set the tool color
-     */
-    cornerstoneTools.toolColors.setActiveColor('greenyellow');
-    cornerstoneTools.toolColors.setToolColor('white');
+    // Set the tool width
+    cornerstoneTools.toolStyle.setToolWidth(2);
+
+    // Set color for inactive tools
+    cornerstoneTools.toolColors.setToolColor('rgb(255, 255, 0)');
+
+    // Set color for active tools
+    cornerstoneTools.toolColors.setActiveColor('rgb(0, 255, 0)');
+
     cornerstoneTools.length.setConfiguration({shadow: true});
 
     // Stop users from zooming in or out too far
