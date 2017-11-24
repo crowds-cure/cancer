@@ -11,13 +11,6 @@ const chronicleDB = new PouchDB(chronicleURL);
 // document ready?
 document.addEventListener("DOMContentLoaded", function(e) {
 
-
-    populateLeaderBoard();
-
-});
-
-function populateLeaderBoard() {
-
     measurementsDB.query('by/annotators', {
         reduce: true,
         group: true,
@@ -26,13 +19,17 @@ function populateLeaderBoard() {
 
         var rows = res.rows;
         rows.sort(function(a, b) { return b.value - a.value; });
-
-        d3.select('.leaderboard .annotator-count')
-            .text(rows.length);
-
-        displayTopAnnotators(rows);
+        populateLeaderBoard(rows);
     });
 
+});
+
+function populateLeaderBoard(rows) {
+
+    d3.select('.leaderboard .annotator-count')
+            .text(rows.length);
+
+    displayTopAnnotators(rows);
 }
 
 function displayTopAnnotators(rows) {
