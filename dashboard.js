@@ -55,7 +55,9 @@ function populateAnnotationPerCase(measBySeries, catBySeriesMap) {
 
     var allCategories = {
         'TCGA-LUAD' : 'Lung',
-        'TCGA-LIHC' : 'Renal'
+        'TCGA-LIHC' : 'Liver',
+        'TCGA_RN' : 'Renal',
+        'TCGA_OV' : 'Ovarian'
     };
 
     // this block gets the categories that have some annotations
@@ -85,7 +87,7 @@ function populateAnnotationPerCase(measBySeries, catBySeriesMap) {
     var y = d3.scaleLinear()
         .rangeRound([height, 0]);
 
-    x.domain(categories);
+    x.domain(Object.keys(allCategories));
     y.domain([0, d3.max(measBySeries, function(d) { return d.value; })]).nice();
 
     svgg.selectAll(".bar")
@@ -100,7 +102,7 @@ function populateAnnotationPerCase(measBySeries, catBySeriesMap) {
     svgg.append("g")
         .attr("class", "axis")
         .attr("transform", "translate(0," + height + ")")
-        .call(d3.axisBottom(x).tickSizeOuter(0))
+        .call(d3.axisBottom(x).tickSizeOuter(0).tickFormat(function(t) { return allCategories[t];}))
         .select(".domain").remove();
 
     svgg.append("g")
