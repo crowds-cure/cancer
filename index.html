@@ -137,107 +137,96 @@
       </div>
     </div>
 
-    <div class="viewer-wrapper invisible">
-      <div class="top-bar">
-        <div class="viewer-tools">
+    <div class="viewer-wrapper invisible noselect">
+      <div class="top-bar noselect">
+        <div class="viewer-tools noselect">
           <div class="tool" data-tool="wwwc">
-            <a href="/#">
-              <svg class="tool-img">
-                <use xlink:href="/imgs/icons.svg#icon-tools-levels" href="/imgs/icons.svg#icon-tools-levels"></use>
-              </svg>
-              W/L
-            </a>
+            <svg class="tool-img">
+              <use xlink:href="/imgs/icons.svg#icon-tools-levels" href="/imgs/icons.svg#icon-tools-levels"></use>
+            </svg>
+            <a>W/L</a>
           </div>
           <div class="tool" data-tool="length">
-            <a href="/#">
-              <svg class="tool-img">
-                <use xlink:href="/imgs/icons.svg#icon-tools-measure-temp" href="/imgs/icons.svg#icon-tools-measure-temp"></use>
-              </svg>
-              Length
-            </a>
+            <svg class="tool-img">
+              <use xlink:href="/imgs/icons.svg#icon-tools-measure-temp" href="/imgs/icons.svg#icon-tools-measure-temp"></use>
+            </svg>
+            <a>Length</a>
           </div>
           <div class="tool" data-tool="pan">
-            <a href="/#">
-              <svg class="tool-img">
-                <use xlink:href="/imgs/icons.svg#icon-tools-pan" href="/imgs/icons.svg#icon-tools-pan"></use>
-              </svg>
-              Pan
-            </a>
+            <svg class="tool-img">
+              <use xlink:href="/imgs/icons.svg#icon-tools-pan" href="/imgs/icons.svg#icon-tools-pan"></use>
+            </svg>
+            <a>Pan</a>
           </div>
           <div class="tool" data-tool="zoom">
-            <a href="/#">
-              <svg class="tool-img">
-                <use xlink:href="/imgs/icons.svg#icon-tools-zoom" href="/imgs/icons.svg#icon-tools-zoom"></use>
-              </svg>
-              Zoom
-            </a>
+            <svg class="tool-img">
+              <use xlink:href="/imgs/icons.svg#icon-tools-zoom" href="/imgs/icons.svg#icon-tools-zoom"></use>
+            </svg>
+            <a>Zoom</a>
           </div>
           <div class="tool more" data-command="toggleMoreMenu">
-            <a href="/#">
-              <svg>
-                <use xlink:href="./imgs/icons.svg#icon-measurements-lesions" href="./imgs/icons.svg#icon-measurements-lesions"></use>
-              </svg>
-              More
-            </a>
+            <svg>
+              <use xlink:href="./imgs/icons.svg#icon-measurements-lesions" href="./imgs/icons.svg#icon-measurements-lesions"></use>
+            </svg>
+            <a>More</a>
           </div>
           <div class="commands-wrapper">
-            <div class="tool" data-command="save">
-              <a href="/#">
-                <svg>
-                  <use xlink:href="./imgs/icons.svg#icon-status-complete" href="./imgs/icons.svg#icon-status-complete"></use>
-                </svg>
-                Save
-              </a>
-            </div>
-            <div class="tool" data-command="skip">
-              <a href="/#">
-                <svg>
-                  <use xlink:href="./imgs/icons.svg#icon-fast-forward" href="./imgs/icons.svg#icon-fast-forward"></use>
-                </svg>
-                Skip Case
-              </a>
-            </div>
             <div class="tool" data-command="clearAll">
-              <a href="/#">
-                <svg>
-                  <use xlink:href="/imgs/icons.svg#icon-ui-close" href="/imgs/icons.svg#icon-ui-close"></use>
-                </svg>
-                Clear
-              </a>
-            </div>
-          </div>
-          <div class="tool save" data-command="save">
-            <a href="/#">
-              <svg>
-                <use xlink:href="./imgs/icons.svg#icon-status-complete" href="./imgs/icons.svg#icon-status-complete"></use>
-              </svg>
-              Save
-            </a>
-          </div>
-          <div class="tool skip" data-command="skip">
-            <a href="/#">
-              <svg>
-                <use xlink:href="./imgs/icons.svg#icon-fast-forward" href="./imgs/icons.svg#icon-fast-forward"></use>
-              </svg>
-              Skip Case
-            </a>
-          </div>
-          <div class="tool clearAll" data-command="clearAll">
-            <a href="/#">
               <svg>
                 <use xlink:href="/imgs/icons.svg#icon-ui-close" href="/imgs/icons.svg#icon-ui-close"></use>
               </svg>
-              Clear
-            </a>
+              <a>Clear</a>
+            </div>
+            <div class="tool" data-command="save">
+              <svg>
+                <use xlink:href="./imgs/icons.svg#icon-status-complete" href="./imgs/icons.svg#icon-status-complete"></use>
+              </svg>
+              <a>Save</a>
+            </div>
+            <div class="tool" data-command="skip">
+              <svg>
+                <use xlink:href="./imgs/icons.svg#icon-fast-forward" href="./imgs/icons.svg#icon-fast-forward"></use>
+              </svg>
+              <a>Skip Case</a>
+            </div>
+          </div>
+          <div class="tool clearAll" data-command="clearAll">
+            <svg>
+              <use xlink:href="/imgs/icons.svg#icon-ui-close" href="/imgs/icons.svg#icon-ui-close"></use>
+            </svg>
+            <a>Clear</a>
+          </div>
+          <div class="tool save" data-command="save">
+            <svg>
+              <use xlink:href="./imgs/icons.svg#icon-status-complete" href="./imgs/icons.svg#icon-status-complete"></use>
+            </svg>
+            <a>Save</a>
+          </div>
+          <div class="tool skip" data-command="skip">
+            <svg>
+              <use xlink:href="./imgs/icons.svg#icon-fast-forward" href="./imgs/icons.svg#icon-fast-forward"></use>
+            </svg>
+            <a>Skip Case</a>
           </div>
         </div>
-        <div id='loading-progress'></div>
       </div>
-      <div class="viewport"
+      <div class="viewport noselect"
            oncontextmenu="return false"
            unselectable='on'
            onselectstart='return false;'>
+        <div id='loading-progress'></div>
+        <div id='loadingIndicator'>
+          <svg class="spin">
+            <use xlink:href="/imgs/icons.svg#icon-spinner" href="/imgs/icons.svg#icon-spinner"></use>
+          </svg>
+        </div>
         <div id="cornerstoneViewport"></div>
+        <div id="mrbottomright" class="dicomTag">
+            Image:
+        </div>
+        <div id="mrbottomleft" class="dicomTag">
+            WW/WC:
+        </div>
         <div class="scroll">
           <div class="scroll-holder">
             <input class="imageSlider" type="range" min="1">

@@ -40,6 +40,7 @@ $max-screen-size-for-more-option: 500px;
         display: inline-block;
         text-align: -webkit-center;
         cursor: pointer;
+        padding: rem(5);
 
         &.save, &.skip, &.clearAll {
           display: none;
@@ -93,7 +94,7 @@ $max-screen-size-for-more-option: 500px;
           display: block;
           width: rem(42);
           height: rem(20);
-          margin-bottom: rem(10);
+          margin-bottom: rem(5);
           padding: rem(6) 0;
         }
 
@@ -116,6 +117,47 @@ $max-screen-size-for-more-option: 500px;
       width: 100%;
       height: 100%;
       position: absolute;
+      outline: none;
+    }
+
+    .dicomTag {
+      position: absolute;
+      color: $light-blue;
+      z-index: 2;
+      text-shadow: 1px 1px black;
+    }
+
+    #mrbottomright {
+      bottom: rem(10);
+      right: rem(10);
+    }
+
+    #mrbottomleft {
+      bottom: rem(10);
+      left: rem(10);
+    }
+
+    #loadingIndicator {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      stroke: $light-blue;
+      fill: $light-blue;
+      background-color: rgba(0,0,0,0.75);
+      display: none;
+      pointer-events: none; // Necessary for click-through to cornerstone element below
+      z-index: 1;
+
+      svg {
+        height: 45px;
+        position: absolute;
+        margin: auto;
+        top: 0px;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+        animation: rotate 1.2s linear infinite;
+      }
     }
   }
 }
@@ -126,6 +168,7 @@ $max-screen-size-for-more-option: 500px;
   width: rem(10);
   height: 100%;
   top: 0;
+  z-index: 2;
 
   .scroll-holder {
     position: relative;
@@ -135,7 +178,7 @@ $max-screen-size-for-more-option: 500px;
       transform: rotate(90deg);
       transform-origin: top left;
       position: absolute;
-      width: rem(800);
+      width: 100%;
       margin-left: 10px;
       -webkit-appearance: none;
       background-color: rgba(0,0,0,0);
@@ -145,14 +188,14 @@ $max-screen-size-for-more-option: 500px;
       }
 
       &::-moz-focus-outer {
-        border: none
+        border: none;
       }
 
       &::-webkit-slider-thumb {
         cursor: -webkit-grab;
         background: rgb(82, 69, 69);
         -webkit-appearance: none;
-        width: 40px;
+        width: 45px;
         height: 20px;
         border-radius: 10px;
 

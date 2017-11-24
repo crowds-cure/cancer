@@ -52,6 +52,14 @@ button.submit {
   100% {
     transform: rotate(360deg); } }
 
+.noselect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
+
 .sign-up {
   border: none;
   padding: 1.07143rem;
@@ -140,7 +148,8 @@ button.submit {
       .viewer-wrapper .top-bar .viewer-tools .tool {
         display: inline-block;
         text-align: -webkit-center;
-        cursor: pointer; }
+        cursor: pointer;
+        padding: 0.35714rem; }
         .viewer-wrapper .top-bar .viewer-tools .tool.save, .viewer-wrapper .top-bar .viewer-tools .tool.skip, .viewer-wrapper .top-bar .viewer-tools .tool.clearAll {
           display: none; }
         @media (min-width: 500px) {
@@ -169,7 +178,7 @@ button.submit {
           display: block;
           width: 3rem;
           height: 1.42857rem;
-          margin-bottom: 0.71429rem;
+          margin-bottom: 0.35714rem;
           padding: 0.42857rem 0; }
         .viewer-wrapper .top-bar .viewer-tools .tool a {
           text-decoration: none;
@@ -183,14 +192,46 @@ button.submit {
     .viewer-wrapper .viewport #cornerstoneViewport {
       width: 100%;
       height: 100%;
-      position: absolute; }
+      position: absolute;
+      outline: none; }
+    .viewer-wrapper .viewport .dicomTag {
+      position: absolute;
+      color: #9ccef9;
+      z-index: 2;
+      text-shadow: 1px 1px black; }
+    .viewer-wrapper .viewport #mrbottomright {
+      bottom: 0.71429rem;
+      right: 0.71429rem; }
+    .viewer-wrapper .viewport #mrbottomleft {
+      bottom: 0.71429rem;
+      left: 0.71429rem; }
+    .viewer-wrapper .viewport #loadingIndicator {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      stroke: #9ccef9;
+      fill: #9ccef9;
+      background-color: rgba(0, 0, 0, 0.75);
+      display: none;
+      pointer-events: none;
+      z-index: 1; }
+      .viewer-wrapper .viewport #loadingIndicator svg {
+        height: 45px;
+        position: absolute;
+        margin: auto;
+        top: 0px;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+        animation: rotate 1.2s linear infinite; }
 
 .scroll {
   position: absolute;
   right: 0;
   width: 0.71429rem;
   height: 100%;
-  top: 0; }
+  top: 0;
+  z-index: 2; }
   .scroll .scroll-holder {
     position: relative;
     height: 100%; }
@@ -198,7 +239,7 @@ button.submit {
       transform: rotate(90deg);
       transform-origin: top left;
       position: absolute;
-      width: 57.14286rem;
+      width: 100%;
       margin-left: 10px;
       -webkit-appearance: none;
       background-color: transparent; }
@@ -210,7 +251,7 @@ button.submit {
         cursor: -webkit-grab;
         background: #524545;
         -webkit-appearance: none;
-        width: 40px;
+        width: 45px;
         height: 20px;
         border-radius: 10px; }
         .scroll .scroll-holder .imageSlider::-webkit-slider-thumb:active {
@@ -298,4 +339,7 @@ button.submit {
         text-decoration: none; }
 
 #loading-progress {
-  color: #9ccef9; }
+  color: #9ccef9;
+  z-index: 2;
+  position: absolute;
+  padding: 5px; }

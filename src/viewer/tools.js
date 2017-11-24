@@ -65,10 +65,14 @@ export default {
     touchTool.activate(element);
 
     this.active = toolToActivate;
+
+    // Set the element to focused, so we can properly handle keyboard events
+    $(this.element).attr('tabindex', 0).focus();
   },
 
   initStackTool(imageIds) {
-    const slider = $('.imageSlider')[0];
+    const $slider = $('.imageSlider');
+    const slider = $slider[0];
     const stack = {
       currentImageIdIndex: 0,
       imageIds: imageIds
@@ -91,7 +95,7 @@ export default {
     cornerstoneTools.stackPrefetch.enable(this.element);
 
     const element = this.element;
-    const slideTimeoutTime = 40;
+    const slideTimeoutTime = 5;
     let slideTimeout;
 
     // Adding input listener
@@ -105,24 +109,29 @@ export default {
       }, slideTimeoutTime);
     }
 
-    $(slider).off('input', selectImage);
-    $(slider).on('input', selectImage);
+    $slider.off('input', selectImage);
+    $slider.on('input', selectImage);
 
     // Setting the slider size
-    $(slider).css('width', `${this.$cornerstoneViewport.height()}px`);
+    const height = this.$cornerstoneViewport.height() - 35;
+    $slider.css('width', `${height}px`);
 
-    const debounceWindowResizeHandler = debounce(() => $(slider).css('width', `${this.$cornerstoneViewport.height()}px`), 150);
+    const debounceWindowResizeHandler = debounce(() => {
+      const height = this.$cornerstoneViewport.height() - 35;
+      $slider.css('width', `${height}px`)
+    }, 150);
+
     $(window).off('resize', debounceWindowResizeHandler);
     $(window).on('resize', debounceWindowResizeHandler);
 
     // Listening to viewport stack image change, so the slider is synced
-    const cornerstoneNewImageHandler = function () {
+    const cornerstoneStackScrollHandler = function () {
       // Update the slider value
       slider.value = stack.currentImageIdIndex;
     };
 
-    this.$cornerstoneViewport[0].removeEventListener('cornerstonenewimage', cornerstoneNewImageHandler);
-    this.$cornerstoneViewport[0].addEventListener('cornerstonenewimage', cornerstoneNewImageHandler);
+    this.$cornerstoneViewport[0].removeEventListener('cornerstonestackscroll', cornerstoneStackScrollHandler);
+    this.$cornerstoneViewport[0].addEventListener('cornerstonestackscroll', cornerstoneStackScrollHandler);
   },
 
   initInteractionTools() {
@@ -238,11 +247,6 @@ export default {
     cornerstoneTools.touchInput.enable(this.element);
     cornerstoneTools.mouseWheelInput.enable(this.element);
     cornerstoneTools.keyboardInput.enable(this.element);
-
-    this.initStackTool(imageIds);
-
-    // Set the element to focused, so we can properly handle keyboard events
-    $(this.element).attr('tabindex', 0).focus();
 
     this.initInteractionTools();
 
