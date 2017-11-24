@@ -74,6 +74,12 @@ export default {
         cornerstone.events.removeEventListener(IMAGE_LOADED_EVENT, handleImageLoaded);
         cornerstone.events.addEventListener(IMAGE_LOADED_EVENT, handleImageLoaded);
 
+        Tools.initStackTool(imageIds);
+
+        const bottomRight = $('.viewport #mrbottomright');
+        const imageIndex = 1;
+        bottomRight.text(`Image: ${imageIndex}/${imageIds.length}`);
+
         cornerstone.loadAndCacheImage(imageIds[0]).then((image) => {
           resolve();
 
@@ -113,6 +119,47 @@ export default {
     this.$window.on('resize', debounceCornerstoneResize);
 
     cornerstone.enable(this.element);
+
+    // Listen for changes to the viewport so we can update the text overlays in the corner
+    const bottomLeft = $('.viewport #mrbottomleft');
+    function onImageRendered(e) {
+        const viewport = e.detail.viewport;
+        bottomLeft.text("WW/WC: " + Math.round(viewport.voi.windowWidth) + "/" + Math.round(viewport.voi.windowCenter));
+    };
+
+    this.element.removeEventListener('cornerstoneimagerendered', onImageRendered);
+    this.element.addEventListener('cornerstoneimagerendered', onImageRendered);
+
+    const bottomRight = $('.viewport #mrbottomright');
+    function onStackScroll(e) {
+      const element = e.target;
+      const stack = cornerstoneTools.getToolState(element, 'stack');
+      const stackData = stack.data[0];
+      const imageIndex = stackData.currentImageIdIndex + 1;
+      bottomRight.text(`Image: ${imageIndex}/${stackData.imageIds.length}`);
+    };
+
+    this.element.removeEventListener('cornerstonestackscroll', onStackScroll);
+    this.element.addEventListener('cornerstonestackscroll', onStackScroll);
+
+    let loadHandlerTimeout;
+    const loadIndicatorDelay = 25;
+    const loadIndicator = $('#loadingIndicator');
+
+    const startLoadingHandler = element => {
+      clearTimeout(loadHandlerTimeout);
+      loadHandlerTimeout = setTimeout(() => {
+        loadIndicator.css('display', 'block');
+      }, loadIndicatorDelay);
+    };
+
+    const doneLoadingHandler = element => {
+      clearTimeout(loadHandlerTimeout);
+      loadIndicator.css('display', 'none');
+    };
+
+    cornerstoneTools.loadHandlerManager.setStartLoadHandler(startLoadingHandler);
+    cornerstoneTools.loadHandlerManager.setEndLoadHandler(doneLoadingHandler);
 
     // currentSeriesIndex = 0;//a hack to get series in order
     this.getNextCase().then(() => {
