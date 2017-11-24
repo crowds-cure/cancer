@@ -1,0 +1,17 @@
+
+
+body {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 1em;
+}
+
+
+.top-annotators {
+    margin-left: 50px;
+}
+
+.annotator {
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
+}

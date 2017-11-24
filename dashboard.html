@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>RSNA-CQ Dashboard</title>
+
+    <link rel="stylesheet" type="text/css" href="dashboard.css" />
+
+
+</head>
+
+<body>
+
+    <h1> RSNA Crowd Quant Dashboard </h1>
+
+    <div class='leaderboard'>
+        <h4 class='section-title'> Leader Board </h4>
+        <h6 class='annotator'> Number of Annotators: <span class='annotator-count'> 0 </span> </h6>
+        <div class='top-annotators'></div>
+    </div>
+
+    <div class='case-cover'>
+        <h4> Case Coverage by Classification </h4>
+    </div>
+
+    <div class='case-histogram'>
+        <h4> Case Histogram </h4>
+    </div>
+
+
+    <script type="text/javascript" src="./node_modules/pouchdb/dist/pouchdb.min.js"></script>
+    <script type="text/javascript" src="./node_modules/pouchdb/dist/pouchdb.find.min.js"></script>
+
+    <script type="text/javascript" src="./node_modules/d3/build/d3.min.js"></script>
+    <script type="text/javascript" src="./dashboard.js"></script>
+
+
+</body>
+
+</html>
