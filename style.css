@@ -6,7 +6,8 @@ html, body {
   background: #000;
   overflow: hidden;
   font-size: 16px;
-  font-family: "Roboto", sans-serif; }
+  font-family: "Roboto", sans-serif;
+  position: fixed; }
 
 .invisible {
   display: none !important; }
