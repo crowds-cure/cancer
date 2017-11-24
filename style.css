@@ -154,8 +154,18 @@ button.submit {
     .login-wrapper .login-form .form-checkbox {
       font-size: 1.78571rem;
       margin-bottom: 1.07143rem; }
+    .login-wrapper .login-form .signup-section {
+      padding: 0.35714rem;
+      margin: 0.71429rem; }
+      .login-wrapper .login-form .signup-section .signup-option {
+        cursor: pointer;
+        font-size: 16pt;
+        margin: 0 10px; }
+        .login-wrapper .login-form .signup-section .signup-option input {
+          height: 1rem;
+          width: 1.5rem; }
     .login-wrapper .login-form .form-input {
-      background-color: #ffffff;
+      background-color: #efefef;
       padding: 0.71429rem;
       border: 0.07143rem solid #808080;
       margin-bottom: 1.07143rem;
@@ -172,16 +182,17 @@ button.submit {
           position: absolute;
           right: 0px; }
       .login-wrapper .login-form .form-input input, .login-wrapper .login-form .form-input select {
+        background-color: #efefef;
         border: none;
         font-size: 1.64286rem; }
         .login-wrapper .login-form .form-input input:focus, .login-wrapper .login-form .form-input select:focus {
           outline-width: 0; }
       .login-wrapper .login-form .form-input input {
-        width: 75%; }
+        width: calc(100% - 60px); }
       .login-wrapper .login-form .form-input select {
-        background-color: #ffffff;
+        background-color: #efefef;
         -webkit-appearance: none;
-        width: 69%; }
+        width: calc(100% - 60px); }
 
 .viewer-wrapper {
   display: flex;

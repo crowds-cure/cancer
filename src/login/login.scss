@@ -140,8 +140,24 @@ $dark-blue: #20a5d6;
       margin-bottom: rem(15);
     }
 
+    .signup-section {
+      padding: rem(5);
+      margin: rem(10);
+
+      .signup-option {
+        cursor: pointer;
+        font-size: 16pt;
+        margin: 0 10px;
+
+        input {
+          height: 1rem;
+          width: 1.5rem;
+        }
+      }
+    }
+
     .form-input {
-      background-color: #ffffff;
+      background-color: $white;
       padding: rem(10);
       border: rem(1) solid #808080;
       margin-bottom: rem(15);
@@ -163,6 +179,7 @@ $dark-blue: #20a5d6;
       }
 
       input, select {
+        background-color: $white;
         border: none;
         font-size: rem(23);
 
@@ -172,13 +189,13 @@ $dark-blue: #20a5d6;
       }
 
       input {
-        width: 75%;
+        width: calc(100% - 60px);
       }
 
       select {
-        background-color: #ffffff;
+        background-color: $white;
         -webkit-appearance: none;
-        width: 69%;
+        width: calc(100% - 60px);
       }
     }
   }

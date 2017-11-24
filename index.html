@@ -42,7 +42,8 @@
         </div>
         <form>
           <div class="error invisible" id="login-error"></div>
-          <h1>Sign In</h1>
+
+          <h3 class="logo-header">Sign In</h3>
           <div class="form-input">
             <svg class="input-icon">
               <use xlink:href="/imgs/icons.svg#icon-user" href="/imgs/icons.svg#icon-user"></use>
@@ -81,40 +82,37 @@
 
     <div class="login-wrapper sign invisible">
       <div class="login-form">
+        <div class="info-section">
+          <h1 class="logo-header">Crowds Cure Cancer</h1>
+          <h2 class="logo-header">Help Annotate Data from The Cancer Imaging Archive</h2>
+        </div>
         <form>
           <div class="error invisible"></div>
 
+        <div class="signup-section">
+          <h3 class="logo-header">Select a username</h3>
           <div class="form-input">
             <svg class="input-icon">
               <use xlink:href="/imgs/icons.svg#icon-user" href="/imgs/icons.svg#icon-user"></use>
             </svg>
             <select id="signup-name-select"></select>
-            <svg class="input-icon caret">
-              <use xlink:href="/imgs/icons.svg#icon-caret" href="/imgs/icons.svg#icon-caret"></use>
-            </svg>
-          </div>
-
-<<<<<<< HEAD
-        <div class="form-input">
-          <span>Are you a practicing Radiologist?:</span>
-          <div>
-              <label for="signup-radiologist-yes">Yes</label>
-              <input type="radio" name="is-radiologist" id="signup-radiologist-yes" value="yes" required/>
-              <label for="signup-radiologist-no">No</label>
-              <input type="radio" name="is-radiologist" id="signup-radiologist-no" value="no" required/>
           </div>
         </div>
-=======
-          <div class="form-checkbox">
-            <div>Are you a practicing Radiologist?:</div>
-            <input type="radio" name="is-radiologist" id="signup-radiologist-yes" checked value="yes" required/>
-            <label for="signup-radiologist-yes">Yes</label>
+        <div class='signup-section'>
+          <h3 class="logo-header">Are you a practicing Radiologist?</h3>
+          <label class="signup-option noselect">
+            <input type="radio" name="is-radiologist" id="signup-radiologist-yes" value="yes" required checked/>
+            Yes
+          </label>
+          <label class="signup-option noselect">
             <input type="radio" name="is-radiologist" id="signup-radiologist-no" value="no" required/>
-            <label for="signup-radiologist-no">No</label>
-          </div>
->>>>>>> Login and signup form update
+            No
+          </label>
+        </div>
 
-          <div class="form-input invisible speciality">
+        <div class="signup-section invisible speciality">
+          <h3 class="logo-header">What is your speciality?</h3>
+          <div class="form-input">
             <svg class="input-icon">
               <use xlink:href="/imgs/icons.svg#icon-doctor" href="/imgs/icons.svg#icon-doctor"></use>
             </svg>
@@ -127,56 +125,61 @@
               <option value="technicianOrDosimetrist">Technician / Dosimetrist</option>
               <option value="other">Other</option>
             </select>
-            <svg class="input-icon caret">
-              <use xlink:href="/imgs/icons.svg#icon-caret" href="/imgs/icons.svg#icon-caret"></use>
-            </svg>
           </div>
+        </div>
 
-          <div class="form-input years-of-experience">
-            <svg class="input-icon">
-              <use xlink:href="/imgs/icons.svg#icon-calendar" href="/imgs/icons.svg#icon-calendar"></use>
-            </svg>
-            <select id="signup-name-select">
-              <option>Years of experience...</option>
-              <option value="<5">< 5 years</option>
-              <option value="5-10">5-10 years</option>
-              <option value=">10">> 10 years</option>
-            </select>
-            <svg class="input-icon caret">
-              <use xlink:href="/imgs/icons.svg#icon-caret" href="/imgs/icons.svg#icon-caret"></use>
-            </svg>
-          </div>
-
-<<<<<<< HEAD
-        <div id="anatomy-choices" class="form-input">
-            <span>Cancer Types:</span>
-            <div>
-                <input type="checkbox" name="anatomy-choice" value="Liver" checked> Liver </input>
-                <input type="checkbox" name="anatomy-choice" value="Lung" checked> Lung </input>
-                <input type="checkbox" name="anatomy-choice" value="Kidney" checked> Renal </input>
-                <input type="checkbox" name="anatomy-choice" value="Ovary" checked> Ovarian </input>
+        <div class="signup-section years-of-experience">
+            <h3 class="logo-header">How many years of experience do you have?</h3>
+            <div class="form-input">
+              <svg class="input-icon">
+                <use xlink:href="/imgs/icons.svg#icon-calendar" href="/imgs/icons.svg#icon-calendar"></use>
+              </svg>
+              <select id="signup-name-select">
+                <option>Years of experience...</option>
+                <option value="<5">< 5 years</option>
+                <option value="5-10">5-10 years</option>
+                <option value=">10">> 10 years</option>
+              </select>
             </div>
-        </div>
+          </div>
 
-        <div class="form-input">
-          <label for="signup-email">Email (not required)</label>
-          <input type="email" name="email" id="signup-email"/>
-        </div>
-=======
+          <div id="anatomy-choices" class="signup-section">
+            <h3 class="logo-header">Which Cancer Types would you like to see?</h3>
+            <label class='noselect signup-option'>
+              <input type="checkbox" name="anatomy-choice" value="Liver" checked/>
+              Liver
+            </label>
+            <label class='noselect signup-option'>
+              <input type="checkbox" name="anatomy-choice" value="Lung" checked/>
+              Lung
+            </label>
+            <label class='noselect signup-option'>
+              <input type="checkbox" name="anatomy-choice" value="Kidney" checked/>
+              Renal
+            </label>
+            <label class='noselect signup-option'>
+              <input type="checkbox" name="anatomy-choice" value="Ovary" checked/>
+              Ovarian
+            </label>
+          </div>
+
+          <div class="signup-section">
+            <h3 class="logo-header">Provide your email to receive news about Crowds Cure Cancer</h3>
           <div class="form-input">
             <svg class="input-icon">
-              <use xlink:href="/imgs/icons.svg#icon-mail" href="/imgs/icons.svg#icon-mail"></use>
+                <use xlink:href="/imgs/icons.svg#icon-mail" href="/imgs/icons.svg#icon-mail"></use>
             </svg>
-            <input id="signup-email" type="text" placeholder="Email (not required)">
+            <input id="signup-email" type="email" name="email" placeholder="Email (Optional)">
           </div>
->>>>>>> Login and signup form update
+        </div>
 
-          <button class="submit" type="submit" id="signup-button">
-            Sign Up
-            <svg class="loading invisible">
-              <use xlink:href="/imgs/icons.svg#icon-spinner" href="/imgs/icons.svg#icon-spinner"></use>
-            </svg>
-          </button>
+
+        <button class="submit" type="submit" id="signup-button">
+          Sign Up
+          <svg class="loading invisible">
+            <use xlink:href="/imgs/icons.svg#icon-spinner" href="/imgs/icons.svg#icon-spinner"></use>
+          </svg>
+        </button>
         </form>
       </div>
     </div>

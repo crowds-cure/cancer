@@ -233,28 +233,6 @@ class Signup {
 
         Viewer.initViewer();
       });
-
-      // getUuid().then((id) => {
-      //   console.log('id:', id);
-      //   return createUser(id, data);
-      // }).then((res) => {
-      //   console.log('res:', res);
-      // })
-
-      //   // Mocking login
-      //   setTimeout(function () {
-      //     $loadingImg.addClass('invisible');
-      //     $loginWrapper.addClass('invisible');
-      //
-      //     Viewer.initViewer();
-      //   }, 1000);
-      // });
-      //
-      // $('#open-signup-btn').click(function(event) {
-      //   event.preventDefault();
-      //   $loginWrapper.addClass('invisible');
-      //
-      //   Signup.initSignup();
     });
   }
 }
