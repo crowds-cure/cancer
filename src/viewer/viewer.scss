@@ -128,6 +128,13 @@ $max-screen-size-for-more-option: 500px;
       text-shadow: 1px 1px black;
     }
 
+    #patient-id-upper-right {
+      color: $light-blue;
+      position: absolute;
+      top: rem(10);
+      right: rem(25); // room for scrollbar
+    }
+
     #mrbottomrightImageIndex {
       bottom: rem(10);
       right: rem(10);
