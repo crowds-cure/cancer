@@ -200,13 +200,14 @@ class Signup {
       //   $loadingImg.addClass('invisible');
       //
       // }
-
+      var createDate = Date.now();
       const data = {
         _id: username,
         username,
         // password,
         isRadiologist,
-        anatomyChoices
+        anatomyChoices,
+        createDate
       }
       window.localStorage.setItem('username', username);
 
