@@ -18,7 +18,7 @@ Login.$loginForm.off('submit').on('submit', function (evt) {
     console.log('username', username, 'exist');
     window.localStorage.setItem('username', username);
     Login.$loadingImg.addClass('invisible');
-    Login.$loginForm.addClass('invisible');
+    Login.$loginWrapper.addClass('invisible');
 
     Viewer.initViewer();
   }).catch((err) => {
@@ -35,4 +35,9 @@ $('#open-signup-btn-new').off('click').click(function(event) {
   Login.$loginWrapper.addClass('invisible');
 
   new Signup().init();
+});
+
+$(document.body).css({
+  position: 'relative',
+  overflow: 'auto'
 });

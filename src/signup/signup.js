@@ -93,8 +93,8 @@ class Signup {
 
   init () {
     console.log('Signup.init() is called');
-    var $loading = $('.signup-wrapper form button.submit img.loading');
-    var $signup = $('.signup-wrapper');
+    var $loading = $('.sign form button.submit loading');
+    var $signup = $('.sign');
     var $overlay = $('.loading-overlay');
 
     $overlay.removeClass('invisible').addClass('loading');
@@ -118,15 +118,15 @@ class Signup {
         const isRadiologist = ($('input[name="is-radiologist"]:checked').val() === 'yes');
         // console.log('isRadiologist:', isRadiologist);
         if(isRadiologist){
-          if(!$('#signup-speciality').hasClass('invisible')){
-            $('#signup-speciality').addClass('invisible');
+          if(!$('.speciality').hasClass('invisible')){
+            $('.speciality').addClass('invisible');
           }
-          $('#signup-years-of-experience').removeClass('invisible');
+          $('.years-of-experience').removeClass('invisible');
         }else{
-          if(!$('#signup-years-of-experience').hasClass('invisible')){
-            $('#signup-years-of-experience').addClass('invisible');
+          if(!$('.years-of-experience').hasClass('invisible')){
+            $('.years-of-experience').addClass('invisible');
           }
-          $('#signup-speciality').removeClass('invisible');
+          $('.speciality').removeClass('invisible');
         }
       }
     });
@@ -134,17 +134,17 @@ class Signup {
 
     // $('input[name="years-of-experience"]').focus(function() {
     //   console.log('years of exp');
-    //   if(!$('.signup-wrapper .error').hasClass('invisible')){
-    //     $('.signup-wrapper .error').text('');
-    //     $('.signup-wrapper .error').addClass('invisible');
+    //   if(!$('.sign .error').hasClass('invisible')){
+    //     $('.sign .error').text('');
+    //     $('.sign .error').addClass('invisible');
     //   }
     // });
 
-    $('.signup-wrapper form').off('submit').on('submit', function (event) {
+    $('.sign form').off('submit').on('submit', function (event) {
       event.preventDefault();
 
       $loading.removeClass('invisible');
-      // $('.signup-wrapper .error').addClass('invisible');
+      // $('.sign .error').addClass('invisible');
 
       const username = $('#signup-name-select option:selected').text();
       Login.username = username;
@@ -157,18 +157,24 @@ class Signup {
       // const isRadiologist2 = $('#radiologist-no').val();
       let yearsOfExperience;
       let speciality;
+      let anatomyChoices = [];
+
       if(isRadiologist){
         yearsOfExperience = $('#signup-years-of-experience option:selected').val();
       }else{
         speciality = $('#signup-speciality option:selected').val();
       }
 
+      $("#anatomy-choices input:checkbox[name=anatomy-choice]:checked").each(function(){
+          anatomyChoices.push($(this).val());
+      });
+
       const email = $('#signup-email').val();
       console.log('email:', email);
 
       // if(isRadiologist && isNaN(yearsOfExperience)){
-      //     $('.signup-wrapper .error').removeClass('invisible');
-      //     $('.signup-wrapper .error').text('"Years of exprience" must be a number');
+      //     $('.sign .error').removeClass('invisible');
+      //     $('.sign .error').text('"Years of exprience" must be a number');
       //
       //     $('input[name="years-of-experience"]').val('');
       //
@@ -183,8 +189,8 @@ class Signup {
       // console.log('values', values);
 
       // if(password !== confirmPassword){
-      //   $('.signup-wrapper .error').removeClass('invisible');
-      //   $('.signup-wrapper .error').text('Passwords don\'t match');
+      //   $('.sign .error').removeClass('invisible');
+      //   $('.sign .error').text('Passwords don\'t match');
       //
       //   const password = $('#signup-password').val('');
       //   const confirmPassword = $('#signup-confirm-password').val('');
@@ -200,6 +206,7 @@ class Signup {
         username,
         // password,
         isRadiologist,
+        anatomyChoices
       }
       window.localStorage.setItem('username', username);
 
@@ -215,6 +222,10 @@ class Signup {
         data.email = email;
       }
 
+      if (anatomyChoices && anatomyChoices.length > 0) {
+        data.anatomyChoices = anatomyChoices;
+      }
+
       console.log('data:', data);
       annotatorsDB.put(data).then(() => {
         $loading.addClass('invisible');
@@ -222,28 +233,6 @@ class Signup {
 
         Viewer.initViewer();
       });
-
-      // getUuid().then((id) => {
-      //   console.log('id:', id);
-      //   return createUser(id, data);
-      // }).then((res) => {
-      //   console.log('res:', res);
-      // })
-
-      //   // Mocking login
-      //   setTimeout(function () {
-      //     $loadingImg.addClass('invisible');
-      //     $loginWrapper.addClass('invisible');
-      //
-      //     Viewer.initViewer();
-      //   }, 1000);
-      // });
-      //
-      // $('#open-signup-btn').click(function(event) {
-      //   event.preventDefault();
-      //   $loginWrapper.addClass('invisible');
-      //
-      //   Signup.initSignup();
     });
   }
 }
