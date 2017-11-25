@@ -71,9 +71,14 @@ function populateAnnotationPerCase(measBySeries, catBySeriesMap) {
     });
     var categories = Object.keys(catMap);
 
-    var margin = {top: 20, right: 40, bottom: 30, left: 60},
+    var margin = {top: 60, right: 40, bottom: 30, left: 60},
         width = +svg.attr('width') - margin.left - margin.right,
         height = +svg.attr('height') - margin.top - margin.bottom;
+
+    svg.append('g')
+        .attr('transform', 'translate(40, 30)')
+        .append('text')
+        .text('Annotations per Category');
 
     var svgg = svg.append("g")
         .attr("transform",
