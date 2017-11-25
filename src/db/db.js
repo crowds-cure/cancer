@@ -9,7 +9,7 @@ export const annotatorsURL = `${baseURL}/annotators`;
 export const adjectivesURL = `${baseURL}/adjectives`;
 export const animalsURL = `${baseURL}/animals`;
 //export const chronicleURL = `${baseURL}/chronicle`;
-export const chronicleURL = `${baseURL}/compressed-chronicle`;
+export const chronicleURL = `${baseURL}/compressed-chronicle2`;
 
 export const measurementsURL = `${baseURL}/measurements`;
 

@@ -26,14 +26,13 @@ export default {
   seriesUID_A: undefined,
 
   getChronicleImageIDs () {
-    return chronicleDB.query("instances/context", {
+    return chronicleDB.query("instances/bySeriesUID_j", { // bySeriesUID_j or byCollection
       reduce : true,
-      stale : 'update_after',
-      // key: [["UnspecifiedInstitution", "TCGA-17-Z011"], ["UnspecifiedStudyDescription", "1.3.6.1.4.1.14519.5.2.1.7777.9002.242742387344636595876380532248"]],
-      // startkey : [['UnspecifiedInstitution', 'TCGA-17-Z011']], // only show the prostates - they basically work
-      // endkey: [['UnspecifiedInstitution', 'TCGA-17-Z013']],
-      group_level : 3,
+      //stale : 'update_after',
+      group : true,
     }).then((data) => {
+
+        // filter the data to the user's choice anatomies
 
       const annotatorID = Login.username;
       return this.getNextSeriesForAnnotator(annotatorID);

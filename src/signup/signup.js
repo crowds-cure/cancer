@@ -228,7 +228,8 @@ class Signup {
       }
 
       console.log('data:', data);
-      annotatorsDB.put(data).then(() => {
+      annotatorsDB.put(data).then((res) => {
+          Login.user = data;
         $loading.addClass('invisible');
         $signup.addClass('invisible');
 
