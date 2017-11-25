@@ -26,16 +26,33 @@ export default {
   seriesUID_A: undefined,
 
   getChronicleImageIDs () {
+
+    var allCases; // this could be cached
+    var userCases; // filtered to user's anatChoices
+
     return chronicleDB.query("instances/bySeriesUID_j", { // bySeriesUID_j or byCollection
       reduce : true,
       //stale : 'update_after',
       group : true,
-    }).then((data) => {
-
-        // filter the data to the user's choice anatomies
+    }).then((cases) => {
+      allCases = cases.rows;
 
       const annotatorID = Login.username;
-      return this.getNextSeriesForAnnotator(annotatorID);
+      const anatomyChoices = Login.user.anatomyChoices;
+
+      var categoryIdToLabelMap = {
+          'TCGA-LUAD' : 'Lung',
+          'TCGA-LIHC' : 'Liver',
+          'TCGA_RN' : 'Renal',
+          'TCGA_OV' : 'Ovarian'
+      };
+
+      userCases = allCases.filter(curCase => {
+        var catLabel = categoryIdToLabelMap[curCase.key[1]];
+        return anatomyChoices.indexOf(catLabel) !== -1;
+      });
+
+      return this.getNextSeriesForAnnotator(annotatorID, userCases);
   }).then ((seriesUID) => {
 
       if(!this.currentSeriesIndex) {
@@ -112,41 +129,38 @@ export default {
     });
   },
 
-  getNextSeriesForAnnotator(annotatorID) {
+  getNextSeriesForAnnotator(annotatorID, cases) {
+
+    // filter cases by annotator's anatomyChoices
+
 
     let measurementsPerSeries = {};
     let annotatorMeasuredSeries = {};
-    let seriesUIDs = [];
+    let seriesUIDs = cases.map(c => { return c.key[0] });
 
     // first, get list of all series (this should be factored out to be global and only queried once)
-    return chronicleDB.query('instances/context', {
+    // result.rows.forEach(row => {
+    //   seriesUIDs.push(row.key[2][2]);
+    // });
+
+    // then get the list of all measurements per series and how many measurements
+    // (not all series will have been measured)
+    return measurementsDB.query('by/seriesUID', {
       reduce: true,
       group: true,
-      group_level: 3,
+      level: 'exact'
     }).then(function (result) {
 
       result.rows.forEach(row => {
-        seriesUIDs.push(row.key[2][2]);
+        measurementsPerSeries[row.key] = row.value;
       });
 
-      // then get the list of all measurements per series and how many measurements
-      // (not all series will have been measured)
-      return measurementsDB.query('by/seriesUID', {
-        reduce: true,
-        group: true,
-        level: 'exact',
+      return measurementsDB.query('by/annotators', {
+        reduce: false,
+        include_docs: true,
+        start_key: annotatorID,
+        end_key: annotatorID,
       })
-    }).then(function (result) {
-        result.rows.forEach(row => {
-          measurementsPerSeries[row.key] = row.value;
-        });
-
-        return measurementsDB.query('by/annotators', {
-          reduce: false,
-          include_docs: true,
-          start_key: annotatorID,
-          end_key: annotatorID,
-        })
     }).then(function (result) {
 
       result.rows.forEach(row => {
@@ -162,6 +176,7 @@ export default {
       for (let seriesIndex = 0; seriesIndex < seriesUIDs.length; seriesIndex++) {
         let seriesUID = seriesUIDs[seriesIndex];
         if ( ! (seriesUID in measurementsPerSeries) ) {
+          console.log('Next Case:', (cases.find(c => c.key[0] === seriesUID)).key);
           return seriesUID;
 
         }
@@ -171,6 +186,7 @@ export default {
           leastMeasured.measurementCount = measurementsPerSeries[seriesUID];
         }
       }
+      console.log(cases.find(c => c.key[0] === seriesUID));
       return leastMeasured.seriesUID;
     })
   }
