@@ -12,13 +12,11 @@ Login.$loginForm.off('submit').on('submit', function (evt) {
   $loginUsername.val('');
   Login.username = username;
   console.log('username:', username);
-  console.log('Login Login:', Login);
+  //console.log('Login Login:', Login);
 
   annotatorsDB.get(username).then((user) => {
-    console.log('username', username, 'exists');
-    console.log('  anatomies', user.anatomyChoices);
-    console.log('  isRadiologist', user.isRadiologist);
     Login.user = user;
+    console.log('Login.user is: ', Login.user);
 
     window.localStorage.setItem('username', username);
     Login.$loadingImg.addClass('invisible');
