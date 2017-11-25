@@ -176,7 +176,7 @@ export default {
       for (let seriesIndex = 0; seriesIndex < seriesUIDs.length; seriesIndex++) {
         let seriesUID = seriesUIDs[seriesIndex];
         if ( ! (seriesUID in measurementsPerSeries) ) {
-          console.log('Next Case:', (cases.find(c => c.key[0] === seriesUID)).key);
+          // console.log('Next Case:', (cases.find(c => c.key[0] === seriesUID)).key);
           return seriesUID;
 
         }
@@ -186,7 +186,7 @@ export default {
           leastMeasured.measurementCount = measurementsPerSeries[seriesUID];
         }
       }
-      console.log(cases.find(c => c.key[0] === seriesUID));
+      // console.log(cases.find(c => c.key[0] === seriesUID));
       return leastMeasured.seriesUID;
     })
   }
