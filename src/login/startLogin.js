@@ -17,6 +17,7 @@ Login.$loginForm.off('submit').on('submit', function (evt) {
   annotatorsDB.get(username).then((user) => {
     Login.user = user;
     console.log('Login.user is: ', Login.user);
+    $('#username-bottom-left').text(Login.username);
 
     window.localStorage.setItem('username', username);
     Login.$loadingImg.addClass('invisible');

@@ -146,7 +146,7 @@ $max-screen-size-for-more-option: 500px;
       color: rgba(211,211,211, 0.7);
       z-index: 2;
       text-shadow: 1px 1px black;
-      bottom: rem(10);
+      bottom: rem(30);
       left: rem(10);
       text-decoration: none;
       cursor: pointer;
@@ -154,6 +154,13 @@ $max-screen-size-for-more-option: 500px;
       &:hover {
         color: rgba(211,211,211, 0.9);
       }
+    }
+
+    #username-bottom-left {
+      position:absolute;
+      bottom: rem(10);
+      left: rem(10);
+      color: $light-blue;
     }
 
     #loadingIndicator {
