@@ -227,8 +227,9 @@ class Signup {
         data.anatomyChoices = anatomyChoices;
       }
 
-      console.log('data:', data);
-      annotatorsDB.put(data).then(() => {
+      annotatorsDB.put(data).then((res) => {
+        Login.user = data;
+        console.log('Login.user is: ', Login.user);
         $loading.addClass('invisible');
         $signup.addClass('invisible');
 
