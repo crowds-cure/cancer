@@ -173,10 +173,14 @@ export default {
       // - if the user already measured it, ignore it
       // - otherwise find the least measured one
       let leastMeasured = {seriesUID: undefined, measurementCount: Number.MAX_SAFE_INTEGER};
+      let caseDetails;
+
       for (let seriesIndex = 0; seriesIndex < seriesUIDs.length; seriesIndex++) {
         let seriesUID = seriesUIDs[seriesIndex];
         if ( ! (seriesUID in measurementsPerSeries) ) {
-          console.log('Next Case Category:', (cases.find(c => c.key[0] === seriesUID)).key);
+          caseDetails = (cases.find(c => c.key[0] === seriesUID).key);
+          console.log('Next Case Category:', caseDetails);
+          $('#patient-id-upper-right').text(caseDetails[2]);
           return seriesUID;
 
         }
@@ -186,7 +190,9 @@ export default {
           leastMeasured.measurementCount = measurementsPerSeries[seriesUID];
         }
       }
-      console.log('Next Case Category:', cases.find(c => c.key[0] === leastMeasured.seriesUID));
+      caseDetails = (cases.find(c => c.key[0] === leastMeasured.seriesUID).key);
+      console.log('Next Case Category:', caseDetails);
+      $('#patient-id-upper-right').text(caseDetails[2]);
       return leastMeasured.seriesUID;
     })
   }

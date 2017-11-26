@@ -292,6 +292,11 @@ button.submit {
       color: #9ccef9;
       z-index: 2;
       text-shadow: 1px 1px black; }
+    .viewer-wrapper .viewport #patient-id-upper-right {
+      color: #9ccef9;
+      position: absolute;
+      top: 0.71429rem;
+      right: 1.78571rem; }
     .viewer-wrapper .viewport #mrbottomrightImageIndex {
       bottom: 0.71429rem;
       right: 0.71429rem; }
@@ -306,12 +311,17 @@ button.submit {
       color: rgba(211, 211, 211, 0.7);
       z-index: 2;
       text-shadow: 1px 1px black;
-      bottom: 0.71429rem;
+      bottom: 2.14286rem;
       left: 0.71429rem;
       text-decoration: none;
       cursor: pointer; }
       .viewer-wrapper .viewport #logo-bottom-left:hover {
         color: rgba(211, 211, 211, 0.9); }
+    .viewer-wrapper .viewport #username-bottom-left {
+      position: absolute;
+      bottom: 0.71429rem;
+      left: 0.71429rem;
+      color: #9ccef9; }
     .viewer-wrapper .viewport #loadingIndicator {
       position: absolute;
       width: 100%;

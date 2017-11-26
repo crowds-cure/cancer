@@ -230,6 +230,7 @@ class Signup {
       annotatorsDB.put(data).then((res) => {
         Login.user = data;
         console.log('Login.user is: ', Login.user);
+        $('#username-bottom-left').text(Login.username);
         $loading.addClass('invisible');
         $signup.addClass('invisible');
 
