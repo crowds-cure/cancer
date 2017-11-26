@@ -135,6 +135,13 @@ $max-screen-size-for-more-option: 500px;
       right: rem(25); // room for scrollbar
     }
 
+    #category-upper-right {
+      color: $light-blue;
+      position: absolute;
+      top: rem(30);
+      right: rem(25); // room for scrollbar
+    }
+
     #mrbottomrightImageIndex {
       bottom: rem(10);
       right: rem(10);

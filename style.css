@@ -297,6 +297,11 @@ button.submit {
       position: absolute;
       top: 0.71429rem;
       right: 1.78571rem; }
+    .viewer-wrapper .viewport #category-upper-right {
+      color: #9ccef9;
+      position: absolute;
+      top: 2.14286rem;
+      right: 1.78571rem; }
     .viewer-wrapper .viewport #mrbottomrightImageIndex {
       bottom: 0.71429rem;
       right: 0.71429rem; }
