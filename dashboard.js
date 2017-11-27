@@ -42,14 +42,14 @@ document.addEventListener("DOMContentLoaded", function(e) {
 
         populateLeaderBoard(measByAnno);
         populateHistogram(measBySeries);
-        populateAnnotationPerCase(measBySeries, catBySeries);
+        populateAnnotationPerCategory(measBySeries, catBySeries);
 
     });
 
 });
 
 
-function populateAnnotationPerCase(measBySeries, catBySeriesMap) {
+function populateAnnotationPerCategory(measBySeries, catBySeriesMap) {
 
     var svg = d3.select('#annos-by-category');
 
@@ -60,7 +60,6 @@ function populateAnnotationPerCase(measBySeries, catBySeriesMap) {
         'TCGA_OV' : 'Ovarian'
     };
 
-    // this block gets the categories that have some annotations
     var catMap = {};
     measBySeries.forEach(function(m) {
         m.category = catBySeriesMap[m.key];
@@ -69,7 +68,6 @@ function populateAnnotationPerCase(measBySeries, catBySeriesMap) {
         }
         catMap[m.category]++;
     });
-    var categories = Object.keys(catMap);
 
     var margin = {top: 60, right: 40, bottom: 30, left: 60},
         width = +svg.attr('width') - margin.left - margin.right,
@@ -92,14 +90,14 @@ function populateAnnotationPerCase(measBySeries, catBySeriesMap) {
     var y = d3.scaleLinear()
         .rangeRound([height, 0]);
 
-    x.domain(Object.keys(allCategories));
-    y.domain([0, d3.max(measBySeries, function(d) { return d.value; })]).nice();
+    x.domain(Object.keys(catMap));
+    y.domain([0, d3.max(Object.values(catMap))]).nice();
 
     svgg.selectAll(".bar")
-      .data(measBySeries)
+      .data(d3.entries(catMap))
     .enter().append("rect")
       .attr("class", "bar")
-      .attr("x", function(d) { return x(d.category); })
+      .attr("x", function(d) { return x(d.key); })
       .attr("width", x.bandwidth())
       .attr("y", function(d) { return y(d.value); })
       .attr("height", function(d) { return height - y(d.value); });
