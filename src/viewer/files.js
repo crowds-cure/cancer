@@ -145,7 +145,7 @@ export default {
 
     // then get the list of all measurements per series and how many measurements
     // (not all series will have been measured)
-    return measurementsDB.query('by/seriesUID', {
+    return measurementsDB.query('by/seriesUIDNoSkip', {
       reduce: true,
       group: true,
       level: 'exact'
