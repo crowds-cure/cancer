@@ -163,6 +163,14 @@ export default {
       })
     }).then(function (result) {
 
+      // todo- remove duplication! store on a utils object? or the Login?
+      let categoryIdToLabelMap = {
+          'TCGA-LUAD' : 'Lung',
+          'TCGA-LIHC' : 'Liver',
+          'TCGA_RN' : 'Renal',
+          'TCGA_OV' : 'Ovarian'
+      };
+
       result.rows.forEach(row => {
         annotatorMeasuredSeries[row.doc.seriesUID] = true;
       });
@@ -181,6 +189,7 @@ export default {
           caseDetails = (cases.find(c => c.key[0] === seriesUID).key);
           console.log('Next Case Category:', caseDetails);
           $('#patient-id-upper-right').text(caseDetails[2]);
+          $('#category-upper-right').text(categoryIdToLabelMap[caseDetails[1]]);
           return seriesUID;
 
         }
@@ -193,6 +202,7 @@ export default {
       caseDetails = (cases.find(c => c.key[0] === leastMeasured.seriesUID).key);
       console.log('Next Case Category:', caseDetails);
       $('#patient-id-upper-right').text(caseDetails[2]);
+      $('#category-upper-right').text(categoryIdToLabelMap[caseDetails[1]]);
       return leastMeasured.seriesUID;
     })
   }
