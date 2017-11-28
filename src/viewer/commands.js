@@ -207,6 +207,10 @@ export default {
     return savingPromise;
   },
 
+  logout() {
+    Login.logout();
+  },
+
   initCommands() {
     $(this.commandSelector).off('click');
     $(this.commandSelector).on('click', 'div[data-command]', event => {

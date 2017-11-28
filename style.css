@@ -222,19 +222,19 @@ button.submit {
       .viewer-wrapper .top-bar .viewer-tools .commands-wrapper {
         position: absolute;
         top: 5.5rem;
-        left: 1.21429rem;
+        right: 1.21429rem;
         height: 0;
         z-index: 9;
         padding: 0;
         background: rgba(20, 25, 30, 0.95);
-        transition: height 1s;
+        transition: height 0.3s;
         overflow: auto;
         width: 23.64286rem; }
-        @media (min-width: 500px) {
+        @media (min-width: 930px) {
           .viewer-wrapper .top-bar .viewer-tools .commands-wrapper {
             display: none; } }
         .viewer-wrapper .top-bar .viewer-tools .commands-wrapper.open {
-          height: 5.35714rem; }
+          height: 14.28571rem; }
         .viewer-wrapper .top-bar .viewer-tools .commands-wrapper.border {
           border: solid 0.07143rem #00a4d9;
           padding: 0 0.71429rem 0.71429rem 0.71429rem; }
@@ -243,12 +243,15 @@ button.submit {
         text-align: -webkit-center;
         cursor: pointer;
         padding: 0.35714rem; }
-        .viewer-wrapper .top-bar .viewer-tools .tool.save, .viewer-wrapper .top-bar .viewer-tools .tool.skip, .viewer-wrapper .top-bar .viewer-tools .tool.clearAll, .viewer-wrapper .top-bar .viewer-tools .tool.stackScroll {
+        .viewer-wrapper .top-bar .viewer-tools .tool.save, .viewer-wrapper .top-bar .viewer-tools .tool.skip, .viewer-wrapper .top-bar .viewer-tools .tool.clearAll, .viewer-wrapper .top-bar .viewer-tools .tool.stackScroll, .viewer-wrapper .top-bar .viewer-tools .tool.wlPreset, .viewer-wrapper .top-bar .viewer-tools .tool.logout {
           display: none; }
-        @media (min-width: 500px) {
+        .viewer-wrapper .top-bar .viewer-tools .tool.save, .viewer-wrapper .top-bar .viewer-tools .tool.skip, .viewer-wrapper .top-bar .viewer-tools .tool.logout, .viewer-wrapper .top-bar .viewer-tools .tool.more {
+          float: right;
+          margin: 0 0.35714rem; }
+        @media (min-width: 930px) {
           .viewer-wrapper .top-bar .viewer-tools .tool.more {
             display: none; }
-          .viewer-wrapper .top-bar .viewer-tools .tool.save, .viewer-wrapper .top-bar .viewer-tools .tool.skip, .viewer-wrapper .top-bar .viewer-tools .tool.clearAll, .viewer-wrapper .top-bar .viewer-tools .tool.stackScroll {
+          .viewer-wrapper .top-bar .viewer-tools .tool.save, .viewer-wrapper .top-bar .viewer-tools .tool.skip, .viewer-wrapper .top-bar .viewer-tools .tool.clearAll, .viewer-wrapper .top-bar .viewer-tools .tool.stackScroll, .viewer-wrapper .top-bar .viewer-tools .tool.wlPreset, .viewer-wrapper .top-bar .viewer-tools .tool.logout {
             display: inline-block; } }
         .viewer-wrapper .top-bar .viewer-tools .tool.active:hover a {
           color: #20a5d6; }

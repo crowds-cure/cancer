@@ -1,4 +1,4 @@
-$max-screen-size-for-more-option: 500px;
+$max-screen-size-for-more-option: 930px;
 
 .viewer-wrapper {
   display: flex;
@@ -14,7 +14,7 @@ $max-screen-size-for-more-option: 500px;
       .commands-wrapper {
         position: absolute;
         top: rem(77);
-        left: rem(17);
+        right: rem(17);
         height: 0;
         z-index: 9;
         padding: 0;
@@ -43,11 +43,11 @@ $max-screen-size-for-more-option: 500px;
         cursor: pointer;
         padding: rem(5);
 
-        &.save, &.skip, &.clearAll, &.stackScroll, &.wlPreset {
+        &.save, &.skip, &.clearAll, &.stackScroll, &.wlPreset, &.logout {
           display: none;
         }
 
-        &.save, &.skip {
+        &.save, &.skip, &.logout, &.more {
           float: right;
           margin: 0 rem(5);
         }
@@ -57,7 +57,7 @@ $max-screen-size-for-more-option: 500px;
             display: none;
           }
 
-          &.save, &.skip, &.clearAll, &.stackScroll, &.wlPreset {
+          &.save, &.skip, &.clearAll, &.stackScroll, &.wlPreset, &.logout {
             display: inline-block;
           }
         }

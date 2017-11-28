@@ -25,7 +25,7 @@
   </head>
   <body>
 
-    <div class="login-wrapper">
+    <div id="homepage" class="login-wrapper">
       <div class="login-form">
         <div class="info-section">
           <h1 class="logo-header">Crowds Cure Cancer</h1>
@@ -88,7 +88,7 @@
       </div>
     </div>
 
-    <div class="login-wrapper sign invisible">
+    <div id="signup-wrapper" class="login-wrapper sign invisible">
       <div class="login-form">
         <div class="info-section">
           <h1 class="logo-header">Crowds Cure Cancer</h1>
@@ -288,6 +288,12 @@
               </svg>
               <a>Skip Case</a>
             </div>
+            <div class="tool" data-command="logout">
+              <svg>
+                <use xlink:href="./imgs/icons.svg#icon-status-complete" href="./imgs/icons.svg#icon-status-complete"></use>
+              </svg>
+              <a>Logout</a>
+            </div>
           </div>
           <div class="tool clearAll" data-command="clearAll">
             <svg>
@@ -316,7 +322,12 @@
             </svg>
             <a>Soft Tissue</a>
           </div>
-
+          <div class="tool logout" data-command="logout">
+            <svg>
+              <use xlink:href="./imgs/icons.svg#icon-status-complete" href="./imgs/icons.svg#icon-status-complete"></use>
+            </svg>
+            <a>Logout</a>
+          </div>
           <div class="tool skip right" data-command="skip">
             <svg>
               <use xlink:href="./imgs/icons.svg#icon-fast-forward" href="./imgs/icons.svg#icon-fast-forward"></use>
