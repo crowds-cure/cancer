@@ -217,6 +217,7 @@ export default {
       // Retrieve the current image
       const element = event.detail.element;
       const image = cornerstone.getImage(element);
+      const viewport = cornerstone.getViewport(element);
       const currentImageId = image.imageId;
 
       // When a new measurement is added, retrieve the current tool state
@@ -238,10 +239,16 @@ export default {
       // If there is more than length measurement, remove the oldest one
       if (lengthMeasurements.length > 1) {
         lengthMeasurements.shift();
-
-        // Re-save this data into the toolState object
-        toolState[currentImageId][toolType].data = lengthMeasurements;
       }
+
+      // Add some viewport details to the length measurement data
+      lengthMeasurements[0].windowWidth = viewport.voi.windowWidth;
+      lengthMeasurements[0].windowCenter = viewport.voi.windowCenter;
+      lengthMeasurements[0].scale = viewport.scale;
+      lengthMeasurements[0].translation = viewport.translation;
+
+      // Re-save this data into the toolState object
+      toolState[currentImageId][toolType].data = lengthMeasurements;
 
       // Restore toolState into the toolStateManager
       toolStateManager.restoreToolState(toolState);
