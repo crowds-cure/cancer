@@ -6,9 +6,14 @@ import {annotatorsDB} from '../db/db';
 Login.$loginForm.off('submit').on('submit', function (evt) {
   evt.preventDefault();
 
-  Login.$loadingImg.removeClass('invisible');
   const $loginUsername = $('#login-username');
   const username = $loginUsername.val();
+  if (username === '') {
+    return;
+  }
+
+  Login.$loadingImg.removeClass('invisible');
+
   $loginUsername.val('');
   Login.username = username;
   console.log('username:', username);
