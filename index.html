@@ -228,6 +228,7 @@
             </svg>
             <a>Zoom</a>
           </div>
+
           <div class="tool more" data-command="toggleMoreMenu">
             <svg>
               <use xlink:href="./imgs/icons.svg#icon-measurements-lesions" href="./imgs/icons.svg#icon-measurements-lesions"></use>
@@ -249,10 +250,32 @@
             </div>
             <div class="tool" data-command="clearAll">
               <svg>
-                <use xlink:href="/imgs/icons.svg#icon-ui-close" href="/imgs/icons.svg#icon-ui-close"></use>
+                <use xlink:href="/imgs/icons.svg#icon-tools-reset" href="/imgs/icons.svg#icon-tools-reset"></use>
               </svg>
               <a>Clear</a>
             </div>
+
+            <div class="tool" data-command="setWLPresetLung">
+              <svg>
+                <use xlink:href="/imgs/icons.svg#icon-tools-levels" href="/imgs/icons.svg#icon-tools-levels"></use>
+              </svg>
+              <a>Lung</a>
+            </div>
+
+            <div class="tool" data-command="setWLPresetLiver">
+              <svg>
+                <use xlink:href="/imgs/icons.svg#icon-tools-levels" href="/imgs/icons.svg#icon-tools-levels"></use>
+              </svg>
+              <a>Liver</a>
+            </div>
+
+            <div class="tool" data-command="setWLPresetSoftTissue">
+              <svg>
+                <use xlink:href="/imgs/icons.svg#icon-tools-levels" href="/imgs/icons.svg#icon-tools-levels"></use>
+              </svg>
+              <a>Soft Tissue</a>
+            </div>
+
             <div class="tool" data-command="save">
               <svg>
                 <use xlink:href="./imgs/icons.svg#icon-status-complete" href="./imgs/icons.svg#icon-status-complete"></use>
@@ -268,21 +291,43 @@
           </div>
           <div class="tool clearAll" data-command="clearAll">
             <svg>
-              <use xlink:href="/imgs/icons.svg#icon-ui-close" href="/imgs/icons.svg#icon-ui-close"></use>
+              <use xlink:href="/imgs/icons.svg#icon-tools-reset" href="/imgs/icons.svg#icon-tools-reset"></use>
             </svg>
-            <a>Clear</a>
+            <a>Reset</a>
           </div>
-          <div class="tool save" data-command="save">
+
+          <div class="tool wlPreset" data-command="setWLPresetLung">
             <svg>
-              <use xlink:href="./imgs/icons.svg#icon-status-complete" href="./imgs/icons.svg#icon-status-complete"></use>
+              <use xlink:href="/imgs/icons.svg#icon-tools-levels" href="/imgs/icons.svg#icon-tools-levels"></use>
             </svg>
-            <a>Save</a>
+            <a>Lung</a>
           </div>
-          <div class="tool skip" data-command="skip">
+
+          <div class="tool wlPreset" data-command="setWLPresetLiver">
+            <svg>
+              <use xlink:href="/imgs/icons.svg#icon-tools-levels" href="/imgs/icons.svg#icon-tools-levels"></use>
+            </svg>
+            <a>Liver</a>
+          </div>
+
+          <div class="tool wlPreset" data-command="setWLPresetSoftTissue">
+            <svg>
+              <use xlink:href="/imgs/icons.svg#icon-tools-levels" href="/imgs/icons.svg#icon-tools-levels"></use>
+            </svg>
+            <a>Soft Tissue</a>
+          </div>
+
+          <div class="tool skip right" data-command="skip">
             <svg>
               <use xlink:href="./imgs/icons.svg#icon-fast-forward" href="./imgs/icons.svg#icon-fast-forward"></use>
             </svg>
             <a>Skip Case</a>
+          </div>
+          <div class="tool save right" data-command="save">
+            <svg>
+              <use xlink:href="./imgs/icons.svg#icon-status-complete" href="./imgs/icons.svg#icon-status-complete"></use>
+            </svg>
+            <a>Save</a>
           </div>
         </div>
       </div>
