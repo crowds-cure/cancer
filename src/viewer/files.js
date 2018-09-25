@@ -30,30 +30,7 @@ export default {
     var allCases; // this could be cached
     var userCases; // filtered to user's anatChoices
 
-    return chronicleDB.query("instances/bySeriesUID_j", { // bySeriesUID_j or byCollection
-      reduce : true,
-      //stale : 'update_after',
-      group : true,
-    }).then((cases) => {
-      allCases = cases.rows;
-
-      const annotatorID = Login.username;
-      const anatomyChoices = Login.user.anatomyChoices;
-
-      var categoryIdToLabelMap = {
-          'TCGA-LUAD' : 'Lung',
-          'TCGA-LIHC' : 'Liver',
-          'TCGA_RN' : 'Renal',
-          'TCGA_OV' : 'Ovarian'
-      };
-
-      userCases = allCases.filter(curCase => {
-        var catLabel = categoryIdToLabelMap[curCase.key[1]];
-        return anatomyChoices.indexOf(catLabel) !== -1;
-      });
-
-      return this.getNextSeriesForAnnotator(annotatorID, userCases);
-  }).then ((seriesUID) => {
+    return Promise.resolve('1.3.6.1.4.1.14519.5.2.1.7695.4007.290560597213035590678005726868').then ((seriesUID) => {
 
       if(!this.currentSeriesIndex) {
         this.currentSeriesIndex = 0;

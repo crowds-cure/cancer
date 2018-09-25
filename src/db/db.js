@@ -2,14 +2,14 @@
 import PouchDB from 'pouchdb';
 
 //const baseURL='http://rsnacrowdquant.cloudapp.net:5984';
-const baseURL='http://rsnacrowdquant2.eastus2.cloudapp.azure.com:5984';
+const baseURL='http://35.180.157.126:5984';
 
 export const uuidURL = `${baseURL}/_uuids`;
 export const annotatorsURL = `${baseURL}/annotators`;
 export const adjectivesURL = `${baseURL}/adjectives`;
 export const animalsURL = `${baseURL}/animals`;
-//export const chronicleURL = `${baseURL}/chronicle`;
-export const chronicleURL = `${baseURL}/compressed-chronicle2`;
+export const chronicleURL = `${baseURL}/chronicle`;
+//export const chronicleURL = `${baseURL}/compressed-chronicle2`;
 
 export const measurementsURL = `${baseURL}/measurements`;
 
