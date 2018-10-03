@@ -367,7 +367,7 @@ button.submit {
       width: 100%;
       margin-left: 10px;
       -webkit-appearance: none;
-      background-color: transparent; }
+      background-color: rgba(0, 0, 0, 0); }
       .scroll .scroll-holder .imageSlider:focus {
         outline: none; }
       .scroll .scroll-holder .imageSlider::-moz-focus-outer {

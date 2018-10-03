@@ -5,10 +5,7 @@ import Menu from '../menu/menu';
 import debounce from './debounce';
 
 cornerstoneWADOImageLoader.external.cornerstone = cornerstone;
-cornerstoneWADOImageLoader.external.$ = $;
-cornerstoneTools.external.$ = $;
 cornerstoneTools.external.cornerstone = cornerstone;
-cornerstone.external.$ = $;
 
 const config = {
   maxWebWorkers: navigator.hardwareConcurrency || 1,
