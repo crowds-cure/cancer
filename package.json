@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "gulp develop",
-    "build": "gulp build && gulp sass && gulp copy:dist && gulp copy:html",
+    "build": "gulp build && gulp sass && gulp copy:dist && gulp copy:html && gulp copy:imgs",
     "build-static-site": "npm install && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
