@@ -3,4 +3,4 @@ const gulp = require('gulp');
 
 requireDir('./gulp/tasks');
 
-gulp.task('develop', ['build', 'sass', 'copy:dist', 'copy:html', 'server', 'watch']);
+gulp.task('develop', ['build', 'sass', 'copy:dist', 'copy:html', 'copy:imgs', 'server', 'watch']);

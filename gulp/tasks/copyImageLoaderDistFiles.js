@@ -11,3 +11,8 @@ gulp.task('copy:html', function () {
   return gulp.src(config.html)
     .pipe(gulp.dest('./public/'));
 });
+
+gulp.task('copy:imgs', function () {
+  return gulp.src(config.imgs)
+    .pipe(gulp.dest('./public/imgs/'));
+});

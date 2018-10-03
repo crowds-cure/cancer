@@ -6,5 +6,6 @@ module.exports = {
   buildFileJsName: 'bundle.js',
   buildFileCSSName: 'style.css',
   html: '*.html',
+  imgs: 'imgs/*',
   imageLoaderDistFiles: 'node_modules/cornerstone-wado-image-loader/dist/*',
 };

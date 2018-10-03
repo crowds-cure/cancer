@@ -1,16 +1,27 @@
-import Files from './files';
-import Tools from './tools';
-import Commands from './commands';
-import Menu from '../menu/menu';
-import debounce from './debounce';
+import * as dicomParser from 'dicom-parser';
+import * as cornerstone from 'cornerstone-core';
+import * as cornerstoneMath from 'cornerstone-math';
+import * as cornerstoneWADOImageLoader from 'cornerstone-wado-image-loader';
+import * as cornerstoneTools from 'cornerstone-tools';
+import Hammer from 'hammerjs';
+
+import Files from './files.js';
+import Tools from './tools.js';
+import Commands from './commands.js';
+import Menu from '../menu/menu.js';
+import debounce from './debounce.js';
+
+cornerstoneTools.external.cornerstone = cornerstone;
+cornerstoneTools.external.Hammer = Hammer;
+cornerstoneTools.external.cornerstoneMath = cornerstoneMath;
 
 cornerstoneWADOImageLoader.external.cornerstone = cornerstone;
-cornerstoneTools.external.cornerstone = cornerstone;
+cornerstoneWADOImageLoader.external.dicomParser = dicomParser;
 
 const config = {
   maxWebWorkers: navigator.hardwareConcurrency || 1,
   startWebWorkersOnDemand: true,
-  webWorkerPath: 'node_modules/cornerstone-wado-image-loader/dist/cornerstoneWADOImageLoaderWebWorker.min.js',
+  webWorkerPath: 'dist/cornerstoneWADOImageLoaderWebWorker.min.js',
   webWorkerTaskPaths: [],
   taskConfiguration: {
     decodeTask: {

@@ -12,6 +12,15 @@
 
     <link rel="stylesheet" type="text/css" href="./style.css">
 
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript">
+
+    $(document).ready(function() {
+      $('#login-username').val(window.localStorage.getItem('username'));
+    });
+
+    </script>
+
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-110076978-1"></script>
     <script>
@@ -406,21 +415,7 @@
         <li><a href="/#" data-menu="logout">Log out</a></li>
       </ul>
     </div>
-
-    <script type="text/javascript" src="../node_modules/jquery/dist/jquery.min.js"></script>
-    <script type="text/javascript" src="../node_modules/hammerjs/hammer.min.js"></script>
-    <script type="text/javascript" src="../node_modules/cornerstone-math/dist/cornerstoneMath.min.js"></script>
-    <script type="text/javascript" src="../node_modules/cornerstone-core/dist/cornerstone.min.js"></script>
-    <script type="text/javascript" src="../node_modules/cornerstone-tools/dist/cornerstoneTools.min.js"></script>
-    <script type="text/javascript" src="../node_modules/dicom-parser/dist/dicomParser.min.js"></script>
-    <script type="text/javascript" src="../node_modules/cornerstone-wado-image-loader/dist/cornerstoneWADOImageLoader.min.js"></script>
-    <script type="text/javascript" src="./bundle.js"></script>
-    <script type="text/javascript">
-
-    $(document).ready(function() {
-      $('#login-username').val(window.localStorage.getItem('username'));
-    });
-
-    </script>
   </body>
+
+  <script type="text/javascript" src="./bundle.js"></script>
 </html>

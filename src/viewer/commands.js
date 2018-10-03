@@ -4,6 +4,9 @@ import ErrorModal from '../errorModal/modal.js';
 import {measurementsDB, getUUID} from '../db/db.js';
 import Login from '../login/login';
 
+import * as cornerstone from 'cornerstone-core';
+import * as cornerstoneTools from 'cornerstone-tools';
+
 const defaultWlPresets = {
     SoftTissue: {
         wc: 40,

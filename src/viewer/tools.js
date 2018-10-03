@@ -1,3 +1,5 @@
+import * as cornerstoneTools from 'cornerstone-tools';
+
 import debounce from './debounce';
 
 const tools = {
