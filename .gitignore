@@ -1,5 +1,5 @@
 node_modules/
-dist/
+public/
 npm-debug.log
 bundle.js
 style.css
