@@ -62,7 +62,11 @@ export default {
       const enabledElement = cornerstone.getEnabledElement(this.element);
 
       this.$loadingText.text('Retrieving case metadata...');
-      Files.getCaseImages().then((imageIds) => {
+      Files.getCaseImages().then((brokenImageIds) => {
+        const imageIds = brokenImageIds.map(imageId => {
+          return imageId.replace('wadouris://', 'wadouri://');
+        });
+
         this.$loadingText.text('Loading images...');
         console.time('Loading All Images');
 

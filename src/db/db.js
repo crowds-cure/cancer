@@ -1,8 +1,6 @@
-// const baseUrl='http://127.0.0.1:5984';
 import PouchDB from 'pouchdb';
 
-//const baseURL='http://rsnacrowdquant.cloudapp.net:5984';
-const baseURL='http://35.180.157.126:5984';
+const baseURL='https://k8s-testing.ohif.org/couchdb';
 
 export const uuidURL = `${baseURL}/_uuids`;
 export const annotatorsURL = `${baseURL}/annotators`;

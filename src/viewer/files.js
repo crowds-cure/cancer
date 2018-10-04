@@ -30,7 +30,7 @@ export default {
     var allCases; // this could be cached
     var userCases; // filtered to user's anatChoices
 
-    return Promise.resolve('1.3.6.1.4.1.14519.5.2.1.7695.4007.290560597213035590678005726868').then ((seriesUID) => {
+    return Promise.resolve('1.3.6.1.4.1.14519.5.2.1.3098.4963.202287948568406289093737485605').then ((seriesUID) => {
 
       if(!this.currentSeriesIndex) {
         this.currentSeriesIndex = 0;

@@ -2,7 +2,7 @@
 // iffy wrapper
 (function() {
 
-const baseURL='http://rsnacrowdquant2.eastus2.cloudapp.azure.com:5984';
+const baseURL='https://k8s-testing.ohif.org/couchdb';
 const measurementsURL = baseURL + '/measurements';
 const measurementsDB = new PouchDB(measurementsURL);
 const chronicleURL = baseURL + '/chronicle';
