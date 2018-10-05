@@ -14,6 +14,8 @@ const style = {
   overflow: 'hidden'
 };
 
+// TODO
+// Add flag to show as grayed out e.g. for badges you haven't reached yet
 class AchievementBadge extends Component {
   render() {
     const badge = BADGE_TYPES[this.props.type];

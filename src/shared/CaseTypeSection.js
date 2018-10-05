@@ -24,7 +24,7 @@ class CaseTypeSection extends Component {
       />
     ));
 
-    return <div className="CaseTypeCard">{items}</div>;
+    return <div className="CaseTypeSection">{items}</div>;
   }
 }
 
