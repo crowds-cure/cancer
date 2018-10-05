@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Crowds Cure Cancer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <meta name="theme-color" content="#9ccef9">
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Sanchez" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="./style.css">
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript">
+
+    $(document).ready(function() {
+      $('#login-username').val(window.localStorage.getItem('username'));
+    });
+
+    </script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-110076978-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-110076978-1');
+    </script>
+
+  </head>
+  <body>
+
+    <div id="homepage" class="login-wrapper">
+      <div class="login-form">
+        <div class="info-section">
+          <h1 class="logo-header">Crowds Cure Cancer</h1>
+          <h2 class="logo-header">Help Annotate Data from The Cancer Imaging Archive</h2>
+
+          <h3 class="logo-header">What is this?</h3>
+          <p>A crowd-sourcing experiment to accelerate quantitative imaging research.</p>
+
+          <h4 class="logo-header">What do I do?</h4>
+          <p>Visually mark tumor locations on scans from The National Cancer Institute's <a href="http://www.cancerimagingarchive.net/">Cancer Imaging Archive</a></p>
+
+          <h4 class="logo-header">Why should I help?</h4>
+          <p>These cases lack tumor-location labels needed for machine learning. By assisting, you are providing valuable data to cancer researchers working in deep learning, radiomics and radiogenomics.</a></p>
+        </div>
+        <form>
+          <div class="error invisible" id="login-error"></div>
+
+          <h3 class="logo-header">Sign In</h3>
+          <div class="form-input">
+            <svg class="input-icon">
+              <use xlink:href="/imgs/icons.svg#icon-user" href="/imgs/icons.svg#icon-user"></use>
+            </svg>
+            <input id="login-username" type="text" placeholder="Username">
+          </div>
+          <button class="submit" type="submit">
+            Login
+            <svg class="loading invisible">
+              <use xlink:href="/imgs/icons.svg#icon-spinner" href="/imgs/icons.svg#icon-spinner"></use>
+            </svg>
+          </button>
+        </form>
+
+        <button id="open-signup-btn-new" class="sign-up">Create a New Account</button>
+        <div class='logo-section'>
+          <h2>Collaborators</h2>
+          <a class='qtim-logo' href="https://qtim-lab.github.io/">
+            <h3>QTIM @ MGH</h3>
+            <p>The Quantitative Tumor Imaging Lab at the Martinos Center</p>
+          </a>
+
+          <a id='tcia-logo' class='logo-img' href="http://www.cancerimagingarchive.net">
+            <img src="/imgs/tcia_logo.png" alt="The Cancer Imaging Archive (TCIA)" width="202">
+          </a>
+
+          <a id="qiicr-logo" class='logo-img' href="http://qiicr.org/ ">
+            <img src="/imgs/qiicr_logo.png" alt="QIICR" width="202">
+          </a>
+
+          <a id='radiomics-logo' class='logo-img' href="http://radiomics.io/ ">
+            <img src="/imgs/radiomics_logo.png" alt="Radiomics.io" width="202">
+          </a>
+
+          <a class='ohif-logo' href="http://www.ohif.org">
+            <svg class="ohif-icon">
+                <use xlink:href="/imgs/icons.svg#icon-ohif-logo" href="/imgs/icons.svg#icon-ohif-logo"></use>
+              </svg>
+            <div class='ohif-logo-text'>Open Health Imaging Foundation</div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div id="signup-wrapper" class="login-wrapper sign invisible">
+      <div class="login-form">
+        <div class="info-section">
+          <h1 class="logo-header">Crowds Cure Cancer</h1>
+          <h2 class="logo-header">Help Annotate Data from The Cancer Imaging Archive</h2>
+        </div>
+        <form>
+          <div class="error invisible"></div>
+
+        <div class="signup-section">
+          <h3 class="logo-header">Select a username</h3>
+          <div class="form-input">
+            <svg class="input-icon">
+              <use xlink:href="/imgs/icons.svg#icon-user" href="/imgs/icons.svg#icon-user"></use>
+            </svg>
+            <select id="signup-name-select"></select>
+            <svg class="input-icon caret">
+              <use xlink:href="/imgs/icons.svg#icon-caret" href="/imgs/icons.svg#icon-caret"></use>
+            </svg>
+          </div>
+        </div>
+        <div class='signup-section'>
+          <h3 class="logo-header">Are you a practicing Radiologist?</h3>
+          <label class="signup-option noselect">
+            <input type="radio" name="is-radiologist" id="signup-radiologist-yes" value="yes" required checked/>
+            Yes
+          </label>
+          <label class="signup-option noselect">
+            <input type="radio" name="is-radiologist" id="signup-radiologist-no" value="no" required/>
+            No
+          </label>
+        </div>
+
+        <div class="signup-section invisible speciality">
+          <h3 class="logo-header">What is your speciality?</h3>
+          <div class="form-input">
+            <svg class="input-icon">
+              <use xlink:href="/imgs/icons.svg#icon-doctor" href="/imgs/icons.svg#icon-doctor"></use>
+            </svg>
+            <select id="signup-name-select">
+              <option>Select a speciality...</option>
+              <option value="medicalPhysicist">Practicing Medical Physicist</option>
+              <option value="researcher">Researcher</option>
+              <option value="resident">Resident</option>
+              <option value="student">Student</option>
+              <option value="technicianOrDosimetrist">Technician / Dosimetrist</option>
+              <option value="other">Other</option>
+            </select>
+            <svg class="input-icon caret">
+              <use xlink:href="/imgs/icons.svg#icon-caret" href="/imgs/icons.svg#icon-caret"></use>
+            </svg>
+          </div>
+        </div>
+
+        <div class="signup-section years-of-experience">
+            <h3 class="logo-header">How many years of experience do you have?</h3>
+            <div class="form-input">
+              <svg class="input-icon">
+                <use xlink:href="/imgs/icons.svg#icon-calendar" href="/imgs/icons.svg#icon-calendar"></use>
+              </svg>
+              <select id="signup-name-select">
+                <option>Years of experience...</option>
+                <option value="<5">< 5 years</option>
+                <option value="5-10">5-10 years</option>
+                <option value=">10">> 10 years</option>
+              </select>
+              <svg class="input-icon caret">
+                <use xlink:href="/imgs/icons.svg#icon-caret" href="/imgs/icons.svg#icon-caret"></use>
+              </svg>
+            </div>
+          </div>
+
+          <div id="anatomy-choices" class="signup-section">
+            <h3 class="logo-header">Which Cancer Types would you like to see?</h3>
+            <label class='noselect signup-option'>
+              <input type="checkbox" name="anatomy-choice" value="Liver" checked/>
+              Liver
+            </label>
+            <label class='noselect signup-option'>
+              <input type="checkbox" name="anatomy-choice" value="Lung" checked/>
+              Lung
+            </label>
+            <label class='noselect signup-option'>
+              <input type="checkbox" name="anatomy-choice" value="Renal" checked/>
+              Renal
+            </label>
+            <label class='noselect signup-option'>
+              <input type="checkbox" name="anatomy-choice" value="Ovarian" checked/>
+              Ovarian
+            </label>
+          </div>
+
+          <div class="signup-section">
+            <h3 class="logo-header">Provide your email to receive news about Crowds Cure Cancer</h3>
+          <div class="form-input">
+            <svg class="input-icon">
+                <use xlink:href="/imgs/icons.svg#icon-mail" href="/imgs/icons.svg#icon-mail"></use>
+            </svg>
+            <input id="signup-email" type="email" name="email" placeholder="Email (Optional)">
+          </div>
+        </div>
+
+
+        <button class="submit" type="submit" id="signup-button">
+          Sign Up
+          <svg class="loading invisible">
+            <use xlink:href="/imgs/icons.svg#icon-spinner" href="/imgs/icons.svg#icon-spinner"></use>
+          </svg>
+        </button>
+        </form>
+      </div>
+    </div>
+
+    <div class="viewer-wrapper invisible noselect">
+      <div class="top-bar noselect">
+        <div class="viewer-tools noselect">
+          <div class="tool" data-tool="wwwc">
+            <svg class="tool-img">
+              <use xlink:href="/imgs/icons.svg#icon-tools-levels" href="/imgs/icons.svg#icon-tools-levels"></use>
+            </svg>
+            <a>W/L</a>
+          </div>
+          <div class="tool" data-tool="length">
+            <svg class="tool-img">
+              <use xlink:href="/imgs/icons.svg#icon-tools-measure-temp" href="/imgs/icons.svg#icon-tools-measure-temp"></use>
+            </svg>
+            <a>Length</a>
+          </div>
+          <div class="tool" data-tool="pan">
+            <svg class="tool-img">
+              <use xlink:href="/imgs/icons.svg#icon-tools-pan" href="/imgs/icons.svg#icon-tools-pan"></use>
+            </svg>
+            <a>Pan</a>
+          </div>
+          <div class="tool" data-tool="zoom">
+            <svg class="tool-img">
+              <use xlink:href="/imgs/icons.svg#icon-tools-zoom" href="/imgs/icons.svg#icon-tools-zoom"></use>
+            </svg>
+            <a>Zoom</a>
+          </div>
+
+          <div class="tool more" data-command="toggleMoreMenu">
+            <svg>
+              <use xlink:href="./imgs/icons.svg#icon-measurements-lesions" href="./imgs/icons.svg#icon-measurements-lesions"></use>
+            </svg>
+            <a>More</a>
+          </div>
+          <div class="tool stackScroll" data-tool="stackScroll">
+            <svg class="tool-img">
+              <use xlink:href="/imgs/icons.svg#icon-tools-stack-scroll" href="/imgs/icons.svg#icon-tools-stack-scroll"></use>
+            </svg>
+            <a>Stack Scroll</a>
+          </div>
+          <div class="commands-wrapper">
+            <div class="tool" data-tool="stackScroll">
+              <svg class="tool-img">
+                <use xlink:href="/imgs/icons.svg#icon-tools-stack-scroll" href="/imgs/icons.svg#icon-tools-stack-scroll"></use>
+              </svg>
+              <a>Stack Scroll</a>
+            </div>
+            <div class="tool" data-command="clearAll">
+              <svg>
+                <use xlink:href="/imgs/icons.svg#icon-tools-reset" href="/imgs/icons.svg#icon-tools-reset"></use>
+              </svg>
+              <a>Clear</a>
+            </div>
+
+            <div class="tool" data-command="setWLPresetLung">
+              <svg>
+                <use xlink:href="/imgs/icons.svg#icon-tools-levels" href="/imgs/icons.svg#icon-tools-levels"></use>
+              </svg>
+              <a>Lung</a>
+            </div>
+
+            <div class="tool" data-command="setWLPresetLiver">
+              <svg>
+                <use xlink:href="/imgs/icons.svg#icon-tools-levels" href="/imgs/icons.svg#icon-tools-levels"></use>
+              </svg>
+              <a>Liver</a>
+            </div>
+
+            <div class="tool" data-command="setWLPresetSoftTissue">
+              <svg>
+                <use xlink:href="/imgs/icons.svg#icon-tools-levels" href="/imgs/icons.svg#icon-tools-levels"></use>
+              </svg>
+              <a>Soft Tissue</a>
+            </div>
+
+            <div class="tool" data-command="save">
+              <svg>
+                <use xlink:href="./imgs/icons.svg#icon-status-complete" href="./imgs/icons.svg#icon-status-complete"></use>
+              </svg>
+              <a>Save</a>
+            </div>
+            <div class="tool" data-command="skip">
+              <svg>
+                <use xlink:href="./imgs/icons.svg#icon-fast-forward" href="./imgs/icons.svg#icon-fast-forward"></use>
+              </svg>
+              <a>Skip Case</a>
+            </div>
+            <div class="tool" data-command="logout">
+              <svg>
+                <use xlink:href="./imgs/icons.svg#icon-status-complete" href="./imgs/icons.svg#icon-status-complete"></use>
+              </svg>
+              <a>Logout</a>
+            </div>
+          </div>
+          <div class="tool clearAll" data-command="clearAll">
+            <svg>
+              <use xlink:href="/imgs/icons.svg#icon-tools-reset" href="/imgs/icons.svg#icon-tools-reset"></use>
+            </svg>
+            <a>Reset</a>
+          </div>
+
+          <div class="tool wlPreset" data-command="setWLPresetLung">
+            <svg>
+              <use xlink:href="/imgs/icons.svg#icon-tools-levels" href="/imgs/icons.svg#icon-tools-levels"></use>
+            </svg>
+            <a>Lung</a>
+          </div>
+
+          <div class="tool wlPreset" data-command="setWLPresetLiver">
+            <svg>
+              <use xlink:href="/imgs/icons.svg#icon-tools-levels" href="/imgs/icons.svg#icon-tools-levels"></use>
+            </svg>
+            <a>Liver</a>
+          </div>
+
+          <div class="tool wlPreset" data-command="setWLPresetSoftTissue">
+            <svg>
+              <use xlink:href="/imgs/icons.svg#icon-tools-levels" href="/imgs/icons.svg#icon-tools-levels"></use>
+            </svg>
+            <a>Soft Tissue</a>
+          </div>
+          <div class="tool logout" data-command="logout">
+            <svg>
+              <use xlink:href="./imgs/icons.svg#icon-status-complete" href="./imgs/icons.svg#icon-status-complete"></use>
+            </svg>
+            <a>Logout</a>
+          </div>
+          <div class="tool skip right" data-command="skip">
+            <svg>
+              <use xlink:href="./imgs/icons.svg#icon-fast-forward" href="./imgs/icons.svg#icon-fast-forward"></use>
+            </svg>
+            <a>Skip Case</a>
+          </div>
+          <div class="tool save right" data-command="save">
+            <svg>
+              <use xlink:href="./imgs/icons.svg#icon-status-complete" href="./imgs/icons.svg#icon-status-complete"></use>
+            </svg>
+            <a>Save</a>
+          </div>
+        </div>
+      </div>
+      <div class="viewport noselect"
+           oncontextmenu="return false"
+           unselectable='on'
+           onselectstart='return false;'>
+        <div id='loading-progress'></div>
+        <div id='loadingIndicator'>
+          <svg class="spin">
+            <use xlink:href="/imgs/icons.svg#icon-spinner" href="/imgs/icons.svg#icon-spinner"></use>
+          </svg>
+        </div>
+        <div id="cornerstoneViewport"></div>
+        <label id="patient-id-upper-right"></label>
+        <label id="category-upper-right"></label>
+        <div id="mrbottomrightImageIndex" class="dicomTag">
+            Image:
+        </div>
+        <div id="mrbottomrightWWWC" class="dicomTag">
+            WW/WC:
+        </div>
+        <a id="logo-bottom-left" href="https://github.com/QTIM-Lab/rsnaCrowdQuant" target="_blank">
+            Crowds Cure Cancer
+        </a>
+        <label id="username-bottom-left">username goes here</label>
+        <div class="scroll">
+          <div class="scroll-holder">
+            <input class="imageSlider" type="range" min="1">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal">
+      <p>Thanks for submitting your measurement!</p>
+      <div class="button-holder">
+        <button class="logout">Log out</button>
+        <button class="next-case">Next Case</button>
+      </div>
+    </div>
+
+    <div class="error-modal">
+      <p>You don't have any measurements to submit</p>
+      <div class="button-holder">
+        <button class="ok">Ok</button>
+      </div>
+    </div>
+
+    <div class="loading-overlay invisible">
+      <div class="padding"></div>
+      <div class="content">
+        <svg class="spin">
+          <use xlink:href="/imgs/icons.svg#icon-spinner" href="/imgs/icons.svg#icon-spinner"></use>
+        </svg>
+        <div class="submit-text">Submitting...</div>
+      </div>
+    </div>
+
+    <div class="menu-wrapper invisible">
+      <ul>
+        <li><a href="/#" data-menu="nextCase">Next Case</a></li>
+        <li><a href="/#" data-menu="submit">Save</a></li>
+        <li class="separator"></li>
+        <li><a href="/#" data-menu="logout">Log out</a></li>
+      </ul>
+    </div>
+  </body>
+
+  <script type="text/javascript" src="./bundle.js"></script>
+</html>
