@@ -90,16 +90,6 @@ export default {
     slider.step = 1;
     slider.value = stack.currentImageIdIndex;
 
-    // Clear any previous tool state
-    cornerstoneTools.clearToolState(this.element, 'stack');
-
-    // Disable stack prefetch in case there are still queued requests
-    cornerstoneTools.stackPrefetch.disable(this.element);
-
-    cornerstoneTools.addStackStateManager(this.element, ['stack']);
-    cornerstoneTools.addToolState(this.element, 'stack', stack);
-    cornerstoneTools.stackPrefetch.enable(this.element);
-
     const element = this.element;
     const slideTimeoutTime = 5;
     let slideTimeout;
@@ -138,58 +128,6 @@ export default {
 
     this.$cornerstoneViewport[0].removeEventListener('cornerstonestackscroll', cornerstoneStackScrollHandler);
     this.$cornerstoneViewport[0].addEventListener('cornerstonestackscroll', cornerstoneStackScrollHandler);
-  },
-
-  initInteractionTools() {
-    /*
-    For touch devices, by default we activate:
-    - Pinch to zoom
-    - Two-finger Pan
-    - Three (or more) finger Stack Scroll
-
-    We also enable the Length tool so it is always visible
-     */
-    cornerstoneTools.zoomTouchPinch.activate(this.element);
-    cornerstoneTools.panMultiTouch.activate(this.element);
-    cornerstoneTools.panMultiTouch.setConfiguration({
-        testPointers: (eventData) => (eventData.numPointers === 2)
-    });
-    cornerstoneTools.stackScrollMultiTouch.activate(this.element);
-    cornerstoneTools.length.enable(this.element);
-
-    /* For mouse devices, by default we turn on:
-    - Stack scrolling by mouse wheel
-    - Stack scrolling by keyboard up / down arrow keys
-    - Pan with middle click
-    - Zoom with right click
-     */
-    cornerstoneTools.stackScrollWheel.activate(this.element);
-    cornerstoneTools.stackScrollKeyboard.activate(this.element);
-    cornerstoneTools.pan.activate(this.element, 2);
-    cornerstoneTools.zoom.activate(this.element, 4);
-
-    // Set the tool font and font size
-    // context.font = "[style] [variant] [weight] [size]/[line height] [font family]";
-    const fontFamily = 'Roboto, OpenSans, HelveticaNeue-Light, Helvetica Neue Light, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif';
-    cornerstoneTools.textStyle.setFont('15px ' + fontFamily);
-
-    // Set the tool width
-    cornerstoneTools.toolStyle.setToolWidth(2);
-
-    // Set color for inactive tools
-    cornerstoneTools.toolColors.setToolColor('rgb(255, 255, 0)');
-
-    // Set color for active tools
-    cornerstoneTools.toolColors.setActiveColor('rgb(0, 255, 0)');
-
-    cornerstoneTools.length.setConfiguration({shadow: true});
-
-    // Stop users from zooming in or out too far
-    cornerstoneTools.zoom.setConfiguration({
-        minScale: 0.3,
-        maxScale: 10,
-        preventZoomOutsideImage: true
-    });
   },
 
   toolClickHandler(event) {
@@ -264,13 +202,6 @@ export default {
   },
 
   initTools(imageIds) {
-    cornerstoneTools.mouseInput.enable(this.element);
-    cornerstoneTools.touchInput.enable(this.element);
-    cornerstoneTools.mouseWheelInput.enable(this.element);
-    cornerstoneTools.keyboardInput.enable(this.element);
-
-    this.initInteractionTools();
-
     // If a previously active tool exists, re-enable it.
     // If not, use wwwc
     const toolToActivate = this.active || 'wwwc';

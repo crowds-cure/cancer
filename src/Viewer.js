@@ -2,9 +2,12 @@ import { Component } from 'react';
 import React from 'react';
 import CornerstoneViewport from './viewer/CornerstoneViewport.js';
 import ToolbarSection from './viewer/ToolbarSection.js';
+import clearOldCornerstoneCacheData from './viewer/clearOldCornerstoneCacheData.js';
 
 class Viewer extends Component {
   render() {
+    clearOldCornerstoneCacheData();
+
     const viewportData = [
       {
         plugin: 'cornerstone'

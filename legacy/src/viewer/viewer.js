@@ -1,38 +1,8 @@
-import * as dicomParser from 'dicom-parser';
-import * as cornerstone from 'cornerstone-core';
-import * as cornerstoneMath from 'cornerstone-math';
-import * as cornerstoneWADOImageLoader from 'cornerstone-wado-image-loader';
-import * as cornerstoneTools from 'cornerstone-tools';
-import Hammer from 'hammerjs';
-
 import Files from './files.js';
 import Tools from './tools.js';
 import Commands from './commands.js';
 import Menu from '../menu/menu.js';
 import debounce from './debounce.js';
-
-cornerstoneTools.external.cornerstone = cornerstone;
-cornerstoneTools.external.Hammer = Hammer;
-cornerstoneTools.external.cornerstoneMath = cornerstoneMath;
-
-cornerstoneWADOImageLoader.external.cornerstone = cornerstone;
-cornerstoneWADOImageLoader.external.dicomParser = dicomParser;
-
-const config = {
-  maxWebWorkers: navigator.hardwareConcurrency || 1,
-  startWebWorkersOnDemand: true,
-  webWorkerPath: 'dist/cornerstoneWADOImageLoaderWebWorker.min.js',
-  webWorkerTaskPaths: [],
-  taskConfiguration: {
-    decodeTask: {
-      loadCodecsOnStartup: true,
-      initializeCodecsOnStartup: false,
-      codecsPath: 'cornerstoneWADOImageLoaderCodecs.min.js',
-      usePDFJS: false,
-      strict: false,
-    }
-  }
-};
 
 const IMAGE_LOADED_EVENT = 'cornerstoneimageloaded';
 
@@ -43,21 +13,6 @@ export default {
   $loadingText: $('.loading-overlay .content .submit-text'),
   numImagesLoaded: 0,
   getNextCase() {
-    // Purge the old image cache, we don't expect to ever load the same case again
-    cornerstone.imageCache.purgeCache();
-
-    // TODO: Check this. Not sure this is necessary, actually, since things should be decached anyway
-    cornerstoneWADOImageLoader.wadouri.dataSetCacheManager.purge();
-
-    // Clear any old requests in the request pool
-    cornerstoneTools.requestPoolManager.clearRequestStack('interaction');
-    cornerstoneTools.requestPoolManager.clearRequestStack('prefetch');
-
-    // TODO: Cancel all ongoing requests
-
-    // Remove all tool data in the tool state manager
-    cornerstoneTools.globalImageIdSpecificToolStateManager.restoreToolState({});
-
     return new Promise((resolve, reject) => {
       const enabledElement = cornerstone.getEnabledElement(this.element);
 
@@ -143,30 +98,6 @@ export default {
 
     this.$window.off('resize', debounceCornerstoneResize);
     this.$window.on('resize', debounceCornerstoneResize);
-
-    cornerstone.enable(this.element);
-
-    // Listen for changes to the viewport so we can update the text overlays in the corner
-    const bottomLeft = $('.viewport #mrbottomrightWWWC');
-    function onImageRendered(e) {
-        const viewport = e.detail.viewport;
-        bottomLeft.text("WW/WC: " + Math.round(viewport.voi.windowWidth) + "/" + Math.round(viewport.voi.windowCenter));
-    };
-
-    this.element.removeEventListener('cornerstoneimagerendered', onImageRendered);
-    this.element.addEventListener('cornerstoneimagerendered', onImageRendered);
-
-    const bottomRight = $('.viewport #mrbottomrightImageIndex');
-    function onStackScroll(e) {
-      const element = e.target;
-      const stack = cornerstoneTools.getToolState(element, 'stack');
-      const stackData = stack.data[0];
-      const imageIndex = stackData.currentImageIdIndex + 1;
-      bottomRight.text(`Image: ${imageIndex}/${stackData.imageIds.length}`);
-    };
-
-    this.element.removeEventListener('cornerstonestackscroll', onStackScroll);
-    this.element.addEventListener('cornerstonestackscroll', onStackScroll);
 
     let loadHandlerTimeout;
     const loadIndicatorDelay = 25;
