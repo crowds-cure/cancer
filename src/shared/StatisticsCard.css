@@ -1,0 +1,16 @@
+.StatisticsCard {
+  width: 136px;
+  height: 82px;
+}
+
+.StatisticsCard .number {
+  color: #34ffd4;
+  font-weight: bold;
+  font-size: 38pt;
+}
+
+.StatisticsCard .description {
+  color: #ffffff;
+  font-weight: 400;
+  font-size: 13pt;
+}

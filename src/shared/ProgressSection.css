@@ -1,0 +1,21 @@
+.ProgressSection {
+  width: 452px;
+  height: 145px;
+  margin: 20px;
+}
+
+.ProgressSection .title {
+  font-weight: bold;
+  font-size: 20pt;
+}
+
+.ProgressSection .value {
+  color: #34ffd4;
+  font-weight: bold;
+  font-size: 60pt;
+}
+
+.ProgressSection .suffix {
+  font-variant: small-caps;
+  font-size: 16pt;
+}

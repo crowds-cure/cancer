@@ -1,21 +1,26 @@
 html {
   height: 100%;
+  width: 100%;
 }
 
 body {
   height: 100%;
+  width: 100%;
   overflow: hidden; /*makes the body non-scrollable (we will add scrolling to the sidebar and main content containers)*/
   margin: 0px; /*removes default style*/
   display: flex; /*enables flex content for its children*/
   box-sizing: border-box;
+  font-family: 'SF Pro Text', 'Roboto', 'Helvetica Neue', sans-serif;
 }
 
 .Dashboard {
   height: 100%;
+  width: 100%;
   overflow: hidden; /*makes the body non-scrollable (we will add scrolling to the sidebar and main content containers)*/
   margin: 0px; /*removes default style*/
   display: flex; /*enables flex content for its children*/
   box-sizing: border-box;
+  background-color: #dda0dd;
 }
 
 .column {
@@ -26,11 +31,10 @@ body {
 
 #left {
   flex-shrink: 0; /*makes sure that content is not cut off in a smaller browser window*/
-  background-color: white;
 }
 
 #right {
-  background-color: #f3f3f3;
+  flex-grow: 1;
 }
 
 .top-left {

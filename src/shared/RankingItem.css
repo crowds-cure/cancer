@@ -1,0 +1,14 @@
+.RankingItem {
+  color: white;
+  padding: 5px;
+}
+
+.RankingItem .number {
+  font-size: 20pt;
+  font-weight: bold;
+  padding: 5px 10px;
+}
+
+.RankingItem .text {
+  font-size: 16pt;
+}

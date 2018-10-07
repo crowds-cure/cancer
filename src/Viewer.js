@@ -3,6 +3,7 @@ import React from 'react';
 import CornerstoneViewport from './viewer/CornerstoneViewport.js';
 import ToolbarSection from './viewer/ToolbarSection.js';
 import clearOldCornerstoneCacheData from './viewer/clearOldCornerstoneCacheData.js';
+import './Viewer.css';
 
 class Viewer extends Component {
   render() {

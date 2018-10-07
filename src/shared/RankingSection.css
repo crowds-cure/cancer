@@ -1,0 +1,14 @@
+.RankingSection {
+  width: 276px;
+  padding: 10px;
+}
+
+.RankingSection .title {
+  font-size: 20pt;
+  font-weight: bold;
+  padding: 5px;
+}
+
+.RankingSection .list {
+  display: block;
+}
