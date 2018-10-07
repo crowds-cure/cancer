@@ -2,6 +2,8 @@ import { Component } from 'react';
 import React from 'react';
 import CornerstoneViewport from './viewer/CornerstoneViewport.js';
 import ToolbarSection from './viewer/ToolbarSection.js';
+import CaseControlButtons from './viewer/CaseControlButtons.js';
+
 import clearOldCornerstoneCacheData from './viewer/clearOldCornerstoneCacheData.js';
 import './Viewer.css';
 
@@ -27,7 +29,10 @@ class Viewer extends Component {
 
     return (
       <div className="Viewer">
-        <ToolbarSection />
+        <div>
+          <ToolbarSection />
+          <CaseControlButtons />
+        </div>
         <div>{items}</div>
       </div>
     );

@@ -78,9 +78,6 @@ class Signup {
         dataType: 'json',
         data: data,
         success: function(res){
-          // $loadingImg.addClass('invisible');
-          // $signupWrapper.addClass('invisible');
-          // Viewer.initViewer();
           resolve(res);
         },
         error: function(err){
@@ -131,30 +128,15 @@ class Signup {
       }
     });
 
-
-    // $('input[name="years-of-experience"]').focus(function() {
-    //   console.log('years of exp');
-    //   if(!$('.sign .error').hasClass('invisible')){
-    //     $('.sign .error').text('');
-    //     $('.sign .error').addClass('invisible');
-    //   }
-    // });
-
     $('.sign form').off('submit').on('submit', function (event) {
       event.preventDefault();
 
       $loading.removeClass('invisible');
-      // $('.sign .error').addClass('invisible');
 
       const username = $('#signup-name-select option:selected').text();
       Login.username = username;
-      // console.log('signup Login:', Login);
-      // const username = $('input[name="username"]').val();
-      // const password = $('input[name="password"]').val();
-      // const confirmPassword = $('input[name="confirm-password"]').val();
       const isRadiologist = ($('input[name="is-radiologist"]:checked').val() === 'yes');
-      // const isChecked = $('input:radio[name="is-radiologist"]').is(':checked');
-      // const isRadiologist2 = $('#radiologist-no').val();
+
       let yearsOfExperience;
       let speciality;
       let anatomyChoices = [];
@@ -172,34 +154,6 @@ class Signup {
       const email = $('#signup-email').val();
       console.log('email:', email);
 
-      // if(isRadiologist && isNaN(yearsOfExperience)){
-      //     $('.sign .error').removeClass('invisible');
-      //     $('.sign .error').text('"Years of exprience" must be a number');
-      //
-      //     $('input[name="years-of-experience"]').val('');
-      //
-      //     $('#signup-button').blur();
-      //
-      //     $loadingImg.addClass('invisible');
-      //
-      //     return false;
-      // }
-
-      // var values = $(this).serializeArray();
-      // console.log('values', values);
-
-      // if(password !== confirmPassword){
-      //   $('.sign .error').removeClass('invisible');
-      //   $('.sign .error').text('Passwords don\'t match');
-      //
-      //   const password = $('#signup-password').val('');
-      //   const confirmPassword = $('#signup-confirm-password').val('');
-      //
-      //   $('#signup-button').blur();
-      //
-      //   $loadingImg.addClass('invisible');
-      //
-      // }
       var createDate = Date.now();
       const data = {
         _id: username,

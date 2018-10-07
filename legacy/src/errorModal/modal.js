@@ -25,6 +25,5 @@ export default {
   },
   init() {
     this.$modal.find('.ok').on('click', () => this.hide());
-    // this.$modal.find('.next-case').on('click', () => this.nextCase());
   }
 }
