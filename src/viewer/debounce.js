@@ -1,4 +1,4 @@
-export default function (action, timeWindow) {
+export default function(action, timeWindow) {
   let timeout;
 
   return function() {

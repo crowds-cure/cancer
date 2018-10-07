@@ -1,0 +1,14 @@
+.ToolbarButton {
+  width: 48px;
+  height: 48px;
+  color: white;
+  float: left;
+  padding: 0 10px;
+}
+
+.ToolbarButton svg {
+  height: 30px;
+  width: 48px;
+  fill: white;
+  stroke: white;
+}

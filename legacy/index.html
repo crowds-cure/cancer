@@ -1,17 +1,6 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Crowds Cure Cancer</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-
-    <meta name="theme-color" content="#9ccef9">
-
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Sanchez" rel="stylesheet">
-
-    <link rel="stylesheet" type="text/css" href="./style.css">
-
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript">
 
@@ -213,57 +202,13 @@
     <div class="viewer-wrapper invisible noselect">
       <div class="top-bar noselect">
         <div class="viewer-tools noselect">
-          <div class="tool" data-tool="wwwc">
-            <svg class="tool-img">
-              <use xlink:href="/imgs/icons.svg#icon-tools-levels" href="/imgs/icons.svg#icon-tools-levels"></use>
-            </svg>
-            <a>W/L</a>
-          </div>
-          <div class="tool" data-tool="length">
-            <svg class="tool-img">
-              <use xlink:href="/imgs/icons.svg#icon-tools-measure-temp" href="/imgs/icons.svg#icon-tools-measure-temp"></use>
-            </svg>
-            <a>Length</a>
-          </div>
-          <div class="tool" data-tool="pan">
-            <svg class="tool-img">
-              <use xlink:href="/imgs/icons.svg#icon-tools-pan" href="/imgs/icons.svg#icon-tools-pan"></use>
-            </svg>
-            <a>Pan</a>
-          </div>
-          <div class="tool" data-tool="zoom">
-            <svg class="tool-img">
-              <use xlink:href="/imgs/icons.svg#icon-tools-zoom" href="/imgs/icons.svg#icon-tools-zoom"></use>
-            </svg>
-            <a>Zoom</a>
-          </div>
-
           <div class="tool more" data-command="toggleMoreMenu">
             <svg>
               <use xlink:href="./imgs/icons.svg#icon-measurements-lesions" href="./imgs/icons.svg#icon-measurements-lesions"></use>
             </svg>
             <a>More</a>
           </div>
-          <div class="tool stackScroll" data-tool="stackScroll">
-            <svg class="tool-img">
-              <use xlink:href="/imgs/icons.svg#icon-tools-stack-scroll" href="/imgs/icons.svg#icon-tools-stack-scroll"></use>
-            </svg>
-            <a>Stack Scroll</a>
-          </div>
           <div class="commands-wrapper">
-            <div class="tool" data-tool="stackScroll">
-              <svg class="tool-img">
-                <use xlink:href="/imgs/icons.svg#icon-tools-stack-scroll" href="/imgs/icons.svg#icon-tools-stack-scroll"></use>
-              </svg>
-              <a>Stack Scroll</a>
-            </div>
-            <div class="tool" data-command="clearAll">
-              <svg>
-                <use xlink:href="/imgs/icons.svg#icon-tools-reset" href="/imgs/icons.svg#icon-tools-reset"></use>
-              </svg>
-              <a>Clear</a>
-            </div>
-
             <div class="tool" data-command="setWLPresetLung">
               <svg>
                 <use xlink:href="/imgs/icons.svg#icon-tools-levels" href="/imgs/icons.svg#icon-tools-levels"></use>
@@ -356,11 +301,6 @@
            unselectable='on'
            onselectstart='return false;'>
         <div id='loading-progress'></div>
-        <div id='loadingIndicator'>
-          <svg class="spin">
-            <use xlink:href="/imgs/icons.svg#icon-spinner" href="/imgs/icons.svg#icon-spinner"></use>
-          </svg>
-        </div>
         <div id="cornerstoneViewport"></div>
         <label id="patient-id-upper-right"></label>
         <label id="category-upper-right"></label>
@@ -382,14 +322,6 @@
       </div>
     </div>
 
-    <div class="modal">
-      <p>Thanks for submitting your measurement!</p>
-      <div class="button-holder">
-        <button class="logout">Log out</button>
-        <button class="next-case">Next Case</button>
-      </div>
-    </div>
-
     <div class="error-modal">
       <p>You don't have any measurements to submit</p>
       <div class="button-holder">
@@ -405,15 +337,6 @@
         </svg>
         <div class="submit-text">Submitting...</div>
       </div>
-    </div>
-
-    <div class="menu-wrapper invisible">
-      <ul>
-        <li><a href="/#" data-menu="nextCase">Next Case</a></li>
-        <li><a href="/#" data-menu="submit">Save</a></li>
-        <li class="separator"></li>
-        <li><a href="/#" data-menu="logout">Log out</a></li>
-      </ul>
     </div>
   </body>
 

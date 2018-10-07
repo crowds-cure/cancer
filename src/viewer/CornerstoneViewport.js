@@ -3,7 +3,8 @@ import React from 'react';
 import * as cornerstone from 'cornerstone-core';
 import * as cornerstoneTools from 'cornerstone-tools';
 import './initCornerstone.js';
-
+import debounce from './debounce.js';
+import LoadingIndicator from '../shared/LoadingIndicator.js';
 const EVENT_RESIZE = 'resize';
 
 const stack = {
@@ -36,9 +37,15 @@ const bottomRightStyle = {
   color: 'white'
 };
 
+const loadIndicatorDelay = 25;
+
+const { loadHandlerManager } = cornerstoneTools;
+
 class CornerstoneViewport extends Component {
   constructor(props) {
     super(props);
+
+    // TODO: Allow viewport as a prop
     this.state = {
       stack, //: props.stack,
       imageId: stack.imageIds[0]
@@ -49,6 +56,19 @@ class CornerstoneViewport extends Component {
     this.onImageRendered = this.onImageRendered.bind(this);
     this.onNewImage = this.onNewImage.bind(this);
     this.onWindowResize = this.onWindowResize.bind(this);
+    this.onImageLoaded = this.onImageLoaded.bind(this);
+    this.onStackScroll = this.onStackScroll.bind(this);
+    this.startLoadingHandler = this.startLoadingHandler.bind(this);
+    this.doneLoadingHandler = this.doneLoadingHandler.bind(this);
+
+    this.isLoading = true;
+    this.loadHandlerTimeout = null;
+    loadHandlerManager.setStartLoadHandler(this.startLoadingHandler);
+    loadHandlerManager.setEndLoadHandler(this.doneLoadingHandler);
+
+    this.debouncedResize = debounce(() => {
+      cornerstone.resize(this.element, true);
+    }, 300);
   }
 
   render() {
@@ -63,6 +83,9 @@ class CornerstoneViewport extends Component {
           }}
         >
           <canvas className="cornerstone-canvas" />
+
+          {this.state.isLoading && <LoadingIndicator />}
+
           <div style={bottomLeftStyle}>Zoom: {this.state.viewport.scale}</div>
           <div style={bottomRightStyle}>
             WW/WC: {this.state.viewport.voi.windowWidth} /{' '}
@@ -81,7 +104,7 @@ class CornerstoneViewport extends Component {
 
   onWindowResize() {
     console.log('onWindowResize');
-    cornerstone.resize(this.element);
+    this.debouncedResize();
   }
 
   onImageRendered() {
@@ -160,15 +183,27 @@ class CornerstoneViewport extends Component {
       cornerstoneTools.stackScrollKeyboard.activate(element);
 
       element.addEventListener(
-        'cornerstoneimagerendered',
+        cornerstone.EVENTS.IMAGE_RENDERED,
         this.onImageRendered
       );
 
       element.addEventListener(cornerstone.EVENTS.NEW_IMAGE, this.onNewImage);
+
       element.addEventListener(
         cornerstoneTools.EVENTS.STACK_SCROLL,
         this.onStackScroll
       );
+
+      element.addEventListener(
+        cornerstoneTools.EVENTS.MEASUREMENT_ADDED,
+        this.onMeasurementAdded
+      );
+
+      cornerstone.events.addEventListener(
+        cornerstone.EVENTS.IMAGE_LOADED,
+        this.onImageLoaded
+      );
+
       window.addEventListener(EVENT_RESIZE, this.onWindowResize);
     });
   }
@@ -176,18 +211,30 @@ class CornerstoneViewport extends Component {
   componentWillUnmount() {
     const element = this.element;
     element.removeEventListener(
-      'cornerstoneimagerendered',
+      cornerstone.EVENTS.IMAGE_RENDERED,
       this.onImageRendered
     );
 
     element.removeEventListener(cornerstone.EVENTS.NEW_IMAGE, this.onNewImage);
+
     element.removeEventListener(
       cornerstoneTools.EVENTS.STACK_SCROLL,
       this.onStackScroll
     );
+
+    element.removeEventListener(
+      cornerstoneTools.EVENTS.MEASUREMENT_ADDED,
+      this.onMeasurementAdded
+    );
+
     window.removeEventListener(EVENT_RESIZE, this.onWindowResize);
 
     cornerstone.disable(element);
+
+    cornerstone.events.removeEventListener(
+      cornerstone.EVENTS.IMAGE_LOADED,
+      this.onImageLoaded
+    );
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -216,6 +263,37 @@ class CornerstoneViewport extends Component {
 
     // TODO: put this on-screen somewhere?
     console.log(`Image: ${imageIndex}/${stackData.imageIds.length}`);
+  }
+
+  onImageLoaded(event) {
+    console.log(event.detail);
+    //const loadingProgress = $('#loading-progress');
+    //this.numImagesLoaded += 1;
+    //const imagesLeft = imageIds.length - numImagesLoaded;
+    /*loadingProgress.text(`${imagesLeft} images requested`);
+    if (numImagesLoaded === imageIds.length) {
+      console.timeEnd('Loading All Images');
+      loadingProgress.text('');
+    }*/
+  }
+
+  startLoadingHandler() {
+    clearTimeout(this.loadHandlerTimeout);
+    this.loadHandlerTimeout = setTimeout(() => {
+      this.isLoading = true;
+    }, loadIndicatorDelay);
+  }
+
+  doneLoadingHandler() {
+    clearTimeout(this.loadHandlerTimeout);
+    this.isLoading = false;
+  }
+
+  onMeasurementAdded() {
+    console.log('onMeasurementAdded');
+    // TODO: Allow this to be set by props,
+    // call enforceSingleMeasurement for standard cases
+    // Allow this to be set on a case level
   }
 }
 
