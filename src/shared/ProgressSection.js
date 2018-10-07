@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import React from 'react';
 import ProgressBar from './ProgressBar.js';
+import './ProgressSection.css';
 
 class ProgressSection extends Component {
   render() {
@@ -10,10 +11,10 @@ class ProgressSection extends Component {
 
     return (
       <div className="ProgressSection">
-        <h1>Your activity</h1>
+        <span className="title">Your activity</span>
         <ProgressBar min={low} max={high} current={current} />
-        <h2>{current}</h2>
-        <h3>cases</h3>
+        <span className="value">{current}</span>
+        <span className="suffix">cases</span>
       </div>
     );
   }

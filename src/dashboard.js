@@ -30,7 +30,10 @@ class Dashboard extends Component {
           <div className="top-right">
             <nav>
               <Link to="/create-account">Create Account</Link>
+
+              {/* These links are just for testing purposes */}
               <Link to="/viewer">Viewer</Link>
+              <Link to="/session-summary">Session Summary</Link>
             </nav>
           </div>
           <div className="bottom">

@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import React from 'react';
 import CaseTypeCard from './CaseTypeCard.js';
+import './CaseTypeSection.css';
 
 class CaseTypeSection extends Component {
   render() {
@@ -11,6 +12,14 @@ class CaseTypeSection extends Component {
       },
       {
         name: 'Liver',
+        description: 'Measure the largest lesion'
+      },
+      {
+        name: 'Brain',
+        description: 'Measure the largest lesion'
+      },
+      {
+        name: 'Axillary',
         description: 'Measure the largest lesion'
       }
     ];

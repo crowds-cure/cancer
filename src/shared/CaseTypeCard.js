@@ -1,24 +1,17 @@
 import { Component } from 'react';
 import React from 'react';
-
-const style = {
-  height: '100%',
-  display: 'flex',
-  alignItems: 'left',
-  justifyContent: 'left',
-  textAlign: 'center',
-  color: 'white',
-  background: 'black',
-  border: '1px solid cyan',
-  overflow: 'hidden'
-};
+import './CaseTypeCard.css';
 
 class CaseTypeCard extends Component {
   render() {
     return (
-      <div style={style} className="CaseTypeCard">
-        <h1>{this.props.name}</h1>
-        {/*<p>{this.props.description}</p>*/}
+      <div className="CaseTypeCard">
+        <span className="name">{this.props.name}</span>
+        <div className="info-icon svgContainer">
+          <svg>
+            <use xlinkHref="/icons.svg#icon-trial-info" />
+          </svg>
+        </div>
         {/*<img src={{this.props.img}}></img>*/}
       </div>
     );

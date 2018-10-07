@@ -1,25 +1,17 @@
 import { Component } from 'react';
 import React from 'react';
-
-const style = {
-  height: '100%',
-  display: 'flex',
-  alignItems: 'left',
-  justifyContent: 'left',
-  textAlign: 'center',
-  color: 'white',
-  background: 'black',
-  border: '1px solid cyan',
-  overflow: 'hidden'
-};
+import './StatisticsCard.css';
 
 class StatisticsCard extends Component {
   render() {
+    const number = this.props.number || 25;
+    const description =
+      this.props.description || 'Minutes average session time';
+
     return (
-      <div style={style} className="StatisticsCard">
-        <h1>{this.props.name}</h1>
-        {/*<p>{this.props.description}</p>*/}
-        {/*<img src={{this.props.img}}></img>*/}
+      <div className="StatisticsCard">
+        <span className="number">{number}</span>
+        <span className="description">{description}</span>
       </div>
     );
   }

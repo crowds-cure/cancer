@@ -1,0 +1,35 @@
+.CaseTypeCard {
+  float: left;
+  position: relative;
+  margin: 5px;
+  background-color: black;
+  border: 1px solid cyan;
+  width: 339px;
+  height: 217px;
+  cursor: pointer;
+}
+
+.CaseTypeCard .name {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 20px;
+  color: white;
+  font-weight: bold;
+  font-size: 33pt;
+}
+
+.CaseTypeCard .info-icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 10px;
+  height: 20px;
+  width: 20px;
+  stroke: #34ffd4;
+}
+
+.CaseTypeCard .info-icon svg {
+  height: 20px;
+  width: 20px;
+}
