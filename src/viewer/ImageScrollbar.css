@@ -1,0 +1,45 @@
+.scroll {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 15px;
+  height: 100%;
+  z-index: 2;
+}
+
+.scroll .scroll-holder {
+  position: relative;
+  height: 100%;
+}
+
+.scroll .scroll-holder .imageSlider {
+  transform: rotate(90deg);
+  transform-origin: top left;
+  position: absolute;
+  width: 300px;
+  margin-left: 10px;
+  -webkit-appearance: none;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.imageSlider :focus {
+  outline: none;
+}
+
+.imageSlider ::-moz-focus-outer {
+  border: none;
+}
+
+.imageSlider ::-webkit-slider-thumb {
+  cursor: -webkit-grab;
+  background: rgb(82, 69, 69);
+  -webkit-appearance: none;
+  width: 45px;
+  height: 20px;
+  border-radius: 10px;
+}
+
+.imageSlider ::-webkit-slider-thumb:active {
+  background: blue;
+  cursor: -webkit-grabbing;
+}

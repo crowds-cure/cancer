@@ -24,16 +24,20 @@ class Viewer extends Component {
         );
       }
 
-      return <CornerstoneViewport key={index} viewportData={item} />;
+      return (
+        <div key={index} className="viewport">
+          <CornerstoneViewport viewportData={item} />
+        </div>
+      );
     });
 
     return (
       <div className="Viewer">
-        <div>
+        <div className="toolbar-row">
           <ToolbarSection />
           <CaseControlButtons />
         </div>
-        <div>{items}</div>
+        <div className="viewport-section">{items}</div>
       </div>
     );
   }

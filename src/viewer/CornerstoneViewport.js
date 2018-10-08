@@ -4,7 +4,11 @@ import * as cornerstone from 'cornerstone-core';
 import * as cornerstoneTools from 'cornerstone-tools';
 import './initCornerstone.js';
 import debounce from './debounce.js';
+import ImageScrollbar from './ImageScrollbar.js';
+import ViewportOverlay from './ViewportOverlay.js';
 import LoadingIndicator from '../shared/LoadingIndicator.js';
+import './CornerstoneViewport.css';
+
 const EVENT_RESIZE = 'resize';
 
 const stack = {
@@ -14,27 +18,6 @@ const stack = {
     'dicomweb://s3.amazonaws.com/lury/PTCTStudy/1.3.6.1.4.1.25403.52237031786.3872.20100510032220.3.dcm'
   ],
   currentImageIdIndex: 0
-};
-
-const divStyle = {
-  width: '512px',
-  height: '512px',
-  position: 'relative',
-  color: 'white'
-};
-
-const bottomLeftStyle = {
-  bottom: '5px',
-  left: '5px',
-  position: 'absolute',
-  color: 'white'
-};
-
-const bottomRightStyle = {
-  bottom: '5px',
-  right: '5px',
-  position: 'absolute',
-  color: 'white'
 };
 
 const loadIndicatorDelay = 25;
@@ -51,6 +34,7 @@ class CornerstoneViewport extends Component {
       imageId: stack.imageIds[0]
     };
 
+    this.displayScrollbar = stack.imageIds.length > 1;
     this.state.viewport = cornerstone.getDefaultViewport(null, undefined);
 
     this.onImageRendered = this.onImageRendered.bind(this);
@@ -69,6 +53,21 @@ class CornerstoneViewport extends Component {
     this.debouncedResize = debounce(() => {
       cornerstone.resize(this.element, true);
     }, 300);
+
+    const slideTimeoutTime = 5;
+    this.slideTimeout = null;
+
+    // Adding input listener
+    this.imageSliderOnInputCallback = value => {
+      // Note that we throttle requests to prevent the
+      // user's ultrafast scrolling from firing requests too quickly.
+      clearTimeout(this.slideTimeout);
+      this.slideTimeout = setTimeout(() => {
+        const newImageIdIndex = parseInt(value, 10);
+
+        cornerstoneTools.scrollToIndex(this.element, newImageIdIndex);
+      }, slideTimeoutTime);
+    };
   }
 
   render() {
@@ -77,7 +76,6 @@ class CornerstoneViewport extends Component {
         <div
           className="CornerstoneViewport viewportElement"
           onContextMenu={this.onContextMenu}
-          style={divStyle}
           ref={input => {
             this.element = input;
           }}
@@ -85,12 +83,15 @@ class CornerstoneViewport extends Component {
           <canvas className="cornerstone-canvas" />
 
           {this.state.isLoading && <LoadingIndicator />}
+          {this.displayScrollbar && (
+            <ImageScrollbar
+              onInputCallback={this.imageSliderOnInputCallback}
+              max={this.state.stack.imageIds.length - 1}
+              value={this.state.currentImageIdIndex}
+            />
+          )}
 
-          <div style={bottomLeftStyle}>Zoom: {this.state.viewport.scale}</div>
-          <div style={bottomRightStyle}>
-            WW/WC: {this.state.viewport.voi.windowWidth} /{' '}
-            {this.state.viewport.voi.windowCenter}
-          </div>
+          <ViewportOverlay viewport={this.state.viewport} />
         </div>
       </>
     );
@@ -109,20 +110,17 @@ class CornerstoneViewport extends Component {
 
   onImageRendered() {
     const viewport = cornerstone.getViewport(this.element);
-    console.log(viewport);
 
     this.setState({
       viewport
     });
-
-    console.log(this.state.viewport);
   }
 
   onNewImage() {
-    const enabledElement = cornerstone.getEnabledElement(this.element);
+    const image = cornerstone.getImage(this.element);
 
     this.setState({
-      imageId: enabledElement.image.imageId
+      imageId: image.imageId
     });
   }
 
