@@ -84,29 +84,7 @@ export default {
       imageIds: imageIds
     };
 
-    // Init slider configurations
-    slider.min = 0;
-    slider.max = stack.imageIds.length - 1;
-    slider.step = 1;
-    slider.value = stack.currentImageIdIndex;
-
     const element = this.element;
-    const slideTimeoutTime = 5;
-    let slideTimeout;
-
-    // Adding input listener
-    function selectImage(event) {
-      // Note that we throttle requests to prevent the
-      // user's ultrafast scrolling from firing requests too quickly.
-      clearTimeout(slideTimeout);
-      slideTimeout = setTimeout(() => {
-        const newImageIdIndex = parseInt(event.currentTarget.value, 10);
-        cornerstoneTools.scrollToIndex(element, newImageIdIndex);
-      }, slideTimeoutTime);
-    }
-
-    $slider.off('input', selectImage);
-    $slider.on('input', selectImage);
 
     // Setting the slider size
     const height = this.$cornerstoneViewport.height() - 60;

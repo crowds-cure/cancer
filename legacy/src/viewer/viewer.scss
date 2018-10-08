@@ -113,50 +113,6 @@ $max-screen-size-for-more-option: 930px;
     }
   }
 
-  .viewport {
-    flex: 1 1 auto;
-    border: 1px solid $blue;
-    margin: 2px;
-    position: relative;
-
-    #cornerstoneViewport {
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      outline: none;
-    }
-
-    .dicomTag {
-      position: absolute;
-      color: $light-blue;
-      z-index: 2;
-      text-shadow: 1px 1px black;
-    }
-
-    #patient-id-upper-right {
-      color: $light-blue;
-      position: absolute;
-      top: rem(10);
-      right: rem(25); // room for scrollbar
-    }
-
-    #category-upper-right {
-      color: $light-blue;
-      position: absolute;
-      top: rem(30);
-      right: rem(25); // room for scrollbar
-    }
-
-    #mrbottomrightImageIndex {
-      bottom: rem(10);
-      right: rem(10);
-    }
-
-    #mrbottomrightWWWC {
-      bottom: rem(30);
-      right: rem(10);
-    }
-
     #logo-bottom-left {
       position: absolute;
       font-family: 'Montserrat', 'Roboto', sans-serif;
@@ -180,52 +136,6 @@ $max-screen-size-for-more-option: 930px;
       bottom: rem(10);
       left: rem(10);
       color: $light-blue;
-    }
-  }
-}
-
-.scroll {
-  position: absolute;
-  right: 0;
-  width: rem(10);
-  height: 100%;
-  top: 0;
-  z-index: 2;
-
-  .scroll-holder {
-    position: relative;
-    height: 100%;
-
-    .imageSlider {
-      transform: rotate(90deg);
-      transform-origin: top left;
-      position: absolute;
-      width: 100%;
-      margin-left: 10px;
-      -webkit-appearance: none;
-      background-color: rgba(0,0,0,0);
-
-      &:focus {
-        outline: none;
-      }
-
-      &::-moz-focus-outer {
-        border: none;
-      }
-
-      &::-webkit-slider-thumb {
-        cursor: -webkit-grab;
-        background: rgb(82, 69, 69);
-        -webkit-appearance: none;
-        width: 45px;
-        height: 20px;
-        border-radius: 10px;
-
-        &:active {
-          background: $blue;
-          cursor: -webkit-grabbing;
-        }
-      }
     }
   }
 }

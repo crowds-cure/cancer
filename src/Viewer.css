@@ -3,3 +3,24 @@
   width: 100%;
   background-color: black;
 }
+
+.toolbar-row {
+  height: 50px;
+  display: inline-flex;
+}
+
+.viewport-section {
+  width: 100%;
+  height: calc(100% - 50px);
+  position: relative;
+  display: flex;
+}
+
+.viewport-section .viewport {
+  border: 1px solid blue;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  outline: none;
+  flex: 1 1 auto;
+}
