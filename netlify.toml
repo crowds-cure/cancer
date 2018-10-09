@@ -1,0 +1,7 @@
+[Settings]
+ID = "7331e6f7-ed44-4213-97ec-08f119adcbaa"
+
+[build]
+  base    = ""
+  publish = "build"
+  command = "yarn build"
