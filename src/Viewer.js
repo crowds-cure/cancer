@@ -7,6 +7,8 @@ import CaseControlButtons from './viewer/CaseControlButtons.js';
 import getNextCase from './case/getNextCase.js';
 
 import clearOldCornerstoneCacheData from './viewer/clearOldCornerstoneCacheData.js';
+
+import * as cornerstone from 'cornerstone-core';
 import * as cornerstoneWADOImageLoader from 'cornerstone-wado-image-loader';
 
 import './Viewer.css';
@@ -23,7 +25,7 @@ class Viewer extends Component {
       clearOldCornerstoneCacheData();
 
       const series = seriesData[0];
-      const imageIds = [];
+      let imageIds = [];
 
       series.forEach(instance => {
         // TODO: use this
@@ -31,14 +33,26 @@ class Viewer extends Component {
 
         instance['7FE00010'].BulkDataURI = instance[
           '7FE00010'
-        ].BulkDataURI.replace('http://', '');
+        ].BulkDataURI.replace('http://', 'https://');
 
-        const imageId = 'wadors://' + instance['7FE00010'].BulkDataURI;
+        const imageId = 'wadors:' + instance['7FE00010'].BulkDataURI;
         imageIds.push(imageId);
 
         cornerstoneWADOImageLoader.wadors.metaDataManager.add(
           imageId,
           instance
+        );
+      });
+
+      imageIds = imageIds.sort((a, b) => {
+        const imagePlaneA = cornerstone.metaData.get('imagePlaneModule', a);
+        const imagePlaneB = cornerstone.metaData.get('imagePlaneModule', b);
+
+        debugger;
+
+        return (
+          imagePlaneA.imagePositionPatient[2] -
+          imagePlaneB.imagePositionPatient[2]
         );
       });
 
