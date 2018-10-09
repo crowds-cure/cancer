@@ -19,15 +19,7 @@ export default {
         const imageIds = brokenImageIds.map(imageId => {
           return imageId.replace('wadouris://', 'wadouri://');
         });
-
-
-
-        Tools.initStackTool(imageIds);
-
-        const bottomRight = $('.viewport #mrbottomright');
-        const imageIndex = 1;
-        bottomRight.text(`Image: ${imageIndex}/${imageIds.length}`);
-      }, reject);
+        }, reject);
     });
   },
 
@@ -42,14 +34,6 @@ export default {
     });
 
     Menu.init();
-
-    this.$viewer.removeClass('invisible');
-
-    Tools.element = this.element;
-    Commands.element = this.element;
-    Menu.element = this.element;
-
-    Commands.initCommands();
 
     // currentSeriesIndex = 0;//a hack to get series in order
     this.getNextCase().then(() => {

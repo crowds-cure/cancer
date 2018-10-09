@@ -30,14 +30,7 @@ export default {
   $overlay: $('.loading-overlay'),
   $loadingText: $('.loading-overlay .content .submit-text'),
   $commandMenu: $('.commands-wrapper'),
-
-  clearAll() {
-    // Remove all imageId-specific measurements associated with this element
-    cornerstoneTools.globalImageIdSpecificToolStateManager.restoreToolState({});
-
-    // Reset the viewport parameters (i.e. VOI LUT, scale, translation)
-    cornerstone.reset(this.element);
-  },
+,
 
   setWL: function (windowWidth, windowCenter) {
     const viewport = cornerstone.getViewport(this.element);

@@ -4,10 +4,18 @@ import CornerstoneViewport from './viewer/CornerstoneViewport.js';
 import ToolbarSection from './viewer/ToolbarSection.js';
 import CaseControlButtons from './viewer/CaseControlButtons.js';
 
+import getNextCase from './case/getNextCase.js';
+
 import clearOldCornerstoneCacheData from './viewer/clearOldCornerstoneCacheData.js';
 import './Viewer.css';
 
 class Viewer extends Component {
+  constructor(props) {
+    super(props);
+
+    getNextCase();
+  }
+
   render() {
     clearOldCornerstoneCacheData();
 

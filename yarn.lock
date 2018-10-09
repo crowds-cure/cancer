@@ -1386,6 +1386,14 @@ babel-plugin-transform-react-remove-prop-types@0.4.18:
   version "0.4.18"
   resolved "https://registry.yarnpkg.com/babel-plugin-transform-react-remove-prop-types/-/babel-plugin-transform-react-remove-prop-types-0.4.18.tgz#85ff79d66047b34288c6f7cc986b8854ab384f8c"
 
+babel-polyfill@>=6.9.1:
+  version "6.26.0"
+  resolved "https://registry.yarnpkg.com/babel-polyfill/-/babel-polyfill-6.26.0.tgz#379937abc67d7895970adc621f284cd966cf2153"
+  dependencies:
+    babel-runtime "^6.26.0"
+    core-js "^2.5.0"
+    regenerator-runtime "^0.10.5"
+
 babel-preset-jest@^23.2.0:
   version "23.2.0"
   resolved "https://registry.yarnpkg.com/babel-preset-jest/-/babel-preset-jest-23.2.0.tgz#8ec7a03a138f001a1a8fb1e8113652bf1a55da46"
@@ -2664,6 +2672,10 @@ detect-port-alt@1.1.6:
 dicom-parser@^1.7.6, dicom-parser@^1.8.1:
   version "1.8.1"
   resolved "https://registry.yarnpkg.com/dicom-parser/-/dicom-parser-1.8.1.tgz#5baef740f7ae2911921f3e4109b89c936b8b3273"
+
+dicomweb-client@^0.3.2:
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/dicomweb-client/-/dicomweb-client-0.3.2.tgz#e4e52b138f78548c98fea67bfc797a23cf11f626"
 
 diff@^3.2.0:
   version "3.5.0"
@@ -5066,6 +5078,10 @@ jsprim@^1.2.2:
     json-schema "0.2.3"
     verror "1.10.0"
 
+jsrsasign@^8.0.12:
+  version "8.0.12"
+  resolved "https://registry.yarnpkg.com/jsrsasign/-/jsrsasign-8.0.12.tgz#22abb9656d34a30b9530436720835e89c2e5c316"
+
 jsx-ast-utils@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/jsx-ast-utils/-/jsx-ast-utils-2.0.1.tgz#e801b1b39985e20fffc87b40e3748080e2dcac7f"
@@ -6034,6 +6050,14 @@ object.values@^1.0.4:
 obuf@^1.0.0, obuf@^1.1.1:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/obuf/-/obuf-1.1.2.tgz#09bea3343d41859ebd446292d11c9d4db619084e"
+
+oidc-client@^1.5.3-beta.1:
+  version "1.5.3-beta.1"
+  resolved "https://registry.yarnpkg.com/oidc-client/-/oidc-client-1.5.3-beta.1.tgz#c1e1d23a89cfa7531a320a443ec1dc6eb534c3b2"
+  dependencies:
+    jsrsasign "^8.0.12"
+  optionalDependencies:
+    babel-polyfill ">=6.9.1"
 
 on-finished@~2.3.0:
   version "2.3.0"
@@ -7484,6 +7508,10 @@ regenerate-unicode-properties@^7.0.0:
 regenerate@^1.2.1, regenerate@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/regenerate/-/regenerate-1.4.0.tgz#4a856ec4b56e4077c557589cae85e7a4c8869a11"
+
+regenerator-runtime@^0.10.5:
+  version "0.10.5"
+  resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.10.5.tgz#336c3efc1220adcedda2c9fab67b5a7955a33658"
 
 regenerator-runtime@^0.11.0:
   version "0.11.1"

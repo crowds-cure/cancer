@@ -9,18 +9,37 @@ class ImageScrollbar extends Component {
     this.onChange = this.onChange.bind(this);
 
     this.state = {
-      value: 0
+      value: props.value
     };
 
     this.onInputCallback = this.props.onInputCallback;
   }
 
+  static getDerivedStateFromProps(props, state) {
+    // Here we override any internal state that is present
+    // when the higher-level CornerstoneViewport component
+    // has updated the value property.
+    if (props.value !== state.value) {
+      return {
+        value: props.value
+      };
+    }
+
+    // Return null if the state hasn't changed
+    return null;
+  }
+
   render() {
+    this.style = {
+      width: `${this.props.height}`
+    };
+
     return (
       <div className="scroll">
         <div className="scroll-holder">
           <input
             className="imageSlider"
+            style={this.style}
             type="range"
             min="0"
             max={this.props.max}

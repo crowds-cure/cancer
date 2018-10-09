@@ -1,4 +1,5 @@
 import PouchDB from 'pouchdb';
+import $ from 'jquery';
 
 const baseURL = 'https://k8s-testing.ohif.org/couchdb';
 

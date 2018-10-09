@@ -1,7 +1,5 @@
 import * as cornerstoneTools from 'cornerstone-tools';
 
-import debounce from './debounce';
-
 const tools = {
   pan: {
     mouse: cornerstoneTools.pan,
@@ -74,38 +72,6 @@ export default {
 
     // Set the element to focused, so we can properly handle keyboard events
     $(this.element).attr('tabindex', 0).focus();
-  },
-
-  initStackTool(imageIds) {
-    const $slider = $('.imageSlider');
-    const slider = $slider[0];
-    const stack = {
-      currentImageIdIndex: 0,
-      imageIds: imageIds
-    };
-
-    const element = this.element;
-
-    // Setting the slider size
-    const height = this.$cornerstoneViewport.height() - 60;
-    $slider.css('width', `${height}px`);
-
-    const debounceWindowResizeHandler = debounce(() => {
-      const height = this.$cornerstoneViewport.height() - 60;
-      $slider.css('width', `${height}px`)
-    }, 150);
-
-    $(window).off('resize', debounceWindowResizeHandler);
-    $(window).on('resize', debounceWindowResizeHandler);
-
-    // Listening to viewport stack image change, so the slider is synced
-    const cornerstoneStackScrollHandler = function () {
-      // Update the slider value
-      slider.value = stack.currentImageIdIndex;
-    };
-
-    this.$cornerstoneViewport[0].removeEventListener('cornerstonestackscroll', cornerstoneStackScrollHandler);
-    this.$cornerstoneViewport[0].addEventListener('cornerstonestackscroll', cornerstoneStackScrollHandler);
   },
 
   toolClickHandler(event) {

@@ -1,4 +1,5 @@
 .ToolbarSection {
   height: 48px;
   display: inline-block;
+  flex: 1 1 auto;
 }
