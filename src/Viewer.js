@@ -7,26 +7,59 @@ import CaseControlButtons from './viewer/CaseControlButtons.js';
 import getNextCase from './case/getNextCase.js';
 
 import clearOldCornerstoneCacheData from './viewer/clearOldCornerstoneCacheData.js';
+import * as cornerstoneWADOImageLoader from 'cornerstone-wado-image-loader';
+
 import './Viewer.css';
 
 class Viewer extends Component {
   constructor(props) {
     super(props);
 
-    getNextCase();
+    this.state = {
+      viewportData: []
+    };
+
+    getNextCase().then(seriesData => {
+      clearOldCornerstoneCacheData();
+
+      const series = seriesData[0];
+      const imageIds = [];
+
+      series.forEach(instance => {
+        // TODO: use this
+        //const numberOfFrames = instance['00280008'].Value;
+
+        instance['7FE00010'].BulkDataURI = instance[
+          '7FE00010'
+        ].BulkDataURI.replace('http://', '');
+
+        const imageId = 'wadors://' + instance['7FE00010'].BulkDataURI;
+        imageIds.push(imageId);
+
+        cornerstoneWADOImageLoader.wadors.metaDataManager.add(
+          imageId,
+          instance
+        );
+      });
+
+      this.setState({
+        viewportData: [
+          {
+            stack: {
+              imageIds,
+              currentImageIdIndex: 0
+            }
+          }
+        ]
+      });
+    });
   }
 
   render() {
-    clearOldCornerstoneCacheData();
-
-    const viewportData = [
-      {
-        plugin: 'cornerstone'
-      }
-    ];
+    const viewportData = this.state.viewportData;
 
     const items = viewportData.map((item, index) => {
-      if (item.plugin !== 'cornerstone') {
+      if (item.plugin && item.plugin !== 'cornerstone') {
         throw new Error(
           'Only Cornerstone-based Viewports are currently supported.'
         );
@@ -34,7 +67,7 @@ class Viewer extends Component {
 
       return (
         <div key={index} className="viewport">
-          <CornerstoneViewport viewportData={item} />
+          {item ? <CornerstoneViewport viewportData={item} /> : 'Loading'}
         </div>
       );
     });

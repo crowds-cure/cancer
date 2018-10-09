@@ -10,27 +10,18 @@ import LoadingIndicator from '../shared/LoadingIndicator.js';
 import './CornerstoneViewport.css';
 
 const EVENT_RESIZE = 'resize';
-
-const stack = {
-  imageIds: [
-    'dicomweb://s3.amazonaws.com/lury/PTCTStudy/1.3.6.1.4.1.25403.52237031786.3872.20100510032225.15.dcm',
-    'dicomweb://s3.amazonaws.com/lury/PTCTStudy/1.3.6.1.4.1.25403.52237031786.3872.20100510032227.21.dcm',
-    'dicomweb://s3.amazonaws.com/lury/PTCTStudy/1.3.6.1.4.1.25403.52237031786.3872.20100510032220.3.dcm'
-  ],
-  currentImageIdIndex: 0
-};
-
 const loadIndicatorDelay = 25;
-
 const { loadHandlerManager } = cornerstoneTools;
 
 class CornerstoneViewport extends Component {
   constructor(props) {
     super(props);
 
+    const stack = props.viewportData.stack;
+
     // TODO: Allow viewport as a prop
     this.state = {
-      stack, //: props.stack,
+      stack,
       imageId: stack.imageIds[0],
       viewportHeight: '100%'
     };
