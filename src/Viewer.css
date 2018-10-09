@@ -7,6 +7,7 @@
 .toolbar-row {
   height: 50px;
   display: inline-flex;
+  width: 100%;
 }
 
 .viewport-section {

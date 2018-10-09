@@ -1,0 +1,13 @@
+.CaseControlButtons {
+  display: inline-flex;
+  flex: 1 1 auto;
+}
+
+.CaseControlButtons button {
+  height: 100%;
+  min-width: 50px;
+  cursor: pointer;
+}
+
+.CaseControlButtons .btn-group {
+}

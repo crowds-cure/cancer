@@ -31,7 +31,8 @@ class CornerstoneViewport extends Component {
     // TODO: Allow viewport as a prop
     this.state = {
       stack, //: props.stack,
-      imageId: stack.imageIds[0]
+      imageId: stack.imageIds[0],
+      viewportHeight: '100%'
     };
 
     this.displayScrollbar = stack.imageIds.length > 1;
@@ -52,6 +53,10 @@ class CornerstoneViewport extends Component {
 
     this.debouncedResize = debounce(() => {
       cornerstone.resize(this.element, true);
+
+      this.setState({
+        viewportHeight: `${this.element.clientHeight - 20}px`
+      });
     }, 300);
 
     const slideTimeoutTime = 5;
@@ -87,7 +92,8 @@ class CornerstoneViewport extends Component {
             <ImageScrollbar
               onInputCallback={this.imageSliderOnInputCallback}
               max={this.state.stack.imageIds.length - 1}
-              value={this.state.currentImageIdIndex}
+              value={this.state.stack.currentImageIdIndex}
+              height={this.state.viewportHeight}
             />
           )}
 
@@ -203,6 +209,10 @@ class CornerstoneViewport extends Component {
       );
 
       window.addEventListener(EVENT_RESIZE, this.onWindowResize);
+
+      this.setState({
+        viewportHeight: `${this.element.clientHeight - 20}px`
+      });
     });
   }
 
@@ -255,12 +265,16 @@ class CornerstoneViewport extends Component {
 
   onStackScroll(event) {
     const element = event.currentTarget;
-    const stack = cornerstoneTools.getToolState(element, 'stack');
-    const stackData = stack.data[0];
-    const imageIndex = stackData.currentImageIdIndex + 1;
+    const stackData = cornerstoneTools.getToolState(element, 'stack');
+    const stack = stackData.data[0];
+    const imageIndex = stack.currentImageIdIndex + 1;
 
     // TODO: put this on-screen somewhere?
-    console.log(`Image: ${imageIndex}/${stackData.imageIds.length}`);
+    console.log(`Image: ${imageIndex}/${stack.imageIds.length}`);
+
+    this.setState({
+      stack
+    });
   }
 
   onImageLoaded(event) {

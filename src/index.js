@@ -4,10 +4,16 @@ import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import Auth from './openid-connect/Auth.js';
+
+const auth = new Auth();
+
+// TODO: Probably a better way to do this
+window.auth = auth;
 
 ReactDOM.render(
   <BrowserRouter>
-    <App />
+    <App auth={auth} />
   </BrowserRouter>,
   document.getElementById('root')
 );

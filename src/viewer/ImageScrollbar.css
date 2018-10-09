@@ -16,10 +16,11 @@
   transform: rotate(90deg);
   transform-origin: top left;
   position: absolute;
-  width: 300px;
+  width: 100%; /* Note: This width does not have an effect. */
   margin-left: 10px;
   -webkit-appearance: none;
   background-color: rgba(0, 0, 0, 0);
+  outline: none;
 }
 
 .imageSlider :focus {
