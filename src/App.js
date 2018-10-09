@@ -6,7 +6,6 @@ import './App.css';
 import Dashboard from './Dashboard.js';
 import Viewer from './Viewer.js';
 import SessionSummary from './SessionSummary.js';
-import Callback from './openid-connect/Callback.js';
 
 const reload = () => window.location.reload();
 
@@ -16,7 +15,6 @@ class App extends Component {
 
     return (
       <Switch>
-        <Route exact path="/callback" render={() => <Callback auth={auth} />} />
         <SecretRoute
           exact
           path="/dashboard"
