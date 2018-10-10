@@ -9,11 +9,18 @@ export default class Auth {
     const oidcClient = {
       authServerUrl: 'https://k8s-testing.ohif.org/auth/realms/dcm4che',
       clientId: 'crowds-cure-cancer',
-      authRedirectUri: '/callback',
-      postLogoutRedirectUri: '/about',
+      authRedirectUri: '/',
+      postLogoutRedirectUri: '/logout-redirect.html',
       responseType: 'id_token token',
-      scope: 'email profile openid'
+      scope: 'email profile openid',
+      revokeAccessTokenOnSignout: true,
+      extraQueryParams: {
+        kc_idp_hint: 'crowds-cure-cancer-auth0-oidc',
+        client_id: 'crowds-cure-cancer'
+      }
     };
+
+    this.extraQueryParams = oidcClient.extraQueryParams;
 
     const settings = {
       authority: oidcClient.authServerUrl,
@@ -26,7 +33,8 @@ export default class Auth {
       response_type: oidcClient.responseType,
       scope: 'email profile openid', // Note: Request must have scope 'openid' to be considered an OpenID Connect request
       automaticSilentRenew: true,
-      revokeAccessTokenOnSignout: true
+      revokeAccessTokenOnSignout: true,
+      extraQueryParams: oidcClient.extraQueryParams
     };
 
     this.oidcUserManager = new Oidc.UserManager(settings);
@@ -111,15 +119,17 @@ export default class Auth {
   }
 
   login(args) {
-    this.oidcUserManager.signinRedirect(args);
+    return this.oidcUserManager.signinRedirect(args);
   }
 
   logout() {
-    // clear id token and expiration
+    // clear tokens and expiration
     this.idToken = null;
+    this.accessToken = null;
     this.expiresAt = null;
+    this.profile = null;
 
-    this.oidcUserManager.signoutRedirect();
+    return this.oidcUserManager.signoutRedirect();
   }
 
   setSession(authResult) {

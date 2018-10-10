@@ -34,6 +34,7 @@ class Dashboard extends Component {
               {/* These links are just for testing purposes */}
               <Link to="/viewer">Viewer</Link>
               <Link to="/session-summary">Session Summary</Link>
+              <span onClick={this.logout}>Log out</span>
             </nav>
           </div>
           <div className="bottom">
@@ -43,6 +44,10 @@ class Dashboard extends Component {
         </div>
       </div>
     );
+  }
+
+  logout() {
+    window.auth.logout();
   }
 }
 

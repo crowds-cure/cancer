@@ -30,6 +30,7 @@ class App extends Component {
           auth={auth}
         />
         <Route path="/silent-refresh.html" onEnter={reload} />
+        <Route path="/logout-redirect.html" onEnter={reload} />
         <Route render={() => <div> Sorry, this page does not exist. </div>} />
       </Switch>
     );
