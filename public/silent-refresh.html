@@ -5,7 +5,9 @@
     <title>Silent OpenID Connect Token Refresh Page</title>
 </head>
 <body>
-    <script type="text/javascript" src="js/oidc-client.min.js"></script>
-    <script type="text/javascript" src="js/silentRefresh.js"></script>
+    <script type="text/javascript" src="oidc-client.min.js"></script>
+    <script type="text/javascript">
+      new UserManager().signinSilentCallback().catch(console.error);
+    </script>
 </body>
 </html>

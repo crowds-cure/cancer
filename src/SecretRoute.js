@@ -9,6 +9,7 @@ class SecretRoute extends Component {
     const auth = this.props.auth;
     const authenticated = auth.isAuthenticated();
     const hasSignInResponse = Auth.urlHasSignInResponse();
+
     if (!authenticated && !hasSignInResponse) {
       auth.login({ redirect_uri: Auth.absoluteURL(props.path) });
     } else if (!authenticated && hasSignInResponse) {
