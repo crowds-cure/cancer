@@ -7,7 +7,7 @@ Oidc.Log.level = Oidc.Log.DEBUG;
 export default class Auth {
   constructor() {
     const oidcClient = {
-      authServerUrl: 'https://k8s-testing.ohif.org/auth/realms/dcm4che',
+      authServerUrl: 'https://cancer.crowds-cure.org/auth/realms/dcm4che',
       clientId: 'crowds-cure-cancer',
       authRedirectUri: '/',
       postLogoutRedirectUri: '/logout-redirect.html',
