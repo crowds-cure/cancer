@@ -1,0 +1,31 @@
+/* State palette */
+@value uiStateError: #FFCCCC
+@value uiStateErrorBorder: #993333
+@value uiStateErrorText: #661111
+
+@value uiGrayLight: #516873
+@value uiGray: #263340
+@value uiGrayDark: #16202B
+@value uiGrayDarker: #151A1F
+@value uiGrayDarkest: #14202A
+
+/* Interface UI Colors */
+@value defaultColor: #9CCEF9
+@value hoverColor: #ffffff
+@value activeColor: #20A5D6
+@value uiBorderColor: #44626F
+@value uiBorderColorDark: #3C5D80
+@value uiBorderColorActive: #79f9fe
+@value primaryBackgroundColor: #000000
+@value primaryBackgroundImage: linear-gradient(113deg, rgba(45, 44, 105, 0.7), #313060 42%, #1e1d4b);
+@value boxBackgroundColor: #3E5975
+
+/* Text Colors */
+@value textColorActive: #79f9fe
+@value textPrimaryColor: #ffffff
+@value textSecondaryColor: #b8baee
+@value largeNumbersColor: #6FBDE2
+@value textDisabledColor: #878787
+
+/* Other Colors */
+@value imageSliderColor: #163239;

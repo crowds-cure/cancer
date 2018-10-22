@@ -33,7 +33,12 @@ class CaseTypeSection extends Component {
       />
     ));
 
-    return <div className="CaseTypeSection">{items}</div>;
+    return (
+      <>
+        <h1 className="CaseTypeSectionTitle">Select a case type</h1>
+        <div className="CaseTypeSection">{items}</div>;
+      </>
+    );
   }
 }
 

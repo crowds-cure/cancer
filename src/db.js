@@ -1,7 +1,7 @@
 import PouchDB from 'pouchdb';
 import $ from 'jquery';
 
-const baseURL = 'https://k8s-testing.ohif.org/couchdb';
+const baseURL = 'https://db.crowds-cure.org';
 
 export const uuidURL = `${baseURL}/_uuids`;
 export const annotatorsURL = `${baseURL}/annotators`;

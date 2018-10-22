@@ -1,3 +1,10 @@
+@value globals: "../GlobalStyles.css";
+@value textPrimaryColor, textActiveColor from globals;
+
 .CaseTypeSection {
   display: inline-block;
+}
+
+.CaseTypeSectionTitle {
+  color: textActiveColor;
 }
