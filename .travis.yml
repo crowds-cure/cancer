@@ -53,10 +53,10 @@ jobs:
     - docker pull $REPO:dev-latest
     - docker --version
     script:
-    - docker build -f development.Dockerfile -t $REPO:$COMMIT . --cache-from $REPO:latest
+    - docker build -f development.Dockerfile -t $REPO:dev-$COMMIT . --cache-from $REPO:dev-latest
     after_success:
-    - docker tag $REPO:$COMMIT $REPO:$TAG
-    - docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER
+    - docker tag $REPO:dev-$COMMIT $REPO:dev-$TAG
+    - docker tag $REPO:dev-$COMMIT $REPO:dev-travis-$TRAVIS_BUILD_NUMBER
     - docker images
     - docker login -u $DOCKER_USER -p $DOCKER_PASS
     - docker push $REPO:dev-$TAG
