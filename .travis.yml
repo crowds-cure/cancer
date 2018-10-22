@@ -1,0 +1,60 @@
+language: node_js
+
+node_js:
+  - "lts/*"
+
+services:
+  - docker
+
+cache:
+  directories:
+    - node_modules
+
+env:
+  global:
+    - secure: "ZhIMR4geQP/BXdXrQkcARPCSPnyry2aTgszo+Jg+lZfRHWil2FmAweCiWyOC/5rRxrYYSik/ZyEMAX54v9N9sNjYsPlA9UFqovMirEQhXCYmIG+DNBsU58zgnrDWQoolF1xD4f/IFtLjUGG9WQNR7SavHeL/2VmWK9Nis8TChnyTdmlL8IaWEeKjznseLqyVKZSMb490bG34I4ztdumaYHWWt01uhNFZ/XA048NVd/E8LhO7yLIqwtmCt7Cr1Z61TfSzgyajJaCiuTLvrNDU8W/f/j4wlhybGJruvvOH9qDPRRp2aw3surgAB33irZftYFgG1h/6NjjKeRrBvqocW9sZdAeXWcqw4xiNyi4AbbSGk5aPrFuYMswJWP0/i9MkSF5N0eRcFoWl/DvTeaG4bkzTQquT29pdYE/Ef3KXDgKevwUKH0OBU79v8VSLjIT9Tr0ps/FOvNXjeGHjI6FoqCkLt2XYgDMteltRC7rjtmxTGBRpQQFoRksa/11jwr6t5YNxYootzM11g8EFA/uX56aJHkTjZBpSzMsImDPsWjpqu/MTttVmdtq6iFEkA9NBwZYIZEJBmiy/wfNXhNgCe2lDuaSdK6MMF8PHXWIjvcW2/+h6u355ktr+LRXeolVuYDIAaN3SDSJBsDkJg4duYWuCeq8ptJ4bzeRjZtPchew=" # DOCKER_USER
+    - secure: "PrUMwM360a1KMLhfIPmx7qp9+Ry2cMDJpW4WspE28UQTrqcSZdhUYFCs5Q2DISZXrZWGI1/utHK+JYeqCAt3xOf3qRsLqupzJIPqzMPyb2AKtyR1JbJZGyBv7y4s6HMrXZ9pNfRBoR7hHFtiZfmTBo8avpMne8gBN1JGGXM0GTqbZwY6JGAG+vQ0Nt+DculhEraDAzFdNF5vBO+lg8wTmvh2qp+espa+4i9JzjTeRk8O09+33jkqRFugZtJOcgIi9iBvZjKUPedmFA1w/hU3lHLUuofi7tTmpAOyqaQyB8Grfj1JsgaCfbOZQs7kPHtsQ1Ai0zw2MbJtTKoA8kHcU9XWDU4Kxa1K1qXyp+ZdofTXYYnHkN4pgS+EU2it/OlKnpJV4I73JK28aF7A+fe8zheWkpJV8rFBiI04xXdILr+jxQKfdM4TOWos/XShp4bJru4VJuIfnveKuR+1EPIpuOhJ2jj4HB7g6AbIAbGsjICbFq98jSiXENeGaYmx1qIBSIlFn+lLJxp40fx/OsGKC0y5orfDgyUcPUkseckEk/H7zc90DGdCLCFmJVVgrKGWnfq8ifFI8GPVTomUVy41PLGv1LTCIYyrjM02mxLIEMIKrKboy4MSbaOidasaobjYFtwjABR3GLnUK5ETLANhO0LLC4Z4w6KFvARFfZ6JPec=" # DOCKER_PASS
+
+jobs:
+  include:
+    - stage: build production docker image
+      before_script:
+        - export REPO=crowdscure/cancer
+        - export COMMIT=${TRAVIS_COMMIT::8}
+        - export BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)
+        - echo "TRAVIS_BRANCH=$TRAVIS_BRANCH, PR=$PR, BRANCH=$BRANCH"
+        - export TAG=`if [ "$BRANCH" == "master" ]; then echo "latest"; else echo $BRANCH ; fi`
+        - echo "TAG=$TAG, COMMIT=$COMMIT"
+        - docker pull $REPO:latest
+        - docker --version
+      script:
+        - docker build -t $REPO:$COMMIT . --cache-from $REPO:latest
+      after_success:
+        - docker tag $REPO:$COMMIT $REPO:$TAG
+        - docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER
+        - docker images
+        - docker login -u $DOCKER_USER -p $DOCKER_PASS
+        - docker push $REPO:$TAG
+        - docker push $REPO:travis-$TRAVIS_BUILD_NUMBER
+        - docker push $REPO:$COMMIT
+
+    - stage: build development docker image
+      before_script:
+        - export REPO=crowdscure/cancer
+        - export COMMIT=${TRAVIS_COMMIT::8}
+        - export BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)
+        - echo "TRAVIS_BRANCH=$TRAVIS_BRANCH, PR=$PR, BRANCH=$BRANCH"
+        - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
+        - echo "TAG=$TAG, COMMIT=$COMMIT"
+        - docker pull $REPO:dev-latest
+        - docker --version
+      script:
+        - docker build -f development.Dockerfile -t $REPO:$COMMIT . --cache-from $REPO:latest
+      after_success:
+        - docker tag $REPO:$COMMIT $REPO:$TAG
+        - docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER
+        - docker images
+        - docker login -u $DOCKER_USER -p $DOCKER_PASS
+        - docker push $REPO:dev-$TAG
+        - docker push $REPO:dev-travis-$TRAVIS_BUILD_NUMBER
+        - docker push $REPO:dev-$COMMIT
