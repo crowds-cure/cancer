@@ -13,7 +13,7 @@
         // This is a hacky hardcoded workaround. This could also be added as a component to the React application rather than a static page.
         var path = window.location.origin;
         var client_id = 'z5cXMPTxeFOdB3i4xRA8JyhTonQmqMKM';
-        var url = `https://crowds-cure.auth0.com/v2/logout?client_id=${client_id}&returnTo=${path}`;
+        var url = `https://auth.crowds-cure.org/v2/logout?client_id=${client_id}&returnTo=${path}`;
         window.location.href = url;
       });
     </script>
