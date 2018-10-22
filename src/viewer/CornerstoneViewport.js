@@ -161,6 +161,12 @@ class CornerstoneViewport extends Component {
       });
       cornerstoneTools.stackScrollMultiTouch.activate(this.element);
 
+      cornerstoneTools.stackPrefetch.setConfiguration({
+        maxImagesToPrefetch: Infinity,
+        preserveExistingPool: false,
+        maxSimultaneousRequests: 20
+      });
+
       // We also enable the Length tool so it is always visible
       cornerstoneTools.length.enable(this.element);
 
