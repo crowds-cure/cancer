@@ -1,3 +1,6 @@
+@value globals: "../GlobalStyles.css";
+@value activeColor, imageSliderColor from globals;
+
 .scroll {
   position: absolute;
   top: 0;
@@ -12,7 +15,7 @@
   height: 100%;
 }
 
-.scroll .scroll-holder .imageSlider {
+.scroll > .scroll-holder > .imageSlider {
   transform: rotate(90deg);
   transform-origin: top left;
   position: absolute;
@@ -23,24 +26,24 @@
   outline: none;
 }
 
-.imageSlider :focus {
+input.imageSlider:focus {
   outline: none;
 }
 
-.imageSlider ::-moz-focus-outer {
+input.imageSlider::-moz-focus-outer {
   border: none;
 }
 
-.imageSlider ::-webkit-slider-thumb {
+input.imageSlider::-webkit-slider-thumb {
   cursor: -webkit-grab;
-  background: rgb(82, 69, 69);
+  background: imageSliderColor;
   -webkit-appearance: none;
   width: 45px;
   height: 20px;
   border-radius: 10px;
 }
 
-.imageSlider ::-webkit-slider-thumb:active {
-  background: blue;
+input.imageSlider::-webkit-slider-thumb:active {
+  background: activeColor;
   cursor: -webkit-grabbing;
 }
