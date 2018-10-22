@@ -79,17 +79,16 @@ class CornerstoneViewport extends Component {
           <canvas className="cornerstone-canvas" />
 
           {this.state.isLoading && <LoadingIndicator />}
-          {this.displayScrollbar && (
-            <ImageScrollbar
-              onInputCallback={this.imageSliderOnInputCallback}
-              max={this.state.stack.imageIds.length - 1}
-              value={this.state.stack.currentImageIdIndex}
-              height={this.state.viewportHeight}
-            />
-          )}
-
           <ViewportOverlay viewport={this.state.viewport} />
         </div>
+        {this.displayScrollbar && (
+          <ImageScrollbar
+            onInputCallback={this.imageSliderOnInputCallback}
+            max={this.state.stack.imageIds.length - 1}
+            value={this.state.stack.currentImageIdIndex}
+            height={this.state.viewportHeight}
+          />
+        )}
       </>
     );
   }
