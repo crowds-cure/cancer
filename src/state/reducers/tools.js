@@ -1,34 +1,34 @@
 const defaultButtons = [
   {
-    command: 'PanTool',
+    command: 'Pan',
     type: 'tool',
     text: 'Pan',
     svgUrl: '/icons.svg#icon-tools-pan',
     active: false
   },
   {
-    command: 'WwwcTool',
+    command: 'Wwwc',
     type: 'tool',
     text: 'Levels',
     svgUrl: '/icons.svg#icon-tools-levels',
     active: true
   },
   {
-    command: 'ZoomTool',
+    command: 'Zoom',
     type: 'tool',
     text: 'Zoom',
     svgUrl: '/icons.svg#icon-tools-zoom',
     active: false
   },
   {
-    command: 'LengthTool',
+    command: 'Length',
     type: 'tool',
     text: 'Length',
     svgUrl: '/icons.svg#icon-tools-measure-temp',
     active: false
   },
   {
-    command: 'StackScrollTool',
+    command: 'StackScroll',
     type: 'tool',
     text: 'Stack Scroll',
     svgUrl: '/icons.svg#icon-tools-stack-scroll',

@@ -29,6 +29,9 @@ const config = {
   }
 };
 
+cornerstoneTools.init();
+console.warn('tool init done');
+
 cornerstoneWADOImageLoader.webWorkerManager.initialize(config);
 
 cornerstoneWADOImageLoader.configure({
@@ -46,7 +49,7 @@ const fontFamily =
 cornerstoneTools.textStyle.setFont('15px ' + fontFamily);
 
 // Set the tool width
-cornerstoneTools.toolStyle.setToolWidth(2);
+//cornerstoneTools.toolStyle.setToolWidth(2);
 
 // Set color for inactive tools
 cornerstoneTools.toolColors.setToolColor('rgb(255, 255, 0)');
@@ -54,11 +57,11 @@ cornerstoneTools.toolColors.setToolColor('rgb(255, 255, 0)');
 // Set color for active tools
 cornerstoneTools.toolColors.setActiveColor('rgb(0, 255, 0)');
 
-cornerstoneTools.length.setConfiguration({ shadow: true });
+/*cornerstoneTools.LengthTool.setConfiguration({ shadow: true });
 
 // Stop users from zooming in or out too far
-cornerstoneTools.zoom.setConfiguration({
+cornerstoneTools.ZoomTool.setConfiguration({
   minScale: 0.3,
   maxScale: 25,
   preventZoomOutsideImage: true
-});
+});*/

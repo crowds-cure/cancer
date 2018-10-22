@@ -11,6 +11,8 @@ class SessionSummary extends Component {
   render() {
     return (
       <div className="SessionSummary">
+        <span className="title">Session Summary</span>
+
         {/* TODO: Top bar? */}
         {/* TODO: Logo in Top bar? */}
         <div>

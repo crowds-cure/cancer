@@ -13,13 +13,26 @@ const EVENT_RESIZE = 'resize';
 const loadIndicatorDelay = 25;
 const { loadHandlerManager } = cornerstoneTools;
 
-const tools = {
-  WwwcTool: 'wwwc',
-  LengthTool: 'length',
-  ZoomTool: 'zoom',
-  StackScrollTool: 'stackScroll',
-  PanTool: 'pan'
-};
+function setAllToolsPassive() {
+  cornerstoneTools.store.state.tools.forEach(tool => {
+    cornerstoneTools.setToolPassive(tool.name);
+  });
+}
+
+function initializeTools(tools) {
+  Array.from(tools).forEach(toolName => {
+    const apiTool = cornerstoneTools[`${toolName}Tool`];
+    if (apiTool) {
+      cornerstoneTools.addTool(apiTool);
+      console.log('Added:');
+      console.log(apiTool.name);
+    } else {
+      throw new Error(`Tool not found: ${toolName}Tool`);
+    }
+  });
+}
+
+const scrollToIndex = cornerstoneTools.import('util/scrollToIndex');
 
 class CornerstoneViewport extends Component {
   constructor(props) {
@@ -69,7 +82,8 @@ class CornerstoneViewport extends Component {
       this.slideTimeout = setTimeout(() => {
         const newImageIdIndex = parseInt(value, 10);
 
-        cornerstoneTools.scrollToIndex(this.element, newImageIdIndex);
+        // TODO: This doesn't seem to be exported in Tools V3
+        scrollToIndex(this.element, newImageIdIndex);
       }, slideTimeoutTime);
     };
   }
@@ -159,22 +173,44 @@ class CornerstoneViewport extends Component {
       cornerstoneTools.addToolState(element, 'stack', stack);
       cornerstoneTools.stackPrefetch.enable(this.element);
 
-      cornerstoneTools.mouseInput.enable(this.element);
-      cornerstoneTools.touchInput.enable(this.element);
-      cornerstoneTools.mouseWheelInput.enable(this.element);
-      cornerstoneTools.keyboardInput.enable(this.element);
+      const tools = [
+        'Length',
+        'Wwwc',
+        'Zoom',
+        'Pan',
+        'StackScroll',
+        'PanMultiTouch',
+        'ZoomTouchPinch',
+        'StackScrollMouseWheel'
+        //"StackScrollMultiTouch",
+      ];
+
+      initializeTools(tools);
+
+      cornerstoneTools.setToolActive(this.props.activeTool, {
+        mouseButtonMask: 1,
+        isTouchActive: true
+      });
 
       /* For touch devices, by default we activate:
       - Pinch to zoom
       - Two-finger Pan
       - Three (or more) finger Stack Scroll
       */
-      cornerstoneTools.zoomTouchPinch.activate(this.element);
-      cornerstoneTools.panMultiTouch.activate(this.element);
-      cornerstoneTools.panMultiTouch.setConfiguration({
+      cornerstoneTools.setToolActive('PanMultiTouch', {
+        mouseButtonMask: 0,
+        isTouchActive: true
+      });
+      cornerstoneTools.setToolActive('ZoomTouchPinch', {
+        mouseButtonMask: 0,
+        isTouchActive: true
+      });
+      //cornerstoneTools.setToolActive("StackScrollMultiTouch", { mouseButtonMask: 0, isTouchActive: true });
+      /*
+      cornerstoneTools.PanMultiTouch.setConfiguration({
         testPointers: eventData => eventData.numPointers === 2
       });
-      cornerstoneTools.stackScrollMultiTouch.activate(this.element);
+      */
 
       cornerstoneTools.stackPrefetch.setConfiguration({
         maxImagesToPrefetch: Infinity,
@@ -182,22 +218,29 @@ class CornerstoneViewport extends Component {
         maxSimultaneousRequests: 20
       });
 
-      // We also enable the Length tool so it is always visible
-      cornerstoneTools.length.enable(this.element);
-
-      const toolToActivate = tools[this.props.activeTool];
-      cornerstoneTools[toolToActivate].activate(element, 1);
-
       /* For mouse devices, by default we turn on:
       - Stack scrolling by mouse wheel
       - Stack scrolling by keyboard up / down arrow keys
       - Pan with middle click
       - Zoom with right click
       */
-      cornerstoneTools.pan.activate(element, 2); // pan is the default tool for middle mouse button
-      cornerstoneTools.zoom.activate(element, 4); // zoom is the default tool for right mouse button
-      cornerstoneTools.stackScrollWheel.activate(element);
-      cornerstoneTools.stackScrollKeyboard.activate(element);
+
+      // pan is the default tool for middle mouse button
+      cornerstoneTools.setToolActive('Pan', {
+        mouseButtonMask: 4,
+        isTouchActive: false
+      });
+
+      // zoom is the default tool for right mouse button
+      cornerstoneTools.setToolActive('Zoom', {
+        mouseButtonMask: 2,
+        isTouchActive: false
+      });
+
+      cornerstoneTools.setToolActive('StackScrollMouseWheel', {
+        mouseButtonMask: 0,
+        isTouchActive: true
+      });
 
       element.addEventListener(
         cornerstone.EVENTS.IMAGE_RENDERED,
@@ -295,13 +338,18 @@ class CornerstoneViewport extends Component {
     }
 
     if (this.props.activeTool !== prevProps.activeTool) {
-      const toolToActivate = tools[this.props.activeTool];
-      Object.keys(tools).forEach(tool => {
-        const toolToDeactivate = tools[tool];
-        cornerstoneTools[toolToDeactivate].deactivate(this.element, 1);
+      setAllToolsPassive();
+
+      cornerstoneTools.setToolActive(this.props.activeTool, {
+        mouseButtonMask: 1,
+        isTouchActive: true
       });
 
-      cornerstoneTools[toolToActivate].activate(this.element, 1);
+      // TODO: Why do we need to do this in v3?
+      cornerstoneTools.setToolActive('StackScrollMouseWheel', {
+        mouseButtonMask: 0,
+        isTouchActive: true
+      });
     }
   }
 

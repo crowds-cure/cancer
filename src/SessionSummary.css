@@ -10,3 +10,10 @@
   box-sizing: border-box;
   background-image: primaryBackgroundImage;
 }
+
+.SessionSummary > span.title {
+  color: textActiveColor;
+  font-size: 34px;
+  font-weight: bold;
+  font-style: italic;
+}
