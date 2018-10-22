@@ -1,5 +1,6 @@
-import PouchDB from 'pouchdb';
-import $ from 'jquery';
+import PouchDB from 'pouchdb-browser';
+import getAuthorizationHeader from './openid-connect/getAuthorizationHeader.js';
+//import $ from 'jquery';
 
 const baseURL = 'https://db.crowds-cure.org';
 
@@ -9,17 +10,27 @@ export const adjectivesURL = `${baseURL}/adjectives`;
 export const animalsURL = `${baseURL}/animals`;
 export const chronicleURL = `${baseURL}/chronicle`;
 export const measurementsURL = `${baseURL}/measurements`;
-export const adjectivesDB = new PouchDB(adjectivesURL);
-export const animalsDB = new PouchDB(animalsURL);
-export const annotatorsDB = new PouchDB(annotatorsURL);
-export const chronicleDB = new PouchDB(chronicleURL);
-export const measurementsDB = new PouchDB(measurementsURL);
 
-export const getUUID = () => {
+export function getDB(name = 'animals') {
+  const authHeader = getAuthorizationHeader();
+
+  const options = {
+    fetch: function(url, opts) {
+      opts.headers.set('Authorization', authHeader.Authorization);
+      return PouchDB.fetch(url, opts);
+    }
+  };
+
+  const url = `${baseURL}/${name}`;
+
+  return new PouchDB(url, options);
+}
+
+/*export const getUUID = () => {
   return new Promise((resolve, reject) => {
     // TODO: Remove jQuery
     $.get(uuidURL, ({ uuids }) => {
       resolve(uuids[0]);
     });
   });
-};
+};*/

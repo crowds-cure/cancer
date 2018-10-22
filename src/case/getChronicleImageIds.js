@@ -1,4 +1,4 @@
-import { chronicleURL, chronicleDB } from '../db.js';
+import { chronicleURL, getDB } from '../db.js';
 
 export default function getChronicleImageIds() {
   let allCases; // this could be cached

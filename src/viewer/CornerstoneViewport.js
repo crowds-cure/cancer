@@ -269,7 +269,7 @@ class CornerstoneViewport extends Component {
   }
 
   onImageLoaded(event) {
-    console.log(event.detail);
+    //console.log(event.detail);
     //const loadingProgress = $('#loading-progress');
     //this.numImagesLoaded += 1;
     //const imagesLeft = imageIds.length - numImagesLoaded;
