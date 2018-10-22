@@ -48,8 +48,6 @@ class Viewer extends Component {
         const imagePlaneA = cornerstone.metaData.get('imagePlaneModule', a);
         const imagePlaneB = cornerstone.metaData.get('imagePlaneModule', b);
 
-        debugger;
-
         return (
           imagePlaneA.imagePositionPatient[2] -
           imagePlaneB.imagePositionPatient[2]

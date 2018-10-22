@@ -1,3 +1,6 @@
+@value globals: "../GlobalStyles.css";
+@value textPrimaryColor, textSecondaryColor from globals;
+
 .ProgressSection {
   width: 452px;
   height: 145px;
@@ -6,16 +9,21 @@
 
 .ProgressSection .title {
   font-weight: bold;
-  font-size: 20pt;
+  font-size: 18px;
+  color: textPrimaryColor;
 }
 
 .ProgressSection .value {
-  color: #34ffd4;
+  display: block;
+  color: textPrimaryColor;
   font-weight: bold;
-  font-size: 60pt;
+  font-size: 81px;
+  line-height: 81px;
 }
 
 .ProgressSection .suffix {
+  display: block;
   font-variant: small-caps;
   font-size: 16pt;
+  color: textSecondaryColor;
 }

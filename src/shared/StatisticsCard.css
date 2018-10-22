@@ -1,16 +1,24 @@
+@value globals: "../GlobalStyles.css";
+@value textActiveColor, textSecondaryColor from globals;
+
 .StatisticsCard {
   width: 136px;
   height: 82px;
 }
 
 .StatisticsCard .number {
+  display: block;
   color: #34ffd4;
   font-weight: bold;
-  font-size: 38pt;
+  font-size: 38px;
+  color: textActiveColor;
 }
 
 .StatisticsCard .description {
+  display: block;
   color: #ffffff;
   font-weight: 400;
-  font-size: 13pt;
+  font-size: 13x;
+  color: textSecondaryColor;
+  line-height: 1.23;
 }

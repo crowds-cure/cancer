@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import React from 'react';
+import './SessionSummary.css';
 
 import StatisticsSection from './shared/StatisticsSection.js';
 import RankingSection from './shared/RankingSection.js';

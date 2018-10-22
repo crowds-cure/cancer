@@ -1,5 +1,5 @@
 @value globals: "./GlobalStyles.css";
-@value primaryBackgroundImage from globals;
+@value primaryBackgroundImage, textPrimaryColor, textActiveColor from globals;
 
 html {
   height: 100%;
@@ -13,7 +13,7 @@ body {
   margin: 0px; /*removes default style*/
   display: flex; /*enables flex content for its children*/
   box-sizing: border-box;
-  font-family: 'SF Pro Text', 'Roboto', 'Helvetica Neue', sans-serif;
+  font-family: 'WorkSans', 'SF Pro Text', 'Roboto', 'Helvetica Neue', sans-serif;
 }
 
 .Dashboard {
@@ -42,6 +42,22 @@ body {
 
 .top-left {
   flex-shrink: 0;
+}
+
+.logo {
+  width: 327px;
+  height: 24px;
+  padding: 10px;
+}
+
+.logoText {
+  color: textPrimaryColor;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.logoText.highlight {
+  color: textActiveColor;
 }
 
 .top-right {
