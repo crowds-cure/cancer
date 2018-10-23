@@ -1,12 +1,12 @@
 import { Component } from 'react';
 import React from 'react';
-import CornerstoneViewport from './viewer/CornerstoneViewport.js';
-import ToolbarSection from './viewer/ToolbarSection.js';
-import CaseControlButtons from './viewer/CaseControlButtons.js';
+import CornerstoneViewport from './CornerstoneViewport.js';
+import ActiveToolbar from './ActiveToolbar.js';
+import CaseControlButtons from './CaseControlButtons.js';
 
-import getNextCase from './case/getNextCase.js';
+import getNextCase from '../case/getNextCase.js';
 
-import clearOldCornerstoneCacheData from './viewer/clearOldCornerstoneCacheData.js';
+import clearOldCornerstoneCacheData from './lib/clearOldCornerstoneCacheData.js';
 
 import * as cornerstone from 'cornerstone-core';
 import * as cornerstoneWADOImageLoader from 'cornerstone-wado-image-loader';
@@ -17,17 +17,37 @@ class Viewer extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      viewportData: []
-    };
+    this.getNextCase = this.getNextCase.bind(this);
+  }
+  componentDidMount() {
+    this.getNextCase();
+  }
 
-    getNextCase().then(seriesData => {
+  componentDidUpdate(prevProps) {
+    if (
+      prevProps.caseData &&
+      prevProps.caseData.length &&
+      this.props.caseData !== prevProps.caseData
+    ) {
+      this.getNextCase();
+    }
+  }
+
+  getNextCase() {
+    const props = this.props;
+
+    props.fetchCaseRequest();
+    getNextCase().then(props.fetchCaseSuccess, props.fetchCaseFailure);
+  }
+
+  render() {
+    const seriesData = this.props.caseData;
+    let viewportData = [];
+    if (seriesData && seriesData.length) {
       clearOldCornerstoneCacheData();
 
-      const series = seriesData[0];
-      let imageIds = [];
-
-      series.forEach(instance => {
+      const seriesInstances = seriesData[0];
+      let imageIds = seriesInstances.map(instance => {
         // TODO: use this
         //const numberOfFrames = instance['00280008'].Value;
 
@@ -36,12 +56,13 @@ class Viewer extends Component {
         ].BulkDataURI.replace('http://', 'https://');
 
         const imageId = 'wadors:' + instance['7FE00010'].BulkDataURI;
-        imageIds.push(imageId);
 
         cornerstoneWADOImageLoader.wadors.metaDataManager.add(
           imageId,
           instance
         );
+
+        return imageId;
       });
 
       imageIds = imageIds.sort((a, b) => {
@@ -54,22 +75,17 @@ class Viewer extends Component {
         );
       });
 
-      this.setState({
-        viewportData: [
-          {
-            stack: {
-              imageIds,
-              currentImageIdIndex: 0
-            }
+      viewportData = [
+        {
+          stack: {
+            imageIds,
+            currentImageIdIndex: 0
           }
-        ]
-      });
-    });
-  }
+        }
+      ];
+    }
 
-  render() {
-    const viewportData = this.state.viewportData;
-
+    const activeTool = this.props.activeTool;
     const items = viewportData.map((item, index) => {
       if (item.plugin && item.plugin !== 'cornerstone') {
         throw new Error(
@@ -79,7 +95,11 @@ class Viewer extends Component {
 
       return (
         <div key={index} className="viewport">
-          {item ? <CornerstoneViewport viewportData={item} /> : 'Loading'}
+          {item ? (
+            <CornerstoneViewport viewportData={item} activeTool={activeTool} />
+          ) : (
+            'Loading'
+          )}
         </div>
       );
     });
@@ -87,7 +107,7 @@ class Viewer extends Component {
     return (
       <div className="Viewer">
         <div className="toolbar-row">
-          <ToolbarSection />
+          <ActiveToolbar />
           <CaseControlButtons />
         </div>
         <div className="viewport-section">{items}</div>

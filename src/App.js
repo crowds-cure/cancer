@@ -4,7 +4,7 @@ import SecretRoute from './SecretRoute.js';
 import './App.css';
 
 import Dashboard from './Dashboard.js';
-import Viewer from './Viewer.js';
+import ConnectedViewer from './ConnectedViewer.js';
 import SessionSummary from './SessionSummary.js';
 
 const reload = () => window.location.reload();
@@ -22,7 +22,12 @@ class App extends Component {
           auth={auth}
         />
         <SecretRoute exact path="/" component={Dashboard} auth={auth} />
-        <SecretRoute exact path="/viewer" component={Viewer} auth={auth} />
+        <SecretRoute
+          exact
+          path="/viewer"
+          component={ConnectedViewer}
+          auth={auth}
+        />
         <SecretRoute
           exact
           path="/session-summary"

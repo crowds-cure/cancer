@@ -1,6 +1,5 @@
 import PouchDB from 'pouchdb-browser';
 import getAuthorizationHeader from './openid-connect/getAuthorizationHeader.js';
-//import $ from 'jquery';
 
 const baseURL = 'https://db.crowds-cure.org';
 
@@ -25,12 +24,3 @@ export function getDB(name = 'animals') {
 
   return new PouchDB(url, options);
 }
-
-/*export const getUUID = () => {
-  return new Promise((resolve, reject) => {
-    // TODO: Remove jQuery
-    $.get(uuidURL, ({ uuids }) => {
-      resolve(uuids[0]);
-    });
-  });
-};*/

@@ -2,8 +2,8 @@ import { Component } from 'react';
 import React from 'react';
 import * as cornerstone from 'cornerstone-core';
 import * as cornerstoneTools from 'cornerstone-tools';
-import './initCornerstone.js';
-import debounce from './debounce.js';
+import './lib/initCornerstone.js';
+import debounce from './lib/debounce.js';
 import ImageScrollbar from './ImageScrollbar.js';
 import ViewportOverlay from './ViewportOverlay.js';
 import LoadingIndicator from '../shared/LoadingIndicator.js';
@@ -12,6 +12,14 @@ import './CornerstoneViewport.css';
 const EVENT_RESIZE = 'resize';
 const loadIndicatorDelay = 25;
 const { loadHandlerManager } = cornerstoneTools;
+
+const tools = {
+  WwwcTool: 'wwwc',
+  LengthTool: 'length',
+  ZoomTool: 'zoom',
+  StackScrollTool: 'stackScroll',
+  PanTool: 'pan'
+};
 
 class CornerstoneViewport extends Component {
   constructor(props) {
@@ -128,6 +136,14 @@ class CornerstoneViewport extends Component {
 
     // Load the first image in the stack
     cornerstone.loadImage(this.state.imageId).then(image => {
+      try {
+        cornerstone.getEnabledElement(element);
+      } catch (error) {
+        // Handle cases where the user ends the session before the image is displayed.
+        console.error(error);
+        return;
+      }
+
       // Display the first image
       cornerstone.displayImage(element, image);
 
@@ -169,7 +185,8 @@ class CornerstoneViewport extends Component {
       // We also enable the Length tool so it is always visible
       cornerstoneTools.length.enable(this.element);
 
-      cornerstoneTools.wwwc.activate(element, 1); // ww/wc is the default tool for left mouse button
+      const toolToActivate = tools[this.props.activeTool];
+      cornerstoneTools[toolToActivate].activate(element, 1);
 
       /* For mouse devices, by default we turn on:
       - Stack scrolling by mouse wheel
@@ -243,7 +260,7 @@ class CornerstoneViewport extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     const stackData = cornerstoneTools.getToolState(this.element, 'stack');
-    let currentStack = stackData.data[0];
+    let currentStack = stackData && stackData.data[0];
 
     // TODO: we should make something like setToolState by an ID
     if (!currentStack) {
@@ -252,10 +269,22 @@ class CornerstoneViewport extends Component {
         imageIds: this.state.stack.imageIds
       };
 
+      debugger;
+      cornerstoneTools.addStackStateManager(this.element, ['stack']);
       cornerstoneTools.addToolState(this.element, 'stack', stack);
     } else {
       currentStack.currentImageIdIndex = this.state.stack.currentImageIdIndex;
       currentStack.imageIds = this.state.stack.imageIds;
+    }
+
+    if (this.props.activeTool !== prevProps.activeTool) {
+      const toolToActivate = tools[this.props.activeTool];
+      Object.keys(tools).forEach(tool => {
+        const toolToDeactivate = tools[tool];
+        cornerstoneTools[toolToDeactivate].deactivate(this.element, 1);
+      });
+
+      cornerstoneTools[toolToActivate].activate(this.element, 1);
     }
   }
 

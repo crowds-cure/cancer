@@ -5,7 +5,7 @@ import './CaseTypeCard.css';
 class CaseTypeCard extends Component {
   render() {
     return (
-      <div className="CaseTypeCard">
+      <div className="CaseTypeCard" onClick={this.props.click}>
         <span className="name">{this.props.name}</span>
         <div className="info-icon svgContainer">
           <svg>

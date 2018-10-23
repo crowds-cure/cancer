@@ -6,21 +6,13 @@ class ToolbarButton extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      active: false
-    };
-
     this.onClick = this.onClick.bind(this);
   }
 
   render() {
-    const command = this.props.command || null;
-
-    // TODO: Hook up to actual function
     return (
       <div
-        className={this.state.active ? 'ToolbarButton active' : 'ToolbarButton'}
-        data-command={command}
+        className={this.props.active ? 'ToolbarButton active' : 'ToolbarButton'}
         onClick={this.onClick}
       >
         <svg>
@@ -32,7 +24,8 @@ class ToolbarButton extends Component {
   }
 
   onClick(event) {
-    console.log('clicked');
+    const id = this.props.command;
+    this.props.click(id);
   }
 }
 

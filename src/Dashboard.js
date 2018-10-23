@@ -1,6 +1,5 @@
 import { Component } from 'react';
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 import StatisticsSection from './shared/StatisticsSection.js';
 import RankingSection from './shared/RankingSection.js';
@@ -31,12 +30,9 @@ class Dashboard extends Component {
         <div className="column" id="right">
           <div className="top-right">
             <nav>
-              <Link to="/create-account">Create Account</Link>
-
-              {/* These links are just for testing purposes */}
-              <Link to="/viewer">Viewer</Link>
-              <Link to="/session-summary">Session Summary</Link>
-              <span onClick={this.logout}>Log out</span>
+              <span className="Logout" onClick={this.logout}>
+                Log out
+              </span>
             </nav>
           </div>
           <div className="bottom">

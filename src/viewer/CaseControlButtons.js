@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import React from 'react';
 import './CaseControlButtons.css';
+import { Link } from 'react-router-dom';
 
 class CaseControlButtons extends Component {
   render() {
@@ -12,7 +13,7 @@ class CaseControlButtons extends Component {
           <button type="button">Save</button>
         </div>
         <span>28 Cases</span>
-        <button type="button">End Session</button>
+        <Link to="/session-summary">End Session</Link>
       </div>
     );
   }

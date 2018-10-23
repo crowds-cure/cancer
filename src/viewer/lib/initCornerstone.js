@@ -4,7 +4,7 @@ import * as cornerstoneMath from 'cornerstone-math';
 import * as cornerstoneWADOImageLoader from 'cornerstone-wado-image-loader';
 import * as cornerstoneTools from 'cornerstone-tools';
 import Hammer from 'hammerjs';
-import getAuthorizationHeader from '../openid-connect/getAuthorizationHeader.js';
+import getAuthorizationHeader from '../../openid-connect/getAuthorizationHeader.js';
 
 cornerstoneTools.external.cornerstone = cornerstone;
 cornerstoneTools.external.Hammer = Hammer;
