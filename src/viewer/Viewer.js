@@ -18,13 +18,14 @@ class Viewer extends Component {
     super(props);
 
     this.getNextCase = this.getNextCase.bind(this);
+    this.skipCase = this.skipCase.bind(this);
+    this.saveCase = this.saveCase.bind(this);
   }
   componentDidMount() {
     this.getNextCase();
   }
 
   componentDidUpdate(prevProps) {
-    debugger;
     if (
       prevProps.caseData.data &&
       this.props.caseData.data.studyInstanceUid !==
@@ -40,7 +41,7 @@ class Viewer extends Component {
     const props = this.props;
 
     props.fetchCaseRequest();
-    getNextCase().then(props.fetchCaseSuccess, props.fetchCaseFailure);
+    return getNextCase().then(props.fetchCaseSuccess, props.fetchCaseFailure);
   }
 
   render() {
@@ -111,11 +112,23 @@ class Viewer extends Component {
       <div className="Viewer">
         <div className="toolbar-row">
           <ActiveToolbar />
-          <CaseControlButtons />
+          <CaseControlButtons
+            saveCase={this.saveCase}
+            skipCase={this.skipCase}
+          />
         </div>
         <div className="viewport-section">{items}</div>
       </div>
     );
+  }
+
+  saveCase() {
+    console.log('saveCase!');
+  }
+
+  skipCase() {
+    console.log('skipCase!');
+    this.getNextCase();
   }
 }
 

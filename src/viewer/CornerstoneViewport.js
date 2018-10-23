@@ -135,7 +135,7 @@ class CornerstoneViewport extends Component {
     cornerstone.enable(element);
 
     // Load the first image in the stack
-    cornerstone.loadImage(this.state.imageId).then(image => {
+    cornerstone.loadAndCacheImage(this.state.imageId).then(image => {
       try {
         cornerstone.getEnabledElement(element);
       } catch (error) {
@@ -258,23 +258,38 @@ class CornerstoneViewport extends Component {
     );
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    const stackData = cornerstoneTools.getToolState(this.element, 'stack');
-    let currentStack = stackData && stackData.data[0];
+  componentDidUpdate(prevProps) {
+    // TODO: Add a real object shallow comparison here?
+    if (
+      this.state.stack.imageIds[0] !== this.props.viewportData.stack.imageIds[0]
+    ) {
+      this.state.stack = this.props.viewportData.stack;
 
-    // TODO: we should make something like setToolState by an ID
-    if (!currentStack) {
-      const stack = {
-        currentImageIdIndex: this.state.stack.currentImageIdIndex,
-        imageIds: this.state.stack.imageIds
-      };
+      const stackData = cornerstoneTools.getToolState(this.element, 'stack');
+      let currentStack = stackData && stackData.data[0];
 
-      debugger;
-      cornerstoneTools.addStackStateManager(this.element, ['stack']);
-      cornerstoneTools.addToolState(this.element, 'stack', stack);
-    } else {
-      currentStack.currentImageIdIndex = this.state.stack.currentImageIdIndex;
-      currentStack.imageIds = this.state.stack.imageIds;
+      if (!currentStack) {
+        currentStack = {
+          currentImageIdIndex: this.state.stack.currentImageIdIndex,
+          imageIds: this.state.stack.imageIds
+        };
+
+        cornerstoneTools.addStackStateManager(this.element, ['stack']);
+        cornerstoneTools.addToolState(this.element, 'stack', currentStack);
+      } else {
+        // TODO: we should make something like setToolState by an ID
+        currentStack.currentImageIdIndex = this.state.stack.currentImageIdIndex;
+        currentStack.imageIds = this.state.stack.imageIds;
+      }
+
+      const imageId = currentStack.imageIds[currentStack.currentImageIdIndex];
+
+      cornerstone.loadAndCacheImage(imageId).then(image => {
+        cornerstone.displayImage(this.element, image);
+
+        cornerstoneTools.stackPrefetch.disable(this.element);
+        cornerstoneTools.stackPrefetch.enable(this.element);
+      });
     }
 
     if (this.props.activeTool !== prevProps.activeTool) {
