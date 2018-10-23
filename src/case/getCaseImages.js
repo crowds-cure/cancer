@@ -12,7 +12,12 @@ async function getCaseImages(caseData) {
     return dwc.retrieveSeriesMetadata(series);
   });
 
-  return await Promise.all(seriesDataPromises);
+  const seriesData = await Promise.all(seriesDataPromises);
+
+  return {
+    data: caseData[0],
+    seriesData
+  };
 }
 
 export default getCaseImages;

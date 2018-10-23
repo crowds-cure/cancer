@@ -24,10 +24,13 @@ class Viewer extends Component {
   }
 
   componentDidUpdate(prevProps) {
+    debugger;
     if (
-      prevProps.caseData &&
-      prevProps.caseData.length &&
-      this.props.caseData !== prevProps.caseData
+      prevProps.caseData.data &&
+      this.props.caseData.data.studyInstanceUid !==
+        prevProps.caseData.data.studyInstanceUid &&
+      this.props.caseData.data.seriesInstanceUid !==
+        prevProps.caseData.data.seriesInstanceUid
     ) {
       this.getNextCase();
     }
@@ -41,7 +44,7 @@ class Viewer extends Component {
   }
 
   render() {
-    const seriesData = this.props.caseData;
+    const seriesData = this.props.caseData.seriesData;
     let viewportData = [];
     if (seriesData && seriesData.length) {
       clearOldCornerstoneCacheData();

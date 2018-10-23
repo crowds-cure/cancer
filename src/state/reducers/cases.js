@@ -1,4 +1,9 @@
-const cases = (state = { isFetching: true, caseData: [] }, action) => {
+const defaultState = {
+  isFetching: true,
+  caseData: { data: {}, seriesData: [] }
+};
+
+const cases = (state = defaultState, action) => {
   switch (action.type) {
     case 'FETCH_CASE_REQUEST':
       return Object.assign({}, state, {
