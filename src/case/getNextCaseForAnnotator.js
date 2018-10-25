@@ -1,29 +1,27 @@
 //import { measurementsDB } from "../db.js";
 
-let i = 0;
+import { getDB } from '../db';
+
 async function getNextCaseForAnnotator(annotatorID, cases) {
-  // From PD-MELANOMA-00006
-  i = i + 1;
-  console.log(i);
-  if (i % 2) {
-    return [
-      {
-        studyInstanceUID:
-          '1.3.6.1.4.1.14519.5.2.1.3098.4963.326280635338660616706998482671',
-        seriesInstanceUID:
-          '1.3.6.1.4.1.14519.5.2.1.3098.4963.202287948568406289093737485605'
+  const promise = new Promise((resolve, reject) => {
+    // TODO: This just gets a random doc from the entire array of cases.
+    // We should switch this to add some case selection logic based on number of measurements, skips, etc...
+    const db = getDB('cases');
+    db.allDocs({ include_docs: true }, function(error, docs) {
+      if (error) {
+        reject(error);
       }
-    ];
-  } else {
-    return [
-      {
-        studyInstanceUID:
-          '1.3.6.1.4.1.14519.5.2.1.3098.4963.252731115234516169324369334279',
-        seriesInstanceUID:
-          '1.3.6.1.4.1.14519.5.2.1.3098.4963.237896551941716780397268276178'
-      }
-    ];
-  }
+
+      const rows = docs.rows;
+      const doc = rows[Math.floor(Math.random() * rows.length)].doc;
+
+      console.warn(doc);
+
+      resolve(doc);
+    });
+  });
+
+  return promise;
 
   /*
   // filter cases by annotator's anatomyChoices

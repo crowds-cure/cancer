@@ -263,7 +263,9 @@ class CornerstoneViewport extends Component {
     if (
       this.state.stack.imageIds[0] !== this.props.viewportData.stack.imageIds[0]
     ) {
-      this.state.stack = this.props.viewportData.stack;
+      this.setState({
+        stack: this.props.viewportData.stack
+      });
 
       const stackData = cornerstoneTools.getToolState(this.element, 'stack');
       let currentStack = stackData && stackData.data[0];

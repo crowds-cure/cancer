@@ -1,0 +1,3282 @@
+[
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "AMC-001",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.772823147212833057678103865443",
+    "StudyDate": "Aug 10 1994",
+    "StudyDescription": "CT Thorax",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.128241934543986080196677451907",
+    "SeriesDescription": "CHEST 1.25 MM SHARP",
+    "NumberOfImages": 253
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "AMC-002",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.318107938099351952423306401630",
+    "StudyDate": "Feb 18 1992",
+    "StudyDescription": "CT THORAX",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.426581693091941145906372008618",
+    "SeriesDescription": "Chest  1.0  B45f",
+    "NumberOfImages": 271
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "AMC-004",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.188687969358410020518899553874",
+    "StudyDate": "Dec 25 1992",
+    "StudyDescription": "CT THORAX",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.972676021028252527985926093537",
+    "SeriesDescription": "Thorax  1.0  B45f",
+    "NumberOfImages": 284
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "AMC-006",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.296461180370281408264492572274",
+    "StudyDate": "Aug 09 1991",
+    "StudyDescription": "CT CHEST ABD PELVIS WITH CON",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.984921192284715030760999846304",
+    "SeriesDescription": "A/P 1MM",
+    "NumberOfImages": 389
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "AMC-006",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.296461180370281408264492572274",
+    "StudyDate": "Aug 09 1991",
+    "StudyDescription": "CT CHEST ABD PELVIS WITH CON",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.127565890510066907452937805882",
+    "SeriesDescription": "LUNG 1 MM",
+    "NumberOfImages": 314
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "AMC-006",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.296461180370281408264492572274",
+    "StudyDate": "Aug 09 1991",
+    "StudyDescription": "CT CHEST ABD PELVIS WITH CON",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.154911732704580147988002776192",
+    "SeriesDescription": "ST C/A/P 5MM",
+    "NumberOfImages": 119
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "AMC-007",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.976279675184822886153302592005",
+    "StudyDate": "Feb 21 1992",
+    "StudyDescription": "CT THORAX",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.281395662083281353203566871746",
+    "SeriesDescription": "Thorax  1.0  B45f",
+    "NumberOfImages": 285
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "AMC-007",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.976279675184822886153302592005",
+    "StudyDate": "Feb 21 1992",
+    "StudyDescription": "CT THORAX",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.224475137716425829662466496981",
+    "SeriesDescription": "Thorax  5.0  B31f",
+    "NumberOfImages": 57
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "AMC-008",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.163679122557426831063563233407",
+    "StudyDate": "Jul 17 1993",
+    "StudyDescription": "CT CHEST ABD PELVIS WITH CON",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.847677215051167278895006742335",
+    "SeriesDescription": "ABD/PEL  1.0  B31f",
+    "NumberOfImages": 452
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "AMC-008",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.163679122557426831063563233407",
+    "StudyDate": "Jul 17 1993",
+    "StudyDescription": "CT CHEST ABD PELVIS WITH CON",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.100874001416224439397025088575",
+    "SeriesDescription": "CAP  5.0  B31f",
+    "NumberOfImages": 126
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "AMC-008",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.163679122557426831063563233407",
+    "StudyDate": "Jul 17 1993",
+    "StudyDescription": "CT CHEST ABD PELVIS WITH CON",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.886934169656913308953045363666",
+    "SeriesDescription": "CHEST 1.0  B45f",
+    "NumberOfImages": 323
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "AMC-008",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.163679122557426831063563233407",
+    "StudyDate": "Jul 17 1993",
+    "StudyDescription": "CT CHEST ABD PELVIS WITH CON",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.286701099324097837400024750739",
+    "SeriesDescription": "Delays  5.0  B25f",
+    "NumberOfImages": 26
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "AMC-009",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.162572057274667742570993679975",
+    "StudyDate": "May 06 1993",
+    "StudyDescription": "CT THORAX WITH CONTRAST",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.152605705248907893482285277729",
+    "SeriesDescription": "LUNG 1MM B45f",
+    "NumberOfImages": 348
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "AMC-011",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.151365838294076992000750881020",
+    "StudyDate": "Oct 16 1992",
+    "StudyDescription": "CT THORAX WITH CONTRAST",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.103644744912283628520908776076",
+    "SeriesDescription": "LUNG 1MM B45f",
+    "NumberOfImages": 344
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "AMC-012",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.137979220896944359304780636010",
+    "StudyDate": "Nov 10 1993",
+    "StudyDescription": "CT CHEST REFERENCE ONLY",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.280488537564256833270874760715",
+    "SeriesDescription": "IN REACH",
+    "NumberOfImages": 357
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "AMC-013",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.283491629659084872767313598254",
+    "StudyDate": "Mar 03 1993",
+    "StudyDescription": "CT THORAX WITH CONTRAST",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.234206494695321248318318754359",
+    "SeriesDescription": "1.25MM CHEST BONE",
+    "NumberOfImages": 268
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "AMC-014",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.244443454975617602358850815735",
+    "StudyDate": "Nov 20 1992",
+    "StudyDescription": "CT THORAX",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.245990063601626889032714811244",
+    "SeriesDescription": "Thorax  1.0  B45f",
+    "NumberOfImages": 307
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "AMC-016",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.144688442971594229340543172358",
+    "StudyDate": "Mar 10 1994",
+    "StudyDescription": "CT Chest Reference Only",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.316620164524767667994234166652",
+    "SeriesDescription": "Thorax  1.0  B31f",
+    "NumberOfImages": 538
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "AMC-016",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.144688442971594229340543172358",
+    "StudyDate": "Mar 10 1994",
+    "StudyDescription": "CT Chest Reference Only",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.144039348113652556793877602755",
+    "SeriesDescription": "Thorax  1.0  B70f",
+    "NumberOfImages": 538
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "AMC-017",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.119444872057720286526067897582",
+    "StudyDate": "Sep 29 1992",
+    "StudyDescription": "CT THORAX",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.836482550989596789817534606754",
+    "SeriesDescription": "LUNG 1MM B45",
+    "NumberOfImages": 288
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "AMC-018",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.109464990350640410111271621516",
+    "StudyDate": "Nov 30 1993",
+    "StudyDescription": "CT THORAX",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.665886896529820528095455246801",
+    "SeriesDescription": "Chest  1.0  B45s",
+    "NumberOfImages": 317
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "AMC-019",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.198936667383770218958555213196",
+    "StudyDate": "Dec 05 1991",
+    "StudyDescription": "CT THORAX WITH CONTRAST",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.227101534332339532772305414269",
+    "SeriesDescription": "Thorax  1.0  B45f",
+    "NumberOfImages": 312
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "AMC-019",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.198936667383770218958555213196",
+    "StudyDate": "Dec 05 1991",
+    "StudyDescription": "CT THORAX WITH CONTRAST",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.307643950701599782860134041156",
+    "SeriesDescription": "Thorax  5.0  B31f",
+    "NumberOfImages": 63
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "AMC-020",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.109763379583496662079353689166",
+    "StudyDate": "Dec 02 1994",
+    "StudyDescription": "Thorax^CHEST_CONTRAST (Adult)",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.493076156577048480691957527964",
+    "SeriesDescription": "Chest  1.0  B45f",
+    "NumberOfImages": 299
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "AMC-021",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.156154195367158243297086797651",
+    "StudyDate": "Apr 27 1994",
+    "StudyDescription": "Thorax^01ROUTINECHEST (Adult)",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.254075354867243457493008874245",
+    "SeriesDescription": "Thorax  1.0  B45f",
+    "NumberOfImages": 324
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "AMC-022",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.242710672924258389350144014525",
+    "StudyDate": "Sep 01 1993",
+    "StudyDescription": "CT CHEST REFERENCE ONLY",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.229710243262967816343895463670",
+    "SeriesDescription": "IN REACH",
+    "NumberOfImages": 327
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "AMC-023",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.946398284694781115614387471688",
+    "StudyDate": "Mar 08 1995",
+    "StudyDescription": "CT Thorax",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.166812042290698585712020514260",
+    "SeriesDescription": "1.25MM CHEST BONE PLUS",
+    "NumberOfImages": 201
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "AMC-026",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.974103853612439396485586262537",
+    "StudyDate": "Jan 05 1993",
+    "StudyDescription": "CT THORAX WITH CONTRAST",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.211264841302527732307822035945",
+    "SeriesDescription": "Chest  1.0  B45f",
+    "NumberOfImages": 283
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "AMC-028",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.351258716526925986634352752672",
+    "StudyDate": "Sep 17 1992",
+    "StudyDescription": "CT THORAX",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.181177401796944758230192572756",
+    "SeriesDescription": "Chest  1.0  B45f",
+    "NumberOfImages": 274
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "AMC-029",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.139072452038327510406524824336",
+    "StudyDate": "Sep 08 1994",
+    "StudyDescription": "Thorax^01ROUTINECHEST (Adult)",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.982543581268299139403014019639",
+    "SeriesDescription": "Thorax  1.0  B45f",
+    "NumberOfImages": 324
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "AMC-029",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.139072452038327510406524824336",
+    "StudyDate": "Sep 08 1994",
+    "StudyDescription": "Thorax^01ROUTINECHEST (Adult)",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.148926517493355327356174578368",
+    "SeriesDescription": "Thorax  5.0  B31f",
+    "NumberOfImages": 65
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "AMC-031",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.131634601826089417697523573001",
+    "StudyDate": "Jan 14 1993",
+    "StudyDescription": "CT THORAX",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.118808283637255844762541655585",
+    "SeriesDescription": "Thorax  1.0  B45f",
+    "NumberOfImages": 344
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "AMC-031",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.131634601826089417697523573001",
+    "StudyDate": "Jan 14 1993",
+    "StudyDescription": "CT THORAX",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.845564133702355851980508320687",
+    "SeriesDescription": "Thorax  5.0  B31f",
+    "NumberOfImages": 69
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "AMC-032",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.396745595510345978775940369223",
+    "StudyDate": "Sep 22 1993",
+    "StudyDescription": "CT CHEST ABD PELVIS WITH CON",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.188972562285225296597265048712",
+    "SeriesDescription": "1.25MM ABD/PEL",
+    "NumberOfImages": 361
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "AMC-032",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.396745595510345978775940369223",
+    "StudyDate": "Sep 22 1993",
+    "StudyDescription": "CT CHEST ABD PELVIS WITH CON",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.158724722934067661271279140184",
+    "SeriesDescription": "1.25MM CHEST",
+    "NumberOfImages": 262
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "AMC-032",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.396745595510345978775940369223",
+    "StudyDate": "Sep 22 1993",
+    "StudyDescription": "CT CHEST ABD PELVIS WITH CON",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.107872700702418922986502379900",
+    "SeriesDescription": "5MM CAP",
+    "NumberOfImages": 127
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "AMC-032",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.396745595510345978775940369223",
+    "StudyDate": "Sep 22 1993",
+    "StudyDescription": "CT CHEST ABD PELVIS WITH CON",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.127391891193775985142103777955",
+    "SeriesDescription": "5MM DELAYS STD",
+    "NumberOfImages": 29
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "AMC-033",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.719165574132428295596402518430",
+    "StudyDate": "Dec 21 1993",
+    "StudyDescription": "CT THORAX",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.228326549784286129330361922211",
+    "SeriesDescription": "Chest  1.0  B45f",
+    "NumberOfImages": 348
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "AMC-034",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.259101383666952020774815903352",
+    "StudyDate": "Jan 27 1994",
+    "StudyDescription": "CT THORAX WITH CONTRAST",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.308163503311200453383410361657",
+    "SeriesDescription": "CHEST 5MM B30f",
+    "NumberOfImages": 65
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "AMC-034",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.259101383666952020774815903352",
+    "StudyDate": "Jan 27 1994",
+    "StudyDescription": "CT THORAX WITH CONTRAST",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.152360067126083992457625665701",
+    "SeriesDescription": "LUNG 1MM B45f",
+    "NumberOfImages": 324
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "AMC-036",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.300839358295894140834519824324",
+    "StudyDate": "Jan 16 1995",
+    "StudyDescription": "CT Thorax",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.149703651954103004917856712403",
+    "SeriesDescription": "1.25MM CHEST BONE PLUS",
+    "NumberOfImages": 266
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "AMC-037",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.174352832160314765950174664147",
+    "StudyDate": "Jul 06 1992",
+    "StudyDescription": "CT THORAX",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.956533011023866763082729507661",
+    "SeriesDescription": "Thorax  1.0  B45f",
+    "NumberOfImages": 309
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "AMC-038",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.128172690661779209582802573652",
+    "StudyDate": "May 21 1994",
+    "StudyDescription": "CT Thorax",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.322826806781297245301631590287",
+    "SeriesDescription": "1.25MM CHEST BONE PLUS",
+    "NumberOfImages": 241
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "AMC-039",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.213781306418809977101828520405",
+    "StudyDate": "Apr 28 1994",
+    "StudyDescription": "Thorax^CHEST_CONTRAST (Adult)",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.323179594108109562385839498546",
+    "SeriesDescription": "Chest  1.0  B45f",
+    "NumberOfImages": 306
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "AMC-039",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.213781306418809977101828520405",
+    "StudyDate": "Apr 28 1994",
+    "StudyDescription": "Thorax^CHEST_CONTRAST (Adult)",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.927286944038995460861719024715",
+    "SeriesDescription": "Chest  5.0  B31f",
+    "NumberOfImages": 62
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "AMC-040",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.795145721701601922001449710185",
+    "StudyDate": "Nov 09 1993",
+    "StudyDescription": "CT THORAX",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.962101024187713553317875722799",
+    "SeriesDescription": "Thorax  1.0  B45f",
+    "NumberOfImages": 339
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "AMC-041",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.135055350206731603259801377525",
+    "StudyDate": "Feb 14 1994",
+    "StudyDescription": "CT Thorax",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.248339640628717302849614731599",
+    "SeriesDescription": "CHEST WITH 5 X 5",
+    "NumberOfImages": 70
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "AMC-041",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.135055350206731603259801377525",
+    "StudyDate": "Feb 14 1994",
+    "StudyDescription": "CT Thorax",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.863164655009082980047710122521",
+    "SeriesDescription": "LUNG 1x1",
+    "NumberOfImages": 302
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "AMC-042",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.175212982177225417364931934072",
+    "StudyDate": "Jan 13 1994",
+    "StudyDescription": "CT THORAX",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.221460631820230428453992834873",
+    "SeriesDescription": "CHEST 5MM B30F",
+    "NumberOfImages": 56
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "AMC-042",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.175212982177225417364931934072",
+    "StudyDate": "Jan 13 1994",
+    "StudyDescription": "CT THORAX",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.290192378751705663260892713878",
+    "SeriesDescription": "LUNG 1MM B45",
+    "NumberOfImages": 278
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "AMC-043",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.325796976312468883363369222116",
+    "StudyDate": "Jun 23 1994",
+    "StudyDescription": "CT Thorax",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.147763611978067120776670681980",
+    "SeriesDescription": "1.25MM CHEST BONE",
+    "NumberOfImages": 256
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "AMC-044",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.198848661293042890162762601670",
+    "StudyDate": "Nov 11 1994",
+    "StudyDescription": "Thorax^CHEST_CONTRAST (Adult)",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.236390551961167882358906581026",
+    "SeriesDescription": "Chest  1.0  B45f",
+    "NumberOfImages": 239
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "AMC-044",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.198848661293042890162762601670",
+    "StudyDate": "Nov 11 1994",
+    "StudyDescription": "Thorax^CHEST_CONTRAST (Adult)",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.964106896362504464479806856429",
+    "SeriesDescription": "Chest  5.0  B31f",
+    "NumberOfImages": 48
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "AMC-045",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.196600341529545820736617768463",
+    "StudyDate": "May 12 1992",
+    "StudyDescription": "CT THORAX",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.238137090186188631683234315341",
+    "SeriesDescription": "Chest  1.0  B45f",
+    "NumberOfImages": 293
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "AMC-046",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.289540534966119611688273151792",
+    "StudyDate": "Sep 13 1994",
+    "StudyDescription": "CT Thorax",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.256242304040970906688016594141",
+    "SeriesDescription": "1.25MM CHEST BONE",
+    "NumberOfImages": 255
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "AMC-047",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.104228396166078337784556554051",
+    "StudyDate": "Jan 11 1994",
+    "StudyDescription": "CT CHEST REFERENCE ONLY",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.290139074181098188562193081514",
+    "SeriesDescription": 4,
+    "NumberOfImages": 105
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "AMC-047",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.104228396166078337784556554051",
+    "StudyDate": "Jan 11 1994",
+    "StudyDescription": "CT CHEST REFERENCE ONLY",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.114315649303071268036036853220",
+    "SeriesDescription": "THINS",
+    "NumberOfImages": 496
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "AMC-048",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.238974246939240802458575382940",
+    "StudyDate": "Aug 28 1993",
+    "StudyDescription": "CT THORAX WITH CONTRAST",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.151248250772319051578784403264",
+    "SeriesDescription": "Chest  1.0  B45s",
+    "NumberOfImages": 301
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "AMC-048",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.238974246939240802458575382940",
+    "StudyDate": "Aug 28 1993",
+    "StudyDescription": "CT THORAX WITH CONTRAST",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.173168690626092934539096388931",
+    "SeriesDescription": "Chest  2.0",
+    "NumberOfImages": 112
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "AMC-049",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.169689721705274041771980246066",
+    "StudyDate": "Aug 09 1991",
+    "StudyDescription": "CT THORAX WITH CONTRAST",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.309762277070739159137369870949",
+    "SeriesDescription": "THORAX LUNG 1MM",
+    "NumberOfImages": 391
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "AMC-049",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.169689721705274041771980246066",
+    "StudyDate": "Aug 09 1991",
+    "StudyDescription": "CT THORAX WITH CONTRAST",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.694966045879893827227124403964",
+    "SeriesDescription": "THORAX ST 5MM",
+    "NumberOfImages": 79
+  },
+  {
+    "Collection": "SPIE-AAPM Lung CT Challenge",
+    "SubjectID": "CT-Training-BE001",
+    "StudyInstanceUID": "1.2.840.113704.1.111.2112.1167842143.1",
+    "StudyDate": "Jan 03 2007",
+    "StudyDescription": "CT INFUSED CHEST",
+    "SeriesInstanceUID": "1.2.840.113704.1.111.2112.1167842347.17",
+    "SeriesDescription": "HIGH RES",
+    "NumberOfImages": 251
+  },
+  {
+    "Collection": "SPIE-AAPM Lung CT Challenge",
+    "SubjectID": "CT-Training-BE002",
+    "StudyInstanceUID": "1.2.840.113704.1.111.7296.1167934831.1",
+    "StudyDate": "Jan 04 2007",
+    "StudyDescription": "CT INFUSED CHEST",
+    "SeriesInstanceUID": "1.2.840.113704.1.111.7296.1167935298.22",
+    "SeriesDescription": "HI-RES",
+    "NumberOfImages": 350
+  },
+  {
+    "Collection": "SPIE-AAPM Lung CT Challenge",
+    "SubjectID": "CT-Training-BE006",
+    "StudyInstanceUID": "1.2.840.113704.1.111.1724.1168391407.1",
+    "StudyDate": "Jan 09 2007",
+    "StudyDescription": "CT INFUSED CHEST",
+    "SeriesInstanceUID": "1.2.840.113704.1.111.1724.1168392386.17",
+    "SeriesDescription": "HIGH RES",
+    "NumberOfImages": 389
+  },
+  {
+    "Collection": "SPIE-AAPM Lung CT Challenge",
+    "SubjectID": "CT-Training-BE007",
+    "StudyInstanceUID": "1.2.840.113704.1.111.9304.1171412000.1",
+    "StudyDate": "Feb 13 2007",
+    "StudyDescription": "CT INFUSED CHEST",
+    "SeriesInstanceUID": "1.2.840.113704.1.111.9304.1171412289.27",
+    "SeriesDescription": "HIGH RES",
+    "NumberOfImages": 341
+  },
+  {
+    "Collection": "SPIE-AAPM Lung CT Challenge",
+    "SubjectID": "CT-Training-BE010",
+    "StudyInstanceUID": "1.2.840.113704.1.111.344.1177706568.1",
+    "StudyDate": "Apr 27 2007",
+    "StudyDescription": "CT INFUSED CHEST",
+    "SeriesInstanceUID": "1.2.840.113704.1.111.344.1177706886.27",
+    "SeriesDescription": "HIGH RES",
+    "NumberOfImages": 353
+  },
+  {
+    "Collection": "SPIE-AAPM Lung CT Challenge",
+    "SubjectID": "CT-Training-LC001",
+    "StudyInstanceUID": "1.2.840.113704.1.111.9856.1167872600.1",
+    "StudyDate": "Jan 03 2007",
+    "StudyDescription": "CT INFUSED CHEST",
+    "SeriesInstanceUID": "1.2.840.113704.1.111.9856.1167873858.28",
+    "SeriesDescription": "HI-RES",
+    "NumberOfImages": 285
+  },
+  {
+    "Collection": "SPIE-AAPM Lung CT Challenge",
+    "SubjectID": "CT-Training-LC002",
+    "StudyInstanceUID": "1.2.840.113704.1.111.6436.1168891603.1",
+    "StudyDate": "Jan 15 2007",
+    "StudyDescription": "CT INFUSED CHEST",
+    "SeriesInstanceUID": "1.2.840.113704.1.111.6436.1168891896.20",
+    "SeriesDescription": "HIGH RES",
+    "NumberOfImages": 366
+  },
+  {
+    "Collection": "SPIE-AAPM Lung CT Challenge",
+    "SubjectID": "CT-Training-LC003",
+    "StudyInstanceUID": "1.2.840.113704.1.111.5804.1168615966.1",
+    "StudyDate": "Jan 12 2007",
+    "StudyDescription": "CT INFUSED CHEST",
+    "SeriesInstanceUID": "1.2.840.113704.1.111.5804.1168617251.15",
+    "SeriesDescription": "HI-RES",
+    "NumberOfImages": 413
+  },
+  {
+    "Collection": "LCTSC",
+    "SubjectID": "LCTSC-Test-S1-101",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.492964872630309412859177308186",
+    "StudyDate": "Mar 03 2004",
+    "StudyDescription": "",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.106943890850011666503487579262",
+    "SeriesDescription": null,
+    "NumberOfImages": 130
+  },
+  {
+    "Collection": "LCTSC",
+    "SubjectID": "LCTSC-Test-S1-102",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.238478060677653494401819620444",
+    "StudyDate": "Nov 04 2003",
+    "StudyDescription": "RT^RCCT_THORAX_8F_High (Adult)",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.639871532605224417554459681163",
+    "SeriesDescription": "CT114545:RespCT  3.0  B30f  50% Ex",
+    "NumberOfImages": 148
+  },
+  {
+    "Collection": "LCTSC",
+    "SubjectID": "LCTSC-Test-S1-103",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.816327386653410772475068003264",
+    "StudyDate": "Nov 09 2003",
+    "StudyDescription": "RT^RCCT_THORAX_8F_High (Adult)",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.578895540487402949445746417374",
+    "SeriesDescription": "CT140006:RespCT  3.0  B30f  50% Ex",
+    "NumberOfImages": 152
+  },
+  {
+    "Collection": "LCTSC",
+    "SubjectID": "LCTSC-Test-S1-104",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.829677454205016768063779242553",
+    "StudyDate": "Nov 16 2003",
+    "StudyDescription": "Specials^RCCTPET_THORAX_8F (Adult)",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.897505522446382862312678927950",
+    "SeriesDescription": "CT142749:P1B1RCCT  3.0  B19f  50% Ex",
+    "NumberOfImages": 131
+  },
+  {
+    "Collection": "LCTSC",
+    "SubjectID": "LCTSC-Test-S1-201",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.346635067461584156068474273548",
+    "StudyDate": "May 10 2004",
+    "StudyDescription": "RT^RCCT_THORAX_8F (Adult)",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.124917061210845908215297915204",
+    "SeriesDescription": "CT135227:RespCT  3.0  B30f  50% Ex",
+    "NumberOfImages": 117
+  },
+  {
+    "Collection": "LCTSC",
+    "SubjectID": "LCTSC-Test-S1-202",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.311348596911338124468620593243",
+    "StudyDate": "Dec 14 2003",
+    "StudyDescription": "RT^RCCT_THORAX_8F_High (Adult)",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.126903327873844302141601298114",
+    "SeriesDescription": "CT151221:P1B1  3.0  B30f  50% Ex",
+    "NumberOfImages": 131
+  },
+  {
+    "Collection": "LCTSC",
+    "SubjectID": "LCTSC-Test-S1-203",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.126657353437037202011096529416",
+    "StudyDate": "Dec 02 2003",
+    "StudyDescription": "RT^RCCT_THORAX_8F (Adult)",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.598020839962453263302136193830",
+    "SeriesDescription": "CT141836:RCCT-p1b1  3.0  I30f  3  50% Ex",
+    "NumberOfImages": 153
+  },
+  {
+    "Collection": "LCTSC",
+    "SubjectID": "LCTSC-Test-S1-204",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.387640041506394166677046351855",
+    "StudyDate": "Dec 07 2003",
+    "StudyDescription": "RT^RCCT_THORAX_8F_High (Adult)",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.143348938843553837741978176339",
+    "SeriesDescription": "CT135949:RespCT  3.0  B30f  50% Ex",
+    "NumberOfImages": 138
+  },
+  {
+    "Collection": "LCTSC",
+    "SubjectID": "LCTSC-Test-S2-101",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.177073219925349425820713784012",
+    "StudyDate": "Aug 17 2000",
+    "StudyDescription": "4DCT THORAX",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.544133693601694222197340767473",
+    "SeriesDescription": "Ave-IP(10) 0%_10%_20%_30%_40%_50%_60%_70%_80%_90%",
+    "NumberOfImages": 160
+  },
+  {
+    "Collection": "LCTSC",
+    "SubjectID": "LCTSC-Test-S2-102",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.304805754789102895117932115534",
+    "StudyDate": "Jan 30 2001",
+    "StudyDescription": "4DCT THORAX",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.109217572131830816053773071829",
+    "SeriesDescription": "Ave-IP(10) 0%_10%_20%_30%_40%_50%_60%_70%_80%_90%",
+    "NumberOfImages": 176
+  },
+  {
+    "Collection": "LCTSC",
+    "SubjectID": "LCTSC-Test-S2-103",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.205539610686399129384253975216",
+    "StudyDate": "Jun 22 1999",
+    "StudyDescription": "4DCT THORAX",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.870365658376083384628746512879",
+    "SeriesDescription": "Ave-IP(10) 0%_10%_20%_30%_40%_50%_60%_70%_80%_90%",
+    "NumberOfImages": 120
+  },
+  {
+    "Collection": "LCTSC",
+    "SubjectID": "LCTSC-Test-S2-104",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.189721990631943197010794868711",
+    "StudyDate": "Nov 05 2000",
+    "StudyDescription": "4DCT THORAX",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.771581850793138099148100264161",
+    "SeriesDescription": "Ave-IP(10) 0%_10%_20%_30%_40%_50%_60%_70%_80%_90%",
+    "NumberOfImages": 144
+  },
+  {
+    "Collection": "LCTSC",
+    "SubjectID": "LCTSC-Test-S2-201",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.303839966804062210456566892461",
+    "StudyDate": "Apr 12 1999",
+    "StudyDescription": "4D CT THORAX",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.661489439952962136711222393228",
+    "SeriesDescription": "Ave-IP(10) 0%_10%_20%_30%_40%_50%_60%_70%_80%_90%",
+    "NumberOfImages": 136
+  },
+  {
+    "Collection": "LCTSC",
+    "SubjectID": "LCTSC-Test-S2-202",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.225420722952260716557532766670",
+    "StudyDate": "May 10 1999",
+    "StudyDescription": "4D CT THORAX",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.186463975978084836948875020803",
+    "SeriesDescription": null,
+    "NumberOfImages": 142
+  },
+  {
+    "Collection": "LCTSC",
+    "SubjectID": "LCTSC-Test-S2-203",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.597041950444456926319459477155",
+    "StudyDate": "Nov 24 1999",
+    "StudyDescription": "4DCT THORAX",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.203353729959131953763223246911",
+    "SeriesDescription": "Ave-IP(10) 0%_10%_20%_30%_40%_50%_60%_70%_80%_90%",
+    "NumberOfImages": 136
+  },
+  {
+    "Collection": "LCTSC",
+    "SubjectID": "LCTSC-Test-S2-204",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.168826678138510904299220241618",
+    "StudyDate": "Mar 29 2001",
+    "StudyDescription": "LUNG 4DCT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.184537120112103188540038348452",
+    "SeriesDescription": "Ave-IP(10) 0%_10%_20%_30%_40%_50%_60%_70%_80%_90%",
+    "NumberOfImages": 176
+  },
+  {
+    "Collection": "LCTSC",
+    "SubjectID": "LCTSC-Test-S3-101",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.257436981847039852504624871707",
+    "StudyDate": "Feb 09 2004",
+    "StudyDescription": "LEFT HILUM",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.649681571268556191594998351441",
+    "SeriesDescription": null,
+    "NumberOfImages": 199
+  },
+  {
+    "Collection": "LCTSC",
+    "SubjectID": "LCTSC-Test-S3-102",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.317087153258232700153417411520",
+    "StudyDate": "Nov 08 2004",
+    "StudyDescription": "LEFT LUNG",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.601458183607199964857400995635",
+    "SeriesDescription": null,
+    "NumberOfImages": 210
+  },
+  {
+    "Collection": "LCTSC",
+    "SubjectID": "LCTSC-Test-S3-103",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.173947281744808864682292451762",
+    "StudyDate": "Aug 28 2003",
+    "StudyDescription": "LT APEX",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.139831536034774541470284558035",
+    "SeriesDescription": null,
+    "NumberOfImages": 136
+  },
+  {
+    "Collection": "LCTSC",
+    "SubjectID": "LCTSC-Test-S3-201",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.268430116413033494100421517580",
+    "StudyDate": "Jan 19 2004",
+    "StudyDescription": "RIGHT LUNG",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.335078307052561432151962256485",
+    "SeriesDescription": null,
+    "NumberOfImages": 184
+  },
+  {
+    "Collection": "LCTSC",
+    "SubjectID": "LCTSC-Test-S3-202",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.730032477444195010784327546036",
+    "StudyDate": "Oct 21 2003",
+    "StudyDescription": "LTLUNG UP DIBH",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.513033543073296044615683479554",
+    "SeriesDescription": null,
+    "NumberOfImages": 103
+  },
+  {
+    "Collection": "LCTSC",
+    "SubjectID": "LCTSC-Test-S3-204",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.149356563586951669953588524743",
+    "StudyDate": "Apr 17 2005",
+    "StudyDescription": "CHESTWALL",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.301083461608333949710621928825",
+    "SeriesDescription": null,
+    "NumberOfImages": 183
+  },
+  {
+    "Collection": "LCTSC",
+    "SubjectID": "LCTSC-Train-S1-001",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.117430069853376188015337939664",
+    "StudyDate": "Nov 16 2003",
+    "StudyDescription": "RT^RCCT_THORAX_8F_Low (Adult)",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.330486033168582850130357263530",
+    "SeriesDescription": "CT:RespCT-cran  3.0  B30s  50% Ex",
+    "NumberOfImages": 140
+  },
+  {
+    "Collection": "LCTSC",
+    "SubjectID": "LCTSC-Train-S1-002",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.665008031803939868532289200439",
+    "StudyDate": "Nov 01 2003",
+    "StudyDescription": "RT^RCCT_THORAX_8F (Adult)",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.234842392725588194788547945938",
+    "SeriesDescription": "CT2:p2b2 50% Ex",
+    "NumberOfImages": 161
+  },
+  {
+    "Collection": "LCTSC",
+    "SubjectID": "LCTSC-Train-S1-003",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.239183774927620695716557378009",
+    "StudyDate": "Dec 20 2003",
+    "StudyDescription": "RT^RCCT_THORAX_8F_High (Adult)",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.742383887179022534652201963868",
+    "SeriesDescription": "CT:P2B1 long RC  3.0  B30f  50% Ex",
+    "NumberOfImages": 154
+  },
+  {
+    "Collection": "LCTSC",
+    "SubjectID": "LCTSC-Train-S1-004",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.579729309334750446851688611396",
+    "StudyDate": "Nov 24 2003",
+    "StudyDescription": "RT^RCCT_THORAX_8F_High_CONTRAST (Adult)",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.269433294341779474954801314473",
+    "SeriesDescription": "CT:RespCT  3.0  B30f  50% Ex",
+    "NumberOfImages": 158
+  },
+  {
+    "Collection": "LCTSC",
+    "SubjectID": "LCTSC-Train-S1-005",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.323347535961250965231936811317",
+    "StudyDate": "Nov 12 2003",
+    "StudyDescription": "RT^RCCT_THORAX_8F_High (Adult)",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.338518041666541579259326041520",
+    "SeriesDescription": "CT:P1B2  3.0  B30f  50% Ex",
+    "NumberOfImages": 136
+  },
+  {
+    "Collection": "LCTSC",
+    "SubjectID": "LCTSC-Train-S1-006",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.248828253636339996946962229949",
+    "StudyDate": "Nov 01 2003",
+    "StudyDescription": "RT^RCCT_THORAX_8F_High (Adult)",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.770569242984181404413344762948",
+    "SeriesDescription": "CT:P2B2RespCT  3.0  B30f  50% Ex",
+    "NumberOfImages": 140
+  },
+  {
+    "Collection": "LCTSC",
+    "SubjectID": "LCTSC-Train-S1-007",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.208415500372767635171688815875",
+    "StudyDate": "Dec 13 2003",
+    "StudyDescription": "RT^RCCT_THORAX_8F_High (Adult)",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.335375068555840597820636886710",
+    "SeriesDescription": "CT:P1B3RespCT  3.0  B30f  50% Ex",
+    "NumberOfImages": 148
+  },
+  {
+    "Collection": "LCTSC",
+    "SubjectID": "LCTSC-Train-S1-008",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.136053868820564844992632412237",
+    "StudyDate": "Jan 26 2004",
+    "StudyDescription": "Specials^RCCTPET_THORAX_8F (Adult)",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.135073567254051847508429239493",
+    "SeriesDescription": "CT:P1B2 RespCT  3.0  B19f  50% Ex",
+    "NumberOfImages": 134
+  },
+  {
+    "Collection": "LCTSC",
+    "SubjectID": "LCTSC-Train-S1-009",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.185170463609230197577980779893",
+    "StudyDate": "Nov 17 2003",
+    "StudyDescription": "RT^RCCT_THORAX_8F (Adult)",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.260887785452122775593407355428",
+    "SeriesDescription": "CT:P3B1-craniaal   50% Ex",
+    "NumberOfImages": 150
+  },
+  {
+    "Collection": "LCTSC",
+    "SubjectID": "LCTSC-Train-S1-010",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.210392034043289120315059497068",
+    "StudyDate": "Dec 23 2003",
+    "StudyDescription": "RT^RCCT_THORAX_8F_High (Adult)",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.146824384793859596520898751671",
+    "SeriesDescription": "CT:p1b3RCCT  3.0  B30f  50% Ex",
+    "NumberOfImages": 122
+  },
+  {
+    "Collection": "LCTSC",
+    "SubjectID": "LCTSC-Train-S1-011",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.197083794427305601084939885618",
+    "StudyDate": "Dec 21 2003",
+    "StudyDescription": "RT^RCCT_THORAX_8F_High (Adult)",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.203884267248904801171397569051",
+    "SeriesDescription": "CT:P1B1 RespCT  3.0  B30f  50% Ex",
+    "NumberOfImages": 162
+  },
+  {
+    "Collection": "LCTSC",
+    "SubjectID": "LCTSC-Train-S1-012",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.856906139437027948311307972341",
+    "StudyDate": "Jan 18 2004",
+    "StudyDescription": "RT^RCCT_THORAX_8F_High (Adult)",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.152363408275842067001197241415",
+    "SeriesDescription": "CT:P2B1 rcct  3.0  B30f  50% Ex",
+    "NumberOfImages": 131
+  },
+  {
+    "Collection": "LCTSC",
+    "SubjectID": "LCTSC-Train-S2-001",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.232339666140041832806239593853",
+    "StudyDate": "Jan 03 2001",
+    "StudyDescription": "4DCT THORAX",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.153997523296975198691589390386",
+    "SeriesDescription": "Ave-IP(10) 0%_10%_20%_30%_40%_50%_60%_70%_80%_90%",
+    "NumberOfImages": 160
+  },
+  {
+    "Collection": "LCTSC",
+    "SubjectID": "LCTSC-Train-S2-002",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.246879683137332517059613944412",
+    "StudyDate": "Mar 18 1999",
+    "StudyDescription": "4DCT THORAX",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.522178945561749099159967411179",
+    "SeriesDescription": "Ave-IP(10) 0%_10%_20%_30%_40%_50%_60%_70%_80%_90%",
+    "NumberOfImages": 152
+  },
+  {
+    "Collection": "LCTSC",
+    "SubjectID": "LCTSC-Train-S2-003",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.196761816459686710497287530585",
+    "StudyDate": "May 20 1999",
+    "StudyDescription": "4DCT THORAX",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.317364588283152286043395670052",
+    "SeriesDescription": "Ave-IP(10) 0%_10%_20%_30%_40%_50%_60%_70%_80%_90%",
+    "NumberOfImages": 144
+  },
+  {
+    "Collection": "LCTSC",
+    "SubjectID": "LCTSC-Train-S2-004",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.217761530662855965658883981549",
+    "StudyDate": "Jul 11 1999",
+    "StudyDescription": "4DCT THORAX",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.713431881590243788049142773123",
+    "SeriesDescription": "Ave-IP(10) 0%_10%_20%_30%_40%_50%_60%_70%_80%_90%",
+    "NumberOfImages": 168
+  },
+  {
+    "Collection": "LCTSC",
+    "SubjectID": "LCTSC-Train-S2-005",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.177315112057648388270941502125",
+    "StudyDate": "Feb 06 2001",
+    "StudyDescription": "4DCT THORAX",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.111333256198579090011430915453",
+    "SeriesDescription": "Ave-IP(10) 0%_10%_20%_30%_40%_50%_60%_70%_80%_90%",
+    "NumberOfImages": 152
+  },
+  {
+    "Collection": "LCTSC",
+    "SubjectID": "LCTSC-Train-S2-006",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.108466224681512917584454943023",
+    "StudyDate": "Sep 18 2000",
+    "StudyDescription": "THORAX",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.236204792186301490546409224643",
+    "SeriesDescription": "Ave-IP(10) 0%_10%_20%_30%_40%_50%_60%_70%_80%_90%",
+    "NumberOfImages": 144
+  },
+  {
+    "Collection": "LCTSC",
+    "SubjectID": "LCTSC-Train-S2-007",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.237405254500780097983555305004",
+    "StudyDate": "Nov 19 2000",
+    "StudyDescription": "THORAX",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.264531494807607588047471046084",
+    "SeriesDescription": "Ave-IP(10) 0%_10%_20%_30%_40%_50%_60%_70%_80%_90%",
+    "NumberOfImages": 160
+  },
+  {
+    "Collection": "LCTSC",
+    "SubjectID": "LCTSC-Train-S2-008",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.238380054100514760168695015057",
+    "StudyDate": "Jan 09 1999",
+    "StudyDescription": "4DCT THORAX",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.215936934605591587728444583140",
+    "SeriesDescription": "Ave-IP(10) 0%_10%_20%_30%_40%_50%_60%_70%_80%_90%",
+    "NumberOfImages": 168
+  },
+  {
+    "Collection": "LCTSC",
+    "SubjectID": "LCTSC-Train-S2-009",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.761068884402562011271293490521",
+    "StudyDate": "May 26 1999",
+    "StudyDescription": "4DCT THORAX",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.238937006009449320383086806161",
+    "SeriesDescription": "Ave-IP(10) 0%_10%_20%_30%_40%_50%_60%_70%_80%_90%",
+    "NumberOfImages": 160
+  },
+  {
+    "Collection": "LCTSC",
+    "SubjectID": "LCTSC-Train-S2-010",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.809648974903402608359208613762",
+    "StudyDate": "Dec 21 1997",
+    "StudyDescription": "THORAX/ZXL",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.175604851345857042208490329910",
+    "SeriesDescription": "Ave-IP(10) 0%_10%_20%_30%_40%_50%_60%_70%_80%_90%",
+    "NumberOfImages": 152
+  },
+  {
+    "Collection": "LCTSC",
+    "SubjectID": "LCTSC-Train-S2-011",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.176177418811844951717402521513",
+    "StudyDate": "Mar 12 2001",
+    "StudyDescription": "4DCT THORAX",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.916706825292922132328634683513",
+    "SeriesDescription": "Ave-IP(10) 0%_10%_20%_30%_40%_50%_60%_70%_80%_90%",
+    "NumberOfImages": 160
+  },
+  {
+    "Collection": "LCTSC",
+    "SubjectID": "LCTSC-Train-S2-012",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.637649243464777584313916651412",
+    "StudyDate": "Apr 15 2001",
+    "StudyDescription": "4DCT THORAX",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.141615924406533483582820364514",
+    "SeriesDescription": "Ave-IP(10) 0%_10%_20%_30%_40%_50%_60%_70%_80%_90%",
+    "NumberOfImages": 160
+  },
+  {
+    "Collection": "LCTSC",
+    "SubjectID": "LCTSC-Train-S3-001",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.158333268414958887774422778786",
+    "StudyDate": "Nov 09 2004",
+    "StudyDescription": "LT LUNG",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.112579859666157974183752581661",
+    "SeriesDescription": null,
+    "NumberOfImages": 204
+  },
+  {
+    "Collection": "LCTSC",
+    "SubjectID": "LCTSC-Train-S3-003",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.286873019850044437883984034364",
+    "StudyDate": "Dec 13 2004",
+    "StudyDescription": "SBRT LUNG",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.113111242009365080743265965936",
+    "SeriesDescription": null,
+    "NumberOfImages": 202
+  },
+  {
+    "Collection": "LCTSC",
+    "SubjectID": "LCTSC-Train-S3-004",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.838376768275208687192216188693",
+    "StudyDate": "Mar 16 2005",
+    "StudyDescription": "3 SITES",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.167443256752139518417303505820",
+    "SeriesDescription": null,
+    "NumberOfImages": 279
+  },
+  {
+    "Collection": "LCTSC",
+    "SubjectID": "LCTSC-Train-S3-005",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.564375304681767491558739261597",
+    "StudyDate": "Jan 28 2004",
+    "StudyDescription": "LEFT LUNG",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.178222910375044862087935385408",
+    "SeriesDescription": null,
+    "NumberOfImages": 188
+  },
+  {
+    "Collection": "LCTSC",
+    "SubjectID": "LCTSC-Train-S3-006",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.717173103479775250091375811376",
+    "StudyDate": "Oct 21 2003",
+    "StudyDescription": "LT LUNG",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.183244025075173036843023067503",
+    "SeriesDescription": null,
+    "NumberOfImages": 148
+  },
+  {
+    "Collection": "LCTSC",
+    "SubjectID": "LCTSC-Train-S3-007",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.267360218506079083578856286215",
+    "StudyDate": "Apr 29 2003",
+    "StudyDescription": "RIGHT LUNG",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.311892226032003765556361265740",
+    "SeriesDescription": null,
+    "NumberOfImages": 163
+  },
+  {
+    "Collection": "LCTSC",
+    "SubjectID": "LCTSC-Train-S3-008",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.136098092440656301569364336052",
+    "StudyDate": "Sep 29 2003",
+    "StudyDescription": "RT LOW LUNG",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.531490203931619366306907407672",
+    "SeriesDescription": null,
+    "NumberOfImages": 240
+  },
+  {
+    "Collection": "LCTSC",
+    "SubjectID": "LCTSC-Train-S3-009",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.248484087780307011027816481070",
+    "StudyDate": "Oct 21 2003",
+    "StudyDescription": "RT LUNG",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.210533181201919575928229512890",
+    "SeriesDescription": null,
+    "NumberOfImages": 115
+  },
+  {
+    "Collection": "LCTSC",
+    "SubjectID": "LCTSC-Train-S3-010",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.120574963399566731807259976793",
+    "StudyDate": "Nov 29 2003",
+    "StudyDescription": "LT LUNG/MEDIASTINUM",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.307467503617501751325674523800",
+    "SeriesDescription": null,
+    "NumberOfImages": 150
+  },
+  {
+    "Collection": "LCTSC",
+    "SubjectID": "LCTSC-Train-S3-011",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.198134155676495916758630917442",
+    "StudyDate": "Nov 16 2002",
+    "StudyDescription": "RT LUNG",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7014.4598.648202329529129061444241329585",
+    "SeriesDescription": null,
+    "NumberOfImages": 133
+  },
+  {
+    "Collection": "SPIE-AAPM Lung CT Challenge",
+    "SubjectID": "LUNGx-CT001",
+    "StudyInstanceUID": "1.3.50463009827345485762745999238237348347135062081",
+    "StudyDate": "Sep 24 2006",
+    "StudyDescription": "CT INFUSED CHEST",
+    "SeriesInstanceUID": "1.3.563871217806014917027594443208961765673833569714",
+    "SeriesDescription": "HIGH RES",
+    "NumberOfImages": 313
+  },
+  {
+    "Collection": "SPIE-AAPM Lung CT Challenge",
+    "SubjectID": "LUNGx-CT002",
+    "StudyInstanceUID": "1.3.1361414212751267827698140752396118563078395896111",
+    "StudyDate": "May 25 2007",
+    "StudyDescription": "CT INFUSED CHEST",
+    "SeriesInstanceUID": "1.3.1145223087859355399642916469763443565954368970218",
+    "SeriesDescription": "HIGH RES",
+    "NumberOfImages": 272
+  },
+  {
+    "Collection": "SPIE-AAPM Lung CT Challenge",
+    "SubjectID": "LUNGx-CT004",
+    "StudyInstanceUID": "1.3.13486192952515290287187264044599935755292950128",
+    "StudyDate": "Dec 17 2006",
+    "StudyDescription": "CT INFUSED CHEST",
+    "SeriesInstanceUID": "1.3.577127236064391293961915047637903935084441219249",
+    "SeriesDescription": "HI-RES",
+    "NumberOfImages": 317
+  },
+  {
+    "Collection": "SPIE-AAPM Lung CT Challenge",
+    "SubjectID": "LUNGx-CT006",
+    "StudyInstanceUID": "1.3.1195567418842255380736284045921234278592792067393",
+    "StudyDate": "Aug 24 2006",
+    "StudyDescription": "CT INFUSED CHEST",
+    "SeriesInstanceUID": "1.3.518425660167617438804169131451582835056363286344",
+    "SeriesDescription": "HIGH RES",
+    "NumberOfImages": 340
+  },
+  {
+    "Collection": "SPIE-AAPM Lung CT Challenge",
+    "SubjectID": "LUNGx-CT007",
+    "StudyInstanceUID": "1.3.967160427463385844721057042634947789650123423807",
+    "StudyDate": "Jan 12 2007",
+    "StudyDescription": "CT INFUSED CHEST",
+    "SeriesInstanceUID": "1.3.731297249261367346825936955510849690749568387220",
+    "SeriesDescription": "HIGH RES",
+    "NumberOfImages": 288
+  },
+  {
+    "Collection": "SPIE-AAPM Lung CT Challenge",
+    "SubjectID": "LUNGx-CT008",
+    "StudyInstanceUID": "1.3.1326084491803208181438197685640771915278774925891",
+    "StudyDate": "Jul 20 2006",
+    "StudyDescription": "CT INFUSED CHEST",
+    "SeriesInstanceUID": "1.3.667697638122147181120450867733571088119220172237",
+    "SeriesDescription": "HIGH RES",
+    "NumberOfImages": 288
+  },
+  {
+    "Collection": "SPIE-AAPM Lung CT Challenge",
+    "SubjectID": "LUNGx-CT010",
+    "StudyInstanceUID": "1.3.52147739131872773652444990376855573492232884069",
+    "StudyDate": "Jan 12 2007",
+    "StudyDescription": "CT INFUSED CHEST",
+    "SeriesInstanceUID": "1.3.379588105990835917918897498663126117273131290345",
+    "SeriesDescription": "HIGH RES",
+    "NumberOfImages": 292
+  },
+  {
+    "Collection": "SPIE-AAPM Lung CT Challenge",
+    "SubjectID": "LUNGx-CT011",
+    "StudyInstanceUID": "1.3.1161898371247050221746438756738977277640022749902",
+    "StudyDate": "Sep 16 2006",
+    "StudyDescription": "CT INFUSED CHEST",
+    "SeriesInstanceUID": "1.3.767780323452591888690483144675401655804730579323",
+    "SeriesDescription": "HIGH RES",
+    "NumberOfImages": 267
+  },
+  {
+    "Collection": "SPIE-AAPM Lung CT Challenge",
+    "SubjectID": "LUNGx-CT012",
+    "StudyInstanceUID": "1.3.1038259177463533197156692348980046935095867700902",
+    "StudyDate": "Apr 18 2006",
+    "StudyDescription": "CT INFUSED CHEST",
+    "SeriesInstanceUID": "1.3.92280459696777639025198367923691018934194857102",
+    "SeriesDescription": "HI RES",
+    "NumberOfImages": 307
+  },
+  {
+    "Collection": "SPIE-AAPM Lung CT Challenge",
+    "SubjectID": "LUNGx-CT014",
+    "StudyInstanceUID": "1.3.1341963484873457067439841815408104366420964536309",
+    "StudyDate": "Jul 06 2006",
+    "StudyDescription": "CT INFUSED CHEST",
+    "SeriesInstanceUID": "1.3.690677913318372454050976828073106821137195723604",
+    "SeriesDescription": "HIGH RES",
+    "NumberOfImages": 315
+  },
+  {
+    "Collection": "SPIE-AAPM Lung CT Challenge",
+    "SubjectID": "LUNGx-CT016",
+    "StudyInstanceUID": "1.3.727563515869879309410938825516953492051622252742",
+    "StudyDate": "Mar 05 2007",
+    "StudyDescription": "CT INFUSED CHEST",
+    "SeriesInstanceUID": "1.3.1176319142685554242662884472117081893645563040880",
+    "SeriesDescription": "HI-RES",
+    "NumberOfImages": 261
+  },
+  {
+    "Collection": "SPIE-AAPM Lung CT Challenge",
+    "SubjectID": "LUNGx-CT017",
+    "StudyInstanceUID": "1.3.1099998131511000124447411558234573520958419880787",
+    "StudyDate": "Dec 27 2006",
+    "StudyDescription": "",
+    "SeriesInstanceUID": "1.3.339775668846604123113831279107216085138711838232",
+    "SeriesDescription": "HIGH RES",
+    "NumberOfImages": 335
+  },
+  {
+    "Collection": "SPIE-AAPM Lung CT Challenge",
+    "SubjectID": "LUNGx-CT019",
+    "StudyInstanceUID": "1.3.262855407653474349999683209121121833222795299144",
+    "StudyDate": "Aug 27 2006",
+    "StudyDescription": "CT INFUSED CHEST",
+    "SeriesInstanceUID": "1.3.808972334795970037868530884525606759363171012730",
+    "SeriesDescription": "HI-RES",
+    "NumberOfImages": 374
+  },
+  {
+    "Collection": "SPIE-AAPM Lung CT Challenge",
+    "SubjectID": "LUNGx-CT021",
+    "StudyInstanceUID": "1.3.530178974155183493457120663300764090753523102967",
+    "StudyDate": "Jan 11 2007",
+    "StudyDescription": "CT INFUSED CHEST",
+    "SeriesInstanceUID": "1.3.1350209142447788896827975194482848027360829551556",
+    "SeriesDescription": "HIGH RES",
+    "NumberOfImages": 286
+  },
+  {
+    "Collection": "SPIE-AAPM Lung CT Challenge",
+    "SubjectID": "LUNGx-CT022",
+    "StudyInstanceUID": "1.3.1387935719742216297071597417967766127484226494126",
+    "StudyDate": "Jun 15 2006",
+    "StudyDescription": "CT INFUSED CHEST",
+    "SeriesInstanceUID": "1.3.551372667173853773078546402801992860115214683725",
+    "SeriesDescription": "HIGH RES",
+    "NumberOfImages": 344
+  },
+  {
+    "Collection": "SPIE-AAPM Lung CT Challenge",
+    "SubjectID": "LUNGx-CT023",
+    "StudyInstanceUID": "1.3.755042283004666958704054509771209707400826247399",
+    "StudyDate": "Jul 26 2006",
+    "StudyDescription": "CT INFUSED CHEST",
+    "SeriesInstanceUID": "1.3.16132153934128212792625952492172248785269560559",
+    "SeriesDescription": "HIGH RES",
+    "NumberOfImages": 268
+  },
+  {
+    "Collection": "SPIE-AAPM Lung CT Challenge",
+    "SubjectID": "LUNGx-CT024",
+    "StudyInstanceUID": "1.3.1320168486540352226106975711422416499836221912515",
+    "StudyDate": "Jul 03 2006",
+    "StudyDescription": "CT INFUSED CHEST",
+    "SeriesInstanceUID": "1.3.147817643276198641932967384036929401902110085034",
+    "SeriesDescription": "HI-RES",
+    "NumberOfImages": 469
+  },
+  {
+    "Collection": "SPIE-AAPM Lung CT Challenge",
+    "SubjectID": "LUNGx-CT025",
+    "StudyInstanceUID": "1.3.438623817630369461316823287719574658855145216264",
+    "StudyDate": "Mar 06 2007",
+    "StudyDescription": "CT INFUSED CHEST",
+    "SeriesInstanceUID": "1.3.1397530337126795449342728698260374360766996995826",
+    "SeriesDescription": "HI-RES",
+    "NumberOfImages": 300
+  },
+  {
+    "Collection": "SPIE-AAPM Lung CT Challenge",
+    "SubjectID": "LUNGx-CT026",
+    "StudyInstanceUID": "1.3.210812770901514343863488434465069831299853313884",
+    "StudyDate": "Jun 10 2006",
+    "StudyDescription": "CT INFUSED CHEST",
+    "SeriesInstanceUID": "1.3.782686375060550792011786057633915465800313968644",
+    "SeriesDescription": "HIGH RES",
+    "NumberOfImages": 319
+  },
+  {
+    "Collection": "SPIE-AAPM Lung CT Challenge",
+    "SubjectID": "LUNGx-CT027",
+    "StudyInstanceUID": "1.3.903819121499441114724459035572935558851372085959",
+    "StudyDate": "Jan 13 2007",
+    "StudyDescription": "CT INFUSED CHEST",
+    "SeriesInstanceUID": "1.3.716676205639234976182056139541672797014256386583",
+    "SeriesDescription": "HIGH RES",
+    "NumberOfImages": 275
+  },
+  {
+    "Collection": "SPIE-AAPM Lung CT Challenge",
+    "SubjectID": "LUNGx-CT028",
+    "StudyInstanceUID": "1.3.1240997055854040187242863921435767082486908388072",
+    "StudyDate": "Apr 03 2007",
+    "StudyDescription": "CT INFUSED CHEST",
+    "SeriesInstanceUID": "1.3.824259018789583391381047107414119291936057995600",
+    "SeriesDescription": "HIGH RES",
+    "NumberOfImages": 351
+  },
+  {
+    "Collection": "SPIE-AAPM Lung CT Challenge",
+    "SubjectID": "LUNGx-CT029",
+    "StudyInstanceUID": "1.3.947227492355042809811253891901599810351547247401",
+    "StudyDate": "Dec 09 2006",
+    "StudyDescription": "CT INFUSED CHEST",
+    "SeriesInstanceUID": "1.3.953243163791703490574905683988665902666716847567",
+    "SeriesDescription": "HIGH RES",
+    "NumberOfImages": 243
+  },
+  {
+    "Collection": "SPIE-AAPM Lung CT Challenge",
+    "SubjectID": "LUNGx-CT031",
+    "StudyInstanceUID": "1.3.517661235795504018860804953486268569756257125884",
+    "StudyDate": "Mar 18 2007",
+    "StudyDescription": "CT INFUSED CHEST",
+    "SeriesInstanceUID": "1.3.352254172600286877929035101700227591067529845806",
+    "SeriesDescription": "HIGH RES",
+    "NumberOfImages": 313
+  },
+  {
+    "Collection": "SPIE-AAPM Lung CT Challenge",
+    "SubjectID": "LUNGx-CT032",
+    "StudyInstanceUID": "1.3.343102460618322207232015487499163612290392636835",
+    "StudyDate": "Feb 18 2007",
+    "StudyDescription": "CT INFUSED CHEST",
+    "SeriesInstanceUID": "1.3.530134345525576634180750513959015117777267533014",
+    "SeriesDescription": "HIGH RES",
+    "NumberOfImages": 328
+  },
+  {
+    "Collection": "SPIE-AAPM Lung CT Challenge",
+    "SubjectID": "LUNGx-CT033",
+    "StudyInstanceUID": "1.3.596973885754318269543317517368500133465887373110",
+    "StudyDate": "Jul 08 2006",
+    "StudyDescription": "CT INFUSED CHEST",
+    "SeriesInstanceUID": "1.3.1193502136734422836697516507694898439101901573061",
+    "SeriesDescription": "HIGH RES",
+    "NumberOfImages": 307
+  },
+  {
+    "Collection": "SPIE-AAPM Lung CT Challenge",
+    "SubjectID": "LUNGx-CT034",
+    "StudyInstanceUID": "1.3.707525997274552867606536566793148232258059426117",
+    "StudyDate": "Aug 18 2006",
+    "StudyDescription": "CT INFUSED CHEST",
+    "SeriesInstanceUID": "1.3.684976991477355058229703402933426609312139698365",
+    "SeriesDescription": "HIGH RES",
+    "NumberOfImages": 300
+  },
+  {
+    "Collection": "SPIE-AAPM Lung CT Challenge",
+    "SubjectID": "LUNGx-CT035",
+    "StudyInstanceUID": "1.3.901873814850239475168586327791090383042833195899",
+    "StudyDate": "Apr 18 2006",
+    "StudyDescription": "CT INFUSED CHEST",
+    "SeriesInstanceUID": "1.3.835332077308701210403975325231308474640478438494",
+    "SeriesDescription": "HIGH RES",
+    "NumberOfImages": 356
+  },
+  {
+    "Collection": "SPIE-AAPM Lung CT Challenge",
+    "SubjectID": "LUNGx-CT037",
+    "StudyInstanceUID": "1.3.648225821892550097392012644175413428547200900085",
+    "StudyDate": "Feb 26 2007",
+    "StudyDescription": "CT INFUSED CHEST",
+    "SeriesInstanceUID": "1.3.590624258213382097666730897761790507226204408330",
+    "SeriesDescription": "HIGH RES",
+    "NumberOfImages": 379
+  },
+  {
+    "Collection": "SPIE-AAPM Lung CT Challenge",
+    "SubjectID": "LUNGx-CT038",
+    "StudyInstanceUID": "1.3.604044899997328576272870187975198172464411983487",
+    "StudyDate": "Mar 11 2007",
+    "StudyDescription": "CT INFUSED CHEST",
+    "SeriesInstanceUID": "1.3.235994342382803190365804366726907469363843415907",
+    "SeriesDescription": "HIGH RES",
+    "NumberOfImages": 321
+  },
+  {
+    "Collection": "SPIE-AAPM Lung CT Challenge",
+    "SubjectID": "LUNGx-CT039",
+    "StudyInstanceUID": "1.3.1372094640924836440304657248250942474664776066176",
+    "StudyDate": "Aug 12 2006",
+    "StudyDescription": "CT INFUSED CHEST",
+    "SeriesInstanceUID": "1.3.339426369536818033124152674703399625501022815116",
+    "SeriesDescription": "HIGH RES",
+    "NumberOfImages": 304
+  },
+  {
+    "Collection": "SPIE-AAPM Lung CT Challenge",
+    "SubjectID": "LUNGx-CT040",
+    "StudyInstanceUID": "1.3.741235653491470918717524136140086691183081351678",
+    "StudyDate": "Aug 15 2006",
+    "StudyDescription": "CT INFUSED CHEST",
+    "SeriesInstanceUID": "1.3.975141488167018539951633576162853984813861164711",
+    "SeriesDescription": "HI-RES",
+    "NumberOfImages": 334
+  },
+  {
+    "Collection": "SPIE-AAPM Lung CT Challenge",
+    "SubjectID": "LUNGx-CT042",
+    "StudyInstanceUID": "1.3.1332530537213623248962143373836235190913762027083",
+    "StudyDate": "Apr 19 2006",
+    "StudyDescription": "CT INFUSED CHEST",
+    "SeriesInstanceUID": "1.3.642971882379840225160402364872476492335927213338",
+    "SeriesDescription": "HIGH RES",
+    "NumberOfImages": 276
+  },
+  {
+    "Collection": "SPIE-AAPM Lung CT Challenge",
+    "SubjectID": "LUNGx-CT044",
+    "StudyInstanceUID": "1.3.518279068853577928722229450565518558406841447108",
+    "StudyDate": "Oct 21 2006",
+    "StudyDescription": "CT INFUSED CHEST",
+    "SeriesInstanceUID": "1.3.753920066022036429035102063001756486076845692720",
+    "SeriesDescription": "HIGH RES",
+    "NumberOfImages": 386
+  },
+  {
+    "Collection": "SPIE-AAPM Lung CT Challenge",
+    "SubjectID": "LUNGx-CT045",
+    "StudyInstanceUID": "1.3.209772951558475693077054206984359607373872869003",
+    "StudyDate": "Apr 30 2006",
+    "StudyDescription": "CT INFUSED CHEST",
+    "SeriesInstanceUID": "1.3.504915276803093972307122644042884445791174355992",
+    "SeriesDescription": "HIGH RES",
+    "NumberOfImages": 379
+  },
+  {
+    "Collection": "SPIE-AAPM Lung CT Challenge",
+    "SubjectID": "LUNGx-CT046",
+    "StudyInstanceUID": "1.3.642318999528878793263980936724379314215901991911",
+    "StudyDate": "May 05 2006",
+    "StudyDescription": "CT INFUSED CHEST",
+    "SeriesInstanceUID": "1.3.879844309129508284800994590753442102855212539013",
+    "SeriesDescription": "HIGH RES",
+    "NumberOfImages": 243
+  },
+  {
+    "Collection": "SPIE-AAPM Lung CT Challenge",
+    "SubjectID": "LUNGx-CT047",
+    "StudyInstanceUID": "1.3.1041854094155014479374542818589424021816940667102",
+    "StudyDate": "Feb 09 2007",
+    "StudyDescription": "CT INFUSED CHEST",
+    "SeriesInstanceUID": "1.3.211158813185482688960040821328542571296714356113",
+    "SeriesDescription": "HIGH RES",
+    "NumberOfImages": 348
+  },
+  {
+    "Collection": "SPIE-AAPM Lung CT Challenge",
+    "SubjectID": "LUNGx-CT048",
+    "StudyInstanceUID": "1.3.807314714762156547817608468667714927152852759897",
+    "StudyDate": "Jul 01 2006",
+    "StudyDescription": "CT INFUSED CHEST",
+    "SeriesInstanceUID": "1.3.1116747241072906869884879654848764434280050603740",
+    "SeriesDescription": "HI-RES",
+    "NumberOfImages": 422
+  },
+  {
+    "Collection": "SPIE-AAPM Lung CT Challenge",
+    "SubjectID": "LUNGx-CT049",
+    "StudyInstanceUID": "1.3.769485270742128706576406978872009753077396354153",
+    "StudyDate": "Dec 31 2006",
+    "StudyDescription": "CT INFUSED CHEST",
+    "SeriesInstanceUID": "1.3.7628612479772689274381436122445352863066737996",
+    "SeriesDescription": "HIGH RES",
+    "NumberOfImages": 338
+  },
+  {
+    "Collection": "SPIE-AAPM Lung CT Challenge",
+    "SubjectID": "LUNGx-CT050",
+    "StudyInstanceUID": "1.3.459942554482019639028807421679019320332496394751",
+    "StudyDate": "Nov 22 2006",
+    "StudyDescription": "CT INFUSED CHEST",
+    "SeriesInstanceUID": "1.3.1269338962361172358603921369868397456345685969707",
+    "SeriesDescription": "HI-RES",
+    "NumberOfImages": 285
+  },
+  {
+    "Collection": "SPIE-AAPM Lung CT Challenge",
+    "SubjectID": "LUNGx-CT051",
+    "StudyInstanceUID": "1.3.82911972825712168443558593263414553854942732081",
+    "StudyDate": "Jan 13 2007",
+    "StudyDescription": "CT INFUSED CHEST",
+    "SeriesInstanceUID": "1.3.183511591909357504354574752986792089024440164483",
+    "SeriesDescription": "HIGH RES",
+    "NumberOfImages": 298
+  },
+  {
+    "Collection": "SPIE-AAPM Lung CT Challenge",
+    "SubjectID": "LUNGx-CT053",
+    "StudyInstanceUID": "1.3.909892482166685780802136196793032899730479321858",
+    "StudyDate": "Jan 17 2007",
+    "StudyDescription": "CT INFUSED CHEST",
+    "SeriesInstanceUID": "1.3.283555618156207794581815676543265885365354236113",
+    "SeriesDescription": "HIGH RES",
+    "NumberOfImages": 334
+  },
+  {
+    "Collection": "SPIE-AAPM Lung CT Challenge",
+    "SubjectID": "LUNGx-CT054",
+    "StudyInstanceUID": "1.3.1293771406558661957124536884935329887384171952125",
+    "StudyDate": "Jan 23 2007",
+    "StudyDescription": "CT INFUSED CHEST",
+    "SeriesInstanceUID": "1.3.1244770715611476030519746918118047288718784723912",
+    "SeriesDescription": "HIGH RES",
+    "NumberOfImages": 265
+  },
+  {
+    "Collection": "SPIE-AAPM Lung CT Challenge",
+    "SubjectID": "LUNGx-CT055",
+    "StudyInstanceUID": "1.3.590935773227994588865418895161359904534542131841",
+    "StudyDate": "Jan 23 2007",
+    "StudyDescription": "CT INFUSED CHEST",
+    "SeriesInstanceUID": "1.3.486130223248695939804080844700827694434925553130",
+    "SeriesDescription": "HIGH RES",
+    "NumberOfImages": 246
+  },
+  {
+    "Collection": "SPIE-AAPM Lung CT Challenge",
+    "SubjectID": "LUNGx-CT056",
+    "StudyInstanceUID": "1.3.692921131155442918506703290482446592965857757893",
+    "StudyDate": "Jan 14 2007",
+    "StudyDescription": "CT INFUSED CHEST",
+    "SeriesInstanceUID": "1.3.1017368304677902588345679194061962347623590284663",
+    "SeriesDescription": "HIGH RES",
+    "NumberOfImages": 309
+  },
+  {
+    "Collection": "SPIE-AAPM Lung CT Challenge",
+    "SubjectID": "LUNGx-CT057",
+    "StudyInstanceUID": "1.3.1383526335824072935697077573466183105731337410925",
+    "StudyDate": "Jan 05 2007",
+    "StudyDescription": "CT INFUSED CHEST",
+    "SeriesInstanceUID": "1.3.1302338498912198895105263245109697269777075356183",
+    "SeriesDescription": "HIGH RES",
+    "NumberOfImages": 254
+  },
+  {
+    "Collection": "SPIE-AAPM Lung CT Challenge",
+    "SubjectID": "LUNGx-CT059",
+    "StudyInstanceUID": "1.3.389766124384087345301838150513540429709389126028",
+    "StudyDate": "Jan 08 2007",
+    "StudyDescription": "CT INFUSED CHEST",
+    "SeriesInstanceUID": "1.3.882780095853171933678762658989527481644980362275",
+    "SeriesDescription": "HI RES",
+    "NumberOfImages": 307
+  },
+  {
+    "Collection": "SPIE-AAPM Lung CT Challenge",
+    "SubjectID": "LUNGx-CT060",
+    "StudyInstanceUID": "1.3.930520220103062027365655148005431490653441013719",
+    "StudyDate": "Feb 20 2007",
+    "StudyDescription": "CT INFUSED CHEST",
+    "SeriesInstanceUID": "1.3.1186646311610038317282976737211640873380276742551",
+    "SeriesDescription": "HIGH RES",
+    "NumberOfImages": 347
+  },
+  {
+    "Collection": "LungCT-Diagnosis",
+    "SubjectID": "R_004",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.248552508121514040263344871813",
+    "StudyDate": "Jun 30 1997",
+    "StudyDescription": "Diagnostic Pre-Surgery Contrast Enhanced CT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.966354075876482042295761929295",
+    "SeriesDescription": "= NONE =",
+    "NumberOfImages": 68
+  },
+  {
+    "Collection": "LungCT-Diagnosis",
+    "SubjectID": "R_006",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.203059346048546067166621241946",
+    "StudyDate": "Sep 24 1998",
+    "StudyDescription": "Diagnostic Pre-Surgery Contrast Enhanced CT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.113686129632252779806152571225",
+    "SeriesDescription": "= NONE =",
+    "NumberOfImages": 130
+  },
+  {
+    "Collection": "LungCT-Diagnosis",
+    "SubjectID": "R_013",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.858893877330075891307460974850",
+    "StudyDate": "Feb 09 1997",
+    "StudyDescription": "Diagnostic Pre-Surgery Contrast Enhanced CT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.108377250346249631601443486053",
+    "SeriesDescription": "= NONE =",
+    "NumberOfImages": 67
+  },
+  {
+    "Collection": "LungCT-Diagnosis",
+    "SubjectID": "R_014",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.231039938881330096566986102847",
+    "StudyDate": "Apr 11 1998",
+    "StudyDescription": "Diagnostic Pre-Surgery Contrast Enhanced CT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.195727395237465554634939962871",
+    "SeriesDescription": "= NONE =",
+    "NumberOfImages": 76
+  },
+  {
+    "Collection": "LungCT-Diagnosis",
+    "SubjectID": "R_019",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.188933890086471043002203871046",
+    "StudyDate": "Jan 13 1996",
+    "StudyDescription": "Diagnostic Pre-Surgery Contrast Enhanced CT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.858665305863061871764636291385",
+    "SeriesDescription": "= NONE =",
+    "NumberOfImages": 63
+  },
+  {
+    "Collection": "LungCT-Diagnosis",
+    "SubjectID": "R_020",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.296744537535180467572696090432",
+    "StudyDate": "Nov 01 1995",
+    "StudyDescription": "Diagnostic Pre-Surgery Contrast Enhanced CT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.261781697101054597239292572759",
+    "SeriesDescription": "= NONE =",
+    "NumberOfImages": 150
+  },
+  {
+    "Collection": "LungCT-Diagnosis",
+    "SubjectID": "R_022",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.219900495822852419986671497215",
+    "StudyDate": "Aug 14 1997",
+    "StudyDescription": "Diagnostic Pre-Surgery Contrast Enhanced CT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.177447273293879900929015869634",
+    "SeriesDescription": "= NONE =",
+    "NumberOfImages": 80
+  },
+  {
+    "Collection": "LungCT-Diagnosis",
+    "SubjectID": "R_029",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.125721920632162119492941634336",
+    "StudyDate": "Jun 06 1998",
+    "StudyDescription": "Diagnostic Pre-Surgery Contrast Enhanced CT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.226952804465088850041383585906",
+    "SeriesDescription": "= NONE =",
+    "NumberOfImages": 109
+  },
+  {
+    "Collection": "LungCT-Diagnosis",
+    "SubjectID": "R_033",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.851061538959703807827542270653",
+    "StudyDate": "Aug 01 1996",
+    "StudyDescription": "Diagnostic Pre-Surgery Contrast Enhanced CT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.194126952887269510493034552293",
+    "SeriesDescription": "= NONE =",
+    "NumberOfImages": 67
+  },
+  {
+    "Collection": "LungCT-Diagnosis",
+    "SubjectID": "R_035",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.518965472573814300881432173817",
+    "StudyDate": "Oct 06 1997",
+    "StudyDescription": "Diagnostic Pre-Surgery Contrast Enhanced CT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.186537828665845240420327354304",
+    "SeriesDescription": "= NONE =",
+    "NumberOfImages": 74
+  },
+  {
+    "Collection": "LungCT-Diagnosis",
+    "SubjectID": "R_036",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.100451486724919545709557823451",
+    "StudyDate": "Jun 30 1997",
+    "StudyDescription": "Diagnostic Pre-Surgery Contrast Enhanced CT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.951012325004992950113044282187",
+    "SeriesDescription": "= NONE =",
+    "NumberOfImages": 65
+  },
+  {
+    "Collection": "LungCT-Diagnosis",
+    "SubjectID": "R_043",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.227672022111453893046049224932",
+    "StudyDate": "Aug 03 1998",
+    "StudyDescription": "Diagnostic Pre-Surgery Contrast Enhanced CT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.167938164374243671184910060739",
+    "SeriesDescription": "= NONE =",
+    "NumberOfImages": 111
+  },
+  {
+    "Collection": "LungCT-Diagnosis",
+    "SubjectID": "R_053",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.517417975270684537124932347957",
+    "StudyDate": "Aug 17 1998",
+    "StudyDescription": "Diagnostic Pre-Surgery Contrast Enhanced CT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.318649237187862394298238772820",
+    "SeriesDescription": "= NONE =",
+    "NumberOfImages": 104
+  },
+  {
+    "Collection": "LungCT-Diagnosis",
+    "SubjectID": "R_056",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.192223804861576056024369880508",
+    "StudyDate": "Nov 16 1997",
+    "StudyDescription": "Diagnostic Pre-Surgery Contrast Enhanced CT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.357245235701670723101804413792",
+    "SeriesDescription": "= NONE =",
+    "NumberOfImages": 62
+  },
+  {
+    "Collection": "LungCT-Diagnosis",
+    "SubjectID": "R_061",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.148444392206166653380348096858",
+    "StudyDate": "Apr 06 1998",
+    "StudyDescription": "Diagnostic Pre-Surgery Contrast Enhanced CT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.160778064310462492410315125687",
+    "SeriesDescription": "= NONE =",
+    "NumberOfImages": 70
+  },
+  {
+    "Collection": "LungCT-Diagnosis",
+    "SubjectID": "R_064",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.223114647221486834339942810753",
+    "StudyDate": "Dec 26 1996",
+    "StudyDescription": "Diagnostic Pre-Surgery Contrast Enhanced CT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.256644935344040683824919640017",
+    "SeriesDescription": "= NONE =",
+    "NumberOfImages": 63
+  },
+  {
+    "Collection": "LungCT-Diagnosis",
+    "SubjectID": "R_065",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.233872568071694592857630274388",
+    "StudyDate": "Mar 06 1998",
+    "StudyDescription": "Diagnostic Pre-Surgery Contrast Enhanced CT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.546493509930628296274751118533",
+    "SeriesDescription": "= NONE =",
+    "NumberOfImages": 69
+  },
+  {
+    "Collection": "LungCT-Diagnosis",
+    "SubjectID": "R_066",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.727120684603931671140268930874",
+    "StudyDate": "Mar 02 1997",
+    "StudyDescription": "Diagnostic Pre-Surgery Contrast Enhanced CT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.291777971096616783435132467040",
+    "SeriesDescription": "= NONE =",
+    "NumberOfImages": 98
+  },
+  {
+    "Collection": "LungCT-Diagnosis",
+    "SubjectID": "R_069",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.272642986942028254801481747252",
+    "StudyDate": "Jun 29 1998",
+    "StudyDescription": "Diagnostic Pre-Surgery Contrast Enhanced CT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.707460157128929865794170952055",
+    "SeriesDescription": "= NONE =",
+    "NumberOfImages": 118
+  },
+  {
+    "Collection": "LungCT-Diagnosis",
+    "SubjectID": "R_075",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.905893527127370577828717624475",
+    "StudyDate": "Jun 13 1998",
+    "StudyDescription": "Diagnostic Pre-Surgery Contrast Enhanced CT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.175436775971528801344124816822",
+    "SeriesDescription": "= NONE =",
+    "NumberOfImages": 112
+  },
+  {
+    "Collection": "LungCT-Diagnosis",
+    "SubjectID": "R_077",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.224592101182434229311031186058",
+    "StudyDate": "Aug 25 1996",
+    "StudyDescription": "Diagnostic Pre-Surgery Contrast Enhanced CT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.326776744705831132952530466898",
+    "SeriesDescription": "= NONE =",
+    "NumberOfImages": 49
+  },
+  {
+    "Collection": "LungCT-Diagnosis",
+    "SubjectID": "R_078",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.200669196334798686049957852894",
+    "StudyDate": "Jan 02 1998",
+    "StudyDescription": "Diagnostic Pre-Surgery Contrast Enhanced CT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.250482562044146560935543375894",
+    "SeriesDescription": "= NONE =",
+    "NumberOfImages": 87
+  },
+  {
+    "Collection": "LungCT-Diagnosis",
+    "SubjectID": "R_093",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.201986527949877334068747060981",
+    "StudyDate": "Mar 21 1998",
+    "StudyDescription": "Diagnostic Pre-Surgery Contrast Enhanced CT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.310382911724076859337109513048",
+    "SeriesDescription": "= NONE =",
+    "NumberOfImages": 65
+  },
+  {
+    "Collection": "LungCT-Diagnosis",
+    "SubjectID": "R_098",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.378450399989714541022204301518",
+    "StudyDate": "Dec 15 1995",
+    "StudyDescription": "Diagnostic Pre-Surgery Contrast Enhanced CT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.729243044254570583133005972993",
+    "SeriesDescription": "= NONE =",
+    "NumberOfImages": 88
+  },
+  {
+    "Collection": "LungCT-Diagnosis",
+    "SubjectID": "R_102",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.258791025467107717549952052215",
+    "StudyDate": "May 31 1997",
+    "StudyDescription": "Diagnostic Pre-Surgery Contrast Enhanced CT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.249790265424420499532684148743",
+    "SeriesDescription": "= NONE =",
+    "NumberOfImages": 55
+  },
+  {
+    "Collection": "LungCT-Diagnosis",
+    "SubjectID": "R_108",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.174752416535028436038836053946",
+    "StudyDate": "Jun 26 1997",
+    "StudyDescription": "Diagnostic Pre-Surgery Contrast Enhanced CT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.332367356450026445862610984105",
+    "SeriesDescription": "= NONE =",
+    "NumberOfImages": 66
+  },
+  {
+    "Collection": "LungCT-Diagnosis",
+    "SubjectID": "R_111",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.160599014715262639329004787068",
+    "StudyDate": "Aug 29 1997",
+    "StudyDescription": "Diagnostic Pre-Surgery Contrast Enhanced CT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.340000851536662018199161660450",
+    "SeriesDescription": "= NONE =",
+    "NumberOfImages": 83
+  },
+  {
+    "Collection": "LungCT-Diagnosis",
+    "SubjectID": "R_116",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.140526923029511055644251155499",
+    "StudyDate": "Apr 30 1998",
+    "StudyDescription": "Diagnostic Pre-Surgery Contrast Enhanced CT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.920587009878263614536599927319",
+    "SeriesDescription": "= NONE =",
+    "NumberOfImages": 115
+  },
+  {
+    "Collection": "LungCT-Diagnosis",
+    "SubjectID": "R_117",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.286202242964262414175811821515",
+    "StudyDate": "Nov 16 1997",
+    "StudyDescription": "Diagnostic Pre-Surgery Contrast Enhanced CT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.157350444067781191153251322487",
+    "SeriesDescription": "= NONE =",
+    "NumberOfImages": 78
+  },
+  {
+    "Collection": "LungCT-Diagnosis",
+    "SubjectID": "R_124",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.899192812586608895671278347484",
+    "StudyDate": "Nov 30 1997",
+    "StudyDescription": "Diagnostic Pre-Surgery Contrast Enhanced CT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.203688968170164692143856961585",
+    "SeriesDescription": "= NONE =",
+    "NumberOfImages": 86
+  },
+  {
+    "Collection": "LungCT-Diagnosis",
+    "SubjectID": "R_126",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.803397998355063686023109438391",
+    "StudyDate": "Apr 05 1998",
+    "StudyDescription": "Diagnostic Pre-Surgery Contrast Enhanced CT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.325851233802697617990000642816",
+    "SeriesDescription": "= NONE =",
+    "NumberOfImages": 71
+  },
+  {
+    "Collection": "LungCT-Diagnosis",
+    "SubjectID": "R_127",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.138525986909732252421346117470",
+    "StudyDate": "Sep 04 1995",
+    "StudyDescription": "Diagnostic Pre-Surgery Contrast Enhanced CT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.184331161898265797536679037106",
+    "SeriesDescription": "= NONE =",
+    "NumberOfImages": 68
+  },
+  {
+    "Collection": "LungCT-Diagnosis",
+    "SubjectID": "R_137",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.239545520492807075303226373919",
+    "StudyDate": "Dec 14 1997",
+    "StudyDescription": "Diagnostic Pre-Surgery Contrast Enhanced CT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.337225343744405791739913069476",
+    "SeriesDescription": "= NONE =",
+    "NumberOfImages": 69
+  },
+  {
+    "Collection": "LungCT-Diagnosis",
+    "SubjectID": "R_141",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.179196140853257709306370614304",
+    "StudyDate": "Jul 24 1998",
+    "StudyDescription": "Diagnostic Pre-Surgery Contrast Enhanced CT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.488217962349550158953121757047",
+    "SeriesDescription": "= NONE =",
+    "NumberOfImages": 110
+  },
+  {
+    "Collection": "LungCT-Diagnosis",
+    "SubjectID": "R_143",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.284385032340194639932471212982",
+    "StudyDate": "Dec 04 1996",
+    "StudyDescription": "Diagnostic Pre-Surgery Contrast Enhanced CT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.433099875475167940950359985277",
+    "SeriesDescription": "= NONE =",
+    "NumberOfImages": 65
+  },
+  {
+    "Collection": "LungCT-Diagnosis",
+    "SubjectID": "R_144",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.253056126926926164849057283847",
+    "StudyDate": "Sep 29 1997",
+    "StudyDescription": "Diagnostic Pre-Surgery Contrast Enhanced CT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.388928335629903864121985226150",
+    "SeriesDescription": "= NONE =",
+    "NumberOfImages": 93
+  },
+  {
+    "Collection": "LungCT-Diagnosis",
+    "SubjectID": "R_146",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.320460374301563573628329637280",
+    "StudyDate": "Jul 03 1995",
+    "StudyDescription": "Diagnostic Pre-Surgery Contrast Enhanced CT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.227287063806269076002068979333",
+    "SeriesDescription": "= NONE =",
+    "NumberOfImages": 87
+  },
+  {
+    "Collection": "LungCT-Diagnosis",
+    "SubjectID": "R_150",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.281350061153986532104891148002",
+    "StudyDate": "Oct 29 1997",
+    "StudyDescription": "Diagnostic Pre-Surgery Contrast Enhanced CT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.222717809741020436235558472790",
+    "SeriesDescription": "= NONE =",
+    "NumberOfImages": 77
+  },
+  {
+    "Collection": "LungCT-Diagnosis",
+    "SubjectID": "R_157",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.326993896661830458453159861347",
+    "StudyDate": "Apr 07 1997",
+    "StudyDescription": "Diagnostic Pre-Surgery Contrast Enhanced CT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.290915713367311700984841434979",
+    "SeriesDescription": "= NONE =",
+    "NumberOfImages": 34
+  },
+  {
+    "Collection": "LungCT-Diagnosis",
+    "SubjectID": "R_168",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.339960057327890022720983572187",
+    "StudyDate": "Sep 19 1998",
+    "StudyDescription": "Diagnostic Pre-Surgery Contrast Enhanced CT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.279457018741813217480697344851",
+    "SeriesDescription": "= NONE =",
+    "NumberOfImages": 73
+  },
+  {
+    "Collection": "LungCT-Diagnosis",
+    "SubjectID": "R_170",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.164963633393851780208366179022",
+    "StudyDate": "Aug 15 1997",
+    "StudyDescription": "Diagnostic Pre-Surgery Contrast Enhanced CT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.300069571844254433153455037441",
+    "SeriesDescription": "= NONE =",
+    "NumberOfImages": 63
+  },
+  {
+    "Collection": "LungCT-Diagnosis",
+    "SubjectID": "R_172",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.488834349971731413942494730899",
+    "StudyDate": "Apr 28 1997",
+    "StudyDescription": "Diagnostic Pre-Surgery Contrast Enhanced CT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.152764849009261863696583153323",
+    "SeriesDescription": "= NONE =",
+    "NumberOfImages": 24
+  },
+  {
+    "Collection": "LungCT-Diagnosis",
+    "SubjectID": "R_175",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.617905887500226085305302697754",
+    "StudyDate": "Nov 30 1997",
+    "StudyDescription": "Diagnostic Pre-Surgery Contrast Enhanced CT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.193951498075078399974717171247",
+    "SeriesDescription": "= NONE =",
+    "NumberOfImages": 62
+  },
+  {
+    "Collection": "LungCT-Diagnosis",
+    "SubjectID": "R_180",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.240191044353389722771211299721",
+    "StudyDate": "Mar 22 1996",
+    "StudyDescription": "Diagnostic Pre-Surgery Contrast Enhanced CT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.480687834929077561103132587918",
+    "SeriesDescription": "= NONE =",
+    "NumberOfImages": 68
+  },
+  {
+    "Collection": "LungCT-Diagnosis",
+    "SubjectID": "R_185",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.114814564319398480045363505166",
+    "StudyDate": "Aug 22 1997",
+    "StudyDescription": "Diagnostic Pre-Surgery Contrast Enhanced CT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.194697786789902988028714732986",
+    "SeriesDescription": "= NONE =",
+    "NumberOfImages": 62
+  },
+  {
+    "Collection": "LungCT-Diagnosis",
+    "SubjectID": "R_191",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.243097352990517043299166705830",
+    "StudyDate": "Mar 06 1998",
+    "StudyDescription": "Diagnostic Pre-Surgery Contrast Enhanced CT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.124429021744741770821343524565",
+    "SeriesDescription": "= NONE =",
+    "NumberOfImages": 76
+  },
+  {
+    "Collection": "LungCT-Diagnosis",
+    "SubjectID": "R_193",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.269397763739881205715849098834",
+    "StudyDate": "Apr 28 1996",
+    "StudyDescription": "Diagnostic Pre-Surgery Contrast Enhanced CT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.298933976061478316517386840260",
+    "SeriesDescription": "= NONE =",
+    "NumberOfImages": 59
+  },
+  {
+    "Collection": "LungCT-Diagnosis",
+    "SubjectID": "R_208",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.164730230253961980387037866413",
+    "StudyDate": "Sep 08 1997",
+    "StudyDescription": "Diagnostic Pre-Surgery Contrast Enhanced CT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.213042630698665232747610388775",
+    "SeriesDescription": "= NONE =",
+    "NumberOfImages": 79
+  },
+  {
+    "Collection": "LungCT-Diagnosis",
+    "SubjectID": "R_209",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.317287965053684439528874094292",
+    "StudyDate": "Jun 09 1997",
+    "StudyDescription": "Diagnostic Pre-Surgery Contrast Enhanced CT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.219110654907990889327369011112",
+    "SeriesDescription": "= NONE =",
+    "NumberOfImages": 76
+  },
+  {
+    "Collection": "LungCT-Diagnosis",
+    "SubjectID": "R_210",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.296738593990263872210071427126",
+    "StudyDate": "Aug 20 1998",
+    "StudyDescription": "Diagnostic Pre-Surgery Contrast Enhanced CT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.102725984777640487908433088221",
+    "SeriesDescription": "= NONE =",
+    "NumberOfImages": 108
+  },
+  {
+    "Collection": "LungCT-Diagnosis",
+    "SubjectID": "R_214",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.304321166355479950563019240482",
+    "StudyDate": "Feb 28 1996",
+    "StudyDescription": "Diagnostic Pre-Surgery Contrast Enhanced CT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.136651722353847502085944023943",
+    "SeriesDescription": "= NONE =",
+    "NumberOfImages": 62
+  },
+  {
+    "Collection": "LungCT-Diagnosis",
+    "SubjectID": "R_232",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.339835546587977846672632754158",
+    "StudyDate": "Sep 03 1998",
+    "StudyDescription": "Diagnostic Pre-Surgery Contrast Enhanced CT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.334032147225445506239488365098",
+    "SeriesDescription": "= NONE =",
+    "NumberOfImages": 74
+  },
+  {
+    "Collection": "LungCT-Diagnosis",
+    "SubjectID": "R_233",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.681962696010777092272412255441",
+    "StudyDate": "Jun 27 1998",
+    "StudyDescription": "Diagnostic Pre-Surgery Contrast Enhanced CT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.114435629754610230836920689040",
+    "SeriesDescription": "= NONE =",
+    "NumberOfImages": 65
+  },
+  {
+    "Collection": "LungCT-Diagnosis",
+    "SubjectID": "R_237",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.213658277730427015624893071198",
+    "StudyDate": "Jan 14 1998",
+    "StudyDescription": "Diagnostic Pre-Surgery Contrast Enhanced CT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.567583209332689861199186070474",
+    "SeriesDescription": "= NONE =",
+    "NumberOfImages": 68
+  },
+  {
+    "Collection": "LungCT-Diagnosis",
+    "SubjectID": "R_239",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.328628220798397070256025659387",
+    "StudyDate": "Dec 26 1997",
+    "StudyDescription": "Diagnostic Pre-Surgery Contrast Enhanced CT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.242412547539871733631621392709",
+    "SeriesDescription": "= NONE =",
+    "NumberOfImages": 69
+  },
+  {
+    "Collection": "LungCT-Diagnosis",
+    "SubjectID": "R_256",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.275685156126409101574442290842",
+    "StudyDate": "Sep 09 1996",
+    "StudyDescription": "Diagnostic Pre-Surgery Contrast Enhanced CT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.286922270860200404736369021578",
+    "SeriesDescription": "= NONE =",
+    "NumberOfImages": 65
+  },
+  {
+    "Collection": "LungCT-Diagnosis",
+    "SubjectID": "R_259",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.118971343230482216615654322951",
+    "StudyDate": "Jan 31 1996",
+    "StudyDescription": "Diagnostic Pre-Surgery Contrast Enhanced CT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.411911859032422710586149276741",
+    "SeriesDescription": "= NONE =",
+    "NumberOfImages": 58
+  },
+  {
+    "Collection": "LungCT-Diagnosis",
+    "SubjectID": "R_266",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.246951763716093367702078539265",
+    "StudyDate": "Jul 17 1997",
+    "StudyDescription": "Diagnostic Pre-Surgery Contrast Enhanced CT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.741102378769805780857362698365",
+    "SeriesDescription": "= NONE =",
+    "NumberOfImages": 93
+  },
+  {
+    "Collection": "LungCT-Diagnosis",
+    "SubjectID": "R_267",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.294146073179367570423565184119",
+    "StudyDate": "Oct 05 1996",
+    "StudyDescription": "Diagnostic Pre-Surgery Contrast Enhanced CT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.289029811259950700918044216155",
+    "SeriesDescription": "= NONE =",
+    "NumberOfImages": 40
+  },
+  {
+    "Collection": "LungCT-Diagnosis",
+    "SubjectID": "R_273",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.275763013774423666595125337398",
+    "StudyDate": "Jul 11 1997",
+    "StudyDescription": "Diagnostic Pre-Surgery Contrast Enhanced CT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.310786298605125936123363770421",
+    "SeriesDescription": "= NONE =",
+    "NumberOfImages": 62
+  },
+  {
+    "Collection": "LungCT-Diagnosis",
+    "SubjectID": "R_274",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.443635061226959308567626629836",
+    "StudyDate": "Nov 02 1997",
+    "StudyDescription": "Diagnostic Pre-Surgery Contrast Enhanced CT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4320.5030.324614335142762859716329057359",
+    "SeriesDescription": "= NONE =",
+    "NumberOfImages": 74
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-001",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.116796918629271881210561198785",
+    "StudyDate": "Sep 06 1990",
+    "StudyDescription": "CT CHEST ABD PELVIS WITH CON",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.312037286778380630549945195741",
+    "SeriesDescription": "THORAX 1.0 B45f",
+    "NumberOfImages": 304
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-002",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.903904917923659176782501655296",
+    "StudyDate": "Sep 20 1990",
+    "StudyDescription": "CT THORAX",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.136205917555503781160610541459",
+    "SeriesDescription": "CHEST 1.25 MM",
+    "NumberOfImages": 269
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-007",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.249748018373725756080242136328",
+    "StudyDate": "Oct 16 1991",
+    "StudyDescription": "CT CHEST WITH",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.273402029178462221323992286443",
+    "SeriesDescription": "THIN LUNG WINDOW",
+    "NumberOfImages": 318
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-011",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.357040377405835216525513903983",
+    "StudyDate": "Sep 04 1990",
+    "StudyDescription": "CT THORAX WITH CONTRAST",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.108960293210385774687266530533",
+    "SeriesDescription": "Recon 2: CHEST",
+    "NumberOfImages": 241
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-013",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.310695508694525937527011030965",
+    "StudyDate": "Nov 06 1989",
+    "StudyDescription": "Thorax^01ROUTINECHEST (Adult)",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.412029015710583470213913046197",
+    "SeriesDescription": "Thorax  1.0  B45f",
+    "NumberOfImages": 301
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-015",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.284693484301949461843795804086",
+    "StudyDate": "Feb 08 1991",
+    "StudyDescription": "CT CHEST W/",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.277001760797162704222667836812",
+    "SeriesDescription": ".625 mm Chest",
+    "NumberOfImages": 589
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-017",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.157731434183980187341772898097",
+    "StudyDate": "Oct 25 1991",
+    "StudyDescription": "CT THORAX",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.319177538604211779102974297044",
+    "SeriesDescription": "CHEST 1.25 MM",
+    "NumberOfImages": 228
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-019",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.144869488489487065980904127579",
+    "StudyDate": "Sep 29 1990",
+    "StudyDescription": "CT CHEST",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.173425581038606308807499332185",
+    "SeriesDescription": "THINS",
+    "NumberOfImages": 273
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-020",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.111558925637778258818195924798",
+    "StudyDate": "Jul 17 1991",
+    "StudyDescription": "CT CHEST W CONTRAST",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.201449711675811751087183808880",
+    "SeriesDescription": "2.5MM AXIAL LUNG WINDOW",
+    "NumberOfImages": 129
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-021",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.578255530287804526782035325952",
+    "StudyDate": "Dec 04 1990",
+    "StudyDescription": "CT THORAX",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.307701863726359436164313970158",
+    "SeriesDescription": "Thorax  1.0  B45f",
+    "NumberOfImages": 314
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-024",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.142876178515334827475506045077",
+    "StudyDate": "Mar 07 1991",
+    "StudyDescription": "CT CHEST W/",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.724319631624225365282536691703",
+    "SeriesDescription": ".625 mm Chest",
+    "NumberOfImages": 531
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-026",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.655577627062132621158786993365",
+    "StudyDate": "Nov 12 1990",
+    "StudyDescription": "CT CHEST ABD PELVIS WITH CON",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.256599181343186097046250428445",
+    "SeriesDescription": "Recon 2: CAP",
+    "NumberOfImages": 376
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-027",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.727175393110701348792141112004",
+    "StudyDate": "Jul 21 1993",
+    "StudyDescription": "CT CHEST W/CON",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.544114900611159736013218419688",
+    "SeriesDescription": "THIN LUNG WINDOW",
+    "NumberOfImages": 227
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-028",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.114682823206321582147612631743",
+    "StudyDate": "Aug 05 1993",
+    "StudyDescription": "CT CHEST W/CON",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.828822551638140966682339857972",
+    "SeriesDescription": "THIN LUNG WINDOW",
+    "NumberOfImages": 264
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-029",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.237004876943649803641098543529",
+    "StudyDate": "Jul 31 1993",
+    "StudyDescription": "CT Thorax",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.331997606494888771755006789162",
+    "SeriesDescription": "1.25MM CHEST BONE",
+    "NumberOfImages": 251
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-030",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.161985240201325467797168078256",
+    "StudyDate": "Mar 17 1992",
+    "StudyDescription": "CT CHEST WITH",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.284799443640182977268035646179",
+    "SeriesDescription": "THIN LUNG WINDOW",
+    "NumberOfImages": 255
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-033",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.309048978904725235480633902043",
+    "StudyDate": "Jun 27 1992",
+    "StudyDescription": "CT CHEST WITH",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.191079418702701793651405972161",
+    "SeriesDescription": "THIN LUNG WINDOW",
+    "NumberOfImages": 300
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-036",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.309126250603625782624755553384",
+    "StudyDate": "Oct 15 1992",
+    "StudyDescription": "CT CHEST W/CONT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.315261242334351673132007492976",
+    "SeriesDescription": "THIN LUNG WINDOW",
+    "NumberOfImages": 322
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-040",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.188215249998007306595704692911",
+    "StudyDate": "Jan 14 1992",
+    "StudyDescription": "CT CHEST W/",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.295627250247490248963725507667",
+    "SeriesDescription": "THIN LUNG WINDOW",
+    "NumberOfImages": 316
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-042",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.204594733456696293220483958121",
+    "StudyDate": "May 29 1992",
+    "StudyDescription": "CT CHEST W/",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.182741025789520991625710029129",
+    "SeriesDescription": "THIN LUNG WINDOW",
+    "NumberOfImages": 240
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-045",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.231911828700881029411121620276",
+    "StudyDate": "Jan 13 1993",
+    "StudyDescription": "CT CHEST W/",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.117391401456138517492730100714",
+    "SeriesDescription": "THIN LUNG WINDOW",
+    "NumberOfImages": 282
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-046",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.316784059453599383358411134757",
+    "StudyDate": "Jun 17 1993",
+    "StudyDescription": "CT CHEST W/CON",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.530753182009180264148152887393",
+    "SeriesDescription": "THIN LUNG WINDOW",
+    "NumberOfImages": 252
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-047",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.200244410459944923842769986994",
+    "StudyDate": "Aug 11 1993",
+    "StudyDescription": "CT CHEST W/ CON",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.134012438430841009190602753641",
+    "SeriesDescription": "THIN LUNG WINDOW",
+    "NumberOfImages": 226
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-048",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.255581254579775840445830952882",
+    "StudyDate": "Apr 30 1993",
+    "StudyDescription": "CT CHEST ABD PELVIS WITH CON",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.310295663613229205341452767710",
+    "SeriesDescription": "CHEST 1.0  B45f",
+    "NumberOfImages": 636
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-049",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.116382948167081272688215370115",
+    "StudyDate": "Jun 09 1993",
+    "StudyDescription": "CT THORAX WITH CONTRAST",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.159656947853816283405205352987",
+    "SeriesDescription": "LUNG 1MM B45f",
+    "NumberOfImages": 322
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-050",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.131688346314729111036699248912",
+    "StudyDate": "Jul 30 1993",
+    "StudyDescription": "CT Thorax",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.362427620926581916953269791598",
+    "SeriesDescription": "1.25MM CHEST BONE PLUS",
+    "NumberOfImages": 291
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-051",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.224118148082476550607888014001",
+    "StudyDate": "Sep 11 1993",
+    "StudyDescription": "CT THORAX WITH CONTRAST",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.297718388181309297832210898239",
+    "SeriesDescription": "1.25MM CHEST BONE PLUS",
+    "NumberOfImages": 224
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-052",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.304162097473249026330515360746",
+    "StudyDate": "Jul 15 1993",
+    "StudyDescription": "CT CHEST W/C-DESCENDAN",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.319618333625532847261648128067",
+    "SeriesDescription": "CT Thick Axials 2.5mm",
+    "NumberOfImages": 155
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-054",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.255589295442126540859213973725",
+    "StudyDate": "Oct 03 1993",
+    "StudyDescription": "CT CHEST W/ CON",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.608940026390522744703922070930",
+    "SeriesDescription": "THIN LUNG WINDOW",
+    "NumberOfImages": 252
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-056",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.115152178807116195133154959530",
+    "StudyDate": "Nov 02 1993",
+    "StudyDescription": "CT CHEST W/CON",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.221433663477768241861521869713",
+    "SeriesDescription": "THIN LUNG WINDOW",
+    "NumberOfImages": 242
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-057",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.958191089998939213037231089691",
+    "StudyDate": "Oct 14 1993",
+    "StudyDescription": "CT THORAX W/DYE",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.496394661578780678598977071343",
+    "SeriesDescription": "CHEST LUNG",
+    "NumberOfImages": 254
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-062",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.133015886716845100152299604584",
+    "StudyDate": "Dec 21 1993",
+    "StudyDescription": "CT THORAX W/CONT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.103249989455637283084890164035",
+    "SeriesDescription": "THIN LUNG WINDOW",
+    "NumberOfImages": 211
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-063",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.316655044000378628475126158950",
+    "StudyDate": "Dec 02 1993",
+    "StudyDescription": "CT CHEST W",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.214289562777010697245955954283",
+    "SeriesDescription": "THIN LUNG WINDOW",
+    "NumberOfImages": 243
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-064",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.812312682964344926030497858795",
+    "StudyDate": "Jan 14 1994",
+    "StudyDescription": "CT CHEST W/CON",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.236610056566379601228313474803",
+    "SeriesDescription": "THIN LUNG WINDOW",
+    "NumberOfImages": 245
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-065",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.337208675597178940164642872316",
+    "StudyDate": "Feb 04 1994",
+    "StudyDescription": "CT CHEST W/CON",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.181516533637555977381986237492",
+    "SeriesDescription": "THIN LUNG WINDOW",
+    "NumberOfImages": 248
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-068",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.148920327162615109916706774703",
+    "StudyDate": "Feb 09 1994",
+    "StudyDescription": "CT CHEST W",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.177496864050040923041550684536",
+    "SeriesDescription": "THIN LUNG WINDOW",
+    "NumberOfImages": 300
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-070",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.155054061645627258433834010049",
+    "StudyDate": "Mar 22 1994",
+    "StudyDescription": "CT CHEST W/CONT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.808047849127523075771191832536",
+    "SeriesDescription": "THIN LUNG WINDOW",
+    "NumberOfImages": 242
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-071",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.189573460085498213850813088442",
+    "StudyDate": "Mar 17 1994",
+    "StudyDescription": "CT CHEST W/CONT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.320563482295571785328110963611",
+    "SeriesDescription": "THIN LUNG WINDOW",
+    "NumberOfImages": 266
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-074",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.921347164235365206112895916514",
+    "StudyDate": "Mar 07 1994",
+    "StudyDescription": "CT Thorax",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.235634019724491332642139812254",
+    "SeriesDescription": "0.625MM CHEST NO PACS",
+    "NumberOfImages": 493
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-076",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.137912259338324725690543803674",
+    "StudyDate": "Apr 23 1994",
+    "StudyDescription": "CT Chest Reference Only",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.201809319317668346803592237989",
+    "SeriesDescription": "THINS",
+    "NumberOfImages": 423
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-077",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.285872819659817254374185196713",
+    "StudyDate": "Jan 11 1994",
+    "StudyDescription": "CT THORAX WITH CONTRAST",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.474282098817282951878608565658",
+    "SeriesDescription": "1.25MM CHEST BONE",
+    "NumberOfImages": 244
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-078",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.283136436532343169173148147059",
+    "StudyDate": "Feb 28 1994",
+    "StudyDescription": "CT Chest Reference Only",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.775297180361930472909616849035",
+    "SeriesDescription": "SUPER",
+    "NumberOfImages": 271
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-079",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.280940007435935067339002015442",
+    "StudyDate": "Jul 06 1994",
+    "StudyDescription": "CT Chest Reference Only",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.285445474755391961213363755618",
+    "SeriesDescription": "2.5 MM LUNG",
+    "NumberOfImages": 115
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-080",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.324282173828415874991528596792",
+    "StudyDate": "Feb 09 1994",
+    "StudyDescription": "CT CHEST W/CONT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.196193502776979291835885800180",
+    "SeriesDescription": "THIN LUNG WINDOW",
+    "NumberOfImages": 251
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-082",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.315879615327865171758988173242",
+    "StudyDate": "May 05 1994",
+    "StudyDescription": "XT CHEST W/CONT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.196481979436492946789405626851",
+    "SeriesDescription": "CHEST LUNG",
+    "NumberOfImages": 249
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-084",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.128303650163786091787818243454",
+    "StudyDate": "May 19 1994",
+    "StudyDescription": "CT CHEST W/CONTRAST",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.205438693868562864272653734769",
+    "SeriesDescription": "THIN LUNG WINDOW",
+    "NumberOfImages": 267
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-086",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.203771633588026510490940008505",
+    "StudyDate": "Jun 18 1994",
+    "StudyDescription": "CT CHEST W/CONTRAST",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.193091211081753416119701278994",
+    "SeriesDescription": "THIN LUNG WINDOW",
+    "NumberOfImages": 241
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-087",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.255964552401507872213697756820",
+    "StudyDate": "May 07 1994",
+    "StudyDescription": "CT CHEST/ABD/[PEL W/",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.175099571939775862747404226564",
+    "SeriesDescription": "THIN CHEST LUNG",
+    "NumberOfImages": 252
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-088",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.293865264211880853460014423463",
+    "StudyDate": "May 24 1994",
+    "StudyDescription": "CT CHEST/RENAL MASS",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.288150501649622364780003423230",
+    "SeriesDescription": "THIN CHEST LUNG",
+    "NumberOfImages": 267
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-089",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.316981838174992194938659365056",
+    "StudyDate": "Jun 18 1994",
+    "StudyDescription": "CT Chest Reference Only",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.220336351607773539613868813965",
+    "SeriesDescription": "IN REACH",
+    "NumberOfImages": 368
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-090",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.218224986133185073238438362593",
+    "StudyDate": "Oct 14 1994",
+    "StudyDescription": "CT Thorax",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.335103259909039521837941288273",
+    "SeriesDescription": "CHEST 1.25MM",
+    "NumberOfImages": 218
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-091",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.174794036767063526947842178824",
+    "StudyDate": "Nov 25 1994",
+    "StudyDescription": "Thorax^CHEST_W_CONTRAST (Adult)",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.520413017634153826005320022726",
+    "SeriesDescription": "LUNG 1MM B45f",
+    "NumberOfImages": 313
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-093",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.240670240758603778272625719701",
+    "StudyDate": "Jun 22 1994",
+    "StudyDescription": "CT THORAX W/DYE",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.143700250022821944637075337096",
+    "SeriesDescription": "THIN LUNG WINDOW",
+    "NumberOfImages": 244
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-094",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.692350904364619177696183359492",
+    "StudyDate": "Sep 07 1994",
+    "StudyDescription": "CT CHEST W/CONT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.159381545942212641704777588609",
+    "SeriesDescription": "THIN LUNG WINDOW",
+    "NumberOfImages": 245
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-096",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.960067268681480915101346047187",
+    "StudyDate": "Jul 05 1994",
+    "StudyDescription": "CT THORAX W/DYE",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.245931734657960927271727316809",
+    "SeriesDescription": "THIN LUNG WINDOW",
+    "NumberOfImages": 241
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-097",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.154541383758490860384602725765",
+    "StudyDate": "Feb 21 1995",
+    "StudyDescription": "CT CHEST W",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.337911091145995902967780467163",
+    "SeriesDescription": "THIN LUNG WINDOW",
+    "NumberOfImages": 231
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-098",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.764988229546609926241359612018",
+    "StudyDate": "Nov 16 1994",
+    "StudyDescription": "CT Chest Reference Only",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.159138041453099081477616146218",
+    "SeriesDescription": "LUNG",
+    "NumberOfImages": 212
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-099",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.436280546785289759835522319320",
+    "StudyDate": "Dec 20 1994",
+    "StudyDescription": "CT Chest Reference Only",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.163586551273041219225878048497",
+    "SeriesDescription": "Chest wo  3.0  B40f",
+    "NumberOfImages": 248
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-100",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.292926335524012027204048439551",
+    "StudyDate": "Jan 04 1995",
+    "StudyDescription": "CT Thorax",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.127710600214243175386528960135",
+    "SeriesDescription": "CHEST 1.25MM",
+    "NumberOfImages": 230
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-101",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.297176024667050194586186837779",
+    "StudyDate": "Feb 27 1995",
+    "StudyDescription": "Thorax^CHEST_W_CONTRAST (Adult)",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.332133762433045690678280704485",
+    "SeriesDescription": "LUNG 1MM B45f",
+    "NumberOfImages": 305
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-102",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.233746586601574823021211985077",
+    "StudyDate": "Feb 13 1995",
+    "StudyDescription": "CT Thorax",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.128627944093794686696962029471",
+    "SeriesDescription": "CHEST 1.25MM",
+    "NumberOfImages": 254
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-103",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.696943681622311186681588640392",
+    "StudyDate": "Mar 24 1995",
+    "StudyDescription": "CT Thorax",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.706396362070469844232596580691",
+    "SeriesDescription": "CHEST 1.25MM",
+    "NumberOfImages": 243
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-104",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.250426352468384929420253109030",
+    "StudyDate": "Apr 12 1995",
+    "StudyDescription": "CT Thorax",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.184465376893200185569003992394",
+    "SeriesDescription": "CHEST 1.25MM",
+    "NumberOfImages": 259
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-105",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.109397337200994517552391832718",
+    "StudyDate": "Jan 26 1995",
+    "StudyDescription": "CT Chest Abd Pelvis Reference Only",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.590080933534717737043935982225",
+    "SeriesDescription": "LUNG",
+    "NumberOfImages": 121
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-106",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.305336997923414853371595025536",
+    "StudyDate": "Jun 08 1994",
+    "StudyDescription": "CT Chest Reference Only",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.366121226552397218563321681047",
+    "SeriesDescription": "2.5 MM LUNG",
+    "NumberOfImages": 133
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-107",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.301650268414104290496823962914",
+    "StudyDate": "Feb 24 1995",
+    "StudyDescription": "CT Thorax",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.221095324980335292326653133002",
+    "SeriesDescription": "1.25MM CHEST BONE PLUS",
+    "NumberOfImages": 268
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-111",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.317745518721068312443987613988",
+    "StudyDate": "Mar 08 1995",
+    "StudyDescription": "CT CHEST W/CONT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.653301566645798796786006612320",
+    "SeriesDescription": "THIN LUNG WINDOW",
+    "NumberOfImages": 233
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-112",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.280090874362421892752427486436",
+    "StudyDate": "Feb 27 1995",
+    "StudyDescription": "CT CHEST W/ CON",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.334885347052611490268829472844",
+    "SeriesDescription": "THIN LUNG WINDOW",
+    "NumberOfImages": 250
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-114",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.885372594864106476950907529806",
+    "StudyDate": "Mar 15 1995",
+    "StudyDescription": "CT CHEST W/CONT",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.208564813141655649632003079119",
+    "SeriesDescription": "THIN LUNG WINDOW",
+    "NumberOfImages": 226
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-116",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.281671105741917089956972899090",
+    "StudyDate": "Mar 22 1995",
+    "StudyDescription": "CT THORAX W/DYE",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.266295160644771145484017758571",
+    "SeriesDescription": "THIN LUNG WINDOW",
+    "NumberOfImages": 223
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-117",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.721471887545746329454960669240",
+    "StudyDate": "Mar 22 1995",
+    "StudyDescription": "CT CHEST W/CON",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.314350671053848747341104890875",
+    "SeriesDescription": "THIN LUNG WINDOW",
+    "NumberOfImages": 222
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-119",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.202582417047487682115701626641",
+    "StudyDate": "Jun 28 1995",
+    "StudyDescription": "CT CHEST W",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.789593249812049743146954614991",
+    "SeriesDescription": "THIN LUNG WINDOW",
+    "NumberOfImages": 305
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-121",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.753838266609890347166077440097",
+    "StudyDate": "Oct 20 1995",
+    "StudyDescription": "CT CHEST W/ CON",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.198906178598718709027315379369",
+    "SeriesDescription": "THIN LUNG WINDOW",
+    "NumberOfImages": 234
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-122",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.210410709002195361911981503755",
+    "StudyDate": "Sep 08 1995",
+    "StudyDescription": "CT CHEST W CON",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.184001197767140287220646776339",
+    "SeriesDescription": "THIN LUNG WINDOW",
+    "NumberOfImages": 237
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-125",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.255441885016254569080827861175",
+    "StudyDate": "Jul 07 1995",
+    "StudyDescription": "CT Thorax",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.288981375230288584727283399860",
+    "SeriesDescription": "1.25MM CHEST BONE",
+    "NumberOfImages": 266
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-126",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.138107247672084495439866158601",
+    "StudyDate": "Jun 21 1995",
+    "StudyDescription": "CT Thorax",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.207984302675817089260611377140",
+    "SeriesDescription": "1.25MM CHEST BONE",
+    "NumberOfImages": 327
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-127",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.583445723256956734071500930347",
+    "StudyDate": "Jul 29 1995",
+    "StudyDescription": "Thorax^01ROUTINECHEST (Adult)",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.326505468165764293062857180377",
+    "SeriesDescription": "Thorax  1.0  B45f",
+    "NumberOfImages": 301
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-128",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.852775115601643027744243311585",
+    "StudyDate": "Aug 12 1995",
+    "StudyDescription": "CT Chest Reference Only",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.233592025121811012087005174786",
+    "SeriesDescription": "AXIAL",
+    "NumberOfImages": 259
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-129",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.136489148405230136223318762790",
+    "StudyDate": "Oct 17 1995",
+    "StudyDescription": "CT Thorax with Contras",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.100114168163408175617193377511",
+    "SeriesDescription": "1.25MM CHEST BONE",
+    "NumberOfImages": 292
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-130",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.616809183062158087742518063485",
+    "StudyDate": "Sep 23 1995",
+    "StudyDescription": "CT Chest Reference Only",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.116535782371384563999005119339",
+    "SeriesDescription": "Lung 2.0 Arterial/Phase CE",
+    "NumberOfImages": 157
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-131",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.241589741495536386187673080468",
+    "StudyDate": "Nov 08 1995",
+    "StudyDescription": "CT Thorax",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.146062334918763750226693735607",
+    "SeriesDescription": "1.25MM CHEST BONE",
+    "NumberOfImages": 301
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-132",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.275925220764792921507841023592",
+    "StudyDate": "Oct 25 1995",
+    "StudyDescription": "CT Chest Reference Only",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.317283051763830572362805785635",
+    "SeriesDescription": "(SafeCT) STD  2.5mm",
+    "NumberOfImages": 138
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-133",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.561897204172158936027356860655",
+    "StudyDate": "Oct 31 1995",
+    "StudyDescription": "Thorax^CHEST_CONTRAST (Adult)",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.913365821057799133982597420952",
+    "SeriesDescription": "Chest  1.0  B45f",
+    "NumberOfImages": 346
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-134",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.219888375297756295072887637750",
+    "StudyDate": "Dec 19 1995",
+    "StudyDescription": "CT Thorax",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.130546364159566311498097734674",
+    "SeriesDescription": "1.25MM BONE PLUS",
+    "NumberOfImages": 265
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-135",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.940237341576771690038220688591",
+    "StudyDate": "Jan 17 1996",
+    "StudyDescription": "CT Thorax with Contrast",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.269828711608390621669109467290",
+    "SeriesDescription": "1.25MM CHEST BONE PLUS",
+    "NumberOfImages": 273
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-136",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.107666350509130737267460506708",
+    "StudyDate": "Nov 21 1995",
+    "StudyDescription": "CT Chest Reference Only",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.173712899802800085536546370759",
+    "SeriesDescription": "CHEST  3.0  B50f",
+    "NumberOfImages": 131
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-137",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.164005255087876749932338210285",
+    "StudyDate": "Jan 11 1996",
+    "StudyDescription": "Thorax^01ROUTINECHEST (Adult)",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.312274974832816916850703545426",
+    "SeriesDescription": "Thorax  1.0  B50f",
+    "NumberOfImages": 310
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-138",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.290974572348293042562697155691",
+    "StudyDate": "Dec 05 1995",
+    "StudyDescription": "Thorax^01ROUTINECHEST (Adult)",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.316449465369741290345675215115",
+    "SeriesDescription": "Thorax  1.0  B50f",
+    "NumberOfImages": 299
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-139",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.272182650323484238304320918314",
+    "StudyDate": "Mar 29 1996",
+    "StudyDescription": "CT Thorax with Contrast",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.194842580323785652553789069796",
+    "SeriesDescription": "1.25MM CHEST BONE PLUS",
+    "NumberOfImages": 257
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-140",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.198983189389498195128318494030",
+    "StudyDate": "Apr 27 1996",
+    "StudyDescription": "CT Thorax",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.284103882108312732863173458248",
+    "SeriesDescription": "1.25MM CHEST BONE PLUS",
+    "NumberOfImages": 269
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-141",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.337480678423244851826155949117",
+    "StudyDate": "Feb 27 1996",
+    "StudyDescription": "CT Chest Abdomen and P",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.185643582456943353671129947369",
+    "SeriesDescription": "1.25MM CHEST",
+    "NumberOfImages": 241
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-142",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.203477538624777549443048942721",
+    "StudyDate": "May 23 1996",
+    "StudyDescription": "CT Chest Reference Only",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.286497645200236630433157358364",
+    "SeriesDescription": "LUNG  2X2  B70f VERY SHARP",
+    "NumberOfImages": 207
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-144",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.260896762360881310818883650428",
+    "StudyDate": "Jun 26 1996",
+    "StudyDescription": "CT Thorax",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.368619057949003001687514540916",
+    "SeriesDescription": "1.25MM CHEST BONE PLUS",
+    "NumberOfImages": 265
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-145",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.618024159237150435338209145122",
+    "StudyDate": "Sep 11 1996",
+    "StudyDescription": "Thorax^CHEST_CONTRAST (Adult)",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.102364226950555400197813630020",
+    "SeriesDescription": "Chest  1.0  I70f  2",
+    "NumberOfImages": 326
+  },
+  {
+    "Collection": "NSCLC Radiogenomics",
+    "SubjectID": "R01-146",
+    "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.728900374662584578075165827444",
+    "StudyDate": "Aug 28 1996",
+    "StudyDescription": "CT Chest Reference Only",
+    "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4334.1501.133013322203332069696663917560",
+    "SeriesDescription": "THINS",
+    "NumberOfImages": 397
+  }
+]
