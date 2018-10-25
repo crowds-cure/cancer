@@ -101,7 +101,10 @@ class CornerstoneViewport extends Component {
           <canvas className="cornerstone-canvas" />
 
           {this.state.isLoading && <LoadingIndicator />}
-          <ViewportOverlay viewport={this.state.viewport} />
+          <ViewportOverlay
+            viewport={this.state.viewport}
+            imageId={this.state.imageId}
+          />
         </div>
         {this.displayScrollbar && (
           <ImageScrollbar

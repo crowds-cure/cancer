@@ -21,6 +21,7 @@ class Viewer extends Component {
     this.skipCase = this.skipCase.bind(this);
     this.saveCase = this.saveCase.bind(this);
   }
+
   componentDidMount() {
     this.getNextCase();
   }
@@ -61,9 +62,14 @@ class Viewer extends Component {
 
         const imageId = 'wadors:' + instance['7FE00010'].BulkDataURI;
 
+        const instanceLowerCaseKeys = {};
+        Object.keys(instance).forEach(key => {
+          instanceLowerCaseKeys[key.toLowerCase()] = instance[key];
+        });
+
         cornerstoneWADOImageLoader.wadors.metaDataManager.add(
           imageId,
-          instance
+          instanceLowerCaseKeys
         );
 
         return imageId;

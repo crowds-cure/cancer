@@ -13,6 +13,10 @@
   text-shadow: 1px 1px black;
 }
 
+.ViewportOverlay .overlay-element > span {
+  display: block;
+}
+
 .ViewportOverlay .top-right {
   top: 10px;
   right: 25px; /* room for scrollbar */
