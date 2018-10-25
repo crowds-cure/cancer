@@ -28,6 +28,27 @@ const defaultButtons = [
     active: false
   },
   {
+    command: 'FreehandMouse',
+    type: 'tool',
+    text: 'Freehand',
+    svgUrl: '/icons.svg#icon-tools-measure-ellipse',
+    active: false
+  },
+  {
+    command: 'FreehandSculpterMouse',
+    type: 'tool',
+    text: 'Sculpter',
+    svgUrl: '/icons.svg#icon-tools-measure-ellipse',
+    active: false
+  },
+  {
+    command: 'Brush',
+    type: 'tool',
+    text: 'Brush',
+    svgUrl: '/icons.svg#icon-tools-measure-ellipse',
+    active: false
+  },
+  {
     command: 'StackScroll',
     type: 'tool',
     text: 'Stack Scroll',

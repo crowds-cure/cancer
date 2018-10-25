@@ -181,8 +181,11 @@ class CornerstoneViewport extends Component {
         'StackScroll',
         'PanMultiTouch',
         'ZoomTouchPinch',
-        'StackScrollMouseWheel'
+        'StackScrollMouseWheel',
         //"StackScrollMultiTouch",
+        'FreehandMouse',
+        'FreehandSculpterMouse',
+        'Brush'
       ];
 
       initializeTools(tools);
