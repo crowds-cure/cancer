@@ -8,6 +8,7 @@ import ConnectedDashboard from './ConnectedDashboard.js';
 import ConnectedViewer from './ConnectedViewer.js';
 import ConnectedSessionSummary from './ConnectedSessionSummary.js';
 import ScreenshotQA from './ScreenshotQA.js';
+import TestPage from './TestPage.js';
 
 const reload = () => window.location.reload();
 
@@ -52,6 +53,7 @@ class App extends Component {
         />
         <Route path="/silent-refresh.html" onEnter={reload} />
         <Route path="/logout-redirect.html" onEnter={reload} />
+        <Route exact path="/playground" component={TestPage} />
         <Route render={() => <div> Sorry, this page does not exist. </div>} />
       </Switch>
     );
