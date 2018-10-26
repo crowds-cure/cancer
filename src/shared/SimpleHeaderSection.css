@@ -1,0 +1,16 @@
+@value globals: "../GlobalStyles.css";
+@value textPrimaryColor, textActiveColor from globals;
+
+.simpleHeader {
+  margin: 30px 0;
+}
+
+.logoText {
+  color: textPrimaryColor;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.logoText.highlight {
+  color: textActiveColor;
+}
