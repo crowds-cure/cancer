@@ -3,13 +3,18 @@ import React from 'react';
 import AutoLogoutCountdown from './AutoLogoutCountdown.js';
 import Button from './Button.js';
 
+const style = {
+  display: 'flex',
+  justifyContent: 'center'
+};
+
 class LogoutSection extends Component {
   render() {
     return (
-      <div className="LogoutSection">
+      <div className="LogoutSection" style={style}>
         <AutoLogoutCountdown />
-        <Button text="Dashboard" />
-        <Button text="Log out now" />
+        <Button label="Dashboard" />
+        <Button label="Log out now" />
       </div>
     );
   }
