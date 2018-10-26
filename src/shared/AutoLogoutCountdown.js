@@ -1,16 +1,17 @@
 import { Component } from 'react';
 import React from 'react';
+import './AutoLogoutCountdown.css';
 
 class AutoLogoutCountdown extends Component {
   render() {
     const timeLeft = 29;
 
     return (
-      <>
-        <h1>
-          Auto logout in <p className="timer">{timeLeft}</p> seconds
-        </h1>
-      </>
+      <div className="AutoLogoutCountdown">
+        <span>Auto logout in </span>
+        <span className="timer">{timeLeft}</span>
+        <span>seconds</span>
+      </div>
     );
   }
 }
