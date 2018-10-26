@@ -6,20 +6,29 @@ import StatisticsSection from './shared/StatisticsSection.js';
 import RankingSection from './shared/RankingSection.js';
 import ProgressSection from './shared/ProgressSection.js';
 import LogoutSection from './shared/LogoutSection.js';
+import SimpleHeaderSection from './shared/SimpleHeaderSection';
 
 class SessionSummary extends Component {
   render() {
     return (
       <div className="SessionSummary">
-        {/* TODO: Top bar? */}
-        {/* TODO: Logo in Top bar? */}
+        <div>
+          <SimpleHeaderSection />
+        </div>
+        <div className="title-wrapper">
+          <label className="title">SESSION SUMMARY</label>
+        </div>
         <div>
           <ProgressSection />
         </div>
-        <LogoutSection />
         <div>
-          <StatisticsSection />
-          <div>
+          <LogoutSection />
+        </div>
+        <div>
+          <div className="communityStats">
+            <StatisticsSection />
+          </div>
+          <div className="rankingStats">
             <RankingSection name="Close to you" />
             <RankingSection name="Top this week" />
           </div>
