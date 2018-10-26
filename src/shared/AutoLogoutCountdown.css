@@ -1,0 +1,17 @@
+@value globals: "../GlobalStyles.css";
+@value textSecondaryColor, textActiveColor from globals;
+
+.AutoLogoutCountdown {
+  margin: 0 15px;
+}
+
+.AutoLogoutCountdown span {
+  color: textSecondaryColor;
+}
+
+.AutoLogoutCountdown .timer {
+  color: textActiveColor;
+  font-size: 36px;
+  font-weight: bold;
+  margin: 0 9px;
+}
