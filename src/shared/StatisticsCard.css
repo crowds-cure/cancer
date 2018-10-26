@@ -2,13 +2,14 @@
 @value textActiveColor, textSecondaryColor from globals;
 
 .StatisticsCard {
-  width: 136px;
-  height: 82px;
+  border-left: 1px solid textSecondaryColor;
+  box-sizing: border-box;
+  display: inline-block;
+  padding: 0 10px;
 }
 
 .StatisticsCard .number {
   display: block;
-  color: #34ffd4;
   font-weight: bold;
   font-size: 38px;
   color: textActiveColor;
@@ -16,9 +17,8 @@
 
 .StatisticsCard .description {
   display: block;
-  color: #ffffff;
   font-weight: 400;
-  font-size: 13x;
+  font-size: 13px;
   color: textSecondaryColor;
   line-height: 1.23;
 }
