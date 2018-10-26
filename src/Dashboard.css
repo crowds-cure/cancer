@@ -44,22 +44,6 @@ body {
   flex-shrink: 0;
 }
 
-.logo {
-  width: 327px;
-  height: 24px;
-  padding: 10px;
-}
-
-.logoText {
-  color: textPrimaryColor;
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.logoText.highlight {
-  color: textActiveColor;
-}
-
 .top-right {
   flex-shrink: 0;
   display: inline-flex;
