@@ -8,8 +8,8 @@ async function getNextCaseForAnnotator(annotatorID, cases) {
     // We should switch this to add some case selection logic based on number of measurements, skips, etc...
     const db = getDB('cases');
     db.allDocs({ include_docs: true }, function(error, docs) {
-      if (error) {
-        reject(error);
+      if (error || !docs || !docs.rows) {
+        return reject(error);
       }
 
       const rows = docs.rows;
