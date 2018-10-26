@@ -6,7 +6,11 @@ class InputRadio extends Component {
     const labelClass = this.props.labelClass;
     //" tree-current-node " +
     return (
-      <label className={'wrapperLabel radioLabel ' + labelClass} name="label">
+      <label
+        className={'wrapperLabel radioLabel ' + labelClass}
+        name="label"
+        onClick={this.props.click}
+      >
         <input
           type="radio"
           className={this.props.className}

@@ -416,3 +416,19 @@
     overflow: visible;
   }
 }
+
+label.wrapperLabel:not(.checkboxLabel) .wrapperText {
+  display: block;
+  order: -1;
+  -webkit-transition: color 0.3s ease;
+  -moz-transition: color 0.3s ease;
+  -ms-transition: color 0.3s ease;
+  -o-transition: color 0.3s ease;
+  transition: color 0.3s ease;
+}
+
+.select-tree-root .tree-options .tree-inputs > label {
+  float: left;
+  width: 40%;
+  display: block;
+}

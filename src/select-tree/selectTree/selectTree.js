@@ -1,20 +1,8 @@
-import { OHIF } from 'meteor/ohif:core';
-import { Meteor } from 'meteor/meteor';
-import { Template } from 'meteor/templating';
-import { Tracker } from 'meteor/tracker';
-import { ReactiveVar } from 'meteor/reactive-var';
 import { _ } from 'meteor/underscore';
 import { $ } from 'meteor/jquery';
 
 // TODO: use npm dependency
 import transition from 'meteor/ohif:core/client/lib/third-party/transition-to-from-auto';
-
-Template.selectTree.onCreated(() => {
-  const instance = Template.instance();
-
-  // Create a reactive variable to control the search
-  instance.searchTerm = new ReactiveVar('');
-});
 
 Template.selectTree.onRendered(() => {
   const instance = Template.instance();
@@ -30,25 +18,6 @@ Template.selectTree.onRendered(() => {
     'transform',
     'translate(1px, 1px)'
   );
-
-  // Set the margin property and width
-  const isthreeColumns = instance.data.threeColumns;
-  if (!rootInstance.marginProperty) {
-    rootInstance.marginProperty = isthreeColumns
-      ? 'margin-left'
-      : 'margin-right';
-    rootInstance.marginWidth = isthreeColumns
-      ? $treeRoot.width() / 2
-      : $treeRoot.width();
-  }
-
-  // Define a function to set the margin and toggle common section
-  instance.setMargin = isHidden => {
-    const marginWidth = isHidden ? '' : rootInstance.marginWidth;
-    $treeRoot
-      .children('.tree-content')
-      .css(rootInstance.marginProperty, marginWidth);
-  };
 
   // Set the margin to display the common section
   if (!$treeRoot.hasClass('started')) {
@@ -115,15 +84,6 @@ Template.selectTree.onRendered(() => {
   instance.updateOpen = () => {
     rootInstance.$('.select-tree').removeClass('open');
     rootInstance.$('.select-tree:last').addClass('open');
-  };
-
-  // Put the component in selected state
-  instance.setSelected = flag => {
-    if (flag) {
-      $treeRoot.addClass('selected');
-    } else {
-      $treeRoot.removeClass('selected');
-    }
   };
 
   // Store the element's initial height
@@ -242,14 +202,6 @@ Template.selectTree.events({
       if (storageKey) {
         // Get the current stored data
         const storedData = _.extend({}, OHIF.user.getData(storageKey));
-
-        // Increment or create a counter for the clicked leaf
-        const itemKey = OHIF.string.encodeId($target.val());
-        if (storedData[itemKey]) {
-          storedData[itemKey]++;
-        } else {
-          storedData[itemKey] = 1;
-        }
 
         // Update the stored data with the new count
         OHIF.user.setData(storageKey, storedData);
