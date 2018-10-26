@@ -24,8 +24,6 @@ function initializeTools(tools) {
     const apiTool = cornerstoneTools[`${toolName}Tool`];
     if (apiTool) {
       cornerstoneTools.addTool(apiTool);
-      console.log('Added:');
-      console.log(apiTool.name);
     } else {
       throw new Error(`Tool not found: ${toolName}Tool`);
     }
@@ -44,7 +42,8 @@ class CornerstoneViewport extends Component {
     this.state = {
       stack,
       imageId: stack.imageIds[0],
-      viewportHeight: '100%'
+      viewportHeight: '100%',
+      isLoading: true
     };
 
     this.displayScrollbar = stack.imageIds.length > 1;
@@ -58,7 +57,6 @@ class CornerstoneViewport extends Component {
     this.startLoadingHandler = this.startLoadingHandler.bind(this);
     this.doneLoadingHandler = this.doneLoadingHandler.bind(this);
 
-    this.isLoading = true;
     this.loadHandlerTimeout = null;
     loadHandlerManager.setStartLoadHandler(this.startLoadingHandler);
     loadHandlerManager.setEndLoadHandler(this.doneLoadingHandler);
@@ -98,9 +96,9 @@ class CornerstoneViewport extends Component {
             this.element = input;
           }}
         >
+          {this.state.isLoading ? <LoadingIndicator /> : ''}
           <canvas className="cornerstone-canvas" />
 
-          {this.state.isLoading && <LoadingIndicator />}
           <ViewportOverlay
             viewport={this.state.viewport}
             imageId={this.state.imageId}
@@ -272,6 +270,8 @@ class CornerstoneViewport extends Component {
       this.setState({
         viewportHeight: `${this.element.clientHeight - 20}px`
       });
+
+      this.doneLoadingHandler();
     });
   }
 
@@ -383,15 +383,20 @@ class CornerstoneViewport extends Component {
   }
 
   startLoadingHandler() {
+    console.log('startLoadingHandler');
     clearTimeout(this.loadHandlerTimeout);
     this.loadHandlerTimeout = setTimeout(() => {
-      this.isLoading = true;
+      this.setState({
+        isLoading: true
+      });
     }, loadIndicatorDelay);
   }
 
   doneLoadingHandler() {
     clearTimeout(this.loadHandlerTimeout);
-    this.isLoading = false;
+    this.setState({
+      isLoading: false
+    });
   }
 
   onMeasurementAdded() {

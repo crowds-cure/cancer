@@ -8,8 +8,13 @@ import getNextCase from '../case/getNextCase.js';
 
 import clearOldCornerstoneCacheData from './lib/clearOldCornerstoneCacheData.js';
 
+import saveMeasurementToDatabase from './lib/saveMeasurementToDatabase.js';
+import saveSkipToDatabase from './lib/saveSkipToDatabase.js';
+
 import * as cornerstone from 'cornerstone-core';
 import * as cornerstoneWADOImageLoader from 'cornerstone-wado-image-loader';
+import * as cornerstoneTools from 'cornerstone-tools';
+
 import LoadingIndicator from '../shared/LoadingIndicator.js';
 import './Viewer.css';
 
@@ -59,55 +64,60 @@ class Viewer extends Component {
       });
   }
 
-  render() {
+  getViewportData() {
     const seriesData = this.props.caseData.seriesData;
-    let viewportData = [];
-    if (seriesData && seriesData.length) {
-      clearOldCornerstoneCacheData();
-
-      const seriesInstances = seriesData[0];
-      let imageIds = seriesInstances.map(instance => {
-        // TODO: use this
-        //const numberOfFrames = instance['00280008'].Value;
-
-        instance['7FE00010'].BulkDataURI = instance[
-          '7FE00010'
-        ].BulkDataURI.replace('http://', 'https://');
-
-        const imageId = 'wadors:' + instance['7FE00010'].BulkDataURI;
-
-        const instanceLowerCaseKeys = {};
-        Object.keys(instance).forEach(key => {
-          instanceLowerCaseKeys[key.toLowerCase()] = instance[key];
-        });
-
-        cornerstoneWADOImageLoader.wadors.metaDataManager.add(
-          imageId,
-          instanceLowerCaseKeys
-        );
-
-        return imageId;
-      });
-
-      imageIds = imageIds.sort((a, b) => {
-        const imagePlaneA = cornerstone.metaData.get('imagePlaneModule', a);
-        const imagePlaneB = cornerstone.metaData.get('imagePlaneModule', b);
-
-        return (
-          imagePlaneA.imagePositionPatient[2] -
-          imagePlaneB.imagePositionPatient[2]
-        );
-      });
-
-      viewportData = [
-        {
-          stack: {
-            imageIds,
-            currentImageIdIndex: 0
-          }
-        }
-      ];
+    if (!seriesData || !seriesData.length) {
+      return [];
     }
+
+    clearOldCornerstoneCacheData();
+
+    const seriesInstances = seriesData[0];
+    let imageIds = seriesInstances.map(instance => {
+      // TODO: use this
+      //const numberOfFrames = instance['00280008'].Value;
+
+      instance['7FE00010'].BulkDataURI = instance[
+        '7FE00010'
+      ].BulkDataURI.replace('http://', 'https://');
+
+      const imageId = 'wadors:' + instance['7FE00010'].BulkDataURI;
+
+      const instanceLowerCaseKeys = {};
+      Object.keys(instance).forEach(key => {
+        instanceLowerCaseKeys[key.toLowerCase()] = instance[key];
+      });
+
+      cornerstoneWADOImageLoader.wadors.metaDataManager.add(
+        imageId,
+        instanceLowerCaseKeys
+      );
+
+      return imageId;
+    });
+
+    imageIds = imageIds.sort((a, b) => {
+      const imagePlaneA = cornerstone.metaData.get('imagePlaneModule', a);
+      const imagePlaneB = cornerstone.metaData.get('imagePlaneModule', b);
+
+      return (
+        imagePlaneA.imagePositionPatient[2] -
+        imagePlaneB.imagePositionPatient[2]
+      );
+    });
+
+    return [
+      {
+        stack: {
+          imageIds,
+          currentImageIdIndex: 0
+        }
+      }
+    ];
+  }
+
+  render() {
+    const viewportData = this.getViewportData();
 
     const activeTool = this.props.activeTool;
     const items = viewportData.map((item, index) => {
@@ -144,11 +154,59 @@ class Viewer extends Component {
     );
   }
 
+  getMeasurementData() {
+    const toolStateManager =
+      cornerstoneTools.globalImageIdSpecificToolStateManager;
+
+    // Dump all of its tool state into an Object
+    const toolState = toolStateManager.saveToolState();
+
+    // Get the stack tool data
+    //const stackData = cornerstoneTools.getToolState(element, 'stack');
+    //const stack = stackData.data[0];
+
+    // Retrieve the length data from this Object
+    let lengthData = [];
+    const toolType = 'length';
+    Object.keys(toolState).forEach(imageId => {
+      const toolDataForImage = toolState[imageId];
+      if (
+        !toolDataForImage[toolType] ||
+        !toolDataForImage[toolType].data.length
+      ) {
+        return;
+      }
+
+      lengthData.push(toolDataForImage[toolType]);
+    });
+
+    if (lengthData.length > 1) {
+      throw new Error(
+        'Only one length measurement should be in the lengthData'
+      );
+    }
+
+    return lengthData;
+  }
+
   saveCase() {
+    const { caseData } = this.props;
+
+    const measurements = this.getMeasurementData();
+    saveMeasurementToDatabase(caseData, measurements);
     console.log('saveCase!');
+    this.getNextCase();
   }
 
   skipCase() {
+    //const stack = cornerstoneTools.getToolState(element, "stack");
+    // const sliceIndex = stack.data[0].currentImageIdIndex;
+    //instanceUID: window.rsnaCrowdQuantCaseStudy.instanceUIDs[sliceIndex],
+    //instanceURL: window.rsnaCrowdQuantCaseStudy.urls[sliceIndex],
+    //sliceIndex,
+
+    const { caseData } = this.props;
+    saveSkipToDatabase(caseData);
     console.log('skipCase!');
     this.getNextCase();
   }

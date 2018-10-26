@@ -2,6 +2,8 @@ import { Component } from 'react';
 import React from 'react';
 import ToolbarButton from './ToolbarButton.js';
 import './ToolbarSection.css';
+import * as cornerstone from 'cornerstone-core';
+import viewerCommands from '../lib/viewerCommands.js';
 
 class ToolbarSection extends Component {
   constructor(props) {
@@ -20,8 +22,12 @@ class ToolbarSection extends Component {
   onClick(id) {
     const buttonItem = this.props.buttons.find(item => item.command === id);
 
+    const activeElement = cornerstone.getEnabledElements()[0].element;
+
     if (buttonItem.type === 'tool') {
       this.props.setToolActive(buttonItem.command);
+    } else {
+      viewerCommands[buttonItem.command](activeElement);
     }
   }
 }
