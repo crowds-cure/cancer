@@ -1,13 +1,12 @@
 @value globals: "../GlobalStyles.css";
-@value textActiveColor from globals;
+@value textActiveColor, textSecondaryColor from globals;
 
 .RankingSection {
-  width: 276px;
   padding: 10px;
 }
 
 .RankingSection .title {
-  font-size: 20pt;
+  font-size: 20px;
   font-weight: bold;
   padding: 5px;
   color: textActiveColor;
@@ -15,4 +14,6 @@
 
 .RankingSection .list {
   display: block;
+  border-left: 1px solid textSecondaryColor;
+  padding-left: 15px;
 }
