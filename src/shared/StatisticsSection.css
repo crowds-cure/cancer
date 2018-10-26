@@ -1,0 +1,15 @@
+@value globals: "../GlobalStyles.css";
+@value textActiveColor from globals;
+
+.StatisticsSection .subTitle {
+  font-size: 20px;
+  font-weight: bold;
+  display: block;
+  padding: 5px;
+  margin-bottom: 12px;
+  color: textActiveColor;
+}
+
+.StatisticsCard {
+  width: 20%;
+}
