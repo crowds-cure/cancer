@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import Auth from './openid-connect/Auth.js';
+import LoadingIndicator from './shared/LoadingIndicator.js';
 
 class SecretRoute extends Component {
   constructor(props) {
@@ -34,7 +35,7 @@ class SecretRoute extends Component {
           auth.isAuthenticated() === true ? (
             <Component {...props} />
           ) : (
-            'Loading...'
+            <LoadingIndicator />
           )
         }
       />

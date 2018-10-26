@@ -1,22 +1,52 @@
+@value globals: "../GlobalStyles.css";
+@value activeColor, primaryBackgroundImage from globals;
+
 .LoadingIndicator {
   position: absolute;
   width: 100%;
   height: 100%;
-  stroke: pink;
-  fill: pink;
-  background-color: rgba(0, 0, 0, 0.75);
-  display: none;
+  background: primaryBackgroundImage;
   pointer-events: none; /* Necessary for click-through to cornerstone element below*/
   z-index: 1;
+  text-align: center;
 }
 
-.LoadingIndicator svg {
-  height: 45px;
+.LoadingIndicator .indicatorContents {
   position: absolute;
   margin: auto;
   top: 0px;
   bottom: 0px;
   left: 0px;
   right: 0px;
-  animation: rotate 1.2s linear infinite;
+  width: 25%;
+  min-width: 100px;
+  max-width: 200px;
+  height: 25%;
+  min-height: 100px;
+  max-height: 200px;
+}
+
+.LoadingIndicator .indicatorContents span {
+  color: activeColor;
+  display: block;
+  padding: 15px;
+}
+
+.LoadingIndicator .indicatorContents svg {
+  display: block;
+  margin: 0 auto;
+  fill: activeColor;
+  stroke: activeColor;
+  width: 45px;
+  height: 45px;
+  animation: rotate 2.4s linear infinite;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

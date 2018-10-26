@@ -10,12 +10,16 @@ import clearOldCornerstoneCacheData from './lib/clearOldCornerstoneCacheData.js'
 
 import * as cornerstone from 'cornerstone-core';
 import * as cornerstoneWADOImageLoader from 'cornerstone-wado-image-loader';
-
+import LoadingIndicator from '../shared/LoadingIndicator.js';
 import './Viewer.css';
 
 class Viewer extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      loading: true
+    };
 
     this.getNextCase = this.getNextCase.bind(this);
     this.skipCase = this.skipCase.bind(this);
@@ -42,7 +46,17 @@ class Viewer extends Component {
     const props = this.props;
 
     props.fetchCaseRequest();
-    return getNextCase().then(props.fetchCaseSuccess, props.fetchCaseFailure);
+    this.setState({
+      loading: true
+    });
+
+    return getNextCase()
+      .then(props.fetchCaseSuccess, props.fetchCaseFailure)
+      .then(() => {
+        this.setState({
+          loading: false
+        });
+      });
   }
 
   render() {
@@ -108,7 +122,7 @@ class Viewer extends Component {
           {item ? (
             <CornerstoneViewport viewportData={item} activeTool={activeTool} />
           ) : (
-            'Loading'
+            <LoadingIndicator />
           )}
         </div>
       );
@@ -123,7 +137,9 @@ class Viewer extends Component {
             skipCase={this.skipCase}
           />
         </div>
-        <div className="viewport-section">{items}</div>
+        <div className="viewport-section">
+          {this.state.loading ? <LoadingIndicator /> : items}
+        </div>
       </div>
     );
   }
