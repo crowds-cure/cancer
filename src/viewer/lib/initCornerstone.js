@@ -30,14 +30,19 @@ const config = {
 };
 
 cornerstoneTools.init();
-console.warn('tool init done');
 
 cornerstoneWADOImageLoader.webWorkerManager.initialize(config);
 
 cornerstoneWADOImageLoader.configure({
-  beforeSend: function(xhr) {
+  beforeSend: function(xhr, imageId, headers) {
+    delete headers.accept;
+
     const header = getAuthorizationHeader();
 
+    // JPEG2000 Lossless Image Compression
+    const accept = 'multipart/related; type="image/jp2"';
+
+    xhr.setRequestHeader('Accept', accept);
     xhr.setRequestHeader('Authorization', header.Authorization);
   }
 });
