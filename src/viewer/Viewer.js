@@ -42,14 +42,18 @@ class Viewer extends Component {
 
     this.state = {
       loading: true,
-      showInstructionsModal: false
+      showInstructionsModal: false,
+      feedback: [],
+      hasMeasurements: false
     };
 
     this.getNextCase = this.getNextCase.bind(this);
     this.skipCase = this.skipCase.bind(this);
     this.saveCase = this.saveCase.bind(this);
+    this.isSaveEnabled = this.isSaveEnabled.bind(this);
+    this.isSkipEnabled = this.isSkipEnabled.bind(this);
     this.feedbackChanged = this.feedbackChanged.bind(this);
-
+    this.measurementsChanged = this.measurementsChanged.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
   }
 
@@ -164,7 +168,11 @@ class Viewer extends Component {
       return (
         <div key={index} className="viewport">
           {item ? (
-            <CornerstoneViewport viewportData={item} activeTool={activeTool} />
+            <CornerstoneViewport
+              measurementsChanged={this.measurementsChanged}
+              viewportData={item}
+              activeTool={activeTool}
+            />
           ) : (
             <LoadingIndicator />
           )}
@@ -194,7 +202,9 @@ class Viewer extends Component {
           </Modal>
           <CaseControlButtons
             feedbackChanged={this.feedbackChanged}
+            saveEnabled={this.isSaveEnabled()}
             saveCase={this.saveCase}
+            skipEnabled={this.isSkipEnabled()}
             skipCase={this.skipCase}
             casesInCurrentSession={this.props.casesInCurrentSession}
           />
@@ -251,6 +261,11 @@ class Viewer extends Component {
     this.getNextCase();
   }
 
+  isSaveEnabled() {
+    // Do not allow saving unless at least one measurement exists
+    return this.state.hasMeasurements === true;
+  }
+
   skipCase() {
     //const stack = cornerstoneTools.getToolState(element, "stack");
     // const sliceIndex = stack.data[0].currentImageIdIndex;
@@ -263,9 +278,26 @@ class Viewer extends Component {
     this.getNextCase();
   }
 
-  feedbackChanged(feedback) {
-    console.warn('feedbackChanged');
-    console.warn(feedback);
+  isSkipEnabled() {
+    // Do not allow skipping unless at least one feedback
+    // option has been selected
+    return this.state.feedback && this.state.feedback.length > 0;
+  }
+
+  feedbackChanged(feedbackObject) {
+    // The CaseFeedback component calls this callback with the Object
+    // which describes which options are selected.
+    const feedback = Array.from(feedbackObject.selected);
+
+    this.setState({
+      feedback
+    });
+  }
+
+  measurementsChanged(toolType, toolData) {
+    this.setState({
+      hasMeasurements: toolData.length > 0
+    });
   }
 
   toggleModal() {

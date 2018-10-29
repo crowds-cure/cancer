@@ -1,11 +1,13 @@
 import { Component } from 'react';
 import React from 'react';
+import PropTypes from 'prop-types';
 import * as cornerstone from 'cornerstone-core';
 import * as cornerstoneTools from 'cornerstone-tools';
 import './lib/initCornerstone.js';
 import debounce from './lib/debounce.js';
 import ImageScrollbar from './ImageScrollbar.js';
 import ViewportOverlay from './ViewportOverlay.js';
+import ToolContextMenu from './ToolContextMenu.js';
 import LoadingIndicator from '../shared/LoadingIndicator.js';
 import './CornerstoneViewport.css';
 
@@ -13,8 +15,8 @@ const EVENT_RESIZE = 'resize';
 const loadIndicatorDelay = 25;
 const { loadHandlerManager } = cornerstoneTools;
 
-function setAllToolsPassive() {
-  cornerstoneTools.store.state.tools.forEach(tool => {
+function setToolsPassive(tools) {
+  tools.forEach(tool => {
     cornerstoneTools.setToolPassive(tool.name);
   });
 }
@@ -56,8 +58,14 @@ class CornerstoneViewport extends Component {
     this.onStackScroll = this.onStackScroll.bind(this);
     this.startLoadingHandler = this.startLoadingHandler.bind(this);
     this.doneLoadingHandler = this.doneLoadingHandler.bind(this);
+    this.onMouseClick = this.onMouseClick.bind(this);
+    this.onTouchPress = this.onTouchPress.bind(this);
+    this.onMeasurementAddedOrRemoved = this.onMeasurementAddedOrRemoved.bind(
+      this
+    );
+    this.onCloseToolContextMenu = this.onCloseToolContextMenu.bind(this);
 
-    this.loadHandlerTimeout = null;
+    this.loadHandlerTimeout = 25;
     loadHandlerManager.setStartLoadHandler(this.startLoadingHandler);
     loadHandlerManager.setEndLoadHandler(this.doneLoadingHandler);
 
@@ -89,6 +97,10 @@ class CornerstoneViewport extends Component {
   render() {
     return (
       <>
+        <ToolContextMenu
+          toolContextMenuData={this.state.toolContextMenuData}
+          onClose={this.onCloseToolContextMenu}
+        />
         <div
           className="CornerstoneViewport viewportElement"
           onContextMenu={this.onContextMenu}
@@ -98,7 +110,6 @@ class CornerstoneViewport extends Component {
         >
           {this.state.isLoading ? <LoadingIndicator /> : ''}
           <canvas className="cornerstone-canvas" />
-
           <ViewportOverlay
             viewport={this.state.viewport}
             imageId={this.state.imageId}
@@ -123,7 +134,6 @@ class CornerstoneViewport extends Component {
   }
 
   onWindowResize() {
-    console.log('onWindowResize');
     this.debouncedResize();
   }
 
@@ -257,7 +267,22 @@ class CornerstoneViewport extends Component {
 
       element.addEventListener(
         cornerstoneTools.EVENTS.MEASUREMENT_ADDED,
-        this.onMeasurementAdded
+        this.onMeasurementAddedOrRemoved
+      );
+
+      element.addEventListener(
+        cornerstoneTools.EVENTS.MEASUREMENT_REMOVED,
+        this.onMeasurementAddedOrRemoved
+      );
+
+      element.addEventListener(
+        cornerstoneTools.EVENTS.MOUSE_CLICK,
+        this.onMouseClick
+      );
+
+      element.addEventListener(
+        cornerstoneTools.EVENTS.TOUCH_PRESS,
+        this.onTouchPress
       );
 
       cornerstone.events.addEventListener(
@@ -291,7 +316,22 @@ class CornerstoneViewport extends Component {
 
     element.removeEventListener(
       cornerstoneTools.EVENTS.MEASUREMENT_ADDED,
-      this.onMeasurementAdded
+      this.onMeasurementAddedOrRemoved
+    );
+
+    element.removeEventListener(
+      cornerstoneTools.EVENTS.MEASUREMENT_REMOVED,
+      this.onMeasurementAddedOrRemoved
+    );
+
+    element.removeEventListener(
+      cornerstoneTools.EVENTS.MOUSE_CLICK,
+      this.onMouseClick
+    );
+
+    element.removeEventListener(
+      cornerstoneTools.EVENTS.TOUCH_PRESS,
+      this.onTouchPress
     );
 
     window.removeEventListener(EVENT_RESIZE, this.onWindowResize);
@@ -341,7 +381,9 @@ class CornerstoneViewport extends Component {
     }
 
     if (this.props.activeTool !== prevProps.activeTool) {
-      setAllToolsPassive();
+      const leftMouseTools = ['Length', 'Wwwc', 'Zoom', 'Pan', 'StackScroll'];
+
+      setToolsPassive(leftMouseTools);
 
       cornerstoneTools.setToolActive(this.props.activeTool, {
         mouseButtonMask: 1,
@@ -399,12 +441,50 @@ class CornerstoneViewport extends Component {
     });
   }
 
-  onMeasurementAdded() {
-    console.log('onMeasurementAdded');
-    // TODO: Allow this to be set by props,
-    // call enforceSingleMeasurement for standard cases
-    // Allow this to be set on a case level
+  onMeasurementAddedOrRemoved(event) {
+    const toolType = event.detail.toolType;
+
+    // TODO: Pass in as prop?
+    const toolsOfInterest = ['Length'];
+
+    if (toolsOfInterest.includes(toolType)) {
+      const toolState = cornerstoneTools.getToolState(this.element, toolType);
+
+      this.props.measurementsChanged(toolType, toolState.data);
+    }
+  }
+
+  onMouseClick(event) {
+    if (event.detail.event.which === 3) {
+      this.setState({
+        toolContextMenuData: {
+          eventData: event.detail,
+          isTouchEvent: false
+        }
+      });
+    }
+  }
+
+  onTouchPress(event) {
+    this.setState({
+      toolContextMenuData: {
+        eventData: event.detail,
+        isTouchEvent: true
+      }
+    });
+  }
+
+  onCloseToolContextMenu() {
+    this.setState({
+      toolContextMenuData: null
+    });
   }
 }
+
+CornerstoneViewport.propTypes = {
+  measurementsChanged: PropTypes.func.isRequired,
+  activeTool: PropTypes.string.isRequired,
+  viewportData: PropTypes.object.isRequired
+};
 
 export default CornerstoneViewport;

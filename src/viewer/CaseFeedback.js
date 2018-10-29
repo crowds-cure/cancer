@@ -22,12 +22,20 @@ class CaseFeedback extends Component {
         label: 'Poor Image Quality'
       },
       {
-        value: 'unspecified',
-        label: "I don't want to measure it."
+        value: 'noDisease',
+        label: 'No disease'
       },
       {
-        value: 'reconstruction',
-        label: 'Non-axial orientation (reconstruction)'
+        value: 'nonContrast',
+        label: 'Non-contrast'
+      },
+      {
+        value: 'artifact',
+        label: 'Artifact'
+      },
+      {
+        value: 'unspecified',
+        label: 'No Feedback'
       }
     ];
 
