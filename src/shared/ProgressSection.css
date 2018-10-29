@@ -47,12 +47,12 @@
 }
 
 .ProgressSection .medalContainer {
-  padding-top: 10px;
+  padding-top: 36px;
 }
 
 .ProgressSection .medalContainer .medalBackground {
-  width: 50px;
-  height: 50px;
+  width: 67px;
+  height: 67px;
   border: 5px solid #605886;
   background: white;
   transform: rotate(45deg);
@@ -60,8 +60,8 @@
 
 .ProgressSection .medalContainer .medal {
   margin: 7px;
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   object-fit: contain;
   transform: rotate(-45deg);
 }
