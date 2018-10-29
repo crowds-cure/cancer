@@ -30,6 +30,7 @@ class Dashboard extends Component {
         </div>
         <div className="column" id="right">
           <div className="top-right">
+            <span>{this.props.username}</span>
             <nav>
               <span className="Logout" onClick={this.logout}>
                 Log out
@@ -52,7 +53,8 @@ class Dashboard extends Component {
 }
 
 Dashboard.propTypes = {
-  current: PropTypes.number.isRequired
+  current: PropTypes.number.isRequired,
+  username: PropTypes.string.isRequired
 };
 
 export default Dashboard;

@@ -11,33 +11,35 @@ const reload = () => window.location.reload();
 
 class App extends Component {
   render() {
-    const auth = this.props.auth;
-
     return (
       <Switch>
         <SecretRoute
           exact
           path="/dashboard"
           component={ConnectedDashboard}
-          auth={auth}
+          auth={this.props.auth}
+          store={this.props.store}
         />
         <SecretRoute
           exact
           path="/"
           component={ConnectedDashboard}
-          auth={auth}
+          auth={this.props.auth}
+          store={this.props.store}
         />
         <SecretRoute
           exact
           path="/viewer"
           component={ConnectedViewer}
-          auth={auth}
+          auth={this.props.auth}
+          store={this.props.store}
         />
         <SecretRoute
           exact
           path="/session-summary"
           component={ConnectedSessionSummary}
-          auth={auth}
+          auth={this.props.auth}
+          store={this.props.store}
         />
         <Route path="/silent-refresh.html" onEnter={reload} />
         <Route path="/logout-redirect.html" onEnter={reload} />

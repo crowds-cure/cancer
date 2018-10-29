@@ -13,6 +13,7 @@ const mapStateToProps = state => {
   });
 
   return {
+    username: state.user.username,
     isFetching: state.cases.isFetching,
     error: state.cases.error,
     caseData: state.cases.caseData,

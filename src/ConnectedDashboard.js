@@ -3,6 +3,7 @@ import Dashboard from './Dashboard.js';
 
 const mapStateToProps = state => {
   return {
+    username: state.user.username,
     current: state.user.current
   };
 };
