@@ -38,13 +38,20 @@ class ProgressSection extends Component {
             <div className="currentPoints">
               <span className="value">{this.props.current}</span>
               <span className="suffix">cases</span>
-              <span className="plusPoints">+{increment}</span>
+              <span className="plusPoints">
+                +{increment.casesInCurrentSession}
+              </span>
             </div>
           </div>
           <div className="progressBarContainer">
             <span className="progressLow">{low}</span>
             <span className="progressHigh">{high}</span>
-            <ProgressBar min={low} max={high} current={this.props.current} increment={increment}/>
+            <ProgressBar
+              min={low}
+              max={high}
+              current={this.props.current}
+              increment={increment}
+            />
           </div>
         </div>
       </div>
