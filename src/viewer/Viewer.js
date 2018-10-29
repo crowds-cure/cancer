@@ -47,6 +47,7 @@ class Viewer extends Component {
     this.getNextCase = this.getNextCase.bind(this);
     this.skipCase = this.skipCase.bind(this);
     this.saveCase = this.saveCase.bind(this);
+    this.feedbackChanged = this.feedbackChanged.bind(this);
 
     this.toggleModal = this.toggleModal.bind(this);
   }
@@ -187,6 +188,7 @@ class Viewer extends Component {
             </span>
           </Modal>
           <CaseControlButtons
+            feedbackChanged={this.feedbackChanged}
             saveCase={this.saveCase}
             skipCase={this.skipCase}
             casesInCurrentSession={this.props.casesInCurrentSession}
@@ -254,6 +256,11 @@ class Viewer extends Component {
     const { caseData } = this.props;
     saveSkipToDatabase(caseData);
     this.getNextCase();
+  }
+
+  feedbackChanged(feedback) {
+    console.warn('feedbackChanged');
+    console.warn(feedback);
   }
 
   toggleModal() {
