@@ -2,14 +2,7 @@
 @value primaryBackgroundImage, textPrimaryColor, textActiveColor from globals;
 
 .SessionSummary {
-  flex-direction: column;
-  height: 100%;
-  width: 100%;
   padding: 0 172.5px;
-  overflow: hidden; /*makes the body non-scrollable (we will add scrolling to the sidebar and main content containers)*/
-  margin: 0px; /*removes default style*/
-  display: flex; /*enables flex content for its children*/
-  box-sizing: border-box;
   background-image: primaryBackgroundImage;
 }
 
@@ -26,14 +19,10 @@
 }
 
 .SessionSummary .communityStats {
-  width: 62.5%;
-  display: inline-flex;
-  margin-top: 50px;
+  margin-top: 120px;
 }
 
 .SessionSummary .rankingStats {
-  width: 37.5%;
-  display: inline-flex;
   margin-top: 120px;
 }
 
@@ -42,14 +31,5 @@
 }
 
 .ProgressSection {
-  width: 62.5%;
-  margin: 130px auto 0 auto;
-}
-
-.RankingSection {
-  width: 50%;
-}
-
-.StatisticsSection {
-  width: 100%;
+  margin-top: 130px;
 }

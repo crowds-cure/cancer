@@ -12,28 +12,42 @@ import SimpleHeaderSection from './shared/SimpleHeaderSection';
 class SessionSummary extends Component {
   render() {
     return (
-      <div className="SessionSummary">
-        <div>
-          <SimpleHeaderSection />
+      <div className="SessionSummary container">
+        <div className="row align-items-start">
+          <div className="col">
+            <SimpleHeaderSection />
+          </div>
         </div>
-        <div className="title-wrapper">
-          <label className="title">SESSION SUMMARY</label>
+        <div className="row align-items-center">
+          <div className="col title-wrapper">
+            <label className="title">SESSION SUMMARY</label>
+          </div>
         </div>
-        <div>
-          <ProgressSection
-            current={this.props.current}
-            numCasesInSession={this.props.numCasesInSession} />
+        <div className="row justify-content-center">
+          <div className="col-10">
+            <ProgressSection
+              current={this.props.current}
+              numCasesInSession={this.props.numCasesInSession} />
+          </div>
         </div>
-        <div>
-          <LogoutSection />
+        <div className="row justify-content-center">
+          <div className="col-6">
+            <LogoutSection />
+          </div>
         </div>
-        <div>
-          <div className="communityStats">
+        <div className="row">
+          <div className="col-10 communityStats">
             <StatisticsSection />
           </div>
-          <div className="rankingStats">
-            <RankingSection name="Close to you" />
-            <RankingSection name="Top this week" />
+          <div className="col-6 rankingStats">
+            <div className="row">
+              <div className="col">
+                <RankingSection name="Close to you" />
+              </div>
+              <div className="col">
+                <RankingSection name="Top this week" />
+              </div>
+            </div>
           </div>
         </div>
       </div>
