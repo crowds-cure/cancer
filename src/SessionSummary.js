@@ -7,23 +7,31 @@ import RankingSection from './shared/RankingSection.js';
 import ProgressSection from './shared/ProgressSection.js';
 import LogoutSection from './shared/LogoutSection.js';
 import PropTypes from 'prop-types';
+import SimpleHeaderSection from './shared/SimpleHeaderSection';
 
 class SessionSummary extends Component {
   render() {
     return (
       <div className="SessionSummary">
-        <span className="title">Session Summary</span>
-
-        {/* TODO: Top bar? */}
-        {/* TODO: Logo in Top bar? */}
-        <ProgressSection
-          current={this.props.current}
-          numCasesInSession={this.props.numCasesInSession}
-        />
-        <LogoutSection />
         <div>
-          <StatisticsSection />
-          <div>
+          <SimpleHeaderSection />
+        </div>
+        <div className="title-wrapper">
+          <label className="title">SESSION SUMMARY</label>
+        </div>
+        <div>
+          <ProgressSection
+            current={this.props.current}
+            numCasesInSession={this.props.numCasesInSession} />
+        </div>
+        <div>
+          <LogoutSection />
+        </div>
+        <div>
+          <div className="communityStats">
+            <StatisticsSection />
+          </div>
+          <div className="rankingStats">
             <RankingSection name="Close to you" />
             <RankingSection name="Top this week" />
           </div>

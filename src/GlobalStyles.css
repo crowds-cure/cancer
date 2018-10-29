@@ -17,7 +17,7 @@
 @value uiBorderColorDark: #3C5D80;
 @value uiBorderColorActive: #79f9fe;
 @value primaryBackgroundColor: #000000;
-@value primaryBackgroundImage: linear-gradient(113deg, rgba(45, 44, 105, 0.7), #313060 42%, #1e1d4b);
+@value primaryBackgroundImage: linear-gradient(113deg, #2d2c69, #313060 29%, #17163b 70%, #262548);
 @value boxBackgroundColor: #3E5975;
 
 /* Text Colors */
