@@ -17,6 +17,7 @@ import * as cornerstoneTools from 'cornerstone-tools';
 
 import LoadingIndicator from '../shared/LoadingIndicator.js';
 import './Viewer.css';
+import PropTypes from 'prop-types';
 
 class Viewer extends Component {
   constructor(props) {
@@ -33,6 +34,14 @@ class Viewer extends Component {
 
   componentDidMount() {
     this.getNextCase();
+
+    // We need to prevent scrolling / elastic banding
+    // of the viewer page by the browser
+    document.body.classList.add('fixed-page');
+  }
+
+  componentWillUnmount() {
+    document.body.classList.remove('fixed-page');
   }
 
   componentDidUpdate(prevProps) {
@@ -145,6 +154,7 @@ class Viewer extends Component {
           <CaseControlButtons
             saveCase={this.saveCase}
             skipCase={this.skipCase}
+            casesInCurrentSession={this.props.casesInCurrentSession}
           />
         </div>
         <div className="viewport-section">
@@ -192,6 +202,7 @@ class Viewer extends Component {
   saveCase() {
     const { caseData } = this.props;
 
+    this.props.incrementNumCasesInSession();
     const measurements = this.getMeasurementData();
     saveMeasurementToDatabase(caseData, measurements);
     console.log('saveCase!');
@@ -207,9 +218,15 @@ class Viewer extends Component {
 
     const { caseData } = this.props;
     saveSkipToDatabase(caseData);
-    console.log('skipCase!');
     this.getNextCase();
   }
 }
+
+Viewer.propTypes = {
+  caseData: PropTypes.object.isRequired,
+  isFetching: PropTypes.bool.isRequired,
+  activeTool: PropTypes.string.isRequired,
+  casesInCurrentSession: PropTypes.number.isRequired
+};
 
 export default Viewer;

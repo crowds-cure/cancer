@@ -17,3 +17,17 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+
+html {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0px; /*removes default style*/
+  display: flex; /*enables flex content for its children*/
+  box-sizing: border-box;
+  font-family: 'WorkSans', 'SF Pro Text', 'Roboto', 'Helvetica Neue', sans-serif;
+}

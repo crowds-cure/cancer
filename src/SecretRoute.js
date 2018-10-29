@@ -26,8 +26,6 @@ class SecretRoute extends Component {
   render() {
     const { component: Component, auth, ...rest } = this.props;
 
-    // TODO: Replace 'Loading...' with
-    // a real loading page
     return (
       <Route
         {...rest}

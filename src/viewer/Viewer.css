@@ -4,6 +4,11 @@
   background-color: black;
 }
 
+body.fixed-page {
+  position: fixed;
+  overflow: hidden;
+}
+
 .toolbar-row {
   height: 50px;
   display: inline-flex;

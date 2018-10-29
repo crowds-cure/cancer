@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import React from 'react';
 import './ToolbarButton.css';
+import PropTypes from 'prop-types';
 
 class ToolbarButton extends Component {
   constructor(props) {
@@ -28,5 +29,12 @@ class ToolbarButton extends Component {
     this.props.click(id);
   }
 }
+
+ToolbarButton.propTypes = {
+  text: PropTypes.string.isRequired,
+  svgUrl: PropTypes.string.isRequired,
+  active: PropTypes.bool.isRequired,
+  click: PropTypes.func.isRequired
+};
 
 export default ToolbarButton;

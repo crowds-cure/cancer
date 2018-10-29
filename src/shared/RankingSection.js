@@ -2,6 +2,7 @@ import { Component } from 'react';
 import React from 'react';
 import RankingItem from './RankingItem.js';
 import './RankingSection.css';
+import PropTypes from 'prop-types';
 
 class RankingSection extends Component {
   render() {
@@ -32,5 +33,9 @@ class RankingSection extends Component {
     );
   }
 }
+
+RankingSection.propTypes = {
+  name: PropTypes.string.isRequired
+};
 
 export default RankingSection;

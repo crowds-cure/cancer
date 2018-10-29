@@ -4,6 +4,7 @@ import ToolbarButton from './ToolbarButton.js';
 import './ToolbarSection.css';
 import * as cornerstone from 'cornerstone-core';
 import viewerCommands from '../lib/viewerCommands.js';
+import PropTypes from 'prop-types';
 
 class ToolbarSection extends Component {
   constructor(props) {
@@ -31,5 +32,10 @@ class ToolbarSection extends Component {
     }
   }
 }
+
+ToolbarSection.propTypes = {
+  buttons: PropTypes.array.isRequired,
+  setToolActive: PropTypes.func.isRequired
+};
 
 export default ToolbarSection;

@@ -10,4 +10,7 @@
   color: textSecondaryColor;
   font-size: 15px;
   margin: 0 7px;
+  cursor: pointer;
+
+  outline: none;
 }

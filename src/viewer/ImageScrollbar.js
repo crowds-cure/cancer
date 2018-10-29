@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import React from 'react';
 import './ImageScrollbar.css';
+import PropTypes from 'prop-types';
 
 class ImageScrollbar extends Component {
   constructor(props) {
@@ -58,5 +59,10 @@ class ImageScrollbar extends Component {
     this.onInputCallback(event.target.value);
   }
 }
+
+ImageScrollbar.propTypes = {
+  value: PropTypes.number.isRequired,
+  onInputCallback: PropTypes.func.isRequired
+};
 
 export default ImageScrollbar;

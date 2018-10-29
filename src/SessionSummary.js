@@ -6,6 +6,7 @@ import StatisticsSection from './shared/StatisticsSection.js';
 import RankingSection from './shared/RankingSection.js';
 import ProgressSection from './shared/ProgressSection.js';
 import LogoutSection from './shared/LogoutSection.js';
+import PropTypes from 'prop-types';
 
 class SessionSummary extends Component {
   render() {
@@ -15,9 +16,10 @@ class SessionSummary extends Component {
 
         {/* TODO: Top bar? */}
         {/* TODO: Logo in Top bar? */}
-        <div>
-          <ProgressSection />
-        </div>
+        <ProgressSection
+          current={this.props.current}
+          numCasesInSession={this.props.numCasesInSession}
+        />
         <LogoutSection />
         <div>
           <StatisticsSection />
@@ -30,5 +32,10 @@ class SessionSummary extends Component {
     );
   }
 }
+
+SessionSummary.propTypes = {
+  current: PropTypes.number.isRequired,
+  casesInCurrentSession: PropTypes.number.isRequired
+};
 
 export default SessionSummary;

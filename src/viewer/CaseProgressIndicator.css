@@ -1,0 +1,6 @@
+@value globals: "../GlobalStyles.css";
+@value activeColor from globals;
+
+.CaseProgressIndicator {
+  color: activeColor;
+}

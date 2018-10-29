@@ -31,6 +31,9 @@ const config = {
 
 cornerstoneTools.init();
 
+window.cornerstone = cornerstone;
+window.cornerstoneTools = cornerstoneTools;
+
 cornerstoneWADOImageLoader.webWorkerManager.initialize(config);
 
 cornerstoneWADOImageLoader.configure({

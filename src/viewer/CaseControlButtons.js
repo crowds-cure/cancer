@@ -2,6 +2,7 @@ import { Component } from 'react';
 import React from 'react';
 import './CaseControlButtons.css';
 import { Link } from 'react-router-dom';
+import CaseProgressIndicator from './CaseProgressIndicator.js';
 
 class CaseControlButtons extends Component {
   render() {
@@ -16,7 +17,9 @@ class CaseControlButtons extends Component {
             Save
           </button>
         </div>
-        <span>28 Cases</span>
+        <CaseProgressIndicator
+          casesInCurrentSession={this.props.casesInCurrentSession}
+        />
         <Link to="/session-summary">End Session</Link>
       </div>
     );
