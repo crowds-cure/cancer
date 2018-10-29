@@ -18,7 +18,8 @@ const mapStateToProps = state => {
     error: state.cases.error,
     caseData: state.cases.caseData,
     activeTool: activeTool.command,
-    casesInCurrentSession: state.session.casesInCurrentSession
+    casesInCurrentSession: state.session.casesInCurrentSession,
+    collection: state.collection.name
   };
 };
 

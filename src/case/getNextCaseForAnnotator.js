@@ -2,26 +2,22 @@
 
 import { getDB } from '../db';
 
-async function getNextCaseForAnnotator(annotatorID, cases) {
-  const promise = new Promise((resolve, reject) => {
-    // TODO: This just gets a random doc from the entire array of cases.
-    // We should switch this to add some case selection logic based on number of measurements, skips, etc...
-    const db = getDB('cases');
-    db.allDocs({ include_docs: true }, function(error, docs) {
-      if (error || !docs || !docs.rows) {
-        return reject(error);
-      }
+async function getNextCaseForAnnotator(collection, annotatorID, cases) {
+  const db = getDB('cases');
+  const options = {
+    selector: { Collection: collection }
+  };
 
-      const rows = docs.rows;
-      const doc = rows[Math.floor(Math.random() * rows.length)].doc;
+  // TODO: This just gets a random doc from the entire array of cases.
+  // We should switch this to add some case selection logic based on number of measurements, skips, etc...
+  const getRandomDoc = docData => {
+    const { docs } = docData;
+    const doc = docs[Math.floor(Math.random() * docs.length)];
 
-      console.warn(doc);
+    return doc;
+  };
 
-      resolve(doc);
-    });
-  });
-
-  return promise;
+  return db.find(options).then(getRandomDoc);
 
   /*
   // filter cases by annotator's anatomyChoices

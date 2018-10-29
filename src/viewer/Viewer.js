@@ -19,6 +19,7 @@ import LoadingIndicator from '../shared/LoadingIndicator.js';
 import './Viewer.css';
 import PropTypes from 'prop-types';
 import Modal from 'react-modal';
+import { Redirect } from 'react-router-dom';
 import '../shared/Modal.css';
 
 Modal.defaultStyles.overlay.backgroundColor = 'black';
@@ -86,7 +87,7 @@ class Viewer extends Component {
 
     clearOldCornerstoneCacheData();
 
-    return getNextCase()
+    return getNextCase(this.props.collection)
       .then(props.fetchCaseSuccess, props.fetchCaseFailure)
       .then(() => {
         this.setState({
@@ -146,6 +147,10 @@ class Viewer extends Component {
   }
 
   render() {
+    if (!this.props.collection) {
+      return <Redirect to="/" />;
+    }
+
     const viewportData = this.getViewportData();
 
     const activeTool = this.props.activeTool;
@@ -269,6 +274,7 @@ class Viewer extends Component {
 }
 
 Viewer.propTypes = {
+  collection: PropTypes.string,
   caseData: PropTypes.object.isRequired,
   isFetching: PropTypes.bool.isRequired,
   activeTool: PropTypes.string.isRequired,

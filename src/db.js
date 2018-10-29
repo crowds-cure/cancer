@@ -1,5 +1,8 @@
 import PouchDB from 'pouchdb-browser';
+import plugin from 'pouchdb-find';
 import getAuthorizationHeader from './openid-connect/getAuthorizationHeader.js';
+
+PouchDB.plugin(plugin);
 
 const baseURL = 'https://db.crowds-cure.org';
 

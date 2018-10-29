@@ -4,6 +4,7 @@ import CaseTypeCard from './CaseTypeCard.js';
 import './CaseTypeSection.css';
 import { withRouter } from 'react-router-dom';
 import { getDB } from '../db';
+import PropTypes from 'prop-types';
 
 class CaseTypeSection extends Component {
   constructor(props) {
@@ -53,12 +54,18 @@ class CaseTypeSection extends Component {
     );
   }
 
-  onClick(event, item) {
-    // TODO: dispatch action to Redux store to set the case type which has been selected
-    console.log(event);
-    console.log(item);
+  onClick(name) {
+    this.context.store.dispatch({
+      type: 'SET_SELECTED_COLLECTION',
+      collection: name
+    });
+
     this.props.history.push('/viewer');
   }
 }
+
+CaseTypeSection.contextTypes = {
+  store: PropTypes.object.isRequired
+};
 
 export default withRouter(CaseTypeSection);

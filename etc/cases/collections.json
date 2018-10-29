@@ -1,0 +1,28 @@
+{
+    "docs": [{
+		"Collection": "LungCT-Diagnosis",
+		"Type": "Lung Cancer",
+		"Link": "https://wiki.cancerimagingarchive.net/display/Public/LungCT-Diagnosis",
+		"Description": "All the images are diagnostic contrast enhanced CT scans. The images were retrospectively acquired, to ensure sufficient patient follow-up. Slice thickness is variable : between 3 and 6 mm. All images were done at diagnosis and prior to surgery. The objective of the study was to extract prognostic image features that will describe lung adenocarcinomas and will associate with overall survival."
+	}, {
+		"Collection": "NSCLC Radiogenomics",
+		"Type": "Non-small Cell Lung Cancer",
+		"Link": "https://wiki.cancerimagingarchive.net/display/Public/NSCLC+Radiogenomics",
+		"Description": "Medical image biomarkers of cancer promise improvements in patient care through advances in precision medicine. Compared to genomic biomarkers, image biomarkers provide the advantages of being a non-invasive procedure, and characterizing a heterogeneous tumor in its entirety, as opposed to limited tissue available for biopsy. We developed a unique radiogenomic dataset from a Non-Small Cell Lung Cancer (NSCLC) cohort of 211 subjects. The dataset comprises Computed Tomography (CT), Positron Emission Tomography (PET)/CT images, semantic annotations of the tumors as observed on the medical images using a controlled vocabulary, segmentation maps of tumors in the CT scans, and quantitative values obtained from the PET/CT scans. Imaging data are also paired with gene mutation, RNA sequencing data from samples of surgically excised tumor tissue, and clinical data, including survival outcomes. This dataset was created to facilitate the discovery of the underlying relationship between genomic and medical image features, as well as the development and evaluation of prognostic medical image biomarkers."
+	}, {
+		"Collection": "SPIE-AAPM Lung CT Challenge",
+		"Type": "Lung Cancer",
+		"Link": "https://wiki.cancerimagingarchive.net/display/Public/LUNGx+SPIE-AAPM-NCI+Lung+Nodule+Classification+Challenge",
+		"Description": "As part of the 2015 SPIE Medical Imaging Conference, SPIE – with the support of American Association of Physicists in Medicine (AAPM) and the National Cancer Institute (NCI) – will conduct a “Grand Challenge” on quantitative image analysis methods for the diagnostic classification of malignant and benign lung nodules. The LUNGx Challenge will provide a unique opportunity for participants to compare their algorithms to those of others from academia, industry, and government in a structured, direct way using the same data sets."
+	}, {
+		"Collection": "LCTSC",
+		"Type": "Lung Cancer",
+		"Link": "https://wiki.cancerimagingarchive.net/display/Public/Lung+CT+Segmentation+Challenge+2017",
+		"Description": "As part of the 2015 SPIE Medical Imaging Conference, SPIE – with the support of American Association of Physicists in Medicine (AAPM) and the National Cancer Institute (NCI) – will conduct a “Grand Challenge” on quantitative image analysis methods for the diagnostic classification of malignant and benign lung nodules. The LUNGx Challenge will provide a unique opportunity for participants to compare their algorithms to those of others from academia, industry, and government in a structured, direct way using the same data sets."
+	}, {
+		"Collection": "Anti-PD-1_MELANOMA",
+		"Type": "Melanoma",
+		"Link": "https://wiki.cancerimagingarchive.net/pages/viewpage.action?pageId=37225348",
+		"Description": "This collection comprises 47 melanoma cases cases treated with immunotherapy in 2016, each with 2 imaging timepoints."
+	}]
+}
