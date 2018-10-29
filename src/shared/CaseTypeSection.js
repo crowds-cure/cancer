@@ -3,43 +3,41 @@ import React from 'react';
 import CaseTypeCard from './CaseTypeCard.js';
 import './CaseTypeSection.css';
 import { withRouter } from 'react-router-dom';
+import { getDB } from '../db';
 
 class CaseTypeSection extends Component {
   constructor(props) {
     super(props);
 
     this.onClick = this.onClick.bind(this);
+
+    this.state = {
+      types: [],
+      isLoading: true
+    };
+
+    const collectionsDB = getDB('collections');
+
+    collectionsDB.allDocs({ include_docs: true }).then(docs => {
+      const types = docs.rows.map(row => row.doc);
+
+      this.setState({
+        types,
+        isLoading: false
+      });
+    });
   }
 
   render() {
-    const numbers = [
-      {
-        id: 'lung',
-        name: 'Lung',
-        description: 'Measure the largest lesion'
-      },
-      {
-        id: 'liver',
-        name: 'Liver',
-        description: 'Measure the largest lesion'
-      },
-      {
-        id: 'brain',
-        name: 'Brain',
-        description: 'Measure the largest lesion'
-      },
-      {
-        id: 'axillary',
-        name: 'Axillary',
-        description: 'Measure the largest lesion'
-      }
-    ];
+    const { isLoading, types } = this.state;
 
-    const items = numbers.map(item => (
+    const items = types.map(item => (
       <CaseTypeCard
-        key={item.name}
-        name={item.name}
-        description={item.description}
+        key={item.Collection}
+        name={item.Collection}
+        type={item.Type}
+        link={item.Link}
+        description={item.Description}
         img={item.img}
         click={event => this.onClick(event, item)}
       />
@@ -48,7 +46,9 @@ class CaseTypeSection extends Component {
     return (
       <>
         <h1 className="CaseTypeSectionTitle">Select a case type</h1>
-        <div className="CaseTypeSection">{items}</div>
+        <div className="CaseTypeSection">
+          {isLoading ? 'Loading...' : items}
+        </div>
       </>
     );
   }
