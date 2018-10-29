@@ -2,12 +2,15 @@ import { Component } from 'react';
 import React from 'react';
 import './CaseControlButtons.css';
 import { Link } from 'react-router-dom';
+import CaseFeedback from './CaseFeedback.js';
+import CaseProgressIndicator from './CaseProgressIndicator.js';
+import PropTypes from 'prop-types';
 
 class CaseControlButtons extends Component {
   render() {
     return (
       <div className="CaseControlButtons">
-        <button type="button">Case Feedback</button>
+        <CaseFeedback feedbackChanged={this.props.feedbackChanged} />
         <div className="btn-group">
           <button type="button" onClick={this.props.skipCase}>
             Skip
@@ -16,11 +19,20 @@ class CaseControlButtons extends Component {
             Save
           </button>
         </div>
-        <span>28 Cases</span>
+        <CaseProgressIndicator
+          casesInCurrentSession={this.props.casesInCurrentSession}
+        />
         <Link to="/session-summary">End Session</Link>
       </div>
     );
   }
 }
+
+CaseControlButtons.propTypes = {
+  skipCase: PropTypes.func.isRequired,
+  saveCase: PropTypes.func.isRequired,
+  feedbackChanged: PropTypes.func.isRequired,
+  casesInCurrentSession: PropTypes.number.isRequired
+};
 
 export default CaseControlButtons;

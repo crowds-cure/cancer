@@ -11,7 +11,7 @@ const defaultButtons = [
     type: 'tool',
     text: 'Levels',
     svgUrl: '/icons.svg#icon-tools-levels',
-    active: true
+    active: false
   },
   {
     command: 'Zoom',
@@ -32,7 +32,7 @@ const defaultButtons = [
     type: 'tool',
     text: 'Stack Scroll',
     svgUrl: '/icons.svg#icon-tools-stack-scroll',
-    active: false
+    active: true
   },
   {
     command: 'ClearAll',

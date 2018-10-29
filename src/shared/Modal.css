@@ -1,0 +1,67 @@
+@value globals: "../GlobalStyles.css";
+@value uiGrayDarker, uiBorderColor, textActiveColor, textSecondaryColor from globals;
+
+.Modal {
+  width: 400px;
+  background: uiGrayDarker;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  padding: 2em;
+  border-radius: 8px;
+  border: 0;
+  color: textSecondaryColor;
+  outline: none;
+}
+
+.ReactModal__Overlay {
+  opacity: 0;
+  transition: all 0.2s ease-in-out;
+}
+
+.ReactModal__Overlay--after-open {
+  opacity: 1;
+}
+
+.ReactModal__Overlay--before-close {
+  opacity: 0;
+}
+
+.Modal h1 {
+  font-weight: bold;
+  font-size: 150%;
+  margin: 0 0 15px;
+  color: textSecondaryColor;
+}
+
+.modal-close {
+  color: #aaa;
+  line-height: 50px;
+  font-size: 80%;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  top: 0;
+  width: 70px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-close:hover {
+  color: textActiveColor;
+}
+
+.Modal .modal-content {
+  background-color: uiGrayDarker;
+  border-color: uiBorderColor;
+  color: textSecondaryColor;
+  border-radius: 6px;
+  border: 0;
+}
+
+.modal-header,
+.modal-footer {
+  border-color: uiBorderColor;
+}

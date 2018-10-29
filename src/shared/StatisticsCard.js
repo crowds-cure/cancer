@@ -1,20 +1,22 @@
 import { Component } from 'react';
 import React from 'react';
 import './StatisticsCard.css';
+import PropTypes from 'prop-types';
 
 class StatisticsCard extends Component {
   render() {
-    const number = this.props.number || 25;
-    const description =
-      this.props.description || 'Minutes average session time';
-
     return (
       <div className="StatisticsCard">
-        <span className="number">{number}</span>
-        <span className="description">{description}</span>
+        <span className="number">{this.props.number}</span>
+        <span className="description">{this.props.description}</span>
       </div>
     );
   }
 }
+
+StatisticsCard.propTypes = {
+  number: PropTypes.number.isRequired,
+  description: PropTypes.string.isRequired
+};
 
 export default StatisticsCard;

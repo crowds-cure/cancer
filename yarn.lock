@@ -2455,10 +2455,10 @@ core-util-is@1.0.2, core-util-is@~1.0.0:
   resolved "https://registry.yarnpkg.com/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
   integrity sha1-tf1UIgqivFq1eqtxQMlAdUUDwac=
 
-cornerstone-core@^2.2.6:
-  version "2.2.6"
-  resolved "https://registry.yarnpkg.com/cornerstone-core/-/cornerstone-core-2.2.6.tgz#a461face67a78d89b2bab3abbb17763ae9a2c20a"
-  integrity sha512-+ocgGaJSEcWM53oAJ992mtozKpxtkwbiZ4o62hBiKleOb9gfHcA+zmIfWEbfllA+jXtX06TAHeZtv0jE7E03MQ==
+cornerstone-core@^2.2.7:
+  version "2.2.7"
+  resolved "https://registry.yarnpkg.com/cornerstone-core/-/cornerstone-core-2.2.7.tgz#2205d34df5d98cfd040d2cd87987928f6001c29b"
+  integrity sha512-D2CQQMrnr9G/lH4fNspjwiqPcgS+bDFbltcGV1Y/az+402Ja0iNyMkrGQEuaaQNsz6A1D6GD03MUGI9AeVHMDw==
 
 cornerstone-math@^0.1.6:
   version "0.1.6"
@@ -2474,12 +2474,12 @@ cornerstone-tools@3.0.0-b.965:
     cornerstone-math "^0.1.6"
     regenerator-runtime "^0.12.1"
 
-cornerstone-wado-image-loader@^2.1.4:
-  version "2.1.4"
-  resolved "https://registry.yarnpkg.com/cornerstone-wado-image-loader/-/cornerstone-wado-image-loader-2.1.4.tgz#1bf35c00559643b8c6f185b39f1c161d1ba878f4"
-  integrity sha512-JAqr9BAUJQI3kZDzSzG9mV/SiZRSZUzv0CpE/z60C0vSdJbDzOQXlQ6EddZT8WY5n+v876Li+FFcXZZjlsCtuQ==
+cornerstone-wado-image-loader@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/cornerstone-wado-image-loader/-/cornerstone-wado-image-loader-2.2.1.tgz#a4265861d0dba39500971b8b086169bd54069822"
+  integrity sha512-GMCc0EdHTu64fBqlCZHRdzvo9pKCSIh1nznfhDcufsLRmQR/an66uXUi6E//fI64XPdmodWZXytPR9TiZMJClA==
   dependencies:
-    dicom-parser "^1.7.6"
+    dicom-parser "^1.8.1"
 
 cosmiconfig@^4.0.0:
   version "4.0.0"
@@ -2992,7 +2992,7 @@ detect-port-alt@1.1.6:
     address "^1.0.1"
     debug "^2.6.0"
 
-dicom-parser@^1.7.6, dicom-parser@^1.8.1:
+dicom-parser@^1.8.1:
   version "1.8.1"
   resolved "https://registry.yarnpkg.com/dicom-parser/-/dicom-parser-1.8.1.tgz#5baef740f7ae2911921f3e4109b89c936b8b3273"
   integrity sha512-8lgmQ+p4KD9lWdDpte/goUFZW9BrNCqYM/mEpO2IZl1srHj+2kmzWNbIMnYdQH60IMreS0ECJ8BnWE0rHSvBGA==
@@ -3547,6 +3547,11 @@ execa@^0.9.0:
     p-finally "^1.0.0"
     signal-exit "^3.0.0"
     strip-eof "^1.0.0"
+
+exenv@^1.2.0:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/exenv/-/exenv-1.2.2.tgz#2ae78e85d9894158670b03d47bec1f03bd91bb9d"
+  integrity sha1-KueOhdmJQVhnCwPUe+wfA72Ru50=
 
 exit-hook@^1.0.0:
   version "1.1.1"
@@ -7835,7 +7840,7 @@ prompts@^0.1.9:
     kleur "^2.0.1"
     sisteransi "^0.1.1"
 
-prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2:
+prop-types@^15.5.10, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2:
   version "15.6.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.2.tgz#05d5ca77b4453e985d60fc7ff8c859094a497102"
   integrity sha512-3pboPvLiWD7dkI3qf3KbUe6hKFKa52w+AE0VCqECtf+QHAKgOL37tTaNCnuX1nAAQ4ZhyP+kYVKf8rLmJ/feDQ==
@@ -8057,6 +8062,21 @@ react-error-overlay@^5.0.4:
   version "5.0.4"
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-5.0.4.tgz#39cf184d770f98b65a2ee59a779d03b8d092b69e"
   integrity sha512-grVJtoDzIbSMYgy5rKbSOmt2FvzR4iJnpMBjXmZolSYJM5acQvBHoEbBBNW0FzTE/TLZMZ+gSy0bAHydc1hFEw==
+
+react-lifecycles-compat@^3.0.0:
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
+  integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
+
+react-modal@^3.6.1:
+  version "3.6.1"
+  resolved "https://registry.yarnpkg.com/react-modal/-/react-modal-3.6.1.tgz#54d27a1ec2b493bbc451c7efaa3557b6af82332d"
+  integrity sha512-vAhnawahH1fz8A5x/X/1X20KHMe6Q0mkfU5BKPgKSVPYhMhsxtRbNHSitsoJ7/oP27xZo3naZZlwYuuzuSO1xw==
+  dependencies:
+    exenv "^1.2.0"
+    prop-types "^15.5.10"
+    react-lifecycles-compat "^3.0.0"
+    warning "^3.0.0"
 
 react-redux@^5.0.7:
   version "5.0.7"

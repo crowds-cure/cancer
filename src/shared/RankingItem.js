@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import React from 'react';
 import './RankingItem.css';
+import PropTypes from 'prop-types';
 
 class RankingItem extends Component {
   render() {
@@ -12,5 +13,10 @@ class RankingItem extends Component {
     );
   }
 }
+
+RankingItem.propTypes = {
+  number: PropTypes.number.isRequired,
+  text: PropTypes.string.isRequired
+};
 
 export default RankingItem;

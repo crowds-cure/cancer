@@ -7,6 +7,7 @@ import ProgressSection from './shared/ProgressSection.js';
 import CaseTypeSection from './shared/CaseTypeSection.js';
 //import AchievementSection from './shared/AchievementSection.js';
 import './Dashboard.css';
+import PropTypes from 'prop-types';
 
 class Dashboard extends Component {
   render() {
@@ -29,6 +30,7 @@ class Dashboard extends Component {
         </div>
         <div className="column" id="right">
           <div className="top-right">
+            <span>{this.props.username}</span>
             <nav>
               <span className="Logout" onClick={this.logout}>
                 Log out
@@ -36,7 +38,7 @@ class Dashboard extends Component {
             </nav>
           </div>
           <div className="bottom">
-            <ProgressSection />
+            <ProgressSection current={this.props.current} />
             {/*<AchievementSection />*/}
             <CaseTypeSection />
           </div>
@@ -49,5 +51,10 @@ class Dashboard extends Component {
     window.auth.logout();
   }
 }
+
+Dashboard.propTypes = {
+  current: PropTypes.number.isRequired,
+  username: PropTypes.string.isRequired
+};
 
 export default Dashboard;

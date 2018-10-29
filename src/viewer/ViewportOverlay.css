@@ -9,7 +9,6 @@
 .ViewportOverlay .overlay-element {
   position: absolute;
   color: lightblue;
-  z-index: 2;
   text-shadow: 1px 1px black;
 }
 

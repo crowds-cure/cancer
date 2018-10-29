@@ -2,6 +2,7 @@ import { Component } from 'react';
 import React from 'react';
 import './ViewportOverlay.css';
 import * as cornerstone from 'cornerstone-core';
+import PropTypes from 'prop-types';
 
 class ViewportOverlay extends Component {
   render() {
@@ -40,5 +41,10 @@ class ViewportOverlay extends Component {
     );
   }
 }
+
+ViewportOverlay.propTypes = {
+  viewport: PropTypes.object.isRequired,
+  imageId: PropTypes.string.isRequired
+};
 
 export default ViewportOverlay;

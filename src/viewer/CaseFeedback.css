@@ -1,0 +1,42 @@
+@value globals: "../GlobalStyles.css";
+@value activeColor, uiGrayDark, textSecondaryColor from globals;
+
+.CaseFeedback {
+  height: 50px;
+  transition: all 0.3s linear;
+}
+
+.feedback-hover {
+  color: gray;
+}
+
+.feedback-options {
+  display: none;
+  padding-left: 0;
+}
+
+.CaseFeedback:hover > .feedback-options {
+  display: block;
+  position: absolute;
+  z-index: 1;
+}
+
+.CaseFeedback > .feedback-options > li {
+  margin: 10px 0;
+}
+
+.feedback-options > li > button {
+  outline: none;
+  padding: 5px;
+  width: 200px;
+  height: 40px;
+  border: none;
+  border-radius: 5px;
+  background: uiGrayDark;
+  color: textSecondaryColor;
+  transition: all 0.3s linear;
+}
+
+.feedback-options > li.active > button {
+  color: activeColor;
+}

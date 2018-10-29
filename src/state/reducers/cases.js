@@ -1,6 +1,7 @@
 const defaultState = {
   isFetching: true,
-  caseData: { data: {}, seriesData: [] }
+  caseData: { data: {}, seriesData: [] },
+  error: null
 };
 
 const cases = (state = defaultState, action) => {

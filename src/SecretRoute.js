@@ -7,7 +7,7 @@ class SecretRoute extends Component {
   constructor(props) {
     super(props);
 
-    const auth = this.props.auth;
+    const { auth, store } = props;
     const authenticated = auth.isAuthenticated();
     const hasSignInResponse = Auth.urlHasSignInResponse();
 
@@ -15,6 +15,18 @@ class SecretRoute extends Component {
       auth.login({ redirect_uri: Auth.absoluteURL(props.path) });
     } else if (!authenticated && hasSignInResponse) {
       auth.handleAuthentication().then(() => {
+        // User is Authenticated, update the Redux store
+        // with the user information
+        store.dispatch({
+          type: 'SET_FROM_DATABASE',
+          savedState: {
+            username: auth.profile.username,
+            occupation: auth.profile.occupation,
+            team: auth.profile.team,
+            experience: auth.profile.experience
+          }
+        });
+
         // Call setState to force a re-render
         this.setState({
           test: 'xyz'
@@ -26,8 +38,6 @@ class SecretRoute extends Component {
   render() {
     const { component: Component, auth, ...rest } = this.props;
 
-    // TODO: Replace 'Loading...' with
-    // a real loading page
     return (
       <Route
         {...rest}

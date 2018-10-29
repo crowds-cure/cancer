@@ -17,22 +17,51 @@ import * as cornerstoneTools from 'cornerstone-tools';
 
 import LoadingIndicator from '../shared/LoadingIndicator.js';
 import './Viewer.css';
+import PropTypes from 'prop-types';
+import Modal from 'react-modal';
+import '../shared/Modal.css';
+
+Modal.defaultStyles.overlay.backgroundColor = 'black';
+Modal.setAppElement('#root');
+
+const customStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)'
+  }
+};
 
 class Viewer extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      loading: true
+      loading: true,
+      showInstructionsModal: false
     };
 
     this.getNextCase = this.getNextCase.bind(this);
     this.skipCase = this.skipCase.bind(this);
     this.saveCase = this.saveCase.bind(this);
+    this.feedbackChanged = this.feedbackChanged.bind(this);
+
+    this.toggleModal = this.toggleModal.bind(this);
   }
 
   componentDidMount() {
     this.getNextCase();
+
+    // We need to prevent scrolling / elastic banding
+    // of the viewer page by the browser
+    document.body.classList.add('fixed-page');
+  }
+
+  componentWillUnmount() {
+    document.body.classList.remove('fixed-page');
   }
 
   componentDidUpdate(prevProps) {
@@ -142,9 +171,27 @@ class Viewer extends Component {
       <div className="Viewer">
         <div className="toolbar-row">
           <ActiveToolbar />
+          <button onClick={this.toggleModal}>Instructions</button>
+          <Modal
+            isOpen={this.state.showInstructionsModal}
+            contentLabel="Instructions"
+            onRequestClose={this.toggleModal}
+            styles={customStyles}
+            className="Modal"
+            overlayClassName="Overlay"
+            closeTimeoutMS={200}
+          >
+            <h1>Instructions</h1>
+            <p>Measure all lesions you can find.</p>
+            <span className="modal-close" onClick={this.toggleModal}>
+              Close
+            </span>
+          </Modal>
           <CaseControlButtons
+            feedbackChanged={this.feedbackChanged}
             saveCase={this.saveCase}
             skipCase={this.skipCase}
+            casesInCurrentSession={this.props.casesInCurrentSession}
           />
         </div>
         <div className="viewport-section">
@@ -192,6 +239,7 @@ class Viewer extends Component {
   saveCase() {
     const { caseData } = this.props;
 
+    this.props.incrementNumCasesInSession();
     const measurements = this.getMeasurementData();
     saveMeasurementToDatabase(caseData, measurements);
     console.log('saveCase!');
@@ -207,9 +255,24 @@ class Viewer extends Component {
 
     const { caseData } = this.props;
     saveSkipToDatabase(caseData);
-    console.log('skipCase!');
     this.getNextCase();
   }
+
+  feedbackChanged(feedback) {
+    console.warn('feedbackChanged');
+    console.warn(feedback);
+  }
+
+  toggleModal() {
+    this.setState({ showInstructionsModal: !this.state.showInstructionsModal });
+  }
 }
+
+Viewer.propTypes = {
+  caseData: PropTypes.object.isRequired,
+  isFetching: PropTypes.bool.isRequired,
+  activeTool: PropTypes.string.isRequired,
+  casesInCurrentSession: PropTypes.number.isRequired
+};
 
 export default Viewer;

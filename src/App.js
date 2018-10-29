@@ -3,36 +3,43 @@ import { Route, Switch } from 'react-router-dom';
 import SecretRoute from './SecretRoute.js';
 import './App.css';
 
-import Dashboard from './Dashboard.js';
+import ConnectedDashboard from './ConnectedDashboard.js';
 import ConnectedViewer from './ConnectedViewer.js';
-import SessionSummary from './SessionSummary.js';
+import ConnectedSessionSummary from './ConnectedSessionSummary.js';
 
 const reload = () => window.location.reload();
 
 class App extends Component {
   render() {
-    const auth = this.props.auth;
-
     return (
       <Switch>
         <SecretRoute
           exact
           path="/dashboard"
-          component={Dashboard}
-          auth={auth}
+          component={ConnectedDashboard}
+          auth={this.props.auth}
+          store={this.props.store}
         />
-        <SecretRoute exact path="/" component={Dashboard} auth={auth} />
+        <SecretRoute
+          exact
+          path="/"
+          component={ConnectedDashboard}
+          auth={this.props.auth}
+          store={this.props.store}
+        />
         <SecretRoute
           exact
           path="/viewer"
           component={ConnectedViewer}
-          auth={auth}
+          auth={this.props.auth}
+          store={this.props.store}
         />
         <SecretRoute
           exact
           path="/session-summary"
-          component={SessionSummary}
-          auth={auth}
+          component={ConnectedSessionSummary}
+          auth={this.props.auth}
+          store={this.props.store}
         />
         <Route path="/silent-refresh.html" onEnter={reload} />
         <Route path="/logout-redirect.html" onEnter={reload} />

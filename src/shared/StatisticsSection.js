@@ -2,34 +2,19 @@ import { Component } from 'react';
 import React from 'react';
 import StatisticsCard from './StatisticsCard.js';
 import './StatisticsSection.css';
+//import PropTypes from 'prop-types';
 
 class StatisticsSection extends Component {
   render() {
-    const userBadges = [
+    const stats = [
       {
-        type: 'NUM_CASES_ROOKIE',
-        dateReached: new Date()
-      },
-      {
-        type: 'NUM_CASES_ROOKIE2',
-        dateReached: new Date()
-      },
-      {
-        type: 'NUM_CASES_ROOKIE3',
-        dateReached: new Date()
-      },
-      {
-        type: 'NUM_CASES_ROOKIE4',
-        dateReached: new Date()
-      },
-      {
-        type: 'NUM_CASES_ROOKIE5',
-        dateReached: new Date()
+        number: 26,
+        description: 'Minutes average session time'
       }
     ];
 
-    const items = userBadges.map(item => (
-      <StatisticsCard key={item.type} type={item.type} />
+    const items = stats.map((item, index) => (
+      <StatisticsCard key={index} {...item} />
     ));
 
     return (
@@ -40,5 +25,9 @@ class StatisticsSection extends Component {
     );
   }
 }
+
+StatisticsSection.propTypes = {
+  //items: PropTypes.array.isRequired,
+};
 
 export default StatisticsSection;

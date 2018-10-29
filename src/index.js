@@ -19,9 +19,9 @@ window.auth = auth;
 const store = createStore(rootReducer);
 
 ReactDOM.render(
-  <Provider store={store}>
+  <Provider store={store} auth={auth}>
     <BrowserRouter>
-      <App auth={auth} />
+      <App store={store} auth={auth} />
     </BrowserRouter>
   </Provider>,
   document.getElementById('root')

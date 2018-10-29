@@ -2,7 +2,8 @@ import { connect } from 'react-redux';
 import {
   fetchCaseRequest,
   fetchCaseSuccess,
-  fetchCaseFailure
+  fetchCaseFailure,
+  incrementNumCasesInSession
 } from './state/actions.js';
 import Viewer from './viewer/Viewer.js';
 
@@ -11,18 +12,13 @@ const mapStateToProps = state => {
     return button.type === 'tool' && button.active === true;
   });
 
-  if (!state.cases) {
-    return {
-      isFetching: true,
-      caseData: null,
-      activeTool: activeTool.command
-    };
-  }
-
   return {
+    username: state.user.username,
     isFetching: state.cases.isFetching,
+    error: state.cases.error,
     caseData: state.cases.caseData,
-    activeTool: activeTool.command
+    activeTool: activeTool.command,
+    casesInCurrentSession: state.session.casesInCurrentSession
   };
 };
 
@@ -30,7 +26,8 @@ const mapDispatchToProps = dispatch => {
   return {
     fetchCaseRequest: () => dispatch(fetchCaseRequest()),
     fetchCaseSuccess: response => dispatch(fetchCaseSuccess(response)),
-    fetchCaseFailure: error => dispatch(fetchCaseFailure(error))
+    fetchCaseFailure: error => dispatch(fetchCaseFailure(error)),
+    incrementNumCasesInSession: () => dispatch(incrementNumCasesInSession())
   };
 };
 
