@@ -38,14 +38,15 @@ cornerstoneWADOImageLoader.webWorkerManager.initialize(config);
 
 cornerstoneWADOImageLoader.configure({
   beforeSend: function(xhr, imageId, headers) {
-    delete headers.accept;
+    //delete headers.accept;
 
     const header = getAuthorizationHeader();
 
     // JPEG2000 Lossless Image Compression
-    const accept = 'multipart/related; type="image/jp2"';
+    //const accept = 'multipart/related; type="image/jp2"';
+    //const accept = 'multipart/related; type="application/octet-stream"; transfer-syntax="1.2.840.10008.1.2.1"';
 
-    xhr.setRequestHeader('Accept', accept);
+    //xhr.setRequestHeader('Accept', accept);
     xhr.setRequestHeader('Authorization', header.Authorization);
   }
 });
