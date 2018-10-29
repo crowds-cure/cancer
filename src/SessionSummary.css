@@ -2,18 +2,34 @@
 @value primaryBackgroundImage, textPrimaryColor, textActiveColor from globals;
 
 .SessionSummary {
-  height: 100%;
-  width: 100%;
-  overflow: hidden; /*makes the body non-scrollable (we will add scrolling to the sidebar and main content containers)*/
-  margin: 0px; /*removes default style*/
-  display: flex; /*enables flex content for its children*/
-  box-sizing: border-box;
+  padding: 0 172.5px;
   background-image: primaryBackgroundImage;
 }
 
-.SessionSummary > span.title {
-  color: textActiveColor;
+.SessionSummary .title-wrapper {
+  text-align: center;
+  margin-top: 25px;
+}
+
+.SessionSummary .title-wrapper .title {
   font-size: 34px;
   font-weight: bold;
   font-style: italic;
+  color: textActiveColor;
+}
+
+.SessionSummary .communityStats {
+  margin-top: 120px;
+}
+
+.SessionSummary .rankingStats {
+  margin-top: 120px;
+}
+
+.SessionSummary .LogoutSection {
+  margin-top: 110px;
+}
+
+.ProgressSection {
+  margin-top: 130px;
 }

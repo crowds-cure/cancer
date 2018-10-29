@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import SecretRoute from './SecretRoute.js';
 import './App.css';
+import './grid-16.css';
 
 import ConnectedDashboard from './ConnectedDashboard.js';
 import ConnectedViewer from './ConnectedViewer.js';
