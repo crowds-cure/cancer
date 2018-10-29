@@ -84,6 +84,8 @@ class Viewer extends Component {
       loading: true
     });
 
+    clearOldCornerstoneCacheData();
+
     return getNextCase()
       .then(props.fetchCaseSuccess, props.fetchCaseFailure)
       .then(() => {
@@ -98,8 +100,6 @@ class Viewer extends Component {
     if (!seriesData || !seriesData.length) {
       return [];
     }
-
-    clearOldCornerstoneCacheData();
 
     const seriesInstances = seriesData[0];
     let imageIds = seriesInstances.map(instance => {
