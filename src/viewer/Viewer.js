@@ -18,18 +18,37 @@ import * as cornerstoneTools from 'cornerstone-tools';
 import LoadingIndicator from '../shared/LoadingIndicator.js';
 import './Viewer.css';
 import PropTypes from 'prop-types';
+import Modal from 'react-modal';
+import '../shared/Modal.css';
+
+Modal.defaultStyles.overlay.backgroundColor = 'black';
+Modal.setAppElement('#root');
+
+const customStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)'
+  }
+};
 
 class Viewer extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      loading: true
+      loading: true,
+      showInstructionsModal: false
     };
 
     this.getNextCase = this.getNextCase.bind(this);
     this.skipCase = this.skipCase.bind(this);
     this.saveCase = this.saveCase.bind(this);
+
+    this.toggleModal = this.toggleModal.bind(this);
   }
 
   componentDidMount() {
@@ -151,6 +170,22 @@ class Viewer extends Component {
       <div className="Viewer">
         <div className="toolbar-row">
           <ActiveToolbar />
+          <button onClick={this.toggleModal}>Instructions</button>
+          <Modal
+            isOpen={this.state.showInstructionsModal}
+            contentLabel="Instructions"
+            onRequestClose={this.toggleModal}
+            styles={customStyles}
+            className="Modal"
+            overlayClassName="Overlay"
+            closeTimeoutMS={200}
+          >
+            <h1>Instructions</h1>
+            <p>Measure all lesions you can find.</p>
+            <span className="modal-close" onClick={this.toggleModal}>
+              Close
+            </span>
+          </Modal>
           <CaseControlButtons
             saveCase={this.saveCase}
             skipCase={this.skipCase}
@@ -219,6 +254,10 @@ class Viewer extends Component {
     const { caseData } = this.props;
     saveSkipToDatabase(caseData);
     this.getNextCase();
+  }
+
+  toggleModal() {
+    this.setState({ showInstructionsModal: !this.state.showInstructionsModal });
   }
 }
 
