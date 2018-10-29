@@ -11,59 +11,43 @@
   background-image: primaryBackgroundImage;
 }
 
-.column {
+.Dashboard .column {
   height: 100%; /*allows both columns to span the full height of the browser window*/
   display: flex;
   flex-direction: column; /*places the left and right headers above the bottom content*/
 }
 
-#left {
+.Dashboard #left {
   flex-shrink: 0; /*makes sure that content is not cut off in a smaller browser window*/
 }
 
-#right {
+.Dashboard #right {
   flex-grow: 1;
 }
 
-.top-left {
+.Dashboard .top-left {
   flex-shrink: 0;
 }
 
-.logo {
-  width: 327px;
-  height: 24px;
-  padding: 10px;
-}
-
-.logoText {
-  color: textPrimaryColor;
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.logoText.highlight {
-  color: textActiveColor;
-}
-
-.top-right {
+.Dashboard .top-right {
   flex-shrink: 0;
   display: inline-flex;
 }
 
-ul {
+.Dashboard ul {
   display: inline-flex;
   list-style: none;
 }
 
-.bottom {
+.Dashboard .bottom {
   flex-grow: 1; /*ensures that the container will take up the full height of the parent container*/
   overflow-y: auto; /*adds scroll to this container*/
 }
 
-nav {
+.Dashboard nav {
   cursor: pointer;
 }
 
-.Logout {
+.Dashboard .Logout {
   color: textPrimaryColor;
 }
