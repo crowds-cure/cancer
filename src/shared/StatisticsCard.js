@@ -15,7 +15,7 @@ class StatisticsCard extends Component {
 }
 
 StatisticsCard.propTypes = {
-  number: PropTypes.number.isRequired,
+  number: PropTypes.number,
   description: PropTypes.string.isRequired
 };
 
