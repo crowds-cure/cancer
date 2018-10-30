@@ -18,23 +18,35 @@ class CaseFeedback extends Component {
   render() {
     const options = [
       {
-        value: 'poorQuality',
-        label: 'Poor Image Quality'
+        value: 'InadequateIVContrast',
+        label: 'Inadequate IV contrast'
       },
       {
-        value: 'noDisease',
-        label: 'No disease'
+        value: 'NoIVContrast',
+        label: 'No IV contrast'
       },
       {
-        value: 'nonContrast',
-        label: 'Non-contrast'
+        value: 'MotionArtifact',
+        label: 'Motion artifact'
       },
       {
-        value: 'artifact',
-        label: 'Artifact'
+        value: 'MissingAnatomy',
+        label: 'Missing anatomy'
       },
       {
-        value: 'unspecified',
+        value: 'PoorImageQualityOther',
+        label: 'Poor image quality, other'
+      },
+      {
+        value: 'NoDiseaseIdentified',
+        label: 'No disease identified'
+      },
+      {
+        value: 'ContainsDualPhaseImages',
+        label: 'Contains dual phase images'
+      },
+      {
+        value: 'NoFeedback',
         label: 'No Feedback'
       }
     ];
