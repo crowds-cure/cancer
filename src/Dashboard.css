@@ -2,7 +2,6 @@
 @value primaryBackgroundImage, textPrimaryColor, textActiveColor from globals;
 
 .Dashboard {
-  height: 100%;
   padding: 0 172.5px;
   background-image: primaryBackgroundImage;
 }
