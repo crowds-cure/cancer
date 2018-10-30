@@ -10,6 +10,7 @@ import ViewportOverlay from './ViewportOverlay.js';
 import ToolContextMenu from './ToolContextMenu.js';
 import LoadingIndicator from '../shared/LoadingIndicator.js';
 import './CornerstoneViewport.css';
+import guid from './lib/guid.js';
 
 const EVENT_RESIZE = 'resize';
 const loadIndicatorDelay = 25;
@@ -402,6 +403,37 @@ class CornerstoneViewport extends Component {
         isTouchActive: true
       });
     }
+
+    if (this.props.currentLesion !== prevProps.currentLesion) {
+      const currentToolData = this.props.toolData[this.props.currentLesion - 1];
+      const { imageId } = currentToolData;
+      const toolState = cornerstoneTools.globalImageIdSpecificToolStateManager.saveToolState();
+      const toolData = toolState[imageId][currentToolData.toolType].data;
+
+      toolData.forEach(data => {
+        if (data._id === currentToolData._id) {
+          data.active = true;
+        } else {
+          data.active = false;
+        }
+      });
+
+      cornerstoneTools.globalImageIdSpecificToolStateManager.restoreToolState(
+        toolState
+      );
+
+      if (this.state.imageId === imageId) {
+        cornerstone.updateImage(this.element);
+      } else {
+        cornerstone.loadAndCacheImage(imageId).then(image => {
+          cornerstone.displayImage(this.element, image);
+
+          this.setState({
+            imageId
+          });
+        });
+      }
+    }
   }
 
   onStackScroll(event) {
@@ -448,15 +480,28 @@ class CornerstoneViewport extends Component {
   }
 
   onMeasurementAddedOrRemoved(event) {
-    const toolType = event.detail.toolType;
+    const { toolType, measurementData } = event.detail;
+
+    measurementData._id = guid();
 
     // TODO: Pass in as prop?
     const toolsOfInterest = ['Bidirectional'];
 
     if (toolsOfInterest.includes(toolType)) {
-      const toolState = cornerstoneTools.getToolState(this.element, toolType);
+      const image = cornerstone.getImage(this.element);
 
-      this.props.measurementsChanged(toolType, toolState.data);
+      const type = {
+        cornerstonetoolsmeasurementadded: 'added',
+        cornerstonetoolsmeasurementremoved: 'removed'
+      };
+      const action = type[event.type];
+
+      this.props.measurementsChanged(
+        action,
+        image.imageId,
+        toolType,
+        measurementData
+      );
     }
   }
 

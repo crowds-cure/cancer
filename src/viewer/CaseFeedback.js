@@ -74,8 +74,6 @@ class CaseFeedback extends Component {
 
   updateSelectedOptions(event) {
     const option = event.target.id;
-    console.warn(`clicked: ${option}`);
-
     const selected = this.state.selected;
 
     if (selected.has(option)) {

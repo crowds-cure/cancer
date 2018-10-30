@@ -1,0 +1,14 @@
+.MeasurementControl {
+}
+
+.MeasurementControl > span.number {
+  height: 50px;
+  font-size: 20px;
+  color: red;
+  padding: 15px;
+}
+
+.MeasurementControl > button {
+  height: 50px;
+  width: 100px;
+}

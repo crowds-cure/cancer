@@ -3,7 +3,7 @@ import React from 'react';
 import CornerstoneViewport from './CornerstoneViewport.js';
 import ActiveToolbar from './ActiveToolbar.js';
 import CaseControlButtons from './CaseControlButtons.js';
-
+import MeasurementControl from './MeasurementControl.js';
 import getNextCase from '../case/getNextCase.js';
 
 import clearOldCornerstoneCacheData from './lib/clearOldCornerstoneCacheData.js';
@@ -44,7 +44,9 @@ class Viewer extends Component {
       loading: true,
       showInstructionsModal: false,
       feedback: [],
-      hasMeasurements: false
+      hasMeasurements: false,
+      currentLesion: 0,
+      toolData: []
     };
 
     this.getNextCase = this.getNextCase.bind(this);
@@ -55,6 +57,8 @@ class Viewer extends Component {
     this.feedbackChanged = this.feedbackChanged.bind(this);
     this.measurementsChanged = this.measurementsChanged.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
+    this.previous = this.previous.bind(this);
+    this.next = this.next.bind(this);
   }
 
   componentDidMount() {
@@ -169,6 +173,8 @@ class Viewer extends Component {
         <div key={index} className="viewport">
           {item ? (
             <CornerstoneViewport
+              currentLesion={this.state.currentLesion}
+              toolData={this.state.toolData}
               measurementsChanged={this.measurementsChanged}
               viewportData={item}
               activeTool={activeTool}
@@ -200,6 +206,11 @@ class Viewer extends Component {
               Close
             </span>
           </Modal>
+          <MeasurementControl
+            previous={this.previous}
+            next={this.next}
+            number={this.state.currentLesion}
+          />
           <CaseControlButtons
             sessionStart={this.props.sessionStart}
             feedbackChanged={this.feedbackChanged}
@@ -295,14 +306,66 @@ class Viewer extends Component {
     });
   }
 
-  measurementsChanged(toolType, toolData) {
+  measurementsChanged(action, imageId, toolType, measurementData) {
+    let updatedToolData = this.state.toolData;
+    if (action === 'added') {
+      updatedToolData.push({
+        imageId,
+        ...measurementData
+      });
+    } else {
+      const index = updatedToolData.indexOf(measurementData);
+      updatedToolData.splice(index, 1);
+    }
+    const hasMeasurements = this.state.toolData.length > 0;
+
+    let currentLesion = this.state.currentLesion;
+    if (currentLesion === 0 && hasMeasurements) {
+      currentLesion = 1;
+    } else if (!hasMeasurements) {
+      currentLesion = 0;
+    }
+
     this.setState({
-      hasMeasurements: toolData.length > 0
+      hasMeasurements,
+      toolData: updatedToolData,
+      currentLesion
     });
   }
 
   toggleModal() {
     this.setState({ showInstructionsModal: !this.state.showInstructionsModal });
+  }
+
+  previous() {
+    const { currentLesion, toolData } = this.state;
+    const numberOfLesions = toolData.length;
+
+    let previousLesion;
+    if (currentLesion === 1) {
+      previousLesion = numberOfLesions;
+    } else {
+      previousLesion = currentLesion - 1;
+    }
+
+    this.setState({
+      currentLesion: previousLesion
+    });
+  }
+
+  next() {
+    const { currentLesion, toolData } = this.state;
+    const numberOfLesions = toolData.length;
+    let nextLesion;
+    if (currentLesion === numberOfLesions) {
+      nextLesion = 1;
+    } else {
+      nextLesion = currentLesion + 1;
+    }
+
+    this.setState({
+      currentLesion: nextLesion
+    });
   }
 }
 

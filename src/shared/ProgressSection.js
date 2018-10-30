@@ -59,7 +59,7 @@ class ProgressSection extends Component {
 }
 
 ProgressSection.propTypes = {
-  current: PropTypes.number.isRequired,
+  current: PropTypes.number,
   casesInCurrentSession: PropTypes.number
 };
 

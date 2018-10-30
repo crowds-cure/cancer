@@ -59,9 +59,7 @@ async function saveMeasurementToDatabase(caseData, measurements) {
     userAgent: navigator.userAgent
   };
 
-  console.warn(doc);
   const response = await measurementsDB.put(doc);
-  console.warn(response);
 
   console.time('saveAttachment to Measurement DB');
   measurements.forEach(measurement => {

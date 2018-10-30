@@ -3,7 +3,6 @@ import * as cornerstoneWADOImageLoader from 'cornerstone-wado-image-loader';
 import * as cornerstoneTools from 'cornerstone-tools';
 
 export default function clearOldCornerstoneCacheData() {
-  console.warn('clearOldCornerstoneCacheData');
   // Purge the old image cache, we don't expect to ever load the same case again
   cornerstone.imageCache.purgeCache();
 
