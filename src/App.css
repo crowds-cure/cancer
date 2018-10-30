@@ -6,7 +6,10 @@ body,
 }
 
 body {
-  margin: 0px; /*removes default style*/
   box-sizing: border-box;
   font-family: 'WorkSans', 'SF Pro Text', 'Roboto', 'Helvetica Neue', sans-serif;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }

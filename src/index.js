@@ -6,7 +6,6 @@ import { Provider } from 'react-redux';
 
 import rootReducer from './state/reducers';
 
-import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import Auth from './openid-connect/Auth.js';
