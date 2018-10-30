@@ -35,8 +35,8 @@ class StatisticsSection extends Component {
     const colClass = this.props.col ? `col-${this.props.col}` : 'col';
 
     const items = stats.map((item, index) => (
-      <div className={colClass}>
-        <StatisticsCard key={index} {...item} />
+      <div key={index} className={colClass}>
+        <StatisticsCard {...item} />
       </div>
     ));
 
