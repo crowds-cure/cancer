@@ -1,10 +1,8 @@
 @value globals: "../GlobalStyles.css";
 @value textPrimaryColor, textActiveColor from globals;
 
-.CaseTypeSection {
-  display: inline-block;
-}
-
 .CaseTypeSectionTitle {
   color: textActiveColor;
+  margin: 120px 0 26px 0;
+  font-size: 24px;
 }

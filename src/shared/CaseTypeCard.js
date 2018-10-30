@@ -13,21 +13,21 @@ class CaseTypeCard extends Component {
 
   render() {
     return (
-      <div className="CaseTypeCard" onClick={this.onClick}>
-        <div className="title">
-          <span className="name">{this.props.name}</span>
-          <span className="type">{this.props.type}</span>
+      <div className="col-12 col-md-8 col-lg-5">
+        <div className="CaseTypeCard" onClick={this.onClick}>
+          <div className="title">
+            <span className="name">{this.props.name}</span>
+            <span className="type">{this.props.type}</span>
+          </div>
+          <div
+            onClick={this.redirect}
+            title={this.props.description}
+            className="info-icon svgContainer">
+            <svg>
+              <use xlinkHref="/icons.svg#icon-trial-info" />
+            </svg>
+          </div>
         </div>
-        <div
-          onClick={this.redirect}
-          title={this.props.description}
-          className="info-icon svgContainer"
-        >
-          <svg>
-            <use xlinkHref="/icons.svg#icon-trial-info" />
-          </svg>
-        </div>
-        {/*<img src={{this.props.img}}></img>*/}
       </div>
     );
   }
