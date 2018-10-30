@@ -3,26 +3,28 @@ import React from 'react';
 import RankingItem from './RankingItem.js';
 import './RankingSection.css';
 import PropTypes from 'prop-types';
+import getTopAnnotators from './getTopAnnotators';
 
 class RankingSection extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      topAnnotators: []
+    };
+
+    getTopAnnotators().then(topAnnotators => {
+      this.setState({
+        topAnnotators
+      });
+    });
+  }
+
   render() {
-    const rankingItems = [
-      {
-        number: 250,
-        text: 'misty_mandrill'
-      },
-      {
-        number: 200,
-        text: 'shadowy_bee'
-      },
-      {
-        number: 200,
-        text: 'scary_porcupine'
-      }
-    ];
+    const rankingItems = this.state.topAnnotators;
 
     const items = rankingItems.map((item, index) => (
-      <RankingItem key={index} number={item.number} text={item.text} />
+      <RankingItem key={index} number={item.value} text={item.name} />
     ));
 
     return (
