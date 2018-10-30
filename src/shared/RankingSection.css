@@ -2,9 +2,8 @@
 @value textActiveColor, textSecondaryColor from globals;
 
 .RankingSection {
-  padding: 10px;
+  margin: 10px 0;
 }
-
 .RankingSection .title {
   font-size: 20px;
   font-weight: bold;
@@ -16,5 +15,6 @@
   display: block;
   border-left: 1px solid textSecondaryColor;
   padding-left: 15px;
+  margin: 0px;
   list-style-type: none;
 }

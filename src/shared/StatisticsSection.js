@@ -42,7 +42,7 @@ class StatisticsSection extends Component {
 
     return (
       <div className="StatisticsSection">
-        <span className="subTitle">Community stats</span>
+        <div className="subTitle">Community stats</div>
         <div className="row">{items}</div>
       </div>
     );

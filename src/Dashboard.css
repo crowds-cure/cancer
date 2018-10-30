@@ -3,49 +3,8 @@
 
 .Dashboard {
   height: 100%;
-  width: 100%;
-  overflow: hidden; /*makes the body non-scrollable (we will add scrolling to the sidebar and main content containers)*/
-  margin: 0px; /*removes default style*/
-  display: flex; /*enables flex content for its children*/
-  box-sizing: border-box;
+  padding: 0 172.5px;
   background-image: primaryBackgroundImage;
-}
-
-.Dashboard .column {
-  height: 100%; /*allows both columns to span the full height of the browser window*/
-  display: flex;
-  flex-direction: column; /*places the left and right headers above the bottom content*/
-}
-
-.Dashboard #left {
-  flex-shrink: 0; /*makes sure that content is not cut off in a smaller browser window*/
-}
-
-.Dashboard #right {
-  flex-grow: 1;
-}
-
-.Dashboard .top-left {
-  flex-shrink: 0;
-}
-
-.Dashboard .top-right {
-  flex-shrink: 0;
-  display: inline-flex;
-}
-
-.Dashboard ul {
-  display: inline-flex;
-  list-style: none;
-}
-
-.Dashboard .bottom {
-  flex-grow: 1; /*ensures that the container will take up the full height of the parent container*/
-  overflow-y: auto; /*adds scroll to this container*/
-}
-
-.Dashboard nav {
-  cursor: pointer;
 }
 
 .Dashboard .Logout {

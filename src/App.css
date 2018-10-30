@@ -1,33 +1,12 @@
+html,
+body,
 #root {
-  height: 100%;
-  width: 100%;
-  overflow: hidden; /*makes the body non-scrollable (we will add scrolling to the sidebar and main content containers)*/
-  margin: 0px; /*removes default style*/
-  display: flex; /*enables flex content for its children*/
-  box-sizing: border-box;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-html {
   height: 100%;
   width: 100%;
 }
 
 body {
-  height: 100%;
-  width: 100%;
   margin: 0px; /*removes default style*/
-  display: flex; /*enables flex content for its children*/
   box-sizing: border-box;
   font-family: 'WorkSans', 'SF Pro Text', 'Roboto', 'Helvetica Neue', sans-serif;
 }
