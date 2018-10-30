@@ -1,0 +1,54 @@
+@value globals: "../GlobalStyles.css";
+@value medalBorderColor from globals;
+
+.medal-bg-lg,
+.medal-bg-md,
+.medal-bg-sm {
+  background: white;
+  transform: rotate(45deg);
+  border-color: medalBorderColor;
+  border-style: solid;
+}
+
+.medal-bg-lg .medal,
+.medal-bg-md .medal,
+.medal-bg-sm .medal {
+  object-fit: contain;
+  transform: rotate(-45deg);
+}
+
+.medal-bg-lg {
+  border-width: 5px;
+  height: 67px;
+  width: 67px;
+}
+
+.medal-bg-lg .medal {
+  height: 50px;
+  margin: 7px;
+  width: 50px;
+}
+
+.medal-bg-md {
+  border-width: 4px;
+  height: 45px;
+  width: 45px;
+}
+
+.medal-bg-md .medal {
+  height: 35px;
+  margin: 3px;
+  width: 35px;
+}
+
+.medal-bg-sm {
+  border-width: 3px;
+  height: 30px;
+  width: 30px;
+}
+
+.medal-bg-sm .medal {
+  height: 22px;
+  margin: 3px;
+  width: 22px;
+}

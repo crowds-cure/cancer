@@ -47,7 +47,7 @@ class CaseTypeSection extends Component {
     return (
       <>
         <h1 className="CaseTypeSectionTitle">Select a case type</h1>
-        <div className="CaseTypeSection">
+        <div className="CaseTypeSection row">
           {isLoading ? 'Loading...' : items}
         </div>
       </>

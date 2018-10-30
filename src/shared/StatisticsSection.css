@@ -4,12 +4,6 @@
 .StatisticsSection .subTitle {
   font-size: 20px;
   font-weight: bold;
-  display: block;
-  padding: 5px;
-  margin-bottom: 12px;
+  margin-bottom: 17px;
   color: textActiveColor;
-}
-
-.StatisticsCard {
-  width: 20%;
 }

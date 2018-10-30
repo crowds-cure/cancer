@@ -10,17 +10,40 @@ class StatisticsSection extends Component {
       {
         number: 26,
         description: 'Minutes average session time'
+      },
+      {
+        number: 26,
+        description: 'Minutes average session time'
+      },
+      {
+        number: 26,
+        description: 'Minutes average session time'
+      },
+      {
+        number: 26,
+        description: 'Minutes average session time'
+      },
+      {
+        number: 26,
+        description: 'Minutes average session time'
+      },
+      {
+        number: 26,
+        description: 'Minutes average session time'
       }
     ];
+    const colClass = this.props.col ? `col-${this.props.col}` : 'col';
 
     const items = stats.map((item, index) => (
-      <StatisticsCard key={index} {...item} />
+      <div className={colClass}>
+        <StatisticsCard key={index} {...item} />
+      </div>
     ));
 
     return (
       <div className="StatisticsSection">
-        <span className="subTitle">Community stats</span>
-        {items}
+        <div className="subTitle">Community stats</div>
+        <div className="row">{items}</div>
       </div>
     );
   }

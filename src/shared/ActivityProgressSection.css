@@ -1,0 +1,29 @@
+@value globals: "../GlobalStyles.css";
+@value textPrimaryColor, textSecondaryColor from globals;
+
+.ActivityProgressSection .title {
+  color: textPrimaryColor;
+}
+
+.ActivityProgressSection .currentPoints {
+  position: relative;
+}
+
+.ActivityProgressSection .value {
+  color: textPrimaryColor;
+  font-weight: bold;
+  font-size: 81px;
+  line-height: 81px;
+}
+
+.ActivityProgressSection .suffix {
+  font-variant-caps: small-caps;
+  font-size: 15px;
+  color: textSecondaryColor;
+}
+
+.ActivityProgressSection .medalContainer {
+  position: absolute;
+  top: 15px;
+  left: -60px;
+}

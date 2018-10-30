@@ -1,9 +1,10 @@
 import { Component } from 'react';
 import React from 'react';
-import ProgressBar from './ProgressBar.js';
-import './ProgressSection.css';
 import PropTypes from 'prop-types';
-import medal from '../images/medal.svg';
+import ProgressBar from './ProgressBar.js';
+import Medal from './Medal.js';
+
+import './ProgressSection.css';
 
 class ProgressSection extends Component {
   constructor(props) {
@@ -31,9 +32,7 @@ class ProgressSection extends Component {
         <div>
           <div className="numberCases">
             <div className="medalContainer">
-              <div className="medalBackground">
-                <img src={medal} className="medal" alt="medal" />
-              </div>
+              <Medal size="lg" type="NUM_CASES_NEWBIE" />
             </div>
             <div className="currentPoints">
               <span className="value">{this.props.current}</span>
