@@ -6,7 +6,7 @@ import * as cornerstoneTools from 'cornerstone-tools';
 import PropTypes from 'prop-types';
 import './ToolContextMenu.css';
 
-const toolTypes = ['Length'];
+const toolTypes = ['Bidirectional'];
 
 let defaultDropdownItems = [
   {

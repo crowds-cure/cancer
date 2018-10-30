@@ -38,7 +38,7 @@ function saveAttachment(measurement, response) {
 
   cornerstone.loadAndCacheImage(measurement.imageId).then(image => {
     // TODO: Switch to Bidirectional
-    cornerstoneTools.setToolEnabled('LengthTool');
+    cornerstoneTools.setToolEnabled('BidirectionalTool');
 
     cornerstone.displayImage(image, element);
   });

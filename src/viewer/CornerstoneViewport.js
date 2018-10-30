@@ -185,7 +185,7 @@ class CornerstoneViewport extends Component {
       cornerstoneTools.stackPrefetch.enable(this.element);
 
       const tools = [
-        'Length',
+        'Bidirectional',
         'Wwwc',
         'Zoom',
         'Pan',
@@ -381,7 +381,13 @@ class CornerstoneViewport extends Component {
     }
 
     if (this.props.activeTool !== prevProps.activeTool) {
-      const leftMouseTools = ['Length', 'Wwwc', 'Zoom', 'Pan', 'StackScroll'];
+      const leftMouseTools = [
+        'Bidirectional',
+        'Wwwc',
+        'Zoom',
+        'Pan',
+        'StackScroll'
+      ];
 
       setToolsPassive(leftMouseTools);
 
@@ -445,7 +451,7 @@ class CornerstoneViewport extends Component {
     const toolType = event.detail.toolType;
 
     // TODO: Pass in as prop?
-    const toolsOfInterest = ['Length'];
+    const toolsOfInterest = ['Bidirectional'];
 
     if (toolsOfInterest.includes(toolType)) {
       const toolState = cornerstoneTools.getToolState(this.element, toolType);

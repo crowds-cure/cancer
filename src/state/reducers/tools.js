@@ -21,18 +21,18 @@ const defaultButtons = [
     active: false
   },
   {
-    command: 'Length',
+    command: 'Bidirectional',
     type: 'tool',
-    text: 'Length',
-    svgUrl: '/icons.svg#icon-tools-measure-temp',
-    active: false
+    text: 'Bidirectional',
+    svgUrl: '/icons.svg#icon-tools-measure-target',
+    active: true
   },
   {
     command: 'StackScroll',
     type: 'tool',
     text: 'Stack Scroll',
     svgUrl: '/icons.svg#icon-tools-stack-scroll',
-    active: true
+    active: false
   },
   {
     command: 'ClearAll',
