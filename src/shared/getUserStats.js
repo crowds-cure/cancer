@@ -7,9 +7,6 @@ async function getTotalMeasurementsForUser(measurementsDB, username) {
     endkey: username
   });
 
-  console.warn(result);
-  debugger;
-
   return result.rows[0].value;
 }
 

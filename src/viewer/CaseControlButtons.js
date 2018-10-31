@@ -1,12 +1,19 @@
 import { Component } from 'react';
 import React from 'react';
 import './CaseControlButtons.css';
-import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import CaseFeedback from './CaseFeedback.js';
 import CaseProgressIndicator from './CaseProgressIndicator.js';
 import PropTypes from 'prop-types';
+import sendSessionStatisticsToDatabase from './lib/sendSessionStatisticsToDatabase.js';
 
 class CaseControlButtons extends Component {
+  constructor(props) {
+    super(props);
+
+    this.endSession = this.endSession.bind(this);
+  }
+
   static defaultProps = {
     skipEnabled: false,
     saveEnabled: false,
@@ -36,13 +43,30 @@ class CaseControlButtons extends Component {
         <CaseProgressIndicator
           casesInCurrentSession={this.props.casesInCurrentSession}
         />
-        <Link to="/session-summary">End Session</Link>
+        <button onClick={this.endSession}>End Session</button>
       </div>
     );
+  }
+
+  endSession() {
+    const savedStartTime = this.props.sessionStart;
+    const start = Math.round(savedStartTime / 1000);
+    const end = Math.round(Date.now() / 1000);
+
+    const currentSession = {
+      start,
+      end,
+      cases: this.props.casesInCurrentSession
+    };
+
+    sendSessionStatisticsToDatabase(currentSession);
+
+    this.props.history.push('/session-summary');
   }
 }
 
 CaseControlButtons.propTypes = {
+  sessionStart: PropTypes.number.isRequired,
   skipEnabled: PropTypes.bool.isRequired,
   saveEnabled: PropTypes.bool.isRequired,
   skipCase: PropTypes.func.isRequired,
@@ -51,4 +75,4 @@ CaseControlButtons.propTypes = {
   casesInCurrentSession: PropTypes.number.isRequired
 };
 
-export default CaseControlButtons;
+export default withRouter(CaseControlButtons);

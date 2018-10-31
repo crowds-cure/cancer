@@ -60,6 +60,11 @@ class CaseTypeSection extends Component {
       collection: name
     });
 
+    this.context.store.dispatch({
+      type: 'SET_SESSION_START_DATE',
+      start: Date.now()
+    });
+
     this.props.history.push('/viewer');
   }
 }

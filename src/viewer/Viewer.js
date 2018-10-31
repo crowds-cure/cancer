@@ -201,6 +201,7 @@ class Viewer extends Component {
             </span>
           </Modal>
           <CaseControlButtons
+            sessionStart={this.props.sessionStart}
             feedbackChanged={this.feedbackChanged}
             saveEnabled={this.isSaveEnabled()}
             saveCase={this.saveCase}
