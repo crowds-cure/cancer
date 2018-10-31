@@ -7,9 +7,10 @@ import PropTypes from 'prop-types';
 class CaseProgressIndicator extends Component {
   render() {
     return (
-      <span className="CaseProgressIndicator">
-        {this.props.casesInCurrentSession} Cases
-      </span>
+      <div className="CaseProgressIndicator">
+        <span className="cases">{this.props.casesInCurrentSession}</span>
+        <div className="casesLabel">SESSION MEASUREMENTS</div>
+      </div>
     );
   }
 }

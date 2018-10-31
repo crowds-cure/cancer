@@ -1,9 +1,15 @@
 import { Component } from 'react';
 import React from 'react';
+import PropTypes from 'prop-types';
+import Modal from 'react-modal';
+import { Redirect } from 'react-router-dom';
+
 import CornerstoneViewport from './CornerstoneViewport.js';
 import ActiveToolbar from './ActiveToolbar.js';
 import CaseControlButtons from './CaseControlButtons.js';
 import MeasurementControl from './MeasurementControl.js';
+import HeaderSection from './HeaderSection.js';
+
 import getNextCase from '../case/getNextCase.js';
 
 import clearOldCornerstoneCacheData from './lib/clearOldCornerstoneCacheData.js';
@@ -16,10 +22,8 @@ import * as cornerstoneWADOImageLoader from 'cornerstone-wado-image-loader';
 import * as cornerstoneTools from 'cornerstone-tools';
 
 import LoadingIndicator from '../shared/LoadingIndicator.js';
+
 import './Viewer.css';
-import PropTypes from 'prop-types';
-import Modal from 'react-modal';
-import { Redirect } from 'react-router-dom';
 import '../shared/Modal.css';
 
 Modal.defaultStyles.overlay.backgroundColor = 'black';
@@ -188,6 +192,11 @@ class Viewer extends Component {
 
     return (
       <div className="Viewer">
+        <div>
+          <HeaderSection
+            casesInCurrentSession={this.props.casesInCurrentSession}
+          />
+        </div>
         <div className="toolbar-row">
           <ActiveToolbar />
           <button onClick={this.toggleModal}>Instructions</button>
@@ -218,7 +227,6 @@ class Viewer extends Component {
             saveCase={this.saveCase}
             skipEnabled={this.isSkipEnabled()}
             skipCase={this.skipCase}
-            casesInCurrentSession={this.props.casesInCurrentSession}
           />
         </div>
         <div className="viewport-section">
