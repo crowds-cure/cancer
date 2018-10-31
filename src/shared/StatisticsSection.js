@@ -23,31 +23,38 @@ class StatisticsSection extends Component {
   render() {
     const { communityStats } = this.state;
 
+    const {
+      totalMeasurements,
+      numAnnotators,
+      averageMeasurementsPerAnnotator,
+      recentMeasurements
+    } = communityStats;
+
     const stats = [
       {
-        number: communityStats.totalMeasurements,
+        number: totalMeasurements,
         description: 'Total Measurements'
       },
       {
-        number: 26,
-        description: 'Minutes average session time'
+        number: numAnnotators,
+        description: 'Participants'
       },
       {
-        number: 26,
-        description: 'Minutes average session time'
+        number: averageMeasurementsPerAnnotator,
+        description: 'Avg. Measurements / Participant'
       },
       {
-        number: 26,
-        description: 'Minutes average session time'
-      },
-      {
-        number: 26,
-        description: 'Minutes average session time'
-      },
-      {
-        number: 26,
-        description: 'Minutes average session time'
+        number: recentMeasurements,
+        description: 'Measurements yesterday' // TODO Switch to RSNA dates
       }
+      /*{
+        number: 26,
+        description: "Minutes average session time"
+      },
+      {
+        number: 26,
+        description: "Minutes average session time"
+      }*/
     ];
     const colClass = this.props.col ? `col-${this.props.col}` : 'col';
 

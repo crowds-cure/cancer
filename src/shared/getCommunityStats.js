@@ -26,13 +26,58 @@ async function getTotalMeasurements(measurementsDB) {
   return result.rows[0].value;
 }
 
+async function getTotalMeasurementsInDateRange(
+  measurementsDB,
+  startDate,
+  endDate
+) {
+  const result = await measurementsDB.query('by/date', {
+    startkey: Math.floor(startDate.valueOf() / 1000),
+    endkey: Math.floor(endDate.valueOf() / 1000)
+  });
+
+  return result.rows[0].value;
+}
+
+async function getNumAnnotators(measurementsDB) {
+  // TODO: This is a very inefficient approach to get the number of
+  // unique annotators
+  const result = await measurementsDB.query('by/annotators', {
+    reduce: true,
+    group: true,
+    level: 'exact'
+  });
+
+  return result.rows.length;
+}
+
 async function getCommunityStats() {
   const measurementsDB = getDB('measurements');
 
   const totalMeasurements = await getTotalMeasurements(measurementsDB);
+  const numAnnotators = await getNumAnnotators(measurementsDB);
+  const averageMeasurementsPerAnnotator = Math.round(
+    totalMeasurements / numAnnotators
+  );
+
+  // TODO: Use entire week? Switch to RSNA dates?
+  const today = new Date();
+  const yesterday = new Date(new Date().setDate(new Date().getDate() - 1));
+
+  const startDate = yesterday;
+  const endDate = today;
+
+  const recentMeasurements = await getTotalMeasurementsInDateRange(
+    measurementsDB,
+    startDate,
+    endDate
+  );
 
   return {
-    totalMeasurements
+    totalMeasurements,
+    averageMeasurementsPerAnnotator,
+    numAnnotators,
+    recentMeasurements
   };
 }
 
