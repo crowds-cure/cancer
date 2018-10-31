@@ -1,14 +1,57 @@
 .MeasurementControl {
 }
 
-.MeasurementControl > span.number {
-  height: 50px;
-  font-size: 20px;
-  color: red;
-  padding: 15px;
+.MeasurementControl .controls {
+  border-radius: 8px;
+  border: solid 1px #4a4d7a;
+  background-color: #000000;
+  padding: 10px 0;
+  height: 45px;
 }
 
-.MeasurementControl > button {
-  height: 50px;
-  width: 100px;
+.MeasurementControl .controls .number {
+  font-size: 20px;
+  color: #7cf4fe;
+  margin: 0 10px;
+}
+
+.MeasurementControl .controls .left-arrow,
+.MeasurementControl .controls .right-arrow {
+  border: 7px solid #7cf4fe;
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+  display: inline-block;
+  width: 0;
+  height: 0;
+}
+
+.MeasurementControl .controls .right-arrow {
+  border-right: 0px;
+  margin-left: 2px;
+}
+
+.MeasurementControl .controls .left-arrow {
+  border-left: 0px;
+  margin-right: 2px;
+}
+
+.MeasurementControl .controls .previous,
+.MeasurementControl .controls .next {
+  width: 22px;
+  height: 22px;
+  display: inline-block;
+  background: #262548;
+  border-radius: 50%;
+  margin: 0 10px;
+  padding: 3px 0px 0px 6px;
+}
+
+.MeasurementControl .lesions {
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 12px;
+  font-weight: normal;
+  letter-spacing: 1px;
+  color: #7cf4fe;
+  margin: 7px;
 }

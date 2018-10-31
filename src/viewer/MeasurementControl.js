@@ -7,13 +7,16 @@ class MeasurementControl extends Component {
   render() {
     return (
       <div className="MeasurementControl">
-        <button className="previous" onClick={this.props.previous}>
-          Previous
-        </button>
-        <span className="number">{this.props.number}</span>
-        <button className="next" onClick={this.props.next}>
-          Next
-        </button>
+        <div className="controls">
+          <span className="previous" onClick={this.props.previous}>
+            <span className="left-arrow" />
+          </span>
+          <span className="number">{this.props.number}</span>
+          <span className="next" onClick={this.props.next}>
+            <span className="right-arrow" />
+          </span>
+        </div>
+        <div className="lesions">lesions</div>
       </div>
     );
   }
