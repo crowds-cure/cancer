@@ -3,7 +3,6 @@
 
 .SessionSummary {
   height: 100%;
-  padding: 0 172.5px;
   background-image: primaryBackgroundImage;
   overflow-y: scroll;
 }
