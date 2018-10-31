@@ -1,7 +1,6 @@
 import { Component } from 'react';
 import React from 'react';
 import PropTypes from 'prop-types';
-import Modal from 'react-modal';
 import { Redirect } from 'react-router-dom';
 
 import CornerstoneViewport from './CornerstoneViewport.js';
@@ -24,21 +23,6 @@ import * as cornerstoneTools from 'cornerstone-tools';
 import LoadingIndicator from '../shared/LoadingIndicator.js';
 
 import './Viewer.css';
-import '../shared/Modal.css';
-
-Modal.defaultStyles.overlay.backgroundColor = 'black';
-Modal.setAppElement('#root');
-
-const customStyles = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)'
-  }
-};
 
 class Viewer extends Component {
   constructor(props) {
@@ -46,7 +30,6 @@ class Viewer extends Component {
 
     this.state = {
       loading: true,
-      showInstructionsModal: false,
       feedback: [],
       hasMeasurements: false,
       currentLesion: 0,
@@ -60,7 +43,6 @@ class Viewer extends Component {
     this.isSkipEnabled = this.isSkipEnabled.bind(this);
     this.feedbackChanged = this.feedbackChanged.bind(this);
     this.measurementsChanged = this.measurementsChanged.bind(this);
-    this.toggleModal = this.toggleModal.bind(this);
     this.previous = this.previous.bind(this);
     this.next = this.next.bind(this);
   }
@@ -199,22 +181,6 @@ class Viewer extends Component {
         </div>
         <div className="toolbar-row">
           <ActiveToolbar />
-          <button onClick={this.toggleModal}>Instructions</button>
-          <Modal
-            isOpen={this.state.showInstructionsModal}
-            contentLabel="Instructions"
-            onRequestClose={this.toggleModal}
-            styles={customStyles}
-            className="Modal"
-            overlayClassName="Overlay"
-            closeTimeoutMS={200}
-          >
-            <h1>Instructions</h1>
-            <p>Measure all lesions you can find.</p>
-            <span className="modal-close" onClick={this.toggleModal}>
-              Close
-            </span>
-          </Modal>
           <MeasurementControl
             previous={this.previous}
             next={this.next}
@@ -339,10 +305,6 @@ class Viewer extends Component {
       toolData: updatedToolData,
       currentLesion
     });
-  }
-
-  toggleModal() {
-    this.setState({ showInstructionsModal: !this.state.showInstructionsModal });
   }
 
   previous() {

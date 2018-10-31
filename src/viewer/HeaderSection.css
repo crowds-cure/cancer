@@ -20,9 +20,10 @@
   margin: 16px 0 14px 20px;
 }
 
-.HeaderSection .endSession {
+.HeaderSection .endSession,
+.HeaderSection .instructionsSection {
   float: right;
-  margin: 20px 20px 16px 0;
+  margin: 20px 20px 16px 20px;
 }
 
 .HeaderSection .endSession .link {
@@ -35,4 +36,10 @@
   float: right;
   padding: 12px 5px 12px 14px;
   border-left: solid 1px #4a4d7a;
+}
+
+.HeaderSection .instructionsSection .instructions {
+  font-size: 15px;
+  text-decoration: none;
+  color: white;
 }
