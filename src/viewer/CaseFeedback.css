@@ -6,37 +6,84 @@
   transition: all 0.3s linear;
 }
 
-.feedback-hover {
-  color: gray;
+.CaseFeedback .feedback-hover {
+  border-radius: 9px;
+  border: solid 3px #000000;
+  background-color: #14132d;
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 15px;
+  padding: 16px;
 }
 
-.feedback-options {
+.CaseFeedback .arrow-down {
+  width: 0;
+  height: 0;
+  border: 5px solid white;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  position: relative;
+  top: 12px;
+  right: 0px;
+  margin-left: 10px;
+}
+
+.CaseFeedback .feedback-options {
   display: none;
-  padding-left: 0;
+  background-color: #1e1d32;
+  border-radius: 9px;
+  padding: 6px 16px 16px 16px;
+  margin-top: 16px;
 }
 
-.CaseFeedback:hover > .feedback-options {
+.CaseFeedback .feedback-options:before {
+  content: '';
+  width: 0;
+  height: 0;
+  border: 12px solid #1e1d32;
+  border-top-color: transparent;
+  border-right-color: transparent;
+  border-left-color: transparent;
+  position: absolute;
+  top: -24px;
+  left: 70px;
+}
+
+.CaseFeedback:hover .feedback-options,
+.CaseFeedback:hover .button {
   display: block;
   position: absolute;
   z-index: 1;
 }
 
-.CaseFeedback > .feedback-options > li {
-  margin: 10px 0;
+.CaseFeedback .feedback-options ul {
+  padding-left: 0;
+  margin-top: 0;
 }
 
-.feedback-options > li > button {
-  outline: none;
-  padding: 5px;
-  width: 200px;
+.CaseFeedback .feedback-options li {
+  padding-top: 10px;
+  list-style: none;
+  color: white;
+}
+
+.CaseFeedback .feedback-options .customCheckbox {
+  margin-right: 20px;
+}
+
+.CaseFeedback .feedback-options .buttom {
+  display: block;
+  width: 100%;
+  margin-top: 15px;
   height: 40px;
-  border: none;
-  border-radius: 5px;
-  background: uiGrayDark;
-  color: textSecondaryColor;
-  transition: all 0.3s linear;
 }
 
-.feedback-options > li.active > button {
+.CaseFeedback .feedback-options li.active {
   color: activeColor;
+}
+
+.CaseFeedback .button {
+  display: none;
 }
