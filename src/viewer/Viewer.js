@@ -286,18 +286,25 @@ class Viewer extends Component {
 
   measurementsChanged(action, imageId, toolType, measurementData) {
     let updatedToolData = this.state.toolData;
+    let currentLesion = this.state.currentLesion;
+
     if (action === 'added') {
       updatedToolData.push({
         imageId,
         ...measurementData
       });
+
+      // TOOD: Update the current lesion if we add new ones
+      // We can't use this right now because it inadvertently
+      // forces an update while the user is still placing the
+      // measurement.
+      // currentLesion = updatedToolData.length - 1;
     } else {
       const index = updatedToolData.indexOf(measurementData);
       updatedToolData.splice(index, 1);
     }
     const hasMeasurements = this.state.toolData.length > 0;
 
-    let currentLesion = this.state.currentLesion;
     if (currentLesion === 0 && hasMeasurements) {
       currentLesion = 1;
     } else if (!hasMeasurements) {
@@ -314,6 +321,9 @@ class Viewer extends Component {
   previous() {
     const { currentLesion, toolData } = this.state;
     const numberOfLesions = toolData.length;
+    if (numberOfLesions === 0) {
+      return;
+    }
 
     let previousLesion;
     if (currentLesion === 1) {
@@ -330,6 +340,10 @@ class Viewer extends Component {
   next() {
     const { currentLesion, toolData } = this.state;
     const numberOfLesions = toolData.length;
+    if (numberOfLesions === 0) {
+      return;
+    }
+
     let nextLesion;
     if (currentLesion === numberOfLesions) {
       nextLesion = 1;

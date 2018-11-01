@@ -6,14 +6,17 @@ import PropTypes from 'prop-types';
 class MeasurementControl extends Component {
   render() {
     return (
-      <div className="MeasurementControl">
+      <div className="MeasurementControl noselect">
         <div className="controls">
-          <span className="previous" onClick={this.props.previous}>
-            <span className="left-arrow" />
+          <span
+            className="previous arrow-container"
+            onClick={this.props.previous}
+          >
+            <span className="left-arrow arrow" />
           </span>
           <span className="number">{this.props.number}</span>
-          <span className="next" onClick={this.props.next}>
-            <span className="right-arrow" />
+          <span className="next arrow-container" onClick={this.props.next}>
+            <span className="right-arrow arrow" />
           </span>
         </div>
         <div className="lesions">lesions</div>

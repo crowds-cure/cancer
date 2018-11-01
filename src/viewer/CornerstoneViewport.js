@@ -406,32 +406,36 @@ class CornerstoneViewport extends Component {
 
     if (this.props.currentLesion !== prevProps.currentLesion) {
       const currentToolData = this.props.toolData[this.props.currentLesion - 1];
-      const { imageId } = currentToolData;
-      const toolState = cornerstoneTools.globalImageIdSpecificToolStateManager.saveToolState();
-      const toolData = toolState[imageId][currentToolData.toolType].data;
+      if (currentToolData) {
+        const { imageId } = currentToolData;
+        const toolState = cornerstoneTools.globalImageIdSpecificToolStateManager.saveToolState();
+        const toolData = toolState[imageId][currentToolData.toolType].data;
 
-      toolData.forEach(data => {
-        if (data._id === currentToolData._id) {
-          data.active = true;
-        } else {
-          data.active = false;
-        }
-      });
-
-      cornerstoneTools.globalImageIdSpecificToolStateManager.restoreToolState(
-        toolState
-      );
-
-      if (this.state.imageId === imageId) {
-        cornerstone.updateImage(this.element);
-      } else {
-        cornerstone.loadAndCacheImage(imageId).then(image => {
-          cornerstone.displayImage(this.element, image);
-
-          this.setState({
-            imageId
-          });
+        toolData.forEach(data => {
+          if (data._id === currentToolData._id) {
+            data.active = true;
+          } else {
+            data.active = false;
+          }
         });
+
+        cornerstoneTools.globalImageIdSpecificToolStateManager.restoreToolState(
+          toolState
+        );
+
+        if (this.state.imageId === imageId) {
+          cornerstone.updateImage(this.element);
+        } else {
+          cornerstone.loadAndCacheImage(imageId).then(image => {
+            cornerstone.displayImage(this.element, image);
+
+            this.setState({
+              imageId
+            });
+          });
+        }
+      } else {
+        cornerstone.updateImage(this.element);
       }
     }
   }

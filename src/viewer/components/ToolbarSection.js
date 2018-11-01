@@ -23,7 +23,12 @@ class ToolbarSection extends Component {
   onClick(id) {
     const buttonItem = this.props.buttons.find(item => item.command === id);
 
-    const activeElement = cornerstone.getEnabledElements()[0].element;
+    const elements = cornerstone.getEnabledElements();
+    if (!elements || !elements.length) {
+      return;
+    }
+
+    const activeElement = elements[0].element;
 
     if (buttonItem.type === 'tool') {
       this.props.setToolActive(buttonItem.command);

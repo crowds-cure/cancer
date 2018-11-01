@@ -18,6 +18,9 @@ const defaultWlPresets = {
 const viewerCommands = {
   setWL: function(element, windowWidth, windowCenter) {
     const viewport = cornerstone.getViewport(element);
+    if (!viewport) {
+      return;
+    }
 
     viewport.voi.windowWidth = windowWidth;
     viewport.voi.windowCenter = windowCenter;

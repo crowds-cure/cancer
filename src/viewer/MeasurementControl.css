@@ -26,6 +26,37 @@
   height: 0;
 }
 
+.MeasurementControl .controls .arrow-container {
+  cursor: pointer;
+  transition: 0.15s all ease;
+}
+
+.MeasurementControl .controls .arrow-container .arrow {
+  transition: 0.15s all ease;
+}
+
+.MeasurementControl .controls .arrow-container:hover {
+  background-color: #0f373b;
+}
+
+.MeasurementControl .controls .arrow-container:active {
+  background-color: #7cf4fe;
+}
+
+.MeasurementControl .controls .arrow-container:active > .arrow {
+  border: 7px solid black;
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+}
+
+.MeasurementControl .controls .arrow-container:active > .left-arrow {
+  border-left: 0px;
+}
+
+.MeasurementControl .controls .arrow-container:active > .right-arrow {
+  border-right: 0px;
+}
+
 .MeasurementControl .controls .right-arrow {
   border-right: 0px;
   margin-left: 2px;
