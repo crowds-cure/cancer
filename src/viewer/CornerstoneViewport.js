@@ -374,6 +374,14 @@ class CornerstoneViewport extends Component {
       const imageId = currentStack.imageIds[currentStack.currentImageIdIndex];
 
       cornerstone.loadAndCacheImage(imageId).then(image => {
+        try {
+          cornerstone.getEnabledElement(this.element);
+        } catch (error) {
+          // Handle cases where the user ends the session before the image is displayed.
+          console.error(error);
+          return;
+        }
+
         cornerstone.displayImage(this.element, image);
 
         cornerstoneTools.stackPrefetch.disable(this.element);
@@ -427,6 +435,14 @@ class CornerstoneViewport extends Component {
           cornerstone.updateImage(this.element);
         } else {
           cornerstone.loadAndCacheImage(imageId).then(image => {
+            try {
+              cornerstone.getEnabledElement(this.element);
+            } catch (error) {
+              // Handle cases where the user ends the session before the image is displayed.
+              console.error(error);
+              return;
+            }
+
             cornerstone.displayImage(this.element, image);
 
             this.setState({
