@@ -23,7 +23,6 @@ body.fixed-page {
 }
 
 .viewport-section .viewport {
-  border: 1px solid blue;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
