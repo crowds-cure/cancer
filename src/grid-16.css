@@ -27,29 +27,29 @@ html {
   margin-left: auto;
 }
 
-/* @media (min-width: 576px) {
+@media (min-width: 355px) {
   .container {
-    max-width: 540px;
+    max-width: 355px;
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1000px) {
   .container {
-    max-width: 720px;
+    max-width: 1000px;
   }
 }
 
-@media (min-width: 992px) {
+@media (min-width: 1400px) {
   .container {
-    max-width: 960px;
+    max-width: 1400px;
   }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1600px) {
   .container {
-    max-width: 1140px;
+    max-width: 1600px;
   }
-} */
+}
 
 .container-fluid {
   width: 100%;
