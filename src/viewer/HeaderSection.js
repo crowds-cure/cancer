@@ -79,7 +79,47 @@ class HeaderSection extends Component {
               closeTimeoutMS={200}
             >
               <h1>Instructions</h1>
-              <p>Measure all lesions you can find.</p>
+              <h2>Create</h2>
+              <ul>
+                <li>
+                  Measure all of the metastatic lesions that you can find with
+                  the Bidirectional measurement tool. There is no minimum size
+                  for measurement. You will get 1 point for each lesion that is
+                  measured.
+                </li>
+                <li>
+                  Label the lesions and add a description (e.g., ill-defined,
+                  confluent, necrotic, etc.). Use the ‘previous’ and ‘next’
+                  buttons to review the lesions that you have measured.
+                </li>
+                <li>
+                  Use toolbar options or hotkeys (1 = soft tissue; 2 = lung; 3 =
+                  liver) to window/level.
+                </li>
+                <li>
+                  Provide case feedback regarding image quality and/or presence
+                  of disease. Feedback is only required if you want to skip the
+                  case.
+                </li>
+                <li>
+                  Return to the dashboard at anytime to change your case type
+                  selection.
+                </li>
+                <li>End the session (logout) when you are finished.</li>
+              </ul>
+              <h2>Create</h2>
+              <ul>
+                <li>
+                  Log back in under your username to measure more cases.
+                  Measurements can be made on any personal device; you are not
+                  restricted to Crowds Cure Cancer workstations.
+                </li>
+                <li>
+                  Track your personal progress and the progress of other RSNA
+                  attendees. The leaderboard will show the top readers and
+                  community stats for RSNA 2018.
+                </li>
+              </ul>
               <span className="modal-close" onClick={this.toggleModal}>
                 Close
               </span>
