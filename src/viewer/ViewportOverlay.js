@@ -28,7 +28,6 @@ class ViewportOverlay extends Component {
         <div className="top-left overlay-element">
           <span>{collection}</span>
           <span>{patientId}</span>
-          <span>{studyInstanceUID}</span>
           <span>{studyDate}</span>
           <span>{studyDescription}</span>
         </div>
