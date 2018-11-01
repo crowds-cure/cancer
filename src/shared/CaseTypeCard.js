@@ -7,7 +7,6 @@ class CaseTypeCard extends Component {
   constructor(props) {
     super(props);
 
-    this.redirect = this.redirect.bind(this);
     this.onClick = this.onClick.bind(this);
   }
 
@@ -20,9 +19,10 @@ class CaseTypeCard extends Component {
             <span className="type">{this.props.type}</span>
           </div>
           <div
-            onClick={this.redirect}
+            onClick={this.props.clickInfo}
             title={this.props.description}
-            className="info-icon svgContainer">
+            className="info-icon svgContainer"
+          >
             <svg>
               <use xlinkHref="/icons.svg#icon-trial-info" />
             </svg>
@@ -35,18 +35,12 @@ class CaseTypeCard extends Component {
   onClick() {
     this.props.click(this.props.name);
   }
-
-  redirect(event) {
-    event.stopPropagation();
-    window.open(this.props.link);
-  }
 }
 
 CaseTypeCard.propTypes = {
   click: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
-  link: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired
 };
 

@@ -5,9 +5,6 @@ import PropTypes from 'prop-types';
 
 class ProgressBar extends Component {
   render() {
-    console.log(this.props);
-    debugger;
-
     return (
       <progress
         className="ProgressBar"

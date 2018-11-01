@@ -2,8 +2,6 @@ import { Component } from 'react';
 import React from 'react';
 import CaseTypeCard from './CaseTypeCard.js';
 import './CaseTypeSection.css';
-import { withRouter } from 'react-router-dom';
-import { getDB } from '../db';
 import PropTypes from 'prop-types';
 
 class CaseTypeSection extends Component {
@@ -11,36 +9,20 @@ class CaseTypeSection extends Component {
     super(props);
 
     this.onClick = this.onClick.bind(this);
-
-    this.state = {
-      types: [],
-      isLoading: true
-    };
-
-    const collectionsDB = getDB('collections');
-
-    collectionsDB.allDocs({ include_docs: true }).then(docs => {
-      const types = docs.rows.map(row => row.doc);
-
-      this.setState({
-        types,
-        isLoading: false
-      });
-    });
   }
 
   render() {
-    const { isLoading, types } = this.state;
+    const { isLoading, types } = this.props;
 
     const items = types.map(item => (
       <CaseTypeCard
         key={item.Collection}
         name={item.Collection}
         type={item.Type}
-        link={item.Link}
         description={item.Description}
         img={item.img}
         click={event => this.onClick(event, item)}
+        clickInfo={event => this.props.onClickInfo(event, item)}
       />
     ));
 
@@ -73,4 +55,9 @@ CaseTypeSection.contextTypes = {
   store: PropTypes.object.isRequired
 };
 
-export default withRouter(CaseTypeSection);
+CaseTypeSection.propTypes = {
+  isLoading: PropTypes.bool.isRequired,
+  types: PropTypes.array.isRequired
+};
+
+export default CaseTypeSection;

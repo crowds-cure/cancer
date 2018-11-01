@@ -2,7 +2,6 @@
 @value uiGrayDarker, uiBorderColor, textActiveColor, textSecondaryColor from globals;
 
 .Modal {
-  width: 400px;
   background: uiGrayDarker;
   position: absolute;
   top: 50%;
