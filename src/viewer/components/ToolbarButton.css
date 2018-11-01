@@ -2,11 +2,11 @@
 @value defaultColor, activeColor, hoverColor from globals;
 
 .ToolbarButton {
-  width: 48px;
   height: 48px;
   color: defaultColor;
   float: left;
-  padding: 0 10px;
+  text-align: center;
+  padding: 5px;
   cursor: pointer;
 
   -webkit-touch-callout: none; /* iOS Safari */
@@ -49,4 +49,5 @@
   font-size: 14px;
   width: 100%;
   text-align: center;
+  display: block;
 }
