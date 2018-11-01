@@ -76,7 +76,11 @@ class Viewer extends Component {
 
     props.fetchCaseRequest();
     this.setState({
-      loading: true
+      loading: true,
+      feedback: [],
+      hasMeasurements: false,
+      currentLesion: 0,
+      toolData: []
     });
 
     clearOldCornerstoneCacheData();
