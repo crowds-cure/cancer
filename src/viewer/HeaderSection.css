@@ -1,0 +1,45 @@
+@value globals: "../GlobalStyles.css";
+@value textPrimaryColor, textActiveColor, viewerHeaderColor from globals;
+
+.HeaderSection {
+  background-color: viewerHeaderColor;
+}
+
+.HeaderSection .logoText {
+  color: textPrimaryColor;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.HeaderSection .logoText.highlight {
+  color: textActiveColor;
+}
+
+.HeaderSection .logo {
+  display: inline-block;
+  margin: 16px 0 14px 20px;
+}
+
+.HeaderSection .endSession,
+.HeaderSection .instructionsSection {
+  float: right;
+  margin: 20px 20px 16px 20px;
+}
+
+.HeaderSection .endSession .link {
+  font-size: 15px;
+  text-decoration: none;
+  color: white;
+}
+
+.HeaderSection .caseProgress {
+  float: right;
+  padding: 12px 5px 12px 14px;
+  border-left: solid 1px #4a4d7a;
+}
+
+.HeaderSection .instructionsSection .instructions {
+  font-size: 15px;
+  text-decoration: none;
+  color: white;
+}

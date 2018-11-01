@@ -1,11 +1,12 @@
 import { Component } from 'react';
 import React from 'react';
-import './CaseControlButtons.css';
 import { withRouter } from 'react-router-dom';
-import CaseFeedback from './CaseFeedback.js';
-import CaseProgressIndicator from './CaseProgressIndicator.js';
 import PropTypes from 'prop-types';
 import sendSessionStatisticsToDatabase from './lib/sendSessionStatisticsToDatabase.js';
+
+import CaseFeedback from './CaseFeedback.js';
+
+import './CaseControlButtons.css';
 
 class CaseControlButtons extends Component {
   constructor(props) {
@@ -40,10 +41,6 @@ class CaseControlButtons extends Component {
             Save
           </button>
         </div>
-        <CaseProgressIndicator
-          casesInCurrentSession={this.props.casesInCurrentSession}
-        />
-        <button onClick={this.endSession}>End Session</button>
       </div>
     );
   }
