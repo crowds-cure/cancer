@@ -32,17 +32,8 @@ class Dashboard extends Component {
 
     return (
       <div className="Dashboard">
+        <SimpleHeaderSection username={this.props.username} page="dashboard" />
         <div className="container">
-          <div className="row">
-            <div className="col">
-              <SimpleHeaderSection />
-              {/* These will be styled soon */}
-              <span className="Logout">{this.props.username} </span>
-              <span className="Logout" onClick={this.logout}>
-                Log out
-              </span>
-            </div>
-          </div>
           <div className="row">
             <div className="col-lg-5 offset-lg-4 col-md-7 offset-md-2">
               <ActivityProgressSection current={current} />
