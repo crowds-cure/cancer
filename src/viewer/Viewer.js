@@ -176,6 +176,7 @@ class Viewer extends Component {
       <div className="Viewer">
         <div>
           <HeaderSection
+            sessionStart={this.props.sessionStart}
             casesInCurrentSession={this.props.casesInCurrentSession}
           />
         </div>
@@ -187,7 +188,6 @@ class Viewer extends Component {
             number={this.state.currentLesion}
           />
           <CaseControlButtons
-            sessionStart={this.props.sessionStart}
             feedbackChanged={this.feedbackChanged}
             saveEnabled={this.isSaveEnabled()}
             saveCase={this.saveCase}

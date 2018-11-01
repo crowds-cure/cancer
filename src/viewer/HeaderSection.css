@@ -5,6 +5,14 @@
   background-color: viewerHeaderColor;
 }
 
+.HeaderSection button {
+  border: none;
+  -webkit-appearance: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+}
+
 .HeaderSection .logoText {
   color: textPrimaryColor;
   font-size: 20px;

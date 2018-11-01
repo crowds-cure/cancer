@@ -5,9 +5,11 @@ import PropTypes from 'prop-types';
 
 class StatisticsCard extends Component {
   render() {
+    const number = this.props.number === undefined ? '---' : this.props.number;
+
     return (
       <div className="StatisticsCard">
-        <span className="number">{this.props.number}</span>
+        <span className="number">{number}</span>
         <span className="description">{this.props.description}</span>
       </div>
     );

@@ -1,20 +1,11 @@
 import { Component } from 'react';
 import React from 'react';
-import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import sendSessionStatisticsToDatabase from './lib/sendSessionStatisticsToDatabase.js';
-
 import CaseFeedback from './CaseFeedback.js';
 
 import './CaseControlButtons.css';
 
 class CaseControlButtons extends Component {
-  constructor(props) {
-    super(props);
-
-    this.endSession = this.endSession.bind(this);
-  }
-
   static defaultProps = {
     skipEnabled: false,
     saveEnabled: false,
@@ -24,46 +15,24 @@ class CaseControlButtons extends Component {
   render() {
     return (
       <div className="CaseControlButtons">
-        <CaseFeedback feedbackChanged={this.props.feedbackChanged} />
-        <div className="btn-group">
-          <button
-            type="button"
-            disabled={!this.props.skipEnabled}
-            onClick={this.props.skipCase}
-          >
-            Skip
-          </button>
-          <button
-            type="button"
-            disabled={!this.props.saveEnabled}
-            onClick={this.props.saveCase}
-          >
-            Save
-          </button>
-        </div>
+        <CaseFeedback
+          feedbackChanged={this.props.feedbackChanged}
+          skipEnabled={this.props.skipEnabled}
+          skipCase={this.props.skipCase}
+        />
+        <button
+          type="button"
+          disabled={!this.props.saveEnabled}
+          onClick={this.props.saveCase}
+        >
+          Complete
+        </button>
       </div>
     );
-  }
-
-  endSession() {
-    const savedStartTime = this.props.sessionStart;
-    const start = Math.round(savedStartTime / 1000);
-    const end = Math.round(Date.now() / 1000);
-
-    const currentSession = {
-      start,
-      end,
-      cases: this.props.casesInCurrentSession
-    };
-
-    sendSessionStatisticsToDatabase(currentSession);
-
-    this.props.history.push('/session-summary');
   }
 }
 
 CaseControlButtons.propTypes = {
-  sessionStart: PropTypes.number.isRequired,
   skipEnabled: PropTypes.bool.isRequired,
   saveEnabled: PropTypes.bool.isRequired,
   skipCase: PropTypes.func.isRequired,
@@ -72,4 +41,4 @@ CaseControlButtons.propTypes = {
   casesInCurrentSession: PropTypes.number.isRequired
 };
 
-export default withRouter(CaseControlButtons);
+export default CaseControlButtons;

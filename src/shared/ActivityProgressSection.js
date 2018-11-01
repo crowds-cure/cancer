@@ -27,6 +27,9 @@ class ProgressSection extends Component {
       casesInCurrentSession: this.props.casesInCurrentSession
     };
 
+    const current =
+      this.props.current === undefined ? '---' : this.props.current;
+
     return (
       <div className="ActivityProgressSection">
         <div className="title">Your Activity</div>
@@ -42,7 +45,7 @@ class ProgressSection extends Component {
           />
         </div>
         <div className="currentPoints">
-          <div className="value">{this.props.current}</div>
+          <div className="value">{current}</div>
           <div className="suffix">measured</div>
         </div>
       </div>

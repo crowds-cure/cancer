@@ -9,7 +9,7 @@ class SimpleHeaderSection extends Component {
       <div className="logoutSection">
         <span className="username">{this.props.username}</span>
         <span className="logoutButton" onClick={this.logout}>
-          Log out
+          Logout
         </span>
       </div>
     );

@@ -10,11 +10,6 @@ class ViewportOverlay extends Component {
     const scale = this.props.viewport.scale;
     const imageId = this.props.imageId;
 
-    const generalSeriesModule = cornerstone.metaData.get(
-      'generalSeriesModule',
-      imageId
-    );
-    const { studyInstanceUID } = generalSeriesModule;
     const patientId = cornerstone.metaData.get('00100020', imageId);
     const studyDate = cornerstone.metaData.get('00080020', imageId);
     const collection = cornerstone.metaData.get('00131010', imageId);

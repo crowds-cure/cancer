@@ -2,12 +2,13 @@ import { Component } from 'react';
 import React from 'react';
 import PropTypes from 'prop-types';
 import Modal from 'react-modal';
-import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 import CaseProgressIndicator from './CaseProgressIndicator.js';
 
 import './HeaderSection.css';
 import '../shared/Modal.css';
+import sendSessionStatisticsToDatabase from './lib/sendSessionStatisticsToDatabase';
 
 Modal.defaultStyles.overlay.backgroundColor = 'black';
 Modal.setAppElement('#root');
@@ -32,6 +33,7 @@ class HeaderSection extends Component {
     };
 
     this.toggleModal = this.toggleModal.bind(this);
+    this.endSession = this.endSession.bind(this);
   }
 
   toggleModal(e) {
@@ -55,14 +57,18 @@ class HeaderSection extends Component {
             />
           </div>
           <div className="endSession">
-            <Link to="/session-summary" className="link">
+            <button
+              to="/session-summary"
+              className="link"
+              onClick={this.endSession}
+            >
               End Session
-            </Link>
+            </button>
           </div>
           <div className="instructionsSection">
-            <a href="#" className="instructions" onClick={this.toggleModal}>
+            <button className="instructions" onClick={this.toggleModal}>
               Instructions
-            </a>
+            </button>
             <Modal
               isOpen={this.state.showInstructionsModal}
               contentLabel="Instructions"
@@ -83,10 +89,27 @@ class HeaderSection extends Component {
       </div>
     );
   }
+
+  endSession() {
+    const savedStartTime = this.props.sessionStart;
+    const start = Math.round(savedStartTime / 1000);
+    const end = Math.round(Date.now() / 1000);
+
+    const currentSession = {
+      start,
+      end,
+      cases: this.props.casesInCurrentSession
+    };
+
+    sendSessionStatisticsToDatabase(currentSession);
+
+    this.props.history.push('/session-summary');
+  }
 }
 
 HeaderSection.propTypes = {
+  sessionStart: PropTypes.number.isRequired,
   casesInCurrentSession: PropTypes.number.isRequired
 };
 
-export default HeaderSection;
+export default withRouter(HeaderSection);

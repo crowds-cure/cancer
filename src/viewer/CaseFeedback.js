@@ -54,7 +54,6 @@ class CaseFeedback extends Component {
     const opts = options.map(option => {
       const active = this.state.selected.has(option.value);
       return (
-        // TODO: Replace (CHECKED) with a checkmark or something
         <li key={option.value} className={active ? 'active' : ''}>
           <input
             type="checkbox"
@@ -77,7 +76,13 @@ class CaseFeedback extends Component {
         </div>
         <div className="feedback-options">
           <ul>{opts}</ul>
-          <button className="buttom">Skip case</button>
+          <button
+            className="buttom"
+            disabled={!this.props.skipEnabled}
+            onClick={this.props.skipCase}
+          >
+            Skip case
+          </button>
           <button className="buttom">Continue case</button>
         </div>
       </div>
@@ -101,6 +106,8 @@ class CaseFeedback extends Component {
 }
 
 CaseFeedback.propTypes = {
+  skipEnabled: PropTypes.bool.isRequired,
+  skipCase: PropTypes.func.isRequired,
   feedbackChanged: PropTypes.func.isRequired
 };
 

@@ -5,10 +5,13 @@ import PropTypes from 'prop-types';
 
 class RankingItem extends Component {
   render() {
+    const number = this.props.number === undefined ? '---' : this.props.number;
+    const text = this.props.text === undefined ? 'Loading...' : this.props.text;
+
     return (
       <li className="RankingItem">
-        <span className="number">{this.props.number}</span>
-        <span className="text">{this.props.text}</span>
+        <span className="number">{number}</span>
+        <span className="text">{text}</span>
       </li>
     );
   }

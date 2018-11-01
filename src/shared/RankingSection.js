@@ -10,7 +10,7 @@ class RankingSection extends Component {
     super(props);
 
     this.state = {
-      topAnnotators: []
+      topAnnotators: [{}, {}, {}]
     };
 
     getTopAnnotators().then(topAnnotators => {
