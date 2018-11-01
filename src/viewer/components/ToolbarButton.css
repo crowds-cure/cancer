@@ -6,7 +6,7 @@
   color: defaultColor;
   float: left;
   text-align: center;
-  padding: 5px;
+  padding: 0 5px;
   cursor: pointer;
 
   -webkit-touch-callout: none; /* iOS Safari */

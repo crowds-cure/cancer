@@ -4,25 +4,23 @@
   background-color: black;
 }
 
-body.fixed-page {
-  position: fixed;
-  overflow: hidden;
+.Viewer .LoadingIndicator {
+  background: black !important;
 }
 
-.toolbar-row {
-  height: 50px;
+.Viewer .toolbar-row {
   display: inline-flex;
   width: 100%;
 }
 
-.viewport-section {
+.Viewer .viewport-section {
   width: 100%;
-  height: calc(100% - 50px);
+  height: calc(100% - 147px);
   position: relative;
   display: flex;
 }
 
-.viewport-section .viewport {
+.Viewer .viewport-section .viewport {
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
