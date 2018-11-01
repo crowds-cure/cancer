@@ -1,6 +1,7 @@
 .CaseControlButtons {
-  display: inline-flex;
-  flex: 1 1 auto;
+  padding-top: 13px;
+  margin-right: 35px;
+  margin-left: 20px;
 }
 
 .CaseControlButtons button {
@@ -21,4 +22,6 @@
 }
 
 .CaseControlButtons .btn-group {
+  display: inline-block;
+  margin-left: 15px;
 }

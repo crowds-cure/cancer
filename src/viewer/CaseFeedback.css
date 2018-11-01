@@ -2,7 +2,7 @@
 @value activeColor, uiGrayDark, textSecondaryColor from globals;
 
 .CaseFeedback {
-  height: 50px;
+  display: inline-block;
   transition: all 0.3s linear;
 }
 
@@ -14,7 +14,7 @@
   font-size: 15px;
   font-weight: 600;
   line-height: 15px;
-  padding: 16px;
+  padding: 15px;
 }
 
 .CaseFeedback .arrow-down {
