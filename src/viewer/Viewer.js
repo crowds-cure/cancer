@@ -187,6 +187,7 @@ class Viewer extends Component {
         <div className="toolbar-row">
           <ActiveToolbar />
           <MeasurementControl
+            disabled={!this.state.hasMeasurements}
             previous={this.previous}
             next={this.next}
             number={this.state.currentLesion}

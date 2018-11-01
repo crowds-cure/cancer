@@ -6,7 +6,7 @@
   transition: all 0.3s linear;
 }
 
-.CaseFeedback .feedback-hover {
+.CaseFeedback .feedback-button {
   border-radius: 9px;
   border: solid 3px #000000;
   background-color: #14132d;
@@ -15,6 +15,7 @@
   font-weight: 600;
   line-height: 15px;
   padding: 15px;
+  cursor: pointer;
 }
 
 .CaseFeedback .arrow-down {
@@ -31,7 +32,9 @@
 }
 
 .CaseFeedback .feedback-options {
-  display: none;
+  display: block;
+  position: absolute;
+  z-index: 50;
   background-color: #1e1d32;
   border-radius: 9px;
   padding: 6px 16px 16px 16px;
@@ -49,13 +52,6 @@
   position: absolute;
   top: -24px;
   left: 70px;
-}
-
-.CaseFeedback:hover .feedback-options,
-.CaseFeedback:hover .button {
-  display: block;
-  position: absolute;
-  z-index: 1;
 }
 
 .CaseFeedback .feedback-options ul {

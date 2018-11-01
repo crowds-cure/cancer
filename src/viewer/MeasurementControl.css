@@ -35,15 +35,26 @@
   transition: 0.15s all ease;
 }
 
-.MeasurementControl .controls .arrow-container:hover {
+.MeasurementControl .controls.disabled .arrow-container {
+  background-color: #262548;
+  cursor: not-allowed;
+}
+
+.MeasurementControl .controls.disabled .arrow-container > .arrow {
+  border: 7px solid #3a5874;
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+}
+
+.MeasurementControl .controls:not(.disabled) .arrow-container:hover {
   background-color: #0f373b;
 }
 
-.MeasurementControl .controls .arrow-container:active {
+.MeasurementControl .controls:not(.disabled) .arrow-container:active {
   background-color: #7cf4fe;
 }
 
-.MeasurementControl .controls .arrow-container:active > .arrow {
+.MeasurementControl .controls:not(.disabled) .arrow-container:active > .arrow {
   border: 7px solid black;
   border-top-color: transparent;
   border-bottom-color: transparent;
@@ -54,6 +65,14 @@
 }
 
 .MeasurementControl .controls .arrow-container:active > .right-arrow {
+  border-right: 0px;
+}
+
+.MeasurementControl .controls.disabled .arrow-container > .left-arrow {
+  border-left: 0px;
+}
+
+.MeasurementControl .controls.disabled .arrow-container > .right-arrow {
   border-right: 0px;
 }
 

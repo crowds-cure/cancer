@@ -9,10 +9,13 @@ class CaseFeedback extends Component {
     super(props);
 
     this.state = {
-      selected: new Set()
+      selected: new Set(),
+      isOpen: false
     };
 
     this.updateSelectedOptions = this.updateSelectedOptions.bind(this);
+    this.openDropdown = this.openDropdown.bind(this);
+    this.skipCase = this.skipCase.bind(this);
   }
 
   render() {
@@ -69,22 +72,24 @@ class CaseFeedback extends Component {
     });
 
     return (
-      <div className="CaseFeedback">
-        <div className="feedback-hover">
+      <div className="CaseFeedback noselect">
+        <div className="feedback-button" onClick={this.openDropdown}>
           Case Feedback
           <span className="arrow-down" />
         </div>
-        <div className="feedback-options">
-          <ul>{opts}</ul>
-          <button
-            className="buttom"
-            disabled={!this.props.skipEnabled}
-            onClick={this.props.skipCase}
-          >
-            Skip case
-          </button>
-          <button className="buttom">Continue case</button>
-        </div>
+        {this.state.isOpen && (
+          <div className="feedback-options">
+            <ul>{opts}</ul>
+            <button
+              className="buttom"
+              disabled={!this.props.skipEnabled}
+              onClick={this.skipCase}
+            >
+              Skip case
+            </button>
+            <button className="buttom">Continue case</button>
+          </div>
+        )}
       </div>
     );
   }
@@ -102,6 +107,21 @@ class CaseFeedback extends Component {
     this.setState({ selected });
 
     this.props.feedbackChanged({ selected });
+  }
+
+  openDropdown() {
+    this.setState({
+      isOpen: !this.state.isOpen
+    });
+  }
+
+  skipCase() {
+    this.setState({
+      isOpen: false,
+      selected: new Set()
+    });
+
+    this.props.skipCase();
   }
 }
 

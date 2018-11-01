@@ -7,7 +7,7 @@ class MeasurementControl extends Component {
   render() {
     return (
       <div className="MeasurementControl noselect">
-        <div className="controls">
+        <div className={this.props.disabled ? 'controls disabled' : 'controls'}>
           <span
             className="previous arrow-container"
             onClick={this.props.previous}
