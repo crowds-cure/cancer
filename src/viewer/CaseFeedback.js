@@ -16,6 +16,7 @@ class CaseFeedback extends Component {
     this.updateSelectedOptions = this.updateSelectedOptions.bind(this);
     this.openDropdown = this.openDropdown.bind(this);
     this.skipCase = this.skipCase.bind(this);
+    this.closeDropdown = this.closeDropdown.bind(this);
   }
 
   render() {
@@ -87,7 +88,9 @@ class CaseFeedback extends Component {
             >
               Skip case
             </button>
-            <button className="buttom">Continue case</button>
+            <button className="buttom" onClick={this.closeDropdown}>
+              Continue case
+            </button>
           </div>
         )}
       </div>
@@ -112,6 +115,12 @@ class CaseFeedback extends Component {
   openDropdown() {
     this.setState({
       isOpen: !this.state.isOpen
+    });
+  }
+
+  closeDropdown() {
+    this.setState({
+      isOpen: false
     });
   }
 
