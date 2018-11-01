@@ -2,6 +2,7 @@ import { Component } from 'react';
 import React from 'react';
 import CaseTypeCard from './CaseTypeCard.js';
 import './CaseTypeSection.css';
+import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 class CaseTypeSection extends Component {
@@ -60,4 +61,4 @@ CaseTypeSection.propTypes = {
   types: PropTypes.array.isRequired
 };
 
-export default CaseTypeSection;
+export default withRouter(CaseTypeSection);
