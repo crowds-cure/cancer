@@ -2,15 +2,38 @@
 @value textPrimaryColor, textActiveColor from globals;
 
 .simpleHeader {
-  margin: 30px 0;
+  background-color: #1e1d39;
+  padding: 15px 20px;
+  margin-bottom: 30px;
 }
 
-.logoText {
+.simpleHeader .logo {
+  display: inline-block;
+}
+
+.simpleHeader .logoText {
   color: textPrimaryColor;
   font-size: 20px;
   font-weight: bold;
 }
 
-.logoText.highlight {
+.simpleHeader .logoText.highlight {
   color: textActiveColor;
+}
+
+.simpleHeader .logoutSection {
+  float: right;
+}
+
+.simpleHeader .logoutSection .username {
+  font-size: 15px;
+  font-weight: normal;
+  color: #b8baee;
+  padding-right: 10px;
+}
+
+.simpleHeader .logoutSection .logoutButton {
+  color: #71f7fe;
+  border-left: 1px solid #b8baee;
+  padding-left: 10px;
 }

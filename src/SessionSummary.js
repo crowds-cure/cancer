@@ -13,12 +13,8 @@ class SessionSummary extends Component {
   render() {
     return (
       <div className="SessionSummary">
+        <SimpleHeaderSection />
         <div className="container">
-          <div className="row align-items-start">
-            <div className="col">
-              <SimpleHeaderSection />
-            </div>
-          </div>
           <div className="row align-items-center">
             <div className="col title-wrapper">
               <label className="title">SESSION SUMMARY</label>
