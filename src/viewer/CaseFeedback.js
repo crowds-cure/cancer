@@ -56,18 +56,30 @@ class CaseFeedback extends Component {
       return (
         // TODO: Replace (CHECKED) with a checkmark or something
         <li key={option.value} className={active ? 'active' : ''}>
-          <button id={option.value} onClick={this.updateSelectedOptions}>
-            {active ? '(CHECKED) ' : ''}
-            {option.label}
-          </button>
+          <input
+            type="checkbox"
+            id={option.value}
+            className="customCheckbox"
+            value={option.value}
+            {...(active ? 'checked' : '')}
+            onChange={this.updateSelectedOptions}
+          />
+          <label htmlFor={option.value}>{option.label}</label>
         </li>
       );
     });
 
     return (
       <div className="CaseFeedback">
-        <span className="feedback-hover">Case Feedback</span>
-        <ul className="feedback-options">{opts}</ul>
+        <div className="feedback-hover">
+          Case Feedback
+          <span className="arrow-down" />
+        </div>
+        <div className="feedback-options">
+          <ul>{opts}</ul>
+          <button className="buttom">Skip case</button>
+          <button className="buttom">Continue case</button>
+        </div>
       </div>
     );
   }
