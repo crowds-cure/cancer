@@ -7,6 +7,10 @@ async function getTotalMeasurementsForUser(measurementsDB, username) {
     endkey: username
   });
 
+  if (!result.rows || !result.rows[0]) {
+    return 0;
+  }
+
   return result.rows[0].value;
 }
 
