@@ -48,7 +48,7 @@ class ProgressSection extends Component {
             <ProgressBar
               min={low}
               max={high}
-              current={this.props.current}
+              value={this.props.current}
               increment={increment}
             />
           </div>

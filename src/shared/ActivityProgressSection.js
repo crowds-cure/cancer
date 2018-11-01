@@ -23,10 +23,6 @@ class ProgressSection extends Component {
   render() {
     const { low, high } = this.getLowAndHigh();
 
-    const increment = {
-      casesInCurrentSession: this.props.casesInCurrentSession
-    };
-
     const current =
       this.props.current === undefined ? '---' : this.props.current;
 
@@ -37,12 +33,7 @@ class ProgressSection extends Component {
           <Medal size="md" type="NUM_CASES_NEWBIE" />
         </div>
         <div className="progressBarContainer">
-          <ProgressBar
-            min={low}
-            max={high}
-            current={this.props.current}
-            increment={increment}
-          />
+          <ProgressBar min={low} max={high} value={this.props.current} />
         </div>
         <div className="currentPoints">
           <div className="value">{current}</div>

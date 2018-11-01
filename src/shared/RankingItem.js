@@ -18,8 +18,8 @@ class RankingItem extends Component {
 }
 
 RankingItem.propTypes = {
-  number: PropTypes.number.isRequired,
-  text: PropTypes.string.isRequired
+  number: PropTypes.number,
+  text: PropTypes.string
 };
 
 export default RankingItem;

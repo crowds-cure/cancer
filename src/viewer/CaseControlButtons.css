@@ -14,6 +14,7 @@
   border: solid 1px #000000;
   background-color: #b894fe;
   font-weight: bold;
+  outline: none;
 }
 
 .CaseControlButtons button:disabled {

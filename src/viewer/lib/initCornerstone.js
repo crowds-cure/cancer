@@ -54,11 +54,11 @@ cornerstoneWADOImageLoader.configure({
 // Set the tool font and font size
 // context.font = "[style] [variant] [weight] [size]/[line height] [font family]";
 const fontFamily =
-  'Roboto, OpenSans, HelveticaNeue-Light, Helvetica Neue Light, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif';
+  'WorkSans, Roboto, OpenSans, HelveticaNeue-Light, Helvetica Neue Light, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif';
 cornerstoneTools.textStyle.setFont('15px ' + fontFamily);
 
 // Set the tool width
-//cornerstoneTools.toolStyle.setToolWidth(2);
+cornerstoneTools.toolStyle.setToolWidth(2);
 
 // Set color for inactive tools
 cornerstoneTools.toolColors.setToolColor('rgb(255, 255, 0)');

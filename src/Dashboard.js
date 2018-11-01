@@ -10,33 +10,16 @@ import SimpleHeaderSection from './shared/SimpleHeaderSection.js';
 //import AchievementSection from './shared/AchievementSection.js';
 
 import './Dashboard.css';
-import getUserStats from './shared/getUserStats';
 
 class Dashboard extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      userStats: {}
-    };
-
-    getUserStats().then(userStats => {
-      this.setState({
-        userStats
-      });
-    });
-  }
-
   render() {
-    const current = this.state.userStats.current;
-
     return (
       <div className="Dashboard">
         <SimpleHeaderSection username={this.props.username} page="dashboard" />
         <div className="container">
           <div className="row">
             <div className="col-lg-5 offset-lg-4 col-md-7 offset-md-2">
-              <ActivityProgressSection current={current} />
+              <ActivityProgressSection current={this.props.current} />
               {/*<AchievementSection />*/}
             </div>
             <div className="row">
