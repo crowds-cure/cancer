@@ -42,29 +42,28 @@ const BADGE_TYPES = {
 };
 
 function getBadgeByNumberOfCases(numberOfCases) {
-  switch (numberOfCases) {
-    case numberOfCases < 10:
-      return BADGE_TYPES.NUM_CASES_NEWBIE;
-    case numberOfCases < 25:
-      return BADGE_TYPES.NUM_CASES_NOVICE;
-    case numberOfCases < 50:
-      return BADGE_TYPES.NUM_CASES_ROOKIE;
-    case numberOfCases < 100:
-      return BADGE_TYPES.NUM_CASES_INTERMEDIATE;
-    case numberOfCases < 200:
-      return BADGE_TYPES.NUM_CASES_PROFICIENT;
-    case numberOfCases < 300:
-      return BADGE_TYPES.NUM_CASES_EXPERIENCED;
-    case numberOfCases < 400:
-      return BADGE_TYPES.NUM_CASES_ADVANCED;
-    case numberOfCases < 500:
-      return BADGE_TYPES.NUM_CASES_SENIOR;
-    case numberOfCases < 1000:
-      return BADGE_TYPES.NUM_CASES_EXPERT;
-    case numberOfCases > 1000:
-      return BADGE_TYPES.NUM_CASES_GURU;
-    default:
-      return BADGE_TYPES.NUM_CASES_NEWBIE;
+  if (numberOfCases < 10) {
+    return BADGE_TYPES.NUM_CASES_NEWBIE;
+  } else if (numberOfCases < 25) {
+    return BADGE_TYPES.NUM_CASES_NOVICE;
+  } else if (numberOfCases < 50) {
+    return BADGE_TYPES.NUM_CASES_ROOKIE;
+  } else if (numberOfCases < 100) {
+    return BADGE_TYPES.NUM_CASES_INTERMEDIATE;
+  } else if (numberOfCases < 200) {
+    return BADGE_TYPES.NUM_CASES_PROFICIENT;
+  } else if (numberOfCases < 300) {
+    return BADGE_TYPES.NUM_CASES_EXPERIENCED;
+  } else if (numberOfCases < 400) {
+    return BADGE_TYPES.NUM_CASES_ADVANCED;
+  } else if (numberOfCases < 500) {
+    return BADGE_TYPES.NUM_CASES_SENIOR;
+  } else if (numberOfCases < 1000) {
+    return BADGE_TYPES.NUM_CASES_EXPERT;
+  } else if (numberOfCases >= 1000) {
+    return BADGE_TYPES.NUM_CASES_GURU;
+  } else {
+    return BADGE_TYPES.NUM_CASES_NEWBIE;
   }
 }
 

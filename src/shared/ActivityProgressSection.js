@@ -3,10 +3,10 @@ import React from 'react';
 import ProgressBar from './ProgressBar.js';
 import PropTypes from 'prop-types';
 import Medal from './Medal.js';
-
+import { getBadgeByNumberOfCases } from '../badges.js';
 import './ActivityProgressSection.css';
 
-class ProgressSection extends Component {
+class ActivityProgressSection extends Component {
   constructor(props) {
     super(props);
 
@@ -26,11 +26,19 @@ class ProgressSection extends Component {
     const current =
       this.props.current === undefined ? '---' : this.props.current;
 
+    debugger;
+    let rank;
+    if (this.props.current) {
+      rank = getBadgeByNumberOfCases(this.props.current);
+      console.warn(rank);
+    }
+
     return (
       <div className="ActivityProgressSection">
         <div className="title">Your Activity</div>
         <div className="medalContainer">
-          <Medal size="md" type="NUM_CASES_NEWBIE" />
+          <Medal size="md" type={rank.name} />
+          <span className="rank">{rank.name}</span>
         </div>
         <div className="progressBarContainer">
           <ProgressBar min={low} max={high} value={this.props.current} />
@@ -44,9 +52,9 @@ class ProgressSection extends Component {
   }
 }
 
-ProgressSection.propTypes = {
+ActivityProgressSection.propTypes = {
   current: PropTypes.number.isRequired,
   casesInCurrentSession: PropTypes.number
 };
 
-export default ProgressSection;
+export default ActivityProgressSection;

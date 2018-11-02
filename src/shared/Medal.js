@@ -8,7 +8,7 @@ class Medal extends Component {
     const medalClassSize = `medal-bg-${this.props.size}`;
 
     return (
-      <div className={medalClassSize}>
+      <div className={medalClassSize} title={this.props.type}>
         <img src={medal} className="medal" alt="medal" />
       </div>
     );

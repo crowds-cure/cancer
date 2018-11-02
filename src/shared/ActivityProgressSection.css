@@ -27,3 +27,10 @@
   top: 15px;
   left: -60px;
 }
+
+.ActivityProgressSection .rank {
+  position: absolute;
+  padding: 15px;
+  left: -15px;
+  color: textSecondaryColor;
+}
