@@ -5,14 +5,10 @@ import PropTypes from 'prop-types';
 
 class ProgressBar extends Component {
   render() {
-    return (
-      <progress
-        className="ProgressBar"
-        min={this.props.min}
-        max={this.props.max}
-        value={this.props.value}
-      />
-    );
+    const max = this.props.max - this.props.min;
+    const value = this.props.value - this.props.min;
+
+    return <progress className="ProgressBar" max={max} value={value} />;
   }
 }
 
