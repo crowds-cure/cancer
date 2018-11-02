@@ -1,0 +1,5692 @@
+{
+  "docs": [
+    {
+      "Collection": "Anti-PD-1_Lung",
+      "SubjectID": "PD-1-Lung-00003",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.333518400714231612057615479981",
+          "StudyDescription": "CAP W",
+          "StudyDate": "Oct 31 2008",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.159744962165767562601374610249",
+              "SeriesDescription": "LUNG+ N14 A30",
+              "NumberOfImages": 141
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_Lung",
+      "SubjectID": "PD-1-Lung-00003",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.333518400714231612057615479981",
+          "StudyDescription": "CAP W",
+          "StudyDate": "Oct 31 2008",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.188149850436991138262592768389",
+              "SeriesDescription": "ST+ N14/12/16 A0",
+              "NumberOfImages": 247
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_Lung",
+      "SubjectID": "PD-1-Lung-00003",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.333518400714231612057615479981",
+          "StudyDescription": "CAP W",
+          "StudyDate": "Oct 31 2008",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.241745569218523087533189874636",
+              "SeriesDescription": "ST+ N14/12/16 A20/30",
+              "NumberOfImages": 491
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_Lung",
+      "SubjectID": "PD-1-Lung-00006",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.258396009528029179349295692268",
+          "StudyDescription": "CT CHEST ABDOMEN PELVIS W CONTRAST",
+          "StudyDate": "Oct 22 2009",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.109116527416293251080093283135",
+              "SeriesDescription": "CAP AX 2.5",
+              "NumberOfImages": 479
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_Lung",
+      "SubjectID": "PD-1-Lung-00006",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.258396009528029179349295692268",
+          "StudyDescription": "CT CHEST ABDOMEN PELVIS W CONTRAST",
+          "StudyDate": "Oct 22 2009",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.708602308858359843692503098232",
+              "SeriesDescription": "CAP AX 5",
+              "NumberOfImages": 241
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_Lung",
+      "SubjectID": "PD-1-Lung-00006",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.258396009528029179349295692268",
+          "StudyDescription": "CT CHEST ABDOMEN PELVIS W CONTRAST",
+          "StudyDate": "Oct 22 2009",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.317754217438436403231512952982",
+              "SeriesDescription": "LUNG AX 2.5",
+              "NumberOfImages": 143
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_Lung",
+      "SubjectID": "PD-1-Lung-00008",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.250428620518331683410004851932",
+          "StudyDescription": "CAP WITH CONTRAST",
+          "StudyDate": "Jan 23 2009",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.123912208404617819073663909493",
+              "SeriesDescription": "LUNG+ N16 A30",
+              "NumberOfImages": 153
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_Lung",
+      "SubjectID": "PD-1-Lung-00008",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.250428620518331683410004851932",
+          "StudyDescription": "CAP WITH CONTRAST",
+          "StudyDate": "Jan 23 2009",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.289306577312371048934980111518",
+              "SeriesDescription": "ST+ N16/13/18 A0",
+              "NumberOfImages": 246
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_Lung",
+      "SubjectID": "PD-1-Lung-00008",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.250428620518331683410004851932",
+          "StudyDescription": "CAP WITH CONTRAST",
+          "StudyDate": "Jan 23 2009",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.163856039392985716524863508431",
+              "SeriesDescription": "ST+ N16/13/18 A20/30",
+              "NumberOfImages": 489
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_Lung",
+      "SubjectID": "PD-1-Lung-00011",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.179687455913619623365013589422",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Jun 18 2007",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.192605846824646387753182322318",
+              "SeriesDescription": "LUNG+ N14 A30",
+              "NumberOfImages": 147
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_Lung",
+      "SubjectID": "PD-1-Lung-00011",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.179687455913619623365013589422",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Jun 18 2007",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.645295619891266235526712062459",
+              "SeriesDescription": "ST+ N13 A0",
+              "NumberOfImages": 43
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_Lung",
+      "SubjectID": "PD-1-Lung-00011",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.179687455913619623365013589422",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Jun 18 2007",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.605949566933270882908212483927",
+              "SeriesDescription": "ST+ N13 A20",
+              "NumberOfImages": 85
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_Lung",
+      "SubjectID": "PD-1-Lung-00011",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.179687455913619623365013589422",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Jun 18 2007",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.714701350755520411003850938932",
+              "SeriesDescription": "ST+ N14/12/13/13 A0",
+              "NumberOfImages": 221
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_Lung",
+      "SubjectID": "PD-1-Lung-00011",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.179687455913619623365013589422",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Jun 18 2007",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.225682989989329543571058705565",
+              "SeriesDescription": "ST+ N14/12/13/13 A20",
+              "NumberOfImages": 438
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_Lung",
+      "SubjectID": "PD-1-Lung-00013",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.109166066136618523367625484576",
+          "StudyDescription": "CT CHEST W CONTRAST",
+          "StudyDate": "Feb 24 2009",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.122635433951571863616929739950",
+              "SeriesDescription": "LUNG+ NI 21 A40%",
+              "NumberOfImages": 148
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_Lung",
+      "SubjectID": "PD-1-Lung-00013",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.109166066136618523367625484576",
+          "StudyDescription": "CT CHEST W CONTRAST",
+          "StudyDate": "Feb 24 2009",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.180641913458452153362021517917",
+              "SeriesDescription": "STD+ NI 21 A40%",
+              "NumberOfImages": 148
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_Lung",
+      "SubjectID": "PD-1-Lung-00016",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.201441747977536313405278878786",
+          "StudyDescription": "CT CHEST ABDOMEN PELVIS W CONTRAST",
+          "StudyDate": "Jun 19 2009",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.248424528012625759221034190618",
+              "SeriesDescription": "CHST/VEN/DEL ST+ N16.5/12/19",
+              "NumberOfImages": 250
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_Lung",
+      "SubjectID": "PD-1-Lung-00016",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.201441747977536313405278878786",
+          "StudyDescription": "CT CHEST ABDOMEN PELVIS W CONTRAST",
+          "StudyDate": "Jun 19 2009",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.250693792562564048472081327018",
+              "SeriesDescription": "CHST/VEN/DEL ST+ N16.5/12/19",
+              "NumberOfImages": 497
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_Lung",
+      "SubjectID": "PD-1-Lung-00016",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.201441747977536313405278878786",
+          "StudyDescription": "CT CHEST ABDOMEN PELVIS W CONTRAST",
+          "StudyDate": "Jun 19 2009",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.283240871291517919776847644376",
+              "SeriesDescription": "LUNG+ N16.5 A30",
+              "NumberOfImages": 133
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_Lung",
+      "SubjectID": "PD-1-Lung-00020",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.520690639940158920182331848368",
+          "StudyDescription": "OSI CT CHEST ABDOMEN PELVIS",
+          "StudyDate": "Jan 04 2009",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.980943765864649551098602793954",
+              "SeriesDescription": "ChestAbdPel",
+              "NumberOfImages": 138
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_Lung",
+      "SubjectID": "PD-1-Lung-00020",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.520690639940158920182331848368",
+          "StudyDescription": "OSI CT CHEST ABDOMEN PELVIS",
+          "StudyDate": "Jan 04 2009",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.204219276381285455160908904155",
+              "SeriesDescription": "ChestAbdPelC",
+              "NumberOfImages": 138
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_Lung",
+      "SubjectID": "PD-1-Lung-00020",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.520690639940158920182331848368",
+          "StudyDescription": "OSI CT CHEST ABDOMEN PELVIS",
+          "StudyDate": "Jan 04 2009",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.288868887814223190627987000731",
+              "SeriesDescription": "Delayed",
+              "NumberOfImages": 79
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_Lung",
+      "SubjectID": "PD-1-Lung-00020",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.520690639940158920182331848368",
+          "StudyDescription": "OSI CT CHEST ABDOMEN PELVIS",
+          "StudyDate": "Jan 04 2009",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.282622811067874009417746509935",
+              "SeriesDescription": "Lung",
+              "NumberOfImages": 459
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_Lung",
+      "SubjectID": "PD-1-Lung-00021",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.687953035945760354101058837237",
+          "StudyDescription": "OSI CT CHEST ABDOMEN PELVIS",
+          "StudyDate": "Jun 24 2007",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.160578871372109177133676046863",
+              "SeriesDescription": "Routine AP",
+              "NumberOfImages": 97
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_Lung",
+      "SubjectID": "PD-1-Lung-00024",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.207180137529008557528853194028",
+          "StudyDescription": "OSI CT CHEST ABDOMEN PELVIS",
+          "StudyDate": "May 26 2009",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.159572551057407952119270100094",
+              "SeriesDescription": "Axial CE",
+              "NumberOfImages": 86
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_Lung",
+      "SubjectID": "PD-1-Lung-00024",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.207180137529008557528853194028",
+          "StudyDescription": "OSI CT CHEST ABDOMEN PELVIS",
+          "StudyDate": "May 26 2009",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.274829413149511865024968624411",
+              "SeriesDescription": "Axial CE",
+              "NumberOfImages": 86
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_Lung",
+      "SubjectID": "PD-1-Lung-00024",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.207180137529008557528853194028",
+          "StudyDescription": "OSI CT CHEST ABDOMEN PELVIS",
+          "StudyDate": "May 26 2009",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.211950599864742881878551765263",
+              "SeriesDescription": "Axial CE",
+              "NumberOfImages": 159
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_Lung",
+      "SubjectID": "PD-1-Lung-00024",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.207180137529008557528853194028",
+          "StudyDescription": "OSI CT CHEST ABDOMEN PELVIS",
+          "StudyDate": "May 26 2009",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.146217110450191920006308432033",
+              "SeriesDescription": "Axial CE",
+              "NumberOfImages": 159
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_Lung",
+      "SubjectID": "PD-1-Lung-00028",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.173397396095548062106375129237",
+          "StudyDescription": "CT CHEST W CONTRAST",
+          "StudyDate": "Sep 06 2009",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.192609639377700122064270034213",
+              "SeriesDescription": "LUNG+ NI 23 A40%",
+              "NumberOfImages": 124
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_Lung",
+      "SubjectID": "PD-1-Lung-00028",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.173397396095548062106375129237",
+          "StudyDescription": "CT CHEST W CONTRAST",
+          "StudyDate": "Sep 06 2009",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.193123001110098823824021363558",
+              "SeriesDescription": "STD+ NI 23 A40%",
+              "NumberOfImages": 124
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_Lung",
+      "SubjectID": "PD-1-Lung-00029",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.104040006137559583029075659771",
+          "StudyDescription": "CT CHEST ABDOMEN PELVIS W CONTRAST",
+          "StudyDate": "Apr 02 2010",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.115022530859364225793081095046",
+              "SeriesDescription": "CAP AX 2.5",
+              "NumberOfImages": 543
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_Lung",
+      "SubjectID": "PD-1-Lung-00029",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.104040006137559583029075659771",
+          "StudyDescription": "CT CHEST ABDOMEN PELVIS W CONTRAST",
+          "StudyDate": "Apr 02 2010",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.307482033965637701919952242930",
+              "SeriesDescription": "CAP AX 5",
+              "NumberOfImages": 273
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_Lung",
+      "SubjectID": "PD-1-Lung-00029",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.104040006137559583029075659771",
+          "StudyDescription": "CT CHEST ABDOMEN PELVIS W CONTRAST",
+          "StudyDate": "Apr 02 2010",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.107171828736019353970050054530",
+              "SeriesDescription": "LUNG AX 2.5",
+              "NumberOfImages": 145
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_Lung",
+      "SubjectID": "PD-1-Lung-00034",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.250976478345829511981090188621",
+          "StudyDescription": "OSI CT CHEST ABDOMEN PELVIS",
+          "StudyDate": "Nov 24 2008",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.192566056687410315490324744025",
+              "SeriesDescription": "AX LUNG",
+              "NumberOfImages": 98
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_Lung",
+      "SubjectID": "PD-1-Lung-00034",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.250976478345829511981090188621",
+          "StudyDescription": "OSI CT CHEST ABDOMEN PELVIS",
+          "StudyDate": "Nov 24 2008",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.295346938711185345226780058962",
+              "SeriesDescription": "AX ST",
+              "NumberOfImages": 235
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_Lung",
+      "SubjectID": "PD-1-Lung-00034",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.250976478345829511981090188621",
+          "StudyDescription": "OSI CT CHEST ABDOMEN PELVIS",
+          "StudyDate": "Nov 24 2008",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.214939045402002751093056612263",
+              "SeriesDescription": "HI RES",
+              "NumberOfImages": 30
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_Lung",
+      "SubjectID": "PD-1-Lung-00035",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.277755671403188954814359088719",
+          "StudyDescription": "CT CAP W/ CONTRAST",
+          "StudyDate": "Nov 30 2008",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.223683758564946154155846574170",
+              "SeriesDescription": "LUNG+ N16 A30",
+              "NumberOfImages": 137
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_Lung",
+      "SubjectID": "PD-1-Lung-00035",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.277755671403188954814359088719",
+          "StudyDescription": "CT CAP W/ CONTRAST",
+          "StudyDate": "Nov 30 2008",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.171588538618514059856415203686",
+              "SeriesDescription": "ST+ N16/13/18 A0",
+              "NumberOfImages": 247
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_Lung",
+      "SubjectID": "PD-1-Lung-00035",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.277755671403188954814359088719",
+          "StudyDescription": "CT CAP W/ CONTRAST",
+          "StudyDate": "Nov 30 2008",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.275039868724513872765196667070",
+              "SeriesDescription": "ST+ N16/13/18 A20/30",
+              "NumberOfImages": 491
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_Lung",
+      "SubjectID": "PD-1-Lung-00036",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.143822424207282186521414832100",
+          "StudyDescription": "CT CHEST ABDOMEN PELVIS W CONTRAST",
+          "StudyDate": "Jul 31 2008",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.318694025486546539399554083967",
+              "SeriesDescription": "LUNG+ N16 A30",
+              "NumberOfImages": 143
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_Lung",
+      "SubjectID": "PD-1-Lung-00036",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.143822424207282186521414832100",
+          "StudyDescription": "CT CHEST ABDOMEN PELVIS W CONTRAST",
+          "StudyDate": "Jul 31 2008",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.141923286643325154932203040670",
+              "SeriesDescription": "ST+ N16/14/17 A0",
+              "NumberOfImages": 250
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_Lung",
+      "SubjectID": "PD-1-Lung-00036",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.143822424207282186521414832100",
+          "StudyDescription": "CT CHEST ABDOMEN PELVIS W CONTRAST",
+          "StudyDate": "Jul 31 2008",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.157109594178121761691304041476",
+              "SeriesDescription": "ST+ N16/14/17 A20/30",
+              "NumberOfImages": 497
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_Lung",
+      "SubjectID": "PD-1-Lung-00040",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.218868400989615309358666508584",
+          "StudyDescription": "OSI CT CHEST ABDOMEN PELVIS",
+          "StudyDate": "Aug 15 2008",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.257760710362197951836270981675",
+              "SeriesDescription": "CAP W 3.0 B70f",
+              "NumberOfImages": 93
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_Lung",
+      "SubjectID": "PD-1-Lung-00040",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.218868400989615309358666508584",
+          "StudyDescription": "OSI CT CHEST ABDOMEN PELVIS",
+          "StudyDate": "Aug 15 2008",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.779931889797768653318656931222",
+              "SeriesDescription": "CAP W 5.0 B31f",
+              "NumberOfImages": 135
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_Lung",
+      "SubjectID": "PD-1-Lung-00040",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.218868400989615309358666508584",
+          "StudyDescription": "OSI CT CHEST ABDOMEN PELVIS",
+          "StudyDate": "Aug 15 2008",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.314400760404563039872396099267",
+              "SeriesDescription": "CAP W 5.0 MPR",
+              "NumberOfImages": 45
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_Lung",
+      "SubjectID": "PD-1-Lung-00040",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.218868400989615309358666508584",
+          "StudyDescription": "OSI CT CHEST ABDOMEN PELVIS",
+          "StudyDate": "Aug 15 2008",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.701414859994763933890427806221",
+              "SeriesDescription": "KIDNEY 5 MIN 5.0 B31f",
+              "NumberOfImages": 41
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_Lung",
+      "SubjectID": "PD-1-Lung-00041",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.128686666657388574622549391097",
+          "StudyDescription": "CAP WITH",
+          "StudyDate": "Feb 02 2009",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.257834555170953767845239555053",
+              "SeriesDescription": "LUNG+ N14 A30",
+              "NumberOfImages": 143
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_Lung",
+      "SubjectID": "PD-1-Lung-00041",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.128686666657388574622549391097",
+          "StudyDescription": "CAP WITH",
+          "StudyDate": "Feb 02 2009",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.205473812721129934804560600667",
+              "SeriesDescription": "ST+ N14/12/16 A0",
+              "NumberOfImages": 231
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_Lung",
+      "SubjectID": "PD-1-Lung-00041",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.128686666657388574622549391097",
+          "StudyDescription": "CAP WITH",
+          "StudyDate": "Feb 02 2009",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.104712617917450619399991479763",
+              "SeriesDescription": "ST+ N14/12/16 A20/30",
+              "NumberOfImages": 459
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_Lung",
+      "SubjectID": "PD-1-Lung-00042",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.281206229739599893851296624187",
+          "StudyDescription": "Abdomen^CT_CHST_ABD_PELVIS_WO_W_IVCON (Adult)",
+          "StudyDate": "Sep 24 2009",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.109620370376246883324294271398",
+              "SeriesDescription": "CH AX 3 PV",
+              "NumberOfImages": 486
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_Lung",
+      "SubjectID": "PD-1-Lung-00042",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.281206229739599893851296624187",
+          "StudyDescription": "Abdomen^CT_CHST_ABD_PELVIS_WO_W_IVCON (Adult)",
+          "StudyDate": "Sep 24 2009",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.5025.403425768251678195946807931667",
+              "SeriesDescription": "LUNG AX 2",
+              "NumberOfImages": 151
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00001",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.156134827691371823432880178934",
+          "StudyDescription": "Thorax^CHEST_WITHOUT_XCARE_(Adult)",
+          "StudyDate": "Jul 29 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.158137369868502142410566563038",
+              "SeriesDescription": "LUNG WITH 2.0 I70f 2",
+              "NumberOfImages": 189
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00001",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.438160886476757738718294709520",
+          "StudyDescription": "CAP WO CONTRAST",
+          "StudyDate": "Nov 25 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.328731395701312408376895991597",
+              "SeriesDescription": "LUNG+ N12 A30",
+              "NumberOfImages": 131
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00001",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.438160886476757738718294709520",
+          "StudyDescription": "CAP WO CONTRAST",
+          "StudyDate": "Nov 25 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.132790349203754092547143586009",
+              "SeriesDescription": "ST+ N12/10/10/11/11 A0",
+              "NumberOfImages": 151
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00001",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.438160886476757738718294709520",
+          "StudyDescription": "CAP WO CONTRAST",
+          "StudyDate": "Nov 25 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.453469366746138991058271740353",
+              "SeriesDescription": "ST+ N12/10/10/11/11 A20",
+              "NumberOfImages": 301
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00002",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.156779207908846276914011559242",
+          "StudyDescription": "CT CAP W/CONTRAST",
+          "StudyDate": "Aug 19 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.209906983087353829721947721325",
+              "SeriesDescription": "LUNG+ N12 A30",
+              "NumberOfImages": 129
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00002",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.898571071544109570329720730817",
+          "StudyDescription": "CT CAP W/CONTRAST",
+          "StudyDate": "Nov 27 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.309488074097527031061784217755",
+              "SeriesDescription": "LUNG+ N12 A30",
+              "NumberOfImages": 137
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00002",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.156779207908846276914011559242",
+          "StudyDescription": "CT CAP W/CONTRAST",
+          "StudyDate": "Aug 19 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.159872493091037589360083117033",
+              "SeriesDescription": "ST+ N12/10/10/11/11 A0",
+              "NumberOfImages": 151
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00002",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.898571071544109570329720730817",
+          "StudyDescription": "CT CAP W/CONTRAST",
+          "StudyDate": "Nov 27 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.185684104998649588966211409603",
+              "SeriesDescription": "ST+ N12/10/10/11/11 A0",
+              "NumberOfImages": 202
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00002",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.156779207908846276914011559242",
+          "StudyDescription": "CT CAP W/CONTRAST",
+          "StudyDate": "Aug 19 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.880873153795154980931771870478",
+              "SeriesDescription": "ST+ N12/10/10/11/11 A20",
+              "NumberOfImages": 299
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00002",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.898571071544109570329720730817",
+          "StudyDescription": "CT CAP W/CONTRAST",
+          "StudyDate": "Nov 27 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.206913223260019003716206320688",
+              "SeriesDescription": "ST+ N12/10/10/11/11 A20",
+              "NumberOfImages": 399
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00003",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.199368066411424195640712778201",
+          "StudyDescription": "CAP WITH CONTRAST",
+          "StudyDate": "Aug 06 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.295317660542205895069376208889",
+              "SeriesDescription": "LUNG+ N16 A30",
+              "NumberOfImages": 125
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00003",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.203863325456615540256909411038",
+          "StudyDescription": "CT CAP WITH",
+          "StudyDate": "Nov 25 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.225834857233793319585861981855",
+              "SeriesDescription": "ST+ N14/12/12/13/13 A0",
+              "NumberOfImages": 229
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00003",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.203863325456615540256909411038",
+          "StudyDescription": "CT CAP WITH",
+          "StudyDate": "Nov 25 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.163714092517900873759782230489",
+              "SeriesDescription": "ST+ N14/12/12/13/13 A20",
+              "NumberOfImages": 451
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00003",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.199368066411424195640712778201",
+          "StudyDescription": "CAP WITH CONTRAST",
+          "StudyDate": "Aug 06 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.248988892606656231332436406776",
+              "SeriesDescription": "ST+ N16/14/14/15/15 A0",
+              "NumberOfImages": 223
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00003",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.199368066411424195640712778201",
+          "StudyDescription": "CAP WITH CONTRAST",
+          "StudyDate": "Aug 06 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.277514774636868314616597271343",
+              "SeriesDescription": "ST+ N16/14/14/15/15 A20",
+              "NumberOfImages": 440
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00004",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.283511065693697094580873949606",
+          "StudyDescription": "OSF CT Chest",
+          "StudyDate": "May 26 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.244437490366315079195867847528",
+              "SeriesDescription": "c",
+              "NumberOfImages": 65
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00004",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.283511065693697094580873949606",
+          "StudyDescription": "OSF CT Chest",
+          "StudyDate": "May 26 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.261578464944783757570493212284",
+              "SeriesDescription": "CHEST ABD PEL 5.0 B41f",
+              "NumberOfImages": 96
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00004",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.283511065693697094580873949606",
+          "StudyDescription": "OSF CT Chest",
+          "StudyDate": "May 26 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.243317291596203978801287480206",
+              "SeriesDescription": "LIVER 5.0 B45f",
+              "NumberOfImages": 44
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00004",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.283511065693697094580873949606",
+          "StudyDescription": "OSF CT Chest",
+          "StudyDate": "May 26 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.245806252121670157794592520087",
+              "SeriesDescription": "LUNG 5.0 B70f",
+              "NumberOfImages": 64
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00004",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.199258774792729789813473966203",
+          "StudyDescription": "CT CAP W/CON",
+          "StudyDate": "Nov 27 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.314469549819569352706369213479",
+              "SeriesDescription": "LUNG+ N16 A30",
+              "NumberOfImages": 141
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00004",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.199258774792729789813473966203",
+          "StudyDescription": "CT CAP W/CON",
+          "StudyDate": "Nov 27 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.101663831616129685313561365708",
+              "SeriesDescription": "ST+ N16/14/14/15/15 A0",
+              "NumberOfImages": 228
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00004",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.199258774792729789813473966203",
+          "StudyDescription": "CT CAP W/CON",
+          "StudyDate": "Nov 27 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.175253058737086833190917307723",
+              "SeriesDescription": "ST+ N16/14/14/15/15 A20",
+              "NumberOfImages": 451
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00004",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.283511065693697094580873949606",
+          "StudyDescription": "OSF CT Chest",
+          "StudyDate": "May 26 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.168446978001684555677126784111",
+              "SeriesDescription": "Super Dimension",
+              "NumberOfImages": 318
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00006",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.326280635338660616706998482671",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Jul 24 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.585375800440558717088952197395",
+              "SeriesDescription": "LUNG+ N14 A30",
+              "NumberOfImages": 125
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00006",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.252731115234516169324369334279",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Oct 16 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.279601215566865064954397640679",
+              "SeriesDescription": "LUNG+ N16 A30",
+              "NumberOfImages": 135
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00006",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.326280635338660616706998482671",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Jul 24 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.202287948568406289093737485605",
+              "SeriesDescription": "ST+ N14/12/12/13/13 A0",
+              "NumberOfImages": 221
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00006",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.326280635338660616706998482671",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Jul 24 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.279398688929733430414088500894",
+              "SeriesDescription": "ST+ N14/12/12/13/13 A20",
+              "NumberOfImages": 437
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00006",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.252731115234516169324369334279",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Oct 16 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.237896551941716780397268276178",
+              "SeriesDescription": "ST+ N16/14/14/15/15 A0",
+              "NumberOfImages": 241
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00006",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.252731115234516169324369334279",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Oct 16 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.313329416236389418231793354767",
+              "SeriesDescription": "ST+ N16/14/14/15/15 A20",
+              "NumberOfImages": 477
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00007",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.198211016499209384259157741215",
+          "StudyDescription": "CT Soft Tissue Neck W/",
+          "StudyDate": "Dec 03 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.772520607221099128818163032166",
+              "SeriesDescription": "BRAIN",
+              "NumberOfImages": 61
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00007",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.314427061727585124595046110427",
+          "StudyDescription": "CT Soft Tissue Neck W/",
+          "StudyDate": "Sep 01 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.884889995032211710628730412587",
+              "SeriesDescription": "BRAIN",
+              "NumberOfImages": 64
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00007",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.314427061727585124595046110427",
+          "StudyDescription": "CT Soft Tissue Neck W/",
+          "StudyDate": "Sep 01 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.231954839732257999771038301827",
+              "SeriesDescription": "ST A0",
+              "NumberOfImages": 48
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00007",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.198211016499209384259157741215",
+          "StudyDescription": "CT Soft Tissue Neck W/",
+          "StudyDate": "Dec 03 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.758279523969887058642526184083",
+              "SeriesDescription": "ST A0",
+              "NumberOfImages": 64
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00007",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.314427061727585124595046110427",
+          "StudyDescription": "CT Soft Tissue Neck W/",
+          "StudyDate": "Sep 01 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.791035247013080348559394575278",
+              "SeriesDescription": "ST+ N17 A0",
+              "NumberOfImages": 346
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00007",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.198211016499209384259157741215",
+          "StudyDescription": "CT Soft Tissue Neck W/",
+          "StudyDate": "Dec 03 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.193525134909131334546931754626",
+              "SeriesDescription": "ST+ N17 A0",
+              "NumberOfImages": 359
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00010",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.445153876456388640968624812187",
+          "StudyDescription": "CT CAP WITH CONTRAST",
+          "StudyDate": "Sep 03 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.857488471773111677218308264044",
+              "SeriesDescription": "LUNG+ N14 A30",
+              "NumberOfImages": 153
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00010",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.250478694605829257741973533375",
+          "StudyDescription": "CAP w CONTRAST",
+          "StudyDate": "Dec 08 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.169877119305428896386439164440",
+              "SeriesDescription": "SO+N12/10/10/11/11",
+              "NumberOfImages": 409
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00010",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.445153876456388640968624812187",
+          "StudyDescription": "CT CAP WITH CONTRAST",
+          "StudyDate": "Sep 03 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.310203520884981539545085367329",
+              "SeriesDescription": "ST+ N13 A0",
+              "NumberOfImages": 48
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00010",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.445153876456388640968624812187",
+          "StudyDescription": "CT CAP WITH CONTRAST",
+          "StudyDate": "Sep 03 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.166899420145091556614151102554",
+              "SeriesDescription": "ST+ N13 A20",
+              "NumberOfImages": 95
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00010",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.445153876456388640968624812187",
+          "StudyDescription": "CT CAP WITH CONTRAST",
+          "StudyDate": "Sep 03 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.290083221085894336686774319459",
+              "SeriesDescription": "ST+ N14/12/12/13/13 A0",
+              "NumberOfImages": 211
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00010",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.445153876456388640968624812187",
+          "StudyDescription": "CT CAP WITH CONTRAST",
+          "StudyDate": "Sep 03 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.172675530284925261557897554567",
+              "SeriesDescription": "ST+ N14/12/12/13/13 A20",
+              "NumberOfImages": 418
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00010",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.250478694605829257741973533375",
+          "StudyDescription": "CAP w CONTRAST",
+          "StudyDate": "Dec 08 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.218852574370868128871536037062",
+              "SeriesDescription": "ST+N12/10/10/11/11",
+              "NumberOfImages": 256
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00011",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.531347484551418153560828056996",
+          "StudyDescription": "CAP W/",
+          "StudyDate": "Aug 26 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.316350402952048502734216364859",
+              "SeriesDescription": "LUNG+ N14 A30",
+              "NumberOfImages": 125
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00011",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.164380509513623223759112216666",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Dec 08 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.170450531717958670967893308530",
+              "SeriesDescription": "LUNG+ N14 A30",
+              "NumberOfImages": 131
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00011",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.531347484551418153560828056996",
+          "StudyDescription": "CAP W/",
+          "StudyDate": "Aug 26 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.325308777255590953867847375471",
+              "SeriesDescription": "ST+ N14/12/12/13/13 A0",
+              "NumberOfImages": 199
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00011",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.164380509513623223759112216666",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Dec 08 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.329914974046857285892779445665",
+              "SeriesDescription": "ST+ N14/12/12/13/13 A0",
+              "NumberOfImages": 210
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00011",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.531347484551418153560828056996",
+          "StudyDescription": "CAP W/",
+          "StudyDate": "Aug 26 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.267541513021628701698654459938",
+              "SeriesDescription": "ST+ N14/12/12/13/13 A20",
+              "NumberOfImages": 393
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00011",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.164380509513623223759112216666",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Dec 08 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.130311484804110011791737163918",
+              "SeriesDescription": "ST+ N14/12/12/13/13 A20",
+              "NumberOfImages": 415
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00012",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.261377888578772189373918035290",
+          "StudyDescription": "CT, BRAIN, W&W/OCONTRAST",
+          "StudyDate": "Dec 11 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.595560716561284095730622105393",
+              "SeriesDescription": "1.25 STD BRAIN W CONTRAST",
+              "NumberOfImages": 152
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00012",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.261377888578772189373918035290",
+          "StudyDescription": "CT, BRAIN, W&W/OCONTRAST",
+          "StudyDate": "Dec 11 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.145541689219082432791111072190",
+              "SeriesDescription": "3.75 BRAIN W CONTRAST",
+              "NumberOfImages": 64
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00012",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.192694889168960639318359300684",
+          "StudyDescription": "POST C/A/P",
+          "StudyDate": "Sep 05 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.331964937272735380681005852502",
+              "SeriesDescription": "LUNG+ N14 A30",
+              "NumberOfImages": 113
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00012",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.151948766910600461716063946455",
+          "StudyDescription": "CT Head Or Brain W/O&W",
+          "StudyDate": "Sep 09 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.172791503151020816787121430504",
+              "SeriesDescription": "Recon 2: CONTRAST120CC@3CC/S,90",
+              "NumberOfImages": 67
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00012",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.954213480595314998055830015648",
+          "StudyDescription": "CAP W CONTRASDT",
+          "StudyDate": "Dec 11 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.943653324091372039218127660470",
+              "SeriesDescription": "ST+ N14/12/12/13/13 A20",
+              "NumberOfImages": 377
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00012",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.192694889168960639318359300684",
+          "StudyDescription": "POST C/A/P",
+          "StudyDate": "Sep 05 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.218771462609187307229787107620",
+              "SeriesDescription": "ST+ N14/12/12/13/13 A20",
+              "NumberOfImages": 396
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00012",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.286662864174420689697419849254",
+          "StudyDescription": "CT Head Or Brain W/O&W",
+          "StudyDate": "Dec 11 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.143126896368747560931629135171",
+              "SeriesDescription": "STD A0",
+              "NumberOfImages": 64
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00012",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.286662864174420689697419849254",
+          "StudyDescription": "CT Head Or Brain W/O&W",
+          "StudyDate": "Dec 11 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.730546511629334898782337312304",
+              "SeriesDescription": "STD A0",
+              "NumberOfImages": 152
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00013",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.325776082303198065550063131073",
+          "StudyDescription": "Thorax^CAP_ROUTINE (Adult)",
+          "StudyDate": "Dec 16 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.245866235662903667909474382100",
+              "SeriesDescription": "CAP 3.0 I31f 1",
+              "NumberOfImages": 404
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00013",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.325776082303198065550063131073",
+          "StudyDescription": "Thorax^CAP_ROUTINE (Adult)",
+          "StudyDate": "Dec 16 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.196017882685062567077431379465",
+              "SeriesDescription": "CAP 5.0 I31f 1",
+              "NumberOfImages": 203
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00013",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.325776082303198065550063131073",
+          "StudyDescription": "Thorax^CAP_ROUTINE (Adult)",
+          "StudyDate": "Dec 16 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.183707952990808740501728691881",
+              "SeriesDescription": "LUNG 2.0 I70f 1",
+              "NumberOfImages": 187
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00013",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.324501910071632753405397366892",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Sep 09 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.235716361915119568325531303953",
+              "SeriesDescription": "LUNG+ N14 A30",
+              "NumberOfImages": 109
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00013",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.324501910071632753405397366892",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Sep 09 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.183495707835730048606619671413",
+              "SeriesDescription": "MPR A/P",
+              "NumberOfImages": 888
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00013",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.324501910071632753405397366892",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Sep 09 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.103677023838331199155560912143",
+              "SeriesDescription": "MPR CHEST",
+              "NumberOfImages": 440
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00013",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.324501910071632753405397366892",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Sep 09 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.238226393174270717252481686739",
+              "SeriesDescription": "ST+ N14/12/12/13/13 A0",
+              "NumberOfImages": 228
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00013",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.324501910071632753405397366892",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Sep 09 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.325008197324415324222880872912",
+              "SeriesDescription": "ST+ N14/12/12/13/13 A20",
+              "NumberOfImages": 455
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00014",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.104511882184132111280312572655",
+          "StudyDescription": "POST C/A/P",
+          "StudyDate": "Dec 18 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.258780840307704472031248702040",
+              "SeriesDescription": "LUNG+ N14 A30",
+              "NumberOfImages": 117
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00014",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.104511882184132111280312572655",
+          "StudyDescription": "POST C/A/P",
+          "StudyDate": "Dec 18 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.273166709958988991496335130901",
+              "SeriesDescription": "ST+ N14/12/12/13/13 A0",
+              "NumberOfImages": 196
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00014",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.104511882184132111280312572655",
+          "StudyDescription": "POST C/A/P",
+          "StudyDate": "Dec 18 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.457089892404959543113229811253",
+              "SeriesDescription": "ST+ N14/12/12/13/13 A20",
+              "NumberOfImages": 387
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00014",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.306309007781785731108611257878",
+          "StudyDescription": "CAP WITH CONTRAST",
+          "StudyDate": "Sep 11 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.263518286948814997818116343717",
+              "SeriesDescription": "ST+N12/10/10/11/11",
+              "NumberOfImages": 221
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00015",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.127752172403238399134581580755",
+          "StudyDescription": "CT CAP W CONTRAST",
+          "StudyDate": "Aug 21 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.563317151242161105077180415910",
+              "SeriesDescription": "LUNG+ N12 A30",
+              "NumberOfImages": 123
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00015",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.192668646983096052168863089511",
+          "StudyDescription": "CHEEST W CONTRAST",
+          "StudyDate": "Sep 06 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.198975117750822280062729769375",
+              "SeriesDescription": "LUNG+ NI 20 A40%",
+              "NumberOfImages": 133
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00015",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.247082809660501697734408038782",
+          "StudyDescription": "CT Chest W/Contrast",
+          "StudyDate": "Sep 18 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.236743275793776778960700742048",
+              "SeriesDescription": "LUNG+ NI 20 A40%",
+              "NumberOfImages": 133
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00015",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.460182736268820660652796200469",
+          "StudyDescription": "CAP W/ CONTRAST",
+          "StudyDate": "Dec 14 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.254400730602398657496993640447",
+              "SeriesDescription": "SO+N12/10/10/11/11",
+              "NumberOfImages": 425
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00015",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.127752172403238399134581580755",
+          "StudyDescription": "CT CAP W CONTRAST",
+          "StudyDate": "Aug 21 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.215934011427570803431415288561",
+              "SeriesDescription": "ST+ N12/10/10/11/11 A0",
+              "NumberOfImages": 211
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00015",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.127752172403238399134581580755",
+          "StudyDescription": "CT CAP W CONTRAST",
+          "StudyDate": "Aug 21 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.121519708768246623899984549307",
+              "SeriesDescription": "ST+ N12/10/10/11/11 A20",
+              "NumberOfImages": 417
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00015",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.460182736268820660652796200469",
+          "StudyDescription": "CAP W/ CONTRAST",
+          "StudyDate": "Dec 14 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.907081691130513621825534531478",
+              "SeriesDescription": "ST+N12/10/10/11/11",
+              "NumberOfImages": 215
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00015",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.192668646983096052168863089511",
+          "StudyDescription": "CHEEST W CONTRAST",
+          "StudyDate": "Sep 06 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.881059783165134814488080678750",
+              "SeriesDescription": "STD+ NI 20 A40%",
+              "NumberOfImages": 133
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00015",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.247082809660501697734408038782",
+          "StudyDescription": "CT Chest W/Contrast",
+          "StudyDate": "Sep 18 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.238398664577731900123179839827",
+              "SeriesDescription": "STD+ NI 20 A40%",
+              "NumberOfImages": 133
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00016",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.131168137439643688708939709752",
+          "StudyDescription": "OSF CT Chest",
+          "StudyDate": "Aug 06 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.990381997275951898963755638477",
+              "SeriesDescription": "Abd_W 5.0 B30f",
+              "NumberOfImages": 90
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00016",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.165159739334386702504578164045",
+          "StudyDescription": "CT Soft Tissue Neck W/",
+          "StudyDate": "Sep 19 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.173320952501919939460239326551",
+              "SeriesDescription": "BRAIN",
+              "NumberOfImages": 29
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00016",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.131168137439643688708939709752",
+          "StudyDescription": "OSF CT Chest",
+          "StudyDate": "Aug 06 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.334397473766922420160474792400",
+              "SeriesDescription": "Delay Bladder 5.0 B30f",
+              "NumberOfImages": 30
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00016",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.131168137439643688708939709752",
+          "StudyDescription": "OSF CT Chest",
+          "StudyDate": "Aug 06 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.231529283031469871126150252929",
+              "SeriesDescription": "Delay Kidney 5.0 B30f",
+              "NumberOfImages": 50
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00016",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.141750605286240538034638659685",
+          "StudyDescription": "CAP WITH",
+          "StudyDate": "Sep 18 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.196086931552409729133451271354",
+              "SeriesDescription": "LUNG+ N14 A30",
+              "NumberOfImages": 143
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00016",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.195325346953221615039533114896",
+          "StudyDescription": "OSF CT Sft Tiss Neck",
+          "StudyDate": "Aug 06 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.276951859253471659858781345733",
+              "SeriesDescription": "NeckRoutine 2.0 B30s",
+              "NumberOfImages": 99
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00016",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.195325346953221615039533114896",
+          "StudyDescription": "OSF CT Sft Tiss Neck",
+          "StudyDate": "Aug 06 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.291539687947556572749368610128",
+              "SeriesDescription": "NeckRoutine 2.0 B30s",
+              "NumberOfImages": 99
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00016",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.375338576775490758929594844848",
+          "StudyDescription": "OSF CT Chest",
+          "StudyDate": "Aug 06 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.300232412669873565602061464539",
+              "SeriesDescription": "Routine Chest 5.0 B30f ST",
+              "NumberOfImages": 65
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00016",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.375338576775490758929594844848",
+          "StudyDescription": "OSF CT Chest",
+          "StudyDate": "Aug 06 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.115082268330504788488254489731",
+              "SeriesDescription": "Routine Chest 5.0 B30f ST",
+              "NumberOfImages": 65
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00016",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.375338576775490758929594844848",
+          "StudyDescription": "OSF CT Chest",
+          "StudyDate": "Aug 06 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.111877571507883480514324169106",
+              "SeriesDescription": "Routine Chest 5.0 B30f ST",
+              "NumberOfImages": 65
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00016",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.375338576775490758929594844848",
+          "StudyDescription": "OSF CT Chest",
+          "StudyDate": "Aug 06 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.154571231029868986865310635205",
+              "SeriesDescription": "Routine Chest 5.0 B70f LUNG",
+              "NumberOfImages": 65
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00016",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.375338576775490758929594844848",
+          "StudyDescription": "OSF CT Chest",
+          "StudyDate": "Aug 06 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.307195015442171891731791265671",
+              "SeriesDescription": "Routine Chest 5.0 B70f LUNG",
+              "NumberOfImages": 65
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00016",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.141750605286240538034638659685",
+          "StudyDescription": "CAP WITH",
+          "StudyDate": "Sep 18 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.174037705970241046601929726548",
+              "SeriesDescription": "ST+ N14/12/12/13/13 A0",
+              "NumberOfImages": 230
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00016",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.141750605286240538034638659685",
+          "StudyDescription": "CAP WITH",
+          "StudyDate": "Sep 18 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.756251952766066077201742761753",
+              "SeriesDescription": "ST+ N14/12/12/13/13 A20",
+              "NumberOfImages": 455
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00016",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.165159739334386702504578164045",
+          "StudyDescription": "CT Soft Tissue Neck W/",
+          "StudyDate": "Sep 19 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.884668932802446929078675073659",
+              "SeriesDescription": "ST+ N15 A0",
+              "NumberOfImages": 248
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00017",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.993395892667694967413883787882",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Dec 29 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.195281188182648362744870297217",
+              "SeriesDescription": "LUNG+ N14 A30",
+              "NumberOfImages": 149
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00017",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.310919652466759747972714329641",
+          "StudyDescription": "CAP WITH",
+          "StudyDate": "Sep 18 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.131861843542591661777154023492",
+              "SeriesDescription": "LUNG+ N14 A30",
+              "NumberOfImages": 149
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00017",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.310919652466759747972714329641",
+          "StudyDescription": "CAP WITH",
+          "StudyDate": "Sep 18 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.124147538120777834559926309040",
+              "SeriesDescription": "ST+ N14/12/12/13/13 A0",
+              "NumberOfImages": 240
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00017",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.993395892667694967413883787882",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Dec 29 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.340029620894903231056025603985",
+              "SeriesDescription": "ST+ N14/12/12/13/13 A0",
+              "NumberOfImages": 243
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00017",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.310919652466759747972714329641",
+          "StudyDescription": "CAP WITH",
+          "StudyDate": "Sep 18 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.776522355442584702945304251219",
+              "SeriesDescription": "ST+ N14/12/12/13/13 A20",
+              "NumberOfImages": 474
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00017",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.993395892667694967413883787882",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Dec 29 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.134254110059473845491012596344",
+              "SeriesDescription": "ST+ N14/12/12/13/13 A20",
+              "NumberOfImages": 481
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00018",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.167118145838110453393360125033",
+          "StudyDescription": "CAP W/ CONTRAST",
+          "StudyDate": "Sep 18 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.318334261882474111239787686888",
+              "SeriesDescription": "LUNG+ N14 A30",
+              "NumberOfImages": 141
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00018",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.275510006631824126415486432714",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Dec 22 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.146715919037040416026305205992",
+              "SeriesDescription": "SO+N12/10/10/11/11",
+              "NumberOfImages": 437
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00018",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.167118145838110453393360125033",
+          "StudyDescription": "CAP W/ CONTRAST",
+          "StudyDate": "Sep 18 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.735048736427327403426621878252",
+              "SeriesDescription": "ST+ N14/12/12/13/13 A0",
+              "NumberOfImages": 216
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00018",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.167118145838110453393360125033",
+          "StudyDescription": "CAP W/ CONTRAST",
+          "StudyDate": "Sep 18 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.267625721448833959016280401027",
+              "SeriesDescription": "ST+ N14/12/12/13/13 A20",
+              "NumberOfImages": 423
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00019",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.327657635283096556267287184506",
+          "StudyDescription": "CAP WITH CONTRAST",
+          "StudyDate": "Sep 04 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.244253324324552161153622525344",
+              "SeriesDescription": "LUNG+ N12 A30",
+              "NumberOfImages": 151
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00019",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.129806402521079983285275701423",
+          "StudyDescription": "POST C/A/P",
+          "StudyDate": "Dec 24 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.772249187846398615844557910733",
+              "SeriesDescription": "LUNG+ N14 A30",
+              "NumberOfImages": 149
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00019",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.327657635283096556267287184506",
+          "StudyDescription": "CAP WITH CONTRAST",
+          "StudyDate": "Sep 04 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.702551341326771051214908334804",
+              "SeriesDescription": "ST+ N12/10/10/11/11 A0",
+              "NumberOfImages": 230
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00019",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.327657635283096556267287184506",
+          "StudyDescription": "CAP WITH CONTRAST",
+          "StudyDate": "Sep 04 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.263331909315142112809435102633",
+              "SeriesDescription": "ST+ N12/10/10/11/11 A20",
+              "NumberOfImages": 455
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00019",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.129806402521079983285275701423",
+          "StudyDescription": "POST C/A/P",
+          "StudyDate": "Dec 24 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.701062305070496093982725434317",
+              "SeriesDescription": "ST+ N14/12/12/13/13 A0",
+              "NumberOfImages": 216
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00019",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.129806402521079983285275701423",
+          "StudyDescription": "POST C/A/P",
+          "StudyDate": "Dec 24 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.110648845946996804368841840177",
+              "SeriesDescription": "ST+ N14/12/12/13/13 A20",
+              "NumberOfImages": 427
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00020",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.228546988349772987942396824835",
+          "StudyDescription": "CAP W/ CONTRAST",
+          "StudyDate": "Sep 15 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.198781047577165405831497716983",
+              "SeriesDescription": "LUNG+ N16 A30",
+              "NumberOfImages": 129
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00020",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.198130615261475842272531520755",
+          "StudyDescription": "CAP W/CONTRAST",
+          "StudyDate": "Dec 23 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.339875857710095193918725269677",
+              "SeriesDescription": "LUNG+ N16 A30",
+              "NumberOfImages": 139
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00020",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.228546988349772987942396824835",
+          "StudyDescription": "CAP W/ CONTRAST",
+          "StudyDate": "Sep 15 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.392976404465037580433688096009",
+              "SeriesDescription": "ST+ N16/14/14/15/15 A0",
+              "NumberOfImages": 222
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00020",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.228546988349772987942396824835",
+          "StudyDescription": "CAP W/ CONTRAST",
+          "StudyDate": "Sep 15 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.273555951069996451252353923652",
+              "SeriesDescription": "ST+ N16/14/14/15/15 A20",
+              "NumberOfImages": 439
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00020",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.198130615261475842272531520755",
+          "StudyDescription": "CAP W/CONTRAST",
+          "StudyDate": "Dec 23 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.265320040128755533379563061025",
+              "SeriesDescription": "ST+ N16/14/14/15/15 A20",
+              "NumberOfImages": 449
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00022",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.740932229008250781352289901686",
+          "StudyDescription": "CT Soft Tissue Neck W/",
+          "StudyDate": "Nov 06 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.156210915218206025243381887567",
+              "SeriesDescription": "BRAIN",
+              "NumberOfImages": 44
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00022",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.219977675192039780546116712275",
+          "StudyDescription": "CT Soft Tissue Neck W/",
+          "StudyDate": "Oct 01 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.315596223480543527955568624684",
+              "SeriesDescription": "BRAIN",
+              "NumberOfImages": 61
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00022",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.284989100593475819803010940837",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Sep 30 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.130471173519693047036671687492",
+              "SeriesDescription": "LUNG+ N14 A30",
+              "NumberOfImages": 117
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00022",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.133145104389626259896288207951",
+          "StudyDescription": "POST C/A/P",
+          "StudyDate": "Nov 06 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.169666952003564039474120454453",
+              "SeriesDescription": "LUNG+ N14 A30",
+              "NumberOfImages": 131
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00022",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.740932229008250781352289901686",
+          "StudyDescription": "CT Soft Tissue Neck W/",
+          "StudyDate": "Nov 06 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.245554242900402847521206210980",
+              "SeriesDescription": "Recon 4: STD N11 A20",
+              "NumberOfImages": 91
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00022",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.219977675192039780546116712275",
+          "StudyDescription": "CT Soft Tissue Neck W/",
+          "StudyDate": "Oct 01 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.825599626161868961496541430666",
+              "SeriesDescription": "ST A0",
+              "NumberOfImages": 48
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00022",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.284989100593475819803010940837",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Sep 30 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.150039333578050677539717652052",
+              "SeriesDescription": "ST+ N13 A0",
+              "NumberOfImages": 49
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00022",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.284989100593475819803010940837",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Sep 30 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.586742229661250105104680130881",
+              "SeriesDescription": "ST+ N13 A20",
+              "NumberOfImages": 97
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00022",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.284989100593475819803010940837",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Sep 30 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.160286365789781169366693980158",
+              "SeriesDescription": "ST+ N14/12/12/13/13 A0",
+              "NumberOfImages": 204
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00022",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.133145104389626259896288207951",
+          "StudyDescription": "POST C/A/P",
+          "StudyDate": "Nov 06 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.214548393189134582570345231236",
+              "SeriesDescription": "ST+ N14/12/12/13/13 A0",
+              "NumberOfImages": 206
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00022",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.133145104389626259896288207951",
+          "StudyDescription": "POST C/A/P",
+          "StudyDate": "Nov 06 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.841880936240612503295040806146",
+              "SeriesDescription": "ST+ N14/12/12/13/13 A20",
+              "NumberOfImages": 372
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00022",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.284989100593475819803010940837",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Sep 30 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.258601274897967447859032927026",
+              "SeriesDescription": "ST+ N14/12/12/13/13 A20",
+              "NumberOfImages": 403
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00022",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.219977675192039780546116712275",
+          "StudyDescription": "CT Soft Tissue Neck W/",
+          "StudyDate": "Oct 01 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.137749268848702228981253387438",
+              "SeriesDescription": "ST+ N17 A0",
+              "NumberOfImages": 263
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00022",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.740932229008250781352289901686",
+          "StudyDescription": "CT Soft Tissue Neck W/",
+          "StudyDate": "Nov 06 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.347426392667190669553781567353",
+              "SeriesDescription": "STD N11 A20",
+              "NumberOfImages": 77
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00023",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.263369052070585051941353258105",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Sep 21 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.278715515018432272748214493478",
+              "SeriesDescription": "LUNG+ N16 A30",
+              "NumberOfImages": 141
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00023",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.319470288559215551249384632654",
+          "StudyDescription": "CAP WITH CONTRAST",
+          "StudyDate": "Feb 17 2007",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.237086001153327338695698763861",
+              "SeriesDescription": "LUNG+ N16 A30",
+              "NumberOfImages": 149
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00023",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.263369052070585051941353258105",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Sep 21 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.308364240476478304753055157478",
+              "SeriesDescription": "ST+ N16/14/14/15/15 A0",
+              "NumberOfImages": 201
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00023",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.319470288559215551249384632654",
+          "StudyDescription": "CAP WITH CONTRAST",
+          "StudyDate": "Feb 17 2007",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.214923474621879539849288625657",
+              "SeriesDescription": "ST+ N16/14/14/15/15 A0",
+              "NumberOfImages": 222
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00023",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.263369052070585051941353258105",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Sep 21 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.587083126559390563575627718730",
+              "SeriesDescription": "ST+ N16/14/14/15/15 A20",
+              "NumberOfImages": 385
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00023",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.319470288559215551249384632654",
+          "StudyDescription": "CAP WITH CONTRAST",
+          "StudyDate": "Feb 17 2007",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.201816369466754378647084881818",
+              "SeriesDescription": "ST+ N16/14/14/15/15 A20",
+              "NumberOfImages": 439
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00024",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.147831998085308237517519034064",
+          "StudyDescription": "CAP (LIVER)",
+          "StudyDate": "Oct 02 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.337297067300948831718747309942",
+              "SeriesDescription": "2.5 LUNG/SOFT",
+              "NumberOfImages": 263
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00024",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.147831998085308237517519034064",
+          "StudyDescription": "CAP (LIVER)",
+          "StudyDate": "Oct 02 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.339510393021164759075669972255",
+              "SeriesDescription": "2.5 SOFT",
+              "NumberOfImages": 265
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00024",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.147831998085308237517519034064",
+          "StudyDescription": "CAP (LIVER)",
+          "StudyDate": "Oct 02 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.155385979106421127473979619335",
+              "SeriesDescription": "2.5 STANDARD",
+              "NumberOfImages": 263
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00024",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.147831998085308237517519034064",
+          "StudyDescription": "CAP (LIVER)",
+          "StudyDate": "Oct 02 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.423870039627288091166354499962",
+              "SeriesDescription": "2.5 STANDARD",
+              "NumberOfImages": 265
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00024",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.147831998085308237517519034064",
+          "StudyDescription": "CAP (LIVER)",
+          "StudyDate": "Oct 02 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.786985202581185592639703496748",
+              "SeriesDescription": "2.5 STD",
+              "NumberOfImages": 103
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00024",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.147831998085308237517519034064",
+          "StudyDescription": "CAP (LIVER)",
+          "StudyDate": "Oct 02 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.119073095241265587923729485717",
+              "SeriesDescription": "CHEST & BLADDER",
+              "NumberOfImages": 133
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00024",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.147831998085308237517519034064",
+          "StudyDescription": "CAP (LIVER)",
+          "StudyDate": "Oct 02 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.117716393053422266572755008862",
+              "SeriesDescription": "LIVER 2PHASE CAP",
+              "NumberOfImages": 134
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00024",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.147831998085308237517519034064",
+          "StudyDescription": "CAP (LIVER)",
+          "StudyDate": "Oct 02 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.201921654533810208151612098476",
+              "SeriesDescription": "PRE LIVER",
+              "NumberOfImages": 52
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00024",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.147831998085308237517519034064",
+          "StudyDescription": "CAP (LIVER)",
+          "StudyDate": "Oct 02 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.167163985333968147920204320268",
+              "SeriesDescription": "Recon 2: PRE LIVER",
+              "NumberOfImages": 103
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00024",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.174685686343497023818825890738",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Jan 10 2007",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.285670410253185495650134824587",
+              "SeriesDescription": "SO+N12/10/10/11/11",
+              "NumberOfImages": 405
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00024",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.174685686343497023818825890738",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Jan 10 2007",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.320145454615389714134412028542",
+              "SeriesDescription": "ST+N12/10/10/11/11",
+              "NumberOfImages": 205
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00025",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.157431376538702217071496853509",
+          "StudyDescription": "CAP WITH",
+          "StudyDate": "Nov 06 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.186926628985390235532154701850",
+              "SeriesDescription": "LUNG+ N14 A30",
+              "NumberOfImages": 127
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00025",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.209712514977136686490351491556",
+          "StudyDescription": "CAP W/",
+          "StudyDate": "Sep 25 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.935866622588277600150677842600",
+              "SeriesDescription": "LUNG+ N16 A30",
+              "NumberOfImages": 135
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00025",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.157431376538702217071496853509",
+          "StudyDescription": "CAP WITH",
+          "StudyDate": "Nov 06 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.109609157501497823041353417055",
+              "SeriesDescription": "ST+ N14/12/12/13/13 A0",
+              "NumberOfImages": 228
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00025",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.157431376538702217071496853509",
+          "StudyDescription": "CAP WITH",
+          "StudyDate": "Nov 06 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.972010477388162741912445191155",
+              "SeriesDescription": "ST+ N14/12/12/13/13 A20",
+              "NumberOfImages": 432
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00025",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.209712514977136686490351491556",
+          "StudyDescription": "CAP W/",
+          "StudyDate": "Sep 25 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.456203662996884530047413772342",
+              "SeriesDescription": "ST+ N16/14/14/15/15 A0",
+              "NumberOfImages": 236
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00025",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.209712514977136686490351491556",
+          "StudyDescription": "CAP W/",
+          "StudyDate": "Sep 25 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.149958725630530319969078465500",
+              "SeriesDescription": "ST+ N16/14/14/15/15 A20",
+              "NumberOfImages": 467
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00026",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.212090104607723889863874139866",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Jan 12 2007",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.342987754525772048523415328909",
+              "SeriesDescription": "LUNG+ N14 A30",
+              "NumberOfImages": 103
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00026",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.280316771866241569945771024085",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Oct 07 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.589804029000967744524482273593",
+              "SeriesDescription": "LUNG+ N14 A30",
+              "NumberOfImages": 113
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00026",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.212090104607723889863874139866",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Jan 12 2007",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.141530626394077670242762488924",
+              "SeriesDescription": "ST+ N14/12/12/13/13 A0",
+              "NumberOfImages": 202
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00026",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.280316771866241569945771024085",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Oct 07 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.144103535508919654498177327540",
+              "SeriesDescription": "ST+ N14/12/12/13/13 A0",
+              "NumberOfImages": 205
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00026",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.212090104607723889863874139866",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Jan 12 2007",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.117556303389214845243358201306",
+              "SeriesDescription": "ST+ N14/12/12/13/13 A20",
+              "NumberOfImages": 399
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00026",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.280316771866241569945771024085",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Oct 07 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.102515940483137198313151979137",
+              "SeriesDescription": "ST+ N14/12/12/13/13 A20",
+              "NumberOfImages": 405
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00027",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.297756006401287969347795618728",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Jan 14 2007",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.633100809451878565407272220737",
+              "SeriesDescription": "LUNG+ N14 A30",
+              "NumberOfImages": 127
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00027",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.182629793815612460965445519743",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Oct 02 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.189111125954612659204080715657",
+              "SeriesDescription": "LUNG+ N14 A30",
+              "NumberOfImages": 129
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00027",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.297756006401287969347795618728",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Jan 14 2007",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.272681370354253855770142593312",
+              "SeriesDescription": "ST+ N14/12/12/13/13 A0",
+              "NumberOfImages": 215
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00027",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.182629793815612460965445519743",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Oct 02 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.193613622606369395968741967983",
+              "SeriesDescription": "ST+ N14/12/12/13/13 A0",
+              "NumberOfImages": 223
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00027",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.297756006401287969347795618728",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Jan 14 2007",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.148328068960669389156934630928",
+              "SeriesDescription": "ST+ N14/12/12/13/13 A20",
+              "NumberOfImages": 388
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00027",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.182629793815612460965445519743",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Oct 02 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.734445427251675167002309116772",
+              "SeriesDescription": "ST+ N14/12/12/13/13 A20",
+              "NumberOfImages": 411
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00028",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.227330671752933032655424822016",
+          "StudyDescription": "Abdomen^ABDOMEN_PELVIS_WITH__ (Adult)",
+          "StudyDate": "Oct 23 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.243410445874296660905654934006",
+              "SeriesDescription": "Abd/Pel 3.0 I31f 1",
+              "NumberOfImages": 307
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00028",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.227330671752933032655424822016",
+          "StudyDescription": "Abdomen^ABDOMEN_PELVIS_WITH__ (Adult)",
+          "StudyDate": "Oct 23 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.242730784439375654878192348176",
+              "SeriesDescription": "Abd/Pel 5.0 I31f 1",
+              "NumberOfImages": 154
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00028",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.151598076231671127867361339182",
+          "StudyDescription": "CT Abd & Pelvis W/Cont",
+          "StudyDate": "Oct 11 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.328385121722461846866667288189",
+              "SeriesDescription": "SO+N12/12/13/13",
+              "NumberOfImages": 314
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00028",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.151598076231671127867361339182",
+          "StudyDescription": "CT Abd & Pelvis W/Cont",
+          "StudyDate": "Oct 11 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.315525145293104046018864061990",
+              "SeriesDescription": "ST+N12/12/13/13",
+              "NumberOfImages": 159
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00029",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.330451238502912571248937992021",
+          "StudyDescription": "CT CAP W.",
+          "StudyDate": "Nov 11 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.229067775489562513335833002707",
+              "SeriesDescription": "LUNG+ N12 A30",
+              "NumberOfImages": 115
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00029",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.681065283753302010251801395366",
+          "StudyDescription": "CT CAP WITH",
+          "StudyDate": "Feb 03 2007",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.155428846327681222157168212743",
+              "SeriesDescription": "LUNG+ N12 A30",
+              "NumberOfImages": 129
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00029",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.180866439472440216051513086804",
+          "StudyDescription": "CT CAP WO/W CONTRAST",
+          "StudyDate": "Oct 09 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.164516932880793817465109843005",
+              "SeriesDescription": "LUNG+ N12 A30",
+              "NumberOfImages": 133
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00029",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.152502512460630071600352394406",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Aug 07 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.271445926554251681177016641357",
+              "SeriesDescription": "SO+N12/10/10/11/11",
+              "NumberOfImages": 393
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00029",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.180866439472440216051513086804",
+          "StudyDescription": "CT CAP WO/W CONTRAST",
+          "StudyDate": "Oct 09 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.193335987979390277981621049129",
+              "SeriesDescription": "ST+ N11 A0",
+              "NumberOfImages": 47
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00029",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.180866439472440216051513086804",
+          "StudyDescription": "CT CAP WO/W CONTRAST",
+          "StudyDate": "Oct 09 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.873294758345668186261068665926",
+              "SeriesDescription": "ST+ N11 A20",
+              "NumberOfImages": 93
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00029",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.681065283753302010251801395366",
+          "StudyDescription": "CT CAP WITH",
+          "StudyDate": "Feb 03 2007",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.146436249885651037001426967269",
+              "SeriesDescription": "ST+ N12/10/10/11/11 A0",
+              "NumberOfImages": 200
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00029",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.330451238502912571248937992021",
+          "StudyDescription": "CT CAP W.",
+          "StudyDate": "Nov 11 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.212271020307200139320294036888",
+              "SeriesDescription": "ST+ N12/10/10/11/11 A0",
+              "NumberOfImages": 207
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00029",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.180866439472440216051513086804",
+          "StudyDescription": "CT CAP WO/W CONTRAST",
+          "StudyDate": "Oct 09 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.300025987316330849838398474455",
+              "SeriesDescription": "ST+ N12/10/10/11/11 A0",
+              "NumberOfImages": 213
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00029",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.681065283753302010251801395366",
+          "StudyDescription": "CT CAP WITH",
+          "StudyDate": "Feb 03 2007",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.241184953715711733609168143705",
+              "SeriesDescription": "ST+ N12/10/10/11/11 A20",
+              "NumberOfImages": 395
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00029",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.330451238502912571248937992021",
+          "StudyDescription": "CT CAP W.",
+          "StudyDate": "Nov 11 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.559661224921287310030001656876",
+              "SeriesDescription": "ST+ N12/10/10/11/11 A20",
+              "NumberOfImages": 409
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00029",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.180866439472440216051513086804",
+          "StudyDescription": "CT CAP WO/W CONTRAST",
+          "StudyDate": "Oct 09 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.228369145752773248522407046982",
+              "SeriesDescription": "ST+ N12/10/10/11/11 A20",
+              "NumberOfImages": 421
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00029",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.152502512460630071600352394406",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Aug 07 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.241052065372162276916225322239",
+              "SeriesDescription": "ST+N12/10/10/11/11",
+              "NumberOfImages": 199
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00031",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.103206351016554410451077682394",
+          "StudyDescription": "CH/ABD W/ CONT",
+          "StudyDate": "Jul 02 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.180579731301054082725003318168",
+              "SeriesDescription": "LUNG+ N12 A30",
+              "NumberOfImages": 133
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00031",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.248183314192603983812203377682",
+          "StudyDescription": "CT CAP W CONTRAST",
+          "StudyDate": "Jan 16 2007",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.186630106589660132852757760017",
+              "SeriesDescription": "LUNG+ N14 A30",
+              "NumberOfImages": 135
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00031",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.103206351016554410451077682394",
+          "StudyDescription": "CH/ABD W/ CONT",
+          "StudyDate": "Jul 02 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.307820319242320578216102515969",
+              "SeriesDescription": "ST+ N12/10/11 A0",
+              "NumberOfImages": 149
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00031",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.103206351016554410451077682394",
+          "StudyDescription": "CH/ABD W/ CONT",
+          "StudyDate": "Jul 02 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.950653016308164384071381312097",
+              "SeriesDescription": "ST+ N12/10/11 A20",
+              "NumberOfImages": 286
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00031",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.248183314192603983812203377682",
+          "StudyDescription": "CT CAP W CONTRAST",
+          "StudyDate": "Jan 16 2007",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.156985366349855191876220778264",
+              "SeriesDescription": "ST+ N14/12/12/13/13 A0",
+              "NumberOfImages": 209
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00031",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.248183314192603983812203377682",
+          "StudyDescription": "CT CAP W CONTRAST",
+          "StudyDate": "Jan 16 2007",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.271922522601987939009530980424",
+              "SeriesDescription": "ST+ N14/12/12/13/13 A20",
+              "NumberOfImages": 413
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00032",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.316455344621797785138506580036",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Oct 15 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.218750015516966357835723864385",
+              "SeriesDescription": "LUNG+ N14 A30",
+              "NumberOfImages": 149
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00032",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.339056546811636981954630526116",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Jan 19 2007",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.292836409905207229110837808722",
+              "SeriesDescription": "LUNG+ N16 A30",
+              "NumberOfImages": 137
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00032",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.316455344621797785138506580036",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Oct 15 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.280583513164721911159656704491",
+              "SeriesDescription": "ST+ N14/12/12/13/13 A0",
+              "NumberOfImages": 243
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00032",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.316455344621797785138506580036",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Oct 15 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.307191145191785067619073630666",
+              "SeriesDescription": "ST+ N14/12/12/13/13 A20",
+              "NumberOfImages": 481
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00032",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.339056546811636981954630526116",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Jan 19 2007",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.206616091101362694179490718490",
+              "SeriesDescription": "ST+ N16/14/14/15/15 A0",
+              "NumberOfImages": 218
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00032",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.339056546811636981954630526116",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Jan 19 2007",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.292568508446628597211493433762",
+              "SeriesDescription": "ST+ N16/14/14/15/15 A20",
+              "NumberOfImages": 431
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00033",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.157297858414924174245174293514",
+          "StudyDescription": "CAP WITH CONTRAST",
+          "StudyDate": "Jan 17 2007",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.166056586397166506953633166437",
+              "SeriesDescription": "LUNG+ N16 A30",
+              "NumberOfImages": 137
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00033",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.461820671238146670108095896372",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Oct 11 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.247054468668297681403497527081",
+              "SeriesDescription": "SO+N14/12/12/13/13",
+              "NumberOfImages": 413
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00033",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.157297858414924174245174293514",
+          "StudyDescription": "CAP WITH CONTRAST",
+          "StudyDate": "Jan 17 2007",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.195493027668387966125986931993",
+              "SeriesDescription": "ST+ N16/14/14/15/15 A0",
+              "NumberOfImages": 223
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00033",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.157297858414924174245174293514",
+          "StudyDescription": "CAP WITH CONTRAST",
+          "StudyDate": "Jan 17 2007",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.315303641137904064712770025506",
+              "SeriesDescription": "ST+ N16/14/14/15/15 A20",
+              "NumberOfImages": 441
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00033",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.461820671238146670108095896372",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Oct 11 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.200784975376109804210628139804",
+              "SeriesDescription": "ST+N14/12/12/13/13",
+              "NumberOfImages": 209
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00034",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.198607764517215881801646894220",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Jan 21 2007",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.270239133791122857021322132071",
+              "SeriesDescription": "LUNG+ N14 A30",
+              "NumberOfImages": 121
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00034",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.836157311059461744129334128985",
+          "StudyDescription": "CAP W",
+          "StudyDate": "Oct 21 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.633455154464234705212856291782",
+              "SeriesDescription": "SO+N14/12/12/13/13",
+              "NumberOfImages": 405
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00034",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.198607764517215881801646894220",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Jan 21 2007",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.247439078200123632405815761912",
+              "SeriesDescription": "ST+ N14/12/12/13/13 A0",
+              "NumberOfImages": 212
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00034",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.198607764517215881801646894220",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Jan 21 2007",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.118389185634962724887903401517",
+              "SeriesDescription": "ST+ N14/12/12/13/13 A20",
+              "NumberOfImages": 419
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00034",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.836157311059461744129334128985",
+          "StudyDescription": "CAP W",
+          "StudyDate": "Oct 21 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.248750637148610987379713801708",
+              "SeriesDescription": "ST+N14/12/12/13/13",
+              "NumberOfImages": 205
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00035",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.164607791207936861512966950839",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Jan 21 2007",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.249380214855836153076908766019",
+              "SeriesDescription": "LUNG+",
+              "NumberOfImages": 129
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00035",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.174886268441024478238198118811",
+          "StudyDescription": "CHEST W CONTRAST",
+          "StudyDate": "Oct 21 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.174929531997161807045410880907",
+              "SeriesDescription": "LUNG+",
+              "NumberOfImages": 134
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00035",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.174886268441024478238198118811",
+          "StudyDescription": "CHEST W CONTRAST",
+          "StudyDate": "Oct 21 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.133971178291594100501687914912",
+              "SeriesDescription": "POST",
+              "NumberOfImages": 134
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00035",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.164607791207936861512966950839",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Jan 21 2007",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.683022990462498148132016077427",
+              "SeriesDescription": "POST",
+              "NumberOfImages": 227
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00035",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.164607791207936861512966950839",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Jan 21 2007",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.198347131160092909049080549215",
+              "SeriesDescription": "SOFT+ 30/40% ASIR",
+              "NumberOfImages": 324
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00035",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.174886268441024478238198118811",
+          "StudyDescription": "CHEST W CONTRAST",
+          "StudyDate": "Oct 21 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.242451110158543897453028235916",
+              "SeriesDescription": "SOFT+ 40% ASIR",
+              "NumberOfImages": 134
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00035",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.164607791207936861512966950839",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Jan 21 2007",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.147728134332862904670575472743",
+              "SeriesDescription": "SOFT+ 50% ASIR",
+              "NumberOfImages": 195
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00035",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.164607791207936861512966950839",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Jan 21 2007",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.244981682325445517056407263349",
+              "SeriesDescription": "STD+",
+              "NumberOfImages": 195
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00036",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.222432935666773437614227970800",
+          "StudyDescription": "CT Soft Tissue Neck W/",
+          "StudyDate": "Oct 22 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.334974206602856970596586954572",
+              "SeriesDescription": "BRAIN",
+              "NumberOfImages": 44
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00036",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.202666701303490740038696070244",
+          "StudyDescription": "CT Soft Tissue Neck W/",
+          "StudyDate": "Jan 19 2007",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.303691320485552232087530987491",
+              "SeriesDescription": "BRAIN",
+              "NumberOfImages": 106
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00036",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.232059957465447927791904824023",
+          "StudyDescription": "CAP (LYMPHOMA)",
+          "StudyDate": "Oct 22 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.642919421627803906693251851899",
+              "SeriesDescription": "LUNG+ N14 A30",
+              "NumberOfImages": 147
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00036",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.202666701303490740038696070244",
+          "StudyDescription": "CT Soft Tissue Neck W/",
+          "StudyDate": "Jan 19 2007",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.219434677689130664515698742876",
+              "SeriesDescription": "ORAL/NASOPHARYNX",
+              "NumberOfImages": 317
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00036",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.578505296455141220011342461875",
+          "StudyDescription": "CAP WITH CONTRAST",
+          "StudyDate": "Jan 19 2007",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.135295313722745420429177075580",
+              "SeriesDescription": "SO+N12/10/10/11/11",
+              "NumberOfImages": 429
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00036",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.232059957465447927791904824023",
+          "StudyDescription": "CAP (LYMPHOMA)",
+          "StudyDate": "Oct 22 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.104780621456019880790360040593",
+              "SeriesDescription": "ST+ N14/12/12/13/13 A0",
+              "NumberOfImages": 225
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00036",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.232059957465447927791904824023",
+          "StudyDescription": "CAP (LYMPHOMA)",
+          "StudyDate": "Oct 22 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.182988185655531728541231250646",
+              "SeriesDescription": "ST+ N14/12/12/13/13 A20",
+              "NumberOfImages": 445
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00036",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.578505296455141220011342461875",
+          "StudyDescription": "CAP WITH CONTRAST",
+          "StudyDate": "Jan 19 2007",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.128532011902405565290494163082",
+              "SeriesDescription": "ST+N12/10/10/11/11",
+              "NumberOfImages": 217
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00036",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.222432935666773437614227970800",
+          "StudyDescription": "CT Soft Tissue Neck W/",
+          "StudyDate": "Oct 22 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.215681087113902543993039531733",
+              "SeriesDescription": "STD N11 A20",
+              "NumberOfImages": 106
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00037",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.176165557045445775879765851235",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Oct 30 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.607481542340293152061468665251",
+              "SeriesDescription": "SO+N14/12/12/13/13",
+              "NumberOfImages": 443
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00037",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.552136317143376424259787710925",
+          "StudyDescription": "ct cap w/",
+          "StudyDate": "Jan 27 2007",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.259303250415358186115788684921",
+              "SeriesDescription": "SO+N14/12/12/13/13",
+              "NumberOfImages": 469
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00037",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.176165557045445775879765851235",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Oct 30 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.240503099899470880388656328886",
+              "SeriesDescription": "ST+N14/12/12/13/13",
+              "NumberOfImages": 224
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00037",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.552136317143376424259787710925",
+          "StudyDescription": "ct cap w/",
+          "StudyDate": "Jan 27 2007",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.326809289169645006909115182360",
+              "SeriesDescription": "ST+N14/12/12/13/13",
+              "NumberOfImages": 237
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00038",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.550037211379730055079535185811",
+          "StudyDescription": "OSF CT Chest",
+          "StudyDate": "Jan 27 2007",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.336600994835417189039616063834",
+              "SeriesDescription": "5mm",
+              "NumberOfImages": 153
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00038",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.723166642830094596103456032868",
+          "StudyDescription": "OSF CT Chest",
+          "StudyDate": "May 07 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.244469089806723244374383396541",
+              "SeriesDescription": "CHEST",
+              "NumberOfImages": 19
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00038",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.723166642830094596103456032868",
+          "StudyDescription": "OSF CT Chest",
+          "StudyDate": "May 07 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.269772803907220404932212634076",
+              "SeriesDescription": "CHEST",
+              "NumberOfImages": 150
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00038",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.723166642830094596103456032868",
+          "StudyDescription": "OSF CT Chest",
+          "StudyDate": "May 07 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.200935494018632432960665602689",
+              "SeriesDescription": "LUNG WINDOW",
+              "NumberOfImages": 56
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00038",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.550037211379730055079535185811",
+          "StudyDescription": "OSF CT Chest",
+          "StudyDate": "Jan 27 2007",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.260143509749033886009782359114",
+              "SeriesDescription": "LUNG WINDOWS GROUP 1",
+              "NumberOfImages": 59
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00039",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.231072960943322077804010396733",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Feb 02 2007",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.243384111207779755070832495906",
+              "SeriesDescription": "LUNG+ N16 A30",
+              "NumberOfImages": 121
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00039",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.391786688563026350812361016079",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Oct 28 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.338377997998809538314974724409",
+              "SeriesDescription": "SO+N14/12/12/13/13",
+              "NumberOfImages": 431
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00039",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.231072960943322077804010396733",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Feb 02 2007",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.329409761775756650600121551118",
+              "SeriesDescription": "ST+ N16/14/14/15/15 A0",
+              "NumberOfImages": 207
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00039",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.231072960943322077804010396733",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Feb 02 2007",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.945091896987109610876594999064",
+              "SeriesDescription": "ST+ N16/14/14/15/15 A20",
+              "NumberOfImages": 409
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00039",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.391786688563026350812361016079",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Oct 28 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.300710668745440676766442000832",
+              "SeriesDescription": "ST+N14/12/12/13/13",
+              "NumberOfImages": 218
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00040",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.223975068190367174983946482192",
+          "StudyDescription": "CT With Oral Contrast",
+          "StudyDate": "Jan 31 2007",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.336017608885206223534227655401",
+              "SeriesDescription": "LUNG+ N16 A30",
+              "NumberOfImages": 113
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00040",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.223975068190367174983946482192",
+          "StudyDescription": "CT With Oral Contrast",
+          "StudyDate": "Jan 31 2007",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.639166502432949427204943768787",
+              "SeriesDescription": "ST+ N16/14/14/15/15 A0",
+              "NumberOfImages": 199
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00040",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.228495952740188825095054909344",
+          "StudyDescription": "CAP WITH",
+          "StudyDate": "Nov 09 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.864783133078946450996277131923",
+              "SeriesDescription": "ST+ N16/14/14/15/15 A0",
+              "NumberOfImages": 221
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00040",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.223975068190367174983946482192",
+          "StudyDescription": "CT With Oral Contrast",
+          "StudyDate": "Jan 31 2007",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.183742306695338338911810639181",
+              "SeriesDescription": "ST+ N16/14/14/15/15 A20",
+              "NumberOfImages": 393
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00040",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.228495952740188825095054909344",
+          "StudyDescription": "CAP WITH",
+          "StudyDate": "Nov 09 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.157276471874921125569245823340",
+              "SeriesDescription": "ST+ N16/14/14/15/15 A20",
+              "NumberOfImages": 437
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00041",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.169372493018603320689178270801",
+          "StudyDescription": "CHEST WITH CONTRAST",
+          "StudyDate": "Oct 30 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.635467290242471650886849322221",
+              "SeriesDescription": "LUNG",
+              "NumberOfImages": 147
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00041",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.169372493018603320689178270801",
+          "StudyDescription": "CHEST WITH CONTRAST",
+          "StudyDate": "Oct 30 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.128168075896613081499279260752",
+              "SeriesDescription": "STANDARD",
+              "NumberOfImages": 147
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00042",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.243742452385743482776989423623",
+          "StudyDescription": "CT CAP W CONTRAST",
+          "StudyDate": "Oct 10 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.148153483263616077701187580674",
+              "SeriesDescription": "LUNG+ N14 A30",
+              "NumberOfImages": 123
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00042",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.576228801078617261989634296961",
+          "StudyDescription": "CAP WITH CONTRAST",
+          "StudyDate": "Feb 11 2007",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.329217979007358396563043276685",
+              "SeriesDescription": "LUNG+ N16 A30",
+              "NumberOfImages": 115
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00042",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.243742452385743482776989423623",
+          "StudyDescription": "CT CAP W CONTRAST",
+          "StudyDate": "Oct 10 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.175191436879171187721676277025",
+              "SeriesDescription": "ST+ N14/12/12/13/13 A0",
+              "NumberOfImages": 214
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00042",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.243742452385743482776989423623",
+          "StudyDescription": "CT CAP W CONTRAST",
+          "StudyDate": "Oct 10 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.331248651944071870108495501931",
+              "SeriesDescription": "ST+ N14/12/12/13/13 A20",
+              "NumberOfImages": 423
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00042",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.576228801078617261989634296961",
+          "StudyDescription": "CAP WITH CONTRAST",
+          "StudyDate": "Feb 11 2007",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.254440237786747424348803409023",
+              "SeriesDescription": "ST+ N16/14/14/15/15 A0",
+              "NumberOfImages": 203
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00042",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.576228801078617261989634296961",
+          "StudyDescription": "CAP WITH CONTRAST",
+          "StudyDate": "Feb 11 2007",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.377203738598243293597272607601",
+              "SeriesDescription": "ST+ N16/14/14/15/15 A20",
+              "NumberOfImages": 401
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00044",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.206371168663544866662558764115",
+          "StudyDescription": "CT CHEST W CONT",
+          "StudyDate": "Dec 01 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.708676453072776640903106283139",
+              "SeriesDescription": "CAP AXIAL ST",
+              "NumberOfImages": 145
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00044",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.161605732292710908550485665535",
+          "StudyDescription": "CT Chest W/Contrast",
+          "StudyDate": "Nov 18 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.850727523611153243482535832229",
+              "SeriesDescription": "LUNG+ NI 20 A40%",
+              "NumberOfImages": 155
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00044",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.161605732292710908550485665535",
+          "StudyDescription": "CT Chest W/Contrast",
+          "StudyDate": "Nov 18 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.220432233339628991344378001240",
+              "SeriesDescription": "STD+ NI 20 A40%",
+              "NumberOfImages": 155
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00045",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.119176436435873112231353675460",
+          "StudyDescription": "Thorax^CHEST_WITH_XCARE_ (Adult)",
+          "StudyDate": "Dec 25 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.246462435007862298899035869408",
+              "SeriesDescription": "CAP 3.0 I31f 1",
+              "NumberOfImages": 420
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00045",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.119176436435873112231353675460",
+          "StudyDescription": "Thorax^CHEST_WITH_XCARE_ (Adult)",
+          "StudyDate": "Dec 25 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.314347942905490060128476558385",
+              "SeriesDescription": "CAP 5.0 I31f 1",
+              "NumberOfImages": 211
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00045",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.119176436435873112231353675460",
+          "StudyDescription": "Thorax^CHEST_WITH_XCARE_ (Adult)",
+          "StudyDate": "Dec 25 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.154548278335686848075922487034",
+              "SeriesDescription": "LUNG 2.0 I70f 1",
+              "NumberOfImages": 181
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00045",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.238884978620469327133178543676",
+          "StudyDescription": "Dual Energy^_SIEMENS_TEST_Customized (Adult)",
+          "StudyDate": "Nov 21 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.168857327919772985101644273637",
+              "SeriesDescription": "LUNG 2MM F_0.6",
+              "NumberOfImages": 169
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00045",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.238884978620469327133178543676",
+          "StudyDescription": "Dual Energy^_SIEMENS_TEST_Customized (Adult)",
+          "StudyDate": "Nov 21 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.326480596773404953822716978284",
+              "SeriesDescription": "SOFT TISSUE 1.5MM F_0.6",
+              "NumberOfImages": 225
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00046",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.280387272036221830573929252768",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Feb 12 2007",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.271102940534560039205070472990",
+              "SeriesDescription": "LUNG+ N16 A30",
+              "NumberOfImages": 127
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00046",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.280387272036221830573929252768",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Feb 12 2007",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.279877182611830101372282565003",
+              "SeriesDescription": "ST+ N16/14/14/15/15 A0",
+              "NumberOfImages": 237
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00046",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.280387272036221830573929252768",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Feb 12 2007",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.205261307564618476827643030720",
+              "SeriesDescription": "ST+ N16/14/14/15/15 A20",
+              "NumberOfImages": 468
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00046",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.322481745013344436560819896927",
+          "StudyDescription": "CT CAP WITH CONTRAST",
+          "StudyDate": "Nov 22 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.293423056416904531906841282026",
+              "SeriesDescription": "ST+N14/12/12/13/13",
+              "NumberOfImages": 133
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00046",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.322481745013344436560819896927",
+          "StudyDescription": "CT CAP WITH CONTRAST",
+          "StudyDate": "Nov 22 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.202396854212088504778638681181",
+              "SeriesDescription": "ST+N14/12/12/13/13",
+              "NumberOfImages": 240
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00046",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.322481745013344436560819896927",
+          "StudyDescription": "CT CAP WITH CONTRAST",
+          "StudyDate": "Nov 22 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.217246754789818641836683938548",
+              "SeriesDescription": "ST+N14/12/12/13/13",
+              "NumberOfImages": 475
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00047",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.429680979123213173926648515248",
+          "StudyDescription": "CT CAP WITH",
+          "StudyDate": "Feb 04 2007",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.108144764128144753870648789917",
+              "SeriesDescription": "LUNG+ N14 A30",
+              "NumberOfImages": 135
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00047",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.232858630182659397045008034802",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Dec 16 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.286165869450240444100944161317",
+              "SeriesDescription": "LUNG+ N14 A30",
+              "NumberOfImages": 137
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00047",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.429680979123213173926648515248",
+          "StudyDescription": "CT CAP WITH",
+          "StudyDate": "Feb 04 2007",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.539216536248995778095852938209",
+              "SeriesDescription": "ST+ N14/12/12/13/13 A0",
+              "NumberOfImages": 218
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00047",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.232858630182659397045008034802",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Dec 16 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.268801928736574987193524877747",
+              "SeriesDescription": "ST+ N14/12/12/13/13 A0",
+              "NumberOfImages": 290
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00047",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.429680979123213173926648515248",
+          "StudyDescription": "CT CAP WITH",
+          "StudyDate": "Feb 04 2007",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.151227924656780334640308876358",
+              "SeriesDescription": "ST+ N14/12/12/13/13 A20",
+              "NumberOfImages": 431
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "Anti-PD-1_MELANOMA",
+      "SubjectID": "PD-1-MELANOMA-00047",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.232858630182659397045008034802",
+          "StudyDescription": "CAP W CONTRAST",
+          "StudyDate": "Dec 16 2006",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3098.4963.324776216190955850782805432423",
+              "SeriesDescription": "ST+ N14/12/12/13/13 A20",
+              "NumberOfImages": 574
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -29,7 +29,13 @@ class ViewportOverlay extends Component {
         <div className="top-right overlay-element">Other info</div>
         <div className="bottom-left overlay-element">Zoom: {scale}</div>
         <div className="bottom-right overlay-element">
-          WW/WC: {windowWidth} / {windowCenter}
+          <span>
+            WW/WC: {windowWidth} / {windowCenter}
+          </span>
+          <span>
+            Image: {this.props.stack.currentImageIdIndex + 1} /{' '}
+            {this.props.stack.imageIds.length + 1}
+          </span>
         </div>
       </div>
     );
@@ -38,7 +44,8 @@ class ViewportOverlay extends Component {
 
 ViewportOverlay.propTypes = {
   viewport: PropTypes.object.isRequired,
-  imageId: PropTypes.string.isRequired
+  imageId: PropTypes.string.isRequired,
+  stack: PropTypes.object.isRequired
 };
 
 export default ViewportOverlay;

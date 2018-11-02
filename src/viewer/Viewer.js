@@ -125,13 +125,12 @@ class Viewer extends Component {
     });
 
     imageIds = imageIds.sort((a, b) => {
-      const imagePlaneA = cornerstone.metaData.get('imagePlaneModule', a);
-      const imagePlaneB = cornerstone.metaData.get('imagePlaneModule', b);
+      const instanceA = cornerstone.metaData.get('instance', a);
+      const instanceB = cornerstone.metaData.get('instance', b);
+      const instanceNumberA = instanceA['00200013'].Value[0];
+      const instanceNumberB = instanceB['00200013'].Value[0];
 
-      return (
-        imagePlaneA.imagePositionPatient[2] -
-        imagePlaneB.imagePositionPatient[2]
-      );
+      return instanceNumberA - instanceNumberB;
     });
 
     return [
