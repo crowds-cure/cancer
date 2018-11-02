@@ -24,6 +24,10 @@ import LoadingIndicator from '../shared/LoadingIndicator.js';
 
 import './Viewer.css';
 
+const scroll = cornerstoneTools.import('util/scroll');
+
+const EVENT_KEYDOWN = 'keydown';
+
 class Viewer extends Component {
   constructor(props) {
     super(props);
@@ -45,9 +49,12 @@ class Viewer extends Component {
     this.measurementsChanged = this.measurementsChanged.bind(this);
     this.previous = this.previous.bind(this);
     this.next = this.next.bind(this);
+    this.onKeyDown = this.onKeyDown.bind(this);
   }
 
   componentDidMount() {
+    document.body.addEventListener(EVENT_KEYDOWN, this.onKeyDown);
+
     this.getNextCase();
 
     // We need to prevent scrolling / elastic banding
@@ -56,6 +63,7 @@ class Viewer extends Component {
   }
 
   componentWillUnmount() {
+    document.body.removeEventListener(EVENT_KEYDOWN, this.onKeyDown);
     document.body.classList.remove('fixed-page');
   }
 
@@ -354,6 +362,35 @@ class Viewer extends Component {
     this.setState({
       currentLesion: nextLesion
     });
+  }
+
+  onKeyDown(event) {
+    const keys = {
+      UP: 38,
+      DOWN: 40
+    };
+
+    let scrollAmount = -1;
+
+    if (event.keyCode === keys.DOWN) {
+      scrollAmount = 1;
+    }
+
+    const enabledElements = cornerstone.getEnabledElements();
+    if (!enabledElements || !enabledElements.length) {
+      return;
+    }
+
+    const element = enabledElements[0].element;
+
+    scroll(element, scrollAmount);
+
+    event.stopPropagation();
+    event.preventDefault();
+
+    // return false to prevent default browser behavior
+    // and stop event from bubbling
+    return false;
   }
 }
 

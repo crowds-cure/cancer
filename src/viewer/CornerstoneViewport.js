@@ -194,8 +194,8 @@ class CornerstoneViewport extends Component {
         'StackScroll',
         'PanMultiTouch',
         'ZoomTouchPinch',
-        'StackScrollMouseWheel'
-        //"StackScrollMultiTouch",
+        'StackScrollMouseWheel',
+        'StackScrollMultiTouch'
       ];
 
       initializeTools(tools);
@@ -218,12 +218,11 @@ class CornerstoneViewport extends Component {
         mouseButtonMask: 0,
         isTouchActive: true
       });
-      //cornerstoneTools.setToolActive("StackScrollMultiTouch", { mouseButtonMask: 0, isTouchActive: true });
-      /*
-      cornerstoneTools.PanMultiTouch.setConfiguration({
-        testPointers: eventData => eventData.numPointers === 2
+
+      cornerstoneTools.setToolActive('StackScrollMultiTouch', {
+        mouseButtonMask: 0,
+        isTouchActive: true
       });
-      */
 
       cornerstoneTools.stackPrefetch.setConfiguration({
         maxImagesToPrefetch: Infinity,
