@@ -23,12 +23,17 @@ function setToolsPassive(tools) {
 }
 
 function initializeTools(tools) {
-  Array.from(tools).forEach(toolName => {
-    const apiTool = cornerstoneTools[`${toolName}Tool`];
+  Array.from(tools).forEach(tool => {
+    const apiTool = cornerstoneTools[`${tool.name}Tool`];
     if (apiTool) {
-      cornerstoneTools.addTool(apiTool);
+      console.warn(tool);
+      if (tool.configuration) {
+        cornerstoneTools.addTool(apiTool, tool);
+      } else {
+        cornerstoneTools.addTool(apiTool);
+      }
     } else {
-      throw new Error(`Tool not found: ${toolName}Tool`);
+      throw new Error(`Tool not found: ${tool.name}Tool`);
     }
   });
 }
@@ -187,15 +192,25 @@ class CornerstoneViewport extends Component {
       cornerstoneTools.stackPrefetch.enable(this.element);
 
       const tools = [
-        'Bidirectional',
-        'Wwwc',
-        'Zoom',
-        'Pan',
-        'StackScroll',
-        'PanMultiTouch',
-        'ZoomTouchPinch',
-        'StackScrollMouseWheel',
-        'StackScrollMultiTouch'
+        {
+          name: 'Bidirectional',
+          configuration: { shadow: true, drawHandlesOnHover: true }
+        },
+        { name: 'Wwwc' },
+        {
+          name: 'Zoom',
+          configuration: {
+            minScale: 0.3,
+            maxScale: 25,
+            preventZoomOutsideImage: true
+          }
+        },
+        { name: 'Pan' },
+        { name: 'StackScroll' },
+        { name: 'PanMultiTouch' },
+        { name: 'ZoomTouchPinch' },
+        { name: 'StackScrollMouseWheel' },
+        { name: 'StackScrollMultiTouch' }
       ];
 
       initializeTools(tools);

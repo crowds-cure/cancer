@@ -55,7 +55,7 @@ cornerstoneWADOImageLoader.configure({
 // context.font = "[style] [variant] [weight] [size]/[line height] [font family]";
 const fontFamily =
   'WorkSans, Roboto, OpenSans, HelveticaNeue-Light, Helvetica Neue Light, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif';
-cornerstoneTools.textStyle.setFont('15px ' + fontFamily);
+cornerstoneTools.textStyle.setFont('16px ' + fontFamily);
 
 // Set the tool width
 cornerstoneTools.toolStyle.setToolWidth(2);
@@ -65,15 +65,6 @@ cornerstoneTools.toolColors.setToolColor('rgb(255, 255, 0)');
 
 // Set color for active tools
 cornerstoneTools.toolColors.setActiveColor('rgb(0, 255, 0)');
-
-/*cornerstoneTools.LengthTool.setConfiguration({ shadow: true });
-
-// Stop users from zooming in or out too far
-cornerstoneTools.ZoomTool.setConfiguration({
-  minScale: 0.3,
-  maxScale: 25,
-  preventZoomOutsideImage: true
-});*/
 
 function metaDataProvider(type, imageId) {
   const metaData = cornerstoneWADOImageLoader.wadors.metaDataManager.get(
