@@ -502,8 +502,6 @@ class CornerstoneViewport extends Component {
   onMeasurementAddedOrRemoved(event) {
     const { toolType, measurementData } = event.detail;
 
-    measurementData._id = guid();
-
     // TODO: Pass in as prop?
     const toolsOfInterest = ['Bidirectional'];
 
@@ -515,6 +513,10 @@ class CornerstoneViewport extends Component {
         cornerstonetoolsmeasurementremoved: 'removed'
       };
       const action = type[event.type];
+
+      if (action === 'added') {
+        measurementData._id = guid();
+      }
 
       this.props.measurementsChanged(
         action,

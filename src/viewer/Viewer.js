@@ -177,7 +177,7 @@ class Viewer extends Component {
         <div key={index} className="viewport">
           {item ? (
             <CornerstoneViewport
-              currentLesion={this.state.currentLesion}
+              currentLesion={this.state.lesionSelected}
               toolData={this.state.toolData}
               measurementsChanged={this.measurementsChanged}
               viewportData={item}
@@ -309,14 +309,16 @@ class Viewer extends Component {
         ...measurementData
       });
 
-      // TOOD: Update the current lesion if we add new ones
-      // We can't use this right now because it inadvertently
-      // forces an update while the user is still placing the
-      // measurement.
-      // currentLesion = updatedToolData.length - 1;
+      currentLesion = updatedToolData.length;
     } else {
-      const index = updatedToolData.indexOf(measurementData);
+      const index = updatedToolData.findIndex(
+        data => data._id === measurementData._id
+      );
       updatedToolData.splice(index, 1);
+
+      if (currentLesion - 1 >= index) {
+        currentLesion = currentLesion - 1;
+      }
     }
     const hasMeasurements = this.state.toolData.length > 0;
 
@@ -348,7 +350,8 @@ class Viewer extends Component {
     }
 
     this.setState({
-      currentLesion: previousLesion
+      currentLesion: previousLesion,
+      lesionSelected: previousLesion
     });
   }
 
@@ -367,7 +370,8 @@ class Viewer extends Component {
     }
 
     this.setState({
-      currentLesion: nextLesion
+      currentLesion: nextLesion,
+      lesionSelected: nextLesion
     });
   }
 
