@@ -35,6 +35,10 @@
   color: textSecondaryColor;
 }
 
+.Modal a {
+  color: textActiveColor;
+}
+
 .modal-close {
   color: #aaa;
   line-height: 50px;

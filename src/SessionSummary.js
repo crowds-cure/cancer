@@ -24,7 +24,7 @@ class SessionSummary extends Component {
             <div className="col-10">
               <ProgressSection
                 current={this.props.current}
-                numCasesInSession={this.props.numCasesInSession}
+                casesInCurrentSession={this.props.casesInCurrentSession}
               />
             </div>
           </div>

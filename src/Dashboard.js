@@ -1,7 +1,6 @@
 import { Component } from 'react';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import StatisticsSection from './shared/StatisticsSection.js';
 import RankingSection from './shared/RankingSection.js';
 import ActivityProgressSection from './shared/ActivityProgressSection.js';
@@ -126,7 +125,7 @@ class Dashboard extends Component {
         <h3>Location: {item.Location}</h3>
         <p>{item.Description}</p>
         <span>
-          Dataset available at: <Link to={item.Link}>item.link</Link>
+          Dataset available at: <a href={item.Link}>{item.Link}</a>
         </span>
       </>
     );

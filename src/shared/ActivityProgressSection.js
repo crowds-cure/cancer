@@ -7,22 +7,7 @@ import { getBadgeByNumberOfCases } from '../badges.js';
 import './ActivityProgressSection.css';
 
 class ActivityProgressSection extends Component {
-  constructor(props) {
-    super(props);
-
-    this.getLowAndHigh = this.getLowAndHigh.bind(this);
-  }
-
-  getLowAndHigh() {
-    return {
-      low: Math.floor(this.props.current / 100) * 100,
-      high: Math.ceil(this.props.current / 100) * 100
-    };
-  }
-
   render() {
-    const { low, high } = this.getLowAndHigh();
-
     const current =
       this.props.current === undefined ? '---' : this.props.current;
 
@@ -33,12 +18,15 @@ class ActivityProgressSection extends Component {
     }
 
     const rankName = rank ? rank.name : '';
+    const low = rank ? rank.min : 0;
+    const high = rank ? rank.max : 10;
+    const rankType = rank ? rank.type : 'NUM_CASES_NOVICE';
 
     return (
       <div className="ActivityProgressSection">
         <div className="title">Your Activity</div>
-        <div className="medalContainer">
-          <Medal size="md" type={rankName} />
+        <div className="medalContainer" title={rankName}>
+          <Medal size="md" type={rankType} />
           <span className="rank">{rankName}</span>
         </div>
         <div className="progressBarContainer">
@@ -54,8 +42,7 @@ class ActivityProgressSection extends Component {
 }
 
 ActivityProgressSection.propTypes = {
-  current: PropTypes.number.isRequired,
-  casesInCurrentSession: PropTypes.number
+  current: PropTypes.number.isRequired
 };
 
 export default ActivityProgressSection;

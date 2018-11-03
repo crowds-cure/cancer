@@ -5,23 +5,22 @@ import ProgressBar from './ProgressBar.js';
 import Medal from './Medal.js';
 
 import './ProgressSection.css';
+import { getBadgeByNumberOfCases } from '../badges';
 
 class ProgressSection extends Component {
-  constructor(props) {
-    super(props);
-
-    this.getLowAndHigh = this.getLowAndHigh.bind(this);
-  }
-
-  getLowAndHigh() {
-    return {
-      low: Math.floor(this.props.current / 100) * 100,
-      high: Math.ceil(this.props.current / 100) * 100
-    };
-  }
-
   render() {
-    const { low, high } = this.getLowAndHigh();
+    const current =
+      this.props.current === undefined ? '---' : this.props.current;
+
+    let rank;
+    if (this.props.current !== undefined) {
+      rank = getBadgeByNumberOfCases(this.props.current);
+    }
+
+    const rankName = rank ? rank.name : '';
+    const low = rank ? rank.min : 0;
+    const high = rank ? rank.max : 10;
+    const rankType = rank ? rank.type : 'NUM_CASES_NOVICE';
 
     const increment = {
       casesInCurrentSession: this.props.casesInCurrentSession
@@ -31,11 +30,11 @@ class ProgressSection extends Component {
       <div className="ProgressSection">
         <div>
           <div className="numberCases">
-            <div className="medalContainer">
-              <Medal size="lg" type="NUM_CASES_NEWBIE" />
+            <div className="medalContainer" title={rankName}>
+              <Medal size="lg" type={rankType} />
             </div>
             <div className="currentPoints">
-              <span className="value">{this.props.current}</span>
+              <span className="value">{current}</span>
               <span className="suffix">cases</span>
               <span className="plusPoints">
                 +{increment.casesInCurrentSession}
