@@ -34,7 +34,7 @@ class ViewportOverlay extends Component {
           </span>
           <span>
             Image: {this.props.stack.currentImageIdIndex + 1} /{' '}
-            {this.props.stack.imageIds.length + 1}
+            {this.props.stack.imageIds.length}
           </span>
         </div>
       </div>
