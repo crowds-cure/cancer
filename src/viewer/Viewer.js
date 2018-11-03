@@ -20,13 +20,20 @@ import * as cornerstone from 'cornerstone-core';
 import * as cornerstoneWADOImageLoader from 'cornerstone-wado-image-loader';
 import * as cornerstoneTools from 'cornerstone-tools';
 
+import viewerCommands from './lib/viewerCommands.js';
 import LoadingIndicator from '../shared/LoadingIndicator.js';
 
 import './Viewer.css';
 
-const scroll = cornerstoneTools.import('util/scroll');
-
 const EVENT_KEYDOWN = 'keydown';
+
+const hotkeyFunctions = {
+  ArrowDown: () => viewerCommands.scrollActiveElement(1),
+  ArrowUp: () => viewerCommands.scrollActiveElement(-1),
+  '1': () => viewerCommands.setWLPresetSoftTissue(),
+  '2': () => viewerCommands.setWLPresetLung(),
+  '3': () => viewerCommands.setWLPresetLiver()
+};
 
 class Viewer extends Component {
   constructor(props) {
@@ -365,32 +372,18 @@ class Viewer extends Component {
   }
 
   onKeyDown(event) {
-    const keys = {
-      UP: 38,
-      DOWN: 40
-    };
+    console.warn(event);
+    const hotkeyFn = hotkeyFunctions[event.key];
+    if (hotkeyFn) {
+      hotkeyFn();
 
-    let scrollAmount = -1;
+      event.stopPropagation();
+      event.preventDefault();
 
-    if (event.keyCode === keys.DOWN) {
-      scrollAmount = 1;
+      // return false to prevent default browser behavior
+      // and stop event from bubbling
+      return false;
     }
-
-    const enabledElements = cornerstone.getEnabledElements();
-    if (!enabledElements || !enabledElements.length) {
-      return;
-    }
-
-    const element = enabledElements[0].element;
-
-    scroll(element, scrollAmount);
-
-    event.stopPropagation();
-    event.preventDefault();
-
-    // return false to prevent default browser behavior
-    // and stop event from bubbling
-    return false;
   }
 }
 

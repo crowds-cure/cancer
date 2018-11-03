@@ -1,4 +1,6 @@
 import * as cornerstone from 'cornerstone-core';
+import * as cornerstoneTools from 'cornerstone-tools';
+const scroll = cornerstoneTools.import('util/scroll');
 
 const defaultWlPresets = {
   SoftTissue: {
@@ -14,6 +16,17 @@ const defaultWlPresets = {
     ww: 150
   }
 };
+
+function getActiveElement() {
+  const enabledElements = cornerstone.getEnabledElements();
+  if (!enabledElements || !enabledElements.length) {
+    return;
+  }
+
+  const element = enabledElements[0].element;
+
+  return element;
+}
 
 const viewerCommands = {
   setWL: function(element, windowWidth, windowCenter) {
@@ -33,16 +46,29 @@ const viewerCommands = {
     this.setWL(element, preset.ww, preset.wc);
   },
 
-  setWLPresetLung: function(element) {
+  setWLPresetLung: function(element = getActiveElement()) {
     this.setWLPreset(element, 'Lung');
   },
 
-  setWLPresetLiver: function(element) {
+  setWLPresetLiver: function(element = getActiveElement()) {
     this.setWLPreset(element, 'Liver');
   },
 
-  setWLPresetSoftTissue: function(element) {
+  setWLPresetSoftTissue: function(element = getActiveElement()) {
     this.setWLPreset(element, 'SoftTissue');
+  },
+
+  reset: function(element = getActiveElement()) {
+    cornerstone.reset(element);
+  },
+
+  scrollActiveElement: function(scrollAmount) {
+    const element = getActiveElement();
+    if (!element) {
+      return;
+    }
+
+    scroll(element, scrollAmount);
   }
 };
 

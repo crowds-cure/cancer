@@ -35,10 +35,17 @@ const defaultButtons = [
     active: false
   },
   {
-    command: 'ClearAll',
+    command: 'reset',
     type: 'command',
-    text: 'Clear',
+    text: 'Reset',
     svgUrl: '/icons.svg#icon-tools-reset',
+    active: false
+  },
+  {
+    command: 'setWLPresetSoftTissue',
+    type: 'command',
+    text: 'Soft Tissue',
+    svgUrl: '/icons.svg#icon-tools-levels',
     active: false
   },
   {
@@ -52,13 +59,6 @@ const defaultButtons = [
     command: 'setWLPresetLiver',
     type: 'command',
     text: 'Liver',
-    svgUrl: '/icons.svg#icon-tools-levels',
-    active: false
-  },
-  {
-    command: 'setWLPresetSoftTissue',
-    type: 'command',
-    text: 'Soft Tissue',
     svgUrl: '/icons.svg#icon-tools-levels',
     active: false
   }
