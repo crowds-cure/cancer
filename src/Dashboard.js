@@ -11,6 +11,7 @@ import SimpleHeaderSection from './shared/SimpleHeaderSection.js';
 import './Dashboard.css';
 import Modal from 'react-modal';
 import { getDB } from './db';
+import getUserStats from './shared/getUserStats';
 
 const customStyles = {
   content: {
@@ -42,6 +43,15 @@ class Dashboard extends Component {
       this.setState({
         types,
         isLoading: false
+      });
+    });
+
+    getUserStats().then(userStats => {
+      this.context.store.dispatch({
+        type: 'SET_FROM_DATABASE',
+        savedState: {
+          current: userStats.current
+        }
       });
     });
 
@@ -137,6 +147,10 @@ class Dashboard extends Component {
     window.auth.logout();
   }
 }
+
+Dashboard.contextTypes = {
+  store: PropTypes.object.isRequired
+};
 
 Dashboard.propTypes = {
   current: PropTypes.number.isRequired,

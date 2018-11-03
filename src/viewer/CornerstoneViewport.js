@@ -193,8 +193,8 @@ class CornerstoneViewport extends Component {
 
       const tools = [
         {
-          name: 'Bidirectional',
-          configuration: { shadow: true, drawHandlesOnHover: true }
+          name: 'Bidirectional'
+          //configuration: { shadow: true, drawHandlesOnHover: true }
         },
         { name: 'Wwwc' },
         {

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import Auth from './openid-connect/Auth.js';
 import LoadingIndicator from './shared/LoadingIndicator.js';
-import getUserStats from './shared/getUserStats';
 
 class SecretRoute extends Component {
   constructor(props) {
@@ -25,14 +24,6 @@ class SecretRoute extends Component {
             occupation: auth.profile.occupation,
             team: auth.profile.team,
             experience: auth.profile.experience
-          }
-        });
-
-        const userStats = await getUserStats();
-        store.dispatch({
-          type: 'SET_FROM_DATABASE',
-          savedState: {
-            current: userStats.current
           }
         });
 
