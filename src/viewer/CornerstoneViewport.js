@@ -26,12 +26,7 @@ function initializeTools(tools) {
   Array.from(tools).forEach(tool => {
     const apiTool = cornerstoneTools[`${tool.name}Tool`];
     if (apiTool) {
-      console.warn(tool);
-      if (tool.configuration) {
-        cornerstoneTools.addTool(apiTool, tool);
-      } else {
-        cornerstoneTools.addTool(apiTool);
-      }
+      cornerstoneTools.addTool(apiTool, tool);
     } else {
       throw new Error(`Tool not found: ${tool.name}Tool`);
     }
@@ -193,8 +188,8 @@ class CornerstoneViewport extends Component {
 
       const tools = [
         {
-          name: 'Bidirectional'
-          //configuration: { shadow: true, drawHandlesOnHover: true }
+          name: 'Bidirectional',
+          configuration: { shadow: true, drawHandlesOnHover: true }
         },
         { name: 'Wwwc' },
         {
