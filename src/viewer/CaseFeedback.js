@@ -59,15 +59,17 @@ class CaseFeedback extends Component {
       const active = this.state.selected.has(option.value);
       return (
         <li key={option.value} className={active ? 'active' : ''}>
-          <input
-            type="checkbox"
-            id={option.value}
-            className="customCheckbox"
-            value={option.value}
-            checked={active ? true : false}
-            onChange={this.updateSelectedOptions}
-          />
-          <label htmlFor={option.value}>{option.label}</label>
+          <label htmlFor={option.value}>
+            <input
+              type="checkbox"
+              id={option.value}
+              className="customCheckbox"
+              value={option.value}
+              checked={active ? true : false}
+              onChange={this.updateSelectedOptions}
+            />
+            {option.label}
+          </label>
         </li>
       );
     });

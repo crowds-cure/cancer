@@ -60,13 +60,19 @@
 }
 
 .CaseFeedback .feedback-options li {
-  padding-top: 10px;
+  padding: 5px 0;
   list-style: none;
   color: white;
 }
 
+.CaseFeedback .feedback-options li label {
+  padding: 5px 0;
+  cursor: pointer;
+}
+
 .CaseFeedback .feedback-options .customCheckbox {
   margin-right: 20px;
+  cursor: pointer;
 }
 
 .CaseFeedback .feedback-options .buttom {
