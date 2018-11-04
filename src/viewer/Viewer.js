@@ -53,6 +53,9 @@ class Viewer extends Component {
     this.isSaveEnabled = this.isSaveEnabled.bind(this);
     this.isSkipEnabled = this.isSkipEnabled.bind(this);
     this.feedbackChanged = this.feedbackChanged.bind(this);
+    this.measurementsAddedOrRemoved = this.measurementsAddedOrRemoved.bind(
+      this
+    );
     this.measurementsChanged = this.measurementsChanged.bind(this);
     this.previous = this.previous.bind(this);
     this.next = this.next.bind(this);
@@ -179,6 +182,7 @@ class Viewer extends Component {
             <CornerstoneViewport
               currentLesion={this.state.lesionSelected}
               toolData={this.state.toolData}
+              measurementsAddedOrRemoved={this.measurementsAddedOrRemoved}
               measurementsChanged={this.measurementsChanged}
               viewportData={item}
               activeTool={activeTool}
@@ -228,41 +232,37 @@ class Viewer extends Component {
     // Dump all of its tool state into an Object
     const toolState = toolStateManager.saveToolState();
 
+    const measurements = this.state.toolData;
+
     // Get the stack tool data
     //const stackData = cornerstoneTools.getToolState(element, 'stack');
     //const stack = stackData.data[0];
 
-    // Retrieve the length data from this Object
-    let lengthData = [];
-    const toolType = 'length';
-    Object.keys(toolState).forEach(imageId => {
-      const toolDataForImage = toolState[imageId];
-      if (
-        !toolDataForImage[toolType] ||
-        !toolDataForImage[toolType].data.length
-      ) {
-        return;
-      }
-
-      lengthData.push(toolDataForImage[toolType]);
+    // Retrieve the tool data from this Object
+    let toolData = [];
+    measurements.forEach(measurement => {
+      const { toolType, imageId } = measurement;
+      const data = toolState[imageId][toolType].data;
+      const tool = data.find(a => a._id === measurement._id);
+      toolData.push({
+        ...tool,
+        toolType,
+        imageId
+      });
     });
 
-    if (lengthData.length > 1) {
-      throw new Error(
-        'Only one length measurement should be in the lengthData'
-      );
-    }
-
-    return lengthData;
+    return toolData;
   }
 
   saveCase() {
     const { caseData } = this.props;
 
     this.props.incrementNumCasesInSession();
+
     const measurements = this.getMeasurementData();
+
     saveMeasurementToDatabase(caseData, measurements);
-    console.log('saveCase!');
+
     this.getNextCase();
   }
 
@@ -299,13 +299,14 @@ class Viewer extends Component {
     });
   }
 
-  measurementsChanged(action, imageId, toolType, measurementData) {
+  measurementsAddedOrRemoved(action, imageId, toolType, measurementData) {
     let updatedToolData = this.state.toolData;
     let currentLesion = this.state.currentLesion;
 
     if (action === 'added') {
       updatedToolData.push({
         imageId,
+        toolType,
         ...measurementData
       });
 
@@ -333,6 +334,12 @@ class Viewer extends Component {
       toolData: updatedToolData,
       currentLesion
     });
+  }
+
+  measurementsChanged() {
+    console.log('changed');
+    // TODO: Get VOI of image, in case it has changed
+    // TODO: Update this.state.toolData;
   }
 
   previous() {

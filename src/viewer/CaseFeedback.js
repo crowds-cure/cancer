@@ -64,7 +64,7 @@ class CaseFeedback extends Component {
             id={option.value}
             className="customCheckbox"
             value={option.value}
-            {...(active ? 'checked' : '')}
+            checked={active ? true : false}
             onChange={this.updateSelectedOptions}
           />
           <label htmlFor={option.value}>{option.label}</label>

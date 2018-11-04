@@ -6,9 +6,19 @@ import { getDB } from '../../db.js';
 import * as cornerstone from 'cornerstone-core';
 import * as cornerstoneTools from 'cornerstone-tools';
 
+const { newImageIdSpecificToolStateManager } = cornerstoneTools;
+const offScreenToolStateMgr = newImageIdSpecificToolStateManager();
+
 function saveAttachment(measurement, response) {
   const measurementsDB = getDB('measurements');
-  const element = document.createElement('offscreen-renderer');
+  const element = document.createElement('div');
+  element.id = `offscreen-renderer-${measurement.id}`;
+
+  const { imageId, toolType } = measurement;
+  const tool = {
+    name: 'Bidirectional',
+    configuration: { shadow: true, drawHandlesOnHover: true }
+  };
 
   function createScreenshot(event) {
     // JPEG Image Quality
@@ -23,24 +33,59 @@ function saveAttachment(measurement, response) {
       createScreenshot
     );
 
+    cornerstone.disable(element);
+
+    offScreenToolStateMgr.restoreToolState({});
+
     measurementsDB.putAttachment(
       response.id,
       'screenshot.jpeg',
       response.rev,
       imageBlob,
-      'image/png'
+      'image/jpeg'
     );
   }
 
-  // TODO: double check that the tool is actually rendered in this
-  // frame
-  element.addEventListener(cornerstone.EVENTS.IMAGE_RENDERED, createScreenshot);
+  cornerstone.enable(element);
+  cornerstoneTools.setElementToolStateManager(element, offScreenToolStateMgr);
 
-  cornerstone.loadAndCacheImage(measurement.imageId).then(image => {
-    // TODO: Switch to Bidirectional
-    cornerstoneTools.setToolEnabled('BidirectionalTool');
+  const apiTool = cornerstoneTools[`${tool.name}Tool`];
+  cornerstoneTools.addToolForElement(element, apiTool, tool.configuration);
 
-    cornerstone.displayImage(image, element);
+  function firstRender() {
+    element.removeEventListener(cornerstone.EVENTS.IMAGE_RENDERED, firstRender);
+    element.addEventListener(
+      cornerstone.EVENTS.IMAGE_RENDERED,
+      createScreenshot
+    );
+
+    cornerstoneTools.setToolEnabled(toolType);
+    cornerstone.updateImage(element);
+  }
+
+  cornerstone.loadAndCacheImage(imageId).then(image => {
+    const enabledElement = cornerstone.getEnabledElement(element);
+    const { canvas } = enabledElement;
+    canvas.width = 512;
+    canvas.height = 512;
+
+    const toolState = {};
+    toolState[imageId] = {};
+    toolState[imageId][toolType] = {
+      data: [measurement]
+    };
+
+    offScreenToolStateMgr.restoreToolState(toolState);
+
+    const viewport = cornerstone.getDefaultViewportForImage(element, image);
+
+    // TODO: Update Viewport whenever the measurement changes
+    if (measurement.viewport.voi) {
+      viewport.voi = measurement.viewport.voi;
+    }
+
+    element.addEventListener(cornerstone.EVENTS.IMAGE_RENDERED, firstRender);
+    cornerstone.displayImage(element, image, viewport);
   });
 }
 
@@ -49,24 +94,21 @@ async function saveMeasurementToDatabase(caseData, measurements) {
   const measurementsDB = getDB('measurements');
   const annotator = await getUsername();
 
-  const doc = {
-    _id: guid(),
-    measurements,
-    annotator,
-    skip: false,
-    caseData: caseData.data,
-    date: Math.floor(Date.now() / 1000),
-    userAgent: navigator.userAgent
-  };
+  measurements.forEach(async measurement => {
+    const doc = {
+      _id: guid(),
+      measurement,
+      annotator,
+      skip: false,
+      caseData: caseData.data,
+      date: Math.floor(Date.now() / 1000),
+      userAgent: navigator.userAgent
+    };
 
-  const response = await measurementsDB.put(doc);
+    const response = await measurementsDB.put(doc);
 
-  console.time('saveAttachment to Measurement DB');
-  measurements.forEach(measurement => {
     saveAttachment(measurement, response);
   });
-
-  console.timeEnd('saveAttachment to Measurement DB');
 }
 
 export default saveMeasurementToDatabase;

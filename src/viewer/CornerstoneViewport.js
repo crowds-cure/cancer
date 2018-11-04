@@ -517,6 +517,7 @@ class CornerstoneViewport extends Component {
 
     if (toolsOfInterest.includes(toolType)) {
       const image = cornerstone.getImage(this.element);
+      const viewport = cornerstone.getViewport(this.element);
 
       const type = {
         cornerstonetoolsmeasurementadded: 'added',
@@ -526,9 +527,10 @@ class CornerstoneViewport extends Component {
 
       if (action === 'added') {
         measurementData._id = guid();
+        measurementData.viewport = viewport;
       }
 
-      this.props.measurementsChanged(
+      this.props.measurementsAddedOrRemoved(
         action,
         image.imageId,
         toolType,
@@ -565,6 +567,7 @@ class CornerstoneViewport extends Component {
 }
 
 CornerstoneViewport.propTypes = {
+  measurementsAddedOrRemoved: PropTypes.func.isRequired,
   measurementsChanged: PropTypes.func.isRequired,
   activeTool: PropTypes.string.isRequired,
   viewportData: PropTypes.object.isRequired
