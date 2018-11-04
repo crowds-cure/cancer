@@ -23,9 +23,11 @@ class LogoutSection extends Component {
   };
 
   render() {
+    const timeLeft = 30;
+
     return (
       <div className="LogoutSection">
-        <AutoLogoutCountdown />
+        <AutoLogoutCountdown timeLeft={timeLeft} />
         <Button label="Dashboard" click={this.handleClickDashboard} />
         <Button label="Log out now" click={this.handleClickLogout} />
       </div>
