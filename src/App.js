@@ -7,6 +7,7 @@ import './grid-16.css';
 import ConnectedDashboard from './ConnectedDashboard.js';
 import ConnectedViewer from './ConnectedViewer.js';
 import ConnectedSessionSummary from './ConnectedSessionSummary.js';
+import ScreenshotQA from './ScreenshotQA.js';
 
 const reload = () => window.location.reload();
 
@@ -39,6 +40,13 @@ class App extends Component {
           exact
           path="/session-summary"
           component={ConnectedSessionSummary}
+          auth={this.props.auth}
+          store={this.props.store}
+        />
+        <SecretRoute
+          exact
+          path="/screenshot-qa"
+          component={ScreenshotQA}
           auth={this.props.auth}
           store={this.props.store}
         />
