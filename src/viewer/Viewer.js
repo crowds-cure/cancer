@@ -246,6 +246,7 @@ class Viewer extends Component {
       const tool = data.find(a => a._id === measurement._id);
       toolData.push({
         ...tool,
+        viewport: measurement.viewport,
         toolType,
         imageId
       });

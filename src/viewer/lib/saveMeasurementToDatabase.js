@@ -6,10 +6,9 @@ import { getDB } from '../../db.js';
 import * as cornerstone from 'cornerstone-core';
 import * as cornerstoneTools from 'cornerstone-tools';
 
-const { newImageIdSpecificToolStateManager } = cornerstoneTools;
-const offScreenToolStateMgr = newImageIdSpecificToolStateManager();
-
 function saveAttachment(measurement, response) {
+  const { newImageIdSpecificToolStateManager } = cornerstoneTools;
+  const offScreenToolStateMgr = newImageIdSpecificToolStateManager();
   const measurementsDB = getDB('measurements');
   const element = document.createElement('div');
   element.id = `offscreen-renderer-${measurement.id}`;
@@ -59,7 +58,7 @@ function saveAttachment(measurement, response) {
       createScreenshot
     );
 
-    cornerstoneTools.setToolEnabled(toolType);
+    cornerstoneTools.setToolEnabledForElement(element, toolType);
     cornerstone.updateImage(element);
   }
 
@@ -81,7 +80,7 @@ function saveAttachment(measurement, response) {
 
     // TODO: Update Viewport whenever the measurement changes
     if (measurement.viewport.voi) {
-      viewport.voi = measurement.viewport.voi;
+      viewport.voi = Object.assign({}, measurement.viewport.voi);
     }
 
     element.addEventListener(cornerstone.EVENTS.IMAGE_RENDERED, firstRender);

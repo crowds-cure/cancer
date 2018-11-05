@@ -12,6 +12,8 @@ import LoadingIndicator from '../shared/LoadingIndicator.js';
 import './CornerstoneViewport.css';
 import guid from './lib/guid.js';
 
+import cloneDeep from 'lodash.clonedeep';
+
 const EVENT_RESIZE = 'resize';
 const loadIndicatorDelay = 25;
 const { loadHandlerManager } = cornerstoneTools;
@@ -515,7 +517,7 @@ class CornerstoneViewport extends Component {
 
       if (action === 'added') {
         measurementData._id = guid();
-        measurementData.viewport = viewport;
+        measurementData.viewport = cloneDeep(viewport);
       }
 
       this.props.measurementsAddedOrRemoved(
