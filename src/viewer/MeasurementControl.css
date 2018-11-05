@@ -60,11 +60,17 @@
   border-bottom-color: transparent;
 }
 
-.MeasurementControl .controls .arrow-container:active > .left-arrow {
+.MeasurementControl
+  .controls:not(.disabled)
+  .arrow-container:active
+  > .left-arrow {
   border-left: 0px;
 }
 
-.MeasurementControl .controls .arrow-container:active > .right-arrow {
+.MeasurementControl
+  .controls:not(.disabled)
+  .arrow-container:active
+  > .right-arrow {
   border-right: 0px;
 }
 
