@@ -54,8 +54,8 @@ cornerstoneWADOImageLoader.configure({
 // Set the tool font and font size
 // context.font = "[style] [variant] [weight] [size]/[line height] [font family]";
 const fontFamily =
-  'WorkSans, Roboto, OpenSans, HelveticaNeue-Light, Helvetica Neue Light, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif';
-cornerstoneTools.textStyle.setFont('16px ' + fontFamily);
+  'Work Sans, Roboto, OpenSans, HelveticaNeue-Light, Helvetica Neue Light, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif';
+cornerstoneTools.textStyle.setFont(`16px ${fontFamily}`);
 
 // Set the tool width
 cornerstoneTools.toolStyle.setToolWidth(2);
