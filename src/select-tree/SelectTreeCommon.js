@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import React from 'react';
+import 'SelectTreeCommon.css';
 
 class selectTreeCommon extends Component {
   constructor(props) {
@@ -33,3 +34,5 @@ class selectTreeCommon extends Component {
     this.props.click(event, item);
   }
 }
+
+export default selectTreeCommon;

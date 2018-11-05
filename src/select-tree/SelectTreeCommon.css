@@ -1,0 +1,70 @@
+.select-tree-root .select-tree-common {
+  height: 100%;
+  padding-left: 6px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 50%;
+}
+.select-tree-root .select-tree-common .content {
+  background-color: var(--gray-6);
+  border: 1px solid var(--gray-5);
+  border-radius: 5px;
+  color: #fff;
+  opacity: 0.9;
+  padding: 0 15px 12px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: calc(100% - 6px);
+}
+.select-tree-root .select-tree-common .content h5.title {
+  color: var(--gray-5);
+  font-weight: normal;
+  line-height: 20px;
+  margin: 12px 0 16px;
+}
+.select-tree-root .select-tree-common .content div.labels {
+  position: relative;
+}
+.select-tree-root .select-tree-common .content label {
+  cursor: pointer;
+  display: block;
+  font-weight: 300;
+  line-height: 26px;
+  margin: 0;
+  padding-left: 3px;
+  transition: padding 0.3s ease;
+}
+
+.select-tree-root .select-tree-common .content label:hover {
+  padding-left: 0;
+}
+
+.select-tree-root .select-tree-common {
+  z-index: -1;
+}
+.select-tree-root .select-tree-common .content {
+  margin-left: calc(-100% - 6px);
+  transform: scale(0);
+  transition: margin-left 0.3s ease 0.3s, transform 0s linear 0.3s;
+}
+.select-tree-root.started .select-tree-common .content {
+  margin-left: 0;
+  transform: scale(1) translateY(-50%);
+}
+.select-tree-root.navigated .select-tree-common .content,
+.select-tree-root.selected .select-tree-common .content {
+  opacity: 0;
+  transform: translateX(-100%) scale(0);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+@keyframes selectTreeCommonOverflow {
+  from {
+    overflow: hidden;
+  }
+  to {
+    overflow: visible;
+  }
+}
