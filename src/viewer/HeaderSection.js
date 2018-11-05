@@ -129,6 +129,7 @@ class HeaderSection extends Component {
                   Detailed results will be posted after RSNA. Visit{' '}
                   <a
                     target="_blank"
+                    rel="noopener noreferrer"
                     href="http://www.cancerimagingarchive.net/"
                   >
                     Cancer Imaging Archive
@@ -136,6 +137,7 @@ class HeaderSection extends Component {
                   to view{' '}
                   <a
                     target="_blank"
+                    rel="noopener noreferrer"
                     href="https://doi.org/10.7937/K9/TCIA.2018.OW73VLO2"
                   >
                     results from RSNA 2017
