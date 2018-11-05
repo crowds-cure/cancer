@@ -164,8 +164,15 @@ class CornerstoneViewport extends Component {
         return;
       }
 
+      // Set Soft Tissue preset for all images by default
+      const viewport = cornerstone.getDefaultViewportForImage(element, image);
+      viewport.voi = {
+        windowWidth: 400,
+        windowCenter: 40
+      };
+
       // Display the first image
-      cornerstone.displayImage(element, image);
+      cornerstone.displayImage(element, image, viewport);
 
       // Clear any previous tool state
       cornerstoneTools.clearToolState(this.element, 'stack');
