@@ -85,14 +85,15 @@ class HeaderSection extends Component {
               <ul>
                 <li>
                   Measure all of the metastatic lesions that you can find with
-                  the Bidirectional measurement tool. There is no minimum size
-                  for measurement. You will get 1 point for each lesion that is
-                  measured.
+                  the bidirectional measurement tool. There is no minimum size
+                  for measurement. You will get 1 point for each lesion
+                  measurement.
                 </li>
                 <li>
-                  Label the lesions and add a description (e.g., ill-defined,
-                  confluent, necrotic, etc.). Use the ‘previous’ and ‘next’
-                  buttons to review the lesions that you have measured.
+                  Label the lesion locations and add a description (e.g.,
+                  ill-defined, confluent, necrotic, etc. if applicable). Use the
+                  ‘previous’ and ‘next’ buttons to review the lesions that you
+                  have measured.
                 </li>
                 <li>
                   Use toolbar options or hotkeys (1 = soft tissue; 2 = lung; 3 =
@@ -104,12 +105,12 @@ class HeaderSection extends Component {
                   case.
                 </li>
                 <li>
-                  Return to the dashboard at anytime to change your case type
+                  Return to the dashboard at any time to change your case type
                   selection.
                 </li>
                 <li>End the session (logout) when you are finished.</li>
               </ul>
-              <h2>Create</h2>
+              <h2>Compete</h2>
               <ul>
                 <li>
                   Log back in under your username to measure more cases.
@@ -118,8 +119,28 @@ class HeaderSection extends Component {
                 </li>
                 <li>
                   Track your personal progress and the progress of other RSNA
-                  attendees. The leaderboard will show the top readers and
-                  community stats for RSNA 2018.
+                  attendees. The leaderboard will show the top individual
+                  readers, residency teams, and community stats for RSNA 2018.
+                </li>
+              </ul>
+              <h2>Contribute</h2>
+              <ul>
+                <li>
+                  Detailed results will be posted after RSNA. Visit{' '}
+                  <a
+                    target="_blank"
+                    href="http://www.cancerimagingarchive.net/"
+                  >
+                    Cancer Imaging Archive
+                  </a>{' '}
+                  to view{' '}
+                  <a
+                    target="_blank"
+                    href="https://doi.org/10.7937/K9/TCIA.2018.OW73VLO2"
+                  >
+                    results from RSNA 2017
+                  </a>
+                  .
                 </li>
               </ul>
               <span className="modal-close" onClick={this.toggleModal}>

@@ -140,7 +140,10 @@ class Dashboard extends Component {
         <h3>Location: {item.Location}</h3>
         <p>{item.Description}</p>
         <span>
-          Dataset available at: <a href={item.Link}>{item.Link}</a>
+          Dataset available at:{' '}
+          <a target="_blank" href={item.Link}>
+            {item.Link}
+          </a>
         </span>
       </>
     );
