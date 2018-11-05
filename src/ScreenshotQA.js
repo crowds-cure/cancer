@@ -10,7 +10,7 @@ async function getLatestMeasurements() {
     selector: {
       skip: false
     },
-    fields: ['_id', 'date', 'annotator'],
+    fields: ['_id', 'date', 'annotator', 'caseData'],
     sort: [{ date: 'desc' }],
     limit: 10
   });
@@ -26,6 +26,20 @@ class ScreenshotQA extends Component {
       measurements: []
     };
 
+    this.updateMeasurements = this.updateMeasurements.bind(this);
+
+    this.updateMeasurements();
+  }
+
+  componentDidMount() {
+    this.interval = setInterval(this.updateMeasurements, 30000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+
+  updateMeasurements() {
     getLatestMeasurements().then(measurements => {
       this.setState({
         measurements
@@ -40,22 +54,32 @@ class ScreenshotQA extends Component {
       const imgName = 'screenshot.jpeg';
       const src = `${host}/${db}/${measurement._id}/${imgName}`;
 
-      return <img src={src} alt={measurement._id} key={measurement._id} />;
+      const date = new Date(measurement.date * 1000).toUTCString();
+
+      return (
+        <div className="row" key={measurement._id}>
+          <div className="col-4">
+            <h4>{measurement.annotator}</h4>
+            <h5>{date}</h5>
+            <p>{measurement.caseData.Collection}</p>
+            <p>{measurement.caseData.SubjectID}</p>
+            <p>{measurement.caseData.studies[0].StudyDescription}</p>
+            <p>{measurement.caseData.studies[0].series[0].SeriesDescription}</p>
+          </div>
+          <div className="col-10">
+            <img src={src} alt={measurement._id} />
+          </div>
+        </div>
+      );
     });
 
     return (
       <div className="ScreenshotQA">
         <SimpleHeaderSection />
         <div className="container">
-          <div className="row align-items-center">
-            <div className="col title-wrapper">
-              <label className="title">ScreenshotQA</label>
-            </div>
-          </div>
           <div className="row justify-content-center">
             <div className="col-10">{screenshots}</div>
           </div>
-          >
         </div>
       </div>
     );
