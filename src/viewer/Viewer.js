@@ -214,6 +214,7 @@ class Viewer extends Component {
           />
           <CaseControlButtons
             feedbackChanged={this.feedbackChanged}
+            feedbackSelected={this.state.feedback}
             saveEnabled={this.isSaveEnabled()}
             saveCase={this.saveCase}
             skipEnabled={this.isSkipEnabled()}
@@ -291,11 +292,9 @@ class Viewer extends Component {
     return this.state.feedback && this.state.feedback.length > 0;
   }
 
-  feedbackChanged(feedbackObject) {
-    // The CaseFeedback component calls this callback with the Object
-    // which describes which options are selected.
-    const feedback = Array.from(feedbackObject.selected);
-
+  feedbackChanged(feedback) {
+    // The CaseFeedback component calls this callback with
+    // an Array which describes which options are selected.
     this.setState({
       feedback
     });
@@ -385,7 +384,6 @@ class Viewer extends Component {
   }
 
   onKeyDown(event) {
-    console.warn(event);
     const hotkeyFn = hotkeyFunctions[event.key];
     if (hotkeyFn) {
       hotkeyFn();

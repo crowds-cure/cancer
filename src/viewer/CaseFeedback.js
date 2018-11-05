@@ -9,7 +9,6 @@ class CaseFeedback extends Component {
     super(props);
 
     this.state = {
-      selected: new Set(),
       isOpen: false
     };
 
@@ -56,7 +55,7 @@ class CaseFeedback extends Component {
     ];
 
     const opts = options.map(option => {
-      const active = this.state.selected.has(option.value);
+      const active = this.props.feedbackSelected.includes(option.value);
       return (
         <li key={option.value} className={active ? 'active' : ''}>
           <label htmlFor={option.value}>
@@ -101,7 +100,7 @@ class CaseFeedback extends Component {
 
   updateSelectedOptions(event) {
     const option = event.target.id;
-    const selected = this.state.selected;
+    const selected = new Set(this.props.feedbackSelected);
 
     if (selected.has(option)) {
       selected.delete(option);
@@ -109,9 +108,7 @@ class CaseFeedback extends Component {
       selected.add(option);
     }
 
-    this.setState({ selected });
-
-    this.props.feedbackChanged({ selected });
+    this.props.feedbackChanged(Array.from(selected));
   }
 
   openDropdown() {
@@ -127,11 +124,7 @@ class CaseFeedback extends Component {
   }
 
   skipCase() {
-    this.setState({
-      isOpen: false,
-      selected: new Set()
-    });
-
+    this.closeDropdown();
     this.props.skipCase();
   }
 }
@@ -139,7 +132,8 @@ class CaseFeedback extends Component {
 CaseFeedback.propTypes = {
   skipEnabled: PropTypes.bool.isRequired,
   skipCase: PropTypes.func.isRequired,
-  feedbackChanged: PropTypes.func.isRequired
+  feedbackChanged: PropTypes.func.isRequired,
+  feedbackSelected: PropTypes.array.isRequired
 };
 
 export default CaseFeedback;

@@ -16,6 +16,7 @@ class CaseControlButtons extends Component {
     return (
       <div className="CaseControlButtons">
         <CaseFeedback
+          feedbackSelected={this.props.feedbackSelected}
           feedbackChanged={this.props.feedbackChanged}
           skipEnabled={this.props.skipEnabled}
           skipCase={this.props.skipCase}
@@ -38,6 +39,7 @@ CaseControlButtons.propTypes = {
   skipCase: PropTypes.func.isRequired,
   saveCase: PropTypes.func.isRequired,
   feedbackChanged: PropTypes.func.isRequired,
+  feedbackSelected: PropTypes.array.isRequired,
   measurementsInCurrentSession: PropTypes.number.isRequired
 };
 
