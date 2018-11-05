@@ -80,7 +80,10 @@ function getDropdownItems(eventData, isTouchEvent = false) {
         eventData,
         nearbyToolData
       };
-      item.text = getTypeText(nearbyToolData, item.actionType);
+
+      if (item.actionType === 'Delete') {
+        item.text = 'Delete measurement';
+      }
 
       dropdownItems.push(item);
     });
@@ -113,8 +116,8 @@ class ToolContextMenu extends Component {
     });
 
     const position = {
-      top: `${eventData.currentPoints.page.y}px`,
-      left: `${eventData.currentPoints.page.x}px`
+      top: `${eventData.currentPoints.canvas.y}px`,
+      left: `${eventData.currentPoints.canvas.x}px`
     };
 
     return (
