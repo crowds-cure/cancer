@@ -1,68 +1,97 @@
 import { Component } from 'react';
 import React from 'react';
 import './TestPage.css';
+import { labelItems, descriptionItems } from './labelling/labellingData.js';
 
 import SelectTree from './select-tree/SelectTree.js';
 
-var organGroups = [
-  'Abdominal/Chest Wall',
-  'Adrenal',
-  'Bladder',
-  'Bone',
-  'Brain',
-  'Breast',
-  'Colon',
-  'Esophagus',
-  'Extremities',
-  'Gallbladder',
-  'Kidney',
-  'Liver',
-  'Lung',
-  'Lymph Node',
-  'Mediastinum/Hilum',
-  'Muscle',
-  'Neck',
-  'Other: Soft Tissue',
-  'Ovary',
-  'Pancreas',
-  'Pelvis',
-  'Peritoneum/Omentum',
-  'Prostate',
-  'Retroperitoneum',
-  'Small Bowel',
-  'Spleen',
-  'Stomach',
-  'Subcutaneous'
-];
-
-function nameToID(name) {
-  // http://stackoverflow.com/questions/29258016/remove-special-symbols-and-extra-spaces-and-make-it-camel-case-javascript
-  return name
-    .trim() //might need polyfill if you need to support older browsers
-    .toLowerCase() //lower case everything
-    .replace(
-      /([^A-Z0-9]+)(.)/gi, //match multiple non-letter/numbers followed by any character
-      function(match) {
-        return arguments[2].toUpperCase(); //3rd index is the character we need to transform uppercase
-      }
-    );
-}
-
-const items = organGroups.map(name => {
-  return {
-    label: name,
-    value: nameToID(name)
-  };
-});
-
 class TestPage extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      label: null,
+      description: null,
+      requestDescription: false
+    };
+  }
+
   render() {
+    let showButtons = false;
+    let showLabelList = false;
+    let showDescriptionList = false;
+    let buttons = '';
+
+    if (this.state.label === null) {
+      showLabelList = true;
+    } else if (this.state.requestDescription) {
+      showDescriptionList = true;
+    } else {
+      showButtons = true;
+    }
+
+    if (showButtons) {
+      buttons = (
+        <>
+          <button onClick={this.relabel}>Relabel</button>
+          <button onClick={this.editDescription}>
+            {this.state.description ? 'Edit ' : 'Add '} description
+          </button>
+        </>
+      );
+    }
+
     return (
       <div className="TestPage">
-        <SelectTree twoColumns={true} items={items} />
+        {showLabelList && (
+          <SelectTree
+            twoColumns={true}
+            items={labelItems}
+            value={this.state.label}
+            onSelect={this.itemLabelSelected}
+          />
+        )}
+        {showDescriptionList && (
+          <SelectTree
+            twoColumns={true}
+            items={descriptionItems}
+            value={this.state.description}
+            onSelect={this.itemDescriptionSelected}
+          />
+        )}
+        {this.state.label && <div>{this.state.label.value}</div>}
+        {this.state.description && <div>{this.state.description.value}</div>}
+
+        {buttons}
       </div>
     );
   }
+
+  itemLabelSelected = (event, item) => {
+    this.setState({
+      label: item
+    });
+  };
+
+  itemDescriptionSelected = (event, item) => {
+    this.setState({
+      description: item,
+      requestDescription: false
+    });
+  };
+
+  relabel = () => {
+    this.setState({
+      label: null
+    });
+  };
+
+  editDescription = () => {
+    this.setState({
+      description: null,
+      requestDescription: true
+    });
+  };
 }
 
 export default TestPage;

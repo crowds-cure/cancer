@@ -4,21 +4,27 @@ import React from 'react';
 class InputRadio extends Component {
   render() {
     const labelClass = this.props.labelClass;
-    //" tree-current-node " +
     return (
       <label
         className={'wrapperLabel radioLabel ' + labelClass}
-        name="label"
-        onClick={this.props.click}
+        htmlFor={this.props.id}
       >
         <input
           type="radio"
+          id={this.props.id}
           className={this.props.className}
           value={this.props.value}
+          onChange={this.onSelected.bind(this)}
         />
         <span className="wrapperText">{this.props.label}</span>
       </label>
     );
+  }
+
+  onSelected(evt) {
+    if (this.props.onSelected) {
+      this.props.onSelected(evt, this.props.itemData);
+    }
   }
 }
 
