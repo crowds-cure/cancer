@@ -46,7 +46,8 @@ class CornerstoneViewport extends Component {
       stack,
       imageId: stack.imageIds[0],
       viewportHeight: '100%',
-      isLoading: true
+      isLoading: true,
+      imageScrollbarValue: 0
     };
 
     this.displayScrollbar = stack.imageIds.length > 1;
@@ -65,6 +66,9 @@ class CornerstoneViewport extends Component {
       this
     );
     this.onCloseToolContextMenu = this.onCloseToolContextMenu.bind(this);
+    this.imageSliderOnInputCallback = this.imageSliderOnInputCallback.bind(
+      this
+    );
 
     this.loadHandlerTimeout = 25;
     loadHandlerManager.setStartLoadHandler(this.startLoadingHandler);
@@ -78,21 +82,8 @@ class CornerstoneViewport extends Component {
       });
     }, 300);
 
-    const slideTimeoutTime = 5;
+    this.slideTimeoutTime = 25;
     this.slideTimeout = null;
-
-    // Adding input listener
-    this.imageSliderOnInputCallback = value => {
-      // Note that we throttle requests to prevent the
-      // user's ultrafast scrolling from firing requests too quickly.
-      clearTimeout(this.slideTimeout);
-      this.slideTimeout = setTimeout(() => {
-        const newImageIdIndex = parseInt(value, 10);
-
-        // TODO: This doesn't seem to be exported in Tools V3
-        scrollToIndex(this.element, newImageIdIndex);
-      }, slideTimeoutTime);
-    };
   }
 
   render() {
@@ -121,7 +112,7 @@ class CornerstoneViewport extends Component {
           <ImageScrollbar
             onInputCallback={this.imageSliderOnInputCallback}
             max={this.state.stack.imageIds.length - 1}
-            value={this.state.stack.currentImageIdIndex}
+            value={this.state.imageScrollbarValue}
             height={this.state.viewportHeight}
           />
         )}
@@ -470,13 +461,10 @@ class CornerstoneViewport extends Component {
     const element = event.currentTarget;
     const stackData = cornerstoneTools.getToolState(element, 'stack');
     const stack = stackData.data[0];
-    const imageIndex = stack.currentImageIdIndex + 1;
-
-    // TODO: put this on-screen somewhere?
-    console.log(`Image: ${imageIndex}/${stack.imageIds.length}`);
 
     this.setState({
-      stack
+      stack,
+      imageScrollbarValue: stack.currentImageIdIndex
     });
   }
 
@@ -563,6 +551,19 @@ class CornerstoneViewport extends Component {
     this.setState({
       toolContextMenuData: null
     });
+  }
+
+  imageSliderOnInputCallback(value) {
+    this.setState({
+      imageScrollbarValue: value
+    });
+
+    // Note that we throttle requests to prevent the
+    // user's ultrafast scrolling from firing requests too quickly.
+    clearTimeout(this.slideTimeout);
+    this.slideTimeout = setTimeout(() => {
+      scrollToIndex(this.element, value);
+    }, this.slideTimeoutTime);
   }
 }
 
