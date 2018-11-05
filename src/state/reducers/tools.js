@@ -7,13 +7,6 @@ const defaultButtons = [
     active: false
   },
   {
-    command: 'Wwwc',
-    type: 'tool',
-    text: 'Levels',
-    svgUrl: '/icons.svg#icon-tools-levels',
-    active: false
-  },
-  {
     command: 'Zoom',
     type: 'tool',
     text: 'Zoom',
@@ -39,6 +32,13 @@ const defaultButtons = [
     type: 'command',
     text: 'Reset',
     svgUrl: '/icons.svg#icon-tools-reset',
+    active: false
+  },
+  {
+    command: 'Wwwc',
+    type: 'tool',
+    text: 'Manual',
+    svgUrl: '/icons.svg#icon-tools-levels',
     active: false
   },
   {
