@@ -23,7 +23,7 @@ class ProgressSection extends Component {
     const rankType = rank ? rank.type : 'NUM_CASES_NOVICE';
 
     const increment = {
-      casesInCurrentSession: this.props.casesInCurrentSession
+      measurementsInCurrentSession: this.props.measurementsInCurrentSession
     };
 
     return (
@@ -37,7 +37,7 @@ class ProgressSection extends Component {
               <span className="value">{current}</span>
               <span className="suffix">cases</span>
               <span className="plusPoints">
-                +{increment.casesInCurrentSession}
+                +{increment.measurementsInCurrentSession}
               </span>
             </div>
           </div>
@@ -48,7 +48,7 @@ class ProgressSection extends Component {
               min={low}
               max={high}
               value={this.props.current}
-              increment={increment}
+              increment={increment.measurementsInCurrentSession}
             />
           </div>
         </div>
@@ -59,7 +59,7 @@ class ProgressSection extends Component {
 
 ProgressSection.propTypes = {
   current: PropTypes.number,
-  casesInCurrentSession: PropTypes.number
+  measurementsInCurrentSession: PropTypes.number
 };
 
 export default ProgressSection;

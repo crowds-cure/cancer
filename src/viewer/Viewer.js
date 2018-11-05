@@ -199,7 +199,9 @@ class Viewer extends Component {
         <div>
           <HeaderSection
             sessionStart={this.props.sessionStart}
-            casesInCurrentSession={this.props.casesInCurrentSession}
+            measurementsInCurrentSession={
+              this.props.measurementsInCurrentSession
+            }
           />
         </div>
         <div className="toolbar-row">
@@ -258,9 +260,8 @@ class Viewer extends Component {
   saveCase() {
     const { caseData } = this.props;
 
-    this.props.incrementNumCasesInSession();
-
     const measurements = this.getMeasurementData();
+    this.props.incrementNumMeasurementsInSession(measurements.length);
 
     saveMeasurementToDatabase(caseData, measurements);
 
@@ -404,7 +405,7 @@ Viewer.propTypes = {
   caseData: PropTypes.object.isRequired,
   isFetching: PropTypes.bool.isRequired,
   activeTool: PropTypes.string.isRequired,
-  casesInCurrentSession: PropTypes.number.isRequired
+  measurementsInCurrentSession: PropTypes.number.isRequired
 };
 
 export default Viewer;

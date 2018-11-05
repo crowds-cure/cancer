@@ -9,7 +9,7 @@ class CaseControlButtons extends Component {
   static defaultProps = {
     skipEnabled: false,
     saveEnabled: false,
-    casesInCurrentSession: 0
+    measurementsInCurrentSession: 0
   };
 
   render() {
@@ -38,7 +38,7 @@ CaseControlButtons.propTypes = {
   skipCase: PropTypes.func.isRequired,
   saveCase: PropTypes.func.isRequired,
   feedbackChanged: PropTypes.func.isRequired,
-  casesInCurrentSession: PropTypes.number.isRequired
+  measurementsInCurrentSession: PropTypes.number.isRequired
 };
 
 export default CaseControlButtons;

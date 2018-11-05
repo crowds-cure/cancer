@@ -4,7 +4,7 @@ import SessionSummary from './SessionSummary.js';
 const mapStateToProps = state => {
   return {
     current: state.user.current,
-    casesInCurrentSession: state.session.casesInCurrentSession
+    measurementsInCurrentSession: state.session.measurementsInCurrentSession
   };
 };
 

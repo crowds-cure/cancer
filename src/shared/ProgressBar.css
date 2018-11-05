@@ -26,18 +26,5 @@
 
 .ProgressBar[value]::-webkit-progress-value {
   background-image: linear-gradient(to right, #79f9fe, #b994fe);
-  -webkit-animation: animate-stripes 5s linear infinite;
-  animation: animate-stripes 5s linear infinite;
-}
-
-@-webkit-keyframes animate-stripes {
-  100% {
-    background-position: -100px 0px;
-  }
-}
-
-@keyframes animate-stripes {
-  100% {
-    background-position: -100px 0px;
-  }
+  transition: all 2s linear;
 }

@@ -30,7 +30,11 @@ class ActivityProgressSection extends Component {
           <span className="rank">{rankName}</span>
         </div>
         <div className="progressBarContainer">
-          <ProgressBar min={low} max={high} value={this.props.current} />
+          {this.props.current === undefined ? (
+            ''
+          ) : (
+            <ProgressBar min={low} max={high} value={this.props.current} />
+          )}
         </div>
         <div className="currentPoints">
           <div className="value">{current}</div>
@@ -42,7 +46,7 @@ class ActivityProgressSection extends Component {
 }
 
 ActivityProgressSection.propTypes = {
-  current: PropTypes.number.isRequired
+  current: PropTypes.number
 };
 
 export default ActivityProgressSection;

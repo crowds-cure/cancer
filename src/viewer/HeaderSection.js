@@ -53,7 +53,9 @@ class HeaderSection extends Component {
         <div className="col">
           <div className="caseProgress">
             <CaseProgressIndicator
-              casesInCurrentSession={this.props.casesInCurrentSession}
+              measurementsInCurrentSession={
+                this.props.measurementsInCurrentSession
+              }
             />
           </div>
           <div className="endSession">
@@ -138,7 +140,7 @@ class HeaderSection extends Component {
     const currentSession = {
       start,
       end,
-      cases: this.props.casesInCurrentSession
+      cases: this.props.measurementsInCurrentSession
     };
 
     sendSessionStatisticsToDatabase(currentSession);
@@ -149,7 +151,7 @@ class HeaderSection extends Component {
 
 HeaderSection.propTypes = {
   sessionStart: PropTypes.number.isRequired,
-  casesInCurrentSession: PropTypes.number.isRequired
+  measurementsInCurrentSession: PropTypes.number.isRequired
 };
 
 export default withRouter(HeaderSection);

@@ -30,6 +30,7 @@ class Dashboard extends Component {
 
     this.state = {
       types: [],
+      current: this.props.current,
       isLoading: true,
       showDetailsModal: false,
       collectionDescription: ''
@@ -53,6 +54,10 @@ class Dashboard extends Component {
           current: userStats.current
         }
       });
+
+      this.setState({
+        current: userStats.current
+      });
     });
 
     this.onClickInfo = this.onClickInfo.bind(this);
@@ -65,7 +70,7 @@ class Dashboard extends Component {
         <div className="container">
           <div className="row">
             <div className="col-lg-5 offset-lg-4 col-md-7 offset-md-2">
-              <ActivityProgressSection current={this.props.current} />
+              <ActivityProgressSection current={this.state.current} />
               {/*<AchievementSection />*/}
             </div>
             <div className="row">
@@ -153,7 +158,7 @@ Dashboard.contextTypes = {
 };
 
 Dashboard.propTypes = {
-  current: PropTypes.number.isRequired,
+  current: PropTypes.number,
   username: PropTypes.string.isRequired
 };
 

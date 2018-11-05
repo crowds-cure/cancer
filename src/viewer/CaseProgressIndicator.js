@@ -8,7 +8,7 @@ class CaseProgressIndicator extends Component {
   render() {
     return (
       <div className="CaseProgressIndicator">
-        <span className="cases">{this.props.casesInCurrentSession}</span>
+        <span className="cases">{this.props.measurementsInCurrentSession}</span>
         <div className="casesLabel">SESSION MEASUREMENTS</div>
       </div>
     );
@@ -16,7 +16,7 @@ class CaseProgressIndicator extends Component {
 }
 
 CaseProgressIndicator.propTypes = {
-  casesInCurrentSession: PropTypes.number.isRequired
+  measurementsInCurrentSession: PropTypes.number.isRequired
 };
 
 export default CaseProgressIndicator;

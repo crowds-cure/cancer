@@ -24,7 +24,9 @@ class SessionSummary extends Component {
             <div className="col-10">
               <ProgressSection
                 current={this.props.current}
-                casesInCurrentSession={this.props.casesInCurrentSession}
+                measurementsInCurrentSession={
+                  this.props.measurementsInCurrentSession
+                }
               />
             </div>
           </div>
@@ -56,7 +58,7 @@ class SessionSummary extends Component {
 
 SessionSummary.propTypes = {
   current: PropTypes.number.isRequired,
-  casesInCurrentSession: PropTypes.number.isRequired
+  measurementsInCurrentSession: PropTypes.number.isRequired
 };
 
 export default SessionSummary;

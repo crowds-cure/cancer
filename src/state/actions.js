@@ -3,8 +3,9 @@ export const setToolActive = tool => ({
   tool
 });
 
-export const incrementNumCasesInSession = () => ({
-  type: 'INCREMENT_NUM_CASES_IN_SESSION'
+export const incrementNumMeasurementsInSession = num => ({
+  type: 'INCREMENT_NUM_MEASUREMENTS_IN_SESSION',
+  num
 });
 
 export const fetchCaseRequest = () => ({
