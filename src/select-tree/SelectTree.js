@@ -11,11 +11,13 @@ import './SelectTree.css';
 // if browser supports translate property
 const useTransform = styleProperty.check('transform', 'translate(1px, 1px)');
 
+const columnsClassMap = ['', 'col-16', 'col-8', 'col-5', 'col-4', 'col-3'];
+
 class SelectTree extends Component {
   static defaultProps = {
     useTransform,
     value: null,
-    twoColumns: true,
+    columns: 2,
     isRoot: true,
     searchEnabled: true,
     items: []
@@ -25,7 +27,7 @@ class SelectTree extends Component {
     super(props);
 
     this.state = {
-      itemSelected: props.value
+      itemSelected: null
     };
 
     this.rootNode = React.createRef();
@@ -49,10 +51,7 @@ class SelectTree extends Component {
     const storageKey = 'SelectTree';
     const items = this.props.items;
     let sortedItems = items;
-    let columnsClass = 'col-16';
-    if (this.props.twoColumns) {
-      columnsClass = 'col-8';
-    }
+    const columnsClass = columnsClassMap[this.props.columns];
 
     if (this.isLeafSelected()) {
       sortedItems = [this.state.itemSelected];

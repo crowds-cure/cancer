@@ -1,5 +1,6 @@
 .TestPage {
   background-color: gray;
+  position: relative;
   width: 100%;
   height: 100%;
 }

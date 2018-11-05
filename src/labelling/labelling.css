@@ -1,0 +1,12 @@
+.labellingComponent {
+  position: relative;
+  top: 150px;
+  left: 150px;
+}
+
+.labellingComponent .selectedLabel,
+.labellingComponent .selectedDescription {
+  padding: 5px;
+  background-color: white;
+  width: 150px;
+}
