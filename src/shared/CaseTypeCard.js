@@ -12,7 +12,7 @@ class CaseTypeCard extends Component {
 
   render() {
     return (
-      <div className="col-12 col-md-8 col-lg-5">
+      <div className="col-16 col-md-8 col-lg-5">
         <div className="CaseTypeCard" onClick={this.onClick}>
           <div className="title">
             <span className="name">{this.props.name}</span>

@@ -69,7 +69,7 @@ class Dashboard extends Component {
         <SimpleHeaderSection username={this.props.username} page="dashboard" />
         <div className="container">
           <div className="row">
-            <div className="col-lg-5 offset-lg-4 col-md-7 offset-md-2">
+            <div className="col-lg-5 offset-lg-4 col-md-7 offset-md-2 col-12 offset-4">
               <ActivityProgressSection current={this.state.current} />
               {/*<AchievementSection />*/}
             </div>
