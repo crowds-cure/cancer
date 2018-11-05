@@ -10,13 +10,49 @@ async function getLatestMeasurements() {
     selector: {
       skip: false
     },
-    fields: ['_id', 'date', 'annotator', 'caseData'],
+    fields: ['_id', 'date', 'annotator', 'caseData', 'feedback'],
     sort: [{ date: 'desc' }],
     limit: 10
   });
 
   return result.docs;
 }
+
+// TODO: Centralize this somewhere
+const options = [
+  {
+    value: 'InadequateIVContrast',
+    label: 'Inadequate IV contrast'
+  },
+  {
+    value: 'NoIVContrast',
+    label: 'No IV contrast'
+  },
+  {
+    value: 'MotionArtifact',
+    label: 'Motion artifact'
+  },
+  {
+    value: 'MissingAnatomy',
+    label: 'Missing anatomy'
+  },
+  {
+    value: 'PoorImageQualityOther',
+    label: 'Poor image quality, other'
+  },
+  {
+    value: 'NoDiseaseIdentified',
+    label: 'No disease identified'
+  },
+  {
+    value: 'ContainsDualPhaseImages',
+    label: 'Contains dual phase images'
+  },
+  {
+    value: 'NoFeedback',
+    label: 'No Feedback'
+  }
+];
 
 class ScreenshotQA extends Component {
   constructor(props) {
@@ -55,6 +91,12 @@ class ScreenshotQA extends Component {
       const src = `${host}/${db}/${measurement._id}/${imgName}`;
 
       const date = new Date(measurement.date * 1000).toUTCString();
+      const feedback = measurement.feedback || [];
+      const feedbackLabels = feedback.map(f => {
+        return options.find(opt => opt.value === f).label;
+      });
+
+      const feedbackString = feedbackLabels.join(', ');
 
       return (
         <div className="row" key={measurement._id}>
@@ -65,6 +107,10 @@ class ScreenshotQA extends Component {
             <p>{measurement.caseData.SubjectID}</p>
             <p>{measurement.caseData.studies[0].StudyDescription}</p>
             <p>{measurement.caseData.studies[0].series[0].SeriesDescription}</p>
+            <p>
+              <strong>Feedback:</strong>
+              {feedbackString}
+            </p>
           </div>
           <div className="col-10">
             <img src={src} alt={measurement._id} />

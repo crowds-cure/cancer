@@ -57,12 +57,6 @@ function getNearbyToolData(element, coords, toolTypes) {
   return pointNearTool ? nearbyTool : undefined;
 }
 
-function getTypeText(toolData, actionType) {
-  const message = `${toolData.toolType}`;
-
-  return `${actionType} ${message}`;
-}
-
 function getDropdownItems(eventData, isTouchEvent = false) {
   const nearbyToolData = getNearbyToolData(
     eventData.element,

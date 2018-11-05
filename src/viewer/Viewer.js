@@ -264,7 +264,7 @@ class Viewer extends Component {
     const measurements = this.getMeasurementData();
     this.props.incrementNumMeasurementsInSession(measurements.length);
 
-    saveMeasurementToDatabase(caseData, measurements);
+    saveMeasurementToDatabase(caseData, measurements, this.state.feedback);
 
     this.getNextCase();
   }
@@ -282,7 +282,7 @@ class Viewer extends Component {
     //sliceIndex,
 
     const { caseData } = this.props;
-    saveSkipToDatabase(caseData);
+    saveSkipToDatabase(caseData, this.state.feedback);
     this.getNextCase();
   }
 

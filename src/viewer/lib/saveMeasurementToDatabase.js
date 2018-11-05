@@ -95,7 +95,7 @@ function saveAttachment(measurement, response) {
 }
 
 // TODO: Add Feedback
-async function saveMeasurementToDatabase(caseData, measurements) {
+async function saveMeasurementToDatabase(caseData, measurements, feedback) {
   const measurementsDB = getDB('measurements');
   const annotator = await getUsername();
 
@@ -105,6 +105,7 @@ async function saveMeasurementToDatabase(caseData, measurements) {
       measurement,
       annotator,
       skip: false,
+      feedback,
       caseData: caseData.data,
       date: Math.floor(Date.now() / 1000),
       userAgent: navigator.userAgent
