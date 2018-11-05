@@ -68,6 +68,12 @@ function saveAttachment(measurement, response) {
     canvas.width = 512;
     canvas.height = 512;
 
+    measurement.active = false;
+    Object.keys(measurement.handles).forEach(handle => {
+      measurement.handles[handle].active = false;
+      measurement.handles[handle].highlight = false;
+    });
+
     const toolState = {};
     toolState[imageId] = {};
     toolState[imageId][toolType] = {
