@@ -442,6 +442,7 @@ class CornerstoneViewport extends Component {
         );
 
         if (this.state.imageId === imageId) {
+          cornerstone.setViewport(this.element, currentToolData.viewport);
           cornerstone.updateImage(this.element);
         } else {
           cornerstone.loadAndCacheImage(imageId).then(image => {
@@ -453,7 +454,11 @@ class CornerstoneViewport extends Component {
               return;
             }
 
-            cornerstone.displayImage(this.element, image);
+            cornerstone.displayImage(
+              this.element,
+              image,
+              currentToolData.viewport
+            );
 
             this.setState({
               imageId
