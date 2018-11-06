@@ -3,14 +3,28 @@
 
 .CaseTypeCard {
   position: relative;
-  margin-bottom: 20px;
-  background-color: black;
+  margin: 5px;
+  margin-bottom: 10px;
   width: 100%;
-  height: 220px;
+  height: 320px;
   cursor: pointer;
   border: 4px solid transparent;
   border-radius: 12px;
+  padding: 0;
   transition: border-color 0.2s linear;
+}
+
+.CaseTypeCard .imgContainer {
+  width: 100%;
+  height: 220px;
+  border-radius: 12px;
+  background: black;
+  text-align: center;
+}
+
+.CaseTypeCard img {
+  height: 100%;
+  background: black;
 }
 
 .CaseTypeCard:hover {
@@ -35,7 +49,7 @@
 
 .CaseTypeCard .type {
   font-size: 18px;
-  color: #336468;
+  color: textSecondaryColor;
 }
 
 .CaseTypeCard .info-icon {
@@ -44,6 +58,9 @@
   width: 20px;
   stroke: textActiveColor;
   opacity: 0.41;
+  position: absolute;
+  top: 5px;
+  right: 20px;
 }
 
 .CaseTypeCard .info-icon:hover {

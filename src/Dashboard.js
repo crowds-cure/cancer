@@ -39,7 +39,18 @@ class Dashboard extends Component {
     const collectionsDB = getDB('collections');
 
     collectionsDB.allDocs({ include_docs: true }).then(docs => {
-      const types = docs.rows.map(row => row.doc);
+      const types = docs.rows.map(row => {
+        const host = 'https://db.crowds-cure.org';
+        const db = 'collections';
+        const name = 'screenshot.png';
+        console.warn(row);
+        const img = `${host}/${db}/${row.id}/${name}`;
+
+        return {
+          ...row.doc,
+          img
+        };
+      });
 
       this.setState({
         types,

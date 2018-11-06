@@ -12,12 +12,11 @@ class CaseTypeCard extends Component {
 
   render() {
     return (
-      <div className="col-16 col-md-8 col-lg-5">
-        <div className="CaseTypeCard" onClick={this.onClick}>
-          <div className="title">
-            <span className="name">{this.props.name}</span>
-            <span className="type">{this.props.type}</span>
-          </div>
+      <div
+        className="CaseTypeCard col-16 col-md-8 col-lg-5"
+        onClick={this.onClick}
+      >
+        <div className="imgContainer">
           <div
             onClick={this.props.clickInfo}
             title={this.props.description}
@@ -27,6 +26,17 @@ class CaseTypeCard extends Component {
               <use xlinkHref="/icons.svg#icon-trial-info" />
             </svg>
           </div>
+          <img
+            alt={this.props.name}
+            className="screenshot"
+            ref={img => (this.img = img)}
+            src={this.props.img}
+            onError={() => (this.img.style.display = 'none')}
+          />
+        </div>
+        <div className="title">
+          <span className="name">{this.props.name}</span>
+          <span className="type">{this.props.type}</span>
         </div>
       </div>
     );
@@ -41,7 +51,8 @@ CaseTypeCard.propTypes = {
   click: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired
+  description: PropTypes.string.isRequired,
+  img: PropTypes.string.isRequired
 };
 
 export default CaseTypeCard;
