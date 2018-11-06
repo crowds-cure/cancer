@@ -3,6 +3,7 @@ import React from 'react';
 import './CaseFeedback.css';
 import PropTypes from 'prop-types';
 import './CaseFeedback.css';
+import Checkbox from '../shared/Checkbox.js';
 
 class CaseFeedback extends Component {
   constructor(props) {
@@ -58,24 +59,24 @@ class CaseFeedback extends Component {
       const active = this.props.feedbackSelected.includes(option.value);
       return (
         <li key={option.value} className={active ? 'active' : ''}>
-          <label htmlFor={option.value}>
-            <input
-              type="checkbox"
-              id={option.value}
-              className="customCheckbox"
-              value={option.value}
-              checked={active ? true : false}
-              onChange={this.updateSelectedOptions}
-            />
-            {option.label}
-          </label>
+          <Checkbox
+            id={option.value}
+            label={option.label}
+            value={option.value}
+            checked={active ? true : false}
+            onChange={this.updateSelectedOptions}
+          />
         </li>
       );
     });
 
     return (
       <div className="CaseFeedback noselect">
-        <div className="feedback-button" onClick={this.openDropdown}>
+        <div
+          className="feedback-button"
+          active={this.state.isOpen ? 'true' : 'false'}
+          onClick={this.openDropdown}
+        >
           Case Feedback
           <span className="arrow-down" />
         </div>

@@ -5,7 +5,7 @@
 }
 
 .CaseControlButtons button {
-  height: 50px;
+  height: 52px;
   padding: 0 15px;
   font-size: 15px;
   cursor: pointer;
@@ -15,11 +15,35 @@
   background-color: #b894fe;
   font-weight: bold;
   outline: none;
+  transition: all 0.3s ease;
+  vertical-align: middle;
+}
+
+.CaseControlButtons button svg {
+  width: 24px;
+  height: 24px;
+  float: left;
+  display: inline-block;
+  margin-top: 6px;
+}
+
+.CaseControlButtons button span {
+  padding: 10px 8px;
+  float: left;
+  display: inline-block;
 }
 
 .CaseControlButtons button:disabled {
   cursor: not-allowed;
-  opacity: 0.7;
+  background-color: #65518c;
+}
+
+.CaseControlButtons button:not(:disabled):hover {
+  background-color: #8a4eff;
+}
+
+.CaseControlButtons button:not(:disabled):active {
+  background-color: white;
 }
 
 .CaseControlButtons .btn-group {

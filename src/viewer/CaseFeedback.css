@@ -9,13 +9,29 @@
 .CaseFeedback .feedback-button {
   border-radius: 9px;
   border: solid 3px #000000;
-  background-color: #14132d;
+  color: white;
+  background-color: #262548;
   color: white;
   font-size: 15px;
   font-weight: 600;
   line-height: 15px;
   padding: 15px;
   cursor: pointer;
+}
+
+.CaseFeedback .feedback-button:disabled {
+  background-color: #14132d;
+  color: #8684bf;
+  cursor: not-allowed;
+}
+
+.CaseFeedback .feedback-button:not(:disabled):hover {
+  background-color: #2e2d65;
+}
+
+.CaseFeedback .feedback-button:not(:disabled):active,
+.CaseFeedback .feedback-button.active {
+  background-color: #14132d;
 }
 
 .CaseFeedback .arrow-down {
@@ -65,25 +81,11 @@
   color: white;
 }
 
-.CaseFeedback .feedback-options li label {
-  padding: 5px 0;
-  cursor: pointer;
-}
-
-.CaseFeedback .feedback-options .customCheckbox {
-  margin-right: 20px;
-  cursor: pointer;
-}
-
 .CaseFeedback .feedback-options .buttom {
   display: block;
   width: 100%;
   margin-top: 15px;
   height: 40px;
-}
-
-.CaseFeedback .feedback-options li.active {
-  color: activeColor;
 }
 
 .CaseFeedback .button {
