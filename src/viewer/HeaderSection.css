@@ -41,12 +41,13 @@
 }
 
 .HeaderSection .endSession,
-.HeaderSection .instructionsSection {
+.HeaderSection .instructionsSection,
+.HeaderSection .dashboardSection {
   float: right;
   margin: 20px 20px 16px 20px;
 }
 
-.HeaderSection .endSession .link {
+.HeaderSection .link {
   font-size: 15px;
   text-decoration: none;
 }

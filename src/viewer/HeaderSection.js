@@ -34,6 +34,7 @@ class HeaderSection extends Component {
 
     this.toggleModal = this.toggleModal.bind(this);
     this.endSession = this.endSession.bind(this);
+    this.handleClickDashboard = this.handleClickDashboard.bind(this);
   }
 
   toggleModal(e) {
@@ -50,6 +51,7 @@ class HeaderSection extends Component {
             <span className="logoText">Cure Cancer</span>
           </div>
         </div>
+
         <div className="col">
           <div className="caseProgress">
             <CaseProgressIndicator
@@ -59,11 +61,7 @@ class HeaderSection extends Component {
             />
           </div>
           <div className="endSession">
-            <button
-              to="/session-summary"
-              className="link"
-              onClick={this.endSession}
-            >
+            <button className="link" onClick={this.endSession}>
               End Session
             </button>
           </div>
@@ -150,6 +148,14 @@ class HeaderSection extends Component {
               </span>
             </Modal>
           </div>
+          <div className="dashboardSection">
+            <button
+              className="dashboard link"
+              onClick={this.handleClickDashboard}
+            >
+              Dashboard
+            </button>
+          </div>
         </div>
       </div>
     );
@@ -170,6 +176,10 @@ class HeaderSection extends Component {
 
     this.props.history.push('/session-summary');
   }
+
+  handleClickDashboard = () => {
+    this.props.history.push('/');
+  };
 }
 
 HeaderSection.propTypes = {
