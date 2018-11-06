@@ -21,40 +21,9 @@ html {
 
 .container {
   width: 100%;
-  padding-right: 12.5px;
-  padding-left: 12.5px;
-  margin-right: auto;
-  margin-left: auto;
-}
-
-@media (min-width: 355px) {
-  .container {
-    max-width: 355px;
-  }
-}
-
-@media (min-width: 1000px) {
-  .container {
-    max-width: 1000px;
-  }
-}
-
-@media (min-width: 1400px) {
-  .container {
-    max-width: 1400px;
-  }
-}
-
-@media (min-width: 1600px) {
-  .container {
-    max-width: 1600px;
-  }
-}
-
-.container-fluid {
-  width: 100%;
-  padding-right: 12.5px;
-  padding-left: 12.5px;
+  max-width: 1600px;
+  padding-right: 37.5px;
+  padding-left: 37.5px;
   margin-right: auto;
   margin-left: auto;
 }
