@@ -5,7 +5,7 @@ import './Medal.css';
 
 class Medal extends Component {
   render() {
-    const medalClassSize = `medal-bg-${this.props.size}`;
+    const medalClassSize = `medal-wrapper medal-bg-${this.props.size}`;
 
     return (
       <div className={medalClassSize} title={this.props.type}>

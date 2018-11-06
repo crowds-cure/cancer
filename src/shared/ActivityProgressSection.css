@@ -25,12 +25,19 @@
 .ActivityProgressSection .medalContainer {
   position: absolute;
   top: 15px;
-  left: -60px;
+  left: -100px;
+  width: 100px;
+  text-align: center;
+}
+
+.ActivityProgressSection .medalContainer .medal-wrapper {
+  margin: 0 auto;
+  display: block;
 }
 
 .ActivityProgressSection .rank {
-  position: absolute;
-  padding: 15px;
-  left: -15px;
+  display: block;
+  padding: 15px 0;
   color: textSecondaryColor;
+  overflow-wrap: break-word;
 }
