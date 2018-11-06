@@ -317,17 +317,16 @@ class Viewer extends Component {
         data => data._id === measurementData._id
       );
       updatedToolData.splice(index, 1);
-
-      if (currentLesion - 1 >= index) {
-        currentLesion = currentLesion - 1;
-      }
     }
+
     const hasMeasurements = this.state.toolData.length > 0;
 
     if (currentLesion === 0 && hasMeasurements) {
       currentLesion = 1;
     } else if (!hasMeasurements) {
       currentLesion = 0;
+    } else if (currentLesion > this.state.toolData.length) {
+      currentLesion = currentLesion - 1;
     }
 
     this.setState({
