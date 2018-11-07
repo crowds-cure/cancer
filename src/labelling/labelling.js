@@ -18,6 +18,10 @@ class Labelling extends Component {
     };
   }
 
+  static defaultProps = {
+    measurementData: {}
+  };
+
   render() {
     let showButtons = false;
     let selectTreeItems = null;
