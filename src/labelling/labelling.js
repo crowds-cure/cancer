@@ -91,7 +91,7 @@ class Labelling extends Component {
   itemLabelSelected = (event, item) => {
     const textLine =
       item.label +
-      (this.state.description ? `(${this.state.description.label})` : '');
+      (this.state.description ? ` (${this.state.description.label})` : '');
 
     this.props.measurementData.location = item.label;
     this.props.measurementData.additionalData = [textLine];
@@ -102,7 +102,7 @@ class Labelling extends Component {
 
   itemDescriptionSelected = (event, item) => {
     const textLine =
-      this.state.label.label + (item.label ? `(${item.label})` : '');
+      this.state.label.label + (item.label ? ` (${item.label})` : '');
 
     this.props.measurementData.description = item.description;
     this.props.measurementData.additionalData = [textLine];
