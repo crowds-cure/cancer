@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import React from 'react';
-
+import PropTypes from 'prop-types';
 import SelectTree from '../select-tree/SelectTree.js';
 import { labelItems, descriptionItems } from './labellingData.js';
 
@@ -125,5 +125,10 @@ class Labelling extends Component {
     });
   };
 }
+
+Labelling.propTypes = {
+  measurementData: PropTypes.object.isRequired,
+  labellingDoneCallback: PropTypes.func.isRequired
+};
 
 export default Labelling;
