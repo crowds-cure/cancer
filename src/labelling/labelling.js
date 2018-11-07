@@ -13,67 +13,95 @@ class Labelling extends Component {
     this.state = {
       label: null,
       description: null,
-      requestDescription: false
+      requestDescription: false,
+      justCreated: true
     };
   }
 
   render() {
     let showButtons = false;
-    let buttons = '';
-    let listOfItems = null;
-    let onSelectedCallback;
+    let selectTreeItems = null;
+    let selectTreeCalback;
+    let selectTreeTitle = '';
 
-    if (this.state.label === null) {
-      listOfItems = labelItems;
-      onSelectedCallback = this.itemLabelSelected;
-    } else if (this.state.requestDescription) {
-      listOfItems = descriptionItems;
-      onSelectedCallback = this.itemDescriptionSelected;
-    } else {
-      showButtons = true;
-    }
-
-    if (showButtons) {
-      buttons = (
-        <>
-          <button onClick={this.relabel}>Relabel</button>
-          <button onClick={this.editDescription}>
-            {this.state.description ? 'Edit ' : 'Add '} description
-          </button>
-        </>
-      );
+    if (!this.state.justCreated) {
+      if (this.state.label === null) {
+        selectTreeItems = labelItems;
+        selectTreeTitle = 'Assign Label';
+        selectTreeCalback = this.itemLabelSelected;
+      } else if (this.state.requestDescription) {
+        selectTreeItems = descriptionItems;
+        selectTreeTitle = 'Assign Description';
+        selectTreeCalback = this.itemDescriptionSelected;
+      } else {
+        showButtons = true;
+      }
     }
 
     return (
       <div className="labellingComponent">
-        {listOfItems && (
+        {this.state.justCreated && (
+          <button className="addLabelButton" onClick={this.showLabelling}>
+            Add Label
+          </button>
+        )}
+        {selectTreeItems && (
           <SelectTree
-            columns={2}
-            items={listOfItems}
-            onSelect={onSelectedCallback}
+            title={selectTreeTitle}
+            items={selectTreeItems}
+            onSelect={selectTreeCalback}
           />
         )}
-        {this.state.label && (
-          <div className="selectedLabel">{this.state.label.value}</div>
+        {showButtons && (
+          <>
+            <div className="textArea">
+              {this.state.label && this.state.label.label}
+              {this.state.description && ` (${this.state.description.label})`}
+            </div>
+            <div className="commonButtons">
+              <button className="commonButton" onClick={this.relabel}>
+                Relabel
+              </button>
+              <button className="commonButton" onClick={this.editDescription}>
+                {this.state.description ? 'Edit ' : 'Add '} description
+              </button>
+              <button
+                className="commonButton"
+                onClick={this.props.labellingDoneCallback}
+              >
+                Done
+              </button>
+            </div>
+          </>
         )}
-        {this.state.description && (
-          <div className="selectedDescription">
-            {this.state.description.value}
-          </div>
-        )}
-
-        {buttons}
       </div>
     );
   }
 
+  showLabelling = () => {
+    this.setState({
+      justCreated: false
+    });
+  };
+
   itemLabelSelected = (event, item) => {
+    const textLine =
+      item.label +
+      (this.state.description ? `(${this.state.description.label})` : '');
+
+    this.props.measurementData.location = item.label;
+    this.props.measurementData.additionalData = [textLine];
     this.setState({
       label: item
     });
   };
 
   itemDescriptionSelected = (event, item) => {
+    const textLine =
+      this.state.label.label + (item.label ? `(${item.label})` : '');
+
+    this.props.measurementData.description = item.description;
+    this.props.measurementData.additionalData = [textLine];
     this.setState({
       description: item,
       requestDescription: false

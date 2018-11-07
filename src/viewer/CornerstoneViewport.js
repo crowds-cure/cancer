@@ -9,6 +9,7 @@ import ImageScrollbar from './ImageScrollbar.js';
 import ViewportOverlay from './ViewportOverlay.js';
 import ToolContextMenu from './ToolContextMenu.js';
 import LoadingIndicator from '../shared/LoadingIndicator.js';
+import Labelling from '../labelling/labelling.js';
 import './CornerstoneViewport.css';
 import guid from './lib/guid.js';
 
@@ -118,9 +119,39 @@ class CornerstoneViewport extends Component {
             height={this.state.viewportHeight}
           />
         )}
+        {this.state.bidirectionalAddLabelShow && (
+          <Labelling
+            measurementData={this.bidirectional.measurementData}
+            eventData={this.bidirectional.eventData}
+            labellingDoneCallback={this.bidirectional.labellingDoneCallback}
+          />
+        )}
       </>
     );
   }
+
+  bidirectionalToolLabellingCallback = (
+    measurementData,
+    eventData,
+    doneCallback
+  ) => {
+    const labellingDoneCallback = () => {
+      this.setState({
+        bidirectionalAddLabelShow: false
+      });
+      return doneCallback();
+    };
+
+    this.bidirectional = {
+      measurementData,
+      eventData,
+      labellingDoneCallback
+    };
+
+    this.setState({
+      bidirectionalAddLabelShow: true
+    });
+  };
 
   onContextMenu(event) {
     // Preventing the default behaviour for right-click is essential to
@@ -189,7 +220,12 @@ class CornerstoneViewport extends Component {
       const tools = [
         {
           name: 'Bidirectional',
-          configuration: { shadow: true, drawHandlesOnHover: true }
+          configuration: {
+            getMeasurementLocationCallback: this
+              .bidirectionalToolLabellingCallback,
+            shadow: true,
+            drawHandlesOnHover: true
+          }
         },
         { name: 'Wwwc' },
         {

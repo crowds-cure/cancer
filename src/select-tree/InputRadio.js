@@ -12,7 +12,7 @@ class InputRadio extends Component {
         <input
           type="radio"
           id={this.props.id}
-          className={this.props.className}
+          className={this.props.className + ' radioInput'}
           value={this.props.value}
           onChange={this.onSelected.bind(this)}
         />

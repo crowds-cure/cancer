@@ -1,7 +1,9 @@
 .labellingComponent {
-  position: relative;
-  top: 150px;
-  left: 150px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
 }
 
 .labellingComponent .selectedLabel,
@@ -9,4 +11,44 @@
   padding: 5px;
   background-color: white;
   width: 150px;
+}
+
+.labellingComponent .addLabelButton {
+  color: #000000;
+  background-color: #20a5d6;
+  border: 2px solid #44626f;
+  border-radius: 14px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 13px;
+  line-height: 24px;
+  opacity: 1;
+  padding: 0 14px;
+  transition: opacity 0.3s ease;
+}
+
+.labellingComponent .commonButton {
+  border: 1px solid #44626f;
+  color: #ffffff;
+  background-color: #000000;
+  border-radius: 16px;
+  font-weight: bold;
+  font-size: 13px;
+  line-height: 26px;
+  padding: 0 12px;
+  margin: 10px 5px 0 0;
+}
+
+.labellingComponent .textArea {
+  background-color: #ffffff;
+  line-height: 46px;
+  max-width: 355px;
+  min-width: 260px;
+  padding: 0 12px;
+  margin: 0 auto;
+  display: inline-block;
+}
+
+.labellingComponent .commonButtons {
+  text-align: center;
 }
