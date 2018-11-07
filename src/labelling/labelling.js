@@ -19,6 +19,7 @@ class Labelling extends Component {
   }
 
   static defaultProps = {
+    eventData: {},
     measurementData: {}
   };
 
@@ -42,8 +43,16 @@ class Labelling extends Component {
       }
     }
 
+    const { eventData } = this.props;
+
+    // Hardcoding displacement to the right for now
+    const initialStyle = {
+      left: `${eventData.currentPoints.canvas.x + 50}px`,
+      top: `${eventData.currentPoints.canvas.y}px`
+    };
+
     return (
-      <div className="labellingComponent">
+      <div className="labellingComponent" style={initialStyle}>
         {this.state.justCreated && (
           <button className="addLabelButton" onClick={this.showLabelling}>
             Add Label
@@ -127,6 +136,7 @@ class Labelling extends Component {
 }
 
 Labelling.propTypes = {
+  eventData: PropTypes.object.isRequired,
   measurementData: PropTypes.object.isRequired,
   labellingDoneCallback: PropTypes.func.isRequired
 };
