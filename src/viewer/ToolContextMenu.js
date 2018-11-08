@@ -21,6 +21,32 @@ let defaultDropdownItems = [
       );
       cornerstone.updateImage(element);
     }
+  },
+  {
+    actionType: 'bidirectionalLabel',
+    action: ({ nearbyToolData, eventData }) => {
+      const element = eventData.element;
+      const { tool, toolType } = nearbyToolData;
+
+      const doneCallback = () => {
+        cornerstone.updateImage(element);
+      };
+
+      const options = {
+        skipButton: true
+      };
+
+      const ToolInstance = cornerstoneTools.getToolForElement(
+        element,
+        toolType
+      );
+      ToolInstance.configuration.getMeasurementLocationCallback(
+        tool,
+        eventData,
+        doneCallback,
+        options
+      );
+    }
   }
 ];
 
@@ -77,6 +103,13 @@ function getDropdownItems(eventData, isTouchEvent = false) {
 
       if (item.actionType === 'Delete') {
         item.text = 'Delete measurement';
+      }
+
+      if (item.actionType === 'bidirectionalLabel') {
+        if (nearbyToolData.toolType !== 'Bidirectional') {
+          return;
+        }
+        item.text = `${nearbyToolData.tool.location ? 'Edit' : 'Add'} Label`;
       }
 
       dropdownItems.push(item);

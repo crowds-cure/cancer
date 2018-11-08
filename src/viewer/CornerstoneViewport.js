@@ -124,6 +124,7 @@ class CornerstoneViewport extends Component {
             measurementData={this.bidirectional.measurementData}
             eventData={this.bidirectional.eventData}
             labellingDoneCallback={this.bidirectional.labellingDoneCallback}
+            skipButton={this.bidirectional.skipButton}
           />
         )}
       </>
@@ -133,19 +134,19 @@ class CornerstoneViewport extends Component {
   bidirectionalToolLabellingCallback = (
     measurementData,
     eventData,
-    doneCallback
+    doneCallback,
+    options = {}
   ) => {
     const labellingDoneCallback = () => {
-      this.setState({
-        bidirectionalAddLabelShow: false
-      });
+      this.hideBidirectionalAddLabel();
       return doneCallback();
     };
 
     this.bidirectional = {
       measurementData,
       eventData,
-      labellingDoneCallback
+      labellingDoneCallback,
+      skipButton: options.skipButton
     };
 
     this.setState({
@@ -512,6 +513,8 @@ class CornerstoneViewport extends Component {
     const stackData = cornerstoneTools.getToolState(element, 'stack');
     const stack = stackData.data[0];
 
+    this.hideBidirectionalAddLabel();
+
     this.setState({
       stack,
       imageScrollbarValue: stack.currentImageIdIndex
@@ -552,6 +555,8 @@ class CornerstoneViewport extends Component {
 
     // TODO: Pass in as prop?
     const toolsOfInterest = ['Bidirectional'];
+
+    this.hideBidirectionalAddLabel();
 
     if (toolsOfInterest.includes(toolType)) {
       const image = cornerstone.getImage(this.element);
@@ -615,6 +620,14 @@ class CornerstoneViewport extends Component {
       scrollToIndex(this.element, value);
     }, this.slideTimeoutTime);
   }
+
+  hideBidirectionalAddLabel = () => {
+    if (this.state.bidirectionalAddLabelShow === true) {
+      this.setState({
+        bidirectionalAddLabelShow: false
+      });
+    }
+  };
 }
 
 CornerstoneViewport.propTypes = {
