@@ -2,8 +2,8 @@ import { Component } from 'react';
 import React from 'react';
 import './CaseTypeCard.css';
 import PropTypes from 'prop-types';
-import getAuthorizationHeader from '../openid-connect/getAuthorizationHeader.js';
-import SecuredImage from './SecuredImage.js';
+//import getAuthorizationHeader from '../openid-connect/getAuthorizationHeader.js';
+//import SecuredImage from './SecuredImage.js';
 
 class CaseTypeCard extends Component {
   constructor(props) {
@@ -28,6 +28,18 @@ class CaseTypeCard extends Component {
               <use xlinkHref="/icons.svg#icon-trial-info" />
             </svg>
           </div>
+          <img
+            alt={this.props.name}
+            className="screenshot"
+            ref={img => (this.img = img)}
+            src={this.props.img}
+            onError={() => (this.img.style.display = 'none')}
+          />
+          {/*
+
+          Removing this for now because CouchDB serving attachments
+          is horribly slow
+
           <SecuredImage
             alt={this.props.name}
             className="screenshot"
@@ -35,7 +47,7 @@ class CaseTypeCard extends Component {
             src={this.props.img}
             onError={() => (this.img.style.display = 'none')}
             getAuthorizationHeader={getAuthorizationHeader}
-          />
+          />*/}
         </div>
         <div className="title">
           <span className="name">{this.props.name}</span>

@@ -40,11 +40,12 @@ class Dashboard extends Component {
 
     collectionsDB.allDocs({ include_docs: true }).then(docs => {
       const types = docs.rows.map(row => {
-        const host = 'https://db.crowds-cure.org';
-        const db = 'collections';
-        const name = 'screenshot.png';
-        console.warn(row);
-        const img = `${host}/${db}/${row.id}/${name}`;
+        const host = ''; // 'https://db.crowds-cure.org';
+        const db = 'screenshots'; // 'collections';
+        const name = row.doc.Collection.replace(/\s+/g, '-') + '.png'; // 'screenshot.png';
+
+        //const img = `${host}/${db}/${row.id}/${name}`;
+        const img = `${host}/${db}/${name}`;
 
         return {
           ...row.doc,
