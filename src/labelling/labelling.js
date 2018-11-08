@@ -10,7 +10,8 @@ class Labelling extends Component {
   static defaultProps = {
     selectTreeTitle: 'Add Label',
     measurementData: {},
-    eventData: {}
+    eventData: {},
+    skipButton: false
   };
 
   constructor(props) {
@@ -24,10 +25,11 @@ class Labelling extends Component {
   }
 
   render() {
+    let showAddLabel = this.state.justCreated && !this.props.skipButton;
     let showButtons = false;
     let showSelectTree = false;
 
-    if (!this.state.justCreated) {
+    if (!showAddLabel) {
       if (this.state.location === null) {
         showSelectTree = true;
       } else {
@@ -49,7 +51,7 @@ class Labelling extends Component {
         style={initialStyle}
         onMouseLeave={this.props.labellingDoneCallback}
       >
-        {this.state.justCreated && (
+        {showAddLabel && (
           <button className="addLabelButton" onClick={this.showLabelling}>
             Add Label
           </button>

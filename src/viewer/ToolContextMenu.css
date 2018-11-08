@@ -1,12 +1,13 @@
 @value globals: "../GlobalStyles.css";
-@value textActiveColor, uiGrayDark from globals;
+@value textActiveColor, uiGrayDark, uiGrayLight from globals;
 
 .ToolContextMenu {
   position: absolute;
+  background-color: white;
+  border: 1px solid white;
+  border-radius: 5px;
   z-index: 1000;
   display: block;
-  width: 200px;
-  height: 50px;
 }
 
 .ToolContextMenu > ul {
@@ -19,6 +20,7 @@
   padding: 10px;
   font-size: 14px;
   border: none;
+  color: uiGrayLight;
   border-radius: 3px;
   outline: none;
   cursor: pointer;
