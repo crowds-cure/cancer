@@ -73,6 +73,8 @@ class Viewer extends Component {
   }
 
   componentWillUnmount() {
+    clearOldCornerstoneCacheData();
+
     document.body.removeEventListener(EVENT_KEYDOWN, this.onKeyDown);
     document.body.classList.remove('fixed-page');
   }
