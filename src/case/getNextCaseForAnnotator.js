@@ -2,96 +2,160 @@
 
 import { getDB } from '../db';
 
-async function getNextCaseForAnnotator(collection, annotatorID, cases) {
-  const db = getDB('cases');
-  const options = {
-    selector: { Collection: collection }
-  };
-
-  // TODO: This just gets a random doc from the entire array of cases.
-  // We should switch this to add some case selection logic based on number of measurements, skips, etc...
-  const getRandomDoc = docData => {
-    const { docs } = docData;
-    const doc = docs[Math.floor(Math.random() * docs.length)];
-
-    return doc;
-  };
-
-  return db.find(options).then(getRandomDoc);
-
-  /*
-  // filter cases by annotator's anatomyChoices
-  let measurementsPerSeries = {};
-  let annotatorMeasuredSeries = {};
-  let seriesUIDs = cases.map(c => {
-    return c.key[0];
+//
+// Returns the status (how many measured out of total) for a given user on a collection
+// for use on the dashboard page
+//
+async function annotatorCollectionStatus(collection, annotatorID) {
+  const casesDB = getDB('cases');
+  const byCollectionPromise = casesDB.query('by/collection', {
+    reduce: true,
+    group: true,
+    level: 'exact',
+    start_key: collection,
+    end_key: collection
   });
 
-  // then get the list of all measurements per series and how many measurements
-  // (not all series will have been measured)
-  return measurementsDB
-    .query("by/seriesUIDNoSkip", {
+  const measurementsDB = getDB('measurements');
+  const byAnnotatorCollectionPromise = measurementsDB.query(
+    'by/annotatorCollection',
+    {
       reduce: true,
       group: true,
-      level: "exact"
-    })
-    .then(function(result) {
-      result.rows.forEach(row => {
-        measurementsPerSeries[row.key] = row.value;
-      });
+      level: 2,
+      start_key: [annotatorID, collection],
+      end_key: [annotatorID, collection]
+    }
+  );
 
-      return measurementsDB.query("by/annotators", {
-        reduce: false,
-        include_docs: true,
-        start_key: annotatorID,
-        end_key: annotatorID
-      });
-    })
-    .then(function(result) {
-      // todo- remove duplication! store on a utils object? or the Login?
-      let categoryIdToLabelMap = {
-        "TCGA-LUAD": "Lung",
-        "TCGA-LIHC": "Liver",
-        TCGA_RN: "Renal",
-        TCGA_OV: "Ovarian"
-      };
+  return await Promise.all([
+    byCollectionPromise,
+    byAnnotatorCollectionPromise
+  ]).then(results => {
+    return {
+      annotatorID: annotatorID,
+      byAnnotator: results[1].rows[0].value,
+      inCollection: results[0].rows[0].value
+    };
+  });
+}
 
-      result.rows.forEach(row => {
-        annotatorMeasuredSeries[row.doc.seriesUID] = true;
-      });
+//
+// Returns the status the measurement documents for the user for a collection
+// (only return datasets that have been skipped less than skipThreshold)
+//
+async function annotatorCollectionMeasurements(
+  collection,
+  annotatorID,
+  skipThreshold = 5
+) {
+  // get all cases for this collection
+  const casesDB = getDB('cases');
+  const byCollectionPromise = casesDB.query('by/collectionSubject', {
+    reduce: false,
+    start_key: [collection, ''],
+    end_key: [collection, {}]
+  });
 
-      // now reconcile the data
-      // - look through each available series
-      // -- if nobody has measured it then use it
-      // - if the user already measured it, ignore it
-      // - otherwise find the least measured one
-      let leastMeasured = {
-        seriesUID: undefined,
-        measurementCount: Number.MAX_SAFE_INTEGER
-      };
-      let caseDetails;
+  // get measurments for annotator
+  const measurementsDB = getDB('measurements');
+  const byAnnotatorCollectionPromise = measurementsDB.query(
+    'by/annotatorCollection',
+    {
+      reduce: false,
+      start_key: [annotatorID, collection],
+      end_key: [annotatorID, collection],
+      include_docs: true
+    }
+  );
 
-      for (
-        let seriesIndex = 0;
-        seriesIndex < seriesUIDs.length;
-        seriesIndex++
-      ) {
-        let seriesUID = seriesUIDs[seriesIndex];
-        if (!(seriesUID in measurementsPerSeries)) {
-          caseDetails = cases.find(c => c.key[0] === seriesUID).key;
-          return seriesUID;
-        }
-        if (
-          !(seriesUID in annotatorMeasuredSeries) &&
-          measurementsPerSeries[seriesUID] < leastMeasured.measurementCount
-        ) {
-          leastMeasured.seriesUID = seriesUID;
-          leastMeasured.measurementCount = measurementsPerSeries[seriesUID];
-        }
+  // get measurements for collection
+  const byCollectionSubjectPromise = measurementsDB.query(
+    'by/collectionSubjectSkip',
+    {
+      reduce: true,
+      group: true,
+      level: 'exact',
+      start_key: [collection, ''],
+      end_key: [collection, {}]
+    }
+  );
+
+  // create collated table of results
+  return await Promise.all([
+    byCollectionPromise,
+    byAnnotatorCollectionPromise,
+    byCollectionSubjectPromise
+  ]).then(results => {
+    console.log(results);
+
+    // first build table of all cases in collection
+    const cases = {};
+    results[0].rows.forEach(row => {
+      cases[row.key[1]] = { measurements: 0, measured: false, skipped: false };
+    });
+
+    // now mark all the ones measured by this annotator
+    results[1].rows.forEach(row => {
+      cases[row.doc.caseData.SubjectID].measured = true;
+      cases[row.doc.caseData.SubjectID].skipped = true;
+    });
+
+    // now mark the cases if skipped, or list count of other measurements
+    results[2].rows.forEach(row => {
+      const subjectID = row.key[1];
+      cases[subjectID].measurements = row.value;
+      const skipped = row.key[2];
+      if (skipped) {
+        cases[subjectID].skipped |= row.value > skipThreshold;
       }
-      caseDetails = cases.find(c => c.key[0] === leastMeasured.seriesUID).key;
-      return leastMeasured.seriesUID;
-    });*/
+    });
+
+    return cases;
+  });
+}
+
+async function getNextCaseForAnnotator(collection, annotatorID) {
+  // TODO - this can be used on the dashboard page
+  console.log(
+    'this data can be used to label the dashboard with cased to be completed:'
+  );
+  console.log(await annotatorCollectionStatus(collection, annotatorID));
+
+  //
+  // this logic returns the caseData for a case that the user
+  // has not already measured and that has not been skipped more
+  // than five times and has the least measurements of the cases
+  // in the collection.
+  //
+  const cases = await annotatorCollectionMeasurements(collection, annotatorID);
+
+  // sort keys by number of measurments
+  const keys = Object.keys(cases);
+  keys.sort((a, b) => {
+    return cases[a].measurements - cases[b].measurements;
+  });
+
+  // find the first one not skipped or measured by the user
+  for (const index = 0; index < keys.length; index++) {
+    const subjectID = keys[index];
+    const caseData = cases[keys[index]];
+    if (!caseData.measured && !caseData.skipped) {
+      // return the document for that collection/subject
+      const casesDB = getDB('cases');
+      const result = await casesDB.query('by/collectionSubject', {
+        reduce: false,
+        start_key: [collection, subjectID],
+        end_key: [collection, subjectID],
+        include_docs: true
+      });
+      return result.rows[0].doc;
+    }
+  }
+
+  // return null if there's no case - this means user is done with this
+  // collection
+  return null;
 }
 
 export default getNextCaseForAnnotator;
