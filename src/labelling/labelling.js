@@ -44,7 +44,11 @@ class Labelling extends Component {
     };
 
     return (
-      <div className="labellingComponent" style={initialStyle}>
+      <div
+        className="labellingComponent"
+        style={initialStyle}
+        onMouseLeave={this.props.labellingDoneCallback}
+      >
         {this.state.justCreated && (
           <button className="addLabelButton" onClick={this.showLabelling}>
             Add Label
