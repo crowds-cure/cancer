@@ -142,6 +142,17 @@ class HeaderSection extends Component {
                   </a>
                   .
                 </li>
+                <li>
+                  Interested in donating data to this project? Please{' '}
+                  <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href="http://www.cancerimagingarchive.net/primary-data/"
+                  >
+                    visit the TCIA website
+                  </a>{' '}
+                  to find out how.
+                </li>
               </ul>
               <span className="modal-close" onClick={this.toggleModal}>
                 Close
