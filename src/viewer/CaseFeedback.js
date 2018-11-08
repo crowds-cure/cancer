@@ -46,6 +46,10 @@ class CaseFeedback extends Component {
         label: 'No disease identified'
       },
       {
+        value: 'NoMeasurableDisease',
+        label: 'No measurable disease'
+      },
+      {
         value: 'ContainsDualPhaseImages',
         label: 'Contains dual phase images'
       },
