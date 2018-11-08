@@ -33,6 +33,11 @@
   font-weight: bold;
 }
 
+.select-tree-root .breadcrumb .backIcon {
+  padding-right: 5px;
+  color: #0000ff;
+}
+
 .select-tree-root .tree-leaf {
   cursor: pointer;
   display: block;

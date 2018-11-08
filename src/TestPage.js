@@ -8,7 +8,19 @@ class TestPage extends Component {
   render() {
     return (
       <div className="TestPage">
-        <Labelling />
+        <Labelling
+          selectTreeTitle="Add Label"
+          measurementData={{}}
+          eventData={{
+            currentPoints: {
+              canvas: {
+                x: 0,
+                y: 0
+              }
+            }
+          }}
+          labellingDoneCallback={() => alert('Done')}
+        />
       </div>
     );
   }

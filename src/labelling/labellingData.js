@@ -63,7 +63,8 @@ const descriptionItems = descriptions.map(name => {
 const labelItems = organGroups.map(name => {
   return {
     label: name,
-    value: nameToID(name)
+    value: nameToID(name),
+    items: descriptionItems
   };
 });
 

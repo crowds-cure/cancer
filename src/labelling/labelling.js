@@ -2,42 +2,34 @@ import { Component } from 'react';
 import React from 'react';
 import PropTypes from 'prop-types';
 import SelectTree from '../select-tree/SelectTree.js';
-import { labelItems, descriptionItems } from './labellingData.js';
+import { labelItems } from './labellingData.js';
 
 import './labelling.css';
 
 class Labelling extends Component {
+  static defaultProps = {
+    selectTreeTitle: 'Add Label',
+    measurementData: {},
+    eventData: {}
+  };
+
   constructor(props) {
     super(props);
 
     this.state = {
-      label: null,
+      location: null,
       description: null,
-      requestDescription: false,
       justCreated: true
     };
   }
 
-  static defaultProps = {
-    eventData: {},
-    measurementData: {}
-  };
-
   render() {
     let showButtons = false;
-    let selectTreeItems = null;
-    let selectTreeCalback;
-    let selectTreeTitle = '';
+    let showSelectTree = false;
 
     if (!this.state.justCreated) {
-      if (this.state.label === null) {
-        selectTreeItems = labelItems;
-        selectTreeTitle = 'Assign Label';
-        selectTreeCalback = this.itemLabelSelected;
-      } else if (this.state.requestDescription) {
-        selectTreeItems = descriptionItems;
-        selectTreeTitle = 'Assign Description';
-        selectTreeCalback = this.itemDescriptionSelected;
+      if (this.state.location === null) {
+        showSelectTree = true;
       } else {
         showButtons = true;
       }
@@ -58,25 +50,22 @@ class Labelling extends Component {
             Add Label
           </button>
         )}
-        {selectTreeItems && (
+        {showSelectTree && (
           <SelectTree
-            title={selectTreeTitle}
-            items={selectTreeItems}
-            onSelect={selectTreeCalback}
+            items={labelItems}
+            selectTreeTitle={this.props.selectTreeTitle}
+            onSelected={this.relabelCalback}
           />
         )}
         {showButtons && (
           <>
             <div className="textArea">
-              {this.state.label && this.state.label.label}
+              {this.state.location && this.state.location.label}
               {this.state.description && ` (${this.state.description.label})`}
             </div>
             <div className="commonButtons">
               <button className="commonButton" onClick={this.relabel}>
                 Relabel
-              </button>
-              <button className="commonButton" onClick={this.editDescription}>
-                {this.state.description ? 'Edit ' : 'Add '} description
               </button>
               <button
                 className="commonButton"
@@ -97,40 +86,25 @@ class Labelling extends Component {
     });
   };
 
-  itemLabelSelected = (event, item) => {
-    const textLine =
-      item.label +
-      (this.state.description ? ` (${this.state.description.label})` : '');
-
-    this.props.measurementData.location = item.label;
-    this.props.measurementData.additionalData = [textLine];
-    this.setState({
-      label: item
-    });
-  };
-
-  itemDescriptionSelected = (event, item) => {
-    const textLine =
-      this.state.label.label + (item.label ? ` (${item.label})` : '');
-
-    this.props.measurementData.description = item.description;
-    this.props.measurementData.additionalData = [textLine];
-    this.setState({
-      description: item,
-      requestDescription: false
-    });
-  };
-
   relabel = () => {
     this.setState({
-      label: null
+      location: null,
+      description: null
     });
   };
 
-  editDescription = () => {
+  relabelCalback = (event, location, description) => {
+    const descriptionText = description ? ` (${description.label})` : '';
+    const textLine = location.label + descriptionText;
+
+    this.props.measurementData.location = location.label;
+    if (description) {
+      this.props.measurementData.description = description.label;
+    }
+    this.props.measurementData.additionalData = [textLine];
     this.setState({
-      description: null,
-      requestDescription: true
+      location: location,
+      description: description
     });
   };
 }
