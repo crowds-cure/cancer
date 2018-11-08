@@ -42,7 +42,7 @@ class Dashboard extends Component {
       const types = docs.rows.map(row => {
         const host = ''; // 'https://db.crowds-cure.org';
         const db = 'screenshots'; // 'collections';
-        const name = row.doc.Collection.replace(/\s+/g, '-') + '.png'; // 'screenshot.png';
+        const name = row.doc.Collection.replace(/\s+/g, '-') + '.jpg'; // 'screenshot.png';
 
         //const img = `${host}/${db}/${row.id}/${name}`;
         const img = `${host}/${db}/${name}`;
