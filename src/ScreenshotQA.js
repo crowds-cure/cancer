@@ -2,6 +2,8 @@ import { Component } from 'react';
 import React from 'react';
 import SimpleHeaderSection from './shared/SimpleHeaderSection';
 import { getDB } from './db.js';
+import getAuthorizationHeader from './openid-connect/getAuthorizationHeader.js';
+import SecuredImage from './shared/SecuredImage.js';
 
 async function getLatestMeasurements() {
   const measurementsDB = getDB('measurements');
@@ -113,7 +115,12 @@ class ScreenshotQA extends Component {
             </p>
           </div>
           <div className="col-10">
-            <img src={src} alt={measurement._id} />
+            <SecuredImage
+              src={src}
+              alt={measurement._id}
+              onError={() => (this.img.style.display = 'none')}
+              getAuthorizationHeader={getAuthorizationHeader}
+            />
           </div>
         </div>
       );
