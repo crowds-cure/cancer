@@ -10,6 +10,7 @@ import MeasurementControl from './MeasurementControl.js';
 import HeaderSection from './HeaderSection.js';
 
 import getNextCase from '../case/getNextCase.js';
+import getUsername from './lib/getUsername.js';
 
 import clearOldCornerstoneCacheData from './lib/clearOldCornerstoneCacheData.js';
 
@@ -105,7 +106,7 @@ class Viewer extends Component {
 
     clearOldCornerstoneCacheData();
 
-    return getNextCase(this.props.collection)
+    return getNextCase(this.props.collection, getUsername())
       .then(props.fetchCaseSuccess, props.fetchCaseFailure)
       .then(() => {
         this.setState({
