@@ -1,8 +1,10 @@
 @value globals: "../GlobalStyles.css";
-@value textPrimaryColor, textSecondaryColor from globals;
+@value textPrimaryColor, textSecondaryColor, screen-sm from globals;
 
 .ActivityProgressSection .title {
   color: textPrimaryColor;
+  margin-bottom: 10px;
+  font-weight: 600;
 }
 
 .ActivityProgressSection .currentPoints {
@@ -12,14 +14,17 @@
 .ActivityProgressSection .value {
   color: textPrimaryColor;
   font-weight: bold;
-  font-size: 81px;
-  line-height: 81px;
+  font-size: 43px;
+  line-height: 43px;
+  display: inline-block;
 }
 
 .ActivityProgressSection .suffix {
   font-variant-caps: small-caps;
   font-size: 15px;
   color: textSecondaryColor;
+  vertical-align: top;
+  display: inline-block;
 }
 
 .ActivityProgressSection .medalContainer {
@@ -30,14 +35,60 @@
   text-align: center;
 }
 
-.ActivityProgressSection .medalContainer .medal-wrapper {
+.ActivityProgressSection .medal-bg {
   margin: 0 auto;
-  display: block;
+  height: 50px;
+  width: 50px;
+}
+
+.ActivityProgressSection .medal-bg .medal {
+  height: 38px;
+  margin: 4px;
+  width: 38px;
 }
 
 .ActivityProgressSection .rank {
   display: block;
-  padding: 15px 0;
+  padding: 20px 0;
   color: textSecondaryColor;
   overflow-wrap: break-word;
+}
+
+@media (min-width: screen-sm) {
+  .ActivityProgressSection .title {
+    margin-bottom: 15px;
+  }
+
+  .ActivityProgressSection .plusPoints {
+    font-size: 60px;
+    top: -70px;
+    left: 90px;
+  }
+
+  .ActivityProgressSection .value {
+    font-size: 81px;
+    line-height: 81px;
+    display: block;
+  }
+
+  .ActivityProgressSection .suffix {
+    font-size: 22px;
+    margin-top: 0px;
+    display: block;
+  }
+
+  .ActivityProgressSection .medalContainer {
+    padding-top: 36px;
+  }
+
+  .ActivityProgressSection .medal-bg {
+    height: 67px;
+    width: 67px;
+  }
+
+  .ActivityProgressSection .medal-bg .medal {
+    height: 50px;
+    margin: 7px;
+    width: 50px;
+  }
 }

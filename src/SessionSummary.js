@@ -21,7 +21,7 @@ class SessionSummary extends Component {
             </div>
           </div>
           <div className="row justify-content-center">
-            <div className="col-10">
+            <div className="col-15 col-md-10">
               <ProgressSection
                 current={this.props.current}
                 measurementsInCurrentSession={
@@ -31,20 +31,20 @@ class SessionSummary extends Component {
             </div>
           </div>
           <div className="row justify-content-center">
-            <div className="col-6">
+            <div className="col-16">
               <LogoutSection />
             </div>
           </div>
           <div className="row">
-            <div className="col-10 communityStats">
+            <div className="col-16 col-md-9  communityStats">
               <StatisticsSection />
             </div>
-            <div className="col-6 rankingStats">
+            <div className="col-16 col-md-7 rankingStats">
               <div className="row">
-                <div className="col">
+                <div className="col-md">
                   <RankingSection name="Close to you" />
                 </div>
-                <div className="col">
+                <div className="col-md">
                   <RankingSection name="Top this week" />
                 </div>
               </div>

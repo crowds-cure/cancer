@@ -1,5 +1,5 @@
 @value globals: "../GlobalStyles.css";
-@value textPrimaryColor, textSecondaryColor, textActiveColor from globals;
+@value textPrimaryColor, textSecondaryColor, textActiveColor, screen-sm from globals;
 
 .ProgressSection .title {
   font-weight: bold;
@@ -22,7 +22,7 @@
   display: inline-block;
   color: textPrimaryColor;
   font-weight: bold;
-  font-size: 120px;
+  font-size: 43px;
   line-height: normal;
   margin-left: 10px;
 }
@@ -30,24 +30,24 @@
 .ProgressSection .suffix {
   display: inline-block;
   font-variant-caps: small-caps;
-  font-size: 22px;
+  font-size: 13px;
   vertical-align: top;
   margin-left: 10px;
-  margin-top: 15px;
+  margin-top: 10px;
   color: textSecondaryColor;
 }
 
 .ProgressSection .plusPoints {
   color: textActiveColor;
   position: absolute;
-  font-size: 60px;
+  font-size: 33px;
   font-weight: bold;
-  top: -70px;
-  left: 90px;
+  top: -35px;
+  left: 55px;
 }
 
 .ProgressSection .medalContainer {
-  padding-top: 36px;
+  padding-top: 5px;
 }
 
 .ProgressSection .progressBarContainer {
@@ -64,4 +64,47 @@
   float: right;
   color: white;
   font-size: 13px;
+}
+
+.ProgressSection .medal-bg {
+  height: 50px;
+  width: 50px;
+}
+
+.ProgressSection .medal-bg .medal {
+  height: 38px;
+  margin: 4px;
+  width: 38px;
+}
+
+@media (min-width: screen-sm) {
+  .ProgressSection .plusPoints {
+    font-size: 60px;
+    top: -70px;
+    left: 90px;
+  }
+
+  .ProgressSection .value {
+    font-size: 120px;
+  }
+
+  .ProgressSection .suffix {
+    font-size: 22px;
+    margin-top: 15px;
+  }
+
+  .ProgressSection .medalContainer {
+    padding-top: 36px;
+  }
+
+  .ProgressSection .medal-bg {
+    height: 67px;
+    width: 67px;
+  }
+
+  .ProgressSection .medal-bg .medal {
+    height: 50px;
+    margin: 7px;
+    width: 50px;
+  }
 }

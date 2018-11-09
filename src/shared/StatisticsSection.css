@@ -2,7 +2,7 @@
 @value textActiveColor, screen-lg from globals;
 
 .StatisticsSection .subTitle {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: bold;
   margin-bottom: 30px;
   margin-top: 30px;

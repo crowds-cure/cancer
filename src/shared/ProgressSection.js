@@ -31,11 +31,11 @@ class ProgressSection extends Component {
         <div>
           <div className="numberCases">
             <div className="medalContainer" title={rankName}>
-              <Medal size="lg" type={rankType} />
+              <Medal type={rankType} />
             </div>
             <div className="currentPoints">
               <span className="value">{current}</span>
-              <span className="suffix">cases</span>
+              <span className="suffix">measured</span>
               <span className="plusPoints">
                 +{increment.measurementsInCurrentSession}
               </span>
