@@ -32,6 +32,14 @@
 /* Other Colors */
 @value imageSliderColor: #163239;
 
+/* Grid breakpoints */
+@value screen-sm: 576px;
+@value screen-md: 768px;
+@value screen-lg: 992px;
+@value screen-xl: 1200px;
+@value gutter: 12.5px;
+@value negativeGutter: -12.5px;
+
 .noselect {
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */

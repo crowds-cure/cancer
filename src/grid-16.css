@@ -4,6 +4,10 @@
  * Copyright 2011-2018 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
+
+@value globals: "./GlobalStyles.css";
+@value screen-sm, screen-md, screen-lg, screen-xl, gutter, negativeGutter from globals;
+
 @-ms-viewport {
   width: device-width;
 }
@@ -22,8 +26,8 @@ html {
 .container {
   width: 100%;
   max-width: 1600px;
-  padding-right: 12.5px;
-  padding-left: 12.5px;
+  padding-right: gutter;
+  padding-left: gutter;
   margin-right: auto;
   margin-left: auto;
 }
@@ -34,8 +38,8 @@ html {
   display: flex;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  margin-right: -12.5px;
-  margin-left: -12.5px;
+  margin-right: negativeGutter;
+  margin-left: negativeGutter;
 }
 
 .no-gutters {
@@ -142,8 +146,8 @@ html {
   position: relative;
   width: 100%;
   min-height: 1px;
-  padding-right: 12.5px;
-  padding-left: 12.5px;
+  padding-right: gutter;
+  padding-left: gutter;
 }
 
 .col {
@@ -449,7 +453,7 @@ html {
   margin-left: 93.75%;
 }
 
-@media (min-width: 576px) {
+@media (min-width: screen-sm) {
   .col-sm {
     -ms-flex-preferred-size: 0;
     flex-basis: 0;
@@ -706,7 +710,7 @@ html {
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: screen-md) {
   .col-md {
     -ms-flex-preferred-size: 0;
     flex-basis: 0;
@@ -963,7 +967,7 @@ html {
   }
 }
 
-@media (min-width: 992px) {
+@media (min-width: screen-lg) {
   .col-lg {
     -ms-flex-preferred-size: 0;
     flex-basis: 0;
@@ -1220,7 +1224,7 @@ html {
   }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: screen-xl) {
   .col-xl {
     -ms-flex-preferred-size: 0;
     flex-basis: 0;
@@ -1517,7 +1521,7 @@ html {
   display: inline-flex !important;
 }
 
-@media (min-width: 576px) {
+@media (min-width: screen-sm) {
   .d-sm-none {
     display: none !important;
   }
@@ -1551,7 +1555,7 @@ html {
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: screen-md) {
   .d-md-none {
     display: none !important;
   }
@@ -1585,7 +1589,7 @@ html {
   }
 }
 
-@media (min-width: 992px) {
+@media (min-width: screen-lg) {
   .d-lg-none {
     display: none !important;
   }
@@ -1619,7 +1623,7 @@ html {
   }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: screen-xl) {
   .d-xl-none {
     display: none !important;
   }
@@ -1849,7 +1853,7 @@ html {
   align-self: stretch !important;
 }
 
-@media (min-width: 576px) {
+@media (min-width: screen-sm) {
   .flex-sm-row {
     -webkit-box-orient: horizontal !important;
     -webkit-box-direction: normal !important;
@@ -1985,7 +1989,7 @@ html {
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: screen-md) {
   .flex-md-row {
     -webkit-box-orient: horizontal !important;
     -webkit-box-direction: normal !important;
@@ -2121,7 +2125,7 @@ html {
   }
 }
 
-@media (min-width: 992px) {
+@media (min-width: screen-lg) {
   .flex-lg-row {
     -webkit-box-orient: horizontal !important;
     -webkit-box-direction: normal !important;
@@ -2257,7 +2261,7 @@ html {
   }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: screen-xl) {
   .flex-xl-row {
     -webkit-box-orient: horizontal !important;
     -webkit-box-direction: normal !important;
