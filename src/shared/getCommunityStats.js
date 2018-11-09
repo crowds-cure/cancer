@@ -41,14 +41,47 @@ async function getTotalMeasurementsInDateRange(
 
 async function getNumAnnotators(measurementsDB) {
   // TODO: This is a very inefficient approach to get the number of
-  // unique annotators
+  // unique annotators [actually no, this is efficient because of the
+  // way map-reduce works - sp]
   const result = await measurementsDB.query('by/annotators', {
     reduce: true,
-    group: true,
-    level: 'exact'
+    group: true
   });
 
   return result.rows.length;
+}
+
+async function getSessionsByTeam() {
+  const sessionsDB = getDB('sessions');
+  const result = await sessionsDB.query('by/teamUsername', {
+    reduce: true,
+    group: true,
+    group_level: 1
+  });
+
+  const byTeam = {};
+  result.rows.forEach(row => {
+    byTeam[row.key[0]] = row.value;
+  });
+  return byTeam;
+}
+
+async function getTeamUsers() {
+  const sessionsDB = getDB('sessions');
+  const result = await sessionsDB.query('by/teamUsername', {
+    reduce: true,
+    group: true,
+    group_level: 2
+  });
+
+  const teamUsers = {};
+  result.rows.forEach(row => {
+    const team = row.key[0];
+    const user = row.key[1];
+    teamUsers[team] = teamUsers[team] || [];
+    teamUsers[team].push(user);
+  });
+  return teamUsers;
 }
 
 async function getCommunityStats() {
@@ -72,6 +105,10 @@ async function getCommunityStats() {
     startDate,
     endDate
   );
+
+  // extra stat functions that can be added to dashboard / badges
+  console.log('sessions by team', await getSessionsByTeam());
+  console.log('users on each team', await getTeamUsers());
 
   return {
     totalMeasurements,
