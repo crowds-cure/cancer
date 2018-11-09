@@ -26,10 +26,14 @@ class LogoutSection extends Component {
     const timeLeft = 30;
 
     return (
-      <div className="LogoutSection">
-        <AutoLogoutCountdown timeLeft={timeLeft} />
-        <Button label="Dashboard" click={this.handleClickDashboard} />
-        <Button label="Log out now" click={this.handleClickLogout} />
+      <div className="LogoutSection row justify-content-center">
+        <div className="col-sm-16 col-md-auto">
+          <AutoLogoutCountdown timeLeft={timeLeft} />
+        </div>
+        <div className="col-sm-16 col-md-auto">
+          <Button label="Dashboard" click={this.handleClickDashboard} />
+          <Button label="Log out now" click={this.handleClickLogout} />
+        </div>
       </div>
     );
   }
