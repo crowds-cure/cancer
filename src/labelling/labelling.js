@@ -73,12 +73,6 @@ class Labelling extends Component {
               <button className="commonButton" onClick={this.relabel}>
                 Relabel
               </button>
-              <button
-                className="commonButton"
-                onClick={this.props.labellingDoneCallback}
-              >
-                Done
-              </button>
             </div>
           </>
         )}
@@ -99,7 +93,7 @@ class Labelling extends Component {
     });
   };
 
-  relabelCalback = (event, location, description) => {
+  relabelCalback = (event, location, description, stillSelecting) => {
     const descriptionText = description ? ` (${description.label})` : '';
     const textLine = location.label + descriptionText;
 
@@ -108,10 +102,13 @@ class Labelling extends Component {
       this.props.measurementData.description = description.label;
     }
     this.props.measurementData.additionalData = [textLine];
-    this.setState({
-      location: location,
-      description: description
-    });
+
+    if (!stillSelecting) {
+      this.setState({
+        location: location,
+        description: description
+      });
+    }
   };
 }
 

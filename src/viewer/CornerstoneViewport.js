@@ -138,7 +138,7 @@ class CornerstoneViewport extends Component {
     options = {}
   ) => {
     const labellingDoneCallback = () => {
-      this.hideBidirectionalAddLabel();
+      this.hideExtraButtons();
       return doneCallback();
     };
 
@@ -513,7 +513,7 @@ class CornerstoneViewport extends Component {
     const stackData = cornerstoneTools.getToolState(element, 'stack');
     const stack = stackData.data[0];
 
-    this.hideBidirectionalAddLabel();
+    this.hideExtraButtons();
 
     this.setState({
       stack,
@@ -556,7 +556,7 @@ class CornerstoneViewport extends Component {
     // TODO: Pass in as prop?
     const toolsOfInterest = ['Bidirectional'];
 
-    this.hideBidirectionalAddLabel();
+    this.hideExtraButtons();
 
     if (toolsOfInterest.includes(toolType)) {
       const image = cornerstone.getImage(this.element);
@@ -621,12 +621,15 @@ class CornerstoneViewport extends Component {
     }, this.slideTimeoutTime);
   }
 
-  hideBidirectionalAddLabel = () => {
+  hideExtraButtons = () => {
     if (this.state.bidirectionalAddLabelShow === true) {
       this.setState({
         bidirectionalAddLabelShow: false
       });
     }
+    this.setState({
+      toolContextMenuData: null
+    });
   };
 }
 

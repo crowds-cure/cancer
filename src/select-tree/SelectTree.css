@@ -33,14 +33,25 @@
   font-weight: bold;
 }
 
+.select-tree-root .wrapperText {
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.select-tree-root .breadcrumb .wrapperLabel {
+  cursor: pointer;
+}
+
 .select-tree-root .breadcrumb .backIcon {
   padding-right: 5px;
   color: #0000ff;
 }
 
+.select-tree-root .tree-node,
 .select-tree-root .tree-leaf {
   cursor: pointer;
   display: block;
+  overflow: hidden;
   font-weight: normal;
   box-shadow: 0 0 0 200px transparent;
   line-height: 26px;

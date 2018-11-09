@@ -117,6 +117,7 @@ class SelectTree extends Component {
       this.setState({
         currentNode: item
       });
+      this.props.onSelected(event, item, null, true);
     }
   };
 
