@@ -3,15 +3,19 @@
   margin-right: 35px;
   margin-left: 20px;
 }
+.CaseControlButtons .CompleteButtonWrapper {
+  display: inline-block;
+}
 
 .CaseControlButtons button {
-  height: 52px;
+  height: 50px;
+  margin-top: -2px;
   padding: 0 15px;
   font-size: 15px;
   cursor: pointer;
   opacity: 1;
   border-radius: 9px;
-  border: solid 1px #000000;
+  border: solid 3px #000000;
   background-color: #b894fe;
   font-weight: bold;
   outline: none;
@@ -23,14 +27,12 @@
   width: 24px;
   height: 24px;
   float: left;
-  display: inline-block;
   margin-top: 6px;
 }
 
 .CaseControlButtons button span {
   padding: 10px 8px;
   float: left;
-  display: inline-block;
 }
 
 .CaseControlButtons button:disabled {

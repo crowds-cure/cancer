@@ -21,17 +21,19 @@ class CaseControlButtons extends Component {
           skipEnabled={this.props.skipEnabled}
           skipCase={this.props.skipCase}
         />
-        <button
-          className="complete-case"
-          type="button"
-          disabled={!this.props.saveEnabled}
-          onClick={this.props.saveCase}
-        >
-          <svg>
-            <use xlinkHref="/icons.svg#icon-check-circle" />
-          </svg>
-          <span>Complete</span>
-        </button>
+        <div className="CompleteButtonWrapper">
+          <button
+            className="complete-case"
+            type="button"
+            disabled={!this.props.saveEnabled}
+            onClick={this.props.saveCase}
+          >
+            <svg>
+              <use xlinkHref="/icons.svg#icon-check-circle" />
+            </svg>
+            <span>Complete</span>
+          </button>
+        </div>
       </div>
     );
   }
