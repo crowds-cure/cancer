@@ -1,19 +1,19 @@
 @value globals: "./GlobalStyles.css";
-@value primaryBackgroundImage, textPrimaryColor, textActiveColor from globals;
+@value primaryBackgroundImage, textPrimaryColor, textActiveColor, screen-sm from globals;
 
 .SessionSummary {
   height: 100%;
   background-image: primaryBackgroundImage;
   overflow-y: auto;
+  padding-bottom: 15px;
 }
 
 .SessionSummary .title-wrapper {
   text-align: center;
-  margin-top: 25px;
 }
 
 .SessionSummary .title-wrapper .title {
-  font-size: 34px;
+  font-size: 23px;
   font-weight: bold;
   font-style: italic;
   color: textActiveColor;
@@ -24,13 +24,43 @@
 }
 
 .SessionSummary .rankingStats {
-  margin-top: 120px;
+  margin-top: 15px;
+}
+
+.SessionSummary .RankingSection {
+  margin: 10px 0 30px 0;
 }
 
 .SessionSummary .LogoutSection {
-  margin-top: 110px;
+  margin-top: 100px;
 }
 
-.ProgressSection {
-  margin-top: 130px;
+.SessionSummary .ProgressSection {
+  margin-top: 100px;
+}
+
+@media (min-width: screen-sm) {
+  .SessionSummary .title-wrapper .title {
+    font-size: 34px;
+  }
+
+  .SessionSummary .title-wrapper {
+    margin-top: 25px;
+  }
+
+  .SessionSummary .communityStats {
+    margin-top: 120px;
+  }
+
+  .SessionSummary .rankingStats {
+    margin-top: 150px;
+  }
+
+  .SessionSummary .LogoutSection {
+    margin-top: 110px;
+  }
+
+  .SessionSummary .ProgressSection {
+    margin-top: 100px;
+  }
 }

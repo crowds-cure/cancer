@@ -1,5 +1,5 @@
 @value globals: "../GlobalStyles.css";
-@value textPrimaryColor, textActiveColor from globals;
+@value textPrimaryColor, textActiveColor, screen-sm from globals;
 
 .simpleHeader {
   background-color: #1e1d39;
@@ -13,7 +13,7 @@
 
 .simpleHeader .logoText {
   color: textPrimaryColor;
-  font-size: 20px;
+  font-size: 17px;
   font-weight: bold;
 }
 
@@ -37,4 +37,10 @@
   border-left: 1px solid #b8baee;
   padding-left: 10px;
   cursor: pointer;
+}
+
+@media (min-width: screen-sm) {
+  .simpleHeader .logoText {
+    font-size: 20px;
+  }
 }

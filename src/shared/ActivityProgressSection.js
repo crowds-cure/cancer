@@ -24,7 +24,7 @@ class ActivityProgressSection extends Component {
 
     return (
       <div className="ActivityProgressSection">
-        <div className="title">Your Activity</div>
+        <div className="title">Your activity</div>
         <div className="medalContainer" title={rankName}>
           <Medal size="md" type={rankType} />
           <span className="rank">{rankName}</span>
