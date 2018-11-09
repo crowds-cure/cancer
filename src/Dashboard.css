@@ -1,5 +1,5 @@
 @value globals: "./GlobalStyles.css";
-@value primaryBackgroundImage, textPrimaryColor, textActiveColor from globals;
+@value primaryBackgroundImage, textPrimaryColor, textActiveColor, screen-md, screen-lg from globals;
 
 .Dashboard {
   height: 100%;
@@ -9,4 +9,20 @@
 
 .Dashboard .Logout {
   color: textPrimaryColor;
+}
+
+.Dashboard .rankingGroupSection {
+  margin-top: 10px;
+}
+
+@media (min-width: screen-md) {
+  .Dashboard .rankingGroupSection {
+    margin-top: 65px;
+  }
+}
+
+@media (min-width: screen-lg) {
+  .Dashboard .rankingGroupSection {
+    margin-top: 0px;
+  }
 }

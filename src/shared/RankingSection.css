@@ -7,7 +7,6 @@
 .RankingSection .title {
   font-size: 20px;
   font-weight: bold;
-  padding: 5px;
   color: textActiveColor;
 }
 
@@ -15,6 +14,6 @@
   display: block;
   border-left: 1px solid textSecondaryColor;
   padding-left: 15px;
-  margin: 0px;
+  margin: 20px 0 0 0;
   list-style-type: none;
 }

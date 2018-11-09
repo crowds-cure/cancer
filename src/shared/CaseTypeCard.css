@@ -3,14 +3,11 @@
 
 .CaseTypeCard {
   position: relative;
-  margin: 5px;
   margin-bottom: 10px;
-  width: 100%;
   height: 320px;
   cursor: pointer;
   border: 4px solid transparent;
   border-radius: 12px;
-  padding: 0;
   transition: border-color 0.2s linear;
 }
 
@@ -37,6 +34,7 @@
   border-radius: 12px;
   background: black;
   text-align: center;
+  overflow: hidden;
 }
 
 .CaseTypeCard img {
