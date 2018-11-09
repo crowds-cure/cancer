@@ -11,7 +11,6 @@ async function annotatorCollectionStatus(collection, annotatorID) {
   const byCollectionPromise = casesDB.query('by/collection', {
     reduce: true,
     group: true,
-    level: 'exact',
     start_key: collection,
     end_key: collection
   });
@@ -22,7 +21,7 @@ async function annotatorCollectionStatus(collection, annotatorID) {
     {
       reduce: true,
       group: true,
-      level: 2,
+      group_level: 2,
       start_key: [annotatorID, collection],
       end_key: [annotatorID, collection]
     }
@@ -75,7 +74,6 @@ async function annotatorCollectionMeasurements(
     {
       reduce: true,
       group: true,
-      level: 'exact',
       start_key: [collection, ''],
       end_key: [collection, {}]
     }
@@ -117,10 +115,13 @@ async function annotatorCollectionMeasurements(
 
 async function getNextCaseForAnnotator(collection, annotatorID) {
   // TODO - this can be used on the dashboard page
+  //
+  /* something is hanging here when and needs to be debugged:
   console.log(
     'this data can be used to label the dashboard with cased to be completed:'
   );
   console.log(await annotatorCollectionStatus(collection, annotatorID));
+   */
 
   //
   // this logic returns the caseData for a case that the user
@@ -137,7 +138,7 @@ async function getNextCaseForAnnotator(collection, annotatorID) {
   });
 
   // find the first one not skipped or measured by the user
-  for (const index = 0; index < keys.length; index++) {
+  for (let index = 0; index < keys.length; index++) {
     const subjectID = keys[index];
     const caseData = cases[keys[index]];
     if (!caseData.measured && !caseData.skipped) {
