@@ -14,6 +14,23 @@
   transition: border-color 0.2s linear;
 }
 
+.CaseTypeCard.complete {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.CaseTypeCard .complete-flag {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+.CaseTypeCard .complete-flag svg {
+  fill: textActiveColor;
+  height: 40px;
+  width: 40px;
+}
+
 .CaseTypeCard .imgContainer {
   width: 100%;
   height: 220px;

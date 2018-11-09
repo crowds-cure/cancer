@@ -1,43 +1,5 @@
 //import { measurementsDB } from "../db.js";
-
-import { getDB } from '../db';
-
-//
-// Returns the status (how many measured out of total) for a given user on a collection
-// for use on the dashboard page
-//
-async function annotatorCollectionStatus(collection, annotatorID) {
-  const casesDB = getDB('cases');
-  const byCollectionPromise = casesDB.query('by/collection', {
-    reduce: true,
-    group: true,
-    start_key: collection,
-    end_key: collection
-  });
-
-  const measurementsDB = getDB('measurements');
-  const byAnnotatorCollectionPromise = measurementsDB.query(
-    'by/annotatorCollection',
-    {
-      reduce: true,
-      group: true,
-      group_level: 2,
-      start_key: [annotatorID, collection],
-      end_key: [annotatorID, collection]
-    }
-  );
-
-  return await Promise.all([
-    byCollectionPromise,
-    byAnnotatorCollectionPromise
-  ]).then(results => {
-    return {
-      annotatorID: annotatorID,
-      byAnnotator: results[1].rows[0].value,
-      inCollection: results[0].rows[0].value
-    };
-  });
-}
+import { getDB } from '../db.js';
 
 //
 // Returns the status the measurement documents for the user for a collection
@@ -114,16 +76,6 @@ async function annotatorCollectionMeasurements(
 }
 
 async function getNextCaseForAnnotator(collection, annotatorID) {
-  // TODO - this can be used on the dashboard page
-  //
-  /* something is hanging here when and needs to be debugged:
-  console.log(
-    'this data can be used to label the dashboard with cased to be completed:'
-  );
-  console.log(await annotatorCollectionStatus(collection, annotatorID));
-   */
-
-  //
   // this logic returns the caseData for a case that the user
   // has not already measured and that has not been skipped more
   // than five times and has the least measurements of the cases

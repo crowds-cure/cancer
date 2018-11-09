@@ -12,6 +12,8 @@ import './Dashboard.css';
 import Modal from 'react-modal';
 import { getDB } from './db';
 import getUserStats from './shared/getUserStats';
+import getUsername from './viewer/lib/getUsername.js';
+import annotatorCollectionStatus from './case/annotatorCollectionStatus.js';
 
 const customStyles = {
   content: {
@@ -38,8 +40,12 @@ class Dashboard extends Component {
 
     const collectionsDB = getDB('collections');
 
-    collectionsDB.allDocs({ include_docs: true }).then(docs => {
-      const types = docs.rows.map(row => {
+    collectionsDB.allDocs({ include_docs: true }).then(async docs => {
+      const typePromises = docs.rows.map(async row => {
+        const collection = row.doc.Collection;
+        const annotatorID = getUsername();
+        // TODO: Why can't we do this in one call instead of >10
+        const status = await annotatorCollectionStatus(collection, annotatorID);
         const host = ''; // 'https://db.crowds-cure.org';
         const db = 'screenshots'; // 'collections';
         const name = row.doc.Collection.replace(/\s+/g, '-') + '.jpg'; // 'screenshot.png';
@@ -49,9 +55,13 @@ class Dashboard extends Component {
 
         return {
           ...row.doc,
+          inCollection: status.inCollection,
+          byAnnotator: status.byAnnotator,
           img
         };
       });
+
+      const types = await Promise.all(typePromises);
 
       this.setState({
         types,

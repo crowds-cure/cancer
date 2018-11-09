@@ -13,11 +13,22 @@ class CaseTypeCard extends Component {
   }
 
   render() {
+    const completed = this.props.inCollection === this.props.byAnnotator;
+
+    let className = 'CaseTypeCard col-16 col-md-8 col-lg-5';
+    if (completed) {
+      className += ' complete';
+    }
+
     return (
-      <div
-        className="CaseTypeCard col-16 col-md-8 col-lg-5"
-        onClick={this.onClick}
-      >
+      <div className={className} onClick={this.onClick}>
+        {completed && (
+          <span className="complete-flag">
+            <svg>
+              <use xlinkHref="/icons.svg#icon-check-circle" />
+            </svg>
+          </span>
+        )}
         <div className="imgContainer">
           <div
             onClick={this.props.clickInfo}
@@ -51,13 +62,20 @@ class CaseTypeCard extends Component {
         </div>
         <div className="title">
           <span className="name">{this.props.name}</span>
-          <span className="type">{this.props.type}</span>
+          <span className="type">
+            {this.props.type} - {this.props.byAnnotator}/
+            {this.props.inCollection}
+          </span>
         </div>
       </div>
     );
   }
 
   onClick() {
+    if (this.props.inCollection === this.props.byAnnotator) {
+      return;
+    }
+
     this.props.click(this.props.name);
   }
 }
@@ -67,7 +85,9 @@ CaseTypeCard.propTypes = {
   name: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  img: PropTypes.string.isRequired
+  img: PropTypes.string.isRequired,
+  inCollection: PropTypes.number.isRequired,
+  byAnnotator: PropTypes.number.isRequired
 };
 
 export default CaseTypeCard;

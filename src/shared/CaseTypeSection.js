@@ -21,6 +21,8 @@ class CaseTypeSection extends Component {
         name={item.Collection}
         type={item.Type}
         description={item.Description}
+        byAnnotator={item.byAnnotator}
+        inCollection={item.inCollection}
         img={item.img}
         click={event => this.onClick(event, item)}
         clickInfo={event => this.props.onClickInfo(event, item)}
