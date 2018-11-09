@@ -47,9 +47,8 @@
 }
 
 .CaseTypeCard .title {
-  position: absolute;
-  bottom: 10px;
-  left: 25px;
+  margin-top: 10px;
+  margin-left: 10px;
   color: white;
 }
 

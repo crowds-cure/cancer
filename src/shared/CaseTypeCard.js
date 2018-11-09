@@ -15,57 +15,59 @@ class CaseTypeCard extends Component {
   render() {
     const completed = this.props.inCollection === this.props.byAnnotator;
 
-    let className = 'CaseTypeCard col-16 col-md-8 col-lg-5';
+    let className = 'CaseTypeCard';
     if (completed) {
       className += ' complete';
     }
 
     return (
-      <div className={className} onClick={this.onClick}>
-        {completed && (
-          <span className="complete-flag">
-            <svg>
-              <use xlinkHref="/icons.svg#icon-check-circle" />
-            </svg>
-          </span>
-        )}
-        <div className="imgContainer">
-          <div
-            onClick={this.props.clickInfo}
-            title={this.props.description}
-            className="info-icon svgContainer"
-          >
-            <svg>
-              <use xlinkHref="/icons.svg#icon-trial-info" />
-            </svg>
+      <div className="col-16 col-md-8 col-lg-5">
+        <div className={className} onClick={this.onClick}>
+          {completed && (
+            <span className="complete-flag">
+              <svg>
+                <use xlinkHref="/icons.svg#icon-check-circle" />
+              </svg>
+            </span>
+          )}
+          <div className="imgContainer">
+            <div
+              onClick={this.props.clickInfo}
+              title={this.props.description}
+              className="info-icon svgContainer"
+            >
+              <svg>
+                <use xlinkHref="/icons.svg#icon-trial-info" />
+              </svg>
+            </div>
+            <img
+              alt={this.props.name}
+              className="screenshot"
+              ref={img => (this.img = img)}
+              src={this.props.img}
+              onError={() => (this.img.style.display = 'none')}
+            />
+            {/*
+
+            Removing this for now because CouchDB serving attachments
+            is horribly slow
+
+            <SecuredImage
+              alt={this.props.name}
+              className="screenshot"
+              ref={img => (this.img = img)}
+              src={this.props.img}
+              onError={() => (this.img.style.display = 'none')}
+              getAuthorizationHeader={getAuthorizationHeader}
+            />*/}
           </div>
-          <img
-            alt={this.props.name}
-            className="screenshot"
-            ref={img => (this.img = img)}
-            src={this.props.img}
-            onError={() => (this.img.style.display = 'none')}
-          />
-          {/*
-
-          Removing this for now because CouchDB serving attachments
-          is horribly slow
-
-          <SecuredImage
-            alt={this.props.name}
-            className="screenshot"
-            ref={img => (this.img = img)}
-            src={this.props.img}
-            onError={() => (this.img.style.display = 'none')}
-            getAuthorizationHeader={getAuthorizationHeader}
-          />*/}
-        </div>
-        <div className="title">
-          <span className="name">{this.props.name}</span>
-          <span className="type">
-            {this.props.type} - {this.props.byAnnotator}/
-            {this.props.inCollection}
-          </span>
+          <div className="title">
+            <span className="name">{this.props.name}</span>
+            <span className="type">
+              {this.props.type} - {this.props.byAnnotator}/
+              {this.props.inCollection}
+            </span>
+          </div>
         </div>
       </div>
     );
