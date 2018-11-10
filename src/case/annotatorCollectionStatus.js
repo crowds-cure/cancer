@@ -15,13 +15,13 @@ async function annotatorCollectionStatus(collection, annotatorID) {
 
   const measurementsDB = getDB('measurements');
   const byAnnotatorCollectionPromise = measurementsDB.query(
-    'by/annotatorCollection',
+    'by/annotatorCollectionSubject',
     {
       reduce: true,
       group: true,
-      group_level: 2,
-      start_key: [annotatorID, collection],
-      end_key: [annotatorID, collection]
+      group_level: 3,
+      start_key: [annotatorID, collection, ''],
+      end_key: [annotatorID, collection, {}]
     }
   );
 
@@ -32,7 +32,7 @@ async function annotatorCollectionStatus(collection, annotatorID) {
     console.warn(results);
     return {
       annotatorID,
-      byAnnotator: results[1].rows.length && results[1].rows[0].value,
+      byAnnotator: results[1].rows.length,
       inCollection: results[0].rows.length && results[0].rows[0].value
     };
   });
