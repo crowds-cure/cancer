@@ -121,7 +121,13 @@ class Viewer extends Component {
       return [];
     }
 
-    const seriesInstances = seriesData[0];
+    let seriesInstances = seriesData[0];
+
+    // Broken in IE?
+    if (typeof seriesInstances === 'string') {
+      seriesInstances = JSON.parse(seriesInstances);
+    }
+
     let imageIds = seriesInstances.map(instance => {
       // TODO: use this
       //const numberOfFrames = instance['00280008'].Value;

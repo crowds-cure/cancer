@@ -2,8 +2,15 @@
   "presets": [
     ["@babel/preset-env", {
       "targets": {
-        "browsers": ["ie 11"]
-      }
+        "ie": "11"
+      },
+      "useBuiltIns": "entry",
+      "include": [
+      	'es6.map',
+      	'es6.set',
+      	'es6.object.assign'
+      ]
     }]
-  ]
+  ],
+  "plugins": ["@babel/plugin-transform-object-assign"]
 }

@@ -1,6 +1,7 @@
 import PouchDB from 'pouchdb-browser';
 import plugin from 'pouchdb-find';
 import getAuthorizationHeader from './openid-connect/getAuthorizationHeader.js';
+import 'whatwg-fetch';
 
 PouchDB.plugin(plugin);
 

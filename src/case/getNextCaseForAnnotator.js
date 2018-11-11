@@ -102,6 +102,7 @@ async function getNextCaseForAnnotator(collection, annotatorID) {
         end_key: [collection, subjectID],
         include_docs: true
       });
+
       return result.rows[0].doc;
     }
   }

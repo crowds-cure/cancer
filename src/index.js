@@ -1,3 +1,9 @@
+import '@babel/polyfill';
+import 'promise-polyfill/src/polyfill';
+import 'whatwg-fetch';
+import './url.js';
+import './ie.js';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
