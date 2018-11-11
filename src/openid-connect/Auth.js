@@ -46,10 +46,14 @@ export default class Auth {
     this.logout = this.logout.bind(this);
     this.setSession = this.setSession.bind(this);
     this.handleSilentRenewError = this.handleSilentRenewError.bind(this);
+    this.handleUserLoaded = this.handleUserLoaded.bind(this);
 
     this.oidcUserManager.events.addSilentRenewError(
       this.handleSilentRenewError
     );
+
+    this.oidcUserManager.events.addUserLoaded(this.handleUserLoaded);
+
     this.oidcUserManager.events.addAccessTokenExpired(this.logout);
   }
 
@@ -109,6 +113,12 @@ export default class Auth {
     }
 
     await this.processSignInResponse();
+    const authResult = await this.oidcUserManager.getUser();
+
+    this.setSession(authResult);
+  }
+
+  async handleUserLoaded() {
     const authResult = await this.oidcUserManager.getUser();
 
     this.setSession(authResult);
