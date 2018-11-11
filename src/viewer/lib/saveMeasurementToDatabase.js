@@ -99,7 +99,7 @@ async function saveMeasurementToDatabase(caseData, measurements, feedback) {
   const measurementsDB = getDB('measurements');
   const annotator = await getUsername();
 
-  measurements.forEach(async measurement => {
+  const promises = measurements.map(async measurement => {
     const doc = {
       _id: guid(),
       measurement,
@@ -115,6 +115,11 @@ async function saveMeasurementToDatabase(caseData, measurements, feedback) {
 
     saveAttachment(measurement, response);
   });
+
+  // Once at least one of the measurements for this case have been saved back,
+  // resolve. This allows us to move on to the next case without blocking for
+  // too long. It's still pretty hacky but it will do for now.
+  return promises[0];
 }
 
 export default saveMeasurementToDatabase;
