@@ -11,16 +11,6 @@
   display: inline-block;
 }
 
-.simpleHeader .logoText {
-  color: textPrimaryColor;
-  font-size: 17px;
-  font-weight: bold;
-}
-
-.simpleHeader .logoText.highlight {
-  color: textActiveColor;
-}
-
 .simpleHeader .logoutSection {
   float: right;
 }

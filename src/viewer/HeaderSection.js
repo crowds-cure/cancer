@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Modal from 'react-modal';
 import { withRouter } from 'react-router-dom';
+import Logo from '../shared/Logo.js';
 
 import CaseProgressIndicator from './CaseProgressIndicator.js';
 
@@ -46,10 +47,7 @@ class HeaderSection extends Component {
     return (
       <div className="HeaderSection row">
         <div className="col">
-          <div className="logo">
-            <span className="logoText highlight">Crowds </span>
-            <span className="logoText">Cure Cancer</span>
-          </div>
+          <Logo />
         </div>
 
         <div className="col">

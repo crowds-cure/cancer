@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import React from 'react';
 import './SimpleHeaderSection.css';
+import Logo from './Logo.js';
 
 class SimpleHeaderSection extends Component {
   render() {
@@ -15,10 +16,7 @@ class SimpleHeaderSection extends Component {
     );
     return (
       <div className="simpleHeader">
-        <div className="logo">
-          <span className="logoText highlight">Crowds </span>
-          <span className="logoText">Cure Cancer</span>
-        </div>
+        <Logo />
         {isDashboard && logoutButtons}
       </div>
     );

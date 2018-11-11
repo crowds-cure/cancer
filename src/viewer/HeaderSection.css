@@ -25,17 +25,11 @@
   color: textActiveColor;
 }
 
-.HeaderSection .logoText {
-  color: textPrimaryColor;
+.HeaderSection .Logo .logoText {
   font-size: 20px;
-  font-weight: bold;
 }
 
-.HeaderSection .logoText.highlight {
-  color: textActiveColor;
-}
-
-.HeaderSection .logo {
+.HeaderSection .Logo {
   display: inline-block;
   margin: 16px 0 14px 20px;
 }

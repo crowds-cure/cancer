@@ -1,0 +1,16 @@
+@value globals: "../GlobalStyles.css";
+@value textPrimaryColor, textActiveColor from globals;
+
+.Logo {
+  cursor: pointer;
+}
+
+.Logo .logoText {
+  color: textPrimaryColor;
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.Logo .logoText.highlight {
+  color: textActiveColor;
+}
