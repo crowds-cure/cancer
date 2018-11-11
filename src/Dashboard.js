@@ -63,6 +63,20 @@ class Dashboard extends Component {
 
       const types = await Promise.all(typePromises);
 
+      types.sort((a, b) => {
+        const aOrder = a.Order;
+        const bOrder = b.Order;
+        if (aOrder === undefined && bOrder === undefined) {
+          return 0;
+        } else if (aOrder === undefined) {
+          return 1;
+        } else if (bOrder === undefined) {
+          return -1;
+        }
+
+        return a.Order - b.Order;
+      });
+
       this.setState({
         types,
         isLoading: false
