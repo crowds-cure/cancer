@@ -8,7 +8,8 @@ import './labelling.css';
 
 class Labelling extends Component {
   static defaultProps = {
-    selectTreeTitle: 'Add Label',
+    selectTreeFirstTitle: 'Add Label',
+    selectTreeSecondTitle: 'Add Optional Description',
     measurementData: {},
     eventData: {},
     skipButton: false
@@ -49,7 +50,7 @@ class Labelling extends Component {
       <div
         className="labellingComponent"
         style={initialStyle}
-        onMouseLeave={this.props.labellingDoneCallback}
+        //onMouseLeave={this.props.labellingDoneCallback}
       >
         {showAddLabel && (
           <button className="addLabelButton" onClick={this.showLabelling}>
@@ -59,8 +60,9 @@ class Labelling extends Component {
         {showSelectTree && (
           <SelectTree
             items={labelItems}
-            selectTreeTitle={this.props.selectTreeTitle}
             onSelected={this.relabelCalback}
+            selectTreeFirstTitle={this.props.selectTreeFirstTitle}
+            selectTreeSecondTitle={this.props.selectTreeSecondTitle}
           />
         )}
         {showButtons && (

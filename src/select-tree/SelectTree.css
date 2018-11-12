@@ -1,9 +1,13 @@
+@value headerHeight: 37px;
+
 .select-tree-root {
   display: inline-block;
   text-align: initial;
   max-width: 320px;
   font-size: 14px;
   line-height: 26px;
+  height: 100%;
+  overflow: hidden;
 
   --gray-1: #a3a3a3;
   --gray-2: #a0a0a0;
@@ -18,6 +22,7 @@
   border-radius: 5px;
   background-color: #ffffff;
   overflow: hidden;
+  height: 100%;
 }
 
 .select-tree-root .tree-header {
@@ -27,6 +32,7 @@
   padding: 5px;
   position: relative;
   justify-content: center;
+  height: headerHeight;
 }
 
 .select-tree-root .tree-header .wrapperText {
@@ -45,6 +51,11 @@
 .select-tree-root .breadcrumb .backIcon {
   padding-right: 5px;
   color: #0000ff;
+}
+
+.select-tree-root .tree-options {
+  height: calc(100% - headerHeight);
+  overflow: auto;
 }
 
 .select-tree-root .tree-node,

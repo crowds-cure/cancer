@@ -14,6 +14,8 @@ class SelectTree extends Component {
   static defaultProps = {
     columns: 2,
     searchEnabled: false,
+    selectTreeFirstTitle: 'First Level itens',
+    selectTreeSecondTitle: 'Second Level itens',
     items: []
   };
 
@@ -33,16 +35,20 @@ class SelectTree extends Component {
     return (
       <div className="select-tree select-tree-root">
         <div className="tree-content container">
-          {this.headerItem}
-          <div className="tree-options">
-            {this.state.currentNode && (
-              <SelectTreeBreadcrumb
-                onSelected={this.onBreadcrumbSelected}
-                label={this.state.currentNode.label}
-                value={this.state.currentNode.value}
-              />
-            )}
-            <div className="tree-inputs row">{treeItems}</div>
+          {this.headerItem()}
+          <div className="tree-options row">
+            <div className="col-16">
+              {this.state.currentNode && (
+                <SelectTreeBreadcrumb
+                  onSelected={this.onBreadcrumbSelected}
+                  label={this.state.currentNode.label}
+                  value={this.state.currentNode.value}
+                />
+              )}
+            </div>
+            <div className="col-16">
+              <div className="tree-inputs row">{treeItems}</div>
+            </div>
           </div>
         </div>
       </div>
@@ -86,21 +92,28 @@ class SelectTree extends Component {
     });
   }
 
-  headerItem = (
-    <div className="wrapperLabel tree-header row">
-      {this.props.searchEnabled === true && (
-        <>
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Search labels"
-          />
-          <i className="fa fa-search" />
-        </>
-      )}
-      <div className="wrapperText">{this.props.selectTreeTitle}</div>
-    </div>
-  );
+  headerItem = () => {
+    let title = this.props.selectTreeFirstTitle;
+    if (this.state.currentNode) {
+      title = this.props.selectTreeSecondTitle;
+    }
+
+    return (
+      <div className="wrapperLabel tree-header row">
+        {this.props.searchEnabled === true && (
+          <>
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Search labels"
+            />
+            <i className="fa fa-search" />
+          </>
+        )}
+        <div className="wrapperText">{title}</div>
+      </div>
+    );
+  };
 
   onSelected = (event, item) => {
     if (this.isLeafSelected(item)) {

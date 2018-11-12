@@ -9,7 +9,8 @@ class TestPage extends Component {
     return (
       <div className="TestPage">
         <Labelling
-          selectTreeTitle="Add Label"
+          selectTreeFirstTitle="Add Label"
+          selectTreeSecondTitle="Add Description"
           measurementData={{}}
           eventData={{
             currentPoints: {
