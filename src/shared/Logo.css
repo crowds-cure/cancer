@@ -3,6 +3,7 @@
 
 .Logo {
   cursor: pointer;
+  display: inline-block;
 }
 
 .Logo .logoText {
