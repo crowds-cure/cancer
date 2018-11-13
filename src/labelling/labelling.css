@@ -55,3 +55,24 @@
 .labellingComponent .commonButtons {
   text-align: center;
 }
+
+.labelling-appear {
+  opacity: 0;
+  z-index: 1;
+}
+.labelling-appear.labelling-appear-active {
+  opacity: 1;
+  transition: opacity 500ms linear;
+}
+
+/* exit */
+.labelling-exit {
+  opacity: 1;
+}
+.labelling-exit.labelling-exit-active {
+  opacity: 0;
+  transition: opacity 500ms linear;
+}
+.labelling-exit-done {
+  opacity: 0;
+}
