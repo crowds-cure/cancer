@@ -23,8 +23,11 @@ class Labelling extends Component {
       displayComponent: true,
       location: null,
       description: null,
-      justCreated: true
+      justCreated: true,
+      componentStyle: null
     };
+
+    this.mainElement = React.createRef();
   }
 
   render() {
@@ -60,7 +63,10 @@ class Labelling extends Component {
       >
         <div
           className="labellingComponent"
-          style={initialStyle}
+          style={
+            this.state.componentStyle ? this.state.componentStyle : initialStyle
+          }
+          ref={this.mainElement}
           onMouseLeave={this.fadeOutAndLeave}
         >
           {showAddLabel && (
@@ -93,6 +99,41 @@ class Labelling extends Component {
       </CSSTransition>
     );
   }
+
+  componentDidUpdate = () => {
+    const {
+      offsetParent,
+      offsetTop,
+      offsetHeight,
+      offsetLeft
+    } = this.mainElement.current;
+    const { currentPoints } = this.props.eventData;
+    const componentStyle = {};
+    let shouldUpdate = false;
+
+    if (offsetHeight > offsetParent.offsetHeight) {
+      componentStyle.height = offsetParent.offsetHeight;
+      shouldUpdate = true;
+    }
+
+    if (offsetHeight + offsetTop > offsetParent.offsetHeight) {
+      componentStyle.bottom = '0px';
+      shouldUpdate = true;
+    }
+
+    if (offsetLeft + 320 > offsetParent.offsetWidth) {
+      componentStyle.left = `${offsetParent.offsetWidth - 320}px`;
+      shouldUpdate = true;
+    } else {
+      componentStyle.left = `${currentPoints.canvas.x + 50}px`;
+    }
+
+    if (shouldUpdate) {
+      this.setState({
+        componentStyle
+      });
+    }
+  };
 
   fadeOutAndLeave = () => {
     this.setState({

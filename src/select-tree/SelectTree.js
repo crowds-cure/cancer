@@ -37,15 +37,15 @@ class SelectTree extends Component {
         <div className="tree-content container">
           {this.headerItem()}
           <div className="tree-options row">
-            <div className="col-16">
-              {this.state.currentNode && (
+            {this.state.currentNode && (
+              <div className="col-16">
                 <SelectTreeBreadcrumb
                   onSelected={this.onBreadcrumbSelected}
                   label={this.state.currentNode.label}
                   value={this.state.currentNode.value}
                 />
-              )}
-            </div>
+              </div>
+            )}
             <div className="col-16">
               <div className="tree-inputs row">{treeItems}</div>
             </div>
