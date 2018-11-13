@@ -16,6 +16,7 @@ class SelectTree extends Component {
     searchEnabled: false,
     selectTreeFirstTitle: 'First Level itens',
     selectTreeSecondTitle: 'Second Level itens',
+    componentMaxHeight: null,
     items: []
   };
 
@@ -31,12 +32,16 @@ class SelectTree extends Component {
 
   render() {
     const treeItems = this.getTreeItems();
+    const treeStyle = {};
+    if (this.props.componentMaxHeight) {
+      treeStyle.maxHeight = this.props.componentMaxHeight - 37;
+    }
 
     return (
       <div className="select-tree select-tree-root">
         <div className="tree-content container">
           {this.headerItem()}
-          <div className="tree-options row">
+          <div className="tree-options row" style={treeStyle}>
             {this.state.currentNode && (
               <div className="col-16">
                 <SelectTreeBreadcrumb
