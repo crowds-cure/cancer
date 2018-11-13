@@ -24,6 +24,7 @@
   border-radius: 3px;
   outline: none;
   cursor: pointer;
+  background: none;
 }
 
 .ToolContextMenu > ul > li > button:hover {
