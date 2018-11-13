@@ -50,8 +50,26 @@
   display: inline-block;
 }
 
+.labellingComponent .checkIconWrapper {
+  display: inline-block;
+  background-color: #79f9fe;
+  border-radius: 46px;
+  width: 46px;
+  height: 46px;
+  margin-right: 10px;
+  vertical-align: bottom;
+}
+
+.labellingComponent .checkIcon {
+  width: 20px;
+  height: 20px;
+  margin: 13px;
+  fill: black;
+}
+
 .labellingComponent .commonButtons {
   text-align: center;
+  margin-left: 46px;
 }
 
 .labelling-appear {
@@ -63,7 +81,6 @@
   transition: opacity 500ms linear;
 }
 
-/* exit */
 .labelling-exit {
   opacity: 1;
 }

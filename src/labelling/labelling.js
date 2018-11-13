@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import SelectTree from '../select-tree/SelectTree.js';
 import { labelItems } from './labellingData.js';
 import { CSSTransition } from 'react-transition-group';
+import cloneDeep from 'lodash.clonedeep';
 
 import './labelling.css';
 
@@ -24,7 +25,10 @@ class Labelling extends Component {
       location: null,
       description: null,
       justCreated: true,
-      componentStyle: null
+      componentStyle: {
+        left: props.eventData.currentPoints.canvas.x + 50,
+        top: props.eventData.currentPoints.canvas.y
+      }
     };
 
     this.mainElement = React.createRef();
@@ -43,14 +47,6 @@ class Labelling extends Component {
       }
     }
 
-    const { eventData } = this.props;
-
-    // Hardcoding displacement to the right for now
-    const initialStyle = {
-      left: `${eventData.currentPoints.canvas.x + 50}px`,
-      top: `${eventData.currentPoints.canvas.y}px`
-    };
-
     return (
       <CSSTransition
         in={this.state.displayComponent}
@@ -63,9 +59,7 @@ class Labelling extends Component {
       >
         <div
           className="labellingComponent"
-          style={
-            this.state.componentStyle ? this.state.componentStyle : initialStyle
-          }
+          style={this.state.componentStyle}
           ref={this.mainElement}
           onMouseLeave={this.fadeOutAndLeave}
         >
@@ -84,6 +78,11 @@ class Labelling extends Component {
           )}
           {showButtons && (
             <>
+              <div className="checkIconWrapper">
+                <svg className="checkIcon">
+                  <use xlinkHref="/icons.svg#check-solid" />
+                </svg>
+              </div>
               <div className="textArea">
                 {this.state.location && this.state.location.label}
                 {this.state.description && ` (${this.state.description.label})`}
@@ -107,31 +106,36 @@ class Labelling extends Component {
       offsetHeight,
       offsetLeft
     } = this.mainElement.current;
-    const { currentPoints } = this.props.eventData;
-    const componentStyle = {};
-    let shouldUpdate = false;
+    let heightUpdated = false;
+    const componentStyle = cloneDeep(this.state.componentStyle);
 
     if (offsetHeight > offsetParent.offsetHeight) {
       componentStyle.height = offsetParent.offsetHeight;
-      shouldUpdate = true;
+      heightUpdated = true;
     }
 
     if (offsetHeight + offsetTop > offsetParent.offsetHeight) {
-      componentStyle.bottom = '0px';
-      shouldUpdate = true;
+      componentStyle.top =
+        offsetTop - (offsetHeight + offsetTop - offsetParent.offsetHeight);
     }
 
     if (offsetLeft + 320 > offsetParent.offsetWidth) {
-      componentStyle.left = `${offsetParent.offsetWidth - 320}px`;
-      shouldUpdate = true;
-    } else {
-      componentStyle.left = `${currentPoints.canvas.x + 50}px`;
+      componentStyle.left = offsetParent.offsetWidth - 320;
+      if (componentStyle.left < 0) {
+        componentStyle.left = 0;
+      }
     }
 
-    if (shouldUpdate) {
-      this.setState({
-        componentStyle
-      });
+    if (
+      offsetTop !== componentStyle.top ||
+      offsetLeft !== componentStyle.left ||
+      heightUpdated
+    ) {
+      setTimeout(() => {
+        this.setState({
+          componentStyle
+        });
+      }, 50);
     }
   };
 
