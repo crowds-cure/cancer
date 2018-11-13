@@ -1,5 +1,3 @@
-import orderBy from 'lodash.orderby';
-
 const nameToID = name => {
   // http://stackoverflow.com/questions/29258016/remove-special-symbols-and-extra-spaces-and-make-it-camel-case-javascript
   return name
@@ -45,37 +43,31 @@ const organGroups = [
 ];
 
 const descriptions = [
-  'Heterogeneous enhancement',
-  'Ill-defined',
-  'Confluent',
-  'Necrotic',
-  'Cystic',
   'Cavitated',
+  'Confluent',
+  'Cystic',
   'Ground Glass',
+  'Heterogeneous',
+  'Ill-defined',
+  'Necrotic',
   'Solid'
 ];
 
-const descriptionItems = orderBy(
-  descriptions.map(name => {
-    return {
-      label: name,
-      value: nameToID(name)
-    };
-  }),
-  ['label'],
-  ['asc']
-);
 
-const labelItems = orderBy(
-  organGroups.map(name => {
-    return {
-      label: name,
-      value: nameToID(name),
-      items: descriptionItems
-    };
-  }),
-  ['label'],
-  ['asc']
-);
+
+const descriptionItems = descriptions.map(name => {
+  return {
+    label: name,
+    value: nameToID(name)
+  };
+});
+
+const labelItems = organGroups.map(name => {
+  return {
+    label: name,
+    value: nameToID(name),
+    items: descriptionItems
+  };
+});
 
 export { labelItems, descriptionItems };
