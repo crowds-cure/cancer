@@ -50,12 +50,17 @@ class CaseFeedback extends Component {
         label: 'No measurable disease'
       },
       {
-        value: 'ContainsDualPhaseImages',
-        label: 'Contains dual phase images'
+        value: 'ContainsMultiPhaseImages',
+        label: 'Contains multi-phase images'
       },
       {
         value: 'NoFeedback',
         label: 'No Feedback'
+      }
+	  ,
+	  {
+        value: 'LikelyBenign',
+        label: 'Likely benign'
       }
     ];
 
