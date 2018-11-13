@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import SelectTree from '../select-tree/SelectTree.js';
 import { labelItems } from './labellingData.js';
+import { CSSTransition } from 'react-transition-group';
 
 import './labelling.css';
 
@@ -19,6 +20,7 @@ class Labelling extends Component {
     super(props);
 
     this.state = {
+      displayComponent: true,
       location: null,
       description: null,
       justCreated: true
@@ -47,40 +49,56 @@ class Labelling extends Component {
     };
 
     return (
-      <div
-        className="labellingComponent"
-        style={initialStyle}
-        //onMouseLeave={this.props.labellingDoneCallback}
+      <CSSTransition
+        in={this.state.displayComponent}
+        appear={true}
+        timeout={500}
+        classNames="labelling"
+        onExited={() => {
+          this.props.labellingDoneCallback();
+        }}
       >
-        {showAddLabel && (
-          <button className="addLabelButton" onClick={this.showLabelling}>
-            Add Label
-          </button>
-        )}
-        {showSelectTree && (
-          <SelectTree
-            items={labelItems}
-            onSelected={this.relabelCalback}
-            selectTreeFirstTitle={this.props.selectTreeFirstTitle}
-            selectTreeSecondTitle={this.props.selectTreeSecondTitle}
-          />
-        )}
-        {showButtons && (
-          <>
-            <div className="textArea">
-              {this.state.location && this.state.location.label}
-              {this.state.description && ` (${this.state.description.label})`}
-            </div>
-            <div className="commonButtons">
-              <button className="commonButton" onClick={this.relabel}>
-                Relabel
-              </button>
-            </div>
-          </>
-        )}
-      </div>
+        <div
+          className="labellingComponent"
+          style={initialStyle}
+          onMouseLeave={this.fadeOutAndLeave}
+        >
+          {showAddLabel && (
+            <button className="addLabelButton" onClick={this.showLabelling}>
+              Add Label
+            </button>
+          )}
+          {showSelectTree && (
+            <SelectTree
+              items={labelItems}
+              onSelected={this.relabelCalback}
+              selectTreeFirstTitle={this.props.selectTreeFirstTitle}
+              selectTreeSecondTitle={this.props.selectTreeSecondTitle}
+            />
+          )}
+          {showButtons && (
+            <>
+              <div className="textArea">
+                {this.state.location && this.state.location.label}
+                {this.state.description && ` (${this.state.description.label})`}
+              </div>
+              <div className="commonButtons">
+                <button className="commonButton" onClick={this.relabel}>
+                  Relabel
+                </button>
+              </div>
+            </>
+          )}
+        </div>
+      </CSSTransition>
     );
   }
+
+  fadeOutAndLeave = () => {
+    this.setState({
+      displayComponent: false
+    });
+  };
 
   showLabelling = () => {
     this.setState({
