@@ -77,10 +77,7 @@ class HeaderSection extends Component {
               <h2>Create</h2>
               <ul>
                 <li>
-                  Measure all of the metastatic lesions that you can find with
-                  the bidirectional measurement tool. There is no minimum size
-                  for measurement. You will get 1 point for each lesion
-                  measurement.
+                 Measure all of the metastatic lesions or lesions that may mimic metastatic disease that you can find with the bidirectional measurement tool.
                 </li>
                 <li>
                   Label the lesion locations and add a description (e.g.,
