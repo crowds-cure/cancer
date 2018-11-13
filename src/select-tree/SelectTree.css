@@ -6,8 +6,6 @@
   max-width: 320px;
   font-size: 14px;
   line-height: 26px;
-  height: 100%;
-  overflow: hidden;
 
   --gray-1: #a3a3a3;
   --gray-2: #a0a0a0;
@@ -21,8 +19,6 @@
   border: 1px solid var(--gray-3);
   border-radius: 5px;
   background-color: #ffffff;
-  overflow: hidden;
-  height: 100%;
 }
 
 .select-tree-root .tree-header {
@@ -30,6 +26,8 @@
   border-bottom: 1px solid var(--gray-3);
   color: var(--gray-6);
   padding: 5px;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
   position: relative;
   justify-content: center;
   height: headerHeight;
@@ -61,7 +59,6 @@
 }
 
 .select-tree-root .tree-options {
-  height: calc(100% - headerHeight);
   overflow: auto;
 }
 

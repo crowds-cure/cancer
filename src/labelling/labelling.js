@@ -74,6 +74,7 @@ class Labelling extends Component {
               onSelected={this.relabelCalback}
               selectTreeFirstTitle={this.props.selectTreeFirstTitle}
               selectTreeSecondTitle={this.props.selectTreeSecondTitle}
+              componentMaxHeight={this.state.componentMaxHeight}
             />
           )}
           {showButtons && (
@@ -106,17 +107,14 @@ class Labelling extends Component {
       offsetHeight,
       offsetLeft
     } = this.mainElement.current;
-    let heightUpdated = false;
     const componentStyle = cloneDeep(this.state.componentStyle);
-
-    if (offsetHeight > offsetParent.offsetHeight) {
-      componentStyle.height = offsetParent.offsetHeight;
-      heightUpdated = true;
-    }
 
     if (offsetHeight + offsetTop > offsetParent.offsetHeight) {
       componentStyle.top =
         offsetTop - (offsetHeight + offsetTop - offsetParent.offsetHeight);
+      if (componentStyle.top < 0) {
+        componentStyle.top = 0;
+      }
     }
 
     if (offsetLeft + 320 > offsetParent.offsetWidth) {
@@ -127,14 +125,18 @@ class Labelling extends Component {
     }
 
     if (
-      offsetTop !== componentStyle.top ||
-      offsetLeft !== componentStyle.left ||
-      heightUpdated
+      this.state.componentStyle.top !== componentStyle.top ||
+      this.state.componentStyle.left !== componentStyle.left ||
+      !this.state.componentMaxHeight
     ) {
       setTimeout(() => {
-        this.setState({
+        const stateToBeChanged = {
           componentStyle
-        });
+        };
+        if (!this.state.componentMaxHeight) {
+          stateToBeChanged.componentMaxHeight = offsetParent.offsetHeight;
+        }
+        this.setState(stateToBeChanged);
       }, 50);
     }
   };
