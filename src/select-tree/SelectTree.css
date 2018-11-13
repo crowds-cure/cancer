@@ -49,8 +49,15 @@
 }
 
 .select-tree-root .breadcrumb .backIcon {
-  padding-right: 5px;
-  color: #0000ff;
+  padding-right: 10px;
+}
+
+.select-tree-root .breadcrumb .backIcon svg {
+  width: 14px;
+  height: 14px;
+  position: relative;
+  top: 2px;
+  color: #457fb0;
 }
 
 .select-tree-root .tree-options {
