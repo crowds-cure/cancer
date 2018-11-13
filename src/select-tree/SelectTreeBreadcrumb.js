@@ -18,7 +18,12 @@ class SelectTreeBreadcrumb extends Component {
             onChange={this.props.onSelected}
           />
           <span className="wrapperText">
-            <span className="backIcon">&#x2B05;</span> {this.props.label}
+            <span className="backIcon">
+              <svg>
+                <use xlinkHref="/icons.svg#fast-backward" />
+              </svg>
+            </span>
+            {this.props.label}
           </span>
         </label>
       </div>
