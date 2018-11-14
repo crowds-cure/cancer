@@ -33,7 +33,8 @@ const hotkeyFunctions = {
   ArrowUp: () => viewerCommands.scrollActiveElement(-1),
   '1': () => viewerCommands.setWLPresetSoftTissue(),
   '2': () => viewerCommands.setWLPresetLung(),
-  '3': () => viewerCommands.setWLPresetLiver()
+  '3': () => viewerCommands.setWLPresetLiver(),
+  '4': () => viewerCommands.setWLPresetBrain()
 };
 
 class Viewer extends Component {

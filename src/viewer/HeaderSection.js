@@ -90,7 +90,7 @@ class HeaderSection extends Component {
                 </li>
                 <li>
                   Use toolbar options or hotkeys (1 = soft tissue; 2 = lung; 3 =
-                  liver) to window/level.
+                  liver; 4 = brain) to window/level.
                 </li>
                 <li>
                   Provide case feedback regarding image quality and/or presence

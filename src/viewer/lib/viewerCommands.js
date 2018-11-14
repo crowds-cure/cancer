@@ -14,6 +14,10 @@ const defaultWlPresets = {
   Liver: {
     wc: 90,
     ww: 150
+  },
+  Brain: {
+    wc: 40,
+    ww: 80
   }
 };
 
@@ -52,6 +56,10 @@ const viewerCommands = {
 
   setWLPresetLiver: function(element = getActiveElement()) {
     this.setWLPreset(element, 'Liver');
+  },
+  
+   setWLPresetBrain: function(element = getActiveElement()) {
+    this.setWLPreset(element, 'Brain');
   },
 
   setWLPresetSoftTissue: function(element = getActiveElement()) {
