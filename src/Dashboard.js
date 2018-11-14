@@ -6,7 +6,7 @@ import RankingSection from './shared/RankingSection.js';
 import ActivityProgressSection from './shared/ActivityProgressSection.js';
 import CaseTypeSection from './shared/CaseTypeSection.js';
 import SimpleHeaderSection from './shared/SimpleHeaderSection.js';
-//import AchievementSection from './shared/AchievementSection.js';
+import AchievementSection from './shared/AchievementSection.js';
 
 import './Dashboard.css';
 import Modal from 'react-modal';
@@ -105,37 +105,43 @@ class Dashboard extends Component {
         <SimpleHeaderSection username={this.props.username} page="dashboard" />
         <div className="container">
           <div className="row">
-            <div className="col-lg-5 offset-lg-4 col-md-7 offset-md-2 col-12 offset-4">
+            <div className="col-lg-5 offset-lg-4 col-md-7 offset-md-2 col-12 offset-4 order-1">
               <ActivityProgressSection current={this.state.current} />
-              {/*<AchievementSection />*/}
             </div>
-          </div>
-          <div className="row">
-            <div className="col-lg-4 col-md-16 order-2 order-lg-1">
+
+            <div className="col-lg-3 offset-lg-3 col-md-7 col-16 order-3 order-lg-2">
+              <AchievementSection />
+            </div>
+
+            <div className="col-16 order-2 order-lg-3">
               <div className="row">
-                <div className="col-lg-16 col-md-8 col-sm-16">
-                  <StatisticsSection col="8" />
-                </div>
-                <div className="col-lg-16 col-md-8 col-sm-16">
-                  <div className="row rankingGroupSection">
-                    <div className="col-16">
-                      <RankingSection name="Close to you" />
+                <div className="col-lg-4 col-md-16 order-2 order-lg-1">
+                  <div className="row">
+                    <div className="col-lg-16 col-md-8 col-sm-16">
+                      <StatisticsSection col="8" />
                     </div>
-                    <div className="col-16">
-                      <RankingSection name="Top this week" />
+                    <div className="col-lg-16 col-md-8 col-sm-16">
+                      <div className="row rankingGroupSection">
+                        <div className="col-16">
+                          <RankingSection name="Close to you" />
+                        </div>
+                        <div className="col-16">
+                          <RankingSection name="Top this week" />
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-            <div className="col-lg-12 col-md-16 col-sm-16 order-1 order-lg-2">
-              <div className="row">
-                <div className="col-16">
-                  <CaseTypeSection
-                    types={this.state.types}
-                    isLoading={this.state.isLoading}
-                    onClickInfo={this.onClickInfo}
-                  />
+                <div className="col-lg-12 col-md-16 col-sm-16 order-1 order-lg-2">
+                  <div className="row">
+                    <div className="col-16">
+                      <CaseTypeSection
+                        types={this.state.types}
+                        isLoading={this.state.isLoading}
+                        onClickInfo={this.onClickInfo}
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
