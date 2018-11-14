@@ -1,5 +1,16 @@
+@value globals: "../GlobalStyles.css";
+@value screen-md from globals;
+
 .MeasurementControl {
   padding-top: 17px;
+  margin-left: auto;
+  margin-right: 20px;
+}
+
+@media (min-width: screen-md) {
+  .MeasurementControl {
+    margin: 0;
+  }
 }
 
 .MeasurementControl .controls {
@@ -8,6 +19,7 @@
   background-color: #000000;
   padding: 10px 0;
   height: 45px;
+  width: 118px;
 }
 
 .MeasurementControl .controls .number {

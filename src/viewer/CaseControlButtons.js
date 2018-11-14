@@ -14,7 +14,7 @@ class CaseControlButtons extends Component {
 
   render() {
     return (
-      <div className="CaseControlButtons">
+      <div className="CaseControlButtons d-none d-md-inline">
         <CaseFeedback
           feedbackSelected={this.props.feedbackSelected}
           feedbackChanged={this.props.feedbackChanged}
