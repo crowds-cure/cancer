@@ -1,21 +1,21 @@
 import { Component } from 'react';
 import React from 'react';
 import AchievementBadge from './AchievementBadge.js';
+import { achievements } from '../achievements.js';
+import './AchievementSection.css';
 
 class AchievementSection extends Component {
   render() {
-    const userBadges = [
-      {
-        type: 'NUM_CASES_ROOKIE',
-        dateReached: new Date()
-      }
-    ];
-
-    const items = userBadges.map(item => (
-      <AchievementBadge key={item.type} type={item.type} />
+    const items = Object.keys(achievements).map(id => (
+      <AchievementBadge id={id} img={achievements[id].img} />
     ));
 
-    return <div className="AchievementSection">{items}</div>;
+    return (
+      <div className="AchievementSection">
+        <div className="title">Achievements</div>
+        <div className="row">{items}</div>
+      </div>
+    );
   }
 }
 

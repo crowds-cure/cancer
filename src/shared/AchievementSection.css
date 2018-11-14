@@ -1,0 +1,14 @@
+@value globals: "../GlobalStyles.css";
+@value textPrimaryColor, screen-md from globals;
+
+.AchievementSection .title {
+  color: textPrimaryColor;
+  margin-bottom: 25px;
+  font-weight: 600;
+}
+
+@media (max-width: screen-md) {
+  .AchievementSection {
+    margin-top: 20px;
+  }
+}
