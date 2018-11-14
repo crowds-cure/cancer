@@ -127,6 +127,12 @@ class ToolContextMenu extends Component {
 
     const { eventData, isTouchEvent } = this.props.toolContextMenuData;
     const dropdownItems = getDropdownItems(eventData, isTouchEvent);
+
+    // Skip if there is no dropdown item
+    if (!dropdownItems.length) {
+      return '';
+    }
+
     const dropdownComponents = dropdownItems.map(item => {
       const itemOnClick = event => {
         item.action(item.params);
