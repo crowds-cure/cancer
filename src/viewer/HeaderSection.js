@@ -45,12 +45,9 @@ class HeaderSection extends Component {
 
   render() {
     return (
-      <div className="HeaderSection row">
+      <div className="HeaderSection row d-none d-md-block">
         <div className="col">
           <Logo />
-        </div>
-
-        <div className="col">
           <div className="caseProgress">
             <CaseProgressIndicator
               measurementsInCurrentSession={

@@ -10,17 +10,48 @@ class ToolbarSection extends Component {
   constructor(props) {
     super(props);
 
-    this.onClick = this.onClick.bind(this);
+    this.state = {
+      mobileToolbarDisplay: false
+    };
   }
   render() {
     const items = this.props.buttons.map((item, index) => {
       return <ToolbarButton key={index} {...item} click={this.onClick} />;
     });
 
-    return <div className="ToolbarSection">{items}</div>;
+    const activeItem = this.props.buttons.find(item => {
+      return item.active;
+    });
+
+    return (
+      <>
+        <div className="mobileToolbar" onClick={this.mobileToolbarClick}>
+          <div className="mobileToolbarSvg">
+            <svg>
+              <use xlinkHref={activeItem.svgUrl} />
+            </svg>
+            <span className="arrowDown" />
+          </div>
+          <span className="toolName">{activeItem.text}</span>
+        </div>
+        <div
+          className={`ToolbarSection${
+            this.state.mobileToolbarDisplay ? ' d-block' : ''
+          }`}
+        >
+          {items}
+        </div>
+      </>
+    );
   }
 
-  onClick(id) {
+  mobileToolbarClick = () => {
+    this.setState({
+      mobileToolbarDisplay: true
+    });
+  };
+
+  onClick = id => {
     const buttonItem = this.props.buttons.find(item => item.command === id);
 
     const elements = cornerstone.getEnabledElements();
@@ -35,7 +66,11 @@ class ToolbarSection extends Component {
     } else {
       viewerCommands[buttonItem.command](activeElement);
     }
-  }
+
+    this.setState({
+      mobileToolbarDisplay: false
+    });
+  };
 }
 
 ToolbarSection.propTypes = {

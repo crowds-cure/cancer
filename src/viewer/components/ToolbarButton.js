@@ -4,12 +4,6 @@ import './ToolbarButton.css';
 import PropTypes from 'prop-types';
 
 class ToolbarButton extends Component {
-  constructor(props) {
-    super(props);
-
-    this.onClick = this.onClick.bind(this);
-  }
-
   render() {
     return (
       <div
@@ -24,10 +18,10 @@ class ToolbarButton extends Component {
     );
   }
 
-  onClick(event) {
+  onClick = event => {
     const id = this.props.command;
     this.props.click(id);
-  }
+  };
 }
 
 ToolbarButton.propTypes = {

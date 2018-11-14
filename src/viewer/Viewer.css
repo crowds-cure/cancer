@@ -1,3 +1,6 @@
+@value globals: "../GlobalStyles.css";
+@value screen-md from globals;
+
 .Viewer {
   height: 100%;
   width: 100%;
@@ -9,13 +12,13 @@
 }
 
 .Viewer .toolbar-row {
-  display: inline-flex;
+  display: flex;
   width: 100%;
 }
 
 .Viewer .viewport-section {
   width: 100%;
-  height: calc(100% - 147px);
+  height: calc(100% - 90px);
   position: relative;
   display: flex;
 }
@@ -26,4 +29,10 @@
   -webkit-box-sizing: border-box;
   outline: none;
   width: 100%;
+}
+
+@media (min-width: screen-md) {
+  .Viewer .viewport-section {
+    height: calc(100% - 147px);
+  }
 }
