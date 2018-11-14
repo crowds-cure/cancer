@@ -61,6 +61,13 @@ const defaultButtons = [
     text: 'Liver',
     svgUrl: '/icons.svg#icon-tools-levels',
     active: false
+  },
+    {
+    command: 'setWLPresetBrain',
+    type: 'command',
+    text: 'Brain',
+    svgUrl: '/icons.svg#icon-tools-levels',
+    active: false
   }
 ];
 
