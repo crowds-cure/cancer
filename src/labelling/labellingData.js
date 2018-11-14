@@ -43,13 +43,13 @@ const organGroups = [
 ];
 
 const descriptions = [
-  'Cavitated',
-  'Confluent',
-  'Cystic',
-  'Ground Glass',
   'Heterogeneous',
   'Ill-defined',
+  'Confluent',
   'Necrotic',
+  'Cystic',
+  'Cavitated',
+  'Ground Glass',
   'Solid'
 ];
 
