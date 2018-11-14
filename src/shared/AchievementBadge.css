@@ -1,0 +1,9 @@
+.AchievementBadge {
+  display: inline-block;
+  padding: 10px;
+}
+
+.AchievementBadge svg {
+  width: 40px;
+  height: 40px;
+}
