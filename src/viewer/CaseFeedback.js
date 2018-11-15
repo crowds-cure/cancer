@@ -19,6 +19,10 @@ class CaseFeedback extends Component {
     this.closeDropdown = this.closeDropdown.bind(this);
   }
 
+  static defaultProps = {
+    label: 'Case Feedback'
+  };
+
   render() {
     const options = [
       {
@@ -56,9 +60,8 @@ class CaseFeedback extends Component {
       {
         value: 'NoFeedback',
         label: 'No Feedback'
-      }
-	  ,
-	  {
+      },
+      {
         value: 'LikelyBenign',
         label: 'Likely benign'
       }
@@ -86,7 +89,7 @@ class CaseFeedback extends Component {
           active={this.state.isOpen ? 'true' : 'false'}
           onClick={this.openDropdown}
         >
-          Case Feedback
+          {this.props.label}
           <span className="arrow-down" />
         </div>
         {this.state.isOpen && (
@@ -140,6 +143,7 @@ class CaseFeedback extends Component {
 }
 
 CaseFeedback.propTypes = {
+  label: PropTypes.string.isRequired,
   skipEnabled: PropTypes.bool.isRequired,
   skipCase: PropTypes.func.isRequired,
   feedbackChanged: PropTypes.func.isRequired,

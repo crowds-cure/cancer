@@ -1,8 +1,14 @@
 .CaseControlButtons {
   padding-top: 13px;
-  margin-right: 35px;
-  margin-left: 20px;
 }
+
+@media (min-width: screen-md) {
+  .CaseControlButtons {
+    margin-right: 35px;
+    margin-left: 20px;
+  }
+}
+
 .CaseControlButtons .CompleteButtonWrapper {
   display: inline-block;
 }

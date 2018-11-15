@@ -9,7 +9,9 @@ class CaseProgressIndicator extends Component {
     return (
       <div className="CaseProgressIndicator">
         <span className="cases">{this.props.measurementsInCurrentSession}</span>
-        <div className="casesLabel">SESSION MEASUREMENTS</div>
+        {this.props.displayCountSuffix && (
+          <div className="casesLabel">SESSION MEASUREMENTS</div>
+        )}
       </div>
     );
   }

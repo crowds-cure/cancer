@@ -2,6 +2,7 @@ import { Component } from 'react';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
+import MediaQuery from 'react-responsive';
 
 import CornerstoneViewport from './CornerstoneViewport.js';
 import ActiveToolbar from './ActiveToolbar.js';
@@ -206,34 +207,75 @@ class Viewer extends Component {
 
     return (
       <div className="Viewer">
-        <div>
+        <MediaQuery query="(min-width: 768px)">
           <HeaderSection
+            showLogo={true}
+            useHamburgerMenu={false}
             sessionStart={this.props.sessionStart}
             measurementsInCurrentSession={
               this.props.measurementsInCurrentSession
             }
+            displayCountSuffix={true}
           />
-        </div>
-        <div className="toolbar-row">
-          <ActiveToolbar />
-          <MeasurementControl
-            disabled={!this.state.hasMeasurements}
-            previous={this.previous}
-            next={this.next}
-            number={this.state.currentLesion}
+        </MediaQuery>
+        <MediaQuery query="(max-width: 768px)">
+          <HeaderSection
+            showLogo={false}
+            useHamburgerMenu={true}
+            sessionStart={this.props.sessionStart}
+            measurementsInCurrentSession={
+              this.props.measurementsInCurrentSession
+            }
+            displayCountSuffix={false}
           />
-          <CaseControlButtons
-            feedbackChanged={this.feedbackChanged}
-            feedbackSelected={this.state.feedback}
-            saveEnabled={this.isSaveEnabled()}
-            saveCase={this.saveCase}
-            skipEnabled={this.isSkipEnabled()}
-            skipCase={this.skipCase}
-          />
-        </div>
+        </MediaQuery>
+        <MediaQuery query="(min-width: 768px)">
+          <div className="toolbar-row">
+            <ActiveToolbar />
+            <MeasurementControl
+              disabled={!this.state.hasMeasurements}
+              previous={this.previous}
+              next={this.next}
+              number={this.state.currentLesion}
+            />
+            <CaseControlButtons
+              feedbackChanged={this.feedbackChanged}
+              feedbackSelected={this.state.feedback}
+              saveEnabled={this.isSaveEnabled()}
+              saveCase={this.saveCase}
+              skipEnabled={this.isSkipEnabled()}
+              skipCase={this.skipCase}
+            />
+          </div>
+        </MediaQuery>
+        <MediaQuery query="(max-width: 768px)">
+          <div className="toolbar-row">
+            <ActiveToolbar />
+          </div>
+        </MediaQuery>
         <div className="viewport-section">
           {this.state.loading ? <LoadingIndicator /> : items}
         </div>
+
+        <MediaQuery query="(max-width: 768px)">
+          <div className="toolbar-row">
+            <MeasurementControl
+              disabled={!this.state.hasMeasurements}
+              previous={this.previous}
+              next={this.next}
+              number={this.state.currentLesion}
+            />
+            <CaseControlButtons
+              smallControls={true}
+              feedbackChanged={this.feedbackChanged}
+              feedbackSelected={this.state.feedback}
+              saveEnabled={this.isSaveEnabled()}
+              saveCase={this.saveCase}
+              skipEnabled={this.isSkipEnabled()}
+              skipCase={this.skipCase}
+            />
+          </div>
+        </MediaQuery>
       </div>
     );
   }

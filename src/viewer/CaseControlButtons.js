@@ -14,8 +14,9 @@ class CaseControlButtons extends Component {
 
   render() {
     return (
-      <div className="CaseControlButtons d-none d-md-inline">
+      <div className="CaseControlButtons">
         <CaseFeedback
+          label={this.props.smallControls ? 'Feedback' : 'Case Feedback'}
           feedbackSelected={this.props.feedbackSelected}
           feedbackChanged={this.props.feedbackChanged}
           skipEnabled={this.props.skipEnabled}
@@ -28,9 +29,11 @@ class CaseControlButtons extends Component {
             disabled={!this.props.saveEnabled}
             onClick={this.props.saveCase}
           >
-            <svg>
-              <use xlinkHref="/icons.svg#icon-check-circle" />
-            </svg>
+            {!this.props.smallControls && (
+              <svg>
+                <use xlinkHref="/icons.svg#icon-check-circle" />
+              </svg>
+            )}
             <span>Complete</span>
           </button>
         </div>

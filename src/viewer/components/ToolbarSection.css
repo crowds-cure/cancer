@@ -1,5 +1,5 @@
 @value globals: "../../GlobalStyles.css";
-@value screen-md from globals;
+@value screen-lg from globals;
 
 .ToolbarSection {
   position: absolute;
@@ -59,7 +59,7 @@
   stroke: #79f9fe;
 }
 
-@media (min-width: screen-md) {
+@media (min-width: screen-lg) {
   .ToolbarSection {
     margin: 17px 0 0 0;
     display: inline-block;

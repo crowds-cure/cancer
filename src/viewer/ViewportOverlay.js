@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 class ViewportOverlay extends Component {
   render() {
     // TODO: Round the value to 2 decimals
-    const scale = this.props.viewport.scale;
+    const scale = Math.round(this.props.viewport.scale * 100) / 100;
     const imageId = this.props.imageId;
 
     const patientId = cornerstone.metaData.get('00100020', imageId);
@@ -26,7 +26,6 @@ class ViewportOverlay extends Component {
           <span>{studyDate}</span>
           <span>{studyDescription}</span>
         </div>
-        <div className="top-right overlay-element">Other info</div>
         <div className="bottom-left overlay-element">Zoom: {scale}</div>
         <div className="bottom-right overlay-element">
           <span>
