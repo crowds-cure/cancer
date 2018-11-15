@@ -1,23 +1,46 @@
-import testBadge from './images/test-badge.svg';
+import testBadgeActive from './images/test-badge-active.svg';
+import testBadgeInActive from './images/test-badge-inactive.svg';
 
 const achievements = {
-  TestBadge1: {
-    img: testBadge
+  ProductivityDay10: {
+    imgActive: testBadgeActive,
+    imgInactive: testBadgeInActive
   },
-  TestBadge2: {
-    img: testBadge
+  ProductivityDay25: {
+    imgActive: testBadgeActive,
+    imgInactive: testBadgeInActive
   },
-  TestBadge3: {
-    img: testBadge
+  ProductivityDay50: {
+    imgActive: testBadgeActive,
+    imgInactive: testBadgeInActive
   },
-  TestBadge4: {
-    img: testBadge
+  ProductivityDay75: {
+    imgActive: testBadgeActive,
+    imgInactive: testBadgeInActive
   },
-  TestBadge5: {
-    img: testBadge
+  ProductivityDay100: {
+    imgActive: testBadgeActive,
+    imgInactive: testBadgeInActive
   },
-  TestBadge6: {
-    img: testBadge
+  ProductivityDay200: {
+    imgActive: testBadgeActive,
+    imgInactive: testBadgeInActive
+  },
+  ProductivityWeek50: {
+    imgActive: testBadgeActive,
+    imgInactive: testBadgeInActive
+  },
+  ProductivityWeek100: {
+    imgActive: testBadgeActive,
+    imgInactive: testBadgeInActive
+  },
+  ProductivityWeek250: {
+    imgActive: testBadgeActive,
+    imgInactive: testBadgeInActive
+  },
+  ProductivityWeek500: {
+    imgActive: testBadgeActive,
+    imgInactive: testBadgeInActive
   }
 };
 
