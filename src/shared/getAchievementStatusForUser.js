@@ -9,9 +9,9 @@ async function getMaxMeasurementsForUser(
   const result = await measurementsDB.query(measurementsDBView, {
     reduce: true,
     group: true,
-    group_level: 2,
-    start_key: [username, ''],
-    end_key: [username, {}]
+    group_level: 3,
+    start_key: [username, false, ''],
+    end_key: [username, false, {}]
   });
 
   if (!result.rows || !result.rows.length) {
@@ -29,12 +29,12 @@ async function getAchievementStatusForUser() {
   const username = getUsername();
   const maxMeasurementsInDay = await getMaxMeasurementsForUser(
     measurementsDB,
-    'by/annotatorDay',
+    'by/annotatorSkipDay',
     username
   );
   const maxMeasurementsInWeek = await getMaxMeasurementsForUser(
     measurementsDB,
-    'by/annotatorWeek',
+    'by/annotatorSkipWeek',
     username
   );
 
