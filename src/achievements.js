@@ -41,6 +41,10 @@ const achievements = {
   ProductivityWeek500: {
     imgActive: testBadgeActive,
     imgInactive: testBadgeInActive
+  },
+  Collection: {
+    imgActive: testBadgeActive,
+    imgInactive: testBadgeInActive
   }
 };
 

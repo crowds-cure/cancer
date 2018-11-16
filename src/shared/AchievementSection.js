@@ -27,6 +27,7 @@ class AchievementSection extends Component {
         achievementStatus.maxMeasurementsInDay >= 100;
       achievements.ProductivityDay200.completed =
         achievementStatus.maxMeasurementsInDay >= 200;
+
       // Productivity Badges - Week
       achievements.ProductivityWeek50.completed =
         achievementStatus.maxMeasurementsInWeek >= 50;
@@ -36,11 +37,18 @@ class AchievementSection extends Component {
         achievementStatus.maxMeasurementsInWeek >= 250;
       achievements.ProductivityWeek500.completed =
         achievementStatus.maxMeasurementsInWeek >= 500;
+
+      this.setState({
+        achievements
+      });
     });
   }
 
   render() {
     const { achievements } = this.state;
+
+    // Collection Badge
+    achievements.Collection.completed = this.props.totalCompleteCollection > 0;
 
     const items = Object.keys(achievements).map(id => {
       const achievementImg = achievements[id].completed
