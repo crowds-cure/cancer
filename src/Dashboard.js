@@ -35,7 +35,8 @@ class Dashboard extends Component {
       current: this.props.current,
       isLoading: true,
       showDetailsModal: false,
-      collectionDescription: ''
+      collectionDescription: '',
+      totalCompleteCollection: 0
     };
 
     const collectionsDB = getDB('collections');
@@ -77,9 +78,15 @@ class Dashboard extends Component {
         return a.Order - b.Order;
       });
 
+      const totalCompleteCollection = types.reduce(
+        (acc, val) => (val.byAnnotator === val.inCollection ? acc + 1 : acc),
+        0
+      );
+
       this.setState({
         types,
-        isLoading: false
+        isLoading: false,
+        totalCompleteCollection
       });
     });
 
@@ -110,7 +117,9 @@ class Dashboard extends Component {
             </div>
 
             <div className="col-lg-3 offset-lg-3 col-md-7 col-16 order-3 order-lg-2">
-              <AchievementSection />
+              <AchievementSection
+                totalCompleteCollection={this.state.totalCompleteCollection}
+              />
             </div>
 
             <div className="col-16 order-2 order-lg-3">
