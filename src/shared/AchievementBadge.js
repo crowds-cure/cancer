@@ -6,7 +6,11 @@ class AchievementBadge extends Component {
   render() {
     return (
       <div className="AchievementBadge">
-        <img src={this.props.img} data-tip={this.props.description} />
+        <img
+          src={this.props.img}
+          alt={this.props.description}
+          data-tip={this.props.description}
+        />
       </div>
     );
   }
