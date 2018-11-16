@@ -10,6 +10,7 @@ import AchievementSection from './shared/AchievementSection.js';
 
 import './Dashboard.css';
 import Modal from 'react-modal';
+import ReactTooltip from 'react-tooltip';
 import { getDB } from './db';
 import getUserStats from './shared/getUserStats';
 import getUsername from './viewer/lib/getUsername.js';
@@ -170,6 +171,7 @@ class Dashboard extends Component {
             Close
           </span>
         </Modal>
+        <ReactTooltip className="DashboardTooltip" effect="solid" />
       </div>
     );
   }

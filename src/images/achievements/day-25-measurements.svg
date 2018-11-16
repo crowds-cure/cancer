@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="47px" height="47px" viewBox="0 0 47 47" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.4 (67378) - http://www.bohemiancoding.com/sketch -->
+    <title>day-25-measurements</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Ranks-and-Badges" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Badges" transform="translate(-884.000000, -123.000000)">
+            <g id="day-25-measurements" transform="translate(884.000000, 124.000000)">
+                <polyline id="Path" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" points="0.979166667 18.5833333 16.6458333 11.7291667 22.3230417 14.2142917"></polyline>
+                <polyline id="Path" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" points="0.979166667 18.5833333 0.979166667 38.1666667 16.6458333 45.0208333 32.3125 38.1666667 32.3125 23.5614167"></polyline>
+                <path d="M33.2916667,17.6041667 L26.4375,19.5625 L28.3958333,12.7083333 L40.1105833,0.993583333 C41.468736,-0.321166176 43.6303623,-0.303616845 44.9669896,1.03301045 C46.3036168,2.36963774 46.3211662,4.53126397 45.0064167,5.88941667 L33.2916667,17.6041667 Z" id="Path" stroke="#FFFFFF" fill="#6C0AD6" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M38.6418333,2.46233333 L43.5376667,7.35816667" id="Path" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M28.3958333,12.7083333 L33.2916667,17.6041667" id="Path" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round"></path>
+                <text id="25" font-family="SFProText-Semibold, SF Pro Text" font-size="13" font-weight="500" fill="#FFFFFF">
+                    <tspan x="8.70043945" y="33">25</tspan>
+                </text>
+            </g>
+        </g>
+    </g>
+</svg>

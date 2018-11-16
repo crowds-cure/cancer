@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="49px" height="62px" viewBox="0 0 49 62" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.4 (67378) - http://www.bohemiancoding.com/sketch -->
+    <title>time-week-90m</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Ranks-and-Badges" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Badges" transform="translate(-122.000000, -907.000000)">
+            <g id="time-week-90m" transform="translate(122.000000, 905.000000)">
+                <path d="M42.4761634,41.6623753 C45.9564588,39.6703176 48.0722599,35.9507167 47.9981131,31.9547287 C47.9278863,27.9085396 46.2672682,24.050978 43.3726267,21.2098748 C43.1986189,22.6487295 42.4415557,23.9542986 41.2769854,24.8238461 C40.1124151,25.6933935 38.6414982,26.0513861 37.2053115,25.8148122 C33.1633888,22.4305235 31.8998894,16.7700355 34.1216539,12 C24.485224,12 18.3179088,17.6596873 17.1615372,25.8148122 C14.2125206,26.121526 11.5241874,24.1142335 10.994222,21.2098748 C4.17273082,26.985782 3.82031281,38.669166 13.1836189,43" id="Path" stroke="#FFFFFF" stroke-width="1.25" fill="#6C0AD6" stroke-linecap="round" stroke-linejoin="round"></path>
+                <circle id="Oval" stroke="#FFFFFF" stroke-width="1.25" fill="#27264A" stroke-linecap="round" stroke-linejoin="round" cx="28.5" cy="47.5" r="15.5"></circle>
+                <polyline id="Path" stroke="#FFFFFF" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" points="36 47 28 47 28 37"></polyline>
+                <text id="1.5" font-family="SFProText-Semibold, SF Pro Text" font-size="13" font-weight="500" fill="#FFFFFF">
+                    <tspan x="0" y="12">1.5</tspan>
+                </text>
+            </g>
+        </g>
+    </g>
+</svg>
