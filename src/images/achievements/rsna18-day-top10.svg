@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="52px" height="52px" viewBox="0 0 52 52" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.4 (67378) - http://www.bohemiancoding.com/sketch -->
+    <title>rsna18-day-top10</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Ranks-and-Badges" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Badges" transform="translate(-125.000000, -119.000000)" stroke="#FFFFFF" stroke-width="1.25">
+            <g id="rsna18-day-top10" transform="translate(126.000000, 120.000000)">
+                <rect id="Rectangle" fill="#6C0AD6" x="18" y="24" width="15" height="26" rx="1"></rect>
+                <rect id="Rectangle" x="0" y="37" width="13" height="13" rx="1"></rect>
+                <rect id="Rectangle" x="37" y="43" width="13" height="7" rx="1"></rect>
+                <path d="M28.7458877,6.35245381 L32.915199,6.35245381 C33.3855819,6.35265102 33.8022791,6.64847439 33.9471647,7.08507113 C34.0920503,7.52166787 33.9321323,7.99962037 33.5511221,8.26873789 L30.0785046,10.7270869 L32.2185051,15.5252081 C32.4003207,15.9402671 32.2924133,16.4221433 31.949741,16.725413 C31.6070687,17.0286827 31.1049968,17.0866466 30.699235,16.8697831 L25.4903089,14.021825 L20.3009162,16.8697831 C19.8951544,17.0866466 19.3930825,17.0286827 19.0504102,16.725413 C18.7077379,16.4221433 18.5998305,15.9402671 18.7816461,15.5252081 L20.9216466,10.7270869 L17.4490291,8.26873789 C17.0701868,8.00124961 16.9095959,7.52707197 17.0505136,7.09203872 C17.1914313,6.65700548 17.6021596,6.35897294 18.0697595,6.35245381 L22.23473,6.35245381 L24.478909,0.677712003 C24.6403643,0.269341042 25.0427532,1.17541586e-16 25.4913941,0 C25.9400349,-1.17541586e-16 26.3424238,0.269341042 26.5038791,0.677712003 L28.7458877,6.35245381 Z" id="Path" fill="#B8038E"></path>
+                <circle id="Oval" fill="#6C0AD6" cx="6.5" cy="28.5" r="4.5"></circle>
+                <circle id="Oval" fill="#6C0AD6" cx="43.5" cy="34.5" r="4.5"></circle>
+            </g>
+        </g>
+    </g>
+</svg>
