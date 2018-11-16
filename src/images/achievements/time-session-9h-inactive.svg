@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="44px" height="62px" viewBox="0 0 44 62" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.4 (67378) - http://www.bohemiancoding.com/sketch -->
+    <title>time-session-9h-inactive</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Ranks-and-Badges" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Badges" transform="translate(-448.000000, -1002.000000)">
+            <g id="time-session-9h-inactive" transform="translate(448.000000, 1000.000000)">
+                <path d="M37.4761634,41.6623753 C40.9564588,39.6703176 43.0722599,35.9507167 42.9981131,31.9547287 C42.9278863,27.9085396 41.2672682,24.050978 38.3726267,21.2098748 C38.1986189,22.6487295 37.4415557,23.9542986 36.2769854,24.8238461 C35.1124151,25.6933935 33.6414982,26.0513861 32.2053115,25.8148122 C28.1633888,22.4305235 26.8998894,16.7700355 29.1216539,12 C19.485224,12 13.3179088,17.6596873 12.1615372,25.8148122 C9.21252055,26.121526 6.5241874,24.1142335 5.99422195,21.2098748 C-0.827269177,26.985782 -1.17968719,38.669166 8.18361885,43" id="Path" stroke="#4845A0" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></path>
+                <circle id="Oval" stroke="#4845A0" stroke-width="1.25" fill="#27264A" stroke-linecap="round" stroke-linejoin="round" cx="23.5" cy="47.5" r="15.5"></circle>
+                <polyline id="Path" stroke="#4845A0" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" points="31 47 23 47 23 37"></polyline>
+                <text id="9" font-family="SFProText-Semibold, SF Pro Text" font-size="13" font-weight="500" fill="#4845A0">
+                    <tspan x="0" y="12">9</tspan>
+                </text>
+            </g>
+        </g>
+    </g>
+</svg>
