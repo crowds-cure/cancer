@@ -12,14 +12,14 @@ class HamburgerMenu extends Component {
             <use xlinkHref="/icons.svg#bars" />
           </svg>
         </button>
-        <div class="d-none">{this.props.options}</div>
+        <div className="d-none">{this.props.options}</div>
       </>
     );
   }
 }
 
 HamburgerMenu.propTypes = {
-  options: PropTypes.string.isRequired
+  options: PropTypes.object.isRequired
 };
 
 export default HamburgerMenu;
