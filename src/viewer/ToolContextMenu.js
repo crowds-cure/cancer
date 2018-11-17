@@ -91,7 +91,13 @@ function getDropdownItems(eventData, isTouchEvent = false) {
   );
 
   // Annotate tools for touch events already have a press handle to edit it, has a better UX for deleting it
-  if (isTouchEvent && nearbyToolData.toolType === 'arrowAnnotate') return;
+  if (
+    isTouchEvent &&
+    nearbyToolData &&
+    nearbyToolData.toolType === 'arrowAnnotate'
+  ) {
+    return;
+  }
 
   let dropdownItems = [];
   if (nearbyToolData) {
