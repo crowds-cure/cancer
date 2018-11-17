@@ -1,20 +1,19 @@
 @value globals: "../GlobalStyles.css";
-@value medalBorderColor, screen-sm from globals;
+@value rankBadgeBorderColor, screen-sm from globals;
 
-.medal-bg {
+.rankBadge {
   background: white;
   transform: rotate(45deg);
-  border-color: medalBorderColor;
+  border-color: rankBadgeBorderColor;
   border-style: solid;
   border-width: 5px;
   height: 67px;
   width: 67px;
 }
 
-.medal-bg .medal {
+.rankBadge img {
   object-fit: contain;
   transform: rotate(-45deg);
-  height: 50px;
-  margin: 7px;
-  width: 50px;
+  height: 60px;
+  width: 60px;
 }

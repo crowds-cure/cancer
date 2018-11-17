@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="119px" height="119px" viewBox="0 0 119 119" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.4 (67378) - http://www.bohemiancoding.com/sketch -->
+    <title>rank-05-proficient</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="47.5 7 88 47.5 47.5 88 7 47.5"></polygon>
+        <filter x="-42.0%" y="-39.5%" width="184.0%" height="184.0%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="11" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Ranks-and-Badges" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Ranks" transform="translate(-772.000000, -500.000000)">
+            <g id="rank-05-proficient" transform="translate(784.000000, 510.000000)">
+                <path d="M47.5,-0.707106781 L95.7071068,47.5 L47.5,95.7071068 L-0.707106781,47.5 L47.5,-0.707106781 Z" id="Polygon-2" stroke="#5BCAD1" fill-opacity="0.3" fill="#000000" fill-rule="nonzero" opacity="0.338262649"></path>
+                <g id="Polygon-2" fill-rule="nonzero">
+                    <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                    <use fill="#026387" xlink:href="#path-1"></use>
+                </g>
+                <polygon id="Path" fill="#211E95" fill-rule="nonzero" points="31.2636719 8.76513672 36.6669922 20 58.9213867 20 63.9291992 8.12402344"></polygon>
+                <path d="M47.5,70.6458333 L47.5,67.9375" id="Shape" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M62.8210417,64.3002083 L60.90625,62.3854167" id="Shape" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M69.1666667,48.9791667 L66.4583333,48.9791667" id="Shape" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M25.8333333,48.9791667 L28.5416667,48.9791667" id="Shape" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M32.1816667,64.3002083 L34.0964583,62.3854167" id="Shape" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M58.5933333,19.1875 L36.409375,19.1875" id="Shape" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M31.25,8.35416667 L63.75,8.35416667" id="Shape" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M43.7083333,34.5058333 L31.25,8.35416667 L23.2170833,17.5354167 C22.3739888,18.4990351 22.3208898,19.9214121 23.0897917,20.9452083 L36.6314583,39.0016667" id="Shape" stroke="#FFFFFF" stroke-width="2" fill="#211E95" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M51.1941667,34.7225 L63.75,8.35416667 L71.7829167,17.5354167 C72.6260112,18.4990351 72.6791102,19.9214121 71.9102083,20.9452083 L57.9460417,39.5622917" id="Shape" stroke="#FFFFFF" stroke-width="2" fill="#211E95" stroke-linecap="round" stroke-linejoin="round"></path>
+                <circle id="Oval" stroke="#FFFFFF" stroke-width="2" fill="#B8038E" stroke-linecap="round" stroke-linejoin="round" cx="47.069375" cy="47.625" r="13.5416667"></circle>
+                <circle id="Oval" stroke="#FFFFFF" stroke-width="2" fill="#27264A" stroke-linecap="round" stroke-linejoin="round" cx="47.069375" cy="47.625" r="5.41666667"></circle>
+            </g>
+        </g>
+    </g>
+</svg>
