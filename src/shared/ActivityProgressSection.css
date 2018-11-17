@@ -27,7 +27,7 @@
   display: inline-block;
 }
 
-.ActivityProgressSection .medalContainer {
+.ActivityProgressSection .rankBadgeContainer {
   position: absolute;
   top: 15px;
   left: -100px;
@@ -35,16 +35,15 @@
   text-align: center;
 }
 
-.ActivityProgressSection .medal-bg {
+.ActivityProgressSection .rankBadge {
   margin: 0 auto;
   height: 50px;
   width: 50px;
 }
 
-.ActivityProgressSection .medal-bg .medal {
-  height: 38px;
-  margin: 4px;
-  width: 38px;
+.ActivityProgressSection .rankBadge img {
+  height: 40px;
+  width: 40px;
 }
 
 .ActivityProgressSection .rank {
@@ -77,18 +76,17 @@
     display: block;
   }
 
-  .ActivityProgressSection .medalContainer {
+  .ActivityProgressSection .rankBadgeContainer {
     padding-top: 36px;
   }
 
-  .ActivityProgressSection .medal-bg {
+  .ActivityProgressSection .rankBadge {
     height: 67px;
     width: 67px;
   }
 
-  .ActivityProgressSection .medal-bg .medal {
-    height: 50px;
-    margin: 7px;
-    width: 50px;
+  .ActivityProgressSection .rankBadge img {
+    height: 60px;
+    width: 60px;
   }
 }

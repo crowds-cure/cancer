@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="119px" height="119px" viewBox="0 0 119 119" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.4 (67378) - http://www.bohemiancoding.com/sketch -->
+    <title>rank-04-intermediate</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="47.5 7 88 47.5 47.5 88 7 47.5"></polygon>
+        <filter x="-42.0%" y="-39.5%" width="184.0%" height="184.0%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="11" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Ranks-and-Badges" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Ranks" transform="translate(-615.000000, -500.000000)">
+            <g id="rank-04-intermediate" transform="translate(627.000000, 510.000000)">
+                <path d="M47.5,-0.707106781 L95.7071068,47.5 L47.5,95.7071068 L-0.707106781,47.5 L47.5,-0.707106781 Z" id="Polygon-2" stroke="#5BCAD1" fill-opacity="0.3" fill="#000000" fill-rule="nonzero" opacity="0.338262649"></path>
+                <g id="Polygon-2" fill-rule="nonzero">
+                    <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                    <use fill="#026387" xlink:href="#path-1"></use>
+                </g>
+                <circle id="Oval" fill="#211E95" fill-rule="nonzero" cx="75.5" cy="28.5" r="7.5"></circle>
+                <circle id="Oval" fill="#211E95" fill-rule="nonzero" cx="20" cy="28" r="8"></circle>
+                <circle id="Oval" fill="#211E95" fill-rule="nonzero" cx="20" cy="63" r="8"></circle>
+                <rect id="Rectangle" fill="#211E95" fill-rule="nonzero" x="13" y="30" width="5" height="32"></rect>
+                <rect id="Rectangle" fill="#211E95" fill-rule="nonzero" x="78" y="30" width="5" height="15"></rect>
+                <rect id="Rectangle" fill="#211E95" fill-rule="nonzero" x="15" y="21" width="68" height="6"></rect>
+                <rect id="Rectangle" fill="#211E95" fill-rule="nonzero" x="15" y="64" width="33" height="6"></rect>
+                <path d="M48,69.875 L15.625,69.875 C13.922122,69.875 12.5416667,68.4945446 12.5416667,66.7916667 L12.5416667,23.625 C12.5416667,21.922122 13.922122,20.5416667 15.625,20.5416667 L80.375,20.5416667 C82.077878,20.5416667 83.4583333,21.922122 83.4583333,23.625 L83.4583333,46.75" id="Shape" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                <polyline id="Shape" stroke="#FFFFFF" stroke-width="2" fill="#B8038E" stroke-linecap="round" stroke-linejoin="round" points="77.2916667 71.6201667 77.2916667 91.4583333 68.0416667 83.75 58.7916667 91.4583333 58.7916667 71.6170833"></polyline>
+                <path d="M79.51475,62.1666667 C81.1160697,60.189808 81.333689,57.4306227 80.0620737,55.2271732 C78.7904584,53.0237237 76.2925679,51.8316647 73.77975,52.2290833 C72.8666422,49.8565645 70.5869167,48.2912209 68.04475,48.2912209 C65.5025833,48.2912209 63.2228578,49.8565645 62.30975,52.2290833 C59.7969321,51.8316647 57.2990416,53.0237237 56.0274263,55.2271732 C54.755811,57.4306227 54.9734303,60.189808 56.57475,62.1666667 C54.9763269,64.1447498 54.7607684,66.9028025 56.0324614,69.1052026 C57.3041544,71.3076027 59.8005884,72.4997174 62.3128333,72.10425 C63.2259411,74.4767689 65.5056666,76.0421124 68.0478333,76.0421124 C70.5900001,76.0421124 72.8697255,74.4767689 73.7828333,72.10425 C76.2951066,72.5000828 78.7916265,71.3074283 80.0623365,69.104363 C81.3330465,66.9012978 81.1153445,64.1431023 79.51475,62.1666667 Z" id="Shape" stroke="#FFFFFF" stroke-width="2" fill="#B8038E" stroke-linecap="round" stroke-linejoin="round"></path>
+                <circle id="Oval" stroke="#FFFFFF" stroke-width="2" fill="#026387" stroke-linecap="round" stroke-linejoin="round" cx="68.0416667" cy="62.1666667" r="4.625"></circle>
+                <path d="M77.2916667,43.6666667 L77.2916667,35.9583333 C72.1830327,35.9583333 68.0416667,31.8169673 68.0416667,26.7083333 L27.9583333,26.7083333 C27.9583333,31.8169673 23.8169673,35.9583333 18.7083333,35.9583333 L18.7083333,54.4583333 C23.8169673,54.4583333 27.9583333,58.5996994 27.9583333,63.7083333 L48,63.7083333" id="Shape" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            </g>
+        </g>
+    </g>
+</svg>

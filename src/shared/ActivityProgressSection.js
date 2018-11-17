@@ -2,7 +2,7 @@ import { Component } from 'react';
 import React from 'react';
 import ProgressBar from './ProgressBar.js';
 import PropTypes from 'prop-types';
-import Medal from './Medal.js';
+import RankBadge from './RankBadge.js';
 import { getBadgeByNumberOfCases } from '../badges.js';
 import './ActivityProgressSection.css';
 
@@ -25,8 +25,8 @@ class ActivityProgressSection extends Component {
     return (
       <div className="ActivityProgressSection">
         <div className="title">Your activity</div>
-        <div className="medalContainer" title={rankName}>
-          <Medal size="md" type={rankType} />
+        <div className="rankBadgeContainer" title={rankName}>
+          <RankBadge size="md" type={rankType} />
           <span className="rank">{rankName}</span>
         </div>
         <div className="progressBarContainer">
