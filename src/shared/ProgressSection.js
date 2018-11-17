@@ -12,15 +12,7 @@ class ProgressSection extends Component {
     const current =
       this.props.current === undefined ? '---' : this.props.current;
 
-    let rank;
-    if (this.props.current !== undefined) {
-      rank = getBadgeByNumberOfCases(this.props.current);
-    }
-
-    const rankName = rank ? rank.name : '';
-    const low = rank ? rank.min : 0;
-    const high = rank ? rank.max : 10;
-    const rankType = rank ? rank.type : 'NUM_CASES_NOVICE';
+    const rank = getBadgeByNumberOfCases(this.props.current);
 
     const increment = {
       measurementsInCurrentSession: this.props.measurementsInCurrentSession
@@ -30,8 +22,8 @@ class ProgressSection extends Component {
       <div className="ProgressSection">
         <div>
           <div className="numberCases">
-            <div className="rankBadgeContainer" title={rankName}>
-              <RankBadge type={rankType} />
+            <div className="rankBadgeContainer">
+              <RankBadge name={rank.name} img={rank.img} type={rank.type} />
             </div>
             <div className="currentPoints">
               <span className="value">{current}</span>
@@ -42,14 +34,18 @@ class ProgressSection extends Component {
             </div>
           </div>
           <div className="progressBarContainer">
-            <span className="progressLow">{low}</span>
-            <span className="progressHigh">{high}</span>
-            <ProgressBar
-              min={low}
-              max={high}
-              value={this.props.current}
-              increment={increment.measurementsInCurrentSession}
-            />
+            <span className="progressLow">{rank.min}</span>
+            <span className="progressHigh">{rank.max}</span>
+            {this.props.current === undefined ? (
+              ''
+            ) : (
+              <ProgressBar
+                min={rank.min}
+                max={rank.max}
+                value={this.props.current}
+                increment={increment.measurementsInCurrentSession}
+              />
+            )}
           </div>
         </div>
       </div>

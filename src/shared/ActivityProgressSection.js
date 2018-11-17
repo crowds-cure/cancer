@@ -11,29 +11,29 @@ class ActivityProgressSection extends Component {
     const current =
       this.props.current === undefined ? '---' : this.props.current;
 
-    let rank;
-    if (this.props.current !== undefined) {
-      rank = getBadgeByNumberOfCases(this.props.current);
-      console.warn(rank);
-    }
-
-    const rankName = rank ? rank.name : '';
-    const low = rank ? rank.min : 0;
-    const high = rank ? rank.max : 10;
-    const rankType = rank ? rank.type : 'NUM_CASES_NOVICE';
+    const rank = getBadgeByNumberOfCases(this.props.current);
 
     return (
       <div className="ActivityProgressSection">
         <div className="title">Your activity</div>
-        <div className="rankBadgeContainer" title={rankName}>
-          <RankBadge size="md" type={rankType} />
-          <span className="rank">{rankName}</span>
+        <div className="rankBadgeContainer">
+          <RankBadge
+            size="md"
+            name={rank.name}
+            img={rank.img}
+            type={rank.type}
+          />
+          <span className="rank">{rank.name}</span>
         </div>
         <div className="progressBarContainer">
           {this.props.current === undefined ? (
             ''
           ) : (
-            <ProgressBar min={low} max={high} value={this.props.current} />
+            <ProgressBar
+              min={rank.min}
+              max={rank.max}
+              value={this.props.current}
+            />
           )}
         </div>
         <div className="currentPoints">
