@@ -62,6 +62,7 @@ class Labelling extends Component {
           style={this.state.componentStyle}
           ref={this.mainElement}
           onMouseLeave={this.fadeOutAndLeave}
+          onMouseEnter={this.clearFadeOutTimer}
         >
           {showAddLabel && (
             <button className="addLabelButton" onClick={this.showLabelling}>
@@ -142,9 +143,20 @@ class Labelling extends Component {
   };
 
   fadeOutAndLeave = () => {
-    this.setState({
-      displayComponent: false
-    });
+    // Wait for 1 sec to dismiss the labelling component
+    this.fadeOutTimer = setTimeout(() => {
+      this.setState({
+        displayComponent: false
+      });
+    }, 1000);
+  };
+
+  clearFadeOutTimer = () => {
+    if (!this.fadeOutTimer) {
+      return;
+    }
+
+    clearTimeout(this.fadeOutTimer);
   };
 
   showLabelling = () => {
