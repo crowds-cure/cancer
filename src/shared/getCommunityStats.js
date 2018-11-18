@@ -36,7 +36,7 @@ async function getTotalMeasurementsInDateRange(
     endkey: Math.floor(endDate.valueOf() / 1000)
   });
 
-  return result.rows[0].value;
+  return result.rows[0] && result.rows[0].value;
 }
 
 async function getNumAnnotators(measurementsDB) {
