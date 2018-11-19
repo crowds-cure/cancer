@@ -60,6 +60,16 @@ class AchievementSection extends Component {
       achievements.timeSession90.completed =
         achievementStatus.maxSessionDurationInMin >= 90;
 
+      // Persistence Badges - Week
+      achievements.timeSessionWeek90m.completed =
+        achievementStatus.totalSessionDurationInMinInWeek >= 90;
+      achievements.timeSessionWeek3h.completed =
+        achievementStatus.totalSessionDurationInMinInWeek >= 180;
+      achievements.timeSessionWeek6h.completed =
+        achievementStatus.totalSessionDurationInMinInWeek >= 360;
+      achievements.timeSessionWeek9h.completed =
+        achievementStatus.totalSessionDurationInMinInWeek >= 540;
+
       this.setState({
         achievements
       });
