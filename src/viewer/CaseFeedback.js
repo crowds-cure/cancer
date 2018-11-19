@@ -58,12 +58,16 @@ class CaseFeedback extends Component {
         label: 'Contains multi-phase images'
       },
       {
-        value: 'NoFeedback',
-        label: 'No Feedback'
+        value: 'NoNeJustWantToSkip',
+        label: 'None, just want to skip'
       },
       {
         value: 'LikelyBenign',
         label: 'Likely benign'
+      },
+      {
+        value: 'DidntMeasureEverything',
+        label: 'Didn’t measure everything'
       }
     ];
 
