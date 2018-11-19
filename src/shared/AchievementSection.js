@@ -50,6 +50,16 @@ class AchievementSection extends Component {
       achievements.sessionMeasurements200.completed =
         achievementStatus.maxMeasurementsInSession >= 200;
 
+      // Persistence Badges - Session
+      achievements.timeSession15.completed =
+        achievementStatus.maxSessionDurationInMin >= 15;
+      achievements.timeSession30.completed =
+        achievementStatus.maxSessionDurationInMin >= 30;
+      achievements.timeSession60.completed =
+        achievementStatus.maxSessionDurationInMin >= 60;
+      achievements.timeSession90.completed =
+        achievementStatus.maxSessionDurationInMin >= 90;
+
       this.setState({
         achievements
       });
