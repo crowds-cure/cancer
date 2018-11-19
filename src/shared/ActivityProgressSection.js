@@ -15,7 +15,10 @@ class ActivityProgressSection extends Component {
 
     return (
       <div className="ActivityProgressSection">
-        <div className="title">Your activity</div>
+        <div className="title">
+          <span>Rank: </span>
+          <span className="rank">{rank.name}</span>
+        </div>
         <div className="rankBadgeContainer">
           <RankBadge
             size="md"
@@ -23,7 +26,6 @@ class ActivityProgressSection extends Component {
             img={rank.img}
             type={rank.type}
           />
-          <span className="rank">{rank.name}</span>
         </div>
         <div className="progressBarContainer">
           {this.props.current === undefined ? (

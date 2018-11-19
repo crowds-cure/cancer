@@ -18,10 +18,8 @@
   -webkit-filter: blur(1px);*/
 }
 
-.ProgressBar:not([value]) {
-  height: 30px;
-  background-color: #544d79;
-  opacity: 0.45;
+.ProgressBar::-webkit-progress-bar {
+  background: #544d79;
 }
 
 .ProgressBar[value]::-webkit-progress-value {

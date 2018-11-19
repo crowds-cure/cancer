@@ -46,10 +46,6 @@
   left: 55px;
 }
 
-.ProgressSection .rankBadgeContainer {
-  padding-top: 5px;
-}
-
 .ProgressSection .progressBarContainer {
   margin-top: 10px;
 }
@@ -66,16 +62,6 @@
   font-size: 13px;
 }
 
-.ProgressSection .rankBadge {
-  height: 50px;
-  width: 50px;
-}
-
-.ProgressSection .rankBadge img {
-  height: 40px;
-  width: 40px;
-}
-
 @media (min-width: screen-sm) {
   .ProgressSection .plusPoints {
     font-size: 60px;
@@ -90,19 +76,5 @@
   .ProgressSection .suffix {
     font-size: 22px;
     margin-top: 15px;
-  }
-
-  .ProgressSection .rankBadgeContainer {
-    padding-top: 36px;
-  }
-
-  .ProgressSection .rankBadge {
-    height: 67px;
-    width: 67px;
-  }
-
-  .ProgressSection .rankBadge img {
-    height: 60px;
-    width: 60px;
   }
 }

@@ -1,10 +1,11 @@
 @value globals: "../GlobalStyles.css";
-@value textPrimaryColor, textSecondaryColor, screen-sm from globals;
+@value textPrimaryColor, textSecondaryColor, textActiveColor, screen-sm from globals;
 
 .ActivityProgressSection .title {
   color: textPrimaryColor;
   margin-bottom: 10px;
   font-weight: 600;
+  font-size: 18px;
 }
 
 .ActivityProgressSection .currentPoints {
@@ -29,27 +30,16 @@
 
 .ActivityProgressSection .rankBadgeContainer {
   position: absolute;
-  top: 15px;
   left: -100px;
   width: 100px;
   text-align: center;
-}
-
-.ActivityProgressSection .rankBadge {
-  margin: 0 auto;
-  height: 50px;
-  width: 50px;
-}
-
-.ActivityProgressSection .rankBadge img {
-  height: 40px;
-  width: 40px;
+  top: 0px;
 }
 
 .ActivityProgressSection .rank {
-  display: block;
+  display: inline;
   padding: 20px 0;
-  color: textSecondaryColor;
+  color: textActiveColor;
   overflow-wrap: break-word;
 }
 
@@ -77,16 +67,10 @@
   }
 
   .ActivityProgressSection .rankBadgeContainer {
-    padding-top: 36px;
-  }
-
-  .ActivityProgressSection .rankBadge {
-    height: 67px;
-    width: 67px;
-  }
-
-  .ActivityProgressSection .rankBadge img {
-    height: 60px;
-    width: 60px;
+    position: absolute;
+    left: -130px;
+    width: 130px;
+    text-align: center;
+    top: -10px;
   }
 }
