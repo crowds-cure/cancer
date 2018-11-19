@@ -38,6 +38,18 @@ class AchievementSection extends Component {
       achievements.weekMeasurements500.completed =
         achievementStatus.maxMeasurementsInWeek >= 500;
 
+      // Productivity Badges - Session
+      achievements.sessionMeasurements25.completed =
+        achievementStatus.maxMeasurementsInSession >= 25;
+      achievements.sessionMeasurements50.completed =
+        achievementStatus.maxMeasurementsInSession >= 50;
+      achievements.sessionMeasurements75.completed =
+        achievementStatus.maxMeasurementsInSession >= 75;
+      achievements.sessionMeasurements100.completed =
+        achievementStatus.maxMeasurementsInSession >= 100;
+      achievements.sessionMeasurements200.completed =
+        achievementStatus.maxMeasurementsInSession >= 200;
+
       this.setState({
         achievements
       });

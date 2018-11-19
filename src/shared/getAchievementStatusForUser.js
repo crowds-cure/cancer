@@ -24,8 +24,25 @@ async function getMaxMeasurementsForUser(
   );
 }
 
+async function getMaxMeasurementsForUserInSession(sessionsDB, username) {
+  const result = await sessionsDB.query('by/usernameMaxCases', {
+    reduce: true,
+    group: true,
+    group_level: 1,
+    start_key: username,
+    end_key: username
+  });
+
+  if (!result.rows || !result.rows.length) {
+    return 0;
+  }
+
+  return result.rows[0].value;
+}
+
 async function getAchievementStatusForUser() {
   const measurementsDB = getDB('measurements');
+  const sessionsDB = getDB('sessions');
   const username = getUsername();
   const maxMeasurementsInDay = await getMaxMeasurementsForUser(
     measurementsDB,
@@ -37,10 +54,15 @@ async function getAchievementStatusForUser() {
     'by/annotatorWeek',
     username
   );
+  const maxMeasurementsInSession = await getMaxMeasurementsForUserInSession(
+    sessionsDB,
+    username
+  );
 
   return {
     maxMeasurementsInDay,
-    maxMeasurementsInWeek
+    maxMeasurementsInWeek,
+    maxMeasurementsInSession
   };
 }
 
