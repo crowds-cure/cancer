@@ -1,7 +1,7 @@
 import { getDB } from '../db';
 import getUsername from '../viewer/lib/getUsername';
 
-async function getMaxMeasurementsForUser(
+async function getMaxForUserInMeasuremenents(
   measurementsDB,
   measurementsDBView,
   username
@@ -24,8 +24,8 @@ async function getMaxMeasurementsForUser(
   );
 }
 
-async function getMaxMeasurementsForUserInSession(sessionsDB, username) {
-  const result = await sessionsDB.query('by/usernameMaxCases', {
+async function getMaxForUserInSessions(sessionsDB, sessionsDBView, username) {
+  const result = await sessionsDB.query(sessionsDBView, {
     reduce: true,
     group: true,
     group_level: 1,
@@ -44,25 +44,34 @@ async function getAchievementStatusForUser() {
   const measurementsDB = getDB('measurements');
   const sessionsDB = getDB('sessions');
   const username = getUsername();
-  const maxMeasurementsInDay = await getMaxMeasurementsForUser(
+
+  const maxMeasurementsInDay = await getMaxForUserInMeasuremenents(
     measurementsDB,
     'by/annotatorDay',
     username
   );
-  const maxMeasurementsInWeek = await getMaxMeasurementsForUser(
+  const maxMeasurementsInWeek = await getMaxForUserInMeasuremenents(
     measurementsDB,
     'by/annotatorWeek',
     username
   );
-  const maxMeasurementsInSession = await getMaxMeasurementsForUserInSession(
+
+  const maxMeasurementsInSession = await getMaxForUserInSessions(
     sessionsDB,
+    'by/usernameMaxCases',
+    username
+  );
+  const maxSessionDurationInMin = await getMaxForUserInSessions(
+    sessionsDB,
+    'by/usernameMaxSessionDurationInMin',
     username
   );
 
   return {
-    maxMeasurementsInDay,
-    maxMeasurementsInWeek,
-    maxMeasurementsInSession
+    maxMeasurementsInDay, // Max number of measurements in a day
+    maxMeasurementsInWeek, // Max number of measurements in a week
+    maxMeasurementsInSession, // Max number of measurements in a session
+    maxSessionDurationInMin // Max session duration in minutes all time
   };
 }
 
