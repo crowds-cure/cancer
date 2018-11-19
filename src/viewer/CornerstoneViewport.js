@@ -237,7 +237,22 @@ class CornerstoneViewport extends Component {
             preventZoomOutsideImage: true
           }
         },
+        {
+          name: 'Zoom',
+          configuration: {
+            name: 'ZoomRightMouseButton',
+            minScale: 0.3,
+            maxScale: 25,
+            preventZoomOutsideImage: true
+          }
+        },
         { name: 'Pan' },
+        {
+          name: 'Pan',
+          configuration: {
+            name: 'PanMiddleMouseButton'
+          }
+        },
         { name: 'StackScroll' },
         { name: 'PanMultiTouch' },
         { name: 'ZoomTouchPinch' },
@@ -285,13 +300,13 @@ class CornerstoneViewport extends Component {
       */
 
       // pan is the default tool for middle mouse button
-      cornerstoneTools.setToolActive('Pan', {
+      cornerstoneTools.setToolActive('PanMiddleMouseButton', {
         mouseButtonMask: 4,
         isTouchActive: false
       });
 
       // zoom is the default tool for right mouse button
-      cornerstoneTools.setToolActive('Zoom', {
+      cornerstoneTools.setToolActive('ZoomRightMouseButton', {
         mouseButtonMask: 2,
         isTouchActive: false
       });
@@ -446,6 +461,18 @@ class CornerstoneViewport extends Component {
       ];
 
       setToolsPassive(leftMouseTools);
+
+      // // pan is the default tool for middle mouse button
+      // cornerstoneTools.setToolActive('PanMiddleMouseButton', {
+      //   mouseButtonMask: 4,
+      //   isTouchActive: false
+      // });
+
+      // // zoom is the default tool for right mouse button
+      // cornerstoneTools.setToolActive('ZoomRightMouseButton', {
+      //   mouseButtonMask: 2,
+      //   isTouchActive: false
+      // });
 
       cornerstoneTools.setToolActive(this.props.activeTool, {
         mouseButtonMask: 1,
