@@ -1,10 +1,30 @@
 @value globals: "../GlobalStyles.css";
-@value textPrimaryColor, screen-md from globals;
+@value textPrimaryColor, textSecondaryColor, textActiveColor, uiGrayDarker, screen-md from globals;
 
-.AchievementSection .title {
+.AchievementSection .header .title {
   color: textPrimaryColor;
+  display: inline-block;
   margin-bottom: 25px;
   font-weight: 600;
+}
+
+.AchievementSection .header .view-all {
+  background-color: transparent;
+  border: none;
+  color: textActiveColor;
+  cursor: pointer;
+  display: inline-block;
+  float: right;
+  font-size: 14px;
+  outline: none;
+  text-decoration: none;
+}
+
+.AchievementSectionTooltip {
+  background-color: uiGrayDarker !important;
+  color: textSecondaryColor !important;
+  font-size: 14px !important;
+  line-height: 16px !important;
 }
 
 @media (max-width: screen-md) {
