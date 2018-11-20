@@ -21,7 +21,7 @@ const { loadHandlerManager } = cornerstoneTools;
 
 function setToolsPassive(tools) {
   tools.forEach(tool => {
-    cornerstoneTools.setToolPassive(tool.name);
+    cornerstoneTools.setToolPassive(tool);
   });
 }
 
@@ -247,10 +247,7 @@ class CornerstoneViewport extends Component {
 
       initializeTools(tools);
 
-      cornerstoneTools.setToolActive(this.props.activeTool, {
-        mouseButtonMask: 1,
-        isTouchActive: true
-      });
+      this.setActiveTool(this.props.activeTool);
 
       /* For touch devices, by default we activate:
       - Pinch to zoom
@@ -283,18 +280,6 @@ class CornerstoneViewport extends Component {
       - Pan with middle click
       - Zoom with right click
       */
-
-      // pan is the default tool for middle mouse button
-      cornerstoneTools.setToolActive('Pan', {
-        mouseButtonMask: 4,
-        isTouchActive: false
-      });
-
-      // zoom is the default tool for right mouse button
-      cornerstoneTools.setToolActive('Zoom', {
-        mouseButtonMask: 2,
-        isTouchActive: false
-      });
 
       cornerstoneTools.setToolActive('StackScrollMouseWheel', {
         mouseButtonMask: 0,
@@ -437,20 +422,7 @@ class CornerstoneViewport extends Component {
     }
 
     if (this.props.activeTool !== prevProps.activeTool) {
-      const leftMouseTools = [
-        'Bidirectional',
-        'Wwwc',
-        'Zoom',
-        'Pan',
-        'StackScroll'
-      ];
-
-      setToolsPassive(leftMouseTools);
-
-      cornerstoneTools.setToolActive(this.props.activeTool, {
-        mouseButtonMask: 1,
-        isTouchActive: true
-      });
+      this.setActiveTool(this.props.activeTool);
 
       // TODO: Why do we need to do this in v3?
       cornerstoneTools.setToolActive('StackScrollMouseWheel', {
@@ -507,6 +479,33 @@ class CornerstoneViewport extends Component {
       }
     }
   }
+
+  setActiveTool = activeTool => {
+    const leftMouseTools = ['Bidirectional', 'Wwwc', 'StackScroll'];
+
+    setToolsPassive(leftMouseTools);
+
+    cornerstoneTools.setToolActive(activeTool, {
+      mouseButtonMask: 1,
+      isTouchActive: true
+    });
+
+    // pan is the default tool for middle mouse button
+    const isPanToolActive = activeTool === 'Pan';
+    const panOptions = {
+      mouseButtonMask: isPanToolActive ? [1, 4] : [4],
+      isTouchActive: !isPanToolActive
+    };
+    cornerstoneTools.setToolActive('Pan', panOptions);
+
+    // zoom is the default tool for right mouse button
+    const isZoomToolActive = activeTool === 'Zoom';
+    const zoomOptions = {
+      mouseButtonMask: isZoomToolActive ? [1, 2] : [2],
+      isTouchActive: !isZoomToolActive
+    };
+    cornerstoneTools.setToolActive('Zoom', zoomOptions);
+  };
 
   onStackScroll(event) {
     const element = event.currentTarget;
