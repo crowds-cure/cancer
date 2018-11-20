@@ -42,10 +42,8 @@ async function getTopAnnotators() {
 }
 
 // This is the same function used in the map function of the couchdb view.
-// I'm sure it was copied from somewhere else originally.
-// There seems to be a bug in the way this is used, because today's date should be 47 according
-// to https://www.epochconverter.com/weeknumbers, but this logic makes it come out
-// as week 42.  The logic in getTopAnnotatorsByWeek adjusts the mont to compensate.
+// The logic in getTopAnnotatorsByWeek adjusts the month to compensate, and
+//  it gets the actual month number (January as 1)
 function getWeek(year, month, day) {
   function serial(days) {
     return 86400000 * days;
@@ -70,7 +68,8 @@ function getWeek(year, month, day) {
 
 function getWeekKey(week) {
   const date = new Date();
-  week = week || getWeek(date.getFullYear(), date.getMonth(), date.getDate());
+  week =
+    week || getWeek(date.getFullYear(), date.getMonth() + 1, date.getDate());
   return `${date.getFullYear()}/${week}`;
 }
 
