@@ -1,17 +1,34 @@
 import { Component } from 'react';
 import React from 'react';
+import Modal from 'react-modal';
+import ReactTooltip from 'react-tooltip';
 import AchievementBadge from './AchievementBadge.js';
-import './AchievementSection.css';
 import { achievements } from '../achievements.js';
 import getAchievementStatusForUser from './getAchievementStatusForUser.js';
+import './AchievementSection.css';
+import '../shared/Modal.css';
+
+const modalDialogStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)'
+  }
+};
 
 class AchievementSection extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      achievements
+      achievements,
+      showAchievementsModal: false
     };
+
+    this.toggleModal = this.toggleModal.bind(this);
 
     getAchievementStatusForUser().then(achievementStatus => {
       // Productivity Badges - Day
@@ -76,14 +93,28 @@ class AchievementSection extends Component {
     });
   }
 
-  render() {
+  getMostRecentAchievements(limit) {
     const { achievements } = this.state;
 
-    // Collection Badge
-    achievements.collectionAllCases.completed =
-      this.props.totalCompleteCollection > 0;
+    const sortedAchievementKeys = Object.keys(achievements).sort(
+      (a, b) =>
+        (achievements[b].completed || false) -
+        (achievements[a].completed || false)
+    );
+    const slicedAchievementKeys = sortedAchievementKeys.slice(0, limit);
 
-    const items = Object.keys(achievements).map(id => {
+    const recentAchievements = {};
+    slicedAchievementKeys.forEach(achievementKey => {
+      recentAchievements[achievementKey] = achievements[achievementKey];
+    });
+
+    return recentAchievements;
+  }
+
+  getAchievementsBadges(achievementsList) {
+    const { achievements } = this.state;
+
+    return Object.keys(achievementsList).map(id => {
       const achievementImg = achievements[id].completed
         ? achievements[id].imgActive
         : achievements[id].imgInactive;
@@ -96,11 +127,59 @@ class AchievementSection extends Component {
         />
       );
     });
+  }
+
+  toggleModal(e) {
+    e.preventDefault();
+    this.setState({ showAchievementsModal: !this.state.showAchievementsModal });
+  }
+
+  componentDidUpdate() {
+    ReactTooltip.rebuild();
+  }
+
+  render() {
+    const { achievements } = this.state;
+
+    // Collection Badge
+    achievements.collectionAllCases.completed =
+      this.props.totalCompleteCollection > 0;
+
+    const mostRecentAchievements = this.getMostRecentAchievements(6);
+
+    const allAchievementBadges = this.getAchievementsBadges(achievements);
+    const mostRecentAchievementBadges = this.getAchievementsBadges(
+      mostRecentAchievements
+    );
 
     return (
       <div className="AchievementSection">
-        <div className="title">Achievements</div>
-        <div className="row">{items}</div>
+        <div className="header">
+          <div className="title">Achievements</div>
+          <button className="view-all" onClick={this.toggleModal}>
+            view all
+          </button>
+        </div>
+        <div className="row">{mostRecentAchievementBadges}</div>
+
+        <Modal
+          isOpen={this.state.showAchievementsModal}
+          contentLabel="All Achievements"
+          onRequestClose={this.toggleModal}
+          styles={modalDialogStyles}
+          className="Modal"
+          overlayClassName="Overlay"
+          closeTimeoutMS={200}
+          onAfterOpen={ReactTooltip.rebuild}
+        >
+          <h1>Achievements</h1>
+          <div className="row">{allAchievementBadges}</div>
+          <span className="modal-close" onClick={this.toggleModal}>
+            Close
+          </span>
+        </Modal>
+
+        <ReactTooltip className="AchievementSectionTooltip" effect="solid" />
       </div>
     );
   }
