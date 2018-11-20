@@ -70,8 +70,7 @@ const labelItems = orderBy(
   organGroups.map(name => {
     return {
       label: name,
-      value: nameToID(name),
-      items: descriptionItems
+      value: nameToID(name)
     };
   }),
   ['label'],

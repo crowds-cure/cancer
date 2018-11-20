@@ -2,7 +2,7 @@ import { Component } from 'react';
 import React from 'react';
 import PropTypes from 'prop-types';
 import SelectTree from '../select-tree/SelectTree.js';
-import { labelItems } from './labellingData.js';
+import { labelItems, descriptionItems } from './labellingData.js';
 import { CSSTransition } from 'react-transition-group';
 import cloneDeep from 'lodash.clonedeep';
 
@@ -10,8 +10,6 @@ import './labelling.css';
 
 class Labelling extends Component {
   static defaultProps = {
-    selectTreeFirstTitle: 'Add Label',
-    selectTreeSecondTitle: 'Add Optional Description',
     measurementData: {},
     eventData: {},
     skipButton: false
@@ -23,7 +21,7 @@ class Labelling extends Component {
     this.state = {
       displayComponent: true,
       location: null,
-      description: null,
+      description: '',
       justCreated: true,
       componentStyle: {
         left: props.eventData.currentPoints.canvas.x + 50,
@@ -38,9 +36,17 @@ class Labelling extends Component {
     let showAddLabel = this.state.justCreated && !this.props.skipButton;
     let showButtons = false;
     let showSelectTree = false;
+    let selectTreeTitle = '';
+    let treeItems = {};
 
     if (!showAddLabel) {
       if (this.state.location === null) {
+        treeItems = labelItems;
+        selectTreeTitle = 'Add Label';
+        showSelectTree = true;
+      } else if (this.state.description === null) {
+        treeItems = descriptionItems;
+        selectTreeTitle = 'Add Description';
         showSelectTree = true;
       } else {
         showButtons = true;
@@ -71,10 +77,9 @@ class Labelling extends Component {
           )}
           {showSelectTree && (
             <SelectTree
-              items={labelItems}
-              onSelected={this.relabelCalback}
-              selectTreeFirstTitle={this.props.selectTreeFirstTitle}
-              selectTreeSecondTitle={this.props.selectTreeSecondTitle}
+              items={treeItems}
+              onSelected={this.selectTreeSelectCalback}
+              selectTreeFirstTitle={selectTreeTitle}
               componentMaxHeight={this.state.componentMaxHeight}
             />
           )}
@@ -90,8 +95,13 @@ class Labelling extends Component {
                 {this.state.description && ` (${this.state.description.label})`}
               </div>
               <div className="commonButtons">
-                <button className="commonButton" onClick={this.relabel}>
-                  Relabel
+                <button
+                  className="commonButton"
+                  onClick={this.descriptionUpdate}
+                >
+                  {this.state.description === null
+                    ? 'Add Description'
+                    : 'Edit Description'}
                 </button>
               </div>
             </>
@@ -165,28 +175,59 @@ class Labelling extends Component {
     });
   };
 
-  relabel = () => {
+  descriptionUpdate = () => {
+    if (this.setTimeout) {
+      clearTimeout(this.setTimeout);
+    }
     this.setState({
-      location: null,
       description: null
     });
   };
 
-  relabelCalback = (event, location, description, stillSelecting) => {
+  componentDidMount = () => {
+    document.addEventListener('touchstart', this.onTouchStart);
+  };
+
+  componentWillUnmount = () => {
+    document.removeEventListener('touchstart', this.onTouchStart);
+  };
+
+  onTouchStart = () => {
+    this.isTouchScreen = true;
+  };
+
+  selectTreeSelectCalback = (
+    event,
+    levelOneItem,
+    levelTwoItem,
+    stillSelecting
+  ) => {
+    let { location, description } = cloneDeep(this.state);
+
+    if (location === null) {
+      location = levelOneItem;
+    } else {
+      description = levelOneItem;
+    }
+
     const descriptionText = description ? ` (${description.label})` : '';
     const textLine = location.label + descriptionText;
 
+    this.props.measurementData.description = description.label;
     this.props.measurementData.location = location.label;
-    if (description) {
-      this.props.measurementData.description = description.label;
-    }
     this.props.measurementData.additionalData = [textLine];
 
-    if (!stillSelecting) {
-      this.setState({
-        location: location,
-        description: description
-      });
+    this.setState({
+      location,
+      description
+    });
+
+    if (this.isTouchScreen) {
+      this.setTimeout = setTimeout(() => {
+        this.setState({
+          displayComponent: false
+        });
+      }, 2000);
     }
   };
 }
