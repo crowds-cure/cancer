@@ -1,0 +1,35 @@
+.LeaderboardItem {
+  display: flex;
+  width: 100%;
+  margin: 5px auto;
+}
+
+.LeaderboardItem .score {
+  width: 130px;
+  color: #7cf4fe;
+  padding: 5px 10px;
+  text-align: right;
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.LeaderboardItem .rank {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  color: #ffffff;
+  background-color: #6c0ad6;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.LeaderboardItem .name {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  color: #ffffff;
+  background-color: #33316d;
+  padding: 5px 10px;
+  font-size: 24px;
+}
