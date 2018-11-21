@@ -46,6 +46,10 @@ class CaseFeedback extends Component {
         label: 'Poor image quality, other'
       },
       {
+        value: 'ContainsMultiPhaseImages',
+        label: 'Contains multi-phase images'
+      },
+      {
         value: 'NoDiseaseIdentified',
         label: 'No disease identified'
       },
@@ -54,20 +58,16 @@ class CaseFeedback extends Component {
         label: 'No measurable disease'
       },
       {
-        value: 'ContainsMultiPhaseImages',
-        label: 'Contains multi-phase images'
-      },
-      {
-        value: 'NoNeJustWantToSkip',
-        label: 'None, just want to skip'
-      },
-      {
         value: 'LikelyBenign',
         label: 'Likely benign'
       },
       {
         value: 'DidntMeasureEverything',
         label: 'Didn’t measure everything'
+      },
+      {
+        value: 'NoneJustWantToSkip',
+        label: 'None, just want to skip'
       }
     ];
 
