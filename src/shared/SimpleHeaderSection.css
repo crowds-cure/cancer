@@ -27,6 +27,7 @@
   border-left: 1px solid #b8baee;
   padding-left: 10px;
   cursor: pointer;
+  font-size: 15px;
 }
 
 @media (min-width: screen-sm) {
