@@ -11,17 +11,6 @@ class ProgressBar extends Component {
       value: this.props.value - this.props.min,
       max: this.props.max - this.props.min
     };
-
-    const delay = 2000;
-
-    const increment = this.props.increment;
-    if (increment) {
-      setTimeout(() => {
-        this.setState({
-          value: this.state.value + increment
-        });
-      }, delay);
-    }
   }
 
   render() {
@@ -33,6 +22,18 @@ class ProgressBar extends Component {
       />
     );
   }
+
+  componentDidMount = () => {
+    const delay = 300;
+    const increment = this.props.increment;
+    if (increment) {
+      setTimeout(() => {
+        this.setState({
+          value: this.state.value + increment
+        });
+      }, delay);
+    }
+  };
 }
 
 ProgressBar.propTypes = {
