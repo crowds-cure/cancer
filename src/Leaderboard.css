@@ -1,0 +1,35 @@
+.Leaderboard {
+  height: 100%;
+  background-color: #262548;
+  overflow-y: auto;
+  padding-bottom: 15px;
+}
+
+.Leaderboard .title-container {
+  justify-content: space-evenly;
+  margin: 10px auto;
+}
+
+.Leaderboard .title {
+  font-style: italic;
+  color: #317bb1;
+  font-size: 40px;
+  font-weight: 600;
+  padding-left: 0;
+}
+
+.top-individuals,
+.top-groups {
+  margin-top: 50px;
+}
+
+.top-individuals-container,
+.top-groups-container {
+  margin: 0 auto;
+  justify-content: space-evenly;
+}
+
+.top-individuals-container .content .row {
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}

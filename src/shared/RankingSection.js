@@ -3,7 +3,7 @@ import React from 'react';
 import RankingItem from './RankingItem.js';
 import './RankingSection.css';
 import PropTypes from 'prop-types';
-import getTopAnnotators from './getTopAnnotators';
+import { getTopAnnotators } from './getTopAnnotators';
 
 class RankingSection extends Component {
   constructor(props) {

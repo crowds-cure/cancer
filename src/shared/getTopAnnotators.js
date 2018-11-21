@@ -34,10 +34,6 @@ async function getTopAnnotators() {
     };
   });
 
-  // TODO these should be integrated into the leaderboard dessign when available.
-  getTopAnnotatorsByWeek();
-  getTopTeamsByWeek();
-
   return annotators.slice(0, 3);
 }
 
@@ -170,4 +166,4 @@ async function getTopTeamsByWeek(week) {
   return topTeams.slice(0, 3);
 }
 
-export default getTopAnnotators;
+export { getTopAnnotators, getTopAnnotatorsByWeek, getTopTeamsByWeek };

@@ -8,6 +8,7 @@ import ConnectedDashboard from './ConnectedDashboard.js';
 import ConnectedViewer from './ConnectedViewer.js';
 import ConnectedSessionSummary from './ConnectedSessionSummary.js';
 import ScreenshotQA from './ScreenshotQA.js';
+import Leaderboard from './Leaderboard.js';
 import TestPage from './TestPage.js';
 
 const reload = () => window.location.reload();
@@ -48,6 +49,13 @@ class App extends Component {
           exact
           path="/screenshot-qa"
           component={ScreenshotQA}
+          auth={this.props.auth}
+          store={this.props.store}
+        />
+        <SecretRoute
+          exact
+          path="/leaderboard"
+          component={Leaderboard}
           auth={this.props.auth}
           store={this.props.store}
         />
