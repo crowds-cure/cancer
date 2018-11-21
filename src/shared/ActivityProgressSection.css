@@ -56,6 +56,7 @@
 
   .ActivityProgressSection .value {
     font-size: 81px;
+    font-weight: 600;
     line-height: 81px;
     display: block;
   }

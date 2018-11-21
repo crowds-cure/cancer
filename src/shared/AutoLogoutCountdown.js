@@ -46,7 +46,7 @@ class AutoLogoutCountdown extends Component {
     const { timeLeft } = this.state;
     const remaining = timeLeft - 1;
     if (timeLeft === 0) {
-      window.auth.logout();
+      //      window.auth.logout();
     } else {
       this.setState({
         timeLeft: remaining

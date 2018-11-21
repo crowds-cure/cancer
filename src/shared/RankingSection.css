@@ -2,7 +2,7 @@
 @value textActiveColor, textSecondaryColor from globals;
 
 .RankingSection {
-  margin: 10px 0;
+  margin: 10px 0 25px 0;
 }
 .RankingSection .title {
   font-size: 18px;

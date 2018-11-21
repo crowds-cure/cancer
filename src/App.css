@@ -7,7 +7,8 @@ body,
 
 body {
   box-sizing: border-box;
-  font-family: 'WorkSans', 'SF Pro Text', 'Roboto', 'Helvetica Neue', sans-serif;
+  font-family: 'Work Sans', 'SF Pro Text', 'Roboto', 'Helvetica Neue',
+    sans-serif;
   margin: 0;
   padding: 0;
   -webkit-font-smoothing: antialiased;
