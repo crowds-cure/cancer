@@ -26,7 +26,6 @@ async function getTopAnnotators() {
   // TODO: Sort in the View
   measByAnno.sort((a, b) => b.value - a.value);
 
-  // TODO: Skip the current user
   const annotators = measByAnno.map(r => {
     return {
       name: r.key,
@@ -69,10 +68,48 @@ function getWeekKey(week) {
   return `${date.getFullYear()}/${week}`;
 }
 
+// return the top annotators for the given year, month and day, where
+// month is the actual month number (January as 1)
+async function getTopAnnotatorsByDay(limit = 10, year, month, day) {
+  const date = new Date();
+  year = year || date.getFullYear();
+  month = month || date.getMonth() + 1;
+  day = day || date.getDate();
+
+  const yearmonthday = [year, month, day].join('/');
+  const measurementsDB = getDB('measurements');
+  const result = await measurementsDB.query('by/dayAnnotator', {
+    reduce: true,
+    group: true,
+    start_key: [yearmonthday, ''],
+    end_key: [yearmonthday, {}],
+    level: 'exact'
+  });
+
+  let dayAnnotators = result.rows;
+
+  // TODO: Clean up the database so this isn't required
+  dayAnnotators = dayAnnotators.filter(a => a.key[1] !== null);
+
+  // TODO: Sort in the View
+  dayAnnotators.sort((a, b) => b.value - a.value);
+
+  const annotators = dayAnnotators.map(r => {
+    return {
+      name: r.key,
+      value: r.value
+    };
+  });
+
+  console.log(`top for day ${yearmonthday} annotators: `, annotators);
+
+  return annotators.slice(0, limit);
+}
+
 // return the top annotators for the given week, where
 // week is the week number as defined by getWeek above
 // and in the couchdb view
-async function getTopAnnotatorsByWeek(week) {
+async function getTopAnnotatorsByWeek(limit = 10, week) {
   const weekKey = getWeekKey(week);
 
   const measurementsDB = getDB('measurements');
@@ -92,7 +129,6 @@ async function getTopAnnotatorsByWeek(week) {
   // TODO: Sort in the View
   weekAnnotators.sort((a, b) => b.value - a.value);
 
-  // TODO: Skip the current user
   const annotators = weekAnnotators.map(r => {
     return {
       name: r.key,
@@ -102,13 +138,13 @@ async function getTopAnnotatorsByWeek(week) {
 
   console.log(`top for week ${weekKey} annotators: `, annotators);
 
-  return annotators.slice(0, 24);
+  return annotators.slice(0, limit);
 }
 
 // return the top teams for the given week, where
 // week is the week number as defined by getWeek above
 // and in the couchdb view
-async function getTopTeamsByWeek(week) {
+async function getTopTeamsByWeek(limit = 10, week) {
   const weekKey = getWeekKey(week);
 
   const measurementsDB = getDB('measurements');
@@ -163,7 +199,12 @@ async function getTopTeamsByWeek(week) {
 
   console.log(`top for teams week ${weekKey} teams: `, topTeams);
 
-  return topTeams.slice(0, 10);
+  return topTeams.slice(0, limit);
 }
 
-export { getTopAnnotators, getTopAnnotatorsByWeek, getTopTeamsByWeek };
+export {
+  getTopAnnotators,
+  getTopAnnotatorsByDay,
+  getTopAnnotatorsByWeek,
+  getTopTeamsByWeek
+};

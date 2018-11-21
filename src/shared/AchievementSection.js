@@ -87,6 +87,28 @@ class AchievementSection extends Component {
       achievements.timeSessionWeek9h.completed =
         achievementStatus.totalSessionDurationInMinInWeek >= 540;
 
+      // Individual Leader Badge - Day
+      achievements.rsna18Day1.completed =
+        achievementStatus.topIndivNumberInRSNA18Day === 1;
+      achievements.rsna18DayTop10.completed =
+        achievementStatus.topIndivNumberInRSNA18Day > 0 &&
+        achievementStatus.topIndivNumberInRSNA18Day < 11;
+
+      // Individual Leader Badge - Week
+      achievements.rsna18Week1.completed =
+        achievementStatus.topIndivNumberInRSNA18Week === 1;
+      achievements.rsna18WeekTop10.completed =
+        achievementStatus.topIndivNumberInRSNA18Week > 0 &&
+        achievementStatus.topIndivNumberInRSNA18Week < 11;
+
+      // Group Badge
+      achievements.rsna18Group1.completed =
+        achievementStatus.topTeamNumberInRSNA18Week === 1;
+      achievements.rsna18Group2.completed =
+        achievementStatus.topTeamNumberInRSNA18Week === 2;
+      achievements.rsna18Group3.completed =
+        achievementStatus.topTeamNumberInRSNA18Week === 3;
+
       this.setState({
         achievements
       });
