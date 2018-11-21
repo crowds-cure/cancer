@@ -314,12 +314,10 @@ class Viewer extends Component {
   }
 
   saveCase() {
-    const { caseData } = this.props;
+    const { caseData, totalCompleteCollection } = this.props;
 
     const measurements = this.getMeasurementData();
     this.props.incrementNumMeasurementsInSession(measurements.length);
-
-    const { totalCompleteCollection } = this.props;
 
     saveMeasurementToDatabase(caseData, measurements, this.state.feedback).then(
       () => {
@@ -344,8 +342,15 @@ class Viewer extends Component {
     //instanceURL: window.rsnaCrowdQuantCaseStudy.urls[sliceIndex],
     //sliceIndex,
 
-    const { caseData } = this.props;
-    saveSkipToDatabase(caseData, this.state.feedback).then(this.getNextCase);
+    const { caseData, totalCompleteCollection } = this.props;
+
+    saveSkipToDatabase(caseData, this.state.feedback).then(() => {
+      this.getNextCase();
+
+      // Determine and save the earned achievements
+      // after skips are saved to db
+      saveAchievementsToDatabase(totalCompleteCollection);
+    });
   }
 
   isSkipEnabled() {

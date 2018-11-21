@@ -19,12 +19,15 @@
 }
 
 .ProgressSection .value {
+  transition: all 0.1s linear;
   display: inline-block;
   color: textPrimaryColor;
   font-weight: 600;
   font-size: 43px;
   line-height: normal;
   margin-left: 10px;
+  position: relative;
+  top: 0px;
 }
 
 .ProgressSection .suffix {
@@ -38,12 +41,14 @@
 }
 
 .ProgressSection .plusPoints {
+  transition: all 0.3s linear;
   color: textActiveColor;
   position: absolute;
   font-size: 33px;
   font-weight: 600;
   top: -35px;
   left: 55px;
+  opacity: 0;
 }
 
 .ProgressSection .progressBarContainer {
@@ -64,11 +69,34 @@
   font-weight: bold;
 }
 
+.ProgressSection .fadeInAndSlideDown {
+  opacity: 1;
+  top: -35px;
+}
+
+.ProgressSection .fadeOutAndSlideDown {
+  opacity: 0;
+  top: -10px;
+}
+
+.ProgressSection .moveDown {
+  position: relative;
+  top: 22px;
+}
+
 @media (min-width: screen-sm) {
   .ProgressSection .plusPoints {
     font-size: 60px;
+    top: -110px;
+    right: 110px;
+  }
+
+  .ProgressSection .fadeInAndSlideDown {
     top: -70px;
-    left: 90px;
+  }
+
+  .ProgressSection .fadeOutAndSlideDown {
+    top: 0px;
   }
 
   .ProgressSection .value {

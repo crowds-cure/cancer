@@ -8,15 +8,22 @@ import './ProgressSection.css';
 import { getBadgeByNumberOfCases } from '../badges';
 
 class ProgressSection extends Component {
-  render() {
-    const current =
-      this.props.current === undefined ? '---' : this.props.current;
+  constructor(props) {
+    super(props);
 
-    const rank = getBadgeByNumberOfCases(this.props.current);
+    this.plusPoints = React.createRef();
+    this.currentValue = React.createRef();
 
-    const increment = {
+    this.state = {
+      current: this.props.current,
       measurementsInCurrentSession: this.props.measurementsInCurrentSession
     };
+  }
+
+  render() {
+    const rank = getBadgeByNumberOfCases(this.state.current);
+    const current = this.state.current ? this.state.current : '---';
+    const increment = this.state.measurementsInCurrentSession;
 
     return (
       <div className="ProgressSection">
@@ -26,24 +33,26 @@ class ProgressSection extends Component {
               <RankBadge name={rank.name} img={rank.img} type={rank.type} />
             </div>
             <div className="currentPoints">
-              <span className="value">{current}</span>
-              <span className="suffix">measured</span>
-              <span className="plusPoints">
-                +{increment.measurementsInCurrentSession}
+              <span ref={this.currentValue} className="value">
+                {current}
               </span>
+              <span className="suffix">measured</span>
+              {increment && (
+                <span ref={this.plusPoints} className="plusPoints">
+                  +{increment}
+                </span>
+              )}
             </div>
           </div>
           <div className="progressBarContainer">
             <span className="progressLow">{rank.min}</span>
             <span className="progressHigh">{rank.max}</span>
-            {this.props.current === undefined ? (
-              ''
-            ) : (
+            {this.state.current && (
               <ProgressBar
                 min={rank.min}
                 max={rank.max}
-                value={this.props.current}
-                increment={increment.measurementsInCurrentSession}
+                value={this.state.current}
+                increment={increment}
               />
             )}
           </div>
@@ -51,6 +60,40 @@ class ProgressSection extends Component {
       </div>
     );
   }
+
+  componentDidMount = () => {
+    if (this.plusPoints.current) {
+      setTimeout(() => {
+        this.plusPointsAnimation();
+      });
+      setTimeout(() => {
+        this.currentValueAnimation();
+      }, 2100);
+    }
+  };
+
+  plusPointsAnimation = () => {
+    this.plusPoints.current.classList.add('fadeInAndSlideDown');
+    setTimeout(() => {
+      setTimeout(() => {
+        this.plusPoints.current.classList.remove('fadeInAndSlideDown');
+        this.plusPoints.current.classList.add('fadeOutAndSlideDown');
+      }, 1700);
+    }, 300);
+  };
+
+  currentValueAnimation = () => {
+    this.currentValue.current.classList.add('moveDown');
+    setTimeout(() => {
+      this.currentValue.current.classList.remove('moveDown');
+      setTimeout(() => {
+        this.setState({
+          current: this.state.current + this.state.measurementsInCurrentSession,
+          measurementsInCurrentSession: null
+        });
+      }, 100);
+    }, 100);
+  };
 }
 
 ProgressSection.propTypes = {
