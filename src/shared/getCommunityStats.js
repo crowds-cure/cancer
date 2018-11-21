@@ -84,6 +84,40 @@ async function getTeamUsers() {
   return teamUsers;
 }
 
+async function getCollectionMeasurementStats() {
+  const measurementsDB = getDB('measurements');
+  const caseDataPromise = measurementsDB.query('by/caseDataCollection', {
+    reduce: true,
+    group: true
+  });
+
+  const casesDB = getDB('cases');
+  const casesPromise = casesDB.query('by/collection', {
+    reduce: true,
+    group: true
+  });
+
+  return await Promise.all([caseDataPromise, casesPromise]).then(results => {
+    const caseData = results[0].rows;
+    const cases = results[1].rows;
+
+    const statsByCollection = {
+      measurementCount: {},
+      caseCount: {},
+      averageMeaurements: {}
+    };
+    cases.forEach(entry => {
+      statsByCollection.measurementCount[entry.key] = entry.value;
+    });
+    caseData.forEach(entry => {
+      statsByCollection.caseCount[entry.key] = entry.value;
+      statsByCollection.averageMeaurements[entry.key] =
+        statsByCollection.measurementCount[entry.key] / entry.value;
+    });
+    return statsByCollection;
+  });
+}
+
 async function getCommunityStats() {
   const measurementsDB = getDB('measurements');
 
@@ -109,6 +143,11 @@ async function getCommunityStats() {
   // extra stat functions that can be added to dashboard / badges
   console.log('sessions by team', await getSessionsByTeam());
   console.log('users on each team', await getTeamUsers());
+
+  console.log(
+    'measurements per collection',
+    await getCollectionMeasurementStats()
+  );
 
   return {
     totalMeasurements,
