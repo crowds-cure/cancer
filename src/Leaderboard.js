@@ -33,13 +33,13 @@ class Leaderboard extends Component {
 
   updateLeaderboardData() {
     // Retrieve top individuals this week
-    getTopAnnotatorsByWeek().then(topAnnotators => {
+    getTopAnnotatorsByWeek(24).then(topAnnotators => {
       this.setState({
         topAnnotators
       });
     });
     // Retrieve top groups this week
-    getTopTeamsByWeek().then(topTeams => {
+    getTopTeamsByWeek(10).then(topTeams => {
       this.setState({
         topTeams
       });

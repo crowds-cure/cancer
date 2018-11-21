@@ -1,5 +1,10 @@
 import { getDB } from '../db';
-import getUsername from '../viewer/lib/getUsername';
+import {
+  getTopAnnotatorsByDay,
+  getTopAnnotatorsByWeek,
+  getTopTeamsByWeek
+} from './getTopAnnotators';
+import getProfile from '../viewer/lib/getProfile';
 
 async function getMaxWithTwoGroupLevelForUser(db, dbView, username) {
   const result = await db.query(dbView, {
@@ -37,10 +42,53 @@ async function getValueWithOneGroupLevelForUser(db, dbView, username) {
   return result.rows[0].value;
 }
 
+async function getTopIndivNumberInRSNA18DayForUser(username) {
+  const date = new Date();
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+
+  // Determine only for RSNA 2018 (Nov 25 - 30)
+  if (year !== 2018 || month !== 11 || day < 25 || day > 30) {
+    return -1;
+  }
+
+  const topAnnotators = await getTopAnnotatorsByDay(10, year, month, day);
+  return topAnnotators.findIndex(topA => topA.name[1] === username) + 1;
+}
+
+async function getTopIndivNumberInRSNA18WeekForUser(username) {
+  const date = new Date();
+  const year = date.getFullYear();
+  const week = 48;
+
+  // Determine only for RSNA 2018 (Week 48)
+  if (year !== 2018) {
+    return -1;
+  }
+
+  const topAnnotators = await getTopAnnotatorsByWeek(10, week);
+  return topAnnotators.findIndex(topA => topA.name[1] === username) + 1;
+}
+
+async function getTopTeamNumberInRSNA18WeekForUser(team) {
+  const date = new Date();
+  const year = date.getFullYear();
+  const week = 48;
+
+  // Determine only for RSNA 2018 (Week 48)
+  if (year !== 2018) {
+    return -1;
+  }
+
+  const topTeams = await getTopTeamsByWeek(10, week);
+  return topTeams.findIndex(topT => topT[0] === team) + 1;
+}
+
 async function getAchievementStatusForUser() {
   const measurementsDB = getDB('measurements');
   const sessionsDB = getDB('sessions');
-  const username = getUsername();
+  const { team, username } = getProfile();
 
   const maxMeasurementsInDay = await getMaxWithTwoGroupLevelForUser(
     measurementsDB,
@@ -69,12 +117,25 @@ async function getAchievementStatusForUser() {
     username
   );
 
+  const topIndivNumberInRSNA18Day = await getTopIndivNumberInRSNA18DayForUser(
+    username
+  );
+  const topIndivNumberInRSNA18Week = await getTopIndivNumberInRSNA18WeekForUser(
+    username
+  );
+  const topTeamNumberInRSNA18Week = await getTopTeamNumberInRSNA18WeekForUser(
+    team
+  );
+
   return {
     maxMeasurementsInDay, // Max number of total measurements in a day
     maxMeasurementsInWeek, // Max number of total measurements in a week
     maxMeasurementsInSession, // Max number of total measurements in a session
     maxSessionDurationInMin, // Max session duration in minutes all time
-    totalSessionDurationInMinInWeek // Total session duration in minutes in a week
+    totalSessionDurationInMinInWeek, // Total session duration in minutes in a week
+    topIndivNumberInRSNA18Day, // Top Leaderboard Individual Number in a day of RSNA 2018
+    topIndivNumberInRSNA18Week, // Top Leaderboard Individual Number in the week of RSNA 2018
+    topTeamNumberInRSNA18Week // Top Leaderboard Team Number in the week of RSNA 2018
   };
 }
 
