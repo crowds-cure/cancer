@@ -17,6 +17,7 @@ import clearOldCornerstoneCacheData from './lib/clearOldCornerstoneCacheData.js'
 
 import saveMeasurementToDatabase from './lib/saveMeasurementToDatabase.js';
 import saveSkipToDatabase from './lib/saveSkipToDatabase.js';
+import saveAchievementsToDatabase from './lib/saveAchievementsToDatabase.js';
 
 import * as cornerstone from 'cornerstone-core';
 import * as cornerstoneWADOImageLoader from 'cornerstone-wado-image-loader';
@@ -215,6 +216,7 @@ class Viewer extends Component {
             measurementsInCurrentSession={
               this.props.measurementsInCurrentSession
             }
+            totalCompleteCollection={this.props.totalCompleteCollection}
             displayCountSuffix={true}
           />
         </MediaQuery>
@@ -226,6 +228,7 @@ class Viewer extends Component {
             measurementsInCurrentSession={
               this.props.measurementsInCurrentSession
             }
+            totalCompleteCollection={this.props.totalCompleteCollection}
             displayCountSuffix={false}
           />
         </MediaQuery>
@@ -316,8 +319,16 @@ class Viewer extends Component {
     const measurements = this.getMeasurementData();
     this.props.incrementNumMeasurementsInSession(measurements.length);
 
+    const { totalCompleteCollection } = this.props;
+
     saveMeasurementToDatabase(caseData, measurements, this.state.feedback).then(
-      this.getNextCase
+      () => {
+        this.getNextCase();
+
+        // Determine and save the earned achievements
+        // after measurements are saved to db
+        saveAchievementsToDatabase(totalCompleteCollection);
+      }
     );
   }
 

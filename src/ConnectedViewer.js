@@ -19,6 +19,7 @@ const mapStateToProps = state => {
     caseData: state.cases.caseData,
     activeTool: activeTool.command,
     measurementsInCurrentSession: state.session.measurementsInCurrentSession,
+    totalCompleteCollection: state.session.totalCompleteCollection,
     collection: state.collection.name,
     sessionStart: state.session.start
   };

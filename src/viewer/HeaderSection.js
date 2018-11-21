@@ -10,6 +10,7 @@ import CaseProgressIndicator from './CaseProgressIndicator.js';
 import './HeaderSection.css';
 import '../shared/Modal.css';
 import sendSessionStatisticsToDatabase from './lib/sendSessionStatisticsToDatabase';
+import saveAchievementsToDatabase from './lib/saveAchievementsToDatabase';
 
 Modal.defaultStyles.overlay.backgroundColor = 'black';
 Modal.setAppElement('#root');
@@ -233,7 +234,13 @@ class HeaderSection extends Component {
       cases: this.props.measurementsInCurrentSession
     };
 
-    sendSessionStatisticsToDatabase(currentSession);
+    const { totalCompleteCollection } = this.props;
+
+    sendSessionStatisticsToDatabase(currentSession).then(() => {
+      // Determine and save the earned achievements
+      // after session statistics are saved to db
+      saveAchievementsToDatabase(totalCompleteCollection);
+    });
 
     this.props.history.push('/session-summary');
   }

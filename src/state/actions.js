@@ -8,6 +8,11 @@ export const incrementNumMeasurementsInSession = num => ({
   num
 });
 
+export const setTotalCompleteCollection = num => ({
+  type: 'TOTAL_COMPLETE_COLLECTION',
+  num
+});
+
 export const fetchCaseRequest = () => ({
   type: 'FETCH_CASE_REQUEST'
 });

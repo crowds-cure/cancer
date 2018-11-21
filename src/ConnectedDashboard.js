@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import Dashboard from './Dashboard.js';
+import { setTotalCompleteCollection } from './state/actions.js';
 
 const mapStateToProps = state => {
   return {
@@ -9,7 +10,9 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
-  return {};
+  return {
+    setTotalCompleteCollection: num => dispatch(setTotalCompleteCollection(num))
+  };
 };
 
 const ConnectedDashboard = connect(
