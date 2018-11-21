@@ -56,13 +56,14 @@
 }
 
 .CaseTypeCard .name {
-  font-weight: bold;
+  font-weight: 600;
   font-size: 22px;
 }
 
 .CaseTypeCard .type {
-  font-size: 18px;
+  font-size: 16px;
   color: textSecondaryColor;
+  margin-top: 6px;
 }
 
 .CaseTypeCard .info-icon {

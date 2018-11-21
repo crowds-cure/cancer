@@ -22,7 +22,7 @@
   transition: all 0.1s linear;
   display: inline-block;
   color: textPrimaryColor;
-  font-weight: bold;
+  font-weight: 600;
   font-size: 43px;
   line-height: normal;
   margin-left: 10px;
@@ -45,9 +45,9 @@
   color: textActiveColor;
   position: absolute;
   font-size: 33px;
-  font-weight: bold;
-  top: -65px;
-  right: 60px;
+  font-weight: 600;
+  top: -35px;
+  left: 55px;
   opacity: 0;
 }
 
@@ -58,13 +58,15 @@
 .ProgressSection .progressLow {
   float: left;
   color: white;
-  font-size: 13px;
+  font-size: 21px;
+  font-weight: bold;
 }
 
 .ProgressSection .progressHigh {
   float: right;
   color: white;
-  font-size: 13px;
+  font-size: 21px;
+  font-weight: bold;
 }
 
 .ProgressSection .fadeInAndSlideDown {

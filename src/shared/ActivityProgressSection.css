@@ -56,12 +56,13 @@
 
   .ActivityProgressSection .value {
     font-size: 81px;
+    font-weight: 600;
     line-height: 81px;
     display: block;
   }
 
   .ActivityProgressSection .suffix {
-    font-size: 22px;
+    font-size: 18px;
     margin-top: 0px;
     display: block;
   }
