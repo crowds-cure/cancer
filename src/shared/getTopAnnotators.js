@@ -102,7 +102,7 @@ async function getTopAnnotatorsByWeek(week) {
 
   console.log(`top for week ${weekKey} annotators: `, annotators);
 
-  return annotators.slice(0, 3);
+  return annotators;
 }
 
 // return the top teams for the given week, where
@@ -163,7 +163,7 @@ async function getTopTeamsByWeek(week) {
 
   console.log(`top for teams week ${weekKey} teams: `, topTeams);
 
-  return topTeams.slice(0, 3);
+  return topTeams;
 }
 
 export { getTopAnnotators, getTopAnnotatorsByWeek, getTopTeamsByWeek };
