@@ -35,6 +35,8 @@
   background: black;
   text-align: center;
   overflow: hidden;
+  display: flex;
+  justify-content: center;
 }
 
 .CaseTypeCard img {
