@@ -9,7 +9,8 @@ class ProgressBar extends Component {
 
     this.state = {
       value: this.props.value - this.props.min,
-      max: this.props.max - this.props.min
+      max: this.props.max - this.props.min,
+      lastMax: this.props.max
     };
   }
 
@@ -32,6 +33,16 @@ class ProgressBar extends Component {
           value: this.state.value + increment
         });
       }, delay);
+    }
+  };
+
+  componentDidUpdate = () => {
+    if (this.state.lastMax !== this.props.max) {
+      this.setState({
+        value: this.props.value - this.props.min,
+        max: this.props.max - this.props.min,
+        lastMax: this.props.max
+      });
     }
   };
 }
