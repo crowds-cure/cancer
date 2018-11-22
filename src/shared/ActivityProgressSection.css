@@ -36,6 +36,14 @@
   top: 0px;
 }
 
+.badgeName {
+  text-align: center;
+}
+
+.rankBadge.not-received {
+  opacity: 0.25;
+}
+
 .ActivityProgressSection .rank {
   display: inline;
   padding: 20px 0;
