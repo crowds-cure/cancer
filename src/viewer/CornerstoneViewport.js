@@ -485,16 +485,11 @@ class CornerstoneViewport extends Component {
 
     setToolsPassive(leftMouseTools);
 
-    cornerstoneTools.setToolActive(activeTool, {
-      mouseButtonMask: 1,
-      isTouchActive: true
-    });
-
     // pan is the default tool for middle mouse button
     const isPanToolActive = activeTool === 'Pan';
     const panOptions = {
       mouseButtonMask: isPanToolActive ? [1, 4] : [4],
-      isTouchActive: !isPanToolActive
+      isTouchActive: isPanToolActive
     };
     cornerstoneTools.setToolActive('Pan', panOptions);
 
@@ -502,9 +497,14 @@ class CornerstoneViewport extends Component {
     const isZoomToolActive = activeTool === 'Zoom';
     const zoomOptions = {
       mouseButtonMask: isZoomToolActive ? [1, 2] : [2],
-      isTouchActive: !isZoomToolActive
+      isTouchActive: isZoomToolActive
     };
     cornerstoneTools.setToolActive('Zoom', zoomOptions);
+
+    cornerstoneTools.setToolActive(activeTool, {
+      mouseButtonMask: 1,
+      isTouchActive: true
+    });
   };
 
   onStackScroll(event) {
