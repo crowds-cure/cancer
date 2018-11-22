@@ -29,7 +29,6 @@ async function annotatorCollectionStatus(collection, annotatorID) {
     byCollectionPromise,
     byAnnotatorCollectionPromise
   ]).then(results => {
-    console.warn(results);
     return {
       annotatorID,
       byAnnotator: results[1].rows.length,

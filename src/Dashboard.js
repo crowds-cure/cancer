@@ -40,55 +40,67 @@ class Dashboard extends Component {
 
     const collectionsDB = getDB('collections');
 
-    collectionsDB.allDocs({ include_docs: true }).then(async docs => {
-      const typePromises = docs.rows.map(async row => {
-        const collection = row.doc.Collection;
-        const annotatorID = getUsername();
-        // TODO: Why can't we do this in one call instead of >10
-        const status = await annotatorCollectionStatus(collection, annotatorID);
-        const host = ''; // 'https://db.crowds-cure.org';
-        const db = 'screenshots'; // 'collections';
-        const name = row.doc.Collection.replace(/\s+/g, '-') + '.jpg'; // 'screenshot.png';
-
-        //const img = `${host}/${db}/${row.id}/${name}`;
-        const img = `${host}/${db}/${name}`;
-
-        return {
-          ...row.doc,
-          inCollection: status.inCollection,
-          byAnnotator: status.byAnnotator,
-          img
-        };
-      });
-
-      const types = await Promise.all(typePromises);
-
-      types.sort((a, b) => {
-        const aOrder = a.Order;
-        const bOrder = b.Order;
-        if (aOrder === undefined && bOrder === undefined) {
-          return 0;
-        } else if (aOrder === undefined) {
-          return 1;
-        } else if (bOrder === undefined) {
-          return -1;
+    collectionsDB
+      .find({
+        selector: {
+          Enabled: true
         }
+      })
+      .then(async result => {
+        const { docs } = result;
+        const typePromises = docs.map(async collection => {
+          const annotatorID = getUsername();
+          // TODO: Why can't we do this in one call instead of >10
+          const status = await annotatorCollectionStatus(
+            collection.Collection,
+            annotatorID
+          );
+          const host = ''; // 'https://db.crowds-cure.org';
+          const db = 'screenshots'; // 'collections';
+          const name = collection.Collection.replace(/\s+/g, '-') + '.jpg'; // 'screenshot.png';
 
-        return a.Order - b.Order;
+          //const img = `${host}/${db}/${row.id}/${name}`;
+          const img = `${host}/${db}/${name}`;
+
+          return {
+            ...collection,
+            inCollection: status.inCollection,
+            byAnnotator: status.byAnnotator,
+            img
+          };
+        });
+
+        const types = await Promise.all(typePromises);
+        const enabledTypes = types.filter(type => {
+          return type !== null;
+        });
+
+        enabledTypes.sort((a, b) => {
+          const aOrder = a.Order;
+          const bOrder = b.Order;
+          if (aOrder === undefined && bOrder === undefined) {
+            return 0;
+          } else if (aOrder === undefined) {
+            return 1;
+          } else if (bOrder === undefined) {
+            return -1;
+          }
+
+          return a.Order - b.Order;
+        });
+
+        const totalCompleteCollection = enabledTypes.reduce(
+          (acc, val) => (val.byAnnotator === val.inCollection ? acc + 1 : acc),
+          0
+        );
+
+        this.props.setTotalCompleteCollection(totalCompleteCollection);
+
+        this.setState({
+          types: enabledTypes,
+          isLoading: false
+        });
       });
-
-      const totalCompleteCollection = types.reduce(
-        (acc, val) => (val.byAnnotator === val.inCollection ? acc + 1 : acc),
-        0
-      );
-
-      this.props.setTotalCompleteCollection(totalCompleteCollection);
-
-      this.setState({
-        types,
-        isLoading: false
-      });
-    });
 
     getUserStats().then(userStats => {
       this.context.store.dispatch({
