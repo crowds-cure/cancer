@@ -85,7 +85,7 @@ class Labelling extends Component {
           )}
           {showButtons && (
             <>
-              <div className="checkIconWrapper">
+              <div className="checkIconWrapper" onClick={this.fadeOutAndLeave}>
                 <svg className="checkIcon">
                   <use xlinkHref="/icons.svg#check-solid" />
                 </svg>
@@ -99,7 +99,7 @@ class Labelling extends Component {
                   className="commonButton"
                   onClick={this.descriptionUpdate}
                 >
-                  {this.state.description === null
+                  {this.state.description === ''
                     ? 'Add Description'
                     : 'Edit Description'}
                 </button>
