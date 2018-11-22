@@ -11,7 +11,9 @@ class LeaderboardItem extends Component {
           {this.props.score && this.props.score.toLocaleString()}
         </div>
         <div className="rank">{this.props.rank}</div>
-        <div className="name">{this.props.name}</div>
+        <div className="name" title={this.props.name}>
+          {this.props.name}
+        </div>
       </div>
     );
   }

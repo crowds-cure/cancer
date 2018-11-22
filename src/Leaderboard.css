@@ -29,7 +29,12 @@
   justify-content: space-evenly;
 }
 
-.top-individuals-container .content .row {
-  flex-wrap: nowrap;
-  justify-content: space-between;
+.top-individuals-container {
+  max-height: 410px;
+  overflow-y: auto;
+}
+
+.top-groups-container {
+  max-height: 260px;
+  overflow-y: auto;
 }
