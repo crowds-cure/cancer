@@ -22,6 +22,8 @@ class RankingSection extends Component {
       case 'team':
         topPromise = getTopTeams(3);
         break;
+      default:
+        break;
     }
 
     if (!topPromise) {
@@ -46,6 +48,8 @@ class RankingSection extends Component {
           break;
         case 'team':
           name = TEAM_LABELS[item.name] || '';
+          break;
+        default:
           break;
       }
       const score = item.value;
