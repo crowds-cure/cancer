@@ -129,6 +129,9 @@ export default class Auth {
   }
 
   login(args) {
+    args.extraQueryParams =
+      args.extraQueryParams || this.extraQueryParams || {};
+    args.extraQueryParams.hash = window.location.hash;
     return this.oidcUserManager.signinRedirect(args);
   }
 
