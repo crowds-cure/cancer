@@ -45,7 +45,7 @@ class SecuredImage extends Component {
 SecuredImage.propTypes = {
   id: PropTypes.string,
   alt: PropTypes.string.isRequired,
-  className: PropTypes.string.isRequired,
+  className: PropTypes.string,
   src: PropTypes.string.isRequired,
   onError: PropTypes.func.isRequired,
   getAuthorizationHeader: PropTypes.func.isRequired
