@@ -15,7 +15,7 @@ async function annotatorCollectionStatus(collection, annotatorID) {
 
   const measurementsDB = getDB('measurements');
   const byAnnotatorCollectionPromise = measurementsDB.query(
-    'by/annotatorCollectionSubject',
+    'by/annotatorCollectionCaseId',
     {
       reduce: true,
       group: true,
