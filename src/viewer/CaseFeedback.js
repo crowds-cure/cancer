@@ -100,13 +100,13 @@ class CaseFeedback extends Component {
           <div className="feedback-options">
             <ul>{opts}</ul>
             <button
-              className="buttom"
+              className="button"
               disabled={!this.props.skipEnabled}
               onClick={this.skipCase}
             >
               Skip case
             </button>
-            <button className="buttom" onClick={this.closeDropdown}>
+            <button className="button" onClick={this.closeDropdown}>
               Continue case
             </button>
           </div>
