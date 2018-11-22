@@ -1,14 +1,14 @@
 @value globals: "../GlobalStyles.css";
 @value rankBadgeBorderColor, screen-sm from globals;
 
-.rankBadge img {
+.rankBadgeContainer > .rankBadge img {
   height: 100px;
   width: 100px;
   cursor: pointer;
 }
 
 @media (min-width: screen-sm) {
-  .rankBadge img {
+  .rankBadgeContainer > .rankBadge img {
     height: 130px;
     width: 130px;
   }

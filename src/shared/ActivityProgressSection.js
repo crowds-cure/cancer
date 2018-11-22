@@ -48,7 +48,7 @@ class ActivityProgressSection extends Component {
       }
 
       return (
-        <div className={className} title={badge.name}>
+        <div key={badge.name} className={className} title={badge.description}>
           <img src={badge.img} alt={badge.name} />
           <h4 className="badgeName">{badge.name}</h4>
         </div>
