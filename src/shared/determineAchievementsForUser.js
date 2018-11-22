@@ -82,7 +82,7 @@ async function getTopTeamNumberInRSNA18WeekForUser(team) {
   }
 
   const topTeams = await getTopTeamsByWeek(10, week);
-  return topTeams.findIndex(topT => topT[0] === team) + 1;
+  return topTeams.findIndex(topT => topT.name === team) + 1;
 }
 
 async function getAchievementStatusForUser() {

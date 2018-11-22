@@ -2,10 +2,7 @@ import { Component } from 'react';
 import React from 'react';
 import SimpleHeaderSection from './shared/SimpleHeaderSection';
 import LeaderboardItem from './shared/LeaderboardItem';
-import {
-  getTopAnnotatorsByWeek,
-  getTopTeamsByWeek
-} from './shared/getTopAnnotators';
+import { getTopAnnotators, getTopTeams } from './shared/getTopAnnotators';
 import './Leaderboard.css';
 
 import TEAM_LABELS from './shared/teams.js';
@@ -35,13 +32,13 @@ class Leaderboard extends Component {
 
   updateLeaderboardData() {
     // Retrieve top individuals this week
-    getTopAnnotatorsByWeek(24).then(topAnnotators => {
+    getTopAnnotators(24).then(topAnnotators => {
       this.setState({
         topAnnotators
       });
     });
     // Retrieve top groups this week
-    getTopTeamsByWeek(10).then(topTeams => {
+    getTopTeams(10).then(topTeams => {
       this.setState({
         topTeams
       });
@@ -59,7 +56,7 @@ class Leaderboard extends Component {
     );
     return topAnnotatorsLimited.map((item, index) => {
       const rank = startIndex + index + 1;
-      const name = item.name[1];
+      const name = item.name;
       const score = item.value;
       return (
         <LeaderboardItem
@@ -80,9 +77,8 @@ class Leaderboard extends Component {
     const topTeamsLimited = this.state.topTeams.slice(startIndex, endIndex);
     return topTeamsLimited.map((item, index) => {
       const rank = startIndex + index + 1;
-      const value = item[0];
-      const name = TEAM_LABELS[value];
-      const score = item[1];
+      const name = TEAM_LABELS[item.name] || '';
+      const score = item.value;
       return (
         <LeaderboardItem
           key={'team' + rank}

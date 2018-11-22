@@ -142,10 +142,13 @@ class Dashboard extends Component {
                     <div className="col-lg-16 col-md-8 col-sm-16">
                       <div className="row rankingGroupSection">
                         <div className="col-16">
-                          <RankingSection name="Close to you" />
+                          <RankingSection
+                            name="Top individuals"
+                            type="individual"
+                          />
                         </div>
                         <div className="col-16">
-                          <RankingSection name="Top this week" />
+                          <RankingSection name="Top groups" type="team" />
                         </div>
                       </div>
                     </div>

@@ -1,6 +1,6 @@
 import { getDB } from '../db';
 
-async function getTopAnnotators() {
+async function getTopAnnotators(limit = 10) {
   const measurementsDB = getDB('measurements');
 
   // TODO: This is a very inefficient approach to get the top
@@ -33,7 +33,77 @@ async function getTopAnnotators() {
     };
   });
 
-  return annotators.slice(0, 3);
+  return annotators.slice(0, limit);
+}
+
+async function getTopTeams(limit = 10) {
+  const measurementsDB = getDB('measurements');
+
+  // TODO: This is a very inefficient approach to get the top
+  // three annotators. How can CouchDB use Sort and Limit on a view?
+  // ANS: yes, there is a way to do this by creating a little helper
+  // that puts the reduced measurement counts into a new database that
+  // has a has a view indexed by annotation count.  But for the number
+  // of annotators we will have in the near future this is not required
+  // (remember, we are fetching hundreds of CT images all the time, so
+  // a few dozen lines of json is nothing!)
+  const annotatorPromise = measurementsDB.query('by/annotators', {
+    reduce: true,
+    group: true,
+    level: 'exact'
+  });
+
+  const sessionsDB = getDB('sessions');
+  const teamUsernamePromise = sessionsDB.query('by/teamUsername', {
+    reduce: true,
+    group: true,
+    group_level: 2
+  });
+
+  const topTeams = await Promise.all([
+    annotatorPromise,
+    teamUsernamePromise
+  ]).then(results => {
+    console.log(`getTopTeams results`, results);
+
+    const annotators = results[0].rows;
+    const teamUsers = results[1].rows;
+
+    // make a map from user to team
+    const userTeam = {};
+    Object.values(teamUsers).forEach(teamUser => {
+      userTeam[teamUser.key[1]] = teamUser.key[0];
+    });
+    console.log('userTeam', userTeam);
+
+    const teamAnnotations = {};
+    Object.values(annotators).forEach(annotations => {
+      const user = annotations.key;
+      const team = userTeam[user];
+      const score = annotations.value;
+      teamAnnotations[team] = teamAnnotations[team] || 0;
+      teamAnnotations[team] += score;
+    });
+    const teamRanking = [];
+    Object.keys(teamAnnotations).forEach(teamName => {
+      teamRanking.push([teamName, teamAnnotations[teamName]]);
+    });
+    teamRanking.sort((a, b) => b[1] - a[1]);
+    console.log('teamRanking', teamRanking);
+
+    return teamRanking;
+  });
+
+  console.log(`top for teams: `, topTeams);
+
+  return topTeams
+    .map(topT => {
+      return {
+        name: topT[0],
+        value: topT[1]
+      };
+    })
+    .slice(0, limit);
 }
 
 // This is the same function used in the map function of the couchdb view.
@@ -199,11 +269,19 @@ async function getTopTeamsByWeek(limit = 10, week) {
 
   console.log(`top for teams week ${weekKey} teams: `, topTeams);
 
-  return topTeams.slice(0, limit);
+  return topTeams
+    .map(topT => {
+      return {
+        name: topT[0],
+        value: topT[1]
+      };
+    })
+    .slice(0, limit);
 }
 
 export {
   getTopAnnotators,
+  getTopTeams,
   getTopAnnotatorsByDay,
   getTopAnnotatorsByWeek,
   getTopTeamsByWeek
