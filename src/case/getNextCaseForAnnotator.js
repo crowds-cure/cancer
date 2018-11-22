@@ -12,7 +12,7 @@ async function annotatorCollectionMeasurements(
 ) {
   // get all cases for this collection
   const casesDB = getDB('cases');
-  const byCollectionPromise = casesDB.query('by/collectionSubject', {
+  const byCollectionPromise = casesDB.query('by/collectionCaseId', {
     reduce: false,
     start_key: [collection, ''],
     end_key: [collection, {}]
@@ -31,8 +31,8 @@ async function annotatorCollectionMeasurements(
   );
 
   // get measurements for collection
-  const byCollectionSubjectPromise = measurementsDB.query(
-    'by/collectionSubjectSkip',
+  const byCollectionCaseIdSkipPromise = measurementsDB.query(
+    'by/collectionCaseIdSkip',
     {
       reduce: true,
       group: true,
@@ -45,7 +45,7 @@ async function annotatorCollectionMeasurements(
   return await Promise.all([
     byCollectionPromise,
     byAnnotatorCollectionPromise,
-    byCollectionSubjectPromise
+    byCollectionCaseIdSkipPromise
   ]).then(results => {
     console.log(results);
 
@@ -57,17 +57,17 @@ async function annotatorCollectionMeasurements(
 
     // now mark all the ones measured by this annotator
     results[1].rows.forEach(row => {
-      cases[row.doc.caseData.SubjectID].measured = true;
-      cases[row.doc.caseData.SubjectID].skipped = true;
+      cases[row.doc.caseData._id].measured = true;
+      cases[row.doc.caseData._id].skipped = true;
     });
 
     // now mark the cases if skipped, or list count of other measurements
     results[2].rows.forEach(row => {
-      const subjectID = row.key[1];
-      cases[subjectID].measurements = row.value;
+      const caseId = row.key[1];
+      cases[caseId].measurements = row.value;
       const skipped = row.key[2];
       if (skipped) {
-        cases[subjectID].skipped |= row.value > skipThreshold;
+        cases[caseId].skipped |= row.value > skipThreshold;
       }
     });
 
@@ -91,15 +91,15 @@ async function getNextCaseForAnnotator(collection, annotatorID) {
 
   // find the first one not skipped or measured by the user
   for (let index = 0; index < keys.length; index++) {
-    const subjectID = keys[index];
+    const caseId = keys[index];
     const caseData = cases[keys[index]];
     if (!caseData.measured && !caseData.skipped) {
-      // return the document for that collection/subject
+      // return the document for that collection/caseId
       const casesDB = getDB('cases');
-      const result = await casesDB.query('by/collectionSubject', {
+      const result = await casesDB.query('by/collectionCaseId', {
         reduce: false,
-        start_key: [collection, subjectID],
-        end_key: [collection, subjectID],
+        start_key: [collection, caseId],
+        end_key: [collection, caseId],
         include_docs: true
       });
 
