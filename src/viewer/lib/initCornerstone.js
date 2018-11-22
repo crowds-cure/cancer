@@ -66,7 +66,7 @@ cornerstoneTools.toolColors.setToolColor('rgb(255, 255, 0)');
 // Set color for active tools
 cornerstoneTools.toolColors.setActiveColor('rgb(0, 255, 0)');
 
-cornerstoneTools.store.state.touchProximity = 20;
+cornerstoneTools.store.state.touchProximity = 40;
 
 function metaDataProvider(type, imageId) {
   const metaData = cornerstoneWADOImageLoader.wadors.metaDataManager.get(
