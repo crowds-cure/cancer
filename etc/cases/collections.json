@@ -1,102 +1,117 @@
 {
-  "docs": [
-    {
-      "Collection": "LungCT-Diagnosis",
-      "Type": "Lung Adenocarcinoma",
-      "Location": "Lung",
-      "Link": "http://dx.doi.org/10.7937/K9/TCIA.2015.A6V7JIWX",
-      "Description": "This data set contains diagnostic contrast enhanced CT scans acquired retrospectively to ensure sufficient patient follow-up. Slice thickness is variable : between 3 and 6 mm. All images were done at diagnosis and prior to surgery. The objective of the study was to extract prognostic image features that will describe lung adenocarcinomas and will associate with overall survival. "
-    },
-    {
-      "Collection": "NSCLC Radiogenomics",
-      "Type": "Non-small Cell Lung Cancer",
-      "Location": "Lung",
-      "Link": "http://doi.org/10.7937/K9/TCIA.2017.7hs46erv",
-      "Description": "This lung cancer dataset was created to facilitate the discovery of the underlying relationship between genomic and medical image features, as well as the development and evaluation of prognostic medical image biomarkers."
-    },
-    {
-      "Collection": "SPIE-AAPM Lung CT Challenge",
-      "Type": "Lung Cancer",
-      "Location": "Lung",
-      "Link": "http://dx.doi.org/10.7937/K9/TCIA.2015.UZLSU3FL",
-      "Description": "This data set was created to facilitate an SPIE/AAPM competition where participants were asked to use automated methods of lung nodule classification for malignant and benign lung nodules."
-    },
-    {
-      "Collection": "LCTSC",
-      "Type": "Lung Cancer",
-      "Location": "Lung",
-      "Link": "http://doi.org/10.7937/K9/TCIA.2017.3r3fvz08",
-      "Description": "This data set was provided in association with an AAPM challenge competition seeking to compare auto-segmentation algorithms when they are used to delineate organs at risk (OARs) from CT images for thoracic patients in radiation treatment planning."
-    },
-    {
-      "Collection": "Anti-PD-1_LUNG",
-      "Type": "Lung",
-      "Location": "Lung",
-      "Link": "https://wiki.cancerimagingarchive.net/pages/viewpage.action?pageId=37225348",
-      "Description": "This collection contains routine imaging from lung cancer patients treated with immunotherapy in 2016 at MD Anderson Cancer Center."
-    },
-    {
-      "Collection": "Anti-PD-1_MELANOMA",
-      "Type": "Melanoma",
-      "Location": "Skin",
-      "Link": "http://wiki.cancerimagingarchive.net/x/hAM4Ag",
-      "Description": "This collection contains routine imaging from melanoma cancer patients treated with immunotherapy in 2016 at MD Anderson Cancer Center."
-    },
-    {
-      "Collection": "CPTAC-CCRCC",
-      "Type": "Clear Cell Renal Cell Carcinoma",
-      "Location": "Kidney",
-      "Link": "http://doi.org/10.7937/K9/TCIA.2018.OBLAMN27",
-      "Description": "This collection contains subjects from the National Cancer Institute’s Clinical Proteomic Tumor Analysis Consortium (CPTAC). Routine imaging scans were collected for patients whose tissue samples passed CPTAC qualification criteria with the goal of stimulating correlations between imaging, genomic, and proteomic features."
-    },
-    {
-      "Collection": "CPTAC-CM",
-      "Type": "Cutaneous Melanoma",
-      "Location": "Skin",
-      "Link": "http://doi.org/10.7937/K9/TCIA.2018.ODU24GZE",
-      "Description": "This collection contains subjects from the National Cancer Institute’s Clinical Proteomic Tumor Analysis Consortium (CPTAC). Routine imaging scans were collected for patients whose tissue samples passed CPTAC qualification criteria with the goal of stimulating correlations between imaging, genomic, and proteomic features."
-    },
-    {
-      "Collection": "CPTAC-GBM",
-      "Type": "Glioblastoma Multiforme",
-      "Location": "Brain",
-      "Link": "http://doi.org/10.7937/K9/TCIA.2018.3RJE41Q1",
-      "Description": "This collection contains subjects from the National Cancer Institute’s Clinical Proteomic Tumor Analysis Consortium (CPTAC). Routine imaging scans were collected for patients whose tissue samples passed CPTAC qualification criteria with the goal of stimulating correlations between imaging, genomic, and proteomic features."
-    },
-    {
-      "Collection": "CPTAC-HNSCC",
-      "Type": "Head and Neck Squamous Cell Carcinoma",
-      "Location": "Head-Neck",
-      "Link": "https://wiki.cancerimagingarchive.net/x/vwA4Ag",
-      "Description": "This collection contains subjects from the National Cancer Institute’s Clinical Proteomic Tumor Analysis Consortium (CPTAC). Routine imaging scans were collected for patients whose tissue samples passed CPTAC qualification criteria with the goal of stimulating correlations between imaging, genomic, and proteomic features."
-    },
-    {
-      "Collection": "CPTAC-LSCC",
-      "Type": "Lung Squamous Cell Carcinoma",
-      "Location": "Lung",
-      "Link": "http://doi.org/10.7937/K9/TCIA.2018.6EMUB5L2",
-      "Description": "This collection contains subjects from the National Cancer Institute’s Clinical Proteomic Tumor Analysis Consortium (CPTAC). Routine imaging scans were collected for patients whose tissue samples passed CPTAC qualification criteria with the goal of stimulating correlations between imaging, genomic, and proteomic features."
-    },
-    {
-      "Collection": "CPTAC-LUAD",
-      "Type": "Lung Adenocarcinoma",
-      "Location": "Lung",
-      "Link": "http://doi.org/10.7937/K9/TCIA.2018.PAT12TBS",
-      "Description": "This collection contains subjects from the National Cancer Institute’s Clinical Proteomic Tumor Analysis Consortium (CPTAC). Routine imaging scans were collected for patients whose tissue samples passed CPTAC qualification criteria with the goal of stimulating correlations between imaging, genomic, and proteomic features."
-    },
-    {
-      "Collection": "CPTAC-PDA",
-      "Type": "Pancreatic Ductal",
-      "Location": "Pancreas",
-      "Link": "http://doi.org/10.7937/K9/TCIA.2018.SC20FO18",
-      "Description": "This collection contains subjects from the National Cancer Institute’s Clinical Proteomic Tumor Analysis Consortium (CPTAC). Routine imaging scans were collected for patients whose tissue samples passed CPTAC qualification criteria with the goal of stimulating correlations between imaging, genomic, and proteomic features."
-    },
-    {
-      "Collection": "CPTAC-UCEC",
-      "Type": "Uterine Corpus Endometrial Carcinoma",
-      "Location": "Uterus",
-      "Link": "http://doi.org/10.7937/K9/TCIA.2018.3R3JUISW",
-      "Description": "This collection contains subjects from the National Cancer Institute’s Clinical Proteomic Tumor Analysis Consortium (CPTAC). Routine imaging scans were collected for patients whose tissue samples passed CPTAC qualification criteria with the goal of stimulating correlations between imaging, genomic, and proteomic features."
-    }
-  ]
+    "docs": [{
+        "Collection": "LungCT-Diagnosis",
+        "Type": "Lung Adenocarcinoma",
+        "Location": "Lung",
+        "Link": "http://dx.doi.org/10.7937/K9/TCIA.2015.A6V7JIWX",
+        "Description": "This data set contains diagnostic contrast enhanced CT scans acquired retrospectively to ensure sufficient patient follow-up. Slice thickness is variable : between 3 and 6 mm. All images were done at diagnosis and prior to surgery. The objective of the study was to extract prognostic image features that will describe lung adenocarcinomas and will associate with overall survival. "
+    }, {
+        "Collection": "NSCLC Radiogenomics",
+        "Type": "Non-small Cell Lung Cancer",
+        "Location": "Lung",
+        "Link": "http://doi.org/10.7937/K9/TCIA.2017.7hs46erv",
+        "Description": "This lung cancer dataset was created to facilitate the discovery of the underlying relationship between genomic and medical image features, as well as the development and evaluation of prognostic medical image biomarkers."
+    }, {
+        "Collection": "SPIE-AAPM Lung CT Challenge",
+        "Type": "Lung Cancer",
+        "Location": "Lung",
+        "Link": "http://dx.doi.org/10.7937/K9/TCIA.2015.UZLSU3FL",
+        "Description": "This data set was created to facilitate an SPIE/AAPM competition where participants were asked to use automated methods of lung nodule classification for malignant and benign lung nodules."
+    }, {
+        "Collection": "LCTSC",
+        "Type": "Lung Cancer",
+        "Location": "Lung",
+        "Link": "http://doi.org/10.7937/K9/TCIA.2017.3r3fvz08",
+        "Description": "This data set was provided in association with an AAPM challenge competition seeking to compare auto-segmentation algorithms when they are used to delineate organs at risk (OARs) from CT images for thoracic patients in radiation treatment planning."
+    }, {
+        "Collection": "Anti-PD-1_LUNG",
+        "Type": "Lung",
+        "Location": "Lung",
+        "Link": "https://wiki.cancerimagingarchive.net/pages/viewpage.action?pageId=37225348",
+        "Description": "This collection contains routine imaging from lung cancer patients treated with immunotherapy in 2016 at MD Anderson Cancer Center."
+    }, {
+        "Collection": "Anti-PD-1_MELANOMA",
+        "Type": "Melanoma",
+        "Location": "Skin",
+        "Link": "http://wiki.cancerimagingarchive.net/x/hAM4Ag",
+        "Description": "This collection contains routine imaging from melanoma cancer patients treated with immunotherapy in 2016 at MD Anderson Cancer Center."
+    }, {
+        "Collection": "CPTAC-CCRCC",
+        "Type": "Clear Cell Renal Cell Carcinoma",
+        "Location": "Kidney",
+        "Link": "http://doi.org/10.7937/K9/TCIA.2018.OBLAMN27",
+        "Description": "This collection contains subjects from the National Cancer Institute’s Clinical Proteomic Tumor Analysis Consortium (CPTAC). Routine imaging scans were collected for patients whose tissue samples passed CPTAC qualification criteria with the goal of stimulating correlations between imaging, genomic, and proteomic features."
+    }, {
+        "Collection": "CPTAC-CM",
+        "Type": "Cutaneous Melanoma",
+        "Location": "Skin",
+        "Link": "http://doi.org/10.7937/K9/TCIA.2018.ODU24GZE",
+        "Description": "This collection contains subjects from the National Cancer Institute’s Clinical Proteomic Tumor Analysis Consortium (CPTAC). Routine imaging scans were collected for patients whose tissue samples passed CPTAC qualification criteria with the goal of stimulating correlations between imaging, genomic, and proteomic features."
+    }, {
+        "Collection": "CPTAC-GBM",
+        "Type": "Glioblastoma Multiforme",
+        "Location": "Brain",
+        "Link": "http://doi.org/10.7937/K9/TCIA.2018.3RJE41Q1",
+        "Description": "This collection contains subjects from the National Cancer Institute’s Clinical Proteomic Tumor Analysis Consortium (CPTAC). Routine imaging scans were collected for patients whose tissue samples passed CPTAC qualification criteria with the goal of stimulating correlations between imaging, genomic, and proteomic features."
+    }, {
+        "Collection": "CPTAC-HNSCC",
+        "Type": "Head and Neck Squamous Cell Carcinoma",
+        "Location": "Head-Neck",
+        "Link": "https://wiki.cancerimagingarchive.net/x/vwA4Ag",
+        "Description": "This collection contains subjects from the National Cancer Institute’s Clinical Proteomic Tumor Analysis Consortium (CPTAC). Routine imaging scans were collected for patients whose tissue samples passed CPTAC qualification criteria with the goal of stimulating correlations between imaging, genomic, and proteomic features."
+    }, {
+        "Collection": "CPTAC-LSCC",
+        "Type": "Lung Squamous Cell Carcinoma",
+        "Location": "Lung",
+        "Link": "http://doi.org/10.7937/K9/TCIA.2018.6EMUB5L2",
+        "Description": "This collection contains subjects from the National Cancer Institute’s Clinical Proteomic Tumor Analysis Consortium (CPTAC). Routine imaging scans were collected for patients whose tissue samples passed CPTAC qualification criteria with the goal of stimulating correlations between imaging, genomic, and proteomic features."
+    }, {
+        "Collection": "CPTAC-LUAD",
+        "Type": "Lung Adenocarcinoma",
+        "Location": "Lung",
+        "Link": "http://doi.org/10.7937/K9/TCIA.2018.PAT12TBS",
+        "Description": "This collection contains subjects from the National Cancer Institute’s Clinical Proteomic Tumor Analysis Consortium (CPTAC). Routine imaging scans were collected for patients whose tissue samples passed CPTAC qualification criteria with the goal of stimulating correlations between imaging, genomic, and proteomic features."
+    }, {
+        "Collection": "CPTAC-PDA",
+        "Type": "Pancreatic Ductal",
+        "Location": "Pancreas",
+        "Link": "http://doi.org/10.7937/K9/TCIA.2018.SC20FO18",
+        "Description": "This collection contains subjects from the National Cancer Institute’s Clinical Proteomic Tumor Analysis Consortium (CPTAC). Routine imaging scans were collected for patients whose tissue samples passed CPTAC qualification criteria with the goal of stimulating correlations between imaging, genomic, and proteomic features."
+    }, {
+        "Collection": "CPTAC-UCEC",
+        "Type": "Uterine Corpus Endometrial Carcinoma",
+        "Location": "Uterus",
+        "Link": "http://doi.org/10.7937/K9/TCIA.2018.3R3JUISW",
+        "Description": "This collection contains subjects from the National Cancer Institute’s Clinical Proteomic Tumor Analysis Consortium (CPTAC). Routine imaging scans were collected for patients whose tissue samples passed CPTAC qualification criteria with the goal of stimulating correlations between imaging, genomic, and proteomic features."
+    }, {
+        "Collection": "TCGA-BLCA",
+        "Type": "Bladder Endothelial Carcinoma",
+        "Location": "Bladder",
+        "Link": "http://dx.doi.org/10.7937/K9/TCIA.2016.8LNG8XDR",
+        "Description": "The Cancer Genome Atlas Urothelial Bladder Carcinoma (TCGA-BLCA) data collection is part of a larger effort to build a research community focused on connecting cancer phenotypes to genotypes by providing clinical images matched to subjects from The Cancer Genome Atlas (TCGA). Clinical, genetic, and pathological data resides in the Genomic Data Commons (GDC) Data Portal while the radiological data is stored on The Cancer Imaging Archive (TCIA). Tissues for TCGA were collected from many sites all over the world in order to reach their accrual targets. For this reason the image data sets are extremely heterogeneous in terms of scanner modalities, manufacturers and acquisition protocols. In most cases the images were acquired as part of routine care and not as part of a controlled research study or clinical trial."
+    }, {
+        "Collection": "TCGA-COAD",
+        "Type": "Colon Adenocarcinoma",
+        "Location": "Colon",
+        "Link": "http://dx.doi.org/10.7937/K9/TCIA.2016.HJJHBOXZ",
+        "Description": "The Cancer Genome Atlas Colon Adenocarcinoma (TCGA-COAD) data collection is part of a larger effort to build a research community focused on connecting cancer phenotypes to genotypes by providing clinical images matched to subjects from The Cancer Genome Atlas (TCGA). Clinical, genetic, and pathological data resides in the Genomic Data Commons (GDC) Data Portal while the radiological data is stored on The Cancer Imaging Archive (TCIA). Tissues for TCGA were collected from many sites all over the world in order to reach their accrual targets. For this reason the image data sets are extremely heterogeneous in terms of scanner modalities, manufacturers and acquisition protocols. In most cases the images were acquired as part of routine care and not as part of a controlled research study or clinical trial."
+    }, {
+        "Collection": "TCGA-HNSC",
+        "Type": "Head and Neck Squamous Cell Carcinoma",
+        "Location": "Head-Neck",
+        "Link": "http://dx.doi.org/10.7937/K9/TCIA.2016.LXKQ47MS",
+        "Description": "The Cancer Genome Atlas Head and Neck Squamous Cell Carcinoma (TCGA-HNSC) data collection is part of a larger effort to build a research community focused on connecting cancer phenotypes to genotypes by providing clinical images matched to subjects from The Cancer Genome Atlas (TCGA). Clinical, genetic, and pathological data resides in the Genomic Data Commons (GDC) Data Portal while the radiological data is stored on The Cancer Imaging Archive (TCIA). Tissues for TCGA were collected from many sites all over the world in order to reach their accrual targets. For this reason the image data sets are extremely heterogeneous in terms of scanner modalities, manufacturers and acquisition protocols. In most cases the images were acquired as part of routine care and not as part of a controlled research study or clinical trial."
+    }, {
+        "Collection": "TCGA-LUSC",
+        "Type": "Lung Squamous Cell Carcinoma",
+        "Location": "Lung",
+        "Link": "http://dx.doi.org/10.7937/K9/TCIA.2016.TYGKKFMQ",
+        "Description": "The Cancer Genome Atlas Lung Squamous Cell Carcinoma (TCGA-LUSC) data collection is part of a larger effort to build a research community focused on connecting cancer phenotypes to genotypes by providing clinical images matched to subjects from The Cancer Genome Atlas (TCGA). Clinical, genetic, and pathological data resides in the Genomic Data Commons (GDC) Data Portal while the radiological data is stored on The Cancer Imaging Archive (TCIA). Tissues for TCGA were collected from many sites all over the world in order to reach their accrual targets. For this reason the image data sets are extremely heterogeneous in terms of scanner modalities, manufacturers and acquisition protocols. In most cases the images were acquired as part of routine care and not as part of a controlled research study or clinical trial."
+    }, {
+        "Collection": "TCGA-UCEC",
+        "Type": "Uterine Corpus Endometrial Carcinoma",
+        "Location": "Uterus",
+        "Link": "http://dx.doi.org/10.7937/K9/TCIA.2016.GKJ0ZWAC",
+        "Description": "The Cancer Genome Atlas Uterine Corpus Endometrial Carcinoma (TCGA-UCEC) data collection is part of a larger effort to build a research community focused on connecting cancer phenotypes to genotypes by providing clinical images matched to subjects from The Cancer Genome Atlas (TCGA). Clinical, genetic, and pathological data resides in the Genomic Data Commons (GDC) Data Portal while the radiological data is stored on The Cancer Imaging Archive (TCIA). Tissues for TCGA were collected from many sites all over the world in order to reach their accrual targets. For this reason the image data sets are extremely heterogeneous in terms of scanner modalities, manufacturers and acquisition protocols. In most cases the images were acquired as part of routine care and not as part of a controlled research study or clinical trial."
+    }]
 }
