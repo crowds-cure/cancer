@@ -8,7 +8,8 @@
   width: 100px;
   color: #7cf4fe;
   padding: 5px 10px;
-  text-align: right;
+  text-align: center;
+  background-color: #33316d;
   font-size: 30px;
   font-weight: 600;
 }
