@@ -125,6 +125,7 @@ class CornerstoneViewport extends Component {
             eventData={this.bidirectional.eventData}
             labellingDoneCallback={this.bidirectional.labellingDoneCallback}
             skipButton={this.bidirectional.skipButton}
+            editDescription={this.bidirectional.editDescription}
           />
         )}
       </>
@@ -146,7 +147,8 @@ class CornerstoneViewport extends Component {
       measurementData,
       eventData,
       labellingDoneCallback,
-      skipButton: options.skipButton
+      skipButton: options.skipButton,
+      editDescription: options.editDescription
     };
 
     this.setState({
