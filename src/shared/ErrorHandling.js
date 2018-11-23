@@ -2,8 +2,12 @@ import rollbar from 'rollbar';
 import version from '../version.js';
 import sha from '../sha.js';
 
+// TODO: could make this more robust
+debugger;
+const isLocalhost = window.location.origin === 'http://localhost:3000';
+
 const Rollbar = rollbar.init({
-  enabled: true,
+  enabled: !isLocalhost,
   accessToken: '0b87c8ddc3b945a08b212efc005337eb',
   captureUncaught: true,
   captureUnhandledRejections: true,
