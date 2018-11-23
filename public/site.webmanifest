@@ -1,0 +1,20 @@
+{
+    "name": "Crowds Cure",
+    "short_name": "Crowds Cure",
+    "icons": [
+        {
+            "src": "/android-chrome-192x192.png?v=kP3AY8xEYw",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/android-chrome-512x512.png?v=kP3AY8xEYw",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#1e1d39",
+    "background_color": "#1e1d39",
+    "start_url": "https://cancer.crowds-cure.org",
+    "display": "standalone"
+}
