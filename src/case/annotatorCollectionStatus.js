@@ -24,10 +24,16 @@ async function annotatorCollectionStatus(collection, annotatorID) {
     availableCasesPromise,
     byAnnotatorCollectionPromise
   ]).then(results => {
+    const inCollection = results[0] && results[0].length;
+    const byAnnotator = results[1] && results[1].rows && results[1].rows.length;
+
+    // Users who has already completed the ignored cases before such cases are ignored
+    //  can have the number of completed cases more than the number of currently available cases,
+    //  so inCollection should be the number of all available cases including the cases user completed
     return {
       annotatorID,
-      inCollection: results[0] && results[0].length,
-      byAnnotator: results[1] && results[1].rows && results[1].rows.length
+      byAnnotator,
+      inCollection: Math.max(byAnnotator, inCollection)
     };
   });
 }
