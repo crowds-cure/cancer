@@ -154,7 +154,11 @@ class Dashboard extends Component {
                           />
                         </div>
                         <div className="col-16">
-                          <RankingSection name="Top groups" type="team" />
+                          <RankingSection
+                            name="Top groups"
+                            type="team"
+                            viewAllLink="/leaderboard"
+                          />
                         </div>
                       </div>
                     </div>
