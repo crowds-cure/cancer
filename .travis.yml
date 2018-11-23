@@ -17,6 +17,25 @@ env:
 
 jobs:
   include:
+  - stage: upload sourcemap to Rollbar
+    before_script:
+    - export FILE_1=$(find ./build/static/js -type f -name "1.*.js" -exec basename {} \;)
+    - export FILE_MAIN=$(find ./build/static/js -type f -name "main.*.js" -exec basename {} \;)
+    - export FILE_RUNTIME_MAIN=$(find ./build/static/js -type f -name "main.*.js" -exec basename {} \;)
+    script:
+    - curl https://api.rollbar.com/api/1/sourcemap/download
+      -F access_token=0b87c8ddc3b945a08b212efc005337eb \
+      -F version=$TRAVIS_COMMIT \
+      -F minified_url=https://cancer.crowds-cure.org/static/js/$FILE_1
+    - curl https://api.rollbar.com/api/1/sourcemap/download
+      -F access_token=0b87c8ddc3b945a08b212efc005337eb \
+      -F version=$TRAVIS_COMMIT \
+      -F minified_url=https://cancer.crowds-cure.org/static/js/$FILE_MAIN
+    - curl https://api.rollbar.com/api/1/sourcemap/download
+      -F access_token=0b87c8ddc3b945a08b212efc005337eb \
+      -F version=$TRAVIS_COMMIT \
+      -F minified_url=https://cancer.crowds-cure.org/static/js/$FILE_RUNTIME_MAIN
+
   - stage: build production docker image
     before_script:
     - export REPO=crowdscure/cancer

@@ -1,5 +1,6 @@
 // See https://github.com/IdentityModel/oidc-client-js/wiki for more information
 import Oidc from 'oidc-client';
+import Rollbar from '../shared/ErrorHandling.js';
 
 Oidc.Log.logger = console;
 Oidc.Log.level = Oidc.Log.DEBUG;
@@ -149,7 +150,19 @@ export default class Auth {
     this.idToken = authResult.id_token;
     this.accessToken = authResult.access_token;
     this.profile = authResult.profile;
+
     // set the time that the id token will expire at
     this.expiresAt = authResult.expires_at * 1000 + new Date().getTime();
+
+    // TODO: Create some sort of setSession callbacks instead
+    Rollbar.configure({
+      payload: {
+        person: {
+          id: this.profile.jti,
+          username: this.profile.username,
+          email: this.profile.email
+        }
+      }
+    });
   }
 }

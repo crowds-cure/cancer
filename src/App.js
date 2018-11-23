@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router';
 import { Route, Switch } from 'react-router-dom';
 import SecretRoute from './SecretRoute.js';
 import './App.css';
 import './grid-16.css';
 
+import Rollbar from './shared/ErrorHandling.js';
 import ConnectedDashboard from './ConnectedDashboard.js';
 import ConnectedViewer from './ConnectedViewer.js';
 import ConnectedSessionSummary from './ConnectedSessionSummary.js';
@@ -13,7 +15,28 @@ import TestPage from './TestPage.js';
 
 const reload = () => window.location.reload();
 
+function setContext(context) {
+  Rollbar.configure({
+    payload: {
+      context
+    }
+  });
+
+  throw new Error('testing');
+}
+
 class App extends Component {
+  componentDidMount() {
+    debugger;
+    this.unlisten = this.props.history.listen((location, action) => {
+      setContext(window.location.pathname);
+    });
+  }
+
+  componentWillUnmount() {
+    this.unlisten();
+  }
+
   render() {
     return (
       <Switch>
@@ -68,4 +91,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withRouter(App);
