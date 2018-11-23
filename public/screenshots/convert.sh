@@ -1,0 +1,1 @@
+sips -s format jpeg --resampleHeight 440 TCGA-COAD.png --out TCGA-COAD.jpg
