@@ -73,10 +73,11 @@
 .CaseFeedback .feedback-options ul {
   padding-left: 0;
   margin-top: 0;
+  margin-bottom: 3px;
 }
 
 .CaseFeedback .feedback-options li {
-  padding: 2.5px 0;
+  padding: 1.5px 0;
   list-style: none;
   color: white;
 }
@@ -84,7 +85,7 @@
 .CaseFeedback .feedback-options .button {
   display: block;
   width: 100%;
-  margin-top: 15px;
+  margin-top: 8px;
   height: 40px;
 }
 
