@@ -12,8 +12,18 @@
 
 .RankingSection .list {
   display: block;
-  border-left: 1px solid textSecondaryColor;
   padding-left: 15px;
   margin: 20px 0 0 0;
   list-style-type: none;
+}
+
+.RankingSection .listWrapper {
+  border-left: 1px solid textSecondaryColor;
+}
+
+.RankingSection .viewAllLink {
+  margin-left: 15px;
+  color: #79f9fe;
+  font-size: 14px;
+  text-decoration: none;
 }

@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import RankingItem from './RankingItem.js';
 import './RankingSection.css';
 import PropTypes from 'prop-types';
@@ -59,7 +60,14 @@ class RankingSection extends Component {
     return (
       <div className="RankingSection">
         <span className="title">{this.props.name}</span>
-        <ul className="list">{items}</ul>
+        <div className="listWrapper">
+          <ul className="list">{items}</ul>
+          {this.props.viewAllLink && (
+            <Link to={this.props.viewAllLink} className="viewAllLink">
+              view all
+            </Link>
+          )}
+        </div>
       </div>
     );
   }
