@@ -22,7 +22,7 @@ class ProgressSection extends Component {
 
   render() {
     const rank = getBadgeByNumberOfCases(this.state.current);
-    const current = this.state.current ? this.state.current : '---';
+    const current = this.state.current ? this.state.current : 0;
     const increment = this.state.measurementsInCurrentSession;
 
     return (
@@ -47,14 +47,12 @@ class ProgressSection extends Component {
           <div className="progressBarContainer">
             <span className="progressLow">{rank.min}</span>
             <span className="progressHigh">{rank.max}</span>
-            {this.state.current && (
-              <ProgressBar
-                min={rank.min}
-                max={rank.max}
-                value={this.state.current}
-                increment={increment}
-              />
-            )}
+            <ProgressBar
+              min={rank.min}
+              max={rank.max}
+              value={current}
+              increment={increment}
+            />
           </div>
         </div>
       </div>
