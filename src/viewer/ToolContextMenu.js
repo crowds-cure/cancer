@@ -165,6 +165,12 @@ function getDropdownItems(eventData, isTouchEvent = false) {
 }
 
 class ToolContextMenu extends Component {
+  constructor(props) {
+    super(props);
+
+    this.mainElement = React.createRef();
+  }
+
   render() {
     if (!this.props.toolContextMenuData) {
       return '';
@@ -199,13 +205,54 @@ class ToolContextMenu extends Component {
     };
 
     return (
-      <div className="ToolContextMenu dropdown" style={position}>
+      <div
+        className="ToolContextMenu dropdown"
+        style={position}
+        ref={this.mainElement}
+      >
         <ul className="dropdown-menu dropdown-menu-left bounded">
           {dropdownComponents}
         </ul>
       </div>
     );
   }
+
+  componentDidMount = () => {
+    if (this.mainElement.current) {
+      this.updateElementPosition();
+    }
+  };
+
+  componentDidUpdate = () => {
+    if (this.mainElement.current) {
+      this.updateElementPosition();
+    }
+  };
+
+  updateElementPosition = () => {
+    const {
+      offsetParent,
+      offsetTop,
+      offsetHeight,
+      offsetWidth,
+      offsetLeft
+    } = this.mainElement.current;
+    const { eventData } = this.props.toolContextMenuData;
+    if (offsetTop + offsetHeight > offsetParent.offsetHeight) {
+      const offBoundPixels =
+        offsetTop + offsetHeight - offsetParent.offsetHeight;
+      const top = eventData.currentPoints.canvas.y - offBoundPixels;
+
+      this.mainElement.current.style.top = `${top > 0 ? top : 0}px`;
+    }
+    if (offsetLeft + offsetWidth > offsetParent.offsetWidth) {
+      const offBoundPixels =
+        offsetLeft + offsetWidth - offsetParent.offsetWidth;
+      const left = eventData.currentPoints.canvas.x - offBoundPixels;
+
+      this.mainElement.current.style.left = `${left > 0 ? left : 0}px`;
+    }
+  };
 }
 
 ToolContextMenu.propTypes = {
