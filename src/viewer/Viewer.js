@@ -293,17 +293,35 @@ class Viewer extends Component {
     const measurements = this.state.toolData;
 
     // Get the stack tool data
-    //const stackData = cornerstoneTools.getToolState(element, 'stack');
-    //const stack = stackData.data[0];
+    // TODO: probably a better way to find the stack
+    const enabledElement = cornerstone.getEnabledElements()[0];
+    const { element } = enabledElement;
+    const stackData = cornerstoneTools.getToolState(element, 'stack');
+    const stack = stackData.data[0];
 
     // Retrieve the tool data from this Object
     let toolData = [];
     measurements.forEach(measurement => {
       const { toolType, imageId } = measurement;
       const data = toolState[imageId][toolType].data;
+      const generalSeriesModule = cornerstone.metaData.get(
+        'generalSeriesModule',
+        imageId
+      );
+      const sopCommonModule = cornerstone.metaData.get(
+        'sopCommonModule',
+        imageId
+      );
+      const imageIndex = stack.imageIds.indexOf(imageId);
       const tool = data.find(a => a._id === measurement._id);
+
       toolData.push({
         ...tool,
+        studyInstanceUID: generalSeriesModule.studyInstanceUID,
+        seriesInstanceUID: generalSeriesModule.seriesInstanceUID,
+        sopInstanceUID: sopCommonModule.sopInstanceUID,
+        sopClassUID: sopCommonModule.sopClassUID,
+        imageIndex,
         viewport: measurement.viewport,
         toolType,
         imageId

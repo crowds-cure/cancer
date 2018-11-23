@@ -94,7 +94,6 @@ function saveAttachment(measurement, response) {
   });
 }
 
-// TODO: Add Feedback
 async function saveMeasurementToDatabase(caseData, measurements, feedback) {
   const measurementsDB = getDB('measurements');
   const annotator = await getUsername();
