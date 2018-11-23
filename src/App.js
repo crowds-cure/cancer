@@ -21,8 +21,6 @@ function setContext(context) {
       context
     }
   });
-
-  throw new Error('testing');
 }
 
 class App extends Component {

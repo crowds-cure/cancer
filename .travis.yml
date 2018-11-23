@@ -1,41 +1,39 @@
 language: node_js
-
 node_js:
 - lts/*
-
 services:
 - docker
-
+- git
 cache:
   directories:
   - node_modules
-
 env:
   global:
   - secure: j57vfqIZ/PaTehbU+0+iIhRuc0NCHz61XobI/9b8KUg7K6OXBYE87hfiYvvZHkS9B4KgocKzUUHgHwRDVY7BcTfDK4bhwgmlhYnP3W500apQVJY7LAiCGwVbKp8RTtRU4ie7zIGw8Nk7MYVrvQIi6+2sGXiFyVuGzTJffoZ/A6mfJeHQ0Vgk07ISPw0UfS+2gJkUuX0ZL7ILnW/mE2WX+P7B/oQ2P8N/5fpRC9gEQ1+4wk3qRJAGRE91ylOzIzRTbU6c92oOyROS1Ew+WpyaAIUvBvTFuLeGDxvyZsxOgukZe6p5mEsC5fIiVVRTHyOMslrh6/1MKJ2Ay2XaownDGhrr+9KaHyROP2BIuk/0p4EFSTwxqTCW0mwB6ux1a5QKfKdeEjYQTsjcFRtE0MpHqB5WVM1p1QWK2l9T0W9a8QGDEdL+cWibIr0iINCRHvU5vKJjff50alYYgP+EenCwbvKEqB8CDc28CGUF0f3o3gsax7GWMqKbKAtuL5Sz+a5InI4Qn4ynsQkatKV3ZqFtiAAlcIyDmkap6JgCj/pISAn5V3r+0z77xdZaD+lqhSN8riRKkSu9WYKfyj+YXsbMpTZi53xm8R9nNZzJVsI8Uk68tY15r3DCEuIMt/8/sk3uk2zNB7kGvdFRASbIPBdCWfJX1Krz4XdrzP8nOyC5HP8=
   - secure: l2JVj5H5A36A14VBId9UQnIs9zF5MpGRW4VB2Eav51Fs75QsekPdKuhCfh9ULwhPeRVF/c38DyMI04CknDj/FcYTaoScrI4/7Pm0t6VpmIWhTXuETPsTongj8Pz0jo1w7qfZwIvDrbeZW0F8VflQ1nWqBdu6EZgMbTVWoQhVzVES8zFjpy1tzV9bJbvu1aRnAbpS/DCT3ZfR1XAqJAeQx1s/38QNZJC/yHAIvREjdjNjHoRv83/kWubxNpgvupsripfG4lhe8sSDpXjWy/DyM+hhzy9h0UI4eLZlIv+D9Y6exD7G2kkb+yeHVV+myxF2az095ikuj1gxigBbOlbZooaggl+I+2quNchCcm+PoMPTaTp+0zBJIZ5jHcYbEpi8KGozR2AWqCt2ncXR9B7nWbRMmIhwdpNi2OPshrepmJTvz7iIz5UT6/jloKzJTA8/dOzrpGzEHge3cKjAWJMyDkrD/yeDHD4HapqNYcRKhcr25SCLdhKEV9NNOh/XUd6IGjiGUAEW2hhX63D/uBkSdF229SmKUarbKJvrgmCfzrgyWJ5VYKJ9HL8Sr/WzhpRIrzPWOKwlzDd4AZGi5hO/EaIxDoIFYdACfeLSP47W8b7qiiU54U1vs34LVZfCSuQAtOPZVxZNFs7/XwcDPL5M3sLTmSZSDgU5jCzIelfqBME=
-
+  - secure: CqOxP6iMIZM6qCfqwqdCgxBEuGELCMAyOm+UPlLQDdAw7pknUUVPG+6kr+ZVQg4sv6+FYgAnqjW46rSozEQVH3qwPgQAsledFwajtRApyD5agq/9beTZFK+Wo4qRjyVTp0iSAb+dQwGyDNuLCHMVqiuCu2u/VPIgEqLwhl/1wHk6S5VhRlYyAG0hoGqHeAEksZEp/05ZEgJCnL02Xr8KSFhSo/qTjgGK52vEdZXy6gzQNt0h6IPwEpEwfjRY359Pw++J4APvlaYSwwyfDK/p7lUv9hf64TdobPtAASQVBAkeF5tA574N4W/dAI1XUrULPzE+/TS4D4EWSSgJjsxYK5uLJOW1ImXv3LdN9XZzfrHeXvchB0kghycLe+J63gnZMSs6mJgZuceo0vmHTCGuUJEYfkEsH91zElZmWBZMMYF/YvCyOT33ZlKRQwFCweEnXxqWFu0u6vHkcn4J24DLXq9ACDy9Q4OOPJNwsjOj2IdgPjRg6hcPjFCUsqqRMc9Afxo48sucfSa0elGRhlVCrdRbJA67Jhm6oIqp4Pl32iv4r9gKlokGG+QhuzHFfFw27DYgH8t3JPNkDrh8makxTFT6E4AXyHUBV8xYGEuYRUPH+y6pBfuRr0hsymc2Uxh4VTOhKqvOa/3dVGIXyCqs4PB0DPrpT0hQ849+uFYjG1Q= #ROLLBAR_TOKEN
 jobs:
   include:
   - stage: upload sourcemap to Rollbar
     before_script:
-    - export FILE_1=$(find ./build/static/js -type f -name "1.*.js" -exec basename {} \;)
-    - export FILE_MAIN=$(find ./build/static/js -type f -name "main.*.js" -exec basename {} \;)
-    - export FILE_RUNTIME_MAIN=$(find ./build/static/js -type f -name "main.*.js" -exec basename {} \;)
+    - yarn run build
+    - export FILE_1=$(find ./build/static/js -type f -name "1.*.js" -exec basename
+      {} \;)
+    - export FILE_MAIN=$(find ./build/static/js -type f -name "main.*.js" -exec basename
+      {} \;)
+    - export FILE_RUNTIME_MAIN=$(find ./build/static/js -type f -name "runtime~main.*.js"
+      -exec basename {} \;)
+    - echo $TRAVIS_COMMIT
+    - echo $FILE_1
+    - echo $FILE_MAIN
+    - echo $FILE_RUNTIME_MAIN
     script:
-    - curl https://api.rollbar.com/api/1/sourcemap/download
-      -F access_token=0b87c8ddc3b945a08b212efc005337eb \
-      -F version=$TRAVIS_COMMIT \
-      -F minified_url=https://cancer.crowds-cure.org/static/js/$FILE_1
-    - curl https://api.rollbar.com/api/1/sourcemap/download
-      -F access_token=0b87c8ddc3b945a08b212efc005337eb \
-      -F version=$TRAVIS_COMMIT \
-      -F minified_url=https://cancer.crowds-cure.org/static/js/$FILE_MAIN
-    - curl https://api.rollbar.com/api/1/sourcemap/download
-      -F access_token=0b87c8ddc3b945a08b212efc005337eb \
-      -F version=$TRAVIS_COMMIT \
-      -F minified_url=https://cancer.crowds-cure.org/static/js/$FILE_RUNTIME_MAIN
-
+    - curl https://api.rollbar.com/api/1/sourcemap -F source_map=@build/static/js/$FILE_1.map -F access_token=$ROLLBAR_TOKEN -F version=$TRAVIS_COMMIT -F minified_url=https://cancer.crowds-cure.org/static/js/$FILE_1
+    - curl https://api.rollbar.com/api/1/sourcemap -F source_map=@build/static/js/$FILE_MAIN.map -F access_token=$ROLLBAR_TOKEN -F version=$TRAVIS_COMMIT -F minified_url=https://cancer.crowds-cure.org/static/js/$FILE_MAIN
+    - curl https://api.rollbar.com/api/1/sourcemap -F source_map=@build/static/js/$FILE_RUNTIME_MAIN.map -F access_token=$ROLLBAR_TOKEN -F version=$TRAVIS_COMMIT -F minified_url=https://cancer.crowds-cure.org/static/js/$FILE_RUNTIME_MAIN
+    - curl https://api.rollbar.com/api/1/sourcemap -F source_map=@build/static/js/$FILE_1.map -F access_token=$ROLLBAR_TOKEN -F version=$TRAVIS_COMMIT -F minified_url=https://preview.crowds-cure.org/static/js/$FILE_1
+    - curl https://api.rollbar.com/api/1/sourcemap -F source_map=@build/static/js/$FILE_MAIN.map -F access_token=$ROLLBAR_TOKEN -F version=$TRAVIS_COMMIT -F minified_url=https://preview.crowds-cure.org/static/js/$FILE_MAIN
+    - curl https://api.rollbar.com/api/1/sourcemap -F source_map=@build/static/js/$FILE_RUNTIME_MAIN.map -F access_token=$ROLLBAR_TOKEN -F version=$TRAVIS_COMMIT -F minified_url=https://preview.crowds-cure.org/static/js/$FILE_RUNTIME_MAIN
   - stage: build production docker image
     before_script:
     - export REPO=crowdscure/cancer
@@ -58,7 +56,6 @@ jobs:
     - docker push $REPO:$TAG
     - docker push $REPO:travis-$TRAVIS_BUILD_NUMBER
     - docker push $REPO:$COMMIT
-
   - stage: build development docker image
     before_script:
     - export REPO=crowdscure/cancer
