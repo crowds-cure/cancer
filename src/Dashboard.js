@@ -149,6 +149,7 @@ class Dashboard extends Component {
                           <RankingSection
                             name="Top individuals"
                             type="individual"
+                            viewAllLink="/leaderboard"
                           />
                         </div>
                         <div className="col-16">
