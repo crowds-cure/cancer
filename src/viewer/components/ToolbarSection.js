@@ -6,12 +6,19 @@ import * as cornerstone from 'cornerstone-core';
 import viewerCommands from '../lib/viewerCommands.js';
 import PropTypes from 'prop-types';
 
+const wLPresetIDs = [
+  'setWLPresetSoftTissue',
+  'setWLPresetLung',
+  'setWLPresetLiver',
+  'setWLPresetBrain'
+];
+
 class ToolbarSection extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      mobileToolbarDisplay: false
+      presetSelected: null
     };
   }
   render() {
@@ -19,37 +26,38 @@ class ToolbarSection extends Component {
       return <ToolbarButton key={index} {...item} click={this.onClick} />;
     });
 
-    const activeItem = this.props.buttons.find(item => {
-      return item.active;
+    const wlPresetItems = this.props.buttons.map((item, index) => {
+      if (wLPresetIDs.includes(item.command)) {
+        return <ToolbarButton key={index} {...item} click={this.onClick} />;
+      }
+      return '';
+    });
+
+    const toolItems = this.props.buttons.map((item, index) => {
+      if (!wLPresetIDs.includes(item.command)) {
+        return <ToolbarButton key={index} {...item} click={this.onClick} />;
+      }
+      return '';
+    });
+
+    const presetSelectedButton = this.props.buttons.find(item => {
+      return item.command === this.state.presetSelected;
     });
 
     return (
       <>
-        <div className="mobileToolbar" onClick={this.mobileToolbarClick}>
-          <div className="mobileToolbarSvg">
-            <svg>
-              <use xlinkHref={activeItem.svgUrl} />
-            </svg>
-            <span className="arrowDown" />
-          </div>
-          <span className="toolName">{activeItem.text}</span>
+        <div className="mobileToolbar">
+          <div className="wlPresets">{wlPresetItems}</div>
+          <div className="tools">{toolItems}</div>
+          <span className="presetSelected">
+            LEVELS:{' '}
+            {presetSelectedButton ? presetSelectedButton.text : 'Manual'}
+          </span>
         </div>
-        <div
-          className={`ToolbarSection${
-            this.state.mobileToolbarDisplay ? ' d-block' : ''
-          }`}
-        >
-          {items}
-        </div>
+        <div className={'ToolbarSection'}>{items}</div>
       </>
     );
   }
-
-  mobileToolbarClick = () => {
-    this.setState({
-      mobileToolbarDisplay: true
-    });
-  };
 
   onClick = id => {
     const buttonItem = this.props.buttons.find(item => item.command === id);
@@ -65,11 +73,10 @@ class ToolbarSection extends Component {
       this.props.setToolActive(buttonItem.command);
     } else {
       viewerCommands[buttonItem.command](activeElement);
+      this.setState({
+        presetSelected: id
+      });
     }
-
-    this.setState({
-      mobileToolbarDisplay: false
-    });
   };
 }
 
