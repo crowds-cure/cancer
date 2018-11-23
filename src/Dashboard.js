@@ -7,6 +7,7 @@ import ActivityProgressSection from './shared/ActivityProgressSection.js';
 import CaseTypeSection from './shared/CaseTypeSection.js';
 import SimpleHeaderSection from './shared/SimpleHeaderSection.js';
 import AchievementSection from './shared/AchievementSection.js';
+import ReactTooltip from 'react-tooltip';
 
 import './Dashboard.css';
 import Modal from 'react-modal';
@@ -187,6 +188,7 @@ class Dashboard extends Component {
             Close
           </span>
         </Modal>
+        <ReactTooltip className="DashboardTooltip" effect="solid" />
         <p className="hidden-version-text">{versionString}</p>
       </div>
     );

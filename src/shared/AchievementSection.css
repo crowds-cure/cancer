@@ -20,13 +20,6 @@
   text-decoration: none;
 }
 
-.AchievementSectionTooltip {
-  background-color: uiGrayDarker !important;
-  color: textSecondaryColor !important;
-  font-size: 14px !important;
-  line-height: 16px !important;
-}
-
 @media (max-width: screen-md) {
   .AchievementSection {
     margin-top: 20px;

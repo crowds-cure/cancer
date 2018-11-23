@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import React from 'react';
+import ReactTooltip from 'react-tooltip';
 import ProgressBar from './ProgressBar.js';
 import PropTypes from 'prop-types';
 import RankBadge from './RankBadge.js';
@@ -32,6 +33,10 @@ class ActivityProgressSection extends Component {
     this.toggleModal = this.toggleModal.bind(this);
   }
 
+  componentDidUpdate() {
+    ReactTooltip.rebuild();
+  }
+
   toggleModal(e) {
     e.preventDefault();
     this.setState({ showRanksModal: !this.state.showRanksModal });
@@ -48,8 +53,8 @@ class ActivityProgressSection extends Component {
       }
 
       return (
-        <div key={badge.name} className={className} title={badge.description}>
-          <img src={badge.img} alt={badge.name} />
+        <div key={badge.name} className={className}>
+          <img src={badge.img} alt={badge.name} data-tip={badge.description} />
           <h4 className="badgeName">{badge.name}</h4>
         </div>
       );
@@ -78,6 +83,7 @@ class ActivityProgressSection extends Component {
             name={rank.name}
             img={rank.img}
             type={rank.type}
+            description={rank.description}
             onClick={this.toggleModal}
           />
         </div>
@@ -105,6 +111,7 @@ class ActivityProgressSection extends Component {
           className="Modal"
           overlayClassName="Overlay"
           closeTimeoutMS={200}
+          onAfterOpen={ReactTooltip.rebuild}
         >
           <h1>Ranks</h1>
           <div className="row">{allRankBadges}</div>

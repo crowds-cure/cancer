@@ -121,8 +121,6 @@ class AchievementSection extends Component {
             Close
           </span>
         </Modal>
-
-        <ReactTooltip className="AchievementSectionTooltip" effect="solid" />
       </div>
     );
   }

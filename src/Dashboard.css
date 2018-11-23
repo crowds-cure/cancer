@@ -21,6 +21,13 @@
   cursor: default;
 }
 
+.DashboardTooltip {
+  background-color: uiGrayDarker !important;
+  color: textSecondaryColor !important;
+  font-size: 14px !important;
+  line-height: 16px !important;
+}
+
 @media (min-width: screen-md) {
   .Dashboard .rankingGroupSection {
     margin-top: 65px;
