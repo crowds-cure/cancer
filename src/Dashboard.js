@@ -12,6 +12,8 @@ import './Dashboard.css';
 import Modal from 'react-modal';
 import { getDB } from './db';
 import getUserStats from './shared/getUserStats';
+import version from './version.js';
+import sha from './sha.js';
 import getUsername from './viewer/lib/getUsername.js';
 import annotatorCollectionStatus from './case/annotatorCollectionStatus.js';
 
@@ -119,6 +121,8 @@ class Dashboard extends Component {
     this.toggleModal = this.toggleModal.bind(this);
   }
   render() {
+    const versionString = `${version} - ${sha}`;
+
     return (
       <div className="Dashboard">
         <SimpleHeaderSection username={this.props.username} page="dashboard" />
@@ -183,6 +187,7 @@ class Dashboard extends Component {
             Close
           </span>
         </Modal>
+        <p className="hidden-version-text">{versionString}</p>
       </div>
     );
   }

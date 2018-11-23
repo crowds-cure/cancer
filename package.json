@@ -52,7 +52,7 @@
   "scripts": {
     "copy:webworkers": "cp node_modules/cornerstone-wado-image-loader/dist/*.min.js* public",
     "version": "node -p -e \"'export default \\'' + require('./package.json').version + '\\';'\" > src/version.js",
-    "sha": "node -p -e \"'export default \\'' + require('child_process').execSync('git rev-parse HEAD').toString().trim() + '\\';'\" > src/sha.js",
+    "sha": "echo \"export default '\"$(git rev-parse HEAD)\"';\" > src/sha.js",
     "details": "npm run version && npm run sha",
     "prep": "npm run details && npm run copy:webworkers",
     "start": "npm run prep && react-scripts start",

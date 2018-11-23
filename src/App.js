@@ -25,7 +25,6 @@ function setContext(context) {
 
 class App extends Component {
   componentDidMount() {
-    debugger;
     this.unlisten = this.props.history.listen((location, action) => {
       setContext(window.location.pathname);
     });

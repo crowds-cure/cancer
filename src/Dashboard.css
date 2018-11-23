@@ -16,6 +16,11 @@
   margin-top: 10px;
 }
 
+.Dashboard .hidden-version-text {
+  color: transparent;
+  cursor: default;
+}
+
 @media (min-width: screen-md) {
   .Dashboard .rankingGroupSection {
     margin-top: 65px;
