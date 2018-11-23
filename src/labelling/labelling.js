@@ -91,7 +91,10 @@ class Labelling extends Component {
           )}
           {showButtons && (
             <>
-              <div className="checkIconWrapper" onClick={this.fadeOutAndLeave}>
+              <div
+                className="checkIconWrapper"
+                onClick={this.fadeOutAndLeaveFast}
+              >
                 <svg className="checkIcon">
                   <use xlinkHref="/icons.svg#check-solid" />
                 </svg>
@@ -175,6 +178,12 @@ class Labelling extends Component {
         displayComponent: false
       });
     }, 1000);
+  };
+
+  fadeOutAndLeaveFast = () => {
+    this.setState({
+      displayComponent: false
+    });
   };
 
   clearFadeOutTimer = () => {
