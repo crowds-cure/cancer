@@ -12,20 +12,24 @@ class Labelling extends Component {
   static defaultProps = {
     measurementData: {},
     eventData: {},
-    skipButton: false
+    skipButton: false,
+    editDescription: false
   };
 
   constructor(props) {
     super(props);
+    const { measurementData, eventData } = props;
 
     this.state = {
       displayComponent: true,
-      location: null,
-      description: '',
+      editDescription: props.editDescription,
+      editLocation: !props.editDescription,
+      location: measurementData.location,
+      description: measurementData.description,
       justCreated: true,
       componentStyle: {
-        left: props.eventData.currentPoints.canvas.x + 50,
-        top: props.eventData.currentPoints.canvas.y
+        left: eventData.currentPoints.canvas.x + 50,
+        top: eventData.currentPoints.canvas.y
       }
     };
 
@@ -33,6 +37,7 @@ class Labelling extends Component {
   }
 
   render() {
+    debugger;
     let showAddLabel = this.state.justCreated && !this.props.skipButton;
     let showButtons = false;
     let showSelectTree = false;
@@ -40,13 +45,15 @@ class Labelling extends Component {
     let treeItems = {};
 
     if (!showAddLabel) {
-      if (this.state.location === null) {
+      if (this.state.editLocation) {
         treeItems = labelItems;
-        selectTreeTitle = 'Add Label';
+        selectTreeTitle = `${this.state.location ? 'Edit' : 'Add'} Label`;
         showSelectTree = true;
-      } else if (this.state.description === null) {
+      } else if (this.state.editDescription) {
         treeItems = descriptionItems;
-        selectTreeTitle = 'Add Description';
+        selectTreeTitle = `${
+          this.state.description ? 'Edit' : 'Add'
+        } Description`;
         showSelectTree = true;
       } else {
         showButtons = true;
@@ -91,17 +98,17 @@ class Labelling extends Component {
                 </svg>
               </div>
               <div className="textArea">
-                {this.state.location && this.state.location.label}
-                {this.state.description && ` (${this.state.description.label})`}
+                {this.state.location && this.state.location}
+                {this.state.description && ` (${this.state.description})`}
               </div>
               <div className="commonButtons">
                 <button
                   className="commonButton"
                   onClick={this.descriptionUpdate}
                 >
-                  {this.state.description === ''
-                    ? 'Add Description'
-                    : 'Edit Description'}
+                  {this.state.description
+                    ? 'Edit Description'
+                    : 'Add Description'}
                 </button>
               </div>
             </>
@@ -179,8 +186,9 @@ class Labelling extends Component {
     if (this.setTimeout) {
       clearTimeout(this.setTimeout);
     }
+    debugger;
     this.setState({
-      description: null
+      editDescription: true
     });
   };
 
@@ -204,22 +212,26 @@ class Labelling extends Component {
   ) => {
     let { location, description } = cloneDeep(this.state);
 
-    if (location === null) {
-      location = levelOneItem;
+    if (this.state.editLocation) {
+      location = levelOneItem.label;
     } else {
-      description = levelOneItem;
+      description = levelOneItem.label;
     }
 
-    const descriptionText = description ? ` (${description.label})` : '';
-    const textLine = location.label + descriptionText;
+    const descriptionText = description ? ` (${description})` : '';
+    const textLine = location + descriptionText;
 
-    this.props.measurementData.description = description.label;
-    this.props.measurementData.location = location.label;
+    if (description) {
+      this.props.measurementData.description = description;
+    }
+    this.props.measurementData.location = location;
     this.props.measurementData.additionalData = [textLine];
 
     this.setState({
       location,
-      description
+      description,
+      editDescription: false,
+      editLocation: false
     });
 
     if (this.isTouchScreen) {
