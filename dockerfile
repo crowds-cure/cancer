@@ -1,6 +1,8 @@
 # Stage 1: Build the application
-FROM node:10.12.0-slim as builder
+# docker build -t crowds-cure/cancer:latest .
+FROM node:11.2.0-slim as builder
 
+RUN apt-get update && apt-get install -y git
 RUN mkdir /usr/src/app
 RUN npm install react-scripts -g
 

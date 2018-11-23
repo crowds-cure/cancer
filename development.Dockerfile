@@ -1,9 +1,9 @@
 # Use with:
 # docker build -f development.Dockerfile -t crowds-cure/cancer:dev-latest .
 
-FROM node:10.12.0-slim
+FROM node:11.2.0-slim
 
-# set working directory
+RUN apt-get update && apt-get install -y git
 RUN mkdir /usr/src/app
 RUN npm install react-scripts -g --silent
 
