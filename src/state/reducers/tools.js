@@ -45,28 +45,28 @@ const defaultButtons = [
     command: 'setWLPresetSoftTissue',
     type: 'command',
     text: 'Soft Tissue',
-    svgUrl: '/icons.svg#icon-tools-levels',
+    svgUrl: '/icons.svg#icon-wl-soft-tissue',
     active: false
   },
   {
     command: 'setWLPresetLung',
     type: 'command',
     text: 'Lung',
-    svgUrl: '/icons.svg#icon-tools-levels',
+    svgUrl: '/icons.svg#icon-wl-lung',
     active: false
   },
   {
     command: 'setWLPresetLiver',
     type: 'command',
     text: 'Liver',
-    svgUrl: '/icons.svg#icon-tools-levels',
+    svgUrl: '/icons.svg#icon-wl-liver',
     active: false
   },
-    {
+  {
     command: 'setWLPresetBrain',
     type: 'command',
     text: 'Brain',
-    svgUrl: '/icons.svg#icon-tools-levels',
+    svgUrl: '/icons.svg#icon-wl-brain',
     active: false
   }
 ];
