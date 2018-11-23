@@ -37,7 +37,6 @@ class Labelling extends Component {
   }
 
   render() {
-    debugger;
     let showAddLabel = this.state.justCreated && !this.props.skipButton;
     let showButtons = false;
     let showSelectTree = false;
@@ -118,7 +117,17 @@ class Labelling extends Component {
     );
   }
 
+  componentDidMount = () => {
+    if (this.state.skipButton) {
+      this.positioningOverlay();
+    }
+  };
+
   componentDidUpdate = () => {
+    this.positioningOverlay();
+  };
+
+  positioningOverlay = () => {
     const {
       offsetParent,
       offsetTop,
@@ -186,7 +195,6 @@ class Labelling extends Component {
     if (this.setTimeout) {
       clearTimeout(this.setTimeout);
     }
-    debugger;
     this.setState({
       editDescription: true
     });
