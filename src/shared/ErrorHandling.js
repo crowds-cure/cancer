@@ -3,7 +3,6 @@ import version from '../version.js';
 import sha from '../sha.js';
 
 // TODO: could make this more robust
-debugger;
 const isLocalhost = window.location.origin === 'http://localhost:3000';
 
 const Rollbar = rollbar.init({
