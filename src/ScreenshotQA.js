@@ -4,6 +4,7 @@ import SimpleHeaderSection from './shared/SimpleHeaderSection';
 import { getDB } from './db.js';
 import getAuthorizationHeader from './openid-connect/getAuthorizationHeader.js';
 import SecuredImage from './shared/SecuredImage.js';
+import './ScreenshotQA.css';
 
 async function getLatestMeasurements() {
   const measurementsDB = getDB('measurements');
@@ -14,7 +15,7 @@ async function getLatestMeasurements() {
     },
     fields: ['_id', 'date', 'annotator', 'caseData', 'feedback'],
     sort: [{ date: 'desc' }],
-    limit: 10
+    limit: 25
   });
 
   return result.docs;
@@ -43,16 +44,28 @@ const options = [
     label: 'Poor image quality, other'
   },
   {
+    value: 'ContainsMultiPhaseImages',
+    label: 'Contains multi-phase images'
+  },
+  {
     value: 'NoDiseaseIdentified',
     label: 'No disease identified'
   },
   {
-    value: 'ContainsDualPhaseImages',
-    label: 'Contains dual phase images'
+    value: 'NoMeasurableDisease',
+    label: 'No measurable disease'
   },
   {
-    value: 'NoFeedback',
-    label: 'No Feedback'
+    value: 'LikelyBenign',
+    label: 'Likely benign'
+  },
+  {
+    value: 'DidntMeasureEverything',
+    label: 'Didn’t measure everything'
+  },
+  {
+    value: 'NoneJustWantToSkip',
+    label: 'None, just want to skip'
   }
 ];
 
@@ -70,7 +83,7 @@ class ScreenshotQA extends Component {
   }
 
   componentDidMount() {
-    this.interval = setInterval(this.updateMeasurements, 30000);
+    this.interval = setInterval(this.updateMeasurements, 20000);
   }
 
   componentWillUnmount() {
@@ -95,14 +108,19 @@ class ScreenshotQA extends Component {
       const date = new Date(measurement.date * 1000).toUTCString();
       const feedback = measurement.feedback || [];
       const feedbackLabels = feedback.map(f => {
-        return options.find(opt => opt.value === f).label;
+        const option = options.find(opt => opt.value === f);
+        if (!option) {
+          return `unknown feedback option: ${f}`;
+        }
+
+        return option.label;
       });
 
       const feedbackString = feedbackLabels.join(', ');
 
       return (
         <div className="row" key={measurement._id}>
-          <div className="col-4">
+          <div className="col-sm-16 col-md-4">
             <h4>{measurement.annotator}</h4>
             <h5>{date}</h5>
             <p>{measurement.caseData.Collection}</p>
@@ -114,7 +132,7 @@ class ScreenshotQA extends Component {
               {feedbackString}
             </p>
           </div>
-          <div className="col-10">
+          <div className="col-sm-16 col-md-12">
             <SecuredImage
               src={src}
               alt={measurement._id}
@@ -131,7 +149,7 @@ class ScreenshotQA extends Component {
         <SimpleHeaderSection />
         <div className="container">
           <div className="row justify-content-center">
-            <div className="col-10">{screenshots}</div>
+            <div className="col-sm-16">{screenshots}</div>
           </div>
         </div>
       </div>
