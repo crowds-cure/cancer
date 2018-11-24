@@ -141,13 +141,13 @@ async function getCommunityStats() {
   );
 
   // extra stat functions that can be added to dashboard / badges
-  console.log('sessions by team', await getSessionsByTeam());
-  console.log('users on each team', await getTeamUsers());
+  //console.log('sessions by team', await getSessionsByTeam());
+  //console.log('users on each team', await getTeamUsers());
 
-  console.log(
+  /*console.log(
     'measurements per collection',
     await getCollectionMeasurementStats()
-  );
+  );*/
 
   return {
     totalMeasurements,
@@ -158,3 +158,9 @@ async function getCommunityStats() {
 }
 
 export default getCommunityStats;
+export {
+  getCommunityStats,
+  getSessionsByTeam,
+  getTeamUsers,
+  getCollectionMeasurementStats
+};
