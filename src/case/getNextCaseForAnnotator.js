@@ -1,22 +1,13 @@
-//import { measurementsDB } from "../db.js";
 import { getDB } from '../db.js';
+import getAvailableCases from './getAvailableCases';
 
 //
 // Returns the status the measurement documents for the user for a collection
 // (only return datasets that have been skipped less than skipThreshold)
 //
-async function annotatorCollectionMeasurements(
-  collection,
-  annotatorID,
-  skipThreshold = 5
-) {
-  // get all cases for this collection
-  const casesDB = getDB('cases');
-  const byCollectionPromise = casesDB.query('by/collectionCaseId', {
-    reduce: false,
-    start_key: [collection, ''],
-    end_key: [collection, {}]
-  });
+async function annotatorCollectionMeasurements(collection, annotatorID) {
+  // get all available cases for this collection
+  const availableCasesPromise = getAvailableCases(collection);
 
   // get measurments for annotator
   const measurementsDB = getDB('measurements');
@@ -30,28 +21,16 @@ async function annotatorCollectionMeasurements(
     }
   );
 
-  // get measurements for collection
-  const byCollectionCaseIdSkipPromise = measurementsDB.query(
-    'by/collectionCaseIdSkip',
-    {
-      reduce: true,
-      group: true,
-      start_key: [collection, ''],
-      end_key: [collection, {}]
-    }
-  );
-
   // create collated table of results
   return await Promise.all([
-    byCollectionPromise,
-    byAnnotatorCollectionPromise,
-    byCollectionCaseIdSkipPromise
+    availableCasesPromise,
+    byAnnotatorCollectionPromise
   ]).then(results => {
     console.log(results);
 
     // first build table of all cases in collection
     const cases = {};
-    results[0].rows.forEach(row => {
+    results[0].forEach(row => {
       cases[row.key[1]] = { measurements: 0, measured: false, skipped: false };
     });
 
@@ -59,16 +38,6 @@ async function annotatorCollectionMeasurements(
     results[1].rows.forEach(row => {
       cases[row.doc.caseData._id].measured = true;
       cases[row.doc.caseData._id].skipped = true;
-    });
-
-    // now mark the cases if skipped, or list count of other measurements
-    results[2].rows.forEach(row => {
-      const caseId = row.key[1];
-      cases[caseId].measurements = row.value;
-      const skipped = row.key[2];
-      if (skipped) {
-        cases[caseId].skipped |= row.value > skipThreshold;
-      }
     });
 
     return cases;

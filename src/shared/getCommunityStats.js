@@ -23,7 +23,7 @@ Community
 async function getTotalMeasurements(measurementsDB) {
   const result = await measurementsDB.query('by/_id');
 
-  return result.rows[0].value;
+  return result.rows[0] && result.rows[0].value;
 }
 
 async function getTotalMeasurementsInDateRange(
