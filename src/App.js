@@ -11,7 +11,8 @@ import ConnectedViewer from './ConnectedViewer.js';
 import ConnectedSessionSummary from './ConnectedSessionSummary.js';
 import ScreenshotQA from './ScreenshotQA.js';
 import Leaderboard from './Leaderboard.js';
-import TestPage from './TestPage.js';
+import StatisticsPage from './StatisticsPage.js';
+//import TestPage from './TestPage.js';
 
 const reload = () => window.location.reload();
 
@@ -79,9 +80,16 @@ class App extends Component {
           auth={this.props.auth}
           store={this.props.store}
         />
+        <SecretRoute
+          exact
+          path="/stats"
+          component={StatisticsPage}
+          auth={this.props.auth}
+          store={this.props.store}
+        />
         <Route path="/silent-refresh.html" onEnter={reload} />
         <Route path="/logout-redirect.html" onEnter={reload} />
-        <Route exact path="/playground" component={TestPage} />
+        {/*<Route exact path="/playground" component={TestPage} />*/}
         <Route render={() => <div> Sorry, this page does not exist. </div>} />
       </Switch>
     );

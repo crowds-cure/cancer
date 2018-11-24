@@ -51,73 +51,6 @@ async function getNumAnnotators(measurementsDB) {
   return result.rows.length;
 }
 
-async function getSessionsByTeam() {
-  const sessionsDB = getDB('sessions');
-  const result = await sessionsDB.query('by/teamUsername', {
-    reduce: true,
-    group: true,
-    group_level: 1
-  });
-
-  const byTeam = {};
-  result.rows.forEach(row => {
-    byTeam[row.key[0]] = row.value;
-  });
-  return byTeam;
-}
-
-async function getTeamUsers() {
-  const sessionsDB = getDB('sessions');
-  const result = await sessionsDB.query('by/teamUsername', {
-    reduce: true,
-    group: true,
-    group_level: 2
-  });
-
-  const teamUsers = {};
-  result.rows.forEach(row => {
-    const team = row.key[0];
-    const user = row.key[1];
-    teamUsers[team] = teamUsers[team] || [];
-    teamUsers[team].push(user);
-  });
-  return teamUsers;
-}
-
-async function getCollectionMeasurementStats() {
-  const measurementsDB = getDB('measurements');
-  const caseDataPromise = measurementsDB.query('by/caseDataCollection', {
-    reduce: true,
-    group: true
-  });
-
-  const casesDB = getDB('cases');
-  const casesPromise = casesDB.query('by/collection', {
-    reduce: true,
-    group: true
-  });
-
-  return await Promise.all([caseDataPromise, casesPromise]).then(results => {
-    const caseData = results[0].rows;
-    const cases = results[1].rows;
-
-    const statsByCollection = {
-      measurementCount: {},
-      caseCount: {},
-      averageMeaurements: {}
-    };
-    cases.forEach(entry => {
-      statsByCollection.measurementCount[entry.key] = entry.value;
-    });
-    caseData.forEach(entry => {
-      statsByCollection.caseCount[entry.key] = entry.value;
-      statsByCollection.averageMeaurements[entry.key] =
-        statsByCollection.measurementCount[entry.key] / entry.value;
-    });
-    return statsByCollection;
-  });
-}
-
 async function getCommunityStats() {
   const measurementsDB = getDB('measurements');
 
@@ -158,9 +91,3 @@ async function getCommunityStats() {
 }
 
 export default getCommunityStats;
-export {
-  getCommunityStats,
-  getSessionsByTeam,
-  getTeamUsers,
-  getCollectionMeasurementStats
-};
