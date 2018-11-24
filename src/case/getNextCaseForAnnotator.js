@@ -34,7 +34,7 @@ async function annotatorCollectionMeasurements(collection, annotatorID) {
       cases[row.key[1]] = { measurements: 0, measured: false, skipped: false };
     });
 
-    // now mark all the ones measured by this annotator
+    // now mark all the ones measured or skipped by this annotator
     results[1].rows.forEach(row => {
       cases[row.doc.caseData._id].measured = true;
       cases[row.doc.caseData._id].skipped = true;
@@ -58,26 +58,57 @@ async function getNextCaseForAnnotator(collection, annotatorID) {
     return cases[a].measurements - cases[b].measurements;
   });
 
-  // find the first one not skipped or measured by the user
+  // make a list of the least measured cases that haven't
+  // been measured or skipped by this annotator
+  const leastMeasuredCaseIndices = [];
+  let leastMeasuredCount = undefined;
   for (let index = 0; index < keys.length; index++) {
-    const caseId = keys[index];
     const caseData = cases[keys[index]];
     if (!caseData.measured && !caseData.skipped) {
-      // return the document for that collection/caseId
-      const casesDB = getDB('cases');
-      const result = await casesDB.query('by/collectionCaseId', {
-        reduce: false,
-        start_key: [collection, caseId],
-        end_key: [collection, caseId],
-        include_docs: true
-      });
-
-      return result.rows[0].doc;
+      if (leastMeasuredCaseIndices.length === 0) {
+        leastMeasuredCaseIndices.push(index);
+        leastMeasuredCount = caseData.measurements;
+      } else {
+        if (caseData.measurements <= leastMeasuredCount) {
+          leastMeasuredCaseIndices.push(index);
+        } else {
+          // we know the rest of the cases have more measurements
+          // because it's sorted, so drop out here.
+          break;
+        }
+      }
     }
   }
 
-  // return null if there's no case - this means user is done with this
-  // collection
+  // if there's anything on the list, return the case info for a random entry
+  if (leastMeasuredCaseIndices.length > 0) {
+    // now pick a random entry from the list of candidates cases
+    const caseIndex =
+      leastMeasuredCaseIndices[
+        Math.floor(Math.random() * leastMeasuredCaseIndices.length)
+      ];
+    const caseId = keys[caseIndex];
+    console.log(
+      'picking random case ',
+      caseIndex,
+      'out of ',
+      leastMeasuredCaseIndices.length
+    );
+
+    // and return the document for that collection/caseId
+    const casesDB = getDB('cases');
+    const result = await casesDB.query('by/collectionCaseId', {
+      reduce: false,
+      start_key: [collection, caseId],
+      end_key: [collection, caseId],
+      include_docs: true
+    });
+
+    return result.rows[0].doc;
+  }
+
+  // otherwise return null if there's no case - this means user is done with this collection
+  // TODO: it looks like this is not handled and the user sees the same case over and over
   return null;
 }
 
