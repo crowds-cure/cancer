@@ -97,7 +97,7 @@ class Viewer extends Component {
 
   getNextCase() {
     const props = this.props;
-
+    console.log('asking for the next case');
     props.fetchCaseRequest();
     this.setState({
       loading: true,
@@ -109,8 +109,20 @@ class Viewer extends Component {
 
     clearOldCornerstoneCacheData();
 
+    function nextCaseResolver(nextCase) {
+      console.log('next case', nextCase);
+      props.fetchCaseSuccess(nextCase);
+    }
+
+    function nextCaseRejector(args) {
+      // when there is no valid next case
+      console.log('Finished collection - returning to dashboard');
+      props.history.push('/');
+      props.fetchCaseFailure(args);
+    }
+
     return getNextCase(this.props.collection, getUsername())
-      .then(props.fetchCaseSuccess, props.fetchCaseFailure)
+      .then(nextCaseResolver, nextCaseRejector)
       .then(() => {
         this.setState({
           loading: false
