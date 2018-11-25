@@ -14,7 +14,7 @@ const nameToID = name => {
 };
 
 const organGroups = [
-  'Abdominal/Chest Wall',
+  'Abdomen/Chest Wall',
   'Adrenal',
   'Bladder',
   'Bone',
