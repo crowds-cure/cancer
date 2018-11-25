@@ -282,6 +282,7 @@ class Viewer extends Component {
             />
             <CaseControlButtons
               smallControls={true}
+              feedbackOpensDown={false}
               feedbackChanged={this.feedbackChanged}
               feedbackSelected={this.state.feedback}
               saveEnabled={this.isSaveEnabled()}

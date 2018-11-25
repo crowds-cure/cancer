@@ -4,6 +4,7 @@
 .CaseFeedback {
   display: inline-block;
   transition: all 0.3s linear;
+  position: relative;
 }
 
 .CaseFeedback .feedback-button {
@@ -47,6 +48,19 @@
   margin-left: 10px;
 }
 
+.CaseFeedback .arrow-up {
+  width: 0;
+  height: 0;
+  border: 5px solid white;
+  border-top-color: transparent;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  position: relative;
+  top: -12px;
+  right: 0px;
+  margin-left: 10px;
+}
+
 .CaseFeedback .feedback-options {
   display: block;
   position: absolute;
@@ -57,7 +71,7 @@
   margin-top: 16px;
 }
 
-.CaseFeedback .feedback-options:before {
+.CaseFeedback .feedback-options.opens-down:before {
   content: '';
   width: 0;
   height: 0;
@@ -66,8 +80,36 @@
   border-right-color: transparent;
   border-left-color: transparent;
   position: absolute;
+}
+
+.CaseFeedback .feedback-options.opens-up:before {
+  content: '';
+  width: 0;
+  height: 0;
+  border: 12px solid #1e1d32;
+  border-bottom-color: transparent;
+  border-right-color: transparent;
+  border-left-color: transparent;
+  position: absolute;
+}
+
+.CaseFeedback .feedback-options.opens-down:before {
   top: -24px;
   left: 70px;
+}
+
+.CaseFeedback .feedback-options.opens-up:before {
+  bottom: -24px;
+  left: 70px;
+}
+
+.CaseFeedback .feedback-options {
+  width: 244px;
+}
+
+.CaseFeedback .feedback-options.opens-up {
+  top: -461px;
+  width: 244px;
 }
 
 .CaseFeedback .feedback-options ul {

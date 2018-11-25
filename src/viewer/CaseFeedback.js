@@ -20,7 +20,8 @@ class CaseFeedback extends Component {
   }
 
   static defaultProps = {
-    label: 'Case Feedback'
+    label: 'Case Feedback',
+    opensDown: true
   };
 
   render() {
@@ -94,10 +95,16 @@ class CaseFeedback extends Component {
           onClick={this.openDropdown}
         >
           {this.props.label}
-          <span className="arrow-down" />
+          <span className={this.props.opensDown ? 'arrow-down' : 'arrow-up'} />
         </div>
         {this.state.isOpen && (
-          <div className="feedback-options">
+          <div
+            className={
+              this.props.opensDown
+                ? 'feedback-options opens-down'
+                : 'feedback-options opens-up'
+            }
+          >
             <ul>{opts}</ul>
             <button
               className="button"
@@ -148,6 +155,7 @@ class CaseFeedback extends Component {
 
 CaseFeedback.propTypes = {
   label: PropTypes.string.isRequired,
+  opensDown: PropTypes.bool.isRequired,
   skipEnabled: PropTypes.bool.isRequired,
   skipCase: PropTypes.func.isRequired,
   feedbackChanged: PropTypes.func.isRequired,

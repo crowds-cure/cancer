@@ -9,7 +9,8 @@ class CaseControlButtons extends Component {
   static defaultProps = {
     skipEnabled: false,
     saveEnabled: false,
-    measurementsInCurrentSession: 0
+    measurementsInCurrentSession: 0,
+    feedbackOpensDown: true
   };
 
   render() {
@@ -17,6 +18,7 @@ class CaseControlButtons extends Component {
       <div className="CaseControlButtons">
         <CaseFeedback
           label={this.props.smallControls ? 'Feedback' : 'Case Feedback'}
+          opensDown={this.props.feedbackOpensDown}
           feedbackSelected={this.props.feedbackSelected}
           feedbackChanged={this.props.feedbackChanged}
           skipEnabled={this.props.skipEnabled}
@@ -47,6 +49,7 @@ CaseControlButtons.propTypes = {
   saveEnabled: PropTypes.bool.isRequired,
   skipCase: PropTypes.func.isRequired,
   saveCase: PropTypes.func.isRequired,
+  feedbackOpensDown: PropTypes.bool.isRequired,
   feedbackChanged: PropTypes.func.isRequired,
   feedbackSelected: PropTypes.array.isRequired,
   measurementsInCurrentSession: PropTypes.number.isRequired
