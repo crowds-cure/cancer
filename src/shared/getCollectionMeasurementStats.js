@@ -26,13 +26,14 @@ async function getCollectionMeasurementStats() {
   };
 
   cases.forEach(entry => {
-    statsByCollection.measurementCount[entry.key] = entry.value;
+    statsByCollection.caseCount[entry.key] = entry.value;
   });
 
   caseData.forEach(entry => {
-    statsByCollection.caseCount[entry.key] = entry.value;
+    statsByCollection.measurementCount[entry.key] = entry.value;
     statsByCollection.averageMeasurements[entry.key] =
-      statsByCollection.measurementCount[entry.key] / entry.value;
+      statsByCollection.measurementCount[entry.key] /
+      statsByCollection.caseCount[entry.key];
   });
 
   return statsByCollection;
