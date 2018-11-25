@@ -11,6 +11,8 @@ const session = (state = defaultState, action) => {
         measurementsInCurrentSession:
           state.measurementsInCurrentSession + action.num
       });
+    case 'RESET_SESSION':
+      return Object.assign({}, state, defaultState);
     case 'TOTAL_COMPLETE_COLLECTION':
       return Object.assign({}, state, {
         totalCompleteCollection: action.num

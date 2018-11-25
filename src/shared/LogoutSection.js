@@ -13,6 +13,7 @@ class LogoutSection extends Component {
   }
 
   static contextTypes = {
+    store: PropTypes.object.isRequired,
     router: PropTypes.shape({
       history: PropTypes.shape({
         push: PropTypes.func.isRequired,
@@ -39,6 +40,10 @@ class LogoutSection extends Component {
   }
 
   handleClickDashboard = () => {
+    this.context.store.dispatch({
+      type: 'RESET_SESSION'
+    });
+
     this.context.router.history.push('/');
   };
 
