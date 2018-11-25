@@ -11,7 +11,7 @@
       new UserManager().signoutRedirectCallback().then(function() {
         // TODO: Keycloak + Auth0 is not properly logging out both sessions?
         // This is a hacky hardcoded workaround. This could also be added as a component to the React application rather than a static page.
-        var path = window.location.origin + '/#login';
+        var path = 'https://www.crowds-cure.org';
         var client_id = 'z5cXMPTxeFOdB3i4xRA8JyhTonQmqMKM';
         var url = `https://auth.crowds-cure.org/v2/logout?client_id=${client_id}&returnTo=${path}`;
         window.location.href = url;
