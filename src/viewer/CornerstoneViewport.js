@@ -273,7 +273,7 @@ class CornerstoneViewport extends Component {
       cornerstoneTools.stackPrefetch.setConfiguration({
         maxImagesToPrefetch: Infinity,
         preserveExistingPool: false,
-        maxSimultaneousRequests: 20
+        maxSimultaneousRequests: 6
       });
 
       /* For mouse devices, by default we turn on:
