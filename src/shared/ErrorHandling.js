@@ -6,7 +6,7 @@ import sha from '../sha.js';
 const isLocalhost = window.location.origin === 'http://localhost:3000';
 
 const Rollbar = rollbar.init({
-  enabled: !isLocalhost,
+  enabled: false, // temporarily to test performance //!isLocalhost,
   accessToken: '0b87c8ddc3b945a08b212efc005337eb',
   captureUncaught: true,
   captureUnhandledRejections: true,
