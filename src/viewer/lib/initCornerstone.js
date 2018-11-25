@@ -15,7 +15,7 @@ cornerstoneWADOImageLoader.external.dicomParser = dicomParser;
 
 const config = {
   maxWebWorkers: navigator.hardwareConcurrency || 1,
-  startWebWorkersOnDemand: true,
+  startWebWorkersOnDemand: false,
   webWorkerPath: 'cornerstoneWADOImageLoaderWebWorker.min.js',
   webWorkerTaskPaths: [],
   taskConfiguration: {
