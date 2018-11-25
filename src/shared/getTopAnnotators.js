@@ -85,8 +85,11 @@ async function getTopTeams(limit = 10) {
       teamAnnotations[team] += score;
     });
     const teamRanking = [];
+    const teamsToIgnore = ['notApplicable', 'undefined', 'null', ' '];
     Object.keys(teamAnnotations).forEach(teamName => {
-      teamRanking.push([teamName, teamAnnotations[teamName]]);
+      if (!teamsToIgnore.includes(teamName)) {
+        teamRanking.push([teamName, teamAnnotations[teamName]]);
+      }
     });
     teamRanking.sort((a, b) => b[1] - a[1]);
     console.log('teamRanking', teamRanking);
