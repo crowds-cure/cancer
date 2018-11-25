@@ -52,7 +52,8 @@ const descriptions = [
   'Cystic',
   'Cavitated',
   'Ground Glass',
-  'Solid'
+  'Solid',
+  'Likely Benign'
 ];
 
 const descriptionItems = orderBy(
