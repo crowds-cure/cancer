@@ -58,6 +58,7 @@
   height: 46px;
   margin-right: 10px;
   vertical-align: bottom;
+  cursor: pointer;
 }
 
 .labellingComponent .checkIcon {
