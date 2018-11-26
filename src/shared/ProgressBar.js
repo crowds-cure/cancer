@@ -12,6 +12,8 @@ class ProgressBar extends Component {
       max: this.props.max - this.props.min,
       lastMax: this.props.max
     };
+
+    this.progressBar = React.createRef();
   }
 
   render() {
@@ -20,6 +22,7 @@ class ProgressBar extends Component {
         className="ProgressBar"
         max={this.state.max}
         value={this.state.value}
+        ref={this.progressBar}
       />
     );
   }
@@ -38,11 +41,16 @@ class ProgressBar extends Component {
 
   componentDidUpdate = () => {
     if (this.state.lastMax !== this.props.max) {
-      this.setState({
-        value: this.props.value - this.props.min,
-        max: this.props.max - this.props.min,
-        lastMax: this.props.max
-      });
+      this.progressBar.current.classList.add('notransition');
+      this.progressBar.current.value = 0;
+      setTimeout(() => {
+        this.progressBar.current.classList.remove('notransition');
+        this.setState({
+          value: this.props.value - this.props.min,
+          max: this.props.max - this.props.min,
+          lastMax: this.props.max
+        });
+      }, 10);
     }
   };
 }
