@@ -232,7 +232,7 @@ class Viewer extends Component {
             displayCountSuffix={true}
           />
         </MediaQuery>
-        <MediaQuery query="(max-width: 768px)">
+        <MediaQuery query="(max-width: 767px)">
           <HeaderSection
             showLogo={false}
             useHamburgerMenu={true}
@@ -263,7 +263,7 @@ class Viewer extends Component {
             />
           </div>
         </MediaQuery>
-        <MediaQuery query="(max-width: 768px)">
+        <MediaQuery query="(max-width: 767px)">
           <div className="toolbar-row">
             <ActiveToolbar />
           </div>
@@ -272,7 +272,7 @@ class Viewer extends Component {
           {this.state.loading ? <LoadingIndicator /> : items}
         </div>
 
-        <MediaQuery query="(max-width: 768px)">
+        <MediaQuery query="(max-width: 767px)">
           <div className="toolbar-row">
             <MeasurementControl
               disabled={!this.state.hasMeasurements}
