@@ -2631,7 +2631,7 @@ cornerstone-math@^0.1.6:
 
 cornerstone-tools@swederik/cornerstoneTools#ccc-perf-testing:
   version "3.0.0-b.0"
-  resolved "https://codeload.github.com/swederik/cornerstoneTools/tar.gz/dd49a42f63cafbbcdaac0eeb81ef2697f9d38176"
+  resolved "https://codeload.github.com/swederik/cornerstoneTools/tar.gz/ca04602a45da286763f88e6835e25d7527dec96f"
   dependencies:
     "@babel/runtime" "7.1.2"
     cornerstone-math "^0.1.6"
