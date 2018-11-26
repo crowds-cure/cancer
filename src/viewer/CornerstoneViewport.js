@@ -535,7 +535,7 @@ class CornerstoneViewport extends Component {
   }
 
   startLoadingHandler() {
-    console.log('startLoadingHandler');
+    //console.log('startLoadingHandler');
     clearTimeout(this.loadHandlerTimeout);
     this.loadHandlerTimeout = setTimeout(() => {
       this.setState({
@@ -616,10 +616,10 @@ class CornerstoneViewport extends Component {
 
     // Note that we throttle requests to prevent the
     // user's ultrafast scrolling from firing requests too quickly.
-    clearTimeout(this.slideTimeout);
-    this.slideTimeout = setTimeout(() => {
-      scrollToIndex(this.element, value);
-    }, this.slideTimeoutTime);
+    //clearTimeout(this.slideTimeout);
+    //this.slideTimeout = setTimeout(() => {
+    scrollToIndex(this.element, value);
+    //}, this.slideTimeoutTime);
   }
 
   hideExtraButtons = () => {

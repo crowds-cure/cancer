@@ -8,9 +8,9 @@ class LoadingIndicator extends Component {
       <div className="LoadingIndicator">
         <div className="indicatorContents">
           <span>Loading...</span>
-          <svg>
+          {/*<svg>
             <use xlinkHref="/icons.svg#icon-spinner" />
-          </svg>
+          </svg>*/}
         </div>
       </div>
     );
