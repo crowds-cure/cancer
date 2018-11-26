@@ -101,7 +101,9 @@ class CaseFeedback extends Component {
           <>
             <div
               className="caseFeedbackOptionsBackground"
-              onClick={this.openDropdown}
+              onMouseDown={this.openDropdown}
+              onWheel={this.openDropdown}
+              onTouchStart={this.openDropdown}
             />
             <div
               className={
