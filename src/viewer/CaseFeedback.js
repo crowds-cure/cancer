@@ -98,25 +98,31 @@ class CaseFeedback extends Component {
           <span className={this.props.opensDown ? 'arrow-down' : 'arrow-up'} />
         </div>
         {this.state.isOpen && (
-          <div
-            className={
-              this.props.opensDown
-                ? 'feedback-options opens-down'
-                : 'feedback-options opens-up'
-            }
-          >
-            <ul>{opts}</ul>
-            <button
-              className="button"
-              disabled={!this.props.skipEnabled}
-              onClick={this.skipCase}
+          <>
+            <div
+              className="caseFeedbackOptionsBackground"
+              onClick={this.openDropdown}
+            />
+            <div
+              className={
+                this.props.opensDown
+                  ? 'feedback-options opens-down'
+                  : 'feedback-options opens-up'
+              }
             >
-              Skip case
-            </button>
-            <button className="button" onClick={this.closeDropdown}>
-              Continue case
-            </button>
-          </div>
+              <ul>{opts}</ul>
+              <button
+                className="button"
+                disabled={!this.props.skipEnabled}
+                onClick={this.skipCase}
+              >
+                Skip case
+              </button>
+              <button className="button" onClick={this.closeDropdown}>
+                Continue case
+              </button>
+            </div>
+          </>
         )}
       </div>
     );
