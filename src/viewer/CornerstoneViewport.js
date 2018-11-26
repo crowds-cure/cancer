@@ -16,7 +16,7 @@ import guid from './lib/guid.js';
 import cloneDeep from 'lodash.clonedeep';
 
 const EVENT_RESIZE = 'resize';
-const loadIndicatorDelay = 25;
+const loadIndicatorDelay = 45;
 const { loadHandlerManager } = cornerstoneTools;
 
 function setToolsPassive(tools) {
