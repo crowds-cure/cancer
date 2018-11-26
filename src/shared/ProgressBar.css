@@ -22,6 +22,14 @@
   background: #544d79;
 }
 
+.ProgressBar[value].notransition::-webkit-progress-value {
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -o-transition: none !important;
+  -ms-transition: none !important;
+  transition: none !important;
+}
+
 .ProgressBar[value]::-webkit-progress-value {
   background-image: linear-gradient(to right, #79f9fe, #b994fe);
   transition: all 1.7s linear;
