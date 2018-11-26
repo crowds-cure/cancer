@@ -1,6 +1,7 @@
 .labellingComponent {
   position: absolute;
   text-align: center;
+  z-index: 300;
 }
 
 .labellingComponent .selectedLabel,
@@ -75,7 +76,6 @@
 
 .labelling-appear {
   opacity: 0;
-  z-index: 1;
 }
 .labelling-appear.labelling-appear-active {
   opacity: 1;
