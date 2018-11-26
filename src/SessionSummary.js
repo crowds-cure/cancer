@@ -42,10 +42,18 @@ class SessionSummary extends Component {
             <div className="col-16 col-md-7 rankingStats">
               <div className="row">
                 <div className="col-md">
-                  <RankingSection name="Close to you" />
+                  <RankingSection
+                    name="Top individuals"
+                    type="individual"
+                    viewAllLink="/leaderboard"
+                  />
                 </div>
                 <div className="col-md">
-                  <RankingSection name="Top this week" />
+                  <RankingSection
+                    name="Top groups"
+                    type="team"
+                    viewAllLink="/leaderboard"
+                  />
                 </div>
               </div>
             </div>
