@@ -9,7 +9,6 @@
   border: none;
   -webkit-appearance: none;
   background: transparent;
-  padding: 0;
   cursor: pointer;
   outline: none;
   transition: all 0.15s ease;
@@ -38,12 +37,12 @@
 .HeaderSection .instructionsSection,
 .HeaderSection .dashboardSection {
   float: right;
-  margin: 20px 20px 16px 20px;
 }
 
 .HeaderSection .link {
   font-size: 15px;
   text-decoration: none;
+  padding: 20px 20px 16px 20px;
 }
 
 .HeaderSection .caseProgress {

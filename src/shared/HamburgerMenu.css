@@ -1,9 +1,46 @@
 @value globals: "../GlobalStyles.css";
 @value textSecondaryColor from globals;
 
-.HamburgerMenu svg {
+.HamburgerMenu.menuHide .icon-bars,
+.HamburgerMenu .icon-close {
   padding: 10px 5px;
   height: 52px;
   width: 45px;
   fill: textSecondaryColor;
+  color: textSecondaryColor;
+  display: block;
+}
+
+.HamburgerMenu .icon-bars,
+.HamburgerMenu.menuHide .icon-close {
+  display: none;
+}
+
+.HamburgerOptions {
+  background: #262548;
+  position: fixed;
+  height: 100vh;
+  width: 200px;
+  transform: translateX(-200px);
+  transition: transform 0.1s linear;
+  z-index: 101;
+}
+
+.HamburgerOptions.open {
+  transform: translateX(0);
+}
+
+.HamburgerOptions ul {
+  margin: 0;
+}
+
+.HamburgerOptions li {
+  list-style: none;
+}
+
+.hamburgerMenuBackground {
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  z-index: 100;
 }

@@ -53,7 +53,7 @@ class HeaderSection extends Component {
     const options = (
       <ul>
         <li>
-          <button className="instructions" onClick={this.toggleModal}>
+          <button className="instructions link" onClick={this.toggleModal}>
             Instructions
           </button>
         </li>
@@ -93,7 +93,7 @@ class HeaderSection extends Component {
           </div>
           <div className="instructionsSection">
             {!this.props.useHamburgerMenu && (
-              <button className="instructions" onClick={this.toggleModal}>
+              <button className="instructions link" onClick={this.toggleModal}>
                 Instructions
               </button>
             )}
