@@ -50,7 +50,8 @@ class CornerstoneViewport extends Component {
       imageId: stack.imageIds[0],
       viewportHeight: '100%',
       isLoading: true,
-      imageScrollbarValue: 0
+      imageScrollbarValue: 0,
+      numImagesLoaded: 0
     };
 
     this.displayScrollbar = stack.imageIds.length > 1;
@@ -90,6 +91,10 @@ class CornerstoneViewport extends Component {
   }
 
   render() {
+    const isLoading =
+      this.state.isLoading ||
+      this.state.numImagesLoaded / this.state.stack.imageIds.length < 0.1;
+
     return (
       <>
         <ToolContextMenu
@@ -103,12 +108,13 @@ class CornerstoneViewport extends Component {
             this.element = input;
           }}
         >
-          {this.state.isLoading ? <LoadingIndicator /> : ''}
+          {isLoading ? <LoadingIndicator /> : ''}
           <canvas className="cornerstone-canvas" />
           <ViewportOverlay
             stack={this.state.stack}
             viewport={this.state.viewport}
             imageId={this.state.imageId}
+            numImagesLoaded={this.state.numImagesLoaded}
           />
         </div>
         {this.displayScrollbar && (
@@ -187,6 +193,11 @@ class CornerstoneViewport extends Component {
 
     // Enable the DOM Element for use with Cornerstone
     cornerstone.enable(element);
+
+    cornerstone.events.addEventListener(
+      cornerstone.EVENTS.IMAGE_LOADED,
+      this.onImageLoaded
+    );
 
     // Load the first image in the stack
     cornerstone.loadAndCacheImage(this.state.imageId).then(image => {
@@ -318,11 +329,6 @@ class CornerstoneViewport extends Component {
       element.addEventListener(
         cornerstoneTools.EVENTS.TOUCH_PRESS,
         this.onTouchPress
-      );
-
-      cornerstone.events.addEventListener(
-        cornerstone.EVENTS.IMAGE_LOADED,
-        this.onImageLoaded
       );
 
       window.addEventListener(EVENT_RESIZE, this.onWindowResize);
@@ -523,15 +529,9 @@ class CornerstoneViewport extends Component {
   }
 
   onImageLoaded(event) {
-    //console.log(event.detail);
-    //const loadingProgress = $('#loading-progress');
-    //this.numImagesLoaded += 1;
-    //const imagesLeft = imageIds.length - numImagesLoaded;
-    /*loadingProgress.text(`${imagesLeft} images requested`);
-    if (numImagesLoaded === imageIds.length) {
-      console.timeEnd('Loading All Images');
-      loadingProgress.text('');
-    }*/
+    this.setState({
+      numImagesLoaded: this.state.numImagesLoaded + 1
+    });
   }
 
   startLoadingHandler() {

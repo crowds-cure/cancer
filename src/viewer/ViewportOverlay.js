@@ -17,6 +17,8 @@ class ViewportOverlay extends Component {
 
     const windowWidth = Math.round(this.props.viewport.voi.windowWidth);
     const windowCenter = Math.round(this.props.viewport.voi.windowCenter);
+    const imagesLeft =
+      this.props.stack.imageIds.length - this.props.numImagesLoaded;
 
     return (
       <div className="ViewportOverlay">
@@ -25,6 +27,7 @@ class ViewportOverlay extends Component {
           <span>{patientId}</span>
           <span>{studyDate}</span>
           <span>{studyDescription}</span>
+          <span>{imagesLeft ? `${imagesLeft} images remaining...` : ''}</span>
         </div>
         <div className="bottom-left overlay-element">Zoom: {scale}</div>
         <div className="bottom-right overlay-element">
