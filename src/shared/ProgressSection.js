@@ -37,10 +37,12 @@ class ProgressSection extends Component {
                 {current}
               </span>
               <span className="suffix">measured</span>
-              {increment && (
+              {increment ? (
                 <span ref={this.plusPoints} className="plusPoints">
                   +{increment}
                 </span>
+              ) : (
+                ''
               )}
             </div>
           </div>
