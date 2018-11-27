@@ -75,6 +75,7 @@
   border-width: 0 3px 3px 0;
   -webkit-transform: rotate(45deg);
   transform: rotate(45deg);
+  box-sizing: content-box;
 }
 
 .Checkbox input:disabled ~ .control-indicator:after {
