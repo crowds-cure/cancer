@@ -27,7 +27,9 @@ class ViewportOverlay extends Component {
           <span>{patientId}</span>
           <span>{studyDate}</span>
           <span>{studyDescription}</span>
-          <span>{imagesLeft ? `${imagesLeft} images remaining...` : ''}</span>
+          <span>
+            {imagesLeft > 0 ? `${imagesLeft} images remaining...` : ''}
+          </span>
         </div>
         <div className="bottom-left overlay-element">Zoom: {scale}</div>
         <div className="bottom-right overlay-element">
