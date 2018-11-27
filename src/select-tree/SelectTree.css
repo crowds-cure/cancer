@@ -1,4 +1,10 @@
 @value headerHeight: 37px;
+@value --gray-1: #a3a3a3;
+@value --gray-2: #a0a0a0;
+@value --gray-3: #c4c4c4;
+@value --gray-4: #c0c0c0;
+@value --gray-5: #9b9b9b;
+@value --gray-6: #303030;
 
 .select-tree-root {
   display: inline-block;
@@ -6,25 +12,18 @@
   width: 320px;
   font-size: 14px;
   line-height: 26px;
-
-  --gray-1: #a3a3a3;
-  --gray-2: #a0a0a0;
-  --gray-3: #c4c4c4;
-  --gray-4: #c0c0c0;
-  --gray-5: #9b9b9b;
-  --gray-6: #303030;
 }
 
 .select-tree-root .tree-content {
-  border: 1px solid var(--gray-3);
+  border: 1px solid --gray-3;
   border-radius: 5px;
   background-color: #ffffff;
 }
 
 .select-tree-root .tree-header {
-  background-color: var(--gray-4);
-  border-bottom: 1px solid var(--gray-3);
-  color: var(--gray-6);
+  background-color: --gray-4;
+  border-bottom: 1px solid --gray-3;
+  color: --gray-6;
   padding: 5px;
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
