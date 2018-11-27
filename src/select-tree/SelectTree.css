@@ -3,7 +3,7 @@
 .select-tree-root {
   display: inline-block;
   text-align: initial;
-  max-width: 320px;
+  width: 320px;
   font-size: 14px;
   line-height: 26px;
 
