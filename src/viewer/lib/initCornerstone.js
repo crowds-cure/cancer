@@ -48,6 +48,7 @@ cornerstoneWADOImageLoader.configure({
 
     //xhr.setRequestHeader('Accept', accept);
     xhr.setRequestHeader('Authorization', header.Authorization);
+    xhr.setRequestHeader('Cache-Control', 'no-cache');
   }
 });
 
