@@ -47,3 +47,36 @@ input.imageSlider::-webkit-slider-thumb:active {
   background: activeColor;
   cursor: -webkit-grabbing;
 }
+
+input[type='range']::-ms-thumb {
+  cursor: -webkit-grab;
+  background: imageSliderColor;
+  -webkit-appearance: none;
+  width: 45px;
+  height: 20px;
+  border-radius: 10px;
+  border-color: transparent;
+}
+
+input[type='range']::-ms-thumb:active {
+  background: activeColor;
+  cursor: -webkit-grabbing;
+}
+
+input[type='range']::-ms-track {
+  width: 100%;
+  height: 65px;
+  background: transparent;
+  border-color: transparent;
+  border-width: 6px 0;
+  color: transparent;
+}
+
+input[type='range']::-ms-fill-lower {
+  background: transparent;
+  border-radius: 10px;
+}
+input[type='range']::-ms-fill-upper {
+  background: transparent;
+  border-radius: 10px;
+}
