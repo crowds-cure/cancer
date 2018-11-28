@@ -7,6 +7,7 @@ import ActivityProgressSection from './shared/ActivityProgressSection.js';
 import CaseTypeSection from './shared/CaseTypeSection.js';
 import SimpleHeaderSection from './shared/SimpleHeaderSection.js';
 import AchievementSection from './shared/AchievementSection.js';
+import SectionStatistics from './shared/SessionStatistics.js';
 import ReactTooltip from 'react-tooltip';
 
 import './Dashboard.css';
@@ -132,8 +133,10 @@ class Dashboard extends Component {
             <div className="col-lg-5 offset-lg-4 col-md-7 offset-md-2 col-12 offset-4 order-1">
               <ActivityProgressSection current={this.state.current} />
             </div>
-
-            <div className="col-lg-3 offset-lg-3 col-md-7 col-16 order-3 order-lg-2">
+            <div className="col-lg-4 col-md-5 col-16 order-3 order-lg-2">
+              <SectionStatistics />
+            </div>
+            <div className="col-lg-3 col-md-4 col-16 order-3 order-lg-2">
               <AchievementSection />
             </div>
 

@@ -1,0 +1,34 @@
+@value globals: "../GlobalStyles.css";
+@value textActiveColor, textSecondaryColor, textPrimaryColor from globals;
+
+.SessionStatistics .title {
+  color: textPrimaryColor;
+  display: inline-block;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.SessionStatistics .statisticsItem {
+  margin-bottom: 8px;
+}
+
+.SessionStatistics .statisticsItem .icon {
+  fill: textSecondaryColor;
+  height: 20px;
+  width: 20px;
+  position: relative;
+  top: 5px;
+}
+
+.SessionStatistics .statisticsItem .description {
+  color: textSecondaryColor;
+  margin-left: 10px;
+}
+
+.SessionStatistics .statisticsItem .number {
+  color: textActiveColor;
+  margin-left: 10px;
+  display: inline-block;
+  width: 23px;
+  font-weight: bold;
+}
