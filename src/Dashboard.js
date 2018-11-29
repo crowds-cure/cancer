@@ -130,10 +130,10 @@ class Dashboard extends Component {
         <SimpleHeaderSection username={this.props.username} page="dashboard" />
         <div className="container">
           <div className="row">
-            <div className="col-lg-5 offset-lg-4 col-md-7 offset-md-2 col-12 offset-4 order-1">
+            <div className="col-lg-5 offset-lg-4 col-md-7 offset-md-3 col-12 offset-4 order-1">
               <ActivityProgressSection current={this.state.current} />
             </div>
-            <div className="col-lg-4 col-md-5 col-16 order-3 order-lg-2">
+            <div className="col-lg-3 offset-lg-1 col-md-5 offset-md-1 col-16  order-2">
               <SectionStatistics />
             </div>
             <div className="col-lg-3 col-md-4 col-16 order-3 order-lg-2">
