@@ -1,3 +1,42 @@
 .ScreenshotQA .screenshot {
   width: 100%;
 }
+
+.ScreenshotQA .controlHeader {
+  text-align: center;
+}
+
+.ScreenshotQA .controlHeader ul.pagination {
+  display: inline-block;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin: 0 0 25px 0;
+}
+
+.ScreenshotQA .controlHeader .pagination li {
+  display: inline-block;
+  padding: 5px 8px;
+  border: 1px solid #a2a2eb;
+  background-color: #eaeaff;
+  cursor: pointer;
+}
+
+.ScreenshotQA .controlHeader .usernameField {
+  display: inline-block;
+}
+
+.ScreenshotQA .controlHeader .usernameField label {
+  font-size: 12px;
+  display: block;
+  text-align: left;
+}
+
+.ScreenshotQA .controlHeader .usernameField #username {
+  display: block;
+  height: 30px;
+  font-size: 14px;
+}
+
+.ScreenshotQA .controlHeader .pagination .active {
+  background-color: #b8b8f4;
+}
