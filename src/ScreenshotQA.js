@@ -27,16 +27,19 @@ async function getAnnotators(measurementsDB) {
 }
 
 async function getTotalMeasurements(measurementsDB, annotator) {
-  const result = await measurementsDB.query('by/annotators', {
-    selector: {
-      annotator: annotator
-    }
-  });
+  const options = {};
+
+  if (annotator) {
+    options.startkey = annotator;
+    options.endkey = annotator;
+  }
+
+  const result = await measurementsDB.query('by/annotators', options);
 
   if (!result.rows || !result.rows[0]) {
     return 0;
   }
-
+  debugger;
   return result.rows[0].value;
 }
 
