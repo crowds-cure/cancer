@@ -39,7 +39,6 @@ async function getTotalMeasurements(measurementsDB, annotator) {
   if (!result.rows || !result.rows[0]) {
     return 0;
   }
-  debugger;
   return result.rows[0].value;
 }
 
@@ -136,7 +135,6 @@ class ScreenshotQA extends Component {
   }
 
   render() {
-    debugger;
     const { totalMeasurements, screenshotPerPage } = this.state;
     const pageCount = Math.ceil(totalMeasurements / screenshotPerPage) || 0;
     return (
@@ -207,6 +205,7 @@ class ScreenshotQA extends Component {
     const { pageNumber, screenshotPerPage } = this.state;
     let totalMeasurements = this.state.totalMeasurements;
     goToPageNumber = goToPageNumber || pageNumber;
+    annotator = annotator || this.state.annotator;
     const skip = goToPageNumber * screenshotPerPage;
 
     const measurements = await getMeasurements(this.measurementsDB, {
@@ -222,7 +221,6 @@ class ScreenshotQA extends Component {
       );
     }
 
-    debugger;
     this.setState({
       totalMeasurements,
       measurements,
