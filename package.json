@@ -12,9 +12,11 @@
     "cornerstone-math": "^0.1.6",
     "cornerstone-tools": "swederik/cornerstoneTools#ccc-perf-testing",
     "cornerstone-wado-image-loader": "^2.2.2",
+    "dcmjs": "0.2.1-build-10",
     "dicom-parser": "^1.8.1",
     "dicomweb-client": "^0.3.2",
     "es5-shim": "^4.5.12",
+    "file-saver": "^2.0.0",
     "hammerjs": "^2.0.8",
     "husky": "^1.1.3",
     "lint-staged": "^8.0.4",
@@ -36,7 +38,7 @@
     "react-tooltip": "^3.9.0",
     "react-transition-group": "^2.5.0",
     "redux": "^4.0.1",
-    "rollbar": "^2.5.0",
+    "rollbar": "^2.5.1",
     "whatwg-fetch": "^3.0.0"
   },
   "husky": {

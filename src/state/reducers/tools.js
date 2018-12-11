@@ -1,5 +1,12 @@
 const defaultButtons = [
   {
+    command: 'downloadDICOMStructuredReport',
+    type: 'command',
+    text: 'Download DICOM SR',
+    svgUrl: '/icons.svg#icon-tools-pan',
+    active: false
+  },
+  {
     command: 'Pan',
     type: 'tool',
     text: 'Pan',

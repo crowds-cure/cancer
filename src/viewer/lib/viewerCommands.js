@@ -1,5 +1,8 @@
 import * as cornerstone from 'cornerstone-core';
 import * as cornerstoneTools from 'cornerstone-tools';
+import * as dcmjs from 'dcmjs';
+import saveAs from 'file-saver';
+
 const scroll = cornerstoneTools.import('util/scroll');
 
 const defaultWlPresets = {
@@ -57,8 +60,8 @@ const viewerCommands = {
   setWLPresetLiver: function(element = getActiveElement()) {
     this.setWLPreset(element, 'Liver');
   },
-  
-   setWLPresetBrain: function(element = getActiveElement()) {
+
+  setWLPresetBrain: function(element = getActiveElement()) {
     this.setWLPreset(element, 'Brain');
   },
 
@@ -68,6 +71,23 @@ const viewerCommands = {
 
   reset: function(element = getActiveElement()) {
     cornerstone.reset(element);
+  },
+
+  downloadDICOMStructuredReport: function(element = getActiveElement()) {
+    debugger;
+    console.log('downloadDICOMStructuredReport');
+    console.log(cornerstoneTools.globalImageIdSpecificToolStateManager);
+    const toolState = cornerstoneTools.globalImageIdSpecificToolStateManager.saveToolState();
+
+    const { MeasurementReport } = dcmjs.adapters.Cornerstone;
+
+    const report = MeasurementReport.generateReport(
+      toolState,
+      cornerstone.metaData
+    );
+    const reportBlob = dcmjs.data.datasetToBlob(report.dataset);
+    console.log(reportBlob);
+    saveAs(reportBlob, 'dicomSR.dcm');
   },
 
   scrollActiveElement: function(scrollAmount) {

@@ -1711,7 +1711,7 @@ babel-plugin-transform-react-remove-prop-types@0.4.18:
   resolved "https://registry.yarnpkg.com/babel-plugin-transform-react-remove-prop-types/-/babel-plugin-transform-react-remove-prop-types-0.4.18.tgz#85ff79d66047b34288c6f7cc986b8854ab384f8c"
   integrity sha512-azed2nHo8vmOy7EY26KH+om5oOcWRs0r1U8wOmhwta+SBMMnmJ4H6yaBZRCcHBtMeWp9AVhvBTL/lpR1kEx+Xw==
 
-babel-polyfill@>=6.9.1:
+babel-polyfill@>=6.9.1, babel-polyfill@^6.26.0:
   version "6.26.0"
   resolved "https://registry.yarnpkg.com/babel-polyfill/-/babel-polyfill-6.26.0.tgz#379937abc67d7895970adc621f284cd966cf2153"
   integrity sha1-N5k3q8Z9eJWXCtxiHyhM2WbPIVM=
@@ -2969,6 +2969,10 @@ date-now@^0.1.4:
   resolved "https://registry.yarnpkg.com/date-now/-/date-now-0.1.4.tgz#eaf439fd4d4848ad74e5cc7dbef200672b9e345b"
   integrity sha1-6vQ5/U1ISK105cx9vvIAZyueNFs=
 
+"dcmjs@link:../../QIICR/dcmjs":
+  version "0.0.0"
+  uid ""
+
 debug@2.6.9, debug@^2.1.2, debug@^2.2.0, debug@^2.3.3, debug@^2.6.0, debug@^2.6.6, debug@^2.6.8, debug@^2.6.9:
   version "2.6.9"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.9.tgz#5d128515df134ff327e90a4c93f4e077a536341f"
@@ -4044,6 +4048,11 @@ file-loader@2.0.0:
   dependencies:
     loader-utils "^1.0.2"
     schema-utils "^1.0.0"
+
+file-saver@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/file-saver/-/file-saver-2.0.0.tgz#74eef7748159503b60008a15af2f1930fb5df7ab"
+  integrity sha512-cYM1ic5DAkg25pHKgi5f10ziAM7RJU37gaH1XQlyNDrtUnzhC/dfoV9zf2OmF0RMKi42jG5B0JWBnPQqyj/G6g==
 
 filename-regex@^2.0.0:
   version "2.0.1"
@@ -8595,6 +8604,13 @@ react-modal@^3.6.1:
     react-lifecycles-compat "^3.0.0"
     warning "^3.0.0"
 
+react-paginate@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/react-paginate/-/react-paginate-6.0.0.tgz#cdd9382f3de9bdbdb435a86836a281ab2a954fd8"
+  integrity sha512-Xc4LTKqBYIpUKEhXx6x1sro0H9r2y2S5admGuDQT8xmhUNk22iTmDRY/XDB2kX4xKOa59xyK9uFGnNAqyHX1cA==
+  dependencies:
+    prop-types "^15.6.1"
+
 react-redux@^5.1.0:
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-5.1.0.tgz#948b1e2686473d1999092bcfb32d0dc43d33f667"
@@ -9152,10 +9168,10 @@ ripemd160@^2.0.0, ripemd160@^2.0.1:
     hash-base "^3.0.0"
     inherits "^2.0.1"
 
-rollbar@^2.5.0:
-  version "2.5.0"
-  resolved "https://registry.yarnpkg.com/rollbar/-/rollbar-2.5.0.tgz#dbb513eea34f1e3bae57611810c3e6df0ef50a12"
-  integrity sha512-T70jGgC57GSyMeX7NxMH8r7/Ob5dXJl2yBd5PLlDHoQZZh2jeu7vV+OMTXvxk4jPDRc1rAN62SNBPvzXnY297g==
+rollbar@^2.5.1:
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/rollbar/-/rollbar-2.5.1.tgz#0416c793e08fd2fd37ea6e2c623aeadb81ce4804"
+  integrity sha512-RxYmbdUeL9WLsX1qbFvYJAsKXB76fcwfCtFiIPZURrlGL+0dV+5wR/LibaBqu20UjQfCXpBZcrLlbdw/JpTuSQ==
   dependencies:
     async "~1.2.1"
     console-polyfill "0.3.0"
