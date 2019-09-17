@@ -1,9 +1,9 @@
 @value globals: "./GlobalStyles.css";
-@value primaryBackgroundImage, textPrimaryColor, textActiveColor, screen-sm from globals;
+@value primaryBackgroundColor, textPrimaryColor, textActiveColor, screen-sm from globals;
 
 .SessionSummary {
+  background-color: primaryBackgroundColor;
   height: 100%;
-  background-image: primaryBackgroundImage;
   overflow-y: auto;
   padding-bottom: 15px;
 }

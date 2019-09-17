@@ -1,5 +1,6 @@
 @value globals: "../GlobalStyles.css";
 @value textPrimaryColor, textActiveColor from globals;
+@value screen-mobile, screen-tablet, screen-desktop, screen-desktop-lg from globals;
 
 .Logo {
   cursor: pointer;
@@ -8,8 +9,7 @@
 
 .Logo .logoText {
   color: textPrimaryColor;
-  font-size: 17px;
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .Logo .logoText.highlight {

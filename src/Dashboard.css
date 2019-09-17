@@ -1,9 +1,9 @@
 @value globals: "./GlobalStyles.css";
-@value primaryBackgroundImage, textPrimaryColor, textSecondaryColor, textActiveColor, screen-md, screen-lg from globals;
+@value primaryBackgroundColor, textPrimaryColor, textSecondaryColor, textActiveColor, screen-md, screen-lg from globals;
 
 .Dashboard {
+  background-color: primaryBackgroundColor;
   height: 100%;
-  background-image: primaryBackgroundImage;
   overflow-y: auto;
   padding-bottom: 15px;
 }

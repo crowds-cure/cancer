@@ -3,6 +3,8 @@
 @value uiStateErrorBorder: #993333;
 @value uiStateErrorText: #661111;
 
+@value uiUsernameText: #a592d2;
+
 @value uiGrayLight: #516873;
 @value uiGray: #263340;
 @value uiGrayDark: #16202B;
@@ -12,18 +14,17 @@
 /* Interface UI Colors */
 @value defaultColor: #9CCEF9;
 @value hoverColor: #ffffff;
-@value activeColor: #79f9fe;
+@value activeColor: #7cf4fe;
 @value uiBorderColor: #44626F;
 @value uiBorderColorDark: #3C5D80;
 @value uiBorderColorActive: #79f9fe;
-@value primaryBackgroundColor: #000000;
-@value primaryBackgroundImage: linear-gradient(113deg, #2d2c69, #313060 29%, #17163b 70%, #262548);
+@value primaryBackgroundColor: #140046;
 @value boxBackgroundColor: #3E5975;
 @value rankBadgeBorderColor: #605886;
 @value viewerHeaderColor: #262548;
 
 /* Text Colors */
-@value textActiveColor: #79f9fe;
+@value textActiveColor: #7cf4fe;
 @value textPrimaryColor: #ffffff;
 @value textSecondaryColor: #b8baee;
 @value largeNumbersColor: #6FBDE2;
@@ -39,6 +40,14 @@
 @value screen-xl: 1200px;
 @value gutter: 12.5px;
 @value negativeGutter: -12.5px;
+
+@value screen-mobile: 320px;
+@value screen-tablet: 1024px;
+@value screen-desktop: 1280px;
+@value screen-desktop-lg: 1920px;
+
+/* Dimensions */
+@value dashboardInfo-desktop-lg: 35vw;
 
 .noselect {
   -webkit-touch-callout: none; /* iOS Safari */
