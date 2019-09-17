@@ -23,8 +23,8 @@ class Logo extends Component {
   render() {
     return (
       <div className="Logo" onClick={this.onClick}>
-        <span className="logoText">Crowds Cure </span>
-        <span className="logoText highlight">Cancer</span>
+        <span className="logoText highlight">Crowds </span>
+        <span className="logoText">Cure Cancer</span>
       </div>
     );
   }

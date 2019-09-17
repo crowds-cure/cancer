@@ -1,37 +1,158 @@
 @value globals: "../GlobalStyles.css";
-@value textPrimaryColor, textActiveColor, screen-sm from globals;
+@value textActiveColor, uiUsernameText, dashboardInfo-desktop-lg from globals;
+@value screen-mobile, screen-tablet, screen-desktop, screen-desktop-lg from globals;
+
+@value iconSize-mobile: 30px;
+@value iconSize-tablet: 42px;
+@value iconSize-desktop: 60px;
+@value iconSize-desktop-lg: 60px;
+
+@value headerPadding-mobile: 15px 10px;
+@value headerPadding-tablet: 10px 35px;
+@value headerPadding-desktop: 16px 60px;
+@value headerPadding-desktop-lg: 30px 80px;
+
+@value headerHeight-mobile: 60px;
+@value headerHeight-tablet: 94px;
+@value headerHeight-desktop: 130px;
+@value headerHeight-desktop-lg: 140px;
 
 .simpleHeader {
-  background-color: #1e1d39;
-  padding: 15px 20px;
-  margin-bottom: 30px;
+  display: flex;
 }
 
-.simpleHeader .logo {
+.simpleHeader .userIcon {
   display: inline-block;
 }
 
-.simpleHeader .logoutSection {
-  float: right;
+.simpleHeader .userIcon img {
+  width: 100%;
+  height: 100%;
 }
 
-.simpleHeader .logoutSection .username {
-  font-size: 15px;
+.simpleHeader .userSection .username {
   font-weight: normal;
-  color: #b8baee;
-  padding-right: 10px;
+  color: uiUsernameText;
 }
 
-.simpleHeader .logoutSection .logoutButton {
-  color: #71f7fe;
-  border-left: 1px solid #b8baee;
-  padding-left: 10px;
+.simpleHeader .userSection > * {
+  vertical-align: top;
+}
+
+.simpleHeader .actionSection > * {
+  color: textActiveColor;
   cursor: pointer;
-  font-size: 15px;
+  font-family: 'SF Pro Text', 'Roboto', 'Helvetica Neue', sans-serif;
+  font-size: 17px;
+  font-weight: 600;
+  margin-left: 42px;
+  text-decoration: none;
 }
 
-@media (min-width: screen-sm) {
-  .simpleHeader .logoText {
-    font-size: 20px;
+@media (min-width: screen-mobile) {
+  .simpleHeader {
+    height: headerHeight-mobile;
+    padding: headerPadding-mobile;
+  }
+
+  .simpleHeader .Logo {
+    font-size: 17px;
+    line-height: iconSize-mobile;
+  }
+
+  .simpleHeader .userSection .username,
+  .simpleHeader .actionSection > * {
+    display: none;
+  }
+
+  .simpleHeader .userSection {
+    flex-grow: 1;
+    text-align: right;
+  }
+
+  .simpleHeader .userIcon {
+    border-radius: calc(iconSize-mobile / 2);
+    height: iconSize-mobile;
+    width: iconSize-mobile;
+  }
+}
+
+@media (min-width: screen-tablet) {
+  .simpleHeader {
+    align-content: stretch;
+    flex-wrap: wrap;
+    height: headerHeight-tablet;
+    padding: headerPadding-tablet;
+  }
+
+  .simpleHeader .Logo {
+    display: block;
+    font-size: 24px;
+    line-height: 32px;
+    text-align: center;
+    width: 100%;
+  }
+
+  .simpleHeader .userSection .username,
+  .simpleHeader .actionSection > * {
+    display: inline-block;
+    line-height: iconSize-tablet;
+  }
+
+  .simpleHeader .userSection {
+    text-align: left;
+  }
+
+  .simpleHeader .userSection .userIcon {
+    border-radius: calc(iconSize-tablet / 2);
+    height: iconSize-tablet;
+    width: iconSize-tablet;
+  }
+
+  .simpleHeader .userSection .username {
+    font-size: 24px;
+    padding-left: 12px;
+  }
+}
+
+@media (min-width: screen-desktop) {
+  .simpleHeader {
+    height: headerHeight-desktop;
+    padding: headerPadding-desktop;
+  }
+
+  .simpleHeader .Logo {
+    font-size: 32px;
+    line-height: 38px;
+  }
+
+  .simpleHeader .userSection .username,
+  .simpleHeader .actionSection > * {
+    line-height: iconSize-desktop;
+  }
+
+  .simpleHeader .userSection .userIcon {
+    border-radius: calc(iconSize-desktop / 2);
+    height: iconSize-desktop;
+    width: iconSize-desktop;
+  }
+
+  .simpleHeader .userSection .username {
+    font-size: 26px;
+    padding-left: 20px;
+  }
+}
+
+@media (min-width: screen-desktop-lg) {
+  .simpleHeader {
+    flex-wrap: nowrap;
+    height: headerHeight-desktop-lg;
+    padding: headerPadding-desktop-lg;
+  }
+
+  .simpleHeader .Logo {
+    line-height: iconSize-desktop;
+    text-align: left;
+    width: calc(100% - dashboardInfo-desktop-lg);
   }
 }

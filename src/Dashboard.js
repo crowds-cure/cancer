@@ -123,10 +123,15 @@ class Dashboard extends Component {
   }
   render() {
     const versionString = `${version} - ${sha}`;
+    const leaderboardLink = '/leaderboard';
 
     return (
       <div className="Dashboard">
-        <SimpleHeaderSection username={this.props.username} page="dashboard" />
+        <SimpleHeaderSection
+          username={this.props.username}
+          page="dashboard"
+          leaderboardLink={leaderboardLink}
+        />
         <div className="container">
           <div className="row">
             <div className="col-lg-5 offset-lg-4 col-md-7 offset-md-2 col-12 offset-4 order-1">
@@ -150,14 +155,14 @@ class Dashboard extends Component {
                           <RankingSection
                             name="Top individuals"
                             type="individual"
-                            viewAllLink="/leaderboard"
+                            viewAllLink={leaderboardLink}
                           />
                         </div>
                         <div className="col-16">
                           <RankingSection
                             name="Top groups"
                             type="team"
-                            viewAllLink="/leaderboard"
+                            viewAllLink={leaderboardLink}
                           />
                         </div>
                       </div>
