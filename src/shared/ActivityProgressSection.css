@@ -1,59 +1,78 @@
 @value globals: "../GlobalStyles.css";
-@value textPrimaryColor, textSecondaryColor, textActiveColor, screen-sm from globals;
-
-.ActivityProgressSection .title {
-  color: textPrimaryColor;
-  margin-bottom: 10px;
-  font-weight: 600;
-  font-size: 18px;
-}
-
-.ActivityProgressSection .currentPoints {
-  position: relative;
-}
-
-.ActivityProgressSection .value {
-  color: textPrimaryColor;
-  font-weight: bold;
-  font-size: 43px;
-  line-height: 43px;
-  display: inline-block;
-}
-
-.ActivityProgressSection .suffix {
-  font-variant-caps: small-caps;
-  font-size: 15px;
-  color: textSecondaryColor;
-  vertical-align: top;
-  display: inline-block;
-}
-
-.ActivityProgressSection .rankBadgeContainer {
-  position: absolute;
-  left: -100px;
-  width: 100px;
-  text-align: center;
-  top: 0px;
-}
+@value primaryBackgroundColor, textPrimaryColor, textSecondaryColor, textActiveColor, screen-sm from globals;
+@value screen-sm, screen-md, screen-lg from globals;
 
 .badgeName {
   text-align: center;
 }
 
-.rankBadge.not-received {
+.rankBadge.not-received img {
   opacity: 0.25;
 }
 
-.ActivityProgressSection .rank {
-  display: inline;
-  padding: 20px 0;
+.ActivityProgressSection .rankBadge {
+  display: inline-block;
+}
+
+.ActivityProgressSection .rankBadge img {
+  cursor: pointer;
+  height: 92px;
+  width: 92px;
+}
+
+.ActivityProgressSection .casesCount {
   color: textActiveColor;
-  overflow-wrap: break-word;
+  display: inline-block;
+  font-size: 61px;
+  font-weight: 500;
+  line-height: 92px;
+  margin-left: 10px;
+  vertical-align: top;
+}
+
+.ActivityProgressSection .leaderboardRank {
+  padding-top: 10px;
+}
+
+.ActivityProgressSection .leaderboardRank .position {
+  background-color: primaryBackgroundColor;
+  border: solid 1px #9c7dfb;
+  border-radius: 21px 3px;
+  color: textActiveColor;
+  font-size: 30px;
+  font-weight: normal;
+  height: 42px;
+  line-height: 42px;
+  margin-left: auto;
+  text-align: center;
+  width: 95px;
+}
+
+.ActivityProgressSection .leaderboardRank .description {
+  color: textPrimaryColor;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.38;
+  margin-top: 10px;
+  margin-left: auto;
+  text-align: center;
+  width: 95px;
+}
+
+.ActivityProgressSection .progressBarContainer {
+  padding: 0 20px;
 }
 
 @media (min-width: screen-sm) {
-  .ActivityProgressSection .title {
-    margin-bottom: 15px;
+  .ActivityProgressSection .rankBadge img {
+    height: 130px;
+    width: 130px;
+  }
+
+  .ActivityProgressSection .casesCount {
+    font-size: 82px;
+    line-height: 130px;
+    margin-left: 20px;
   }
 
   .ActivityProgressSection .plusPoints {
@@ -61,25 +80,26 @@
     top: -70px;
     left: 90px;
   }
+}
 
-  .ActivityProgressSection .value {
-    font-size: 81px;
-    font-weight: 600;
-    line-height: 81px;
-    display: block;
+@media (min-width: screen-md) {
+  .ActivityProgressSection .rankBadge img {
+    height: 160px;
+    width: 160px;
   }
 
-  .ActivityProgressSection .suffix {
-    font-size: 18px;
-    margin-top: 0px;
-    display: block;
+  .ActivityProgressSection .casesCount {
+    line-height: 160px;
   }
 
-  .ActivityProgressSection .rankBadgeContainer {
-    position: absolute;
-    left: -130px;
-    width: 130px;
-    text-align: center;
-    top: -10px;
+  .ActivityProgressSection .progressBarContainer {
+    padding: 0 30px;
+  }
+}
+
+@media (min-width: screen-lg) {
+  .ActivityProgressSection .progressBarContainer {
+    margin-bottom: 20px;
+    padding: 0 40px;
   }
 }

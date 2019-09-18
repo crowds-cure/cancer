@@ -1,6 +1,5 @@
 import { Component } from 'react';
 import React from 'react';
-import './RankBadge.css';
 
 class RankBadge extends Component {
   render() {

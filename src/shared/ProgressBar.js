@@ -18,12 +18,30 @@ class ProgressBar extends Component {
 
   render() {
     return (
-      <progress
-        className="ProgressBar"
-        max={this.state.max}
-        value={this.state.value}
-        ref={this.progressBar}
-      />
+      <div className="ProgressBarWrapper">
+        {this.props.startNumber === undefined ? (
+          ''
+        ) : (
+          <div className="startNumber">{this.props.startNumber}</div>
+        )}
+        <progress
+          className="ProgressBar"
+          max={this.state.max}
+          value={this.state.value}
+          ref={this.progressBar}
+        />
+        <progress
+          className="ProgressBarBg"
+          max={this.state.max}
+          value={this.state.value}
+          ref={this.progressBar}
+        />
+        {this.props.endNumber === undefined ? (
+          ''
+        ) : (
+          <div className="endNumber">{this.props.endNumber}</div>
+        )}
+      </div>
     );
   }
 
