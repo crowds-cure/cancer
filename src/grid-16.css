@@ -25,7 +25,6 @@ html {
 
 .container {
   width: 100%;
-  max-width: 1600px;
   padding-right: gutter;
   padding-left: gutter;
   margin-right: auto;
