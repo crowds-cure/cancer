@@ -4,6 +4,7 @@ import ReactTooltip from 'react-tooltip';
 import ProgressBar from './ProgressBar.js';
 import PropTypes from 'prop-types';
 import RankBadge from './RankBadge.js';
+import InfoBox from './InfoBox.js';
 import { getBadgeByNumberOfCases } from '../badges.js';
 import './ActivityProgressSection.css';
 import Modal from 'react-modal';
@@ -72,54 +73,59 @@ class ActivityProgressSection extends Component {
     const allRankBadges = this.getAllRankBadges(this.props.current);
 
     return (
-      <div className="ActivityProgressSection">
-        <div className="title">
-          <span>Rank: </span>
-          <span className="rank">{rank.name}</span>
+      <InfoBox headerText="Score and rank">
+        <div className="ActivityProgressSection">
+          <div className="row">
+            <div className="col-12">
+              <RankBadge
+                size="md"
+                name={rank.name}
+                img={rank.img}
+                type={rank.type}
+                description={rank.name}
+                onClick={this.toggleModal}
+              />
+              <div className="casesCount">{current}</div>
+            </div>
+            <div className="d-none d-md-block col-4 leaderboardRank">
+              <div className="position">18</div>
+              <div className="description">
+                Leaderboard
+                <br />
+                Rank
+              </div>
+            </div>
+            <div className="col-16 progressBarContainer">
+              {this.props.current === undefined ? (
+                ''
+              ) : (
+                <ProgressBar
+                  min={rank.min}
+                  max={rank.max}
+                  value={this.props.current}
+                  endNumber={rank.max}
+                />
+              )}
+            </div>
+          </div>
+          <Modal
+            isOpen={this.state.showRanksModal}
+            contentLabel="All Ranks"
+            onRequestClose={this.toggleModal}
+            styles={modalDialogStyles}
+            className="Modal"
+            overlayClassName="Overlay"
+            closeTimeoutMS={200}
+            onAfterOpen={ReactTooltip.rebuild}
+          >
+            <h1>Ranks</h1>
+            <div className="row">{allRankBadges}</div>
+            <span className="modal-close" onClick={this.toggleModal}>
+              Close
+            </span>
+          </Modal>
         </div>
-        <div className="rankBadgeContainer">
-          <RankBadge
-            size="md"
-            name={rank.name}
-            img={rank.img}
-            type={rank.type}
-            description={rank.description}
-            onClick={this.toggleModal}
-          />
-        </div>
-        <div className="progressBarContainer">
-          {this.props.current === undefined ? (
-            ''
-          ) : (
-            <ProgressBar
-              min={rank.min}
-              max={rank.max}
-              value={this.props.current}
-            />
-          )}
-        </div>
-        <div className="currentPoints">
-          <div className="value">{current}</div>
-          <div className="suffix">measured</div>
-        </div>
-
-        <Modal
-          isOpen={this.state.showRanksModal}
-          contentLabel="All Ranks"
-          onRequestClose={this.toggleModal}
-          styles={modalDialogStyles}
-          className="Modal"
-          overlayClassName="Overlay"
-          closeTimeoutMS={200}
-          onAfterOpen={ReactTooltip.rebuild}
-        >
-          <h1>Ranks</h1>
-          <div className="row">{allRankBadges}</div>
-          <span className="modal-close" onClick={this.toggleModal}>
-            Close
-          </span>
-        </Modal>
-      </div>
+      </InfoBox>
     );
   }
 }

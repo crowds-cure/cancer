@@ -126,10 +126,6 @@ class Dashboard extends Component {
     const leaderboardLink = '/leaderboard';
 
     // TODO: REMOVE
-    const scoreStyle = {
-      background: '#472E93',
-      height: '300px'
-    };
     const badgesStyle = {
       background: '#1477B0',
       height: '300px'
@@ -158,7 +154,9 @@ class Dashboard extends Component {
             />
             <div className="col-16 order-0 col-xl-6">
               <div className="row">
-                <div className="col-16 col-sm-8 col-xl-16" style={scoreStyle} />
+                <div className="col-16 col-sm-8 col-xl-16">
+                  <ActivityProgressSection current={this.state.current} />
+                </div>
                 <div
                   className="col-16 col-sm-8 col-xl-16"
                   style={badgesStyle}
@@ -174,10 +172,6 @@ class Dashboard extends Component {
         </div>
         <div className="container">
           <div className="row">
-            <div className="col-lg-5 offset-lg-4 col-md-7 offset-md-2 col-12 offset-4 order-1">
-              <ActivityProgressSection current={this.state.current} />
-            </div>
-
             <div className="col-lg-3 offset-lg-3 col-md-7 col-16 order-3 order-lg-2">
               <AchievementSection />
             </div>

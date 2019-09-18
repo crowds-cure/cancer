@@ -84,7 +84,17 @@
   top: 22px;
 }
 
+.ProgressSection .rankBadge img {
+  height: 100px;
+  width: 100px;
+}
+
 @media (min-width: screen-sm) {
+  .ProgressSection .rankBadge img {
+    height: 130px;
+    width: 130px;
+  }
+
   .ProgressSection .plusPoints {
     font-size: 60px;
     top: -110px;

@@ -1,10 +1,40 @@
 @value globals: "../GlobalStyles.css";
-@value textPrimaryColor, textSecondaryColor from globals;
+@value primaryBackgroundColor, textPrimaryColor, textSecondaryColor from globals;
+
+@value progressBarFilter: blur(9.7px);
+
+.ProgressBarWrapper {
+  height: 12px;
+  margin: 10px 0;
+  position: relative;
+  width: 100%;
+}
+
+.ProgressBarWrapper .startNumber,
+.ProgressBarWrapper .endNumber {
+  color: textPrimaryColor;
+  font-size: 18px;
+  font-weight: 600;
+  height: 21px;
+  position: absolute;
+  top: -32px;
+  width: 50%;
+}
+
+.ProgressBarWrapper .startNumber {
+  left: 0;
+  text-align: left;
+}
+
+.ProgressBarWrapper .endNumber {
+  right: 0;
+  text-align: right;
+}
 
 .ProgressBar {
   width: 100%;
-  height: 12px;
-  margin: 10px 0;
+  height: 100%;
+  vertical-align: top;
 
   /* Reset the default appearance */
   -webkit-appearance: none;
@@ -19,7 +49,7 @@
 }
 
 .ProgressBar::-webkit-progress-bar {
-  background: #544d79;
+  background: primaryBackgroundColor;
 }
 
 .ProgressBar[value].notransition::-webkit-progress-value {
@@ -33,4 +63,43 @@
 .ProgressBar[value]::-webkit-progress-value {
   background-image: linear-gradient(to right, #79f9fe, #b994fe);
   transition: all 1.7s linear;
+}
+
+.ProgressBarBg {
+  width: 100%;
+  height: 100%;
+  vertical-align: top;
+
+  /* Reset the default appearance */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  /* Get rid of default border in Firefox. */
+  border: none;
+
+  /*filter: blur(1px);
+  -webkit-filter: blur(1px);*/
+
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.ProgressBarBg::-webkit-progress-bar {
+  background: transparent;
+}
+
+.ProgressBarBg[value].notransition::-webkit-progress-value {
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -o-transition: none !important;
+  -ms-transition: none !important;
+  transition: none !important;
+}
+
+.ProgressBarBg[value]::-webkit-progress-value {
+  background-image: linear-gradient(to right, #79f9fe, #b994fe);
+  transition: all 1.7s linear;
+  filter: progressBarFilter;
 }
