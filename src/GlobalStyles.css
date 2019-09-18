@@ -34,14 +34,14 @@
 @value imageSliderColor: #163239;
 
 /* Grid breakpoints */
-@value screen-sm: 576px;
-@value screen-md: 768px;
-@value screen-lg: 992px;
-@value screen-xl: 1200px;
+@value screen-sm: 1024px;
+@value screen-md: 1280px;
+@value screen-lg: 1920px;
+@value screen-xl: 1920px;
 @value gutter: 12.5px;
 @value negativeGutter: -12.5px;
 
-@value screen-mobile: 320px;
+@value screen-mobile: 0px;
 @value screen-tablet: 1024px;
 @value screen-desktop: 1280px;
 @value screen-desktop-lg: 1920px;

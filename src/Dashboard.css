@@ -1,5 +1,6 @@
 @value globals: "./GlobalStyles.css";
 @value primaryBackgroundColor, textPrimaryColor, textSecondaryColor, textActiveColor, screen-md, screen-lg from globals;
+@value gutter, screen-mobile, screen-tablet, screen-desktop, screen-desktop-lg from globals;
 
 .Dashboard {
   background-color: primaryBackgroundColor;
@@ -37,5 +38,29 @@
 @media (min-width: screen-lg) {
   .Dashboard .rankingGroupSection {
     margin-top: 0px;
+  }
+}
+
+@media (min-width: screen-mobile) {
+  .Dashboard .container {
+    padding: 0 calc(10px + gutter);
+  }
+}
+
+@media (min-width: screen-tablet) {
+  .Dashboard .container {
+    padding: 0 calc(35px + gutter);
+  }
+}
+
+@media (min-width: screen-desktop) {
+  .Dashboard .container {
+    padding: 0 calc(60px + gutter);
+  }
+}
+
+@media (min-width: screen-desktop-lg) {
+  .Dashboard .container {
+    padding: 0 calc(80px + gutter);
   }
 }

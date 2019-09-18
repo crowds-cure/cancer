@@ -125,6 +125,24 @@ class Dashboard extends Component {
     const versionString = `${version} - ${sha}`;
     const leaderboardLink = '/leaderboard';
 
+    // TODO: REMOVE
+    const scoreStyle = {
+      background: '#472E93',
+      height: '300px'
+    };
+    const badgesStyle = {
+      background: '#1477B0',
+      height: '300px'
+    };
+    const casesStyle = {
+      background: 'gray',
+      height: '1000px'
+    };
+    const communityStyle = {
+      background: '#471448',
+      height: '200px'
+    };
+
     return (
       <div className="Dashboard">
         <SimpleHeaderSection
@@ -132,6 +150,28 @@ class Dashboard extends Component {
           page="dashboard"
           leaderboardLink={leaderboardLink}
         />
+        <div className="container">
+          <div className="row">
+            <div
+              className="col-16 col-xl-10 order-1 order-xl-0"
+              style={casesStyle}
+            />
+            <div className="col-16 order-0 col-xl-6">
+              <div className="row">
+                <div className="col-16 col-sm-8 col-xl-16" style={scoreStyle} />
+                <div
+                  className="col-16 col-sm-8 col-xl-16"
+                  style={badgesStyle}
+                />
+                <div
+                  className="d-none d-xl-block col-xl-16"
+                  style={communityStyle}
+                />
+              </div>
+            </div>
+            <div className="col-16 order-2 d-xl-none" style={communityStyle} />
+          </div>
+        </div>
         <div className="container">
           <div className="row">
             <div className="col-lg-5 offset-lg-4 col-md-7 offset-md-2 col-12 offset-4 order-1">
