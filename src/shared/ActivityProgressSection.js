@@ -10,6 +10,7 @@ import './ActivityProgressSection.css';
 import Modal from 'react-modal';
 import { achievements } from '../achievements';
 import { BADGE_TYPES } from '../badges.js';
+import animate from './animate.js';
 
 const modalDialogStyles = {
   content: {
@@ -28,14 +29,35 @@ class ActivityProgressSection extends Component {
 
     this.state = {
       achievements,
-      showRanksModal: false
+      showRanksModal: false,
+      measurementsCount: 0
     };
+
+    this.measurementsCountRef = React.createRef();
 
     this.toggleModal = this.toggleModal.bind(this);
   }
 
   componentDidUpdate() {
     ReactTooltip.rebuild();
+
+    if (this.state.measurementsCount !== this.props.current) {
+      const oldValue = this.state.measurementsCount || 0;
+
+      animate(3000, progress => {
+        const diff = this.props.current - oldValue;
+        const result = oldValue + diff * progress;
+        const newValue = Math.floor(result);
+
+        const element = this.measurementsCountRef.current;
+        const currentValue = parseInt(element.innerText, 10);
+        if (newValue !== currentValue) {
+          element.innerText = newValue;
+        }
+      });
+
+      this.setState({ measurementsCount: this.props.current });
+    }
   }
 
   toggleModal(e) {
@@ -65,8 +87,7 @@ class ActivityProgressSection extends Component {
   }
 
   render() {
-    const current =
-      this.props.current === undefined ? '---' : this.props.current;
+    const current = this.props.current === undefined ? 0 : this.props.current;
 
     const rank = getBadgeByNumberOfCases(this.props.current);
 
@@ -85,7 +106,12 @@ class ActivityProgressSection extends Component {
                 description={rank.name}
                 onClick={this.toggleModal}
               />
-              <div className="casesCount">{current}</div>
+              <div
+                className="measurementsCount"
+                ref={this.measurementsCountRef}
+              >
+                {this.state.measurementsCount}
+              </div>
             </div>
             <div className="d-none d-md-block col-4 leaderboardRank">
               <div className="position">18</div>
@@ -96,16 +122,12 @@ class ActivityProgressSection extends Component {
               </div>
             </div>
             <div className="col-16 progressBarContainer">
-              {this.props.current === undefined ? (
-                ''
-              ) : (
-                <ProgressBar
-                  min={rank.min}
-                  max={rank.max}
-                  value={this.props.current}
-                  endNumber={rank.max}
-                />
-              )}
+              <ProgressBar
+                min={rank.min}
+                max={rank.max}
+                value={current}
+                endNumber={rank.max}
+              />
             </div>
           </div>
           <Modal

@@ -62,7 +62,7 @@
 
 .ProgressBar[value]::-webkit-progress-value {
   background-image: linear-gradient(to right, #79f9fe, #b994fe);
-  transition: all 1.7s linear;
+  transition: all 3s ease-in-out;
 }
 
 .ProgressBarBg {
@@ -100,6 +100,7 @@
 
 .ProgressBarBg[value]::-webkit-progress-value {
   background-image: linear-gradient(to right, #79f9fe, #b994fe);
-  transition: all 1.7s linear;
+  transition: all 3s ease-in-out;
   filter: progressBarFilter;
+  -webkit-filter: progressBarFilter;
 }

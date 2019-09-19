@@ -1,29 +1,23 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="119px" height="119px" viewBox="0 0 119 119" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 52.4 (67378) - http://www.bohemiancoding.com/sketch -->
-    <title>rank-01-newbie</title>
-    <desc>Created with Sketch.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="130" height="130" viewBox="0 0 130 130">
     <defs>
-        <polygon id="path-1" points="47.5 7 88 47.5 47.5 88 7 47.5"></polygon>
-        <filter x="-42.0%" y="-39.5%" width="184.0%" height="184.0%" filterUnits="objectBoundingBox" id="filter-2">
-            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
-            <feGaussianBlur stdDeviation="11" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
-            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        <path id="b" d="M53 7.81L98.19 53 53 98.19 7.81 53z"/>
+        <filter id="a" width="175.2%" height="175.2%" x="-37.6%" y="-35.4%" filterUnits="objectBoundingBox">
+            <feOffset dy="2" in="SourceAlpha" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="11"/>
+            <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0"/>
         </filter>
     </defs>
-    <g id="Ranks-and-Badges" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Ranks" transform="translate(-146.000000, -500.000000)">
-            <g id="rank-01-newbie" transform="translate(158.000000, 510.000000)">
-                <path d="M47.5,-0.707106781 L95.7071068,47.5 L47.5,95.7071068 L-0.707106781,47.5 L47.5,-0.707106781 Z" id="Polygon-2" stroke="#5BCAD1" fill-opacity="0.3" fill="#000000" fill-rule="nonzero" opacity="0.338262649"></path>
-                <g id="Polygon-2" fill-rule="nonzero">
-                    <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
-                    <use fill="#026387" xlink:href="#path-1"></use>
-                </g>
-                <path d="M74.4444444,18.6666667 C74.1667673,20.8025891 74.8964286,22.9463909 76.4194633,24.4694256 C77.942498,25.9924603 80.0862998,26.7221216 82.2222222,26.4444444 C77.1977778,26.4257778 74.6995556,29.12 74.4444444,34.2222222 C74.748704,32.0804997 74.0277408,29.9204125 72.4981086,28.3907803 C70.9684764,26.861148 68.8083892,26.1401848 66.6666667,26.4444444 C68.8023001,26.7208208 70.945307,25.9907345 72.4680207,24.4680207 C73.9907345,22.945307 74.7208208,20.8023001 74.4444444,18.6666667 Z" id="Shape" stroke="#FFFFFF" stroke-width="2" fill="#B8038E" stroke-linecap="round" stroke-linejoin="round"></path>
-                <path d="M58.8888889,3.11111111 C58.6112117,5.24703356 59.3408731,7.39083534 60.8639078,8.91387003 C62.3869424,10.4369047 64.5307442,11.1665661 66.6666667,10.8888889 C61.6422222,10.8702222 59.144,13.5644444 58.8888889,18.6666667 C59.1931485,16.5249441 58.4721853,14.3648569 56.9425531,12.8352247 C55.4129209,11.3055925 53.2528337,10.5846293 51.1111111,10.8888889 C53.2467446,11.1652653 55.3897515,10.4351789 56.9124652,8.91246518 C58.4351789,7.38975145 59.1652653,5.24674457 58.8888889,3.11111111 Z" id="Shape" stroke="#FFFFFF" stroke-width="2" fill="#B8038E" stroke-linecap="round" stroke-linejoin="round"></path>
-                <path d="M27.7777778,0 C27.7435556,8.79511111 32.0337778,13.7915556 41.7777778,14 C32.7337778,13.9657778 28.2382222,18.8222222 27.7777778,28 C27.7,19.3386667 23.8173333,14 13.7777778,14 C22.7626667,13.8724444 27.7435556,9.53866667 27.7777778,0 Z" id="Shape" stroke="#FFFFFF" stroke-width="2" fill="#B8038E" stroke-linecap="round" stroke-linejoin="round"></path>
-                <path d="M54.2494775,69.879777 L54.2494775,65.1703176 L55.8192973,65.1703176 C58.4202599,65.1703176 60.5287568,63.0618207 60.5287568,60.4608581 L60.5287568,55.7513986 L64.9462297,55.7513986 C65.1958302,55.749735 65.4297591,55.6294539 65.5763307,55.4274144 C65.7229022,55.225375 65.7646403,54.965667 65.6887545,54.7278761 C62.7453423,45.6182117 60.6166667,35.8350946 50.899482,34.0580586 C46.6135445,33.2269605 42.1751587,34.2202535 38.6523141,36.7989256 C35.1294696,39.3775978 32.8411314,43.3081713 32.3379324,47.6448491 C31.8348002,53.0092473 34.1960141,58.2417402 38.5512793,61.4137387 L38.5512793,69.8734977" id="Shape" stroke="#FFFFFF" stroke-width="2" fill="#211E95" stroke-linecap="round" stroke-linejoin="round"></path>
+    <g fill="none" fill-rule="evenodd">
+        <g fill-rule="nonzero">
+            <path fill="#16054C" d="M65 10l53 53-53 53-53-53z" opacity=".338"/>
+            <g transform="translate(12 10)">
+                <use fill="#000" filter="url(#a)" xlink:href="#b"/>
+                <use fill="#1577B0" xlink:href="#b"/>
             </g>
         </g>
+        <g fill="#27264A" stroke="#FFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+            <path d="M95.681 31.062a7.879 7.879 0 0 0 2.207 6.548 7.709 7.709 0 0 0 6.483 2.228c-5.613-.02-8.404 3.02-8.69 8.776a7.809 7.809 0 0 0-2.174-6.58 7.64 7.64 0 0 0-6.515-2.196 7.712 7.712 0 0 0 6.481-2.23 7.882 7.882 0 0 0 2.208-6.546zM78.302 13.51a7.879 7.879 0 0 0 2.206 6.548 7.709 7.709 0 0 0 6.484 2.228c-5.614-.02-8.405 3.02-8.69 8.776a7.809 7.809 0 0 0-2.175-6.58 7.64 7.64 0 0 0-6.515-2.196 7.712 7.712 0 0 0 6.481-2.23 7.882 7.882 0 0 0 2.209-6.546zM43.542 10c-.038 9.924 4.755 15.562 15.642 15.797-10.105-.039-15.128 5.44-15.642 15.797-.087-9.773-4.425-15.797-15.642-15.797C37.939 25.653 43.504 20.763 43.542 10z"/>
+        </g>
+        <path fill="#27264A" stroke="#FFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M72.098 87.09v-5.413h1.782c2.954 0 5.35-2.423 5.35-5.413v-5.413h5.016a.888.888 0 0 0 .716-.373.911.911 0 0 0 .127-.804c-3.343-10.47-5.76-21.716-16.796-23.758a17.643 17.643 0 0 0-13.91 3.15c-4 2.964-6.6 7.482-7.17 12.467-.572 6.166 2.11 12.18 7.056 15.826v9.724"/>
     </g>
 </svg>
