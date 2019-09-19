@@ -1,5 +1,6 @@
 @value globals: "../GlobalStyles.css";
-@value primaryBackgroundColor, textPrimaryColor, textSecondaryColor from globals;
+@value progressBackgroundColor, progressPrimaryColor, progressSecondaryColor from globals;
+@value textPrimaryColor from globals;
 
 @value progressBarFilter: blur(9.7px);
 
@@ -43,13 +44,10 @@
 
   /* Get rid of default border in Firefox. */
   border: none;
-
-  /*filter: blur(1px);
-  -webkit-filter: blur(1px);*/
 }
 
 .ProgressBar::-webkit-progress-bar {
-  background: primaryBackgroundColor;
+  background: progressBackgroundColor;
 }
 
 .ProgressBar[value].notransition::-webkit-progress-value {
@@ -61,46 +59,25 @@
 }
 
 .ProgressBar[value]::-webkit-progress-value {
-  background-image: linear-gradient(to right, #79f9fe, #b994fe);
+  background-image: linear-gradient(
+    to right,
+    progressPrimaryColor,
+    progressSecondaryColor
+  );
   transition: all 3s ease-in-out;
 }
 
-.ProgressBarBg {
-  width: 100%;
-  height: 100%;
-  vertical-align: top;
-
-  /* Reset the default appearance */
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-
-  /* Get rid of default border in Firefox. */
-  border: none;
-
-  /*filter: blur(1px);
-  -webkit-filter: blur(1px);*/
-
+.ProgressBarGlow {
   position: absolute;
   top: 0;
   left: 0;
 }
 
-.ProgressBarBg::-webkit-progress-bar {
+.ProgressBarGlow::-webkit-progress-bar {
   background: transparent;
 }
 
-.ProgressBarBg[value].notransition::-webkit-progress-value {
-  -webkit-transition: none !important;
-  -moz-transition: none !important;
-  -o-transition: none !important;
-  -ms-transition: none !important;
-  transition: none !important;
-}
-
-.ProgressBarBg[value]::-webkit-progress-value {
-  background-image: linear-gradient(to right, #79f9fe, #b994fe);
-  transition: all 3s ease-in-out;
+.ProgressBarGlow[value]::-webkit-progress-value {
   filter: progressBarFilter;
   -webkit-filter: progressBarFilter;
 }

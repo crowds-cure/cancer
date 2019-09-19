@@ -6,7 +6,7 @@ import './InfoBox.css';
 class InfoBox extends Component {
   render() {
     return (
-      <div className="InfoBox">
+      <div className={`InfoBox ${this.props.className}`}>
         <div className="boxHeader">{this.props.headerText}</div>
         <div className="boxContent">{this.props.children}</div>
       </div>
@@ -15,7 +15,8 @@ class InfoBox extends Component {
 }
 
 InfoBox.propTypes = {
-  headerText: PropTypes.string
+  className: PropTypes.string.isRequired,
+  headerText: PropTypes.string.isRequired
 };
 
 export default InfoBox;

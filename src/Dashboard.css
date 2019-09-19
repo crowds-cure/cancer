@@ -43,7 +43,7 @@
 
 @media (min-width: screen-mobile) {
   .Dashboard .container {
-    padding: 0 calc(10px + gutter);
+    padding: 0 16px 0 11px;
   }
 }
 

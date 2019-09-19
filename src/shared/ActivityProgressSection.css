@@ -10,6 +10,14 @@
   opacity: 0.25;
 }
 
+.ActivityProgressSection.InfoBox {
+  background-color: #472e93;
+}
+
+.ActivityProgressSection.InfoBox .boxHeader {
+  background-color: #2f1973;
+}
+
 .ActivityProgressSection .rankBadge {
   display: inline-block;
 }
@@ -18,6 +26,12 @@
   cursor: pointer;
   height: 92px;
   width: 92px;
+  transition: transform 0.3s ease-in-out;
+  vertical-align: top;
+}
+
+.ActivityProgressSection .rankBadge:hover img {
+  transform: scale(1.1);
 }
 
 .ActivityProgressSection .measurementsCount {

@@ -30,7 +30,7 @@ class ActivityProgressSection extends Component {
     this.state = {
       achievements,
       showRanksModal: false,
-      measurementsCount: 0
+      measurementsCount: props.current || 0
     };
 
     this.measurementsCountRef = React.createRef();
@@ -94,59 +94,54 @@ class ActivityProgressSection extends Component {
     const allRankBadges = this.getAllRankBadges(this.props.current);
 
     return (
-      <InfoBox headerText="Score and rank">
-        <div className="ActivityProgressSection">
-          <div className="row">
-            <div className="col-12">
-              <RankBadge
-                size="md"
-                name={rank.name}
-                img={rank.img}
-                type={rank.type}
-                description={rank.name}
-                onClick={this.toggleModal}
-              />
-              <div
-                className="measurementsCount"
-                ref={this.measurementsCountRef}
-              >
-                {this.state.measurementsCount}
-              </div>
-            </div>
-            <div className="d-none d-md-block col-4 leaderboardRank">
-              <div className="position">18</div>
-              <div className="description">
-                Leaderboard
-                <br />
-                Rank
-              </div>
-            </div>
-            <div className="col-16 progressBarContainer">
-              <ProgressBar
-                min={rank.min}
-                max={rank.max}
-                value={current}
-                endNumber={rank.max}
-              />
+      <InfoBox className="ActivityProgressSection" headerText="Score and rank">
+        <div className="row">
+          <div className="col-12">
+            <RankBadge
+              size="md"
+              name={rank.name}
+              img={rank.img}
+              type={rank.type}
+              description={rank.name}
+              onClick={this.toggleModal}
+            />
+            <div className="measurementsCount" ref={this.measurementsCountRef}>
+              {this.state.measurementsCount}
             </div>
           </div>
-          <Modal
-            isOpen={this.state.showRanksModal}
-            contentLabel="All Ranks"
-            onRequestClose={this.toggleModal}
-            styles={modalDialogStyles}
-            className="Modal"
-            overlayClassName="Overlay"
-            closeTimeoutMS={200}
-            onAfterOpen={ReactTooltip.rebuild}
-          >
-            <h1>Ranks</h1>
-            <div className="row">{allRankBadges}</div>
-            <span className="modal-close" onClick={this.toggleModal}>
-              Close
-            </span>
-          </Modal>
+          <div className="d-none d-md-block col-4 leaderboardRank">
+            <div className="position">18</div>
+            <div className="description">
+              Leaderboard
+              <br />
+              Rank
+            </div>
+          </div>
+          <div className="col-16 progressBarContainer">
+            <ProgressBar
+              min={rank.min}
+              max={rank.max}
+              value={current}
+              endNumber={rank.max}
+            />
+          </div>
         </div>
+        <Modal
+          isOpen={this.state.showRanksModal}
+          contentLabel="All Ranks"
+          onRequestClose={this.toggleModal}
+          styles={modalDialogStyles}
+          className="Modal"
+          overlayClassName="Overlay"
+          closeTimeoutMS={200}
+          onAfterOpen={ReactTooltip.rebuild}
+        >
+          <h1>Ranks</h1>
+          <div className="row">{allRankBadges}</div>
+          <span className="modal-close" onClick={this.toggleModal}>
+            Close
+          </span>
+        </Modal>
       </InfoBox>
     );
   }
