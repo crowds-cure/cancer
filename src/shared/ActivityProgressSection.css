@@ -20,7 +20,7 @@
   width: 92px;
 }
 
-.ActivityProgressSection .casesCount {
+.ActivityProgressSection .measurementsCount {
   color: textActiveColor;
   display: inline-block;
   font-size: 61px;
@@ -69,7 +69,7 @@
     width: 130px;
   }
 
-  .ActivityProgressSection .casesCount {
+  .ActivityProgressSection .measurementsCount {
     font-size: 82px;
     line-height: 130px;
     margin-left: 20px;
@@ -88,7 +88,7 @@
     width: 160px;
   }
 
-  .ActivityProgressSection .casesCount {
+  .ActivityProgressSection .measurementsCount {
     line-height: 160px;
   }
 
