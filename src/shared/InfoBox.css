@@ -1,21 +1,22 @@
 @value globals: "./../GlobalStyles.css";
-@value textPrimaryColor from globals;
+@value uiGray, uiGrayLight, textPrimaryColor from globals;
+@value screen-sm, screen-md, screen-lg from globals;
 
 @value headerHeight: 44px;
 @value infoboxRadius: 6px;
-@value infoboxShadow: 13px 13px 0 0 #030628;
+@value infoboxShadow: 0 0 #030628;
 
 .InfoBox {
-  background-color: #472e93;
+  background-color: uiGrayLight;
   border-radius: infoboxRadius;
-  box-shadow: infoboxShadow;
-  margin-bottom: 50px;
+  box-shadow: 8px 8px infoboxShadow;
+  margin-bottom: 18px;
   overflow: hidden;
   padding: 0;
 }
 
 .InfoBox .boxHeader {
-  background-color: #2f1973;
+  background-color: uiGray;
   color: textPrimaryColor;
   font-size: 16px;
   font-weight: 600;
@@ -26,4 +27,24 @@
 
 .InfoBox .boxContent {
   padding: 10px;
+}
+
+@media (min-width: screen-sm) {
+  .InfoBox {
+    box-shadow: 9px 9px infoboxShadow;
+    margin-bottom: 34px;
+  }
+}
+
+@media (min-width: screen-sm) {
+  .InfoBox {
+    margin-bottom: 45px;
+  }
+}
+
+@media (min-width: screen-lg) {
+  .InfoBox {
+    box-shadow: 13px 13px infoboxShadow;
+    margin-bottom: 50px;
+  }
 }

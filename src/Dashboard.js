@@ -125,11 +125,7 @@ class Dashboard extends Component {
     const versionString = `${version} - ${sha}`;
     const leaderboardLink = '/leaderboard';
 
-    // TODO: REMOVE
-    const badgesStyle = {
-      background: '#1477B0',
-      height: '300px'
-    };
+    // TODO: [layout] Remove
     const casesStyle = {
       background: 'gray',
       height: '1000px'
@@ -157,10 +153,9 @@ class Dashboard extends Component {
                 <div className="col-16 col-sm-8 col-xl-16">
                   <ActivityProgressSection current={this.state.current} />
                 </div>
-                <div
-                  className="col-16 col-sm-8 col-xl-16"
-                  style={badgesStyle}
-                />
+                <div className="col-16 col-sm-8 col-xl-16">
+                  <AchievementSection />
+                </div>
                 <div
                   className="d-none d-xl-block col-xl-16"
                   style={communityStyle}
@@ -172,10 +167,6 @@ class Dashboard extends Component {
         </div>
         <div className="container">
           <div className="row">
-            <div className="col-lg-3 offset-lg-3 col-md-7 col-16 order-3 order-lg-2">
-              <AchievementSection />
-            </div>
-
             <div className="col-16 order-2 order-lg-3">
               <div className="row">
                 <div className="col-lg-4 col-md-16 order-2 order-lg-1">

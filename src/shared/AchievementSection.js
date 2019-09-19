@@ -3,6 +3,7 @@ import React from 'react';
 import Modal from 'react-modal';
 import ReactTooltip from 'react-tooltip';
 import AchievementBadge from './AchievementBadge.js';
+import InfoBox from './InfoBox.js';
 import { achievements } from '../achievements.js';
 import './AchievementSection.css';
 import '../shared/Modal.css';
@@ -55,7 +56,23 @@ class AchievementSection extends Component {
       recentAchievements[achievementKey] = achievements[achievementKey];
     });
 
-    return recentAchievements;
+    const badges = this.getAchievementsBadges(recentAchievements);
+
+    return (
+      <div className="d-flex no-gutters badgesGroup" onClick={this.toggleModal}>
+        <div className="col-2">{badges[2]}</div>
+        <div className="col-2">{badges[1]}</div>
+        <div className="col-4">{badges[0]}</div>
+        <div className="col-4 moreBadges">+{badges.length - 3}</div>
+        <div className="col-4 viewAll">
+          <span>
+            View
+            <br />
+            all
+          </span>
+        </div>
+      </div>
+    );
   }
 
   getAchievementsBadges(achievementsList) {
@@ -88,22 +105,12 @@ class AchievementSection extends Component {
   render() {
     const { achievements } = this.state;
 
-    const mostRecentAchievements = this.getMostRecentAchievements(6);
+    const mostRecentAchievementBadges = this.getMostRecentAchievements(5);
     const allAchievementBadges = this.getAchievementsBadges(achievements);
 
-    const mostRecentAchievementBadges = this.getAchievementsBadges(
-      mostRecentAchievements
-    );
-
     return (
-      <div className="AchievementSection">
-        <div className="header">
-          <div className="title">Achievements</div>
-          <button className="view-all" onClick={this.toggleModal}>
-            view all
-          </button>
-        </div>
-        <div className="row">{mostRecentAchievementBadges}</div>
+      <InfoBox className="AchievementSection" headerText="Badges">
+        {mostRecentAchievementBadges}
 
         <Modal
           isOpen={this.state.showAchievementsModal}
@@ -121,7 +128,7 @@ class AchievementSection extends Component {
             Close
           </span>
         </Modal>
-      </div>
+      </InfoBox>
     );
   }
 }

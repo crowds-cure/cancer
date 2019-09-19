@@ -4,7 +4,7 @@ import React from 'react';
 class RankBadge extends Component {
   render() {
     return (
-      <div className="rankBadge">
+      <div className="rankBadge noselect">
         <img
           src={this.props.img}
           alt={this.props.name}

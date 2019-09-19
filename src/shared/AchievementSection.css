@@ -1,27 +1,37 @@
 @value globals: "../GlobalStyles.css";
-@value textPrimaryColor, textSecondaryColor, textActiveColor, uiGrayDarker, screen-md from globals;
+@value primaryBackgroundColor, textPrimaryColor, textActiveColor, screen-md from globals;
 
-.AchievementSection .header .title {
-  color: textPrimaryColor;
-  display: inline-block;
-  margin-bottom: 25px;
-  font-weight: 600;
+@value boxContentBg: #1577b0;
+@value boxHeaderBg: #00588a;
+@value textColor: primaryBackgroundColor;
+
+.AchievementSection.InfoBox {
+  background-color: boxContentBg;
 }
 
-.AchievementSection .header .view-all {
-  background-color: transparent;
-  border: none;
-  color: textActiveColor;
+.AchievementSection.InfoBox .boxHeader {
+  background-color: boxHeaderBg;
+}
+
+.AchievementSection .badgesGroup {
   cursor: pointer;
-  display: inline-block;
-  float: right;
-  font-size: 14px;
-  outline: none;
-  text-decoration: none;
+  margin: 0 auto 5px;
+  width: 272px;
 }
 
-@media (max-width: screen-md) {
-  .AchievementSection {
-    margin-top: 20px;
-  }
+.AchievementSection .moreBadges {
+  display: inline-block;
+  color: textColor;
+  font-size: 40px;
+  font-weight: bold;
+  line-height: 60px;
+  margin-left: -5px;
+}
+
+.AchievementSection .viewAll {
+  color: textColor;
+  font-size: 18px;
+  font-weight: 600;
+  padding-top: 10px;
+  text-align: center;
 }
