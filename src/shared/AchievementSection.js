@@ -59,17 +59,45 @@ class AchievementSection extends Component {
     const badges = this.getAchievementsBadges(recentAchievements);
 
     return (
-      <div className="d-flex no-gutters badgesGroup" onClick={this.toggleModal}>
-        <div className="col-2">{badges[2]}</div>
-        <div className="col-2">{badges[1]}</div>
-        <div className="col-4">{badges[0]}</div>
-        <div className="col-4 moreBadges">+{badges.length - 3}</div>
-        <div className="col-4 viewAll">
-          <span>
-            View
-            <br />
-            all
-          </span>
+      <div className="d-flex no-gutters badgesContent">
+        <div className="col-md d-none d-md-block">
+          <div className="singleBadge" onClick={this.toggleModal}>
+            {badges[4]}
+          </div>
+        </div>
+        <div className="col-sm-5 col-md d-none d-sm-block">
+          <div className="singleBadge" onClick={this.toggleModal}>
+            {badges[3]}
+          </div>
+        </div>
+        <div className="col-16 col-sm-11 col-md">
+          <div
+            className="row no-gutters badgesGroup"
+            onClick={this.toggleModal}
+          >
+            <div className="col-2 col-sm-3">{badges[2]}</div>
+            <div className="col-2 col-sm-3">{badges[1]}</div>
+            <div className="col-4 col-sm-5">{badges[0]}</div>
+            <div className="col-5 d-sm-none">
+              <div className="moreBadges">+{badges.length - 3}</div>
+            </div>
+            <div className="col-sm-5 d-none d-md-none d-sm-block">
+              <div className="moreBadges">+{badges.length - 4}</div>
+            </div>
+            <div className="col-md-5 d-none d-md-block">
+              <div className="moreBadges">+{badges.length - 5}</div>
+            </div>
+            <div className="col-3 d-sm-none viewAll">
+              <span>
+                View
+                <br />
+                all
+              </span>
+            </div>
+            <div className="col-sm-16 d-none d-sm-block viewAll">
+              View earned badges
+            </div>
+          </div>
         </div>
       </div>
     );
@@ -96,6 +124,7 @@ class AchievementSection extends Component {
   toggleModal(e) {
     e.preventDefault();
     this.setState({ showAchievementsModal: !this.state.showAchievementsModal });
+    ReactTooltip.hide();
   }
 
   componentDidUpdate() {
@@ -105,7 +134,7 @@ class AchievementSection extends Component {
   render() {
     const { achievements } = this.state;
 
-    const mostRecentAchievementBadges = this.getMostRecentAchievements(5);
+    const mostRecentAchievementBadges = this.getMostRecentAchievements(6);
     const allAchievementBadges = this.getAchievementsBadges(achievements);
 
     return (

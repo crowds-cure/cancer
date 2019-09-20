@@ -1,9 +1,16 @@
+@value backgroundColor: #1b2d63;
+@value borderColor: #2271a0;
+@value borderWidth: 4px;
+
 .AchievementBadge {
   display: inline-block;
 }
 
 .AchievementBadge img {
-  width: 60px;
-  height: 60px;
+  background-color: backgroundColor;
+  border: borderWidth solid borderColor;
+  border-radius: 50%;
+  height: 68px;
   vertical-align: top;
+  width: 68px;
 }

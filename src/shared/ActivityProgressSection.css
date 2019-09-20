@@ -1,5 +1,5 @@
 @value globals: "../GlobalStyles.css";
-@value primaryBackgroundColor, textPrimaryColor, textSecondaryColor, textActiveColor, screen-sm from globals;
+@value primaryBackgroundColor, textPrimaryColor, textSecondaryColor, textActiveColor from globals;
 @value screen-sm, screen-md, screen-lg from globals;
 
 .badgeName {
@@ -78,6 +78,10 @@
 }
 
 @media (min-width: screen-sm) {
+  .ActivityProgressSection.InfoBox .boxContent {
+    padding-top: 0;
+  }
+
   .ActivityProgressSection .rankBadge img {
     height: 130px;
     width: 130px;
@@ -112,6 +116,10 @@
 }
 
 @media (min-width: screen-lg) {
+  .ActivityProgressSection .InfoBox .boxContent {
+    padding-top: 10px;
+  }
+
   .ActivityProgressSection .progressBarContainer {
     margin-bottom: 20px;
     padding: 0 40px;
