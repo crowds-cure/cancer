@@ -38,6 +38,11 @@ class ActivityProgressSection extends Component {
     this.toggleModal = this.toggleModal.bind(this);
   }
 
+  componentDidMount() {
+    const element = this.measurementsCountRef.current;
+    element.innerText = this.state.measurementsCount;
+  }
+
   componentDidUpdate() {
     ReactTooltip.rebuild();
 
@@ -51,18 +56,20 @@ class ActivityProgressSection extends Component {
 
         const element = this.measurementsCountRef.current;
         const currentValue = parseInt(element.innerText, 10);
-        if (newValue !== currentValue) {
+
+        if (currentValue === this.props.current) {
+          this.setState({ measurementsCount: this.props.current });
+        } else if (newValue !== currentValue) {
           element.innerText = newValue;
         }
       });
-
-      this.setState({ measurementsCount: this.props.current });
     }
   }
 
   toggleModal(e) {
     e.preventDefault();
     this.setState({ showRanksModal: !this.state.showRanksModal });
+    ReactTooltip.hide();
   }
 
   getAllRankBadges(current) {

@@ -1,5 +1,6 @@
 @value globals: "../GlobalStyles.css";
-@value primaryBackgroundColor, textPrimaryColor, textActiveColor, screen-md from globals;
+@value primaryBackgroundColor, textPrimaryColor from globals;
+@value screen-sm, screen-md, screen-lg from globals;
 
 @value boxContentBg: #1577b0;
 @value boxHeaderBg: #00588a;
@@ -13,9 +14,23 @@
   background-color: boxHeaderBg;
 }
 
+.AchievementSection .AchievementBadge img {
+  transition: transform 0.3s ease-in-out;
+}
+
+.AchievementSection .AchievementBadge:hover img {
+  transform: scale(1.1);
+}
+
+.AchievementSection .singleBadge {
+  cursor: pointer;
+  display: table;
+  margin: 0 auto;
+}
+
 .AchievementSection .badgesGroup {
   cursor: pointer;
-  margin: 0 auto 5px;
+  margin: 0 auto 2px;
   width: 272px;
 }
 
@@ -24,8 +39,9 @@
   color: textColor;
   font-size: 40px;
   font-weight: bold;
-  line-height: 60px;
-  margin-left: -5px;
+  line-height: 68px;
+  padding-left: 3px;
+  transition: color 0.3s ease;
 }
 
 .AchievementSection .viewAll {
@@ -34,4 +50,66 @@
   font-weight: 600;
   padding-top: 10px;
   text-align: center;
+  transition: color 0.3s ease;
+}
+
+.AchievementSection .badgesGroup:hover .viewAll,
+.AchievementSection .badgesGroup:hover .moreBadges {
+  color: textPrimaryColor;
+}
+
+@media (min-width: screen-sm) {
+  .AchievementSection .badgesContent {
+    padding-top: 15px;
+  }
+
+  .AchievementSection .badgesGroup {
+    margin-bottom: 0;
+  }
+
+  .AchievementSection .AchievementBadge img {
+    height: 92px;
+    width: 92px;
+  }
+
+  .AchievementSection .moreBadges {
+    line-height: 92px;
+    padding-left: 15px;
+  }
+
+  .AchievementSection .viewAll {
+    padding: 14px 0 10px;
+  }
+}
+
+@media (min-width: screen-md) {
+  .AchievementSection .badgesContent {
+    margin: 0 auto;
+    max-width: 540px;
+    padding-top: 29px;
+  }
+
+  .AchievementSection .badgesGroup {
+    margin-left: 14px;
+    margin-right: 10px;
+  }
+
+  .AchievementSection .viewAll {
+    padding: 20px 0;
+  }
+}
+
+@media (min-width: screen-lg) {
+  .AchievementSection .badgesContent {
+    max-width: 600px;
+  }
+
+  .AchievementSection .badgesGroup {
+    margin-left: 30px;
+    margin-right: 0;
+  }
+
+  .AchievementSection .viewAll {
+    padding: 20px 0;
+  }
 }
