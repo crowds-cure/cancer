@@ -51,7 +51,7 @@
 @value screen-desktop-lg: 1920px;
 
 /* Dimensions */
-@value dashboardInfo-desktop-lg: 35vw;
+@value dashboardInfo-desktop-lg: calc(100vw / 3);
 
 .noselect {
   -webkit-touch-callout: none; /* iOS Safari */

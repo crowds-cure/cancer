@@ -1,16 +1,37 @@
 @value globals: "../GlobalStyles.css";
-@value textActiveColor, screen-lg from globals;
+@value screen-sm, screen-lg from globals;
 
-.StatisticsSection .subTitle {
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 30px;
-  margin-top: 0px;
-  color: textActiveColor;
+@value boxContentBg: #471448;
+@value boxHeaderBg: #3d0c3e;
+
+.StatisticsSection.InfoBox {
+  background-color: boxContentBg;
 }
 
-@media (min-width: screen-md) {
-  .StatisticsSection .subTitle {
-    margin-top: 0px;
+.StatisticsSection.InfoBox .boxHeader {
+  background-color: boxHeaderBg;
+}
+
+.StatisticsSection.InfoBox .boxContent {
+  padding-bottom: 50px;
+}
+
+@media (min-width: screen-sm) {
+  .StatisticsSection.InfoBox .boxContent {
+    display: table;
+    margin: 0 auto;
+    padding-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+@media (min-width: screen-lg) {
+  .StatisticsSection .cardContainer:first-child .StatisticsCard {
+    padding-left: 0;
+  }
+
+  .StatisticsSection .cardContainer:last-child .StatisticsCard {
+    padding-right: 0;
   }
 }
