@@ -130,10 +130,6 @@ class Dashboard extends Component {
       background: 'gray',
       height: '1000px'
     };
-    const communityStyle = {
-      background: '#471448',
-      height: '200px'
-    };
 
     return (
       <div className="Dashboard">
@@ -145,24 +141,25 @@ class Dashboard extends Component {
         <div className="container">
           <div className="row">
             <div
-              className="col-16 col-xl-10 order-1 order-xl-0"
+              className="col-16 col-lg-10 order-1 order-lg-0"
               style={casesStyle}
             />
-            <div className="col-16 order-0 col-xl-6">
+            <div className="col-16 order-0 col-lg-6">
               <div className="row">
-                <div className="col-16 col-sm-8 col-xl-16">
+                <div className="col-16 col-sm-8 col-lg-16">
                   <ActivityProgressSection current={this.state.current} />
                 </div>
-                <div className="col-16 col-sm-8 col-xl-16">
+                <div className="col-16 col-sm-8 col-lg-16">
                   <AchievementSection />
                 </div>
-                <div
-                  className="d-none d-xl-block col-xl-16"
-                  style={communityStyle}
-                />
+                <div className="d-none d-lg-block col-lg-16">
+                  <StatisticsSection />
+                </div>
               </div>
             </div>
-            <div className="col-16 order-2 d-xl-none" style={communityStyle} />
+            <div className="col-16 order-2 d-lg-none">
+              <StatisticsSection />
+            </div>
           </div>
         </div>
         <div className="container">
@@ -171,9 +168,6 @@ class Dashboard extends Component {
               <div className="row">
                 <div className="col-lg-4 col-md-16 order-2 order-lg-1">
                   <div className="row">
-                    <div className="col-lg-16 col-md-8 col-sm-16">
-                      <StatisticsSection col="8" />
-                    </div>
                     <div className="col-lg-16 col-md-8 col-sm-16">
                       <div className="row rankingGroupSection">
                         <div className="col-16">

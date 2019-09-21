@@ -1,28 +1,40 @@
 @value globals: "../GlobalStyles.css";
-@value textActiveColor, textSecondaryColor from globals;
+@value screen-sm from globals;
+
+@value textColor: #f2e0f7;
 
 .StatisticsCard {
-  border-left: 1px solid textSecondaryColor;
   box-sizing: border-box;
   display: inline-block;
-  padding: 0 10px;
+  padding: 0 20px;
   margin-bottom: 24px;
   font-weight: 600;
 }
 
 .StatisticsCard .number {
   display: block;
-  font-weight: 600;
-  font-size: 52px;
-  line-height: 32px;
-  margin-bottom: 14px;
-  color: textActiveColor;
+  font-weight: normal;
+  font-size: 50px;
+  line-height: 50px;
+  margin: 25px 0 15px;
+  color: textColor;
 }
 
 .StatisticsCard .description {
   display: block;
-  font-weight: 400;
-  font-size: 13px;
-  color: textSecondaryColor;
+  font-weight: normal;
+  font-size: 16px;
+  color: textColor;
   line-height: 16px;
+  white-space: nowrap;
+}
+
+@media (min-width: screen-sm) {
+  .StatisticsCard {
+    padding: 0 30px;
+  }
+
+  .StatisticsCard .number {
+    margin-top: 32px;
+  }
 }
