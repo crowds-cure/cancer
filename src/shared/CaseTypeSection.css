@@ -1,15 +1,8 @@
 @value globals: "../GlobalStyles.css";
-@value textPrimaryColor, textActiveColor, screen-md from globals;
+@value screen-lg from globals;
 
-.CaseTypeSectionTitle {
-  color: textActiveColor;
-  margin: 0 0 26px 0;
-  font-size: 22px;
-  font-weight: 600;
-}
-
-@media (min-width: screen-md) {
-  .CaseTypeSectionTitle {
-    margin: 0 0 26px 4px;
+@media (min-width: screen-lg) {
+  .CaseTypeSection {
+    margin-right: 26px;
   }
 }

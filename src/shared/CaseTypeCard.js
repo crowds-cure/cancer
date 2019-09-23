@@ -21,20 +21,13 @@ class CaseTypeCard extends Component {
     }
 
     return (
-      <div className="col-16 col-md-8 col-lg-5">
+      <div className="col-16 col-sm-third">
         <div className={className} onClick={this.onClick}>
-          {completed && (
-            <span className="complete-flag">
-              <svg>
-                <use xlinkHref="/icons.svg#icon-check-circle" />
-              </svg>
-            </span>
-          )}
-          <div className="imgContainer">
+          <div className="imageContainer">
             <div
               onClick={this.props.clickInfo}
               title={this.props.description}
-              className="info-icon svgContainer"
+              className="infoIcon svgContainer"
             >
               <svg>
                 <use xlinkHref="/icons.svg#icon-trial-info" />
@@ -61,12 +54,11 @@ class CaseTypeCard extends Component {
               getAuthorizationHeader={getAuthorizationHeader}
             />*/}
           </div>
-          <div className="title">
-            <span className="name">{this.props.name}</span>
-            <span className="type">
-              {this.props.type} - {this.props.byAnnotator}/
-              {this.props.inCollection}
-            </span>
+          <div className="infoContainer">
+            <div className="progress">
+              <div className="current" />
+            </div>
+            <div className="typeName">{this.props.type}</div>
           </div>
         </div>
       </div>

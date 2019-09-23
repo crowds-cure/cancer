@@ -1,107 +1,107 @@
 @value globals: "../GlobalStyles.css";
 @value activeColor, textActiveColor, textSecondaryColor from globals;
+@value hoverColor, uiBlack, screen-sm from globals;
+
+@value imageContainerColor: uiBlack;
+@value infoContainerColor: #090020;
+@value dividerColor: #24225b;
+@value progressBorderColor: #40297b;
+@value progressBackgroundColor: #28008c;
+@value progressForegroundColor: activeColor;
 
 .CaseTypeCard {
-  position: relative;
-  margin-bottom: 10px;
-  height: 320px;
+  background-color: imageContainerColor;
+  border-radius: 4px 4px 0 0;
   cursor: pointer;
-  border: 4px solid transparent;
-  border-radius: 12px;
-  transition: border-color 0.2s linear;
+  margin-bottom: 10px;
+  position: relative;
 }
 
-.CaseTypeCard.complete {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-.CaseTypeCard .complete-flag {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-}
-
-.CaseTypeCard .complete-flag svg {
-  fill: textActiveColor;
-  height: 40px;
-  width: 40px;
-}
-
-.CaseTypeCard .imgContainer {
-  width: 100%;
-  height: 220px;
-  border-radius: 12px;
-  border: 4px solid transparent;
-  background: black;
+.CaseTypeCard .imageContainer {
+  border-bottom: 2px solid dividerColor;
+  height: 268px;
+  padding: 22px 0;
   text-align: center;
   overflow: hidden;
-  display: flex;
-  justify-content: center;
-  transition: 0.5s ease;
 }
 
-.CaseTypeCard img {
+.CaseTypeCard .imageContainer img {
   height: 100%;
-  background: black;
 }
 
-.CaseTypeCard:hover .imgContainer {
-  border: 4px solid activeColor;
-  transition: 0.4s ease;
-}
-
-.CaseTypeCard .title {
-  margin-top: 10px;
-  color: white;
-  transition: 0.4s ease;
-}
-
-.CaseTypeCard .title > span {
-  display: block;
-}
-
-.CaseTypeCard .name {
-  font-weight: 600;
-  font-size: 21px;
-  transition: 0.4s ease;
-  padding-left: 4px;
-}
-
-.CaseTypeCard:hover .name {
-  color: activeColor;
-  transition: 0.4s ease;
-}
-
-.CaseTypeCard .type {
-  font-size: 16px;
-  color: textSecondaryColor;
-  margin-top: 6px;
-  transition: 0.4s ease;
-  padding-left: 4px;
-}
-
-.CaseTypeCard:hover .type {
-  color: white;
-  transition: 0.4s ease;
-}
-
-.CaseTypeCard .info-icon {
-  margin: 5px 5px 0px auto;
+.CaseTypeCard .infoIcon {
   height: 20px;
-  width: 20px;
-  stroke: textActiveColor;
   opacity: 0.41;
   position: absolute;
-  top: 5px;
-  right: 8px;
+  right: 10px;
+  stroke: textActiveColor;
+  top: 10px;
+  width: 20px;
 }
 
-.CaseTypeCard .info-icon:hover {
+.CaseTypeCard .infoIcon:hover {
   opacity: 1;
 }
 
-.CaseTypeCard .info-icon svg {
+.CaseTypeCard .infoIcon svg {
   height: 20px;
   width: 20px;
+}
+
+.CaseTypeCard .infoContainer {
+  background-color: infoContainerColor;
+  height: 112px;
+  padding: 16px;
+}
+
+.CaseTypeCard .infoContainer .progress {
+  background-color: progressBackgroundColor;
+  border: 1px solid progressBorderColor;
+  border-radius: 5px;
+  height: 10px;
+  margin-bottom: 10px;
+  overflow: hidden;
+  width: 75px;
+}
+
+.CaseTypeCard .infoContainer .progress .current {
+  background-color: activeColor;
+  border-radius: 4px;
+  display: table;
+  height: 100%;
+  min-width: 8px;
+}
+
+.CaseTypeCard .infoContainer .typeName {
+  color: textActiveColor;
+  font-size: 20px;
+  font-weight: normal;
+  line-height: 1.45;
+}
+
+.CaseTypeCard:hover .infoContainer .typeName {
+  color: hoverColor;
+}
+
+@media (min-width: screen-sm) {
+  .CaseTypeCard {
+    margin-bottom: 22px;
+  }
+
+  .CaseTypeCard:after {
+    border: 4px solid transparent;
+    border-radius: 9px;
+    bottom: -10px;
+    content: '';
+    left: -10px;
+    pointer-events: none;
+    position: absolute;
+    right: -10px;
+    top: -10px;
+    transition: border-color 0.3s ease;
+  }
+
+  .CaseTypeCard:hover:after {
+    border-color: activeColor;
+  }
 }

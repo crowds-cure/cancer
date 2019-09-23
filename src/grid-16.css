@@ -8,6 +8,8 @@
 @value globals: "./GlobalStyles.css";
 @value screen-sm, screen-md, screen-lg, screen-xl, gutter, negativeGutter from globals;
 
+@value one-third: calc(100% / 3);
+
 @-ms-viewport {
   width: device-width;
 }
@@ -164,6 +166,13 @@ html {
   flex: 0 0 auto;
   width: auto;
   max-width: none;
+}
+
+.col-third {
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 one-third;
+  flex: 0 0 one-third;
+  max-width: one-third;
 }
 
 .col-1 {
@@ -468,6 +477,12 @@ html {
     width: auto;
     max-width: none;
   }
+  .col-sm-third {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 one-third;
+    flex: 0 0 one-third;
+    max-width: one-third;
+  }
   .col-sm-1 {
     -webkit-box-flex: 0;
     -ms-flex: 0 0 6.25%;
@@ -724,6 +739,12 @@ html {
     flex: 0 0 auto;
     width: auto;
     max-width: none;
+  }
+  .col-md-third {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 one-third;
+    flex: 0 0 one-third;
+    max-width: one-third;
   }
   .col-md-1 {
     -webkit-box-flex: 0;
@@ -982,6 +1003,12 @@ html {
     width: auto;
     max-width: none;
   }
+  .col-lg-third {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 one-third;
+    flex: 0 0 one-third;
+    max-width: one-third;
+  }
   .col-lg-1 {
     -webkit-box-flex: 0;
     -ms-flex: 0 0 6.25%;
@@ -1238,6 +1265,12 @@ html {
     flex: 0 0 auto;
     width: auto;
     max-width: none;
+  }
+  .col-xl-third {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 one-third;
+    flex: 0 0 one-third;
+    max-width: one-third;
   }
   .col-xl-1 {
     -webkit-box-flex: 0;
