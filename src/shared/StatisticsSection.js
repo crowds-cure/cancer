@@ -5,6 +5,9 @@ import InfoBox from './InfoBox.js';
 import './StatisticsSection.css';
 //import PropTypes from 'prop-types';
 import getCommunityStats from './getCommunityStats.js';
+import iconCommunityEye from '../images/general/icon-community-eye.svg';
+import iconCommunityPerson from '../images/general/icon-community-person.svg';
+import iconCommunityCalendar from '../images/general/icon-community-calendar.svg';
 
 class StatisticsSection extends Component {
   constructor(props) {
@@ -34,6 +37,7 @@ class StatisticsSection extends Component {
     const stats = [
       {
         number: totalMeasurements,
+        icon: iconCommunityEye,
         description: (
           <span>
             Total community
@@ -44,10 +48,12 @@ class StatisticsSection extends Component {
       },
       {
         number: numAnnotators,
+        icon: iconCommunityPerson,
         description: <span>Total participants</span>
       },
       {
         number: recentMeasurements,
+        icon: iconCommunityCalendar,
         description: (
           <span>
             Measurements
