@@ -2,7 +2,6 @@ import { Component } from 'react';
 import React from 'react';
 import PropTypes from 'prop-types';
 import StatisticsSection from './shared/StatisticsSection.js';
-import RankingSection from './shared/RankingSection.js';
 import ActivityProgressSection from './shared/ActivityProgressSection.js';
 import CaseTypeSection from './shared/CaseTypeSection.js';
 import SimpleHeaderSection from './shared/SimpleHeaderSection.js';
@@ -125,12 +124,6 @@ class Dashboard extends Component {
     const versionString = `${version} - ${sha}`;
     const leaderboardLink = '/leaderboard';
 
-    // TODO: [layout] Remove
-    const casesStyle = {
-      background: 'gray',
-      height: '1000px'
-    };
-
     return (
       <div className="Dashboard">
         <SimpleHeaderSection
@@ -140,10 +133,13 @@ class Dashboard extends Component {
         />
         <div className="container">
           <div className="row">
-            <div
-              className="col-16 col-lg-10 order-1 order-lg-0"
-              style={casesStyle}
-            />
+            <div className="col-16 col-lg-10 order-1 order-lg-0">
+              <CaseTypeSection
+                types={this.state.types}
+                isLoading={this.state.isLoading}
+                onClickInfo={this.onClickInfo}
+              />
+            </div>
             <div className="col-16 order-0 col-lg-6">
               <div className="row">
                 <div className="col-16 col-sm-8 col-lg-16">
@@ -159,47 +155,6 @@ class Dashboard extends Component {
             </div>
             <div className="col-16 order-2 d-lg-none">
               <StatisticsSection />
-            </div>
-          </div>
-        </div>
-        <div className="container">
-          <div className="row">
-            <div className="col-16 order-2 order-lg-3">
-              <div className="row">
-                <div className="col-lg-4 col-md-16 order-2 order-lg-1">
-                  <div className="row">
-                    <div className="col-lg-16 col-md-8 col-sm-16">
-                      <div className="row rankingGroupSection">
-                        <div className="col-16">
-                          <RankingSection
-                            name="Top individuals"
-                            type="individual"
-                            viewAllLink={leaderboardLink}
-                          />
-                        </div>
-                        <div className="col-16">
-                          <RankingSection
-                            name="Top groups"
-                            type="team"
-                            viewAllLink={leaderboardLink}
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-lg-12 col-md-16 col-sm-16 order-1 order-lg-2">
-                  <div className="row">
-                    <div className="col-16">
-                      <CaseTypeSection
-                        types={this.state.types}
-                        isLoading={this.state.isLoading}
-                        onClickInfo={this.onClickInfo}
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>

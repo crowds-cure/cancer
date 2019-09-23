@@ -3,13 +3,13 @@
 
 .CaseTypeSectionTitle {
   color: textActiveColor;
-  margin: 60px 0 26px 0;
+  margin: 0 0 26px 0;
   font-size: 22px;
   font-weight: 600;
 }
 
 @media (min-width: screen-md) {
   .CaseTypeSectionTitle {
-    margin: 60px 0 26px 4px;
+    margin: 0 0 26px 4px;
   }
 }
