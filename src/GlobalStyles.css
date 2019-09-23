@@ -38,21 +38,26 @@
 @value progressSecondaryColor: secondaryColor;
 @value imageSliderColor: #163239;
 
+/* Screen resolutions */
+@value 640p: 640px;
+@value 1024p: 1024px;
+@value 1366p: 1366px;
+@value 1680p: 1680px;
+@value 1920p: 1920px;
+@value 2880p: 2880px;
+@value 3840p: 3840px;
+
 /* Grid breakpoints */
-@value screen-sm: 1024px;
-@value screen-md: 1280px;
-@value screen-lg: 1920px;
-@value screen-xl: 1920px;
+@value screen-xs: 640p;
+@value screen-sm: 1024p;
+@value screen-md: 1366p;
+@value screen-lg: 1680p;
+@value screen-xl: 1920p;
 @value gutter: 12.5px;
 @value negativeGutter: -12.5px;
 
-@value screen-mobile: 0px;
-@value screen-tablet: 1024px;
-@value screen-desktop: 1280px;
-@value screen-desktop-lg: 1920px;
-
 /* Dimensions */
-@value dashboardInfo-desktop-lg: calc(100vw / 3);
+@value dashboardInfo-lg: calc(100vw / 3);
 
 .noselect {
   -webkit-touch-callout: none; /* iOS Safari */
@@ -62,4 +67,16 @@
   -ms-user-select: none; /* Internet Explorer/Edge */
   user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome and Opera */
+}
+
+@media (min-width: 2880p) {
+  body {
+    zoom: 1.5;
+  }
+}
+
+@media (min-width: 3840p) {
+  body {
+    zoom: 2;
+  }
 }

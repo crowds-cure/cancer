@@ -1,21 +1,21 @@
 @value globals: "../GlobalStyles.css";
-@value textActiveColor, uiUsernameText, dashboardInfo-desktop-lg from globals;
-@value screen-mobile, screen-tablet, screen-desktop, screen-desktop-lg from globals;
+@value textActiveColor, uiUsernameText, dashboardInfo-lg from globals;
+@value screen-xs, screen-sm, screen-md, screen-lg from globals;
 
-@value iconSize-mobile: 30px;
-@value iconSize-tablet: 42px;
-@value iconSize-desktop: 60px;
-@value iconSize-desktop-lg: 60px;
+@value iconSize: 30px;
+@value iconSize-sm: 42px;
+@value iconSize-md: 60px;
+@value iconSize-lg: 60px;
 
-@value headerPadding-mobile: 15px 10px;
-@value headerPadding-tablet: 10px 35px;
-@value headerPadding-desktop: 16px 60px;
-@value headerPadding-desktop-lg: 30px 80px;
+@value headerPadding: 15px 10px;
+@value headerPadding-sm: 10px 35px;
+@value headerPadding-md: 16px 60px;
+@value headerPadding-lg: 30px 80px;
 
-@value headerHeight-mobile: 60px;
-@value headerHeight-tablet: 94px;
-@value headerHeight-desktop: 130px;
-@value headerHeight-desktop-lg: 140px;
+@value headerHeight: 60px;
+@value headerHeight-sm: 94px;
+@value headerHeight-md: 130px;
+@value headerHeight-lg: 140px;
 
 .simpleHeader {
   display: flex;
@@ -49,40 +49,58 @@
   text-decoration: none;
 }
 
-@media (min-width: screen-mobile) {
-  .simpleHeader {
-    height: headerHeight-mobile;
-    padding: headerPadding-mobile;
-  }
+.simpleHeader {
+  height: headerHeight;
+  padding: headerPadding;
+}
 
-  .simpleHeader .Logo {
-    font-size: 17px;
-    line-height: iconSize-mobile;
-  }
+.simpleHeader .Logo {
+  font-size: 17px;
+  line-height: iconSize;
+}
 
+.simpleHeader .userSection .username,
+.simpleHeader .actionSection > * {
+  display: none;
+}
+
+.simpleHeader .userSection {
+  flex-grow: 1;
+  text-align: right;
+}
+
+.simpleHeader .userIcon {
+  border-radius: calc(iconSize / 2);
+  height: iconSize;
+  width: iconSize;
+}
+
+@media (min-width: screen-xs) {
   .simpleHeader .userSection .username,
   .simpleHeader .actionSection > * {
-    display: none;
+    display: inline-block;
+    line-height: iconSize;
   }
 
-  .simpleHeader .userSection {
-    flex-grow: 1;
-    text-align: right;
+  .simpleHeader .userSection .username {
+    padding-left: 6px;
   }
 
-  .simpleHeader .userIcon {
-    border-radius: calc(iconSize-mobile / 2);
-    height: iconSize-mobile;
-    width: iconSize-mobile;
+  .simpleHeader .actionSection {
+    padding-right: 10px;
+  }
+
+  .simpleHeader .actionSection > * {
+    margin-left: 28px;
   }
 }
 
-@media (min-width: screen-tablet) {
+@media (min-width: screen-sm) {
   .simpleHeader {
     align-content: stretch;
     flex-wrap: wrap;
-    height: headerHeight-tablet;
-    padding: headerPadding-tablet;
+    height: headerHeight-sm;
+    padding: headerPadding-sm;
   }
 
   .simpleHeader .Logo {
@@ -95,8 +113,7 @@
 
   .simpleHeader .userSection .username,
   .simpleHeader .actionSection > * {
-    display: inline-block;
-    line-height: iconSize-tablet;
+    line-height: iconSize-sm;
   }
 
   .simpleHeader .userSection {
@@ -104,9 +121,9 @@
   }
 
   .simpleHeader .userSection .userIcon {
-    border-radius: calc(iconSize-tablet / 2);
-    height: iconSize-tablet;
-    width: iconSize-tablet;
+    border-radius: calc(iconSize-sm / 2);
+    height: iconSize-sm;
+    width: iconSize-sm;
   }
 
   .simpleHeader .userSection .username {
@@ -115,10 +132,10 @@
   }
 }
 
-@media (min-width: screen-desktop) {
+@media (min-width: screen-md) {
   .simpleHeader {
-    height: headerHeight-desktop;
-    padding: headerPadding-desktop;
+    height: headerHeight-md;
+    padding: headerPadding-md;
   }
 
   .simpleHeader .Logo {
@@ -128,13 +145,13 @@
 
   .simpleHeader .userSection .username,
   .simpleHeader .actionSection > * {
-    line-height: iconSize-desktop;
+    line-height: iconSize-md;
   }
 
   .simpleHeader .userSection .userIcon {
-    border-radius: calc(iconSize-desktop / 2);
-    height: iconSize-desktop;
-    width: iconSize-desktop;
+    border-radius: calc(iconSize-md / 2);
+    height: iconSize-md;
+    width: iconSize-md;
   }
 
   .simpleHeader .userSection .username {
@@ -143,16 +160,16 @@
   }
 }
 
-@media (min-width: screen-desktop-lg) {
+@media (min-width: screen-lg) {
   .simpleHeader {
     flex-wrap: nowrap;
-    height: headerHeight-desktop-lg;
-    padding: headerPadding-desktop-lg;
+    height: headerHeight-lg;
+    padding: headerPadding-lg;
   }
 
   .simpleHeader .Logo {
-    line-height: iconSize-desktop;
+    line-height: iconSize-md;
     text-align: left;
-    width: calc(100% - dashboardInfo-desktop-lg);
+    width: calc(100% - dashboardInfo-lg);
   }
 }

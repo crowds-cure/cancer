@@ -1,6 +1,6 @@
 @value globals: "../GlobalStyles.css";
 @value primaryBackgroundColor, textPrimaryColor from globals;
-@value screen-sm, screen-md, screen-lg from globals;
+@value screen-xs, screen-sm, screen-md, screen-lg from globals;
 
 @value boxContentBg: #1577b0;
 @value boxHeaderBg: #00588a;
@@ -58,7 +58,7 @@
   color: textPrimaryColor;
 }
 
-@media (min-width: screen-sm) {
+@media (min-width: screen-xs) {
   .AchievementSection .badgesContent {
     padding-top: 15px;
   }
