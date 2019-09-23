@@ -39,11 +39,23 @@ class StatisticsCard extends Component {
   render() {
     const number = this.state.number.toLocaleString();
 
+    // Replace all numeric chars with the wider number in font (6)
+    const formattedNumber = (this.props.number || 0).toLocaleString();
+    const fixedNumber = formattedNumber.replace(/[0-9]/g, '6');
+
     return (
       <div className="StatisticsCard">
-        <span className="number" ref={this.numberRef}>
-          {number}
-        </span>
+        <div className="lineGroup">
+          <div className="icon">
+            <img src={this.props.icon} alt={number} />
+          </div>
+          <div className="number">
+            <span className="maxWidth">{fixedNumber}</span>
+            <span className="visible" ref={this.numberRef}>
+              {number}
+            </span>
+          </div>
+        </div>
         <span className="description">{this.props.description}</span>
       </div>
     );
@@ -52,7 +64,7 @@ class StatisticsCard extends Component {
 
 StatisticsCard.propTypes = {
   number: PropTypes.number,
-  description: PropTypes.string.isRequired
+  description: PropTypes.object.isRequired
 };
 
 export default StatisticsCard;
