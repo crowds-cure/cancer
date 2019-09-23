@@ -65,36 +65,36 @@ class AchievementSection extends Component {
             {badges[4]}
           </div>
         </div>
-        <div className="col-sm-5 col-md d-none d-sm-block">
+        <div className="col-xs-5 col-md d-none d-xs-block">
           <div className="singleBadge" onClick={this.toggleModal}>
             {badges[3]}
           </div>
         </div>
-        <div className="col-16 col-sm-11 col-md">
+        <div className="col-16 col-xs-11 col-md">
           <div
             className="row no-gutters badgesGroup"
             onClick={this.toggleModal}
           >
-            <div className="col-2 col-sm-3">{badges[2]}</div>
-            <div className="col-2 col-sm-3">{badges[1]}</div>
-            <div className="col-4 col-sm-5">{badges[0]}</div>
-            <div className="col-5 d-sm-none">
+            <div className="col-2 col-xs-3">{badges[2]}</div>
+            <div className="col-2 col-xs-3">{badges[1]}</div>
+            <div className="col-4 col-xs-5">{badges[0]}</div>
+            <div className="col-5 d-xs-none">
               <div className="moreBadges">+{badges.length - 3}</div>
             </div>
-            <div className="col-sm-5 d-none d-md-none d-sm-block">
+            <div className="col-xs-5 d-none d-md-none d-xs-block">
               <div className="moreBadges">+{badges.length - 4}</div>
             </div>
             <div className="col-md-5 d-none d-md-block">
               <div className="moreBadges">+{badges.length - 5}</div>
             </div>
-            <div className="col-3 d-sm-none viewAll">
+            <div className="col-3 d-xs-none viewAll">
               <span>
                 View
                 <br />
                 all
               </span>
             </div>
-            <div className="col-sm-16 d-none d-sm-block viewAll">
+            <div className="col-xs-16 d-none d-xs-block viewAll">
               View earned badges
             </div>
           </div>

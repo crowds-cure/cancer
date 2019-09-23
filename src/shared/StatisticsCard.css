@@ -1,5 +1,5 @@
 @value globals: "../GlobalStyles.css";
-@value screen-sm from globals;
+@value screen-sm, screen-lg, screen-xl from globals;
 
 @value textColor: #f2e0f7;
 
@@ -70,5 +70,17 @@
 
   .StatisticsCard .lineGroup {
     margin-top: 32px;
+  }
+}
+
+@media (min-width: screen-lg) {
+  .StatisticsCard {
+    padding: 0 15px;
+  }
+}
+
+@media (min-width: screen-xl) {
+  .StatisticsCard {
+    padding: 0 30px;
   }
 }

@@ -20,8 +20,12 @@ class CaseTypeCard extends Component {
       className += ' complete';
     }
 
+    const progressTitle = `${this.props.byAnnotator} / ${
+      this.props.inCollection
+    }`;
+
     return (
-      <div className="col-16 col-sm-third">
+      <div className="col-16 col-xs-8 col-sm-third col-md-4 col-lg-third">
         <div className={className} onClick={this.onClick}>
           <div className="imageContainer">
             <div
@@ -35,7 +39,7 @@ class CaseTypeCard extends Component {
             </div>
             <img
               alt={this.props.name}
-              className="screenshot"
+              className="screenshot noselect"
               ref={img => (this.img = img)}
               src={this.props.img}
               onError={() => (this.img.style.display = 'none')}
@@ -55,7 +59,7 @@ class CaseTypeCard extends Component {
             />*/}
           </div>
           <div className="infoContainer">
-            <div className="progress">
+            <div className="progress" title={progressTitle}>
               <div className="current" />
             </div>
             <div className="typeName">{this.props.type}</div>
