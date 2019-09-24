@@ -1,5 +1,5 @@
 @value globals: "../GlobalStyles.css";
-@value textActiveColor, uiUsernameText, dashboardInfo-lg from globals;
+@value textActiveColor, hoverColor, uiUsernameText, dashboardInfo-lg from globals;
 @value screen-xs, screen-sm, screen-md, screen-lg from globals;
 
 @value iconSize: 30px;
@@ -114,6 +114,14 @@
   .simpleHeader .userSection .username,
   .simpleHeader .actionSection > * {
     line-height: iconSize-sm;
+  }
+
+  .simpleHeader .actionSection > * {
+    transition: color 0.3s ease;
+  }
+
+  .simpleHeader .actionSection > *:hover {
+    color: hoverColor;
   }
 
   .simpleHeader .userSection {

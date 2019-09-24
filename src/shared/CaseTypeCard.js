@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import React from 'react';
+import requiredIf from 'react-required-if';
 import './CaseTypeCard.css';
 import PropTypes from 'prop-types';
 //import getAuthorizationHeader from '../openid-connect/getAuthorizationHeader.js';
@@ -13,16 +14,27 @@ class CaseTypeCard extends Component {
   }
 
   render() {
+    const { placeholder } = this.props;
     const completed = this.props.inCollection === this.props.byAnnotator;
 
     let className = 'CaseTypeCard';
-    if (completed) {
+    if (placeholder >= 0) {
+      className += ` placeholder placeholder-${placeholder}`;
+    } else if (completed) {
       className += ' complete';
     }
 
-    const progressTitle = `${this.props.byAnnotator} / ${
-      this.props.inCollection
-    }`;
+    let progressTitle = '';
+    let currentStyle = {};
+    if (placeholder === undefined) {
+      const { byAnnotator, inCollection } = this.props;
+      progressTitle = `${byAnnotator} / ${inCollection}`;
+
+      const progressPercent = (byAnnotator / inCollection) * 100;
+      currentStyle = {
+        width: `${progressPercent}%`
+      };
+    }
 
     return (
       <div className="col-16 col-xs-8 col-sm-third col-md-4 col-lg-third">
@@ -35,6 +47,11 @@ class CaseTypeCard extends Component {
             >
               <svg>
                 <use xlinkHref="/icons.svg#icon-trial-info" />
+              </svg>
+            </div>
+            <div className="spinner">
+              <svg>
+                <use xlinkHref="/icons.svg#icon-spinner" />
               </svg>
             </div>
             <img
@@ -59,8 +76,8 @@ class CaseTypeCard extends Component {
             />*/}
           </div>
           <div className="infoContainer">
-            <div className="progress" title={progressTitle}>
-              <div className="current" />
+            <div className="progress" data-tip={progressTitle}>
+              <div className="current" style={currentStyle} />
             </div>
             <div className="typeName">{this.props.type}</div>
           </div>
@@ -78,14 +95,16 @@ class CaseTypeCard extends Component {
   }
 }
 
+const condition = props => props.placeholder === undefined;
 CaseTypeCard.propTypes = {
-  click: PropTypes.func.isRequired,
-  name: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  img: PropTypes.string.isRequired,
-  inCollection: PropTypes.number.isRequired,
-  byAnnotator: PropTypes.number.isRequired
+  placeholder: PropTypes.number,
+  click: requiredIf(PropTypes.func, condition),
+  name: requiredIf(PropTypes.string, condition),
+  type: requiredIf(PropTypes.string, condition),
+  description: requiredIf(PropTypes.string, condition),
+  img: requiredIf(PropTypes.string, condition),
+  inCollection: requiredIf(PropTypes.number, condition),
+  byAnnotator: requiredIf(PropTypes.number, condition)
 };
 
 export default CaseTypeCard;

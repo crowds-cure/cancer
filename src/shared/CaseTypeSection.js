@@ -15,6 +15,11 @@ class CaseTypeSection extends Component {
   render() {
     const { isLoading, types } = this.props;
 
+    const placeholderKeys = Array.from(Array(4).keys());
+    const placeholderItems = placeholderKeys.map(key => (
+      <CaseTypeCard key={key} placeholder={key} />
+    ));
+
     const items = types.map(item => (
       <CaseTypeCard
         key={item.Collection}
@@ -31,7 +36,7 @@ class CaseTypeSection extends Component {
 
     return (
       <div className="CaseTypeSection row">
-        {isLoading ? 'Loading...' : items}
+        {isLoading ? placeholderItems : items}
       </div>
     );
   }

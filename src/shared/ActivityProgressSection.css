@@ -30,10 +30,6 @@
   vertical-align: top;
 }
 
-.ActivityProgressSection .rankBadge:hover img {
-  transform: scale(1.1);
-}
-
 .ActivityProgressSection .measurementsCount {
   color: textActiveColor;
   display: inline-block;
@@ -97,6 +93,10 @@
     font-size: 60px;
     top: -70px;
     left: 90px;
+  }
+
+  .ActivityProgressSection .rankBadge:hover img {
+    transform: scale(1.1);
   }
 }
 
