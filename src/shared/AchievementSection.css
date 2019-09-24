@@ -14,14 +14,6 @@
   background-color: boxHeaderBg;
 }
 
-.AchievementSection .AchievementBadge img {
-  transition: transform 0.3s ease-in-out;
-}
-
-.AchievementSection .AchievementBadge:hover img {
-  transform: scale(1.1);
-}
-
 .AchievementSection .singleBadge {
   cursor: pointer;
   display: table;
@@ -53,11 +45,6 @@
   transition: color 0.3s ease;
 }
 
-.AchievementSection .badgesGroup:hover .viewAll,
-.AchievementSection .badgesGroup:hover .moreBadges {
-  color: textPrimaryColor;
-}
-
 @media (min-width: screen-xs) {
   .AchievementSection .badgesContent {
     padding-top: 15px;
@@ -79,6 +66,21 @@
 
   .AchievementSection .viewAll {
     padding: 14px 0 10px;
+  }
+}
+
+@media (min-width: screen-sm) {
+  .AchievementSection .badgesGroup:hover .viewAll,
+  .AchievementSection .badgesGroup:hover .moreBadges {
+    color: textPrimaryColor;
+  }
+
+  .AchievementSection .AchievementBadge img {
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .AchievementSection .AchievementBadge:hover img {
+    transform: scale(1.1);
   }
 }
 

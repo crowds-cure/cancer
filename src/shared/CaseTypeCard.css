@@ -26,12 +26,9 @@
 }
 
 .CaseTypeCard .imageContainer img {
+  animation: fadeIn 1s;
   height: 100%;
   transition: transform 0.3s ease;
-}
-
-.CaseTypeCard:hover .imageContainer img {
-  transform: scale(1.1);
 }
 
 .CaseTypeCard .infoIcon {
@@ -41,6 +38,7 @@
   right: 10px;
   stroke: textActiveColor;
   top: 10px;
+  transition: opacity 0.3s ease;
   width: 20px;
   z-index: 2;
 }
@@ -71,6 +69,7 @@
 }
 
 .CaseTypeCard .infoContainer .progress .current {
+  animation: slideIn 3s;
   background-color: activeColor;
   border-radius: 4px;
   display: table;
@@ -79,6 +78,7 @@
 }
 
 .CaseTypeCard .infoContainer .typeName {
+  animation: fadeIn 1s;
   color: textActiveColor;
   font-size: 19px;
   font-weight: normal;
@@ -86,13 +86,52 @@
   transition: color 0.3s ease;
 }
 
-.CaseTypeCard:hover .infoContainer .typeName {
-  color: hoverColor;
+.CaseTypeCard .imageContainer .spinner {
+  display: none;
+}
+
+.CaseTypeCard.placeholder {
+  cursor: default;
+}
+
+.CaseTypeCard.placeholder .infoIcon {
+  display: none;
+}
+
+.CaseTypeCard.placeholder .infoContainer .progress .current {
+  display: none;
+}
+
+.CaseTypeCard.placeholder:hover:after {
+  border-color: transparent;
+}
+
+.CaseTypeCard.placeholder .imageContainer img {
+  display: none;
+}
+
+.CaseTypeCard.placeholder .imageContainer .spinner {
+  display: block;
+  height: 100%;
+}
+
+.CaseTypeCard.placeholder .imageContainer .spinner svg {
+  animation: rotate 1s linear infinite;
+  display: block;
+  fill: hoverColor;
+  height: 100%;
+  margin: 0 auto;
+  opacity: 0.5;
+  width: 80px;
 }
 
 @media (min-width: screen-sm) {
   .CaseTypeCard {
     margin-bottom: 22px;
+  }
+
+  .CaseTypeCard:hover .imageContainer img {
+    transform: scale(1.1);
   }
 
   .CaseTypeCard:after {
@@ -110,5 +149,36 @@
 
   .CaseTypeCard:hover:after {
     border-color: activeColor;
+  }
+
+  .CaseTypeCard:hover .infoContainer .typeName {
+    color: hoverColor;
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
   }
 }

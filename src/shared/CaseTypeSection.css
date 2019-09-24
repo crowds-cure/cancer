@@ -1,7 +1,35 @@
 @value globals: "../GlobalStyles.css";
-@value screen-lg from globals;
+@value screen-xs, screen-sm, screen-md, screen-lg from globals;
+
+.CaseTypeSection .CaseTypeCard.placeholder.placeholder-1,
+.CaseTypeSection .CaseTypeCard.placeholder.placeholder-2,
+.CaseTypeSection .CaseTypeCard.placeholder.placeholder-3 {
+  display: none;
+}
+
+@media (min-width: screen-xs) {
+  .CaseTypeSection .CaseTypeCard.placeholder.placeholder-1 {
+    display: block;
+  }
+}
+
+@media (min-width: screen-sm) {
+  .CaseTypeSection .CaseTypeCard.placeholder.placeholder-2 {
+    display: block;
+  }
+}
+
+@media (min-width: screen-md) {
+  .CaseTypeSection .CaseTypeCard.placeholder.placeholder-3 {
+    display: block;
+  }
+}
 
 @media (min-width: screen-lg) {
+  .CaseTypeSection .CaseTypeCard.placeholder.placeholder-3 {
+    display: none;
+  }
+
   .CaseTypeSection {
     margin-right: 26px;
   }
