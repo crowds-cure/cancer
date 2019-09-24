@@ -26,7 +26,7 @@
   cursor: pointer;
   height: 92px;
   width: 92px;
-  transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s ease;
   vertical-align: top;
 }
 

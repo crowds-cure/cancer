@@ -12,7 +12,7 @@ class SimpleHeaderSection extends Component {
       <>
         <div className="userSection">
           <img
-            className="userIcon"
+            className="userIcon noselect"
             src={iconUserDefault}
             alt={this.props.username}
           />

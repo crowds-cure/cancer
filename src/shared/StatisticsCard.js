@@ -46,11 +46,11 @@ class StatisticsCard extends Component {
     return (
       <div className="StatisticsCard">
         <div className="lineGroup">
-          <div className="icon">
+          <div className="icon noselect">
             <img src={this.props.icon} alt={number} />
           </div>
           <div className="number">
-            <span className="maxWidth">{fixedNumber}</span>
+            <span className="maxWidth noselect">{fixedNumber}</span>
             <span className="visible" ref={this.numberRef}>
               {number}
             </span>

@@ -2,6 +2,7 @@
 @value activeColor, textActiveColor, textSecondaryColor from globals;
 @value hoverColor, uiBlack, screen-sm from globals;
 
+@value infoIconFillColor: #034045;
 @value imageContainerColor: uiBlack;
 @value infoContainerColor: #090020;
 @value dividerColor: #24225b;
@@ -32,6 +33,7 @@
 }
 
 .CaseTypeCard .infoIcon {
+  fill: infoIconFillColor;
   height: 20px;
   opacity: 0.41;
   position: absolute;
