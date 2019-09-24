@@ -5,7 +5,7 @@ import './AchievementBadge.css';
 class AchievementBadge extends Component {
   render() {
     return (
-      <div className="AchievementBadge">
+      <div className="AchievementBadge noselect">
         <img
           src={this.props.img}
           alt={this.props.description}

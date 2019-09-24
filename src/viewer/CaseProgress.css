@@ -1,0 +1,90 @@
+@value globals: "../GlobalStyles.css";
+@value activeColor, hoverColor, uiBlack from globals;
+@value screen-sm from globals;
+
+.CaseProgress {
+  margin: 10px 22px;
+}
+
+.CaseProgress .sessionCount {
+  background-color: #472e93;
+  height: 68px;
+  padding: 9px 11px;
+  position: relative;
+  width: 146px;
+}
+
+.CaseProgress .sessionCount .value {
+  color: activeColor;
+  font-size: 52px;
+  font-weight: 600;
+  line-height: 50px;
+}
+
+.CaseProgress .sessionCount .increment {
+  background-color: #00d5ae;
+  border: 3px solid uiBlack;
+  border-radius: 24px;
+  color: #15125e;
+  font-size: 21px;
+  font-weight: 600;
+  height: 40px;
+  line-height: 34px;
+  padding: 0 12px;
+  position: absolute;
+  top: 0;
+  transform: translate(-60%, -60%);
+  left: 0;
+}
+
+.CaseProgress > *:first-child {
+  border-radius: 9px 0 0 9px;
+}
+
+.CaseProgress > *:last-child {
+  border-radius: 0 9px 9px 0;
+}
+
+.CaseProgress .icon {
+  background-color: #3b2d66;
+  border-left: 2px solid uiBlack;
+  cursor: pointer;
+  text-align: center;
+  width: 90px;
+}
+
+.CaseProgress .icon svg {
+  display: inline-block;
+  fill: activeColor;
+  height: 24px;
+  margin: 12px 0 4px;
+  stroke: activeColor;
+  width: 24px;
+}
+
+.CaseProgress .icon div {
+  color: activeColor;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 14px;
+  text-align: center;
+}
+
+@media (min-width: screen-sm) {
+  .CaseProgress .icon svg {
+    transition: fill 0.3s ease, stroke 0.3s ease;
+  }
+
+  .CaseProgress .icon div {
+    transition: color 0.3s ease;
+  }
+
+  .CaseProgress .icon:hover svg {
+    fill: hoverColor;
+    stroke: hoverColor;
+  }
+
+  .CaseProgress .icon:hover div {
+    color: hoverColor;
+  }
+}
