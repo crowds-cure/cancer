@@ -49,6 +49,7 @@
   background-color: #3b2d66;
   border-left: 2px solid uiBlack;
   cursor: pointer;
+  height: 68px;
   text-align: center;
   width: 90px;
 }

@@ -126,54 +126,56 @@ class Dashboard extends Component {
 
     return (
       <div className="Dashboard">
-        <SimpleHeaderSection
-          username={this.props.username}
-          page="dashboard"
-          leaderboardLink={leaderboardLink}
-        />
-        <div className="container">
-          <div className="row">
-            <div className="col-16 col-lg-10 order-1 order-lg-0">
-              <CaseTypeSection
-                types={this.state.types}
-                isLoading={this.state.isLoading}
-                onClickInfo={this.onClickInfo}
-              />
-            </div>
-            <div className="col-16 order-0 col-lg-6">
-              <div className="row">
-                <div className="col-16 col-sm-8 col-lg-16">
-                  <ActivityProgressSection current={this.state.current} />
-                </div>
-                <div className="col-16 col-sm-8 col-lg-16">
-                  <AchievementSection />
-                </div>
-                <div className="d-none d-lg-block col-lg-16">
-                  <StatisticsSection />
+        <div className="layoutGroup">
+          <SimpleHeaderSection
+            username={this.props.username}
+            page="dashboard"
+            leaderboardLink={leaderboardLink}
+          />
+          <div className="container">
+            <div className="row">
+              <div className="col-16 col-lg-10 order-1 order-lg-0">
+                <CaseTypeSection
+                  types={this.state.types}
+                  isLoading={this.state.isLoading}
+                  onClickInfo={this.onClickInfo}
+                />
+              </div>
+              <div className="col-16 order-0 col-lg-6">
+                <div className="row">
+                  <div className="col-16 col-sm-8 col-lg-16">
+                    <ActivityProgressSection current={this.state.current} />
+                  </div>
+                  <div className="col-16 col-sm-8 col-lg-16">
+                    <AchievementSection />
+                  </div>
+                  <div className="d-none d-lg-block col-lg-16">
+                    <StatisticsSection />
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="col-16 order-2 d-lg-none">
-              <StatisticsSection />
+              <div className="col-16 order-2 d-lg-none">
+                <StatisticsSection />
+              </div>
             </div>
           </div>
+          <Modal
+            isOpen={this.state.showDetailsModal}
+            contentLabel="Dataset Details"
+            onRequestClose={this.toggleModal}
+            styles={customStyles}
+            className="Modal"
+            overlayClassName="Overlay"
+            closeTimeoutMS={200}
+          >
+            {this.state.collectionDescription}
+            <span className="modal-close" onClick={this.toggleModal}>
+              Close
+            </span>
+          </Modal>
+          <ReactTooltip className="DashboardTooltip" effect="solid" />
+          <p className="hidden-version-text">{versionString}</p>
         </div>
-        <Modal
-          isOpen={this.state.showDetailsModal}
-          contentLabel="Dataset Details"
-          onRequestClose={this.toggleModal}
-          styles={customStyles}
-          className="Modal"
-          overlayClassName="Overlay"
-          closeTimeoutMS={200}
-        >
-          {this.state.collectionDescription}
-          <span className="modal-close" onClick={this.toggleModal}>
-            Close
-          </span>
-        </Modal>
-        <ReactTooltip className="DashboardTooltip" effect="solid" />
-        <p className="hidden-version-text">{versionString}</p>
       </div>
     );
   }
