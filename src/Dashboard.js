@@ -16,6 +16,7 @@ import version from './version.js';
 import sha from './sha.js';
 import getUsername from './viewer/lib/getUsername.js';
 import annotatorCollectionStatus from './case/annotatorCollectionStatus.js';
+import CaseProgress from './viewer/CaseProgress.js';
 
 const customStyles = {
   content: {
@@ -37,7 +38,10 @@ class Dashboard extends Component {
       current: this.props.current,
       isLoading: true,
       showDetailsModal: false,
-      collectionDescription: ''
+      collectionDescription: '',
+
+      session: 0,
+      case: 0
     };
 
     const collectionsDB = getDB('collections');
@@ -119,10 +123,37 @@ class Dashboard extends Component {
 
     this.onClickInfo = this.onClickInfo.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
+    this.tempAdd = this.tempAdd.bind(this);
+    this.tempRemove = this.tempRemove.bind(this);
+    this.tempComplete = this.tempComplete.bind(this);
   }
+
+  tempAdd() {
+    this.setState({ case: this.state.case + 1 });
+  }
+
+  tempRemove() {
+    if (!this.state.case) {
+      return;
+    }
+
+    this.setState({ case: this.state.case - 1 });
+  }
+
+  tempComplete() {
+    const session = this.state.session + this.state.case;
+    this.setState({ case: 0, session });
+  }
+
   render() {
     const versionString = `${version} - ${sha}`;
     const leaderboardLink = '/leaderboard';
+
+    const tempStyle = {
+      cursor: 'pointer',
+      color: 'white',
+      marginLeft: '60px'
+    };
 
     return (
       <div className="Dashboard">
@@ -135,6 +166,21 @@ class Dashboard extends Component {
           <div className="container">
             <div className="row">
               <div className="col-16 col-lg-10 order-1 order-lg-0">
+                <div className="noselect">
+                  <span onClick={this.tempAdd} style={tempStyle}>
+                    Add
+                  </span>
+                  <span onClick={this.tempRemove} style={tempStyle}>
+                    Remove
+                  </span>
+                  <span onClick={this.tempComplete} style={tempStyle}>
+                    Complete
+                  </span>
+                </div>
+                <CaseProgress
+                  sessionMeasurements={this.state.session}
+                  caseMeasurements={this.state.case}
+                />
                 <CaseTypeSection
                   types={this.state.types}
                   isLoading={this.state.isLoading}

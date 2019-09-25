@@ -21,22 +21,6 @@
   line-height: 50px;
 }
 
-.CaseProgress .sessionCount .increment {
-  background-color: #00d5ae;
-  border: 3px solid uiBlack;
-  border-radius: 24px;
-  color: #15125e;
-  font-size: 21px;
-  font-weight: 600;
-  height: 40px;
-  line-height: 34px;
-  padding: 0 12px;
-  position: absolute;
-  top: 0;
-  transform: translate(-60%, -60%);
-  left: 0;
-}
-
 .CaseProgress > *:first-child {
   border-radius: 9px 0 0 9px;
 }
@@ -87,5 +71,74 @@
 
   .CaseProgress .icon:hover div {
     color: hoverColor;
+  }
+}
+
+/* Increment label */
+
+.CaseProgress .sessionCount .increment {
+  background-color: #00d5ae;
+  border: 3px solid uiBlack;
+  border-radius: 24px;
+  color: #15125e;
+  font-size: 21px;
+  font-weight: 600;
+  height: 35px;
+  line-height: 29px;
+  opacity: 0;
+  padding: 0 12px;
+  position: absolute;
+  top: 0;
+  transform: translate(-60%, -60%);
+  transition: opacity 0.3s linear;
+  left: 0;
+}
+
+.CaseProgress .sessionCount .increment.visible {
+  opacity: 1;
+}
+
+.CaseProgress .sessionCount .increment.slideIn {
+  animation: slideIn 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.CaseProgress .sessionCount .increment.shift {
+  animation: shiftInOut 0.3s ease-in;
+}
+
+.CaseProgress .sessionCount .increment.hidden {
+  animation: slideOut 0.3s ease;
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translate(-60%, 33px);
+  }
+  100% {
+    transform: translate(-60%, -60%);
+  }
+}
+
+@keyframes slideOut {
+  0% {
+    transform: translate(-60%, -60%);
+  }
+  50% {
+    transform: translate(-60%, 20%);
+  }
+  100% {
+    transform: translate(-60%, -200%);
+  }
+}
+
+@keyframes shiftInOut {
+  0% {
+    transform: translate(-60%, -60%);
+  }
+  50% {
+    transform: translate(-80%, -60%);
+  }
+  100% {
+    transform: translate(-60%, -60%);
   }
 }
