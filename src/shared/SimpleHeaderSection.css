@@ -178,6 +178,6 @@
   .simpleHeader .Logo {
     line-height: iconSize-md;
     text-align: left;
-    width: calc(100% - dashboardInfo-lg);
+    width: calc(62.8% + 10px);
   }
 }

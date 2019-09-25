@@ -39,25 +39,35 @@
 @value imageSliderColor: #163239;
 
 /* Screen resolutions */
-@value 640p: 640px;
-@value 1024p: 1024px;
-@value 1366p: 1366px;
-@value 1680p: 1680px;
-@value 1920p: 1920px;
-@value 2880p: 2880px;
-@value 3840p: 3840px;
+@value 640w: 640px;
+@value 1024w: 1024px;
+@value 1366w: 1366px;
+@value 1680w: 1680px;
+@value 1920w: 1920px;
+@value 2048w: 2048px;
+@value 2280w: 2280px;
+@value 2560w: 2560px;
+@value 2880w: 2880px;
+@value 3200w: 3200px;
+@value 3440w: 3440px;
+@value 3840w: 3840px;
+@value 4096w: 4096px;
+@value 4500w: 4500px;
+@value 5120w: 5120px;
+@value 6400w: 6400px;
+@value 7680w: 7680px;
+@value 8192w: 8192px;
+@value 10240w: 10240px;
+@value 15360w: 15360px;
 
 /* Grid breakpoints */
-@value screen-xs: 640p;
-@value screen-sm: 1024p;
-@value screen-md: 1366p;
-@value screen-lg: 1680p;
-@value screen-xl: 1920p;
+@value screen-xs: 640w;
+@value screen-sm: 1024w;
+@value screen-md: 1366w;
+@value screen-lg: 1680w;
+@value screen-xl: 1920w;
 @value gutter: 12.5px;
 @value negativeGutter: -12.5px;
-
-/* Dimensions */
-@value dashboardInfo-lg: calc(100vw / 3);
 
 .noselect {
   -webkit-touch-callout: none; /* iOS Safari */
@@ -69,14 +79,84 @@
                                   supported by Chrome and Opera */
 }
 
-@media (min-width: 2880p) {
-  body {
-    zoom: 1.5;
-  }
+.Dashboard > .layoutGroup {
+  margin: 0 auto;
+  max-width: screen-xl;
+  transform-origin: 50% 0%;
 }
 
-@media (min-width: 3840p) {
-  body {
-    zoom: 2;
+@media (min-width: 2048w) {
+  .Dashboard > .layoutGroup {
+    transform: scale(calc(2048 / 1920));
+  }
+}
+@media (min-width: 2280w) {
+  .Dashboard > .layoutGroup {
+    transform: scale(calc(2280 / 1920));
+  }
+}
+@media (min-width: 2560w) {
+  .Dashboard > .layoutGroup {
+    transform: scale(calc(2560 / 1920));
+  }
+}
+@media (min-width: 2880w) {
+  .Dashboard > .layoutGroup {
+    transform: scale(calc(2880 / 1920));
+  }
+}
+@media (min-width: 3200w) {
+  .Dashboard > .layoutGroup {
+    transform: scale(calc(3200 / 1920));
+  }
+}
+@media (min-width: 3440w) {
+  .Dashboard > .layoutGroup {
+    transform: scale(calc(3440 / 1920));
+  }
+}
+@media (min-width: 3840w) {
+  .Dashboard > .layoutGroup {
+    transform: scale(calc(3840 / 1920));
+  }
+}
+@media (min-width: 4096w) {
+  .Dashboard > .layoutGroup {
+    transform: scale(calc(4096 / 1920));
+  }
+}
+@media (min-width: 4500w) {
+  .Dashboard > .layoutGroup {
+    transform: scale(calc(4500 / 1920));
+  }
+}
+@media (min-width: 5120w) {
+  .Dashboard > .layoutGroup {
+    transform: scale(calc(5120 / 1920));
+  }
+}
+@media (min-width: 6400w) {
+  .Dashboard > .layoutGroup {
+    transform: scale(calc(6400 / 1920));
+  }
+}
+@media (min-width: 7680w) {
+  .Dashboard > .layoutGroup {
+    transform: scale(calc(7680 / 1920));
+  }
+}
+@media (min-width: 8192w) {
+  .Dashboard > .layoutGroup {
+    transform: scale(calc(8192 / 1920));
+  }
+}
+@media (min-width: 10240w) {
+  .Dashboard > .layoutGroup {
+    transform: scale(calc(10240 / 1920));
+  }
+}
+@media (min-width: 15360w) {
+  .Dashboard > .layoutGroup {
+    transform: scale(calc(15360 / 1920));
   }
 }
