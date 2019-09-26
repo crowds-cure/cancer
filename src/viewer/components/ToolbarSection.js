@@ -45,17 +45,18 @@ class ToolbarSection extends Component {
     });
 
     return (
-      <>
-        <div className="mobileToolbar">
-          <div className="wlPresets">{wlPresetItems}</div>
-          <div className="tools">{toolItems}</div>
+      <div className="ToolbarSection">
+        <div className="wlPresets">
+          {wlPresetItems}
           <span className="presetSelected">
-            LEVELS:{' '}
-            {presetSelectedButton ? presetSelectedButton.text : 'Manual'}
+            <span>LEVELS: </span>
+            <span>
+              {presetSelectedButton ? presetSelectedButton.text : 'Manual'}
+            </span>
           </span>
         </div>
-        <div className={'ToolbarSection'}>{items}</div>
-      </>
+        <div className="tools">{toolItems}</div>
+      </div>
     );
   }
 
