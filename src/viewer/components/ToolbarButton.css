@@ -2,27 +2,21 @@
 @value defaultColor, activeColor, hoverColor from globals;
 
 .ToolbarButton {
-  height: 48px;
   color: defaultColor;
-  float: left;
-  text-align: center;
-  padding: 0 5px;
   cursor: pointer;
-
-  -webkit-touch-callout: none; /* iOS Safari */
-  -webkit-user-select: none; /* Safari */
-  -khtml-user-select: none; /* Konqueror HTML */
-  -moz-user-select: none; /* Firefox */
-  -ms-user-select: none; /* Internet Explorer/Edge */
-  user-select: none; /* Non-prefixed version, currently
-                                  supported by Chrome and Opera */
+  float: left;
+  height: 48px;
+  min-width: 48px;
+  padding: 0 5px;
+  text-align: center;
 }
 
 .ToolbarButton svg {
-  height: 30px;
-  width: 48px;
   fill: defaultColor;
+  filter: drop-shadow(1px 1px 1px black);
+  height: 30px;
   stroke: defaultColor;
+  width: 30px;
 }
 
 .ToolbarButton:hover {
@@ -46,8 +40,9 @@
 }
 
 .ToolbarButton span {
-  font-size: 14px;
-  width: 100%;
-  text-align: center;
   display: block;
+  font-size: 14px;
+  text-align: center;
+  text-shadow: 1px 1px 1px black;
+  width: 100%;
 }

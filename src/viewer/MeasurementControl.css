@@ -2,21 +2,15 @@
 @value screen-md from globals;
 
 .MeasurementControl {
-  padding-top: 17px;
-  margin-left: auto;
-  margin-right: 20px;
-}
-
-@media (max-width: screen-md) {
-  .MeasurementControl {
-    margin: 0;
-  }
+  margin-left: 20px;
+  padding-top: 10px;
+  text-shadow: 1px 1px 1px black;
 }
 
 .MeasurementControl .controls {
   border-radius: 8px;
   border: solid 1px #4a4d7a;
-  background-color: #000000;
+  background-color: rgba(0, 0, 0, 0.5);
   padding: 10px 0;
   height: 45px;
 }

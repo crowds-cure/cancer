@@ -27,21 +27,23 @@ class CaseProgress extends Component {
   };
 
   endSession() {
-    // const savedStartTime = this.props.sessionStart;
-    // const start = Math.round(savedStartTime / 1000);
-    // const end = Math.round(Date.now() / 1000);
-    // const currentSession = {
-    //   start,
-    //   end,
-    //   cases: this.props.measurementsInCurrentSession
-    // };
-    // const { totalCompleteCollection } = this.props;
-    // sendSessionStatisticsToDatabase(currentSession).then(() => {
-    //   // Determine and save the earned achievements
-    //   // after session statistics are saved to db
-    //   saveAchievementsToDatabase(totalCompleteCollection);
-    // });
-    // this.props.history.push('/session-summary');
+    const savedStartTime = this.props.sessionStart;
+    const start = Math.round(savedStartTime / 1000);
+    const end = Math.round(Date.now() / 1000);
+    const { totalCompleteCollection } = this.props;
+    const currentSession = {
+      start,
+      end,
+      cases: this.props.measurementsInCurrentSession
+    };
+
+    sendSessionStatisticsToDatabase(currentSession).then(() => {
+      // Determine and save the earned achievements
+      // after session statistics are saved to db
+      saveAchievementsToDatabase(totalCompleteCollection);
+    });
+
+    this.props.history.push('/session-summary');
   }
 
   componentDidUpdate() {

@@ -5,9 +5,10 @@ import PropTypes from 'prop-types';
 
 class ToolbarButton extends Component {
   render() {
+    const baseClass = 'ToolbarButton noselect';
     return (
       <div
-        className={this.props.active ? 'ToolbarButton active' : 'ToolbarButton'}
+        className={this.props.active ? `${baseClass} active` : baseClass}
         onClick={this.onClick}
       >
         <svg>
