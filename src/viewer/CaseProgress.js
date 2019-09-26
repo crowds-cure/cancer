@@ -20,6 +20,9 @@ class CaseProgress extends Component {
 
     this.sessionRef = React.createRef();
     this.incrementRef = React.createRef();
+
+    this.caseSelect = this.caseSelect.bind(this);
+    this.endSession = this.endSession.bind(this);
   }
 
   caseSelect = () => {
