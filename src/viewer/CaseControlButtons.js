@@ -17,26 +17,21 @@ class CaseControlButtons extends Component {
     return (
       <div className="CaseControlButtons">
         <CaseFeedback
-          label={this.props.smallControls ? 'Feedback' : 'Case Feedback'}
+          label="Feedback"
           opensDown={this.props.feedbackOpensDown}
           feedbackSelected={this.props.feedbackSelected}
           feedbackChanged={this.props.feedbackChanged}
           skipEnabled={this.props.skipEnabled}
           skipCase={this.props.skipCase}
         />
-        <div className="CompleteButtonWrapper">
+        <div className="CompleteButtonWrapper noselect">
           <button
             className="complete-case"
             type="button"
             disabled={!this.props.saveEnabled}
             onClick={this.props.saveCase}
           >
-            {!this.props.smallControls && (
-              <svg>
-                <use xlinkHref="/icons.svg#icon-check-circle" />
-              </svg>
-            )}
-            <span>Complete</span>
+            Complete case
           </button>
         </div>
       </div>

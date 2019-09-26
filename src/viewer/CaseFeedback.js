@@ -20,9 +20,17 @@ class CaseFeedback extends Component {
   }
 
   static defaultProps = {
-    label: 'Case Feedback',
+    label: 'Feedback',
     opensDown: true
   };
+
+  getClassName(props) {
+    let className = 'CaseFeedback noselect ';
+
+    className += props.opensDown ? 'opens-down' : 'opens-up';
+
+    return className;
+  }
 
   render() {
     const options = [
@@ -88,14 +96,14 @@ class CaseFeedback extends Component {
     });
 
     return (
-      <div className="CaseFeedback noselect">
+      <div className={this.getClassName(this.props)}>
         <div
           className="feedback-button"
           active={this.state.isOpen ? 'true' : 'false'}
           onClick={this.openDropdown}
         >
           {this.props.label}
-          <span className={this.props.opensDown ? 'arrow-down' : 'arrow-up'} />
+          <span className="arrow" />
         </div>
         {this.state.isOpen && (
           <>
@@ -105,13 +113,7 @@ class CaseFeedback extends Component {
               onWheel={this.openDropdown}
               onTouchStart={this.openDropdown}
             />
-            <div
-              className={
-                this.props.opensDown
-                  ? 'feedback-options opens-down'
-                  : 'feedback-options opens-up'
-              }
-            >
+            <div className="feedback-options">
               <ul>{opts}</ul>
               <button
                 className="button"
