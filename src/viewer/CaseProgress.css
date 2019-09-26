@@ -3,7 +3,7 @@
 @value screen-sm from globals;
 
 .CaseProgress {
-  margin: 10px 22px;
+  margin-bottom: 17px;
 }
 
 .CaseProgress .sessionCount {

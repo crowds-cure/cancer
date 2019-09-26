@@ -2,14 +2,13 @@ import { Component } from 'react';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
-import MediaQuery from 'react-responsive';
 
+import Logo from '../shared/Logo.js';
 import CornerstoneViewport from './CornerstoneViewport.js';
 import ActiveToolbar from './ActiveToolbar.js';
 import CaseControlButtons from './CaseControlButtons.js';
 import CaseProgress from './CaseProgress.js';
 import MeasurementControl from './MeasurementControl.js';
-import HeaderSection from './HeaderSection.js';
 
 import getNextCase from '../case/getNextCase.js';
 import getUsername from './lib/getUsername.js';
@@ -220,87 +219,37 @@ class Viewer extends Component {
       );
     });
 
-    const sessionMeasurements = this.props.measurementsInCurrentSession;
-    const caseMeasurements = this.state.toolData.length;
-
     return (
       <div className="Viewer">
-        <MediaQuery query="(min-width: 768px)">
-          <HeaderSection
-            showLogo={true}
-            useHamburgerMenu={false}
-            sessionStart={this.props.sessionStart}
-            measurementsInCurrentSession={
-              this.props.measurementsInCurrentSession
-            }
-            totalCompleteCollection={this.props.totalCompleteCollection}
-            displayCountSuffix={true}
-          />
-        </MediaQuery>
-        <MediaQuery query="(max-width: 768px)">
-          <HeaderSection
-            showLogo={false}
-            useHamburgerMenu={true}
-            sessionStart={this.props.sessionStart}
-            measurementsInCurrentSession={
-              this.props.measurementsInCurrentSession
-            }
-            totalCompleteCollection={this.props.totalCompleteCollection}
-            displayCountSuffix={false}
-          />
-        </MediaQuery>
-        <MediaQuery query="(min-width: 768px)">
-          <div className="toolbar-row">
-            <ActiveToolbar />
-            <MeasurementControl
-              disabled={!this.state.hasMeasurements}
-              previous={this.previous}
-              next={this.next}
-              number={this.state.currentLesion}
-            />
-            <CaseControlButtons
-              feedbackChanged={this.feedbackChanged}
-              feedbackSelected={this.state.feedback}
-              saveEnabled={this.isSaveEnabled()}
-              saveCase={this.saveCase}
-              skipEnabled={this.isSkipEnabled()}
-              skipCase={this.skipCase}
-            />
-            <CaseProgress
-              sessionMeasurements={sessionMeasurements}
-              caseMeasurements={caseMeasurements}
-            />
-          </div>
-        </MediaQuery>
-        <MediaQuery query="(max-width: 768px)">
-          <div className="toolbar-row">
-            <ActiveToolbar />
-          </div>
-        </MediaQuery>
         <div className="viewport-section">
           {this.state.loading ? <LoadingIndicator /> : items}
         </div>
-
-        <MediaQuery query="(max-width: 768px)">
-          <div className="toolbar-row">
-            <MeasurementControl
-              disabled={!this.state.hasMeasurements}
-              previous={this.previous}
-              next={this.next}
-              number={this.state.currentLesion}
-            />
-            <CaseControlButtons
-              smallControls={true}
-              feedbackOpensDown={false}
-              feedbackChanged={this.feedbackChanged}
-              feedbackSelected={this.state.feedback}
-              saveEnabled={this.isSaveEnabled()}
-              saveCase={this.saveCase}
-              skipEnabled={this.isSkipEnabled()}
-              skipCase={this.skipCase}
-            />
-          </div>
-        </MediaQuery>
+        <Logo />
+        <div class="ViewportControl d-flex">
+          <ActiveToolbar />
+          <MeasurementControl
+            disabled={!this.state.hasMeasurements}
+            previous={this.previous}
+            next={this.next}
+            number={this.state.currentLesion}
+          />
+        </div>
+        <div className="SessionControl">
+          <CaseProgress
+            sessionMeasurements={this.props.measurementsInCurrentSession}
+            caseMeasurements={this.state.toolData.length}
+            sessionStart={this.props.sessionStart}
+            totalCompleteCollection={this.props.totalCompleteCollection}
+          />
+          <CaseControlButtons
+            feedbackChanged={this.feedbackChanged}
+            feedbackSelected={this.state.feedback}
+            saveEnabled={this.isSaveEnabled()}
+            saveCase={this.saveCase}
+            skipEnabled={this.isSkipEnabled()}
+            skipCase={this.skipCase}
+          />
+        </div>
       </div>
     );
   }

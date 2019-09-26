@@ -18,9 +18,17 @@
 
 .Viewer .viewport-section {
   width: 100%;
-  height: calc(100% - 238px);
-  position: relative;
+  height: 100%;
+  position: fixed;
   display: flex;
+  left: 0;
+  top: 0;
+  z-index: 0;
+}
+
+.Viewer .HeaderSection {
+  position: relative;
+  z-index: 1;
 }
 
 .Viewer .viewport-section .viewport {
@@ -31,8 +39,27 @@
   width: 100%;
 }
 
-@media (min-width: screen-md) {
-  .Viewer .viewport-section {
-    height: calc(100% - 147px);
-  }
+.Viewer .ViewportControl {
+  left: 16px;
+  position: fixed;
+  top: 40px;
+}
+
+.Viewer .SessionControl {
+  position: fixed;
+  right: 32px;
+  top: 44px;
+}
+
+.Viewer .Logo {
+  font-size: 15px;
+  left: 27px;
+  line-height: 18px;
+  position: fixed;
+  text-shadow: 1px 1px 1px black;
+  top: 19px;
+}
+
+.Viewer .ViewportOverlay .top-left {
+  top: 130px;
 }
