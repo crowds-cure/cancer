@@ -14,7 +14,7 @@ class ToolbarButton extends Component {
         <svg>
           <use xlinkHref={this.props.svgUrl} />
         </svg>
-        <span>{this.props.text}</span>
+        <span className="caption">{this.props.text}</span>
       </div>
     );
   }

@@ -1,16 +1,15 @@
 @value globals: "../GlobalStyles.css";
-@value screen-md from globals;
+@value activeColor, uiBlack from globals;
 
 .MeasurementControl {
   margin-left: 20px;
   padding-top: 10px;
-  text-shadow: 1px 1px 1px black;
 }
 
 .MeasurementControl .controls {
   border-radius: 8px;
   border: solid 1px #4a4d7a;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: uiBlack;
   padding: 10px 0;
   height: 45px;
 }
@@ -23,7 +22,7 @@
 
 .MeasurementControl .controls .left-arrow,
 .MeasurementControl .controls .right-arrow {
-  border: 7px solid #7cf4fe;
+  border: 7px solid activeColor;
   border-top-color: transparent;
   border-bottom-color: transparent;
   display: inline-block;
@@ -56,11 +55,11 @@
 }
 
 .MeasurementControl .controls:not(.disabled) .arrow-container:active {
-  background-color: #7cf4fe;
+  background-color: activeColor;
 }
 
 .MeasurementControl .controls:not(.disabled) .arrow-container:active > .arrow {
-  border: 7px solid black;
+  border: 7px solid uiBlack;
   border-top-color: transparent;
   border-bottom-color: transparent;
 }
@@ -114,6 +113,6 @@
   font-size: 12px;
   font-weight: normal;
   letter-spacing: 1px;
-  color: #7cf4fe;
+  color: activeColor;
   margin: 7px;
 }

@@ -1,72 +1,90 @@
 @value globals: "../../GlobalStyles.css";
-@value screen-lg, defaultColor from globals;
+@value screen-sm, screen-md, defaultColor from globals;
 
 .ToolbarSection {
-  position: absolute;
-  background-color: black;
   border-radius: 8px;
-  border: solid 1px #4a4d7a;
-  padding: 10px;
+  display: none;
+  margin-top: 17px;
   z-index: 100;
-  max-width: 100%;
-  top: 90px;
-  margin: 10px;
-  display: none;
 }
 
-.mobileToolbar {
-  display: block;
-  margin-top: 10px;
-  margin-left: 10px;
-}
-
-.mobileToolbar .wlPresets {
-  display: inline-block;
-  border-radius: 8px;
-  border: solid 1px #4a4d7a;
-  padding: 0 4px;
-}
-
-.mobileToolbar .ToolbarButton {
-  display: inline-block;
-  padding: 8px 7px;
-  height: auto;
-}
-
-.mobileToolbar .presetSelected {
-  color: defaultColor;
-  display: block;
-}
-
-.mobileToolbar .tools {
-  display: inline-block;
-}
-
-.mobileToolbar .tools svg,
-.mobileToolbar .wlPresets svg {
-  height: 20px;
-  width: 20px;
-}
-
-.mobileToolbar .tools span,
-.mobileToolbar .wlPresets span {
-  display: none;
-}
-
-@media (min-width: screen-lg) {
+@media (min-width: screen-sm) {
   .ToolbarSection {
-    margin: 17px 0 0 0;
-    display: inline-block;
-    flex: 1 1 auto;
-    position: initial;
-    background-color: initial;
-    border-radius: none;
-    border: none;
-    padding: initial;
-    z-index: initial;
-    top: initial;
+    display: flex;
+    margin-top: 10px;
   }
+
+  .ToolbarSection .wlPresets,
+  .ToolbarSection .tools {
+    display: flex;
+  }
+
+  .ToolbarSection .wlPresets {
+    border-radius: 8px;
+    border: solid 1px #4a4d7a;
+    display: table;
+    padding: 0 4px;
+    position: relative;
+  }
+
+  .ToolbarSection .presetSelected {
+    bottom: -22px;
+    color: defaultColor;
+    height: 20px;
+    left: 0;
+    line-height: 20px;
+    position: absolute;
+  }
+
+  .ToolbarSection .tools svg,
+  .ToolbarSection .wlPresets svg {
+    height: 20px;
+    width: 20px;
+  }
+
+  .ToolbarSection .ToolbarButton {
+    display: inline-block;
+    height: auto;
+    min-width: auto;
+    padding: 8px 7px;
+  }
+
+  .ToolbarSection .tools .caption,
+  .ToolbarSection .wlPresets .caption {
+    display: none;
+  }
+}
+
+@media (min-width: screen-md) {
   .mobileToolbar {
     display: none;
+  }
+
+  .ToolbarSection {
+    flex-direction: row-reverse;
+  }
+
+  .ToolbarSection .wlPresets {
+    border: 0;
+    padding: 0;
+  }
+
+  .ToolbarSection .presetSelected {
+    display: none;
+  }
+
+  .ToolbarSection .tools svg,
+  .ToolbarSection .wlPresets svg {
+    height: 30px;
+    width: 30px;
+  }
+
+  .ToolbarSection .ToolbarButton {
+    min-width: 48px;
+  }
+
+  .ToolbarSection .tools .caption,
+  .ToolbarSection .wlPresets .caption {
+    display: block;
   }
 }

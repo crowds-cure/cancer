@@ -1,5 +1,5 @@
 @value globals: "../GlobalStyles.css";
-@value screen-md from globals;
+@value screen-sm, screen-md from globals;
 
 .Viewer {
   height: 100%;
@@ -17,12 +17,12 @@
 }
 
 .Viewer .viewport-section {
-  width: 100%;
-  height: 100%;
-  position: fixed;
+  bottom: 0;
   display: flex;
+  height: calc(100% - 122px);
   left: 0;
-  top: 0;
+  position: fixed;
+  width: 100%;
   z-index: 0;
 }
 
@@ -52,14 +52,63 @@
 }
 
 .Viewer .Logo {
+  display: none;
   font-size: 15px;
   left: 27px;
   line-height: 18px;
   position: fixed;
-  text-shadow: 1px 1px 1px black;
   top: 19px;
 }
 
+.Viewer .ViewportOverlay {
+  display: none;
+}
+
 .Viewer .ViewportOverlay .top-left {
-  top: 130px;
+  top: 10px;
+}
+
+.Viewer .ViewportOverlay .bottom-left,
+.Viewer .ViewportOverlay .top-left {
+  left: 27px;
+}
+
+.Viewer .ViewportOverlay .bottom-right {
+  right: 32px;
+}
+
+@media (min-width: screen-sm) {
+  .Viewer .ViewportOverlay {
+    display: block;
+  }
+
+  .Viewer .viewport-section {
+    height: calc(100% - 100px);
+  }
+
+  .Viewer .ViewportControl {
+    top: 18px;
+  }
+
+  .Viewer .SessionControl {
+    top: 22px;
+  }
+}
+
+@media (min-width: screen-md) {
+  .Viewer .viewport-section {
+    height: calc(100% - 122px);
+  }
+
+  .Viewer .Logo {
+    display: block;
+  }
+
+  .Viewer .ViewportControl {
+    top: 40px;
+  }
+
+  .Viewer .SessionControl {
+    top: 44px;
+  }
 }
