@@ -71,7 +71,7 @@
 }
 
 .CaseTypeCard .infoContainer .progress .current {
-  animation: slideIn 3s;
+  animation: slideRightIn 3s;
   background-color: activeColor;
   border-radius: 4px;
   display: table;
@@ -176,7 +176,7 @@
   }
 }
 
-@keyframes slideIn {
+@keyframes slideRightIn {
   0% {
     transform: translateX(-100%);
   }

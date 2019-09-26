@@ -1,5 +1,6 @@
 .CaseControlButtons {
   padding-top: 13px;
+  white-space: nowrap;
 }
 
 @media (min-width: screen-md) {
@@ -11,46 +12,37 @@
 
 .CaseControlButtons .CompleteButtonWrapper {
   display: inline-block;
+  vertical-align: top;
 }
 
 .CaseControlButtons button {
-  height: 50px;
-  margin-top: -2px;
-  padding: 0 15px;
-  font-size: 15px;
-  cursor: pointer;
-  opacity: 1;
+  background-color: #00d5ae;
+  border: 0;
   border-radius: 9px;
-  border: solid 3px #000000;
-  background-color: #b894fe;
+  color: #100e44;
+  cursor: pointer;
+  font-size: 16px;
   font-weight: bold;
+  height: 43px;
+  line-height: 43px;
+  opacity: 1;
   outline: none;
-  transition: all 0.3s ease;
+  padding: 0;
+  transition: opacity 0.3s ease, background-color 0.3s ease;
   vertical-align: middle;
+  width: 154px;
 }
 
-.CaseControlButtons button svg {
-  width: 24px;
-  height: 24px;
-  float: left;
-  margin-top: 6px;
-}
-
-.CaseControlButtons button span {
-  padding: 10px 8px;
-  float: left;
+.CaseControlButtons button.complete-case {
+  border-radius: 0 9px 9px 0;
 }
 
 .CaseControlButtons button:disabled {
   cursor: not-allowed;
-  background-color: #65518c;
+  opacity: 0.5;
 }
 
 .CaseControlButtons button:not(:disabled):hover {
-  background-color: #8a4eff;
-}
-
-.CaseControlButtons button:not(:disabled):active {
   background-color: white;
 }
 

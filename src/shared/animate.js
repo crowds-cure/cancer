@@ -9,7 +9,6 @@ export default function animate(duration, callback) {
 
   function tick() {
     const elapsed = Date.now() - startTime;
-    console.log(elapsed);
     const progress = easeInOutSine(elapsed, duration);
 
     callback(progress);

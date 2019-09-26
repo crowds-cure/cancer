@@ -64,6 +64,14 @@
     transition: color 0.3s ease;
   }
 
+  .CaseProgress .icon {
+    transition: background-color 0.3s ease;
+  }
+
+  .CaseProgress .icon:hover {
+    background-color: #140046;
+  }
+
   .CaseProgress .icon:hover svg {
     fill: hoverColor;
     stroke: hoverColor;
