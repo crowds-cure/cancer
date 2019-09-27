@@ -1,32 +1,30 @@
 @value globals: "../../GlobalStyles.css";
-@value screen-sm, screen-md, defaultColor from globals;
+@value uiBlack from globals;
+@value screen-xs-max, screen-sm, screen-sm-max, screen-md, defaultColor from globals;
 
 .ToolbarSection {
   border-radius: 8px;
-  display: none;
+  display: flex;
   margin-top: 17px;
   z-index: 100;
 }
 
-@media (min-width: screen-sm) {
+.ToolbarSection .wlPresets,
+.ToolbarSection .tools {
+  display: flex;
+}
+
+@media (min-width: screen-md) {
   .ToolbarSection {
-    display: flex;
-    margin-top: 10px;
+    flex-direction: row-reverse;
   }
 
-  .ToolbarSection .wlPresets,
-  .ToolbarSection .tools {
-    display: flex;
+  .ToolbarSection .presetSelected {
+    display: none;
   }
+}
 
-  .ToolbarSection .wlPresets {
-    border-radius: 8px;
-    border: solid 1px #4a4d7a;
-    display: table;
-    padding: 0 4px;
-    position: relative;
-  }
-
+@media (max-width: screen-sm-max) {
   .ToolbarSection .presetSelected {
     bottom: -22px;
     color: defaultColor;
@@ -34,6 +32,7 @@
     left: 0;
     line-height: 20px;
     position: absolute;
+    white-space: nowrap;
   }
 
   .ToolbarSection .tools svg,
@@ -55,36 +54,69 @@
   }
 }
 
-@media (min-width: screen-md) {
-  .mobileToolbar {
-    display: none;
-  }
-
-  .ToolbarSection {
-    flex-direction: row-reverse;
-  }
-
+@media (min-width: screen-sm) and (max-width: screen-sm-max) {
   .ToolbarSection .wlPresets {
-    border: 0;
-    padding: 0;
+    border-radius: 8px;
+    border: solid 1px #4a4d7a;
+    display: table;
+    padding: 0 4px;
+    position: relative;
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: screen-xs-max) {
+  .ToolbarSection {
+    margin-top: 0;
+    width: 100%;
   }
 
-  .ToolbarSection .presetSelected {
-    display: none;
-  }
-
-  .ToolbarSection .tools svg,
-  .ToolbarSection .wlPresets svg {
-    height: 30px;
-    width: 30px;
+  .ToolbarSection .wlPresets,
+  .ToolbarSection .tools {
+    border-right: 2px solid black;
+    display: flex;
+    flex-grow: 1;
+    flex-wrap: wrap;
+    padding: 0 8px;
   }
 
   .ToolbarSection .ToolbarButton {
-    min-width: 48px;
+    align-items: center;
+    display: flex;
+    flex-grow: 1;
+    min-width: 34px;
+    min-height: 34px;
+    padding: 0;
+    position: relative;
+    width: auto;
   }
 
-  .ToolbarSection .tools .caption,
-  .ToolbarSection .wlPresets .caption {
-    display: block;
+  .ToolbarSection .ToolbarButton svg {
+    height: 100%;
+    left: 50%;
+    max-height: 30px;
+    max-width: 30px;
+    min-height: 20px;
+    min-width: 20px;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: calc(100% - 16px);
+  }
+
+  .ToolbarSection .presetSelected {
+    left: 8px;
+    bottom: -24px;
+    text-shadow: 1px 1px uiBlack;
+  }
+}
+
+@media (max-width: 768px) {
+  .ToolbarSection .wlPresets .ToolbarButton {
+    min-width: 50%;
+  }
+
+  .ToolbarSection .tools .ToolbarButton {
+    min-width: 33%;
   }
 }

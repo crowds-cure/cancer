@@ -1,19 +1,15 @@
 @value globals: "../GlobalStyles.css";
-@value screen-sm, screen-md from globals;
+@value uiBlack from globals;
+@value screen-xs-max, screen-sm-max from globals;
 
 .Viewer {
   height: 100%;
   width: 100%;
-  background-color: black;
+  background-color: uiBlack;
 }
 
 .Viewer .LoadingIndicator {
-  background: black !important;
-}
-
-.Viewer .toolbar-row {
-  display: flex;
-  width: 100%;
+  background: uiBlack !important;
 }
 
 .Viewer .viewport-section {
@@ -24,11 +20,6 @@
   position: fixed;
   width: 100%;
   z-index: 0;
-}
-
-.Viewer .HeaderSection {
-  position: relative;
-  z-index: 1;
 }
 
 .Viewer .viewport-section .viewport {
@@ -45,23 +36,23 @@
   top: 40px;
 }
 
+.Viewer .MeasurementControl {
+  margin-left: 20px;
+  padding-top: 10px;
+}
+
 .Viewer .SessionControl {
   position: fixed;
-  right: 32px;
+  right: 22px;
   top: 44px;
 }
 
 .Viewer .Logo {
-  display: none;
   font-size: 15px;
   left: 27px;
   line-height: 18px;
   position: fixed;
   top: 19px;
-}
-
-.Viewer .ViewportOverlay {
-  display: none;
 }
 
 .Viewer .ViewportOverlay .top-left {
@@ -77,13 +68,13 @@
   right: 32px;
 }
 
-@media (min-width: screen-sm) {
-  .Viewer .ViewportOverlay {
-    display: block;
-  }
-
+@media (max-width: screen-sm-max) {
   .Viewer .viewport-section {
     height: calc(100% - 100px);
+  }
+
+  .Viewer .Logo {
+    display: none;
   }
 
   .Viewer .ViewportControl {
@@ -95,20 +86,58 @@
   }
 }
 
-@media (min-width: screen-md) {
+@media (max-width: screen-xs-max) {
   .Viewer .viewport-section {
-    height: calc(100% - 122px);
+    height: calc(100% - 68px);
   }
 
-  .Viewer .Logo {
-    display: block;
-  }
-
-  .Viewer .ViewportControl {
-    top: 40px;
+  .Viewer .ViewportOverlay {
+    display: none;
   }
 
   .Viewer .SessionControl {
-    top: 44px;
+    right: 0;
+    top: 0;
+  }
+
+  .Viewer .SessionControl .CaseProgress > * {
+    border-radius: 0;
+  }
+
+  .Viewer .SessionControl .CaseProgress .increment {
+    background-color: transparent;
+    border-color: transparent;
+    color: #ffffff;
+    top: 15px;
+    left: auto;
+    right: -40px;
+  }
+
+  .Viewer .SessionControl .CaseControlButtons {
+    bottom: 8px;
+    position: fixed;
+    right: 32px;
+  }
+
+  .Viewer .ViewportControl {
+    background-color: #15125e;
+    height: 68px;
+    left: 0;
+    padding-right: 326px;
+    top: 0;
+    width: 100%;
+  }
+
+  .Viewer .MeasurementControl {
+    bottom: 8px;
+    padding: 0;
+    position: fixed;
+    left: 0;
+  }
+
+  .Viewer .MeasurementControl .lesions {
+    bottom: auto;
+    text-shadow: 1px 1px uiBlack;
+    top: -20px;
   }
 }

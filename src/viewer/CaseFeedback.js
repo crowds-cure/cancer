@@ -20,17 +20,8 @@ class CaseFeedback extends Component {
   }
 
   static defaultProps = {
-    label: 'Feedback',
-    opensDown: true
+    label: 'Feedback'
   };
-
-  getClassName(props) {
-    let className = 'CaseFeedback noselect ';
-
-    className += props.opensDown ? 'opens-down' : 'opens-up';
-
-    return className;
-  }
 
   render() {
     const options = [
@@ -96,7 +87,7 @@ class CaseFeedback extends Component {
     });
 
     return (
-      <div className={this.getClassName(this.props)}>
+      <div className="CaseFeedback noselect">
         <div
           className="feedback-button"
           active={this.state.isOpen ? 'true' : 'false'}
@@ -165,7 +156,6 @@ class CaseFeedback extends Component {
 
 CaseFeedback.propTypes = {
   label: PropTypes.string.isRequired,
-  opensDown: PropTypes.bool.isRequired,
   skipEnabled: PropTypes.bool.isRequired,
   skipCase: PropTypes.func.isRequired,
   feedbackChanged: PropTypes.func.isRequired,

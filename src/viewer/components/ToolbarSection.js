@@ -22,10 +22,6 @@ class ToolbarSection extends Component {
     };
   }
   render() {
-    const items = this.props.buttons.map((item, index) => {
-      return <ToolbarButton key={index} {...item} click={this.onClick} />;
-    });
-
     const wlPresetItems = this.props.buttons.map((item, index) => {
       if (wLPresetIDs.includes(item.command)) {
         return <ToolbarButton key={index} {...item} click={this.onClick} />;
