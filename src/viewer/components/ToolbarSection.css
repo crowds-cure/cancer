@@ -1,6 +1,7 @@
 @value globals: "../../GlobalStyles.css";
 @value uiBlack from globals;
-@value screen-xs-max, screen-sm, screen-sm-max, screen-md, defaultColor from globals;
+@value screen-min, screen-xs, screen-xs-max, screen-sm, screen-sm-max from globals;
+@value screen-md, defaultColor from globals;
 
 .ToolbarSection {
   border-radius: 8px;
@@ -12,6 +13,10 @@
 .ToolbarSection .wlPresets,
 .ToolbarSection .tools {
   display: flex;
+}
+
+.ToolbarSection .presetSelected {
+  pointer-events: none;
 }
 
 @media (min-width: screen-md) {
@@ -111,12 +116,32 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (min-width: screen-xs) and (max-width: 768px) {
   .ToolbarSection .wlPresets .ToolbarButton {
     min-width: 50%;
   }
 
   .ToolbarSection .tools .ToolbarButton {
     min-width: 33%;
+  }
+}
+
+@media (max-width: screen-min) {
+  .ToolbarSection {
+    flex-direction: column;
+  }
+
+  .ToolbarSection .wlPresets,
+  .ToolbarSection .tools {
+    background-color: rgba(0, 0, 0, 0.8);
+    border: 0;
+    border-radius: 0 9px 9px 0;
+    display: table;
+    margin-top: 5px;
+    padding: 0;
+  }
+
+  .ToolbarSection .ToolbarButton {
+    height: 40px;
   }
 }

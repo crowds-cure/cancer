@@ -1,6 +1,6 @@
 @value globals: "../GlobalStyles.css";
-@value uiBlack from globals;
-@value screen-xs-max, screen-sm-max from globals;
+@value defaultColor, uiBlack from globals;
+@value screen-min, screen-xs-max, screen-sm-max from globals;
 
 .Viewer {
   height: 100%;
@@ -139,5 +139,89 @@
     bottom: auto;
     text-shadow: 1px 1px uiBlack;
     top: -20px;
+  }
+}
+
+@media (max-width: screen-min) {
+  .Viewer .SessionControl {
+    width: 100%;
+  }
+
+  .Viewer .SessionControl .CaseProgress .sessionCount {
+    flex-grow: 1;
+    width: auto;
+  }
+
+  .Viewer .SessionControl .CaseControlButtons {
+    bottom: 0;
+    right: 0;
+  }
+
+  .Viewer .SessionControl .CaseControlButtons .feedback-button {
+    border-radius: 9px 0 0 0;
+    width: 120px;
+  }
+
+  .Viewer .SessionControl .CaseControlButtons button.complete-case {
+    border-radius: 0;
+    width: 120px;
+  }
+
+  .Viewer .MeasurementControl {
+    background-color: uiBlack;
+    bottom: 0;
+    left: 0;
+    margin: 0;
+    width: 100%;
+  }
+
+  .Viewer .MeasurementControl .controls {
+    border: none;
+    border-radius: 0;
+    display: table;
+    height: 43px;
+  }
+
+  .Viewer .MeasurementControl .lesions {
+    display: none;
+  }
+
+  .Viewer .ViewportControl {
+    background-color: transparent;
+    height: 40px;
+    padding: 40px 0 0;
+    top: 68px;
+    width: 40px;
+  }
+
+  .Viewer .toolsToggleLabel {
+    height: 40px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 40px;
+  }
+
+  .Viewer .toolsToggleLabel svg {
+    fill: defaultColor;
+    filter: drop-shadow(1px 1px 1px uiBlack);
+    height: 40px;
+    width: 40px;
+    padding: 6px;
+  }
+
+  .Viewer .ToolbarSection .presetSelected {
+    display: none;
+  }
+
+  .Viewer .ToolbarSection {
+    opacity: 0;
+    transform: translateX(-100%);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  .Viewer #toolsToggle:checked ~ .ViewportControl .ToolbarSection {
+    opacity: 1;
+    transform: translateX(0);
   }
 }
