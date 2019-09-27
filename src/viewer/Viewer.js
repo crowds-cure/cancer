@@ -221,11 +221,17 @@ class Viewer extends Component {
 
     return (
       <div className="Viewer">
+        <input id="toolsToggle" className="d-xs-none" type="checkbox" />
         <div className="viewport-section">
           {this.state.loading ? <LoadingIndicator /> : items}
         </div>
         <Logo />
         <div class="ViewportControl d-flex">
+          <label className="toolsToggleLabel d-xs-none" for="toolsToggle">
+            <svg>
+              <use xlinkHref="/icons.svg#bars" />
+            </svg>
+          </label>
           <ActiveToolbar />
           <MeasurementControl
             disabled={!this.state.hasMeasurements}

@@ -15,8 +15,9 @@
 }
 
 .MeasurementControl .controls .number {
-  font-size: 20px;
   color: #7cf4fe;
+  font-size: 20px;
+  line-height: 23px;
   margin: 0 10px;
 }
 

@@ -29,7 +29,8 @@ class CaseControlButtons extends Component {
             disabled={!this.props.saveEnabled}
             onClick={this.props.saveCase}
           >
-            Complete case
+            <span>Complete</span>
+            <span className="d-none d-xs-inline"> case</span>
           </button>
         </div>
       </div>
