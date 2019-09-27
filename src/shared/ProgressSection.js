@@ -47,13 +47,13 @@ class ProgressSection extends Component {
             </div>
           </div>
           <div className="progressBarContainer">
-            <span className="progressLow">{rank.min}</span>
-            <span className="progressHigh">{rank.max}</span>
             <ProgressBar
               min={rank.min}
               max={rank.max}
               value={current}
               increment={increment}
+              startNumber={rank.min}
+              endNumber={rank.max}
             />
           </div>
         </div>
