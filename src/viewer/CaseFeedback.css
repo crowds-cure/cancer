@@ -1,5 +1,10 @@
 @value globals: "../GlobalStyles.css";
-@value activeColor, uiGrayDark, textSecondaryColor from globals;
+@value screen-sm, activeColor, uiGrayDark, textSecondaryColor from globals;
+
+@value buttonHeight: 43px;
+@value buttonArrowColor: #ffffff;
+@value popupArrowWidth: 12px;
+@value popupArrowColor: #1e1d32;
 
 .CaseFeedback {
   display: inline-block;
@@ -14,8 +19,8 @@
   cursor: pointer;
   font-size: 16px;
   font-weight: 600;
-  height: 43px;
-  line-height: 43px;
+  height: buttonHeight;
+  line-height: buttonHeight;
   text-align: center;
   transition: background-color 0.3s ease;
   width: 146px;
@@ -48,10 +53,10 @@
 }
 
 .CaseFeedback .arrow:before {
-  border: 5px solid white;
-  border-bottom-color: transparent;
-  border-left-color: transparent;
-  border-right-color: transparent;
+  border-color: transparent;
+  border-style: solid;
+  border-top-color: buttonArrowColor;
+  border-width: 5px;
   content: '';
   height: 0;
   left: 0;
@@ -61,15 +66,6 @@
   width: 0;
 }
 
-.CaseFeedback.opens-up .arrow,
-.CaseFeedback.opens-down .feedback-button[active='true'] .arrow {
-  transform: scaleY(-1);
-}
-
-.CaseFeedback.opens-up .feedback-button[active='true'] .arrow {
-  transform: scaleY(1);
-}
-
 .CaseFeedback .feedback-options {
   display: block;
   position: absolute;
@@ -77,48 +73,19 @@
   background-color: #1e1d32;
   border-radius: 9px;
   padding: 6px 16px 16px 16px;
-  margin-top: 16px;
-}
-
-.CaseFeedback.opens-down .feedback-options:before {
-  content: '';
-  width: 0;
-  height: 0;
-  border: 12px solid #1e1d32;
-  border-top-color: transparent;
-  border-right-color: transparent;
-  border-left-color: transparent;
-  position: absolute;
-}
-
-.CaseFeedback.opens-up .feedback-options:before {
-  content: '';
-  width: 0;
-  height: 0;
-  border: 12px solid #1e1d32;
-  border-bottom-color: transparent;
-  border-right-color: transparent;
-  border-left-color: transparent;
-  position: absolute;
-}
-
-.CaseFeedback.opens-down .feedback-options:before {
-  top: -24px;
-  left: 70px;
-}
-
-.CaseFeedback.opens-up .feedback-options:before {
-  bottom: -24px;
-  left: 70px;
-}
-
-.CaseFeedback .feedback-options {
   width: 244px;
 }
 
-.CaseFeedback.opens-up .feedback-options {
-  top: -461px;
-  width: 244px;
+.CaseFeedback .feedback-options:before {
+  content: '';
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: popupArrowWidth;
+  left: 70px;
+  pointer-events: none;
+  position: absolute;
+  width: 0;
 }
 
 .CaseFeedback .feedback-options ul {
@@ -151,4 +118,44 @@
   width: 100vw;
   height: 100vh;
   z-index: 25;
+}
+
+/* Responsive properties */
+.CaseFeedback .feedback-options {
+  bottom: calc(buttonHeight + popupArrowWidth);
+}
+
+.CaseFeedback .feedback-options:before {
+  bottom: calc(popupArrowWidth * -2);
+  border-top-color: popupArrowColor;
+}
+
+.CaseFeedback .arrow {
+  transform: scaleY(-1);
+}
+
+.CaseFeedback .feedback-button[active='true'] .arrow {
+  transform: scaleY(1);
+}
+
+@media (min-width: screen-sm) {
+  .CaseFeedback .feedback-options {
+    bottom: auto;
+    top: calc(buttonHeight + popupArrowWidth);
+  }
+
+  .CaseFeedback .feedback-options:before {
+    border-bottom-color: popupArrowColor;
+    border-top-color: transparent;
+    bottom: auto;
+    top: calc(popupArrowWidth * -2);
+  }
+
+  .CaseFeedback .arrow {
+    transform: scaleY(1);
+  }
+
+  .CaseFeedback .feedback-button[active='true'] .arrow {
+    transform: scaleY(-1);
+  }
 }

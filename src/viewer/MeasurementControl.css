@@ -2,8 +2,8 @@
 @value activeColor, uiBlack from globals;
 
 .MeasurementControl {
-  margin-left: 20px;
-  padding-top: 10px;
+  display: table;
+  position: relative;
 }
 
 .MeasurementControl .controls {
@@ -108,11 +108,15 @@
 }
 
 .MeasurementControl .lesions {
-  text-transform: uppercase;
-  text-align: center;
+  bottom: -20px;
+  color: activeColor;
   font-size: 12px;
   font-weight: normal;
   letter-spacing: 1px;
-  color: activeColor;
-  margin: 7px;
+  left: 0;
+  line-height: 20px;
+  position: absolute;
+  text-align: center;
+  text-transform: uppercase;
+  width: 100%;
 }

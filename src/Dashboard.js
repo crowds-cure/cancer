@@ -16,7 +16,6 @@ import version from './version.js';
 import sha from './sha.js';
 import getUsername from './viewer/lib/getUsername.js';
 import annotatorCollectionStatus from './case/annotatorCollectionStatus.js';
-import CaseProgress from './viewer/CaseProgress.js';
 
 const customStyles = {
   content: {

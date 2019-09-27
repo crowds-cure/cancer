@@ -61,11 +61,16 @@
 @value 15360w: 15360px;
 
 /* Grid breakpoints */
-@value screen-xs: 640w;
-@value screen-sm: 1024w;
-@value screen-md: 1366w;
-@value screen-lg: 1680w;
-@value screen-xl: 1920w;
+@value screen-min: 639px;
+@value screen-xs: 640px;
+@value screen-xs-max: 1023px;
+@value screen-sm: 1024px;
+@value screen-sm-max: 1365px;
+@value screen-md: 1366px;
+@value screen-md-max: 1679px;
+@value screen-lg: 1680px;
+@value screen-lg-max: 1919px;
+@value screen-xl: 1920px;
 @value gutter: 12.5px;
 @value negativeGutter: -12.5px;
 
