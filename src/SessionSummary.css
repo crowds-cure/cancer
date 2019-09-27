@@ -8,59 +8,56 @@
   padding-bottom: 15px;
 }
 
-.SessionSummary .title-wrapper {
-  text-align: center;
-}
-
-.SessionSummary .title-wrapper .title {
-  font-size: 23px;
-  font-weight: bold;
-  font-style: italic;
-  color: textActiveColor;
-}
-
-.SessionSummary .communityStats {
-  margin-top: 120px;
-}
-
-.SessionSummary .rankingStats {
-  margin-top: 15px;
-}
-
-.SessionSummary .RankingSection {
-  margin: 10px 0 30px 0;
-}
-
 .SessionSummary .LogoutSection {
   margin-top: 100px;
 }
 
-.SessionSummary .ProgressSection {
-  margin-top: 100px;
+.SessionSummary .cardSection {
+  background-color: #472e93;
+  border-radius: 9px;
+  box-shadow: 13px 13px 0 0 #030628;
+  margin-top: 20px;
+  padding: 17px 23px;
 }
 
-@media (min-width: screen-sm) {
-  .SessionSummary .title-wrapper .title {
-    font-size: 34px;
-  }
+.SessionSummary .cardSection h2 {
+  color: #ffffff;
+  font-size: 28px;
+  font-style: italic;
+  font-weight: 500;
+  line-height: 34px;
+  margin: 0;
+  text-transform: uppercase;
+}
 
-  .SessionSummary .title-wrapper {
-    margin-top: 25px;
-  }
+.SessionSummary .sessionTotalValue {
+  color: textActiveColor;
+  font-size: 102px;
+  font-weight: 600;
+  margin-top: -38px;
+  text-align: center;
+}
 
-  .SessionSummary .communityStats {
-    margin-top: 120px;
-  }
+.SessionSummary h1 {
+  color: textActiveColor;
+  font-size: 34px;
+  font-style: italic;
+  font-weight: 500;
+  padding-left: 25px;
+  text-transform: uppercase;
+}
 
-  .SessionSummary .rankingStats {
-    margin-top: 150px;
-  }
+.SessionSummary .earnedBadgesSection {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 29px -12.5px 0;
+}
 
-  .SessionSummary .LogoutSection {
-    margin-top: 110px;
-  }
-
-  .SessionSummary .ProgressSection {
-    margin-top: 100px;
-  }
+.SessionSummary .earnedBadgesSection .badge {
+  background-color: rgb(59, 59, 189, 0.25);
+  border-radius: 9px;
+  height: 214px;
+  margin: 0 12.5px 25px;
+  width: calc(calc(100% / 3) - 25px);
 }
