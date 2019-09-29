@@ -7,7 +7,7 @@ import './CaseProgress.css';
 
 import sendSessionStatisticsToDatabase from './lib/sendSessionStatisticsToDatabase';
 import saveAchievementsToDatabase from './lib/saveAchievementsToDatabase';
-import animate from '../shared/animate';
+import animateNumber from '../shared/animateNumber';
 
 class CaseProgress extends Component {
   constructor(props) {
@@ -50,22 +50,17 @@ class CaseProgress extends Component {
   }
 
   componentDidUpdate() {
+    const sessionElement = this.sessionRef.current;
+
     if (this.state.sessionMeasurements !== this.props.sessionMeasurements) {
-      const oldValue = this.state.sessionMeasurements || 0;
-
       this.setState({ sessionMeasurements: this.props.sessionMeasurements });
-      animate(1000, progress => {
-        const diff = this.props.sessionMeasurements - oldValue;
-        const result = oldValue + diff * progress;
-        const newValue = Math.floor(result);
-
-        const element = this.sessionRef.current;
-        const currentValue = parseInt(element.innerText, 10);
-
-        if (newValue !== currentValue) {
-          element.innerText = newValue;
-        }
-      });
+      animateNumber(
+        sessionElement,
+        this,
+        'sessionMeasurements',
+        'sessionMeasurements',
+        1000
+      );
     }
 
     const oldValue = this.state.caseMeasurements;

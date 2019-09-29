@@ -1,15 +1,30 @@
 @value globals: "./GlobalStyles.css";
-@value primaryBackgroundColor, textPrimaryColor, textActiveColor, screen-sm from globals;
+@value primaryBackgroundColor, textPrimaryColor, textActiveColor from globals;
+@value screen-xs-max, screen-sm-max, screen-md-max from globals;
 
 .SessionSummary {
   background-color: primaryBackgroundColor;
   height: 100%;
   overflow-y: auto;
   padding-bottom: 15px;
+  position: relative;
 }
 
-.SessionSummary .LogoutSection {
-  margin-top: 100px;
+.SessionSummary .Logo {
+  left: 27px;
+  position: absolute;
+  top: 19px;
+}
+
+.SessionSummary h1 {
+  color: textActiveColor;
+  font-size: 34px;
+  font-style: italic;
+  font-weight: 500;
+  line-height: 40px;
+  margin: 130px 0 43px;
+  padding-left: 25px;
+  text-transform: uppercase;
 }
 
 .SessionSummary .cardSection {
@@ -38,26 +53,37 @@
   text-align: center;
 }
 
-.SessionSummary h1 {
-  color: textActiveColor;
-  font-size: 34px;
-  font-style: italic;
-  font-weight: 500;
-  padding-left: 25px;
-  text-transform: uppercase;
-}
-
 .SessionSummary .earnedBadgesSection {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin: 29px -12.5px 0;
+  margin-top: 29px;
 }
 
 .SessionSummary .earnedBadgesSection .badge {
   background-color: rgb(59, 59, 189, 0.25);
   border-radius: 9px;
   height: 214px;
-  margin: 0 12.5px 25px;
-  width: calc(calc(100% / 3) - 25px);
+  margin-bottom: 25px;
+}
+
+.SessionSummary .LogoutSection {
+  margin-top: 100px;
+}
+
+@media (max-width: screen-sm-max) {
+  .SessionSummary h1 {
+    margin-top: 100px;
+    padding-left: 10px;
+  }
+}
+
+@media (max-width: screen-xs-max) {
+  .SessionSummary h1 {
+    margin-bottom: 32px;
+    margin-top: 60px;
+    padding-left: 0;
+  }
+
+  .SessionSummary .sessionTotalValue {
+    font-size: 80px;
+    margin-top: 0;
+  }
 }
