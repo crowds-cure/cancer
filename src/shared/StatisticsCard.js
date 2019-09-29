@@ -2,7 +2,7 @@ import { Component } from 'react';
 import React from 'react';
 import './StatisticsCard.css';
 import PropTypes from 'prop-types';
-import animate from './animate';
+import animateNumber from './animateNumber';
 
 class StatisticsCard extends Component {
   constructor(props) {
@@ -21,19 +21,8 @@ class StatisticsCard extends Component {
     }
 
     const element = this.numberRef.current;
-    const oldValue = this.state.number || 0;
-    animate(3000, progress => {
-      const diff = this.props.number - oldValue;
-      const result = oldValue + diff * progress;
-      const newValue = Math.floor(result);
-      const currentValue = parseInt(element.innerText, 10);
 
-      if (currentValue === this.props.number) {
-        this.setState({ number: this.props.number });
-      } else if (newValue !== currentValue) {
-        element.innerText = newValue.toLocaleString();
-      }
-    });
+    animateNumber(element, this, 'number', 'number', 3000);
   }
 
   render() {

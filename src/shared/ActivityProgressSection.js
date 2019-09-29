@@ -10,7 +10,7 @@ import './ActivityProgressSection.css';
 import Modal from 'react-modal';
 import { achievements } from '../achievements';
 import { BADGE_TYPES } from '../badges.js';
-import animate from './animate.js';
+import animateNumber from './animateNumber.js';
 
 const modalDialogStyles = {
   content: {
@@ -46,24 +46,8 @@ class ActivityProgressSection extends Component {
   componentDidUpdate() {
     ReactTooltip.rebuild();
 
-    if (this.state.measurementsCount !== this.props.current) {
-      const oldValue = this.state.measurementsCount || 0;
-
-      animate(3000, progress => {
-        const diff = this.props.current - oldValue;
-        const result = oldValue + diff * progress;
-        const newValue = Math.floor(result);
-
-        const element = this.measurementsCountRef.current;
-        const currentValue = parseInt(element.innerText, 10);
-
-        if (currentValue === this.props.current) {
-          this.setState({ measurementsCount: this.props.current });
-        } else if (newValue !== currentValue) {
-          element.innerText = newValue;
-        }
-      });
-    }
+    const element = this.measurementsCountRef.current;
+    animateNumber(element, this, 'current', 'measurementsCount', 3000);
   }
 
   toggleModal(e) {
