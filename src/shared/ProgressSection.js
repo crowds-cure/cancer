@@ -6,24 +6,33 @@ import RankBadge from './RankBadge.js';
 
 import './ProgressSection.css';
 import { getBadgeByNumberOfCases } from '../badges';
+import animateNumber from './animateNumber.js';
 
 class ProgressSection extends Component {
   constructor(props) {
     super(props);
 
-    this.plusPoints = React.createRef();
-    this.currentValue = React.createRef();
+    this.incrementRef = React.createRef();
+    this.bigNumberRef = React.createRef();
+
+    const initialRank = getBadgeByNumberOfCases(this.props.current || 0);
 
     this.state = {
       current: this.props.current,
-      measurementsInCurrentSession: this.props.measurementsInCurrentSession
+      measurementsInCurrentSession: this.props.measurementsInCurrentSession,
+      bigNumber: this.props.current,
+      increment: this.props.measurementsInCurrentSession,
+      rank: initialRank,
+      progressValue: this.props.current
     };
   }
 
+  componentDidUpdate() {}
+
   render() {
-    const rank = getBadgeByNumberOfCases(this.state.current);
-    const current = this.state.current ? this.state.current : 0;
-    const increment = this.state.measurementsInCurrentSession;
+    const rank = this.state.rank;
+    const current = this.state.bigNumber;
+    const increment = this.state.increment;
 
     return (
       <div className="ProgressSection">
@@ -33,11 +42,11 @@ class ProgressSection extends Component {
               <RankBadge name={rank.name} img={rank.img} type={rank.type} />
             </div>
             <div className="currentPoints">
-              <span ref={this.currentValue} className="value">
+              <span ref={this.bigNumberRef} className="value">
                 {current}
               </span>
               {increment ? (
-                <span ref={this.plusPoints} className="plusPoints">
+                <span ref={this.incrementRef} className="plusPoints">
                   +{increment}
                 </span>
               ) : (
@@ -49,8 +58,7 @@ class ProgressSection extends Component {
             <ProgressBar
               min={rank.min}
               max={rank.max}
-              value={current}
-              increment={increment}
+              value={this.state.progressValue}
               startNumber={rank.min}
               endNumber={rank.max}
             />
@@ -61,30 +69,82 @@ class ProgressSection extends Component {
   }
 
   componentDidMount = () => {
-    if (this.plusPoints.current) {
+    if (this.incrementRef.current) {
       setTimeout(() => {
         this.plusPointsAnimation();
       });
-      setTimeout(() => {
-        this.currentValueAnimation();
-      }, 2100);
+      //   setTimeout(() => {
+      //     this.currentValueAnimation();
+      //   }, 2100);
     }
+
+    const ranks = [];
+    let current = this.props.current;
+    let toIncrement = this.props.measurementsInCurrentSession;
+    const finalValue = current + toIncrement;
+
+    while (current !== finalValue) {
+      const currentRank = getBadgeByNumberOfCases(current);
+      const diff = currentRank.max - current;
+
+      ranks.push(currentRank);
+      if (diff <= toIncrement) {
+        toIncrement -= diff;
+        current += diff;
+      } else {
+        current += toIncrement;
+      }
+    }
+
+    const bigNumberElement = this.bigNumberRef.current;
+    const incrementElement = this.incrementRef.current;
+
+    const animateRank = () => {
+      const currentRank = ranks.shift();
+
+      if (!currentRank) {
+        return;
+      }
+
+      const bigNumber = ranks.length ? currentRank.max : finalValue;
+      const increment = bigNumber - this.state.bigNumber;
+
+      this.setState({ rank: currentRank });
+      setTimeout(() => {
+        this.setState({ progressValue: bigNumber });
+        animateNumber(
+          bigNumberElement,
+          this,
+          bigNumber,
+          'bigNumber',
+          3000,
+          () => {
+            this.setState({ bigNumber });
+            setTimeout(() => animateRank(), 1000);
+          }
+        );
+      }, 1500);
+
+      incrementElement.innerText = `+${increment}`;
+    };
+
+    animateRank();
   };
 
   plusPointsAnimation = () => {
-    this.plusPoints.current.classList.add('fadeInAndSlideDown');
-    setTimeout(() => {
-      setTimeout(() => {
-        this.plusPoints.current.classList.remove('fadeInAndSlideDown');
-        this.plusPoints.current.classList.add('fadeOutAndSlideDown');
-      }, 1700);
-    }, 300);
+    // this.incrementRef.current.classList.add('fadeInAndSlideDown');
+    // setTimeout(() => {
+    //   setTimeout(() => {
+    //     this.incrementRef.current.classList.remove('fadeInAndSlideDown');
+    //     this.incrementRef.current.classList.add('fadeOutAndSlideDown');
+    //   }, 1700);
+    // }, 300);
   };
 
   currentValueAnimation = () => {
-    this.currentValue.current.classList.add('moveDown');
+    this.bigNumberRef.current.classList.add('moveDown');
     setTimeout(() => {
-      this.currentValue.current.classList.remove('moveDown');
+      this.bigNumberRef.current.classList.remove('moveDown');
       setTimeout(() => {
         this.setState({
           current: this.state.current + this.state.measurementsInCurrentSession,

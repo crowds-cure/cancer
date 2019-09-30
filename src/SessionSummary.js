@@ -23,7 +23,6 @@ class SessionSummary extends Component {
 
   componentDidMount() {
     const sessionTotalElement = this.sessionTotalRef.current;
-    console.log('PROPS', this.props);
 
     animateNumber(
       sessionTotalElement,
