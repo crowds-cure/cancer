@@ -11,7 +11,7 @@ class RankBadge extends Component {
       img: this.props.img
     };
 
-    this.imgRef = React.createRef();
+    this.badgeRef = React.createRef();
   }
 
   componentDidUpdate() {
@@ -19,33 +19,35 @@ class RankBadge extends Component {
     const newImg = this.props.img;
 
     if (newImg !== oldImg) {
-      const imgElement = this.imgRef.current;
+      const badgeElement = this.badgeRef.current;
       const rankFadeInCallback = () => {
-        imgElement.classList.remove('rankFadeIn');
-        imgElement.removeEventListener('animationend', rankFadeInCallback);
+        badgeElement.classList.remove('rankFadeIn');
+        badgeElement.removeEventListener('animationend', rankFadeInCallback);
+        badgeElement.setAttribute('data-tip-disable', false);
       };
       const rankFadeOutCallback = () => {
-        imgElement.addEventListener('animationend', rankFadeInCallback);
-        imgElement.classList.add('rankFadeIn');
-        imgElement.classList.remove('rankFadeOut');
-        imgElement.removeEventListener('animationend', rankFadeOutCallback);
+        badgeElement.addEventListener('animationend', rankFadeInCallback);
+        badgeElement.classList.add('rankFadeIn');
+        badgeElement.classList.remove('rankFadeOut');
+        badgeElement.removeEventListener('animationend', rankFadeOutCallback);
         this.setState({ img: newImg });
       };
 
-      imgElement.addEventListener('animationend', rankFadeOutCallback);
-      imgElement.classList.add('rankFadeOut');
+      badgeElement.setAttribute('data-tip-disable', true);
+      badgeElement.addEventListener('animationend', rankFadeOutCallback);
+      badgeElement.classList.add('rankFadeOut');
     }
   }
 
   render() {
     return (
-      <div className="rankBadge noselect" ref={this.imgRef}>
-        <img
-          src={this.state.img}
-          alt={this.props.name}
-          data-tip={this.props.description}
-          onClick={this.props.onClick}
-        />
+      <div
+        className="rankBadge noselect"
+        data-tip={this.props.description}
+        ref={this.badgeRef}
+        onClick={this.props.onClick}
+      >
+        <img src={this.state.img} alt={this.props.name} />
       </div>
     );
   }

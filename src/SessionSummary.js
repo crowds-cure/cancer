@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import React from 'react';
+import ReactTooltip from 'react-tooltip';
 import './SessionSummary.css';
 
 import ProgressSection from './shared/ProgressSection.js';
@@ -78,6 +79,7 @@ class SessionSummary extends Component {
             <div className="col-16">{/* <LogoutSection /> */}</div>
           </div>
         </div>
+        <ReactTooltip className="DashboardTooltip" effect="solid" />
       </div>
     );
   }

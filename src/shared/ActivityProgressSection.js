@@ -10,7 +10,7 @@ class ActivityProgressSection extends Component {
     super(props);
 
     this.state = {
-      current: props.current || 0,
+      current: props.current,
       measurementsInCurrentSession: 0
     };
   }
@@ -26,23 +26,16 @@ class ActivityProgressSection extends Component {
   }
 
   render() {
-    const isUndefined =
-      this.props.current === undefined || this.props.current === 0;
-
     return (
       <InfoBox className="ActivityProgressSection" headerText="Score and rank">
         <div className="row">
           <div className="col-12">
-            {isUndefined ? (
-              ''
-            ) : (
-              <ProgressSection
-                current={this.state.current}
-                measurementsInCurrentSession={
-                  this.state.measurementsInCurrentSession
-                }
-              />
-            )}
+            <ProgressSection
+              current={this.state.current}
+              measurementsInCurrentSession={
+                this.state.measurementsInCurrentSession
+              }
+            />
           </div>
           <div className="d-none d-md-block col-4 leaderboardRank">
             <div className="position">18</div>
