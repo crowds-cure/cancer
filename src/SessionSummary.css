@@ -1,5 +1,5 @@
 @value globals: "./GlobalStyles.css";
-@value primaryBackgroundColor, textPrimaryColor, textActiveColor from globals;
+@value primaryBackgroundColor, textPrimaryColor, textActiveColor, uiBlack from globals;
 @value screen-min, screen-xs-max, screen-sm-max, screen-md-max from globals;
 
 .SessionSummary {
@@ -16,15 +16,55 @@
   top: 19px;
 }
 
-.SessionSummary h1 {
+.SessionSummary .pageHeader {
+  display: flex;
+  height: 46px;
+  margin: 127px 0 40px;
+  padding-left: 25px;
+}
+
+.SessionSummary .pageHeader h1 {
   color: textActiveColor;
+  flex-grow: 1;
   font-size: 34px;
   font-style: italic;
   font-weight: 500;
-  line-height: 40px;
-  margin: 130px 0 43px;
-  padding-left: 25px;
+  line-height: 46px;
+  margin: 0;
   text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.SessionSummary .controlButtons {
+  white-space: nowrap;
+}
+
+.SessionSummary .controlButtons button {
+  border: 0;
+  border-radius: 9px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  height: 46px;
+  line-height: 46px;
+  margin-left: 21px;
+  margin-right: 8px;
+  padding: 0;
+  text-align: center;
+}
+
+.SessionSummary .controlButtons .logout {
+  background-color: #2a0e6f;
+  border: 1px solid #ffffff;
+  color: #ffffff;
+  line-height: 44px;
+  width: 85px;
+}
+
+.SessionSummary .controlButtons .dashboard {
+  background-color: #00d5ae;
+  color: #100e44;
+  width: 181px;
 }
 
 .SessionSummary .cardSection {
@@ -62,6 +102,48 @@
   border-radius: 9px;
   height: 214px;
   margin-bottom: 25px;
+  padding: 24px 10px;
+  text-align: center;
+}
+
+.SessionSummary .earnedBadgesSection .AchievementBadge img {
+  background-color: transparent;
+  border: 0;
+  height: 100px;
+  width: 100px;
+}
+
+.SessionSummary .earnedBadgesSection .badgeEarned,
+.SessionSummary .earnedBadgesSection .badgeDescription {
+  font-size: 20px;
+  line-height: 24px;
+  margin-top: 6px;
+}
+
+.SessionSummary .earnedBadgesSection .badgeEarned {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.SessionSummary .earnedBadgesSection .badgeDescription {
+  color: #aca2cd;
+  font-weight: normal;
+}
+
+.SessionSummary .earnedBadgesSection .badgeProgress {
+  background-color: uiBlack;
+  border-radius: 6.5px;
+  display: inline-block;
+  height: 11px;
+  margin: 8px 0 7px;
+  width: 78px;
+}
+
+.SessionSummary .earnedBadgesSection .badgeProgressValue {
+  background-color: #00d5ae;
+  border-radius: 6.5px;
+  height: 100%;
+  width: 70%; /* TODO: [layout] Use value from style on .js */
 }
 
 .SessionSummary .LogoutSection {
@@ -77,14 +159,14 @@
 }
 
 @media (max-width: screen-sm-max) {
-  .SessionSummary h1 {
+  .SessionSummary .pageHeader {
     margin-top: 100px;
     padding-left: 10px;
   }
 }
 
 @media (max-width: screen-xs-max) {
-  .SessionSummary h1 {
+  .SessionSummary .pageHeader {
     margin-bottom: 32px;
     margin-top: 60px;
     padding-left: 0;
@@ -113,5 +195,37 @@
   .SessionSummary .ProgressSection .value {
     font-size: 60px;
     line-height: 128px;
+  }
+
+  .SessionSummary .pageHeader {
+    height: 70px;
+  }
+
+  .SessionSummary .pageHeader h1 {
+    font-size: 28px;
+    line-height: 70px;
+  }
+
+  .SessionSummary .controlButtons {
+    text-align: right;
+    width: 110px;
+    white-space: normal;
+  }
+
+  .SessionSummary .controlButtons button {
+    height: 32px;
+    line-height: 32px;
+    margin: 0;
+  }
+
+  .SessionSummary .controlButtons button.dashboard {
+    margin-top: 10px;
+    width: 110px;
+  }
+
+  .SessionSummary .controlButtons button.logout {
+    line-height: 30px;
+    margin-right: 8px;
+    width: 110px;
   }
 }
