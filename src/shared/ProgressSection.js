@@ -120,10 +120,10 @@ class ProgressSection extends Component {
           3000,
           () => {
             this.setState({ bigNumber });
-            setTimeout(() => animateRank(), 1000);
+            setTimeout(() => animateRank(), 300);
           }
         );
-      }, 1500);
+      }, 2000);
 
       incrementElement.innerText = `+${increment}`;
     };
