@@ -1,9 +1,0 @@
-@value globals: "../GlobalStyles.css";
-@value textSecondaryColor from globals;
-
-.HamburgerMenu svg {
-  padding: 10px 5px;
-  height: 52px;
-  width: 45px;
-  fill: textSecondaryColor;
-}
