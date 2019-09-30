@@ -72,6 +72,10 @@
     filter: none;
     transform: scaleY(1);
   }
+  25% {
+    filter: none;
+    transform: scaleY(1);
+  }
   80% {
     filter: brightness(1.5);
     transform: scaleY(1.2);

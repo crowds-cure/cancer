@@ -1,104 +1,48 @@
 import { Component } from 'react';
 import React from 'react';
-import ReactTooltip from 'react-tooltip';
-import ProgressBar from './ProgressBar.js';
 import PropTypes from 'prop-types';
-import RankBadge from './RankBadge.js';
 import InfoBox from './InfoBox.js';
-import { getBadgeByNumberOfCases } from '../badges.js';
 import './ActivityProgressSection.css';
-import Modal from 'react-modal';
-import { achievements } from '../achievements';
-import { BADGE_TYPES } from '../badges.js';
-import animateNumber from './animateNumber.js';
-
-const modalDialogStyles = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)'
-  }
-};
+import ProgressSection from './ProgressSection.js';
 
 class ActivityProgressSection extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      achievements,
-      showRanksModal: false,
-      measurementsCount: props.current || 0
+      current: props.current || 0,
+      measurementsInCurrentSession: 0
     };
-
-    this.measurementsCountRef = React.createRef();
-
-    this.toggleModal = this.toggleModal.bind(this);
   }
 
-  componentDidMount() {
-    const element = this.measurementsCountRef.current;
-    element.innerText = this.state.measurementsCount;
-  }
-
-  componentDidUpdate() {
-    ReactTooltip.rebuild();
-
-    const element = this.measurementsCountRef.current;
-    animateNumber(element, this, 'current', 'measurementsCount', 3000);
-  }
-
-  toggleModal(e) {
-    e.preventDefault();
-    this.setState({ showRanksModal: !this.state.showRanksModal });
-    ReactTooltip.hide();
-  }
-
-  getAllRankBadges(current) {
-    const badges = Object.keys(BADGE_TYPES).map(type => {
-      const badge = BADGE_TYPES[type];
-
-      let className = 'rankBadge';
-
-      if (current < badge.min) {
-        className += ' not-received';
-      }
-
-      return (
-        <div key={badge.name} className={className}>
-          <img src={badge.img} alt={badge.name} data-tip={badge.description} />
-          <h4 className="badgeName">{badge.name}</h4>
-        </div>
-      );
-    });
-
-    return badges;
+  componentDidUpdate(prevProps) {
+    if (this.props.current !== prevProps.current) {
+      const inSession = this.props.current - (prevProps.current || 0);
+      this.setState({
+        current: this.props.current,
+        measurementsInCurrentSession: inSession
+      });
+    }
   }
 
   render() {
-    const current = this.props.current === undefined ? 0 : this.props.current;
-
-    const rank = getBadgeByNumberOfCases(this.props.current);
-
-    const allRankBadges = this.getAllRankBadges(this.props.current);
+    const isUndefined =
+      this.props.current === undefined || this.props.current === 0;
 
     return (
       <InfoBox className="ActivityProgressSection" headerText="Score and rank">
         <div className="row">
           <div className="col-12">
-            <RankBadge
-              size="md"
-              name={rank.name}
-              img={rank.img}
-              type={rank.type}
-              description={rank.name}
-              onClick={this.toggleModal}
-            />
-            <div className="measurementsCount" ref={this.measurementsCountRef}>
-              {this.state.measurementsCount}
-            </div>
+            {isUndefined ? (
+              ''
+            ) : (
+              <ProgressSection
+                current={this.state.current}
+                measurementsInCurrentSession={
+                  this.state.measurementsInCurrentSession
+                }
+              />
+            )}
           </div>
           <div className="d-none d-md-block col-4 leaderboardRank">
             <div className="position">18</div>
@@ -108,31 +52,7 @@ class ActivityProgressSection extends Component {
               Rank
             </div>
           </div>
-          <div className="col-16 progressBarContainer">
-            <ProgressBar
-              min={rank.min}
-              max={rank.max}
-              value={current}
-              endNumber={rank.max}
-            />
-          </div>
         </div>
-        <Modal
-          isOpen={this.state.showRanksModal}
-          contentLabel="All Ranks"
-          onRequestClose={this.toggleModal}
-          styles={modalDialogStyles}
-          className="Modal"
-          overlayClassName="Overlay"
-          closeTimeoutMS={200}
-          onAfterOpen={ReactTooltip.rebuild}
-        >
-          <h1>Ranks</h1>
-          <div className="row">{allRankBadges}</div>
-          <span className="modal-close" onClick={this.toggleModal}>
-            Close
-          </span>
-        </Modal>
       </InfoBox>
     );
   }

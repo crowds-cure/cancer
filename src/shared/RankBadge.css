@@ -1,0 +1,41 @@
+.rankBadge.rankFadeIn {
+  animation: rankFadeIn 1.5s ease-in-out;
+}
+
+.rankBadge.rankFadeOut {
+  animation: rankFadeOut 0.5s ease-out;
+}
+
+@keyframes rankFadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  20% {
+    filter: drop-shadow(0 0 20px white);
+    opacity: 1;
+  }
+  60% {
+    filter: drop-shadow(0 0 20px white);
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes rankFadeOut {
+  0% {
+    filter: grayscale(0);
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    filter: grayscale(1);
+  }
+  100% {
+    filter: grayscale(1);
+    opacity: 0;
+    transform: scale(0);
+  }
+}
