@@ -11,7 +11,6 @@
 .ProgressSection .numberCases {
   display: flex;
   justify-content: center;
-  margin: -20px 0 30px;
 }
 
 .ProgressSection .currentPoints {
@@ -50,39 +49,6 @@
   opacity: 0;
 }
 
-.ProgressSection .progressBarContainer {
-  margin: 10px 42px 24px;
-}
-
-.ProgressSection .progressLow {
-  float: left;
-  color: white;
-  font-size: 21px;
-  font-weight: bold;
-}
-
-.ProgressSection .progressHigh {
-  float: right;
-  color: white;
-  font-size: 21px;
-  font-weight: bold;
-}
-
-.ProgressSection .fadeInAndSlideDown {
-  opacity: 1;
-  top: -35px;
-}
-
-.ProgressSection .fadeOutAndSlideDown {
-  opacity: 0;
-  top: -10px;
-}
-
-.ProgressSection .moveDown {
-  position: relative;
-  top: 22px;
-}
-
 .ProgressSection .rankBadge img {
   height: 184px;
   width: 184px;
@@ -103,30 +69,12 @@
   .ProgressSection .rankBadge {
     cursor: auto;
   }
-
-  .ProgressSection .numberCases {
-    margin-top: 10px;
-  }
-
-  .ProgressSection .progressBarContainer {
-    margin-left: 10px;
-    margin-right: 10px;
-  }
 }
 
 @media (max-width: screen-min) {
-  .ProgressSection .numberCases {
-    margin-top: 20px;
-  }
-
   .ProgressSection .rankBadge img {
     height: 128px;
     width: 128px;
-  }
-
-  .ProgressSection .value {
-    font-size: 60px;
-    line-height: 128px;
   }
 
   .ProgressSection .currentPoints {

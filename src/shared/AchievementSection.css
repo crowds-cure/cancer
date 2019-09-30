@@ -82,13 +82,17 @@
   .AchievementSection .AchievementBadge:hover img {
     transform: scale(1.1);
   }
+
+  .AchievementSection.InfoBox .boxContent {
+    padding-bottom: 26px;
+  }
 }
 
 @media (min-width: screen-md) {
   .AchievementSection .badgesContent {
     margin: 0 auto;
     max-width: 540px;
-    padding-top: 29px;
+    padding-top: 35px;
   }
 
   .AchievementSection .badgesGroup {
