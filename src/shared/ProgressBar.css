@@ -2,7 +2,9 @@
 @value progressBackgroundColor, progressPrimaryColor, progressSecondaryColor from globals;
 @value textPrimaryColor from globals;
 
-@value progressBarFilter: blur(9.7px);
+@value progressValueFilter: blur(9.7px);
+@value progressValueBackground: linear-gradient(to right, progressPrimaryColor, progressSecondaryColor);
+@value progressValueResetBackground: linear-gradient(to right, progressPrimaryColor, white);
 
 .ProgressBarWrapper {
   height: 12px;
@@ -33,51 +35,49 @@
 }
 
 .ProgressBar {
-  width: 100%;
+  background-color: progressBackgroundColor;
   height: 100%;
-  vertical-align: top;
-
-  /* Reset the default appearance */
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-
-  /* Get rid of default border in Firefox. */
-  border: none;
+  width: 100%;
 }
 
-.ProgressBar::-webkit-progress-bar {
-  background: progressBackgroundColor;
-}
-
-.ProgressBar[value].notransition::-webkit-progress-value {
-  -webkit-transition: none !important;
-  -moz-transition: none !important;
-  -o-transition: none !important;
-  -ms-transition: none !important;
-  transition: none !important;
-}
-
-.ProgressBar[value]::-webkit-progress-value {
-  background-image: linear-gradient(
-    to right,
-    progressPrimaryColor,
-    progressSecondaryColor
-  );
+.ProgressBar .ProgressValue {
+  background-image: progressValueBackground;
+  height: 100%;
+  position: relative;
   transition: all 3s ease-in-out;
 }
 
-.ProgressGlow {
+.ProgressBar .ProgressValue:before {
+  background-image: progressValueBackground;
+  content: '';
+  filter: progressValueFilter;
+  height: 100%;
+  left: 0;
   position: absolute;
   top: 0;
-  left: 0;
+  width: 100%;
 }
 
-.ProgressGlow::-webkit-progress-bar {
-  background: transparent;
+.ProgressBar.valueReset .ProgressValue {
+  transition-duration: 0.2s;
+  transition-delay: 1.8s;
 }
 
-.ProgressGlow[value]::-webkit-progress-value {
-  filter: progressBarFilter;
-  -webkit-filter: progressBarFilter;
+.ProgressBar.valueReset {
+  animation: progressBarReset 2s;
+}
+
+@keyframes progressBarReset {
+  0% {
+    filter: none;
+    transform: scaleY(1);
+  }
+  80% {
+    filter: brightness(1.5);
+    transform: scaleY(1.2);
+  }
+  100% {
+    filter: none;
+    transform: scaleY(1);
+  }
 }

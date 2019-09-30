@@ -17,7 +17,13 @@ class ProgressBar extends Component {
     };
 
     this.progressBarRef = React.createRef();
-    this.progressGlowRef = React.createRef();
+  }
+
+  getProgressValueStyle(state) {
+    const percentage = (state.value / state.max) * 100;
+    return {
+      width: `${percentage}%`
+    };
   }
 
   render() {
@@ -28,18 +34,16 @@ class ProgressBar extends Component {
         ) : (
           <div className="startNumber">{this.props.startNumber}</div>
         )}
-        <progress
-          className="ProgressBar"
-          max={this.state.max}
-          value={this.state.value}
-          ref={this.progressBarRef}
-        />
-        <progress
-          className="ProgressBar ProgressGlow"
-          max={this.state.max}
-          value={this.state.value}
-          ref={this.progressGlowRef}
-        />
+        <div className="ProgressBar" ref={this.progressBarRef}>
+          <div
+            className="ProgressValue"
+            style={this.getProgressValueStyle(this.state)}
+          />
+          <div
+            className="ProgressGlow"
+            style={this.getProgressValueStyle(this.state)}
+          />
+        </div>
         {this.props.endNumber === undefined ? (
           ''
         ) : (
@@ -49,9 +53,8 @@ class ProgressBar extends Component {
     );
   }
 
-  componentDidUpdate = previousProps => {
+  componentDidUpdate = () => {
     const progressBarElement = this.progressBarRef.current;
-    const progressGlowElement = this.progressGlowRef.current;
 
     const oldValue = this.state.value;
     const newValue = this.props.value - this.props.min;
@@ -60,16 +63,14 @@ class ProgressBar extends Component {
     const newMax = this.props.max - this.props.min;
 
     if (oldMax !== newMax) {
-      progressBarElement.classList.add('notransition');
-      progressGlowElement.classList.add('notransition');
+      progressBarElement.classList.add('valueReset');
 
       this.setState({
         max: newMax,
         value: newValue
       });
     } else if (newValue !== oldValue) {
-      progressBarElement.classList.remove('notransition');
-      progressGlowElement.classList.remove('notransition');
+      progressBarElement.classList.remove('valueReset');
       this.setState({ value: newValue });
     }
   };
