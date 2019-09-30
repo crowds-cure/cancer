@@ -226,8 +226,8 @@ class Viewer extends Component {
           {this.state.loading ? <LoadingIndicator /> : items}
         </div>
         <Logo />
-        <div class="ViewportControl d-flex">
-          <label className="toolsToggleLabel d-xs-none" for="toolsToggle">
+        <div className="ViewportControl d-flex">
+          <label className="toolsToggleLabel d-xs-none" htmlFor="toolsToggle">
             <svg>
               <use xlinkHref="/icons.svg#bars" />
             </svg>

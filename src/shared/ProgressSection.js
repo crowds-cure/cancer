@@ -28,17 +28,15 @@ class ProgressSection extends Component {
     this.incrementRef = React.createRef();
     this.bigNumberRef = React.createRef();
 
-    const initialRank = getBadgeByNumberOfCases(this.props.current || 0);
-    const measurementsInCurrentSession =
-      this.props.measurementsInCurrentSession || 0;
+    const increment = this.props.measurementsInCurrentSession || 0;
+    const bigNumber = this.props.current || 0;
+    const initialRank = getBadgeByNumberOfCases(bigNumber);
 
     this.state = {
-      current: this.props.current,
-      measurementsInCurrentSession,
-      bigNumber: this.props.current,
-      increment: measurementsInCurrentSession,
+      bigNumber,
+      increment,
+      progressValue: bigNumber,
       rank: initialRank,
-      progressValue: this.props.current,
       showRanksModal: false
     };
 
@@ -72,14 +70,115 @@ class ProgressSection extends Component {
     return badges;
   }
 
+  animateRanks(ranks, finalValue) {
+    const bigNumberElement = this.bigNumberRef.current;
+    const incrementElement = this.incrementRef.current;
+    const ranksToIterate = Array.from(ranks);
+
+    const animateRank = () => {
+      const currentRank = ranksToIterate.shift();
+
+      ReactTooltip.hide();
+      if (!currentRank) {
+        ReactTooltip.rebuild();
+        return;
+      }
+
+      const bigNumber = ranksToIterate.length ? currentRank.max : finalValue;
+      const increment = bigNumber - this.state.bigNumber;
+
+      this.setState({ rank: currentRank });
+      setTimeout(() => {
+        this.setState({ progressValue: bigNumber });
+        animateNumber(
+          bigNumberElement,
+          this,
+          bigNumber,
+          'bigNumber',
+          3000,
+          () => {
+            this.setState({ bigNumber });
+            setTimeout(() => animateRank(), 300);
+          }
+        );
+      }, 2000);
+
+      incrementElement.innerText = `+${increment}`;
+    };
+
+    animateRank();
+  }
+
+  componentDidUpdate(prevProps) {
+    const oldCurrent = prevProps.current;
+    const newCurrent = this.props.current;
+
+    const newIncrement = this.props.measurementsInCurrentSession;
+
+    if (newCurrent === oldCurrent) {
+      return;
+    }
+
+    let ranks = [];
+    if (oldCurrent === undefined) {
+      ranks = [getBadgeByNumberOfCases(newCurrent)];
+    } else if (newIncrement > 0) {
+      ranks = this.getRanksFromTo(oldCurrent, newCurrent);
+    }
+
+    this.animateRanks(ranks, newCurrent);
+  }
+
+  getRanksFromTo(from, to) {
+    const ranks = [];
+    let current = from;
+    let toIncrement = to - from;
+
+    if (toIncrement > 0) {
+      while (toIncrement !== 0) {
+        const currentRank = getBadgeByNumberOfCases(current);
+        const diff = currentRank.max - current;
+        const iterationIncrement = diff <= toIncrement ? diff : toIncrement;
+
+        ranks.push(currentRank);
+        current += iterationIncrement;
+        toIncrement -= iterationIncrement;
+
+        if (toIncrement === 0 && current === currentRank.max) {
+          ranks.push(getBadgeByNumberOfCases(current));
+        }
+      }
+    }
+
+    return ranks;
+  }
+
+  componentDidMount() {
+    let ranks = [];
+    const current = this.props.current || 0;
+    const increment = this.props.measurementsInCurrentSession || 0;
+    const finalValue = current + increment;
+
+    if (finalValue > 0) {
+      ranks = this.getRanksFromTo(current, finalValue);
+    } else {
+      ranks = [getBadgeByNumberOfCases(current)];
+    }
+
+    this.animateRanks(ranks, finalValue);
+  }
+
   render() {
     const rank = this.state.rank;
-    const current = this.state.bigNumber || 0;
-    const increment = this.state.increment || 0;
+    const bigNumber = this.state.bigNumber || 0;
+    const formattedBigNumber = bigNumber.toLocaleString();
+
+    const current = this.props.current || 0;
+    const increment = this.props.increment || 0;
+    const finalValue = current + increment;
 
     // Replace all numeric chars with the wider number in font (6)
-    const formattedCurrent = current.toLocaleString();
-    const fixedCurrent = formattedCurrent.replace(/[0-9]/g, '6');
+    const fixedFinal = finalValue.toLocaleString().replace(/[0-9]/g, '6');
 
     return (
       <div className="ProgressSection">
@@ -97,9 +196,9 @@ class ProgressSection extends Component {
             </div>
             <div className="currentPoints">
               <span className="value">
-                <span className="maxWidth noselect">{fixedCurrent}</span>
+                <span className="maxWidth noselect">{fixedFinal}</span>
                 <span className="visible" ref={this.bigNumberRef}>
-                  {formattedCurrent}
+                  {formattedBigNumber}
                 </span>
               </span>
               <span ref={this.incrementRef} className="plusPoints">
@@ -135,99 +234,6 @@ class ProgressSection extends Component {
       </div>
     );
   }
-
-  componentDidMount() {
-    ReactTooltip.rebuild();
-
-    if (this.incrementRef.current) {
-      setTimeout(() => {
-        this.plusPointsAnimation();
-      });
-      //   setTimeout(() => {
-      //     this.currentValueAnimation();
-      //   }, 2100);
-    }
-
-    const ranks = [];
-    let current = this.props.current;
-    let toIncrement = this.props.measurementsInCurrentSession || 0;
-    const finalValue = current + toIncrement;
-
-    if (toIncrement > 0) {
-      while (current !== finalValue) {
-        const currentRank = getBadgeByNumberOfCases(current);
-        const diff = currentRank.max - current;
-
-        ranks.push(currentRank);
-        if (diff <= toIncrement) {
-          toIncrement -= diff;
-          current += diff;
-        } else {
-          current += toIncrement;
-        }
-      }
-    } else {
-      const currentRank = getBadgeByNumberOfCases(current);
-      ranks.push(currentRank);
-    }
-
-    const bigNumberElement = this.bigNumberRef.current;
-    const incrementElement = this.incrementRef.current;
-
-    const animateRank = () => {
-      const currentRank = ranks.shift();
-
-      if (!currentRank) {
-        return;
-      }
-
-      const bigNumber = ranks.length ? currentRank.max : finalValue;
-      const increment = bigNumber - this.state.bigNumber;
-
-      this.setState({ rank: currentRank });
-      setTimeout(() => {
-        this.setState({ progressValue: bigNumber });
-        animateNumber(
-          bigNumberElement,
-          this,
-          bigNumber,
-          'bigNumber',
-          3000,
-          () => {
-            this.setState({ bigNumber });
-            setTimeout(() => animateRank(), 300);
-          }
-        );
-      }, 2000);
-
-      incrementElement.innerText = `+${increment}`;
-    };
-
-    animateRank();
-  }
-
-  plusPointsAnimation = () => {
-    // this.incrementRef.current.classList.add('fadeInAndSlideDown');
-    // setTimeout(() => {
-    //   setTimeout(() => {
-    //     this.incrementRef.current.classList.remove('fadeInAndSlideDown');
-    //     this.incrementRef.current.classList.add('fadeOutAndSlideDown');
-    //   }, 1700);
-    // }, 300);
-  };
-
-  currentValueAnimation = () => {
-    this.bigNumberRef.current.classList.add('moveDown');
-    setTimeout(() => {
-      this.bigNumberRef.current.classList.remove('moveDown');
-      setTimeout(() => {
-        this.setState({
-          current: this.state.current + this.state.measurementsInCurrentSession,
-          measurementsInCurrentSession: null
-        });
-      }, 100);
-    }, 100);
-  };
 }
 
 ProgressSection.propTypes = {

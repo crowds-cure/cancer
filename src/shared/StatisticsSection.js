@@ -3,7 +3,6 @@ import React from 'react';
 import StatisticsCard from './StatisticsCard.js';
 import InfoBox from './InfoBox.js';
 import './StatisticsSection.css';
-//import PropTypes from 'prop-types';
 import getCommunityStats from './getCommunityStats.js';
 import iconCommunityEye from '../images/general/icon-community-eye.svg';
 import iconCommunityPerson from '../images/general/icon-community-person.svg';
@@ -33,7 +32,6 @@ class StatisticsSection extends Component {
       recentMeasurements
     } = communityStats;
 
-    // TODO: [layout] Add SVG icon reference to stats statistics object
     const stats = [
       {
         number: totalMeasurements,
@@ -77,9 +75,5 @@ class StatisticsSection extends Component {
     );
   }
 }
-
-StatisticsSection.propTypes = {
-  //items: PropTypes.array.isRequired,
-};
 
 export default StatisticsSection;
