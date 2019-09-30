@@ -13,12 +13,11 @@ class ProgressBar extends Component {
 
     this.state = {
       value: this.props.value - this.props.min,
-      max: this.props.max - this.props.min,
-      lastMax: this.props.max
+      max: this.props.max - this.props.min
     };
 
-    this.progressBar = React.createRef();
-    this.progressBarGlow = React.createRef();
+    this.progressBarRef = React.createRef();
+    this.progressGlowRef = React.createRef();
   }
 
   render() {
@@ -33,13 +32,13 @@ class ProgressBar extends Component {
           className="ProgressBar"
           max={this.state.max}
           value={this.state.value}
-          ref={this.progressBar}
+          ref={this.progressBarRef}
         />
         <progress
-          className="ProgressBar ProgressBarGlow"
+          className="ProgressBar ProgressGlow"
           max={this.state.max}
           value={this.state.value}
-          ref={this.progressBarGlow}
+          ref={this.progressGlowRef}
         />
         {this.props.endNumber === undefined ? (
           ''
@@ -50,41 +49,28 @@ class ProgressBar extends Component {
     );
   }
 
-  componentDidMount = () => {
-    const delay = 300;
-    const increment = this.props.increment;
-    if (increment) {
-      setTimeout(() => {
-        this.setState({
-          value: this.state.value + increment
-        });
-      }, delay);
-    }
-  };
-
   componentDidUpdate = previousProps => {
-    let previousValue;
+    const progressBarElement = this.progressBarRef.current;
+    const progressGlowElement = this.progressGlowRef.current;
 
-    if (this.state.lastMax !== this.props.max) {
-      previousValue = 0;
-    } else if (previousProps.value !== this.props.value) {
-      previousValue = previousProps.value;
-    }
+    const oldValue = this.state.value;
+    const newValue = this.props.value - this.props.min;
 
-    if (previousValue !== undefined) {
-      this.progressBar.current.classList.add('notransition');
-      this.progressBarGlow.current.classList.add('notransition');
-      this.progressBar.current.value = previousValue;
-      this.progressBarGlow.current.value = previousValue;
-      setTimeout(() => {
-        this.progressBar.current.classList.remove('notransition');
-        this.progressBarGlow.current.classList.remove('notransition');
-        this.setState({
-          value: this.props.value - this.props.min,
-          max: this.props.max - this.props.min,
-          lastMax: this.props.max
-        });
-      }, 10);
+    const oldMax = this.state.max;
+    const newMax = this.props.max - this.props.min;
+
+    if (oldMax !== newMax) {
+      progressBarElement.classList.add('notransition');
+      progressGlowElement.classList.add('notransition');
+
+      this.setState({
+        max: newMax,
+        value: newValue
+      });
+    } else if (newValue !== oldValue) {
+      progressBarElement.classList.remove('notransition');
+      progressGlowElement.classList.remove('notransition');
+      this.setState({ value: newValue });
     }
   };
 }
@@ -92,8 +78,7 @@ class ProgressBar extends Component {
 ProgressBar.propTypes = {
   value: PropTypes.number,
   min: PropTypes.number.isRequired,
-  max: PropTypes.number.isRequired,
-  increment: PropTypes.number
+  max: PropTypes.number.isRequired
 };
 
 export default ProgressBar;

@@ -67,17 +67,17 @@
   transition: all 3s ease-in-out;
 }
 
-.ProgressBarGlow {
+.ProgressGlow {
   position: absolute;
   top: 0;
   left: 0;
 }
 
-.ProgressBarGlow::-webkit-progress-bar {
+.ProgressGlow::-webkit-progress-bar {
   background: transparent;
 }
 
-.ProgressBarGlow[value]::-webkit-progress-value {
+.ProgressGlow[value]::-webkit-progress-value {
   filter: progressBarFilter;
   -webkit-filter: progressBarFilter;
 }
