@@ -28,22 +28,16 @@ class ActivityProgressSection extends Component {
   render() {
     return (
       <InfoBox className="ActivityProgressSection" headerText="Score and rank">
-        <div className="row">
-          <div className="col-12">
-            <ProgressSection
-              current={this.state.current}
-              measurementsInCurrentSession={
-                this.state.measurementsInCurrentSession
-              }
-            />
-          </div>
-          <div className="d-none d-md-block col-4 leaderboardRank">
-            <div className="position">18</div>
-            <div className="description">
-              Leaderboard
-              <br />
-              Rank
-            </div>
+        <ProgressSection
+          current={this.state.current}
+          measurementsInCurrentSession={this.state.measurementsInCurrentSession}
+        />
+        <div className="d-none d-md-block leaderboardRank">
+          <div className="position">18</div>
+          <div className="description">
+            Leaderboard
+            <br />
+            Rank
           </div>
         </div>
       </InfoBox>

@@ -90,6 +90,14 @@
   transform-origin: 50% 0%;
 }
 
+.badgeName {
+  text-align: center;
+}
+
+.rankBadge.not-received img {
+  opacity: 0.25;
+}
+
 @media (min-width: 2048w) {
   .Dashboard > .layoutGroup {
     transform: scale(calc(2048 / 1920));

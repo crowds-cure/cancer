@@ -1,6 +1,6 @@
 @value globals: "./GlobalStyles.css";
 @value primaryBackgroundColor, textPrimaryColor, textActiveColor from globals;
-@value screen-xs-max, screen-sm-max, screen-md-max from globals;
+@value screen-min, screen-xs-max, screen-sm-max, screen-md-max from globals;
 
 .SessionSummary {
   background-color: primaryBackgroundColor;
@@ -68,6 +68,14 @@
   margin-top: 100px;
 }
 
+.SessionSummary .ProgressSection .numberCases {
+  margin: -20px 0 30px;
+}
+
+.SessionSummary .ProgressSection .progressBarContainer {
+  margin: 10px 42px 24px;
+}
+
 @media (max-width: screen-sm-max) {
   .SessionSummary h1 {
     margin-top: 100px;
@@ -85,5 +93,25 @@
   .SessionSummary .sessionTotalValue {
     font-size: 80px;
     margin-top: 0;
+  }
+
+  .SessionSummary .ProgressSection .numberCases {
+    margin-top: 10px;
+  }
+
+  .SessionSummary .ProgressSection .progressBarContainer {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}
+
+@media (max-width: screen-min) {
+  .SessionSummary .ProgressSection .numberCases {
+    margin-top: 20px;
+  }
+
+  .SessionSummary .ProgressSection .value {
+    font-size: 60px;
+    line-height: 128px;
   }
 }

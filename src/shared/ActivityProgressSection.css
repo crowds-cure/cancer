@@ -2,14 +2,6 @@
 @value primaryBackgroundColor, textPrimaryColor, textSecondaryColor, textActiveColor from globals;
 @value screen-sm, screen-md, screen-lg from globals;
 
-.badgeName {
-  text-align: center;
-}
-
-.rankBadge.not-received img {
-  opacity: 0.25;
-}
-
 .ActivityProgressSection.InfoBox {
   background-color: #472e93;
 }
@@ -18,11 +10,16 @@
   background-color: #2f1973;
 }
 
-.ActivityProgressSection .rankBadge {
+.ActivityProgressSection.InfoBox .boxContent {
+  padding: 16px 20px;
+  position: relative;
+}
+
+.ActivityProgressSection .ProgressSection .rankBadge {
   display: inline-block;
 }
 
-.ActivityProgressSection .rankBadge img {
+.ActivityProgressSection .ProgressSection .rankBadge img {
   cursor: pointer;
   height: 92px;
   width: 92px;
@@ -30,18 +27,23 @@
   vertical-align: top;
 }
 
-.ActivityProgressSection .measurementsCount {
+.ActivityProgressSection .ProgressSection .numberCases {
+  justify-content: left;
+}
+
+.ActivityProgressSection .ProgressSection .value {
   color: textActiveColor;
   display: inline-block;
   font-size: 61px;
   font-weight: 500;
   line-height: 92px;
-  margin-left: 10px;
   vertical-align: top;
 }
 
 .ActivityProgressSection .leaderboardRank {
-  padding-top: 10px;
+  position: absolute;
+  right: 16px;
+  top: 19px;
 }
 
 .ActivityProgressSection .leaderboardRank .position {
@@ -69,24 +71,19 @@
   width: 95px;
 }
 
-.ActivityProgressSection .progressBarContainer {
-  padding: 0 20px;
-}
-
 @media (min-width: screen-sm) {
   .ActivityProgressSection.InfoBox .boxContent {
-    padding-top: 0;
+    padding: 10px 32px 16px;
   }
 
-  .ActivityProgressSection .rankBadge img {
+  .ActivityProgressSection .ProgressSection .rankBadge img {
     height: 130px;
     width: 130px;
   }
 
-  .ActivityProgressSection .measurementsCount {
+  .ActivityProgressSection .ProgressSection .value {
     font-size: 82px;
     line-height: 130px;
-    margin-left: 20px;
   }
 
   .ActivityProgressSection .plusPoints {
@@ -94,34 +91,25 @@
     top: -70px;
     left: 90px;
   }
-
-  .ActivityProgressSection .rankBadge:hover img {
-    transform: scale(1.1);
-  }
 }
 
 @media (min-width: screen-md) {
-  .ActivityProgressSection .rankBadge img {
+  .ActivityProgressSection .ProgressSection .rankBadge img {
     height: 160px;
     width: 160px;
   }
 
-  .ActivityProgressSection .measurementsCount {
+  .ActivityProgressSection .ProgressSection .value {
     line-height: 160px;
-  }
-
-  .ActivityProgressSection .progressBarContainer {
-    padding: 0 30px;
   }
 }
 
 @media (min-width: screen-lg) {
-  .ActivityProgressSection .InfoBox .boxContent {
-    padding-top: 10px;
+  .ActivityProgressSection.InfoBox .boxContent {
+    padding: 20px 32px;
   }
 
   .ActivityProgressSection .progressBarContainer {
     margin-bottom: 20px;
-    padding: 0 40px;
   }
 }
