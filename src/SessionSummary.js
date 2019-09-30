@@ -6,7 +6,6 @@ import { withRouter } from 'react-router-dom';
 import './SessionSummary.css';
 
 import ProgressSection from './shared/ProgressSection.js';
-import LogoutSection from './shared/LogoutSection.js';
 import PropTypes from 'prop-types';
 import Logo from './shared/Logo';
 import AchievementBadge from './shared/AchievementBadge.js';
@@ -125,9 +124,6 @@ class SessionSummary extends Component {
                 {this.getSessionBadges()}
               </div>
             </div>
-          </div>
-          <div className="row justify-content-center">
-            <div className="col-16">{/* <LogoutSection /> */}</div>
           </div>
         </div>
         <ReactTooltip className="DashboardTooltip" effect="solid" />

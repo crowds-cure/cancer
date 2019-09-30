@@ -226,7 +226,7 @@ class ProgressSection extends Component {
           closeTimeoutMS={200}
         >
           <h1>Ranks</h1>
-          <div className="row">{this.getAllRankBadges(current)}</div>
+          <div className="row">{this.getAllRankBadges(bigNumber)}</div>
           <span className="modal-close" onClick={this.toggleModal}>
             Close
           </span>
