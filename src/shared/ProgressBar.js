@@ -12,15 +12,18 @@ class ProgressBar extends Component {
     }
 
     this.state = {
-      value: this.props.value - this.props.min,
-      max: this.props.max - this.props.min
+      min: this.props.min,
+      max: this.props.max,
+      value: this.props.value
     };
 
     this.progressBarRef = React.createRef();
   }
 
   getProgressValueStyle(state) {
-    const percentage = (state.value / state.max) * 100;
+    const baseBalue = state.value - state.min;
+    const baseMax = state.max - state.min;
+    const percentage = (baseBalue / baseMax) * 100;
     return {
       width: `${percentage}%`
     };
@@ -57,15 +60,16 @@ class ProgressBar extends Component {
     const progressBarElement = this.progressBarRef.current;
 
     const oldValue = this.state.value;
-    const newValue = this.props.value - this.props.min;
+    const newValue = this.props.value;
 
     const oldMax = this.state.max;
-    const newMax = this.props.max - this.props.min;
+    const newMax = this.props.max;
 
     if (oldMax !== newMax) {
       progressBarElement.classList.add('valueReset');
 
       this.setState({
+        min: this.props.min,
         max: newMax,
         value: newValue
       });

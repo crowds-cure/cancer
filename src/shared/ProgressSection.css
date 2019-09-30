@@ -1,5 +1,6 @@
 @value globals: "../GlobalStyles.css";
-@value textPrimaryColor, textSecondaryColor, textActiveColor, screen-sm from globals;
+@value textPrimaryColor, textSecondaryColor, textActiveColor from globals;
+@value screen-min, screen-xs-max, screen-sm from globals;
 
 .ProgressSection .title {
   font-weight: bold;
@@ -10,34 +11,32 @@
 .ProgressSection .numberCases {
   display: flex;
   justify-content: center;
-  margin-top: 70px;
+  margin: -20px 0 30px;
 }
 
 .ProgressSection .currentPoints {
-  margin-left: 25px;
+  margin-left: 10px;
   position: relative;
 }
 
 .ProgressSection .value {
-  transition: all 0.1s linear;
   display: inline-block;
   color: textPrimaryColor;
   font-weight: 600;
-  font-size: 43px;
-  line-height: normal;
-  margin-left: 10px;
+  font-size: 120px;
+  line-height: 184px;
   position: relative;
   top: 0px;
 }
 
-.ProgressSection .suffix {
-  display: inline-block;
-  font-variant-caps: small-caps;
-  font-size: 13px;
-  vertical-align: top;
-  margin-left: 10px;
-  margin-top: 10px;
-  color: textSecondaryColor;
+.ProgressSection .value .maxWidth {
+  visibility: hidden;
+}
+
+.ProgressSection .value .visible {
+  left: 0;
+  position: absolute;
+  top: 0;
 }
 
 .ProgressSection .plusPoints {
@@ -85,36 +84,52 @@
 }
 
 .ProgressSection .rankBadge img {
-  height: 100px;
-  width: 100px;
+  height: 184px;
+  width: 184px;
 }
 
 @media (min-width: screen-sm) {
+  .ProgressSection .rankBadge {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+
+  .ProgressSection .rankBadge:hover {
+    transform: scale(1.1);
+  }
+}
+
+@media (max-width: screen-xs-max) {
+  .ProgressSection .rankBadge {
+    cursor: auto;
+  }
+
+  .ProgressSection .numberCases {
+    margin-top: 10px;
+  }
+
+  .ProgressSection .progressBarContainer {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}
+
+@media (max-width: screen-min) {
+  .ProgressSection .numberCases {
+    margin-top: 20px;
+  }
+
   .ProgressSection .rankBadge img {
-    height: 130px;
-    width: 130px;
-  }
-
-  .ProgressSection .plusPoints {
-    font-size: 60px;
-    top: -110px;
-    right: 110px;
-  }
-
-  .ProgressSection .fadeInAndSlideDown {
-    top: -70px;
-  }
-
-  .ProgressSection .fadeOutAndSlideDown {
-    top: 0px;
+    height: 128px;
+    width: 128px;
   }
 
   .ProgressSection .value {
-    font-size: 120px;
+    font-size: 60px;
+    line-height: 128px;
   }
 
-  .ProgressSection .suffix {
-    font-size: 22px;
-    margin-top: 15px;
+  .ProgressSection .currentPoints {
+    margin-left: 0;
   }
 }
