@@ -1,0 +1,36 @@
+@value globals: "./GlobalStyles.css";
+@value uiBlack from globals;
+
+@value dashboardAnimation: 0.92s ease;
+
+/* Background animation */
+@keyframes dashboardBackground {
+  0% {
+    background-color: #140046;
+  }
+  100% {
+    background-color: uiBlack;
+  }
+}
+
+.Dashboard.fadingOut.fadingToBlack {
+  animation: dashboardBackground dashboardAnimation;
+}
+
+.fade-enter {
+  opacity: 0.01;
+}
+
+.fade-enter.fade-enter-active {
+  opacity: 1;
+  transition: opacity 1000ms ease-in;
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit.fade-exit-active {
+  opacity: 0.01;
+  transition: opacity 1000ms ease-in;
+}
