@@ -23,7 +23,7 @@ class NotificationBox extends React.Component {
   render() {
     const { title, message, icon } = this.props;
     return (
-      <>
+      <div className="background">
         <div className="icon">
           <img src={icon} alt={title} />
           <div className="halo halo1">
@@ -40,7 +40,7 @@ class NotificationBox extends React.Component {
           {message ? <div className="message">{message}</div> : ''}
           {title ? <h4 className="title">{title}</h4> : ''}
         </div>
-      </>
+      </div>
     );
   }
 }

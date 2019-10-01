@@ -4,13 +4,17 @@
 @value boxAnimation: 1.68s ease;
 
 .Notification.notification-box {
-  background-color: #472e93;
   bottom: 0;
   cursor: pointer;
   left: 0;
   position: fixed;
   text-align: center;
   width: 100%;
+}
+
+.Notification.notification-box .background {
+  background-color: #472e93;
+  padding-top: 105px;
 }
 
 .Notification.notification-box .icon {
@@ -78,29 +82,46 @@
   font-weight: 500;
   letter-spacing: 0.42px;
   line-height: 44px;
-  margin-top: 105px;
   text-align: center;
 }
 
-/* Background animation */
-@keyframes notificationBoxBackground {
+/* Box animation */
+@keyframes notificationBoxSlide {
   0% {
-    background-color: rgba(71, 46, 147, 0);
     transform: translateY(100%);
   }
   30%,
   100% {
-    background-color: rgba(71, 46, 147, 1);
     transform: translateY(0);
   }
 }
 
 .Notification.notification-box.fadingIn,
 .Notification.notification-box.fadingOut {
-  animation: notificationBoxBackground boxAnimation;
+  animation: notificationBoxSlide boxAnimation;
 }
 
 .Notification.notification-box.fadingOut {
+  animation-direction: reverse;
+}
+
+/* Background animation */
+@keyframes notificationBoxBackground {
+  0% {
+    background-color: transparent;
+  }
+  30%,
+  100% {
+    background-color: #472e93;
+  }
+}
+
+.Notification.notification-box.fadingIn .background,
+.Notification.notification-box.fadingOut .background {
+  animation: notificationBoxBackground boxAnimation;
+}
+
+.Notification.notification-box.fadingOut .background {
   animation-direction: reverse;
 }
 
@@ -258,4 +279,23 @@
 
 .Notification.notification-box.fadingOut .message {
   animation-direction: reverse;
+}
+
+/* Responsive layout */
+@media (max-width: 1023px) {
+  .Notification.notification-box .background {
+    left: 50%;
+    transform: scale(0.8) translateX(-12.5%);
+    transform-origin: 50% 100%;
+    width: 125%;
+  }
+}
+
+@media (max-width: 639px) {
+  .Notification.notification-box .background {
+    left: 50%;
+    transform: scale(0.5) translateX(-50%);
+    transform-origin: 50% 100%;
+    width: 200%;
+  }
 }
