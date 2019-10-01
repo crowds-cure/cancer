@@ -24,6 +24,12 @@ class Notification extends React.Component {
     onRequestHide: () => {}
   };
 
+  constructor(props) {
+    super(props);
+
+    this.notificationRef = React.createRef();
+  }
+
   componentDidMount = () => {
     const { timeout } = this.props;
     if (timeout > 0) {
@@ -47,19 +53,38 @@ class Notification extends React.Component {
   };
 
   requestHide = () => {
-    const { onRequestHide } = this.props;
-    if (onRequestHide) {
-      onRequestHide();
-    }
+    const element = this.notificationRef.current;
+    const animationCallback = () => {
+      element.removeEventListener('animationend', animationCallback);
+      element.classList.remove('fadingOut');
+
+      const { onRequestHide } = this.props;
+      if (onRequestHide) {
+        onRequestHide();
+      }
+    };
+
+    element.addEventListener('animationend', animationCallback);
+    element.classList.add('fadingOut');
   };
 
   render() {
-    const { type, title, message } = this.props;
+    const { type, title, message, icon } = this.props;
     const className = classnames(['Notification', `notification-${type}`]);
     return (
-      <div className={className} onClick={this.handleClick}>
-        <div className="icon" />
-        <div className="notification-text" role="alert">
+      <div
+        className={className}
+        onClick={this.handleClick}
+        ref={this.notificationRef}
+      >
+        <div className="icon">
+          {icon ? (
+            <img src={icon} alt={title} />
+          ) : (
+            <div className="default">?</div>
+          )}
+        </div>
+        <div className="notificationText" role="alert">
           {title ? <h4 className="title">{title}</h4> : ''}
           {message ? <div className="message">{message}</div> : ''}
         </div>
