@@ -58,7 +58,7 @@ class NotificationContainer extends React.Component {
 
   render() {
     return (
-      <div className="NotificationContainer">
+      <div className="NotificationContainer noselect">
         {this.getNotificationElements(this.state)}
       </div>
     );

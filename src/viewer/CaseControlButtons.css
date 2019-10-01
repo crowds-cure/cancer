@@ -2,13 +2,6 @@
   white-space: nowrap;
 }
 
-@media (min-width: screen-md) {
-  .CaseControlButtons {
-    margin-right: 35px;
-    margin-left: 20px;
-  }
-}
-
 .CaseControlButtons .CompleteButtonWrapper {
   display: inline-block;
   vertical-align: top;
