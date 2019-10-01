@@ -1,0 +1,85 @@
+.Notification.notification-popup {
+  align-items: center;
+  animation: notificationPopupFadeIn 0.3s ease;
+  background-color: #22193d;
+  border-radius: 9px;
+  cursor: pointer;
+  display: flex;
+  margin-bottom: 10px;
+  padding: 15px;
+  width: 100%;
+}
+
+.Notification.fadingOut.notification-popup {
+  animation: notificationPopupFadeOut 0.3s ease;
+}
+
+.Notification.notification-popup .icon {
+  display: inline-block;
+  height: 50px;
+  margin-right: 15px;
+  min-width: 50px;
+  vertical-align: middle;
+  width: 50px;
+}
+
+.Notification.notification-popup .icon img {
+  width: 50px;
+  height: 50px;
+}
+
+/* TODO: [layout] Change for SVG icon when available */
+.Notification.notification-popup .icon .default {
+  background-color: #410988;
+  color: #ffffff;
+  border: 1px solid #ffffff;
+  border-radius: 25px;
+  font-size: 36px;
+  font-weight: 100;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  width: 50px;
+}
+
+.Notification.notification-popup .notificationText {
+  font-size: 16px;
+}
+
+.Notification.notification-popup .notificationText .title {
+  color: #ffffff;
+  line-height: 1.31;
+  margin: 0;
+}
+
+.Notification.notification-popup .notificationText .message {
+  color: #aca2cd;
+}
+
+@keyframes notificationPopupFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  50% {
+    transform: translateY(-10%);
+  }
+  80% {
+    transform: translateY(2%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes notificationPopupFadeOut {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+}

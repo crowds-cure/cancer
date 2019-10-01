@@ -3,10 +3,12 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
 import { Types as NotificationTypes } from './NotificationManager';
+import NotificationPopup from './NotificationPopup';
+import NotificationBox from './NotificationBox';
 
 class Notification extends React.Component {
   static propTypes = {
-    type: PropTypes.oneOf([NotificationTypes.INFO, NotificationTypes.PROGRESS]),
+    type: PropTypes.oneOf([NotificationTypes.POPUP, NotificationTypes.BOX]),
     title: PropTypes.node,
     message: PropTypes.node,
     icon: PropTypes.node,
@@ -19,6 +21,7 @@ class Notification extends React.Component {
     type: NotificationTypes.INFO,
     title: null,
     message: null,
+    icon: null,
     timeout: 5000,
     onClick: () => {},
     onRequestHide: () => {}
@@ -68,8 +71,18 @@ class Notification extends React.Component {
     element.classList.add('fadingOut');
   };
 
+  renderNotificationByType(props) {
+    const { type, title, message, icon } = props;
+
+    if (type === NotificationTypes.BOX) {
+      return <NotificationBox title={title} message={message} icon={icon} />;
+    }
+
+    return <NotificationPopup title={title} message={message} icon={icon} />;
+  }
+
   render() {
-    const { type, title, message, icon } = this.props;
+    const { type } = this.props;
     const className = classnames(['Notification', `notification-${type}`]);
     return (
       <div
@@ -77,17 +90,7 @@ class Notification extends React.Component {
         onClick={this.handleClick}
         ref={this.notificationRef}
       >
-        <div className="icon">
-          {icon ? (
-            <img src={icon} alt={title} />
-          ) : (
-            <div className="default">?</div>
-          )}
-        </div>
-        <div className="notificationText" role="alert">
-          {title ? <h4 className="title">{title}</h4> : ''}
-          {message ? <div className="message">{message}</div> : ''}
-        </div>
+        {this.renderNotificationByType(this.props)}
       </div>
     );
   }

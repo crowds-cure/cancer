@@ -1,8 +1,8 @@
 import { EventEmitter } from 'events';
 
 export const Types = Object.freeze({
-  INFO: 'info',
-  PROGRESS: 'progress'
+  POPUP: 'popup',
+  BOX: 'box'
 });
 
 export const Events = Object.freeze({
@@ -23,7 +23,7 @@ class NotificationManager extends EventEmitter {
     title,
     message,
     icon,
-    type = Types.INFO,
+    type = Types.POPUP,
     timeout = 5000,
     onClick = () => {}
   }) {
@@ -35,7 +35,7 @@ class NotificationManager extends EventEmitter {
       icon,
       type,
       timeout,
-      onclick
+      onClick
     };
 
     this.notifications.unshift(notification);
@@ -46,17 +46,26 @@ class NotificationManager extends EventEmitter {
     return notification;
   }
 
-  info(title, message, timeout, onClick) {
+  popup(title, message, icon, timeout, onClick) {
     return this.create({
+      type: Types.POPUP,
       title,
       message,
+      icon,
       timeout,
       onClick
     });
   }
 
-  progress(title, message, icon, timeout, onClick) {
+  box(title, message, icon, timeout, onClick) {
+    const filter = notification => notification.type === Types.BOX;
+    const existingBox = this.notifications.find(filter);
+    if (existingBox) {
+      this.remove(existingBox.id);
+    }
+
     return this.create({
+      type: Types.BOX,
       title,
       message,
       icon,
@@ -67,7 +76,7 @@ class NotificationManager extends EventEmitter {
 
   remove(id) {
     const filter = notification => notification.id === id;
-    const notification = this.notifications.filter(filter);
+    const notification = this.notifications.find(filter);
 
     if (notification) {
       const index = this.notifications.indexOf(notification);

@@ -31,7 +31,7 @@ class NotificationContainer extends React.Component {
   }
 
   handleRequestHide = notification => {
-    NotificationManager.remove(notification);
+    NotificationManager.remove(notification.id);
   };
 
   getNotificationElements(state) {
