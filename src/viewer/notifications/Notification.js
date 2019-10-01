@@ -5,6 +5,7 @@ import classnames from 'classnames';
 import { Types as NotificationTypes } from './NotificationManager';
 import NotificationPopup from './NotificationPopup';
 import NotificationBox from './NotificationBox';
+import waitForAnimation from '../../shared/waitForAnimation';
 
 class Notification extends React.Component {
   static propTypes = {
@@ -38,6 +39,9 @@ class Notification extends React.Component {
     if (timeout > 0) {
       this.timer = setTimeout(this.requestHide, timeout);
     }
+
+    const element = this.notificationRef.current;
+    this.fadeInPromise = waitForAnimation(element, 'fadingIn');
   };
 
   componentWillUnmount = () => {
@@ -57,18 +61,21 @@ class Notification extends React.Component {
 
   requestHide = () => {
     const element = this.notificationRef.current;
-    const animationCallback = () => {
-      element.removeEventListener('animationend', animationCallback);
-      element.classList.remove('fadingOut');
+    const fadeInPromise = this.fadeInPromise || Promise.resolve();
+    const fadeOutPromise = new Promise(resolve => {
+      fadeInPromise.then(() =>
+        setTimeout(() => {
+          waitForAnimation(element, 'fadingOut').then(resolve);
+        })
+      );
+    });
 
+    fadeOutPromise.then(() => {
       const { onRequestHide } = this.props;
       if (onRequestHide) {
         onRequestHide();
       }
-    };
-
-    element.addEventListener('animationend', animationCallback);
-    element.classList.add('fadingOut');
+    });
   };
 
   renderNotificationByType(props) {

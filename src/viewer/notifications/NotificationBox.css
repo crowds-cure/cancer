@@ -1,8 +1,9 @@
 @value globals: "../../GlobalStyles.css";
 @value uiBlack from globals;
 
+@value boxAnimation: 1.68s ease;
+
 .Notification.notification-box {
-  animation: notificationBoxBackground 0.5s ease;
   background-color: #472e93;
   bottom: 0;
   cursor: pointer;
@@ -13,7 +14,6 @@
 }
 
 .Notification.notification-box .icon {
-  animation: notificationBoxIcon 0.8s ease;
   background-color: #22193d;
   border-radius: 83px;
   box-shadow: 0 0 0 10px #472e93;
@@ -40,28 +40,24 @@
 }
 
 .Notification.notification-box .halo1 {
-  animation: notificationBoxIconHaloRotate 50s linear infinite,
-    notificationBoxMessageHalo1 1.68s ease;
+  animation: notificationBoxIconHaloRotate 50s linear infinite;
   height: 196px;
   width: 196px;
 }
 
 .Notification.notification-box .halo2 {
-  animation: notificationBoxIconHaloRotate 30s linear infinite,
-    notificationBoxMessageHalo1 1.68s ease;
+  animation: notificationBoxIconHaloRotate 30s linear infinite;
   height: 228px;
   width: 228px;
 }
 
 .Notification.notification-box .halo3 {
-  animation: notificationBoxIconHaloRotate 50s linear infinite,
-    notificationBoxMessageHalo1 1.68s ease;
+  animation: notificationBoxIconHaloRotate 50s linear infinite;
   height: 276px;
   width: 276px;
 }
 
 .Notification.notification-box .title {
-  animation: notificationBoxTitle 1.5s ease;
   background-color: uiBlack;
   border-radius: 28.5px;
   color: #00d5ae;
@@ -77,7 +73,6 @@
 }
 
 .Notification.notification-box .message {
-  animation: notificationBoxMessage 1s ease;
   color: #ffffff;
   font-size: 37.8px;
   font-weight: 500;
@@ -87,83 +82,35 @@
   text-align: center;
 }
 
-.Notification.notification-box.fadingOut {
-  animation-direction: reverse;
-  animation-play-state: running;
-}
-
-@keyframes notificationBoxIconHaloRotate {
-  0% {
-    transform: translate(-50%, -50%) rotate(0deg);
-  }
-  100% {
-    transform: translate(-50%, -50%) rotate(360deg);
-  }
-}
-
+/* Background animation */
 @keyframes notificationBoxBackground {
   0% {
     background-color: rgba(71, 46, 147, 0);
     transform: translateY(100%);
   }
+  30%,
   100% {
     background-color: rgba(71, 46, 147, 1);
     transform: translateY(0);
   }
 }
 
-@keyframes notificationBoxIcon {
+.Notification.notification-box.fadingIn,
+.Notification.notification-box.fadingOut {
+  animation: notificationBoxBackground boxAnimation;
+}
+
+.Notification.notification-box.fadingOut {
+  animation-direction: reverse;
+}
+
+/* Halo circles animation */
+@keyframes notificationBoxIconHaloRotate {
   0% {
-    box-shadow: 0 0 0 10px transparent;
-    opacity: 0;
-    transform: translate(-50%, 0);
-  }
-  25% {
-    opacity: 1;
-  }
-  50% {
-    box-shadow: 0 0 0 10px transparent;
-  }
-  75% {
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) rotate(0deg);
   }
   100% {
-    box-shadow: 0 0 0 10px #472e93;
-    opacity: 1;
-    transform: translate(-50%, -50%);
-  }
-}
-
-@keyframes notificationBoxTitle {
-  0%,
-  62% {
-    color: transparent;
-    opacity: 0;
-    transform: scaleX(0);
-  }
-  73% {
-    color: transparent;
-  }
-  83%,
-  100% {
-    opacity: 1;
-    transform: scaleX(1);
-  }
-  100% {
-    color: #00d5ae;
-  }
-}
-
-@keyframes notificationBoxMessage {
-  0%,
-  55% {
-    opacity: 0;
-    transform: translateY(150%);
-  }
-  95%,
-  100% {
-    opacity: 1;
-    transform: translateY(0);
+    transform: translate(-50%, -50%) rotate(360deg);
   }
 }
 
@@ -195,4 +142,120 @@
   100% {
     opacity: 1;
   }
+}
+
+.Notification.notification-box.fadingIn .halo1 {
+  animation: notificationBoxIconHaloRotate 50s linear infinite,
+    notificationBoxMessageHalo1 boxAnimation;
+}
+
+.Notification.notification-box.fadingIn .halo2 {
+  animation: notificationBoxIconHaloRotate 30s linear infinite,
+    notificationBoxMessageHalo2 boxAnimation;
+}
+
+.Notification.notification-box.fadingIn .halo3 {
+  animation: notificationBoxIconHaloRotate 50s linear infinite,
+    notificationBoxMessageHalo3 boxAnimation;
+}
+
+.Notification.notification-box.fadingOut .halo1 {
+  animation: notificationBoxIconHaloRotate 50s linear infinite,
+    notificationBoxMessageHalo1 boxAnimation reverse;
+}
+
+.Notification.notification-box.fadingOut .halo2 {
+  animation: notificationBoxIconHaloRotate 30s linear infinite,
+    notificationBoxMessageHalo2 boxAnimation reverse;
+}
+
+.Notification.notification-box.fadingOut .halo3 {
+  animation: notificationBoxIconHaloRotate 50s linear infinite,
+    notificationBoxMessageHalo3 boxAnimation reverse;
+}
+
+/* Icon animation */
+@keyframes notificationBoxIcon {
+  0% {
+    box-shadow: 0 0 0 10px transparent;
+    opacity: 0;
+    transform: translate(-50%, 0);
+  }
+  12% {
+    opacity: 1;
+  }
+  24% {
+    box-shadow: 0 0 0 10px transparent;
+  }
+  36% {
+    transform: translate(-50%, -50%);
+  }
+  48%,
+  100% {
+    box-shadow: 0 0 0 10px #472e93;
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.Notification.notification-box.fadingIn .icon,
+.Notification.notification-box.fadingOut .icon {
+  animation: notificationBoxIcon boxAnimation;
+}
+
+.Notification.notification-box.fadingOut .icon {
+  animation-direction: reverse;
+}
+
+/* Title animation */
+@keyframes notificationBoxTitle {
+  0%,
+  55% {
+    color: transparent;
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  65% {
+    color: transparent;
+  }
+  74%,
+  100% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+  100% {
+    color: #00d5ae;
+  }
+}
+
+.Notification.notification-box.fadingIn .title,
+.Notification.notification-box.fadingOut .title {
+  animation: notificationBoxTitle boxAnimation;
+}
+
+.Notification.notification-box.fadingOut .title {
+  animation-direction: reverse;
+}
+
+/* Message animation */
+@keyframes notificationBoxMessage {
+  0%,
+  33% {
+    opacity: 0;
+    transform: translateY(150%);
+  }
+  57%,
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.Notification.notification-box.fadingIn .message,
+.Notification.notification-box.fadingOut .message {
+  animation: notificationBoxMessage boxAnimation;
+}
+
+.Notification.notification-box.fadingOut .message {
+  animation-direction: reverse;
 }
