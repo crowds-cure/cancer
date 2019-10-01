@@ -1,0 +1,198 @@
+@value globals: "../../GlobalStyles.css";
+@value uiBlack from globals;
+
+.Notification.notification-box {
+  animation: notificationBoxBackground 0.5s ease;
+  background-color: #472e93;
+  bottom: 0;
+  cursor: pointer;
+  left: 0;
+  position: fixed;
+  text-align: center;
+  width: 100%;
+}
+
+.Notification.notification-box .icon {
+  animation: notificationBoxIcon 0.8s ease;
+  background-color: #22193d;
+  border-radius: 83px;
+  box-shadow: 0 0 0 10px #472e93;
+  height: 146px;
+  left: 50%;
+  position: absolute;
+  top: 0;
+  transform: translate(-50%, -50%);
+  width: 146px;
+}
+
+.Notification.notification-box .icon img {
+  height: 100%;
+  pointer-events: none;
+  width: 100%;
+}
+
+.Notification.notification-box .halo {
+  left: 50%;
+  pointer-events: none;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.Notification.notification-box .halo1 {
+  animation: notificationBoxIconHaloRotate 50s linear infinite,
+    notificationBoxMessageHalo1 1.68s ease;
+  height: 196px;
+  width: 196px;
+}
+
+.Notification.notification-box .halo2 {
+  animation: notificationBoxIconHaloRotate 30s linear infinite,
+    notificationBoxMessageHalo1 1.68s ease;
+  height: 228px;
+  width: 228px;
+}
+
+.Notification.notification-box .halo3 {
+  animation: notificationBoxIconHaloRotate 50s linear infinite,
+    notificationBoxMessageHalo1 1.68s ease;
+  height: 276px;
+  width: 276px;
+}
+
+.Notification.notification-box .title {
+  animation: notificationBoxTitle 1.5s ease;
+  background-color: uiBlack;
+  border-radius: 28.5px;
+  color: #00d5ae;
+  display: inline-block;
+  font-size: 23.8px;
+  font-weight: 500;
+  height: 50px;
+  letter-spacing: 0.26px;
+  line-height: 50px;
+  margin: 25px 0 32px;
+  text-align: center;
+  width: 210px;
+}
+
+.Notification.notification-box .message {
+  animation: notificationBoxMessage 1s ease;
+  color: #ffffff;
+  font-size: 37.8px;
+  font-weight: 500;
+  letter-spacing: 0.42px;
+  line-height: 44px;
+  margin-top: 105px;
+  text-align: center;
+}
+
+.Notification.notification-box.fadingOut {
+  animation-direction: reverse;
+  animation-play-state: running;
+}
+
+@keyframes notificationBoxIconHaloRotate {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+@keyframes notificationBoxBackground {
+  0% {
+    background-color: rgba(71, 46, 147, 0);
+    transform: translateY(100%);
+  }
+  100% {
+    background-color: rgba(71, 46, 147, 1);
+    transform: translateY(0);
+  }
+}
+
+@keyframes notificationBoxIcon {
+  0% {
+    box-shadow: 0 0 0 10px transparent;
+    opacity: 0;
+    transform: translate(-50%, 0);
+  }
+  25% {
+    opacity: 1;
+  }
+  50% {
+    box-shadow: 0 0 0 10px transparent;
+  }
+  75% {
+    transform: translate(-50%, -50%);
+  }
+  100% {
+    box-shadow: 0 0 0 10px #472e93;
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+@keyframes notificationBoxTitle {
+  0%,
+  62% {
+    color: transparent;
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  73% {
+    color: transparent;
+  }
+  83%,
+  100% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+  100% {
+    color: #00d5ae;
+  }
+}
+
+@keyframes notificationBoxMessage {
+  0%,
+  55% {
+    opacity: 0;
+    transform: translateY(150%);
+  }
+  95%,
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes notificationBoxMessageHalo1 {
+  0%,
+  55% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes notificationBoxMessageHalo2 {
+  0%,
+  59% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes notificationBoxMessageHalo3 {
+  0%,
+  62% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
