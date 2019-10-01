@@ -1,6 +1,5 @@
 .Notification.notification-popup {
   align-items: center;
-  animation: notificationPopupFadeIn 0.3s ease;
   background-color: #22193d;
   border-radius: 9px;
   cursor: pointer;
@@ -8,10 +7,6 @@
   margin-bottom: 10px;
   padding: 15px;
   width: 100%;
-}
-
-.Notification.fadingOut.notification-popup {
-  animation: notificationPopupFadeOut 0.3s ease;
 }
 
 .Notification.notification-popup .icon {
@@ -56,6 +51,7 @@
   color: #aca2cd;
 }
 
+/* Popup fadeIn animation */
 @keyframes notificationPopupFadeIn {
   0% {
     opacity: 0;
@@ -73,6 +69,11 @@
   }
 }
 
+.Notification.fadingIn.notification-popup {
+  animation: notificationPopupFadeIn 0.3s ease;
+}
+
+/* Popup fadeOut animation */
 @keyframes notificationPopupFadeOut {
   0% {
     opacity: 1;
@@ -82,4 +83,8 @@
     opacity: 0;
     transform: translateY(-100%);
   }
+}
+
+.Notification.fadingOut.notification-popup {
+  animation: notificationPopupFadeOut 0.3s ease;
 }
