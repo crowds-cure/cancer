@@ -1,6 +1,9 @@
+@value globals: "./GlobalStyles.css";
+@value primaryBackgroundColor from globals;
+
 .Leaderboard {
   height: 100%;
-  background-color: #262548;
+  background-color: primaryBackgroundColor;
   overflow-y: auto;
   padding-bottom: 15px;
 }
