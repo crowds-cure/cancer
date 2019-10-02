@@ -53,7 +53,7 @@ class App extends Component {
         <TransitionGroup className="transition-group">
           <CSSTransition
             key={currentKey}
-            timeout={{ enter: 1000, exit: 1000 }}
+            timeout={{ enter: 2000, exit: 1000 }}
             classNames={'fade'}
             appear
           >

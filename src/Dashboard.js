@@ -1,5 +1,7 @@
 import { Component } from 'react';
 import React from 'react';
+import Modal from 'react-modal';
+import ReactTooltip from 'react-tooltip';
 import PropTypes from 'prop-types';
 import StatisticsSection from './shared/StatisticsSection.js';
 import ActivityProgressSection from './shared/ActivityProgressSection.js';
@@ -10,7 +12,7 @@ import NotificationContainer from './notifications/NotificationContainer';
 import ReactTooltip from 'react-tooltip';
 
 import './Dashboard.css';
-import Modal from 'react-modal';
+
 import { getDB } from './db';
 import getUserStats from './shared/getUserStats';
 import version from './version.js';
