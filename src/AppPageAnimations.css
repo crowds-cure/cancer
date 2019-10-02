@@ -1,7 +1,8 @@
 @value globals: "./GlobalStyles.css";
 @value uiBlack from globals;
 
-@value dashboardAnimation: 1s ease;
+@value defaultTiming: cubic-bezier(0.25, 0.1, 0.25, 1);
+@value dashboardAnimation: 1s defaultTiming;
 
 .transition-group,
 .route-section {
@@ -55,6 +56,38 @@
   }
 }
 
+@keyframes dashboardCommunityExit {
+  0%,
+  20% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  57% {
+    opacity: 0;
+  }
+  66%,
+  100% {
+    opacity: 0;
+    transform: translateY(50%);
+  }
+}
+
+@keyframes dashboardBadgesExit {
+  0%,
+  28% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  64% {
+    opacity: 0;
+  }
+  72%,
+  100% {
+    opacity: 0;
+    transform: translateY(50%);
+  }
+}
+
 @keyframes dashboardScoreExit {
   0%,
   35% {
@@ -65,38 +98,6 @@
     opacity: 0;
   }
   80%,
-  100% {
-    opacity: 0;
-    transform: translateY(50%);
-  }
-}
-
-@keyframes dashboardBadgesExit {
-  0%,
-  32% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  68% {
-    opacity: 0;
-  }
-  76%,
-  100% {
-    opacity: 0;
-    transform: translateY(50%);
-  }
-}
-
-@keyframes dashboardCommunityExit {
-  0%,
-  23% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  60% {
-    opacity: 0;
-  }
-  69%,
   100% {
     opacity: 0;
     transform: translateY(50%);
@@ -124,7 +125,7 @@
 }
 
 .fade-exit.fade-exit-active .Dashboard .StatisticsSection {
-  animation: dashboardScoreExit dashboardAnimation;
+  animation: dashboardCommunityExit dashboardAnimation;
 }
 
 /* Dashboard enter animations */
@@ -146,7 +147,7 @@
 }
 
 .fade-enter.fade-enter-active:last-child .Dashboard .StatisticsSection {
-  animation: dashboardScoreExit dashboardAnimation reverse;
+  animation: dashboardCommunityExit dashboardAnimation reverse;
 }
 
 /* Dashboard states */
