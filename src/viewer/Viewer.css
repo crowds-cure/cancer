@@ -143,8 +143,41 @@
 }
 
 @media (max-width: screen-min) {
+  .Viewer .viewport-section {
+    height: calc(100% - 48px);
+  }
+
   .Viewer .SessionControl {
     width: 100%;
+  }
+
+  .Viewer .SessionControl .CaseControlButtons {
+    bottom: 6px;
+    right: 6px;
+  }
+
+  .Viewer .SessionControl .CaseControlButtons .feedback-button,
+  .Viewer .SessionControl .CaseControlButtons button.complete-case {
+    font-size: 14px;
+    height: 36px;
+    line-height: 36px;
+    width: 86px;
+  }
+
+  .Viewer .SessionControl .CaseControlButtons .feedback-button {
+    border-radius: 9px 0 0 9px;
+  }
+
+  .Viewer .SessionControl .CaseControlButtons .feedback-button .arrow {
+    display: none;
+  }
+
+  .Viewer .SessionControl .CaseControlButtons button.complete-case {
+    border-radius: 0 9px 9px 0;
+  }
+
+  .Viewer .SessionControl .CaseProgress {
+    margin: 0;
   }
 
   .Viewer .SessionControl .CaseProgress .sessionCount {
@@ -152,34 +185,31 @@
     width: auto;
   }
 
-  .Viewer .SessionControl .CaseControlButtons {
-    bottom: 0;
-    right: 0;
+  .Viewer .SessionControl .CaseProgress .caseSelect > div,
+  .Viewer .SessionControl .CaseProgress .endSession > div {
+    display: none;
   }
 
-  .Viewer .SessionControl .CaseControlButtons .feedback-button {
-    border-radius: 9px 0 0 0;
-    width: 120px;
+  .Viewer .SessionControl .CaseProgress .caseSelect,
+  .Viewer .SessionControl .CaseProgress .endSession {
+    width: 70px;
   }
 
-  .Viewer .SessionControl .CaseControlButtons button.complete-case {
-    border-radius: 0;
-    width: 120px;
+  .Viewer .SessionControl .CaseProgress .sessionCount,
+  .Viewer .SessionControl .CaseProgress .caseSelect,
+  .Viewer .SessionControl .CaseProgress .endSession {
+    height: 48px;
+  }
+
+  .Viewer .SessionControl .CaseProgress .sessionCount .value {
+    font-size: 40px;
+    line-height: 30px;
   }
 
   .Viewer .MeasurementControl {
-    background-color: uiBlack;
-    bottom: 0;
-    left: 0;
+    bottom: 6px;
+    left: 6px;
     margin: 0;
-    width: 100%;
-  }
-
-  .Viewer .MeasurementControl .controls {
-    border: none;
-    border-radius: 0;
-    display: table;
-    height: 43px;
   }
 
   .Viewer .MeasurementControl .lesions {
@@ -189,39 +219,29 @@
   .Viewer .ViewportControl {
     background-color: transparent;
     height: 40px;
-    padding: 40px 0 0;
-    top: 68px;
-    width: 40px;
-  }
-
-  .Viewer .toolsToggleLabel {
-    height: 40px;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 40px;
-  }
-
-  .Viewer .toolsToggleLabel svg {
-    fill: defaultColor;
-    filter: drop-shadow(1px 1px 1px uiBlack);
-    height: 40px;
-    width: 40px;
-    padding: 6px;
+    padding: 0;
+    top: 48px;
   }
 
   .Viewer .ToolbarSection .presetSelected {
     display: none;
   }
 
-  .Viewer .ToolbarSection {
-    opacity: 0;
-    transform: translateX(-100%);
-    transition: opacity 0.3s ease, transform 0.3s ease;
+  .Viewer .ToolbarSection .tool-Pan,
+  .Viewer .ToolbarSection .tool-Zoom {
+    display: none;
   }
 
-  .Viewer #toolsToggle:checked ~ .ViewportControl .ToolbarSection {
-    opacity: 1;
-    transform: translateX(0);
+  .Viewer .labellingComponent .addLabelButton {
+    pointer-events: none;
+    visibility: hidden;
+  }
+
+  .Viewer .labellingComponent .select-tree {
+    bottom: 50px;
+    left: 6px;
+    position: fixed;
+    right: 6px;
+    width: auto;
   }
 }

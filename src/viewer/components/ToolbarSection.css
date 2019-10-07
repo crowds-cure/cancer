@@ -80,15 +80,12 @@
   .ToolbarSection .tools {
     border-right: 2px solid black;
     display: flex;
-    flex-grow: 1;
     flex-wrap: wrap;
     padding: 0 8px;
   }
 
   .ToolbarSection .ToolbarButton {
     align-items: center;
-    display: flex;
-    flex-grow: 1;
     min-width: 34px;
     min-height: 34px;
     padding: 0;
@@ -99,14 +96,9 @@
   .ToolbarSection .ToolbarButton svg {
     height: 100%;
     left: 50%;
-    max-height: 30px;
-    max-width: 30px;
-    min-height: 20px;
-    min-width: 20px;
     position: absolute;
     top: 50%;
     transform: translate(-50%, -50%);
-    width: calc(100% - 16px);
   }
 
   .ToolbarSection .presetSelected {
@@ -116,7 +108,17 @@
   }
 }
 
-@media (min-width: screen-xs) and (max-width: 768px) {
+@media (min-width: screen-xs) and (max-width: screen-xs-max) {
+  .ToolbarSection .ToolbarButton {
+    display: flex;
+    flex-grow: 1;
+  }
+
+  .ToolbarSection .wlPresets,
+  .ToolbarSection .tools {
+    flex-grow: 1;
+  }
+
   .ToolbarSection .wlPresets .ToolbarButton {
     min-width: 50%;
   }
@@ -124,24 +126,33 @@
   .ToolbarSection .tools .ToolbarButton {
     min-width: 33%;
   }
+
+  .ToolbarSection .ToolbarButton svg {
+    max-height: 30px;
+    max-width: 30px;
+    min-height: 20px;
+    min-width: 20px;
+    width: calc(100% - 16px);
+  }
 }
 
 @media (max-width: screen-min) {
-  .ToolbarSection {
-    flex-direction: column;
-  }
-
   .ToolbarSection .wlPresets,
   .ToolbarSection .tools {
-    background-color: rgba(0, 0, 0, 0.8);
     border: 0;
-    border-radius: 0 9px 9px 0;
     display: table;
+    margin-left: 2px;
     margin-top: 5px;
     padding: 0;
+    white-space: nowrap;
   }
 
   .ToolbarSection .ToolbarButton {
     height: 40px;
+    width: 36px;
+  }
+
+  .ToolbarSection .ToolbarButton svg {
+    width: calc(100% - 12px);
   }
 }
