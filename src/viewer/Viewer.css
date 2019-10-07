@@ -176,6 +176,19 @@
     border-radius: 0 9px 9px 0;
   }
 
+  .Viewer .SessionControl .CaseControlButtons .CaseFeedback .feedback-options {
+    left: -72px;
+  }
+
+  .Viewer
+    .SessionControl
+    .CaseControlButtons
+    .CaseFeedback
+    .feedback-options:before {
+    left: unset;
+    right: 116px;
+  }
+
   .Viewer .SessionControl .CaseProgress {
     margin: 0;
   }
@@ -232,16 +245,16 @@
     display: none;
   }
 
-  .Viewer .labellingComponent .addLabelButton {
-    pointer-events: none;
-    visibility: hidden;
+  .Viewer .labellingComponent {
+    bottom: 50px;
+    left: 6px !important;
+    position: fixed;
+    right: 6px !important;
+    top: unset !important;
+    width: auto;
   }
 
-  .Viewer .labellingComponent .select-tree {
-    bottom: 50px;
-    left: 6px;
-    position: fixed;
-    right: 6px;
-    width: auto;
+  .Viewer .select-tree {
+    width: 100%;
   }
 }

@@ -18,7 +18,9 @@ class MeasurementControl extends Component {
           <span className="next arrow-container" onClick={this.props.next}>
             <span className="right-arrow arrow" />
           </span>
-          <span className="label">Label</span>
+          <span className="label" onClick={this.props.onLabelClick}>
+            Label
+          </span>
         </div>
         <div className="lesions">lesions</div>
       </div>

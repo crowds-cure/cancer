@@ -20,6 +20,12 @@ class Labelling extends Component {
     super(props);
     const { measurementData, eventData } = props;
 
+    const componentStyle = {};
+    if (eventData && eventData.currentPoints) {
+      componentStyle.left = eventData.currentPoints.canvas.x + 50;
+      componentStyle.top = eventData.currentPoints.canvas.y;
+    }
+
     this.state = {
       displayComponent: true,
       editDescription: props.editDescription,
@@ -27,10 +33,7 @@ class Labelling extends Component {
       location: measurementData.location,
       description: measurementData.description,
       justCreated: true,
-      componentStyle: {
-        left: eventData.currentPoints.canvas.x + 50,
-        top: eventData.currentPoints.canvas.y
-      }
+      componentStyle
     };
 
     this.mainElement = React.createRef();
@@ -138,6 +141,10 @@ class Labelling extends Component {
       offsetLeft
     } = this.mainElement.current;
     const componentStyle = cloneDeep(this.state.componentStyle);
+
+    if (!offsetParent) {
+      return;
+    }
 
     if (offsetHeight + offsetTop > offsetParent.offsetHeight) {
       componentStyle.top =
@@ -262,9 +269,9 @@ class Labelling extends Component {
 }
 
 Labelling.propTypes = {
-  eventData: PropTypes.object.isRequired,
   measurementData: PropTypes.object.isRequired,
-  labellingDoneCallback: PropTypes.func.isRequired
+  labellingDoneCallback: PropTypes.func.isRequired,
+  eventData: PropTypes.object
 };
 
 export default Labelling;
