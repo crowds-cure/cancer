@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 class ToolbarButton extends Component {
   render() {
-    const baseClass = 'ToolbarButton noselect';
+    const baseClass = `ToolbarButton noselect tool-${this.props.command}`;
     return (
       <div
         className={this.props.active ? `${baseClass} active` : baseClass}

@@ -21,9 +21,9 @@ class ProgressBar extends Component {
   }
 
   getProgressValueStyle(state) {
-    const baseBalue = state.value - state.min;
+    const baseValue = state.value - state.min;
     const baseMax = state.max - state.min;
-    const percentage = (baseBalue / baseMax) * 100;
+    const percentage = (baseValue / baseMax) * 100;
     return {
       width: `${percentage}%`
     };
