@@ -44,6 +44,9 @@ class CornerstoneViewport extends Component {
 
     const stack = props.viewportData.stack;
 
+    // TODO: [layout] REMOVE
+    window.cv = this;
+
     // TODO: Allow viewport as a prop
     this.state = {
       stack,
@@ -125,7 +128,8 @@ class CornerstoneViewport extends Component {
             height={this.state.viewportHeight}
           />
         )}
-        {this.state.bidirectionalAddLabelShow && (
+        {(this.state.bidirectionalAddLabelShow ||
+          this.props.showLabelSelectTree) && (
           <Labelling
             measurementData={this.bidirectional.measurementData}
             eventData={this.bidirectional.eventData}
@@ -439,6 +443,30 @@ class CornerstoneViewport extends Component {
       });
     }
 
+    const { showLabelSelectTree } = this.props;
+    if (
+      showLabelSelectTree &&
+      showLabelSelectTree !== prevProps.showLabelSelectTree
+    ) {
+      const toolState = cornerstoneTools.getToolState(
+        this.element,
+        'Bidirectional'
+      ).data;
+      const dataIndex = this.props.currentLesion || toolState.length - 1;
+      const measurementData = toolState[dataIndex];
+      if (measurementData) {
+        this.bidirectionalToolLabellingCallback(
+          measurementData,
+          null,
+          () => {
+            cornerstone.updateImage(this.element);
+            this.props.labelDoneCallback();
+          },
+          { skipButton: true }
+        );
+      }
+    }
+
     if (this.props.currentLesion !== prevProps.currentLesion) {
       const currentToolData = this.props.toolData[this.props.currentLesion - 1];
       if (currentToolData) {
@@ -638,7 +666,9 @@ CornerstoneViewport.propTypes = {
   measurementsAddedOrRemoved: PropTypes.func.isRequired,
   measurementsChanged: PropTypes.func.isRequired,
   activeTool: PropTypes.string.isRequired,
-  viewportData: PropTypes.object.isRequired
+  viewportData: PropTypes.object.isRequired,
+  showLabelSelectTree: PropTypes.bool,
+  labelDoneCallback: PropTypes.func
 };
 
 export default CornerstoneViewport;

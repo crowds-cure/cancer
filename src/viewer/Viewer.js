@@ -51,8 +51,12 @@ class Viewer extends Component {
   constructor(props) {
     super(props);
 
+    // TODO: [layout] REMOVE
+    window.viewer = this;
+
     this.state = {
       loading: true,
+      showLabelSelectTree: false,
       feedback: [],
       hasMeasurements: false,
       currentLesion: 0,
@@ -72,6 +76,8 @@ class Viewer extends Component {
     this.previous = this.previous.bind(this);
     this.next = this.next.bind(this);
     this.onKeyDown = this.onKeyDown.bind(this);
+    this.toggleLabelSelectTree = this.toggleLabelSelectTree.bind(this);
+    this.labelDoneCallback = this.labelDoneCallback.bind(this);
   }
 
   componentDidMount() {
@@ -100,6 +106,10 @@ class Viewer extends Component {
         prevProps.caseData.data.seriesInstanceUid
     ) {
       this.getNextCase();
+    }
+
+    if (this.state.showLabelSelectTree && !this.state.hasMeasurements) {
+      this.setState({ showLabelSelectTree: false });
     }
   }
 
@@ -219,6 +229,8 @@ class Viewer extends Component {
               measurementsChanged={this.measurementsChanged}
               viewportData={item}
               activeTool={activeTool}
+              showLabelSelectTree={this.state.showLabelSelectTree}
+              labelDoneCallback={this.labelDoneCallback}
             />
           ) : (
             <LoadingIndicator />
@@ -241,6 +253,7 @@ class Viewer extends Component {
             previous={this.previous}
             next={this.next}
             number={this.state.currentLesion}
+            onLabelClick={this.toggleLabelSelectTree}
           />
         </div>
         <div className="SessionControl">
@@ -459,6 +472,16 @@ class Viewer extends Component {
       // and stop event from bubbling
       return false;
     }
+  }
+
+  toggleLabelSelectTree() {
+    if (this.state.hasMeasurements) {
+      this.setState({ showLabelSelectTree: !this.state.showLabelSelectTree });
+    }
+  }
+
+  labelDoneCallback() {
+    this.setState({ showLabelSelectTree: false });
   }
 }
 
