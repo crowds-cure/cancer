@@ -174,6 +174,10 @@ class CornerstoneViewport extends Component {
     let index = currentLesion >= 0 ? currentLesion - 1 : toolData.length - 1;
     const currentToolData = toolData[index];
 
+    if (!currentToolData) {
+      return;
+    }
+
     const { imageId } = currentToolData;
     const toolState = cornerstoneTools.globalImageIdSpecificToolStateManager.saveToolState();
     const toolStateData = toolState[imageId][currentToolData.toolType].data;

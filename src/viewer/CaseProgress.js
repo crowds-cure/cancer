@@ -8,14 +8,18 @@ import './CaseProgress.css';
 import sendSessionStatisticsToDatabase from './lib/sendSessionStatisticsToDatabase';
 import saveAchievementsToDatabase from './lib/saveAchievementsToDatabase';
 import animateNumber from '../shared/animateNumber';
+import waitForAnimation from '../shared/waitForAnimation';
 
 class CaseProgress extends Component {
   constructor(props) {
     super(props);
 
+    this.animationsPromise = Promise.resolve();
+
     this.state = {
       sessionMeasurements: this.props.sessionMeasurements || 0,
-      caseMeasurements: this.props.caseMeasurements || 0
+      caseMeasurements: this.props.caseMeasurements || 0,
+      incrementText: this.props.caseMeasurements || 0
     };
 
     this.sessionRef = React.createRef();
@@ -63,39 +67,33 @@ class CaseProgress extends Component {
       );
     }
 
-    const oldValue = this.state.caseMeasurements;
-    const newValue = this.props.caseMeasurements;
-    if (newValue === oldValue) {
-      return;
+    const oldIncrementValue = this.state.caseMeasurements;
+    const newIncrementValue = this.props.caseMeasurements;
+    if (newIncrementValue !== oldIncrementValue) {
+      this.animateIncrement(oldIncrementValue, newIncrementValue);
     }
+  }
+
+  async animateIncrement(oldValue, newValue) {
+    await this.animationsPromise;
+    this.setState({ caseMeasurements: newValue });
 
     const element = this.incrementRef.current;
-    if (newValue === 0) {
-      const callback = () => {
-        element.removeEventListener('transitionend', callback);
-        this.setState({ caseMeasurements: newValue });
-      };
-
-      element.addEventListener('transitionend', callback);
-      element.classList.remove('shift');
+    if (!element) {
+      return;
+    } else if (newValue === 0) {
+      this.animationsPromise = waitForAnimation(element, 'slideOut');
+      await this.animationsPromise;
+      this.setState({ incrementText: newValue });
     } else if (newValue === 1 && newValue > oldValue) {
-      this.setState({ caseMeasurements: newValue });
-      const callback = () => {
-        element.classList.remove('slideIn');
-        element.removeEventListener('animationend', callback);
-      };
-
-      element.addEventListener('animationend', callback);
-      element.classList.add('slideIn');
+      this.setState({ incrementText: newValue });
+      this.animationsPromise = waitForAnimation(element, 'slideIn');
     } else {
-      const callback = () => {
-        element.classList.remove('shift');
-        element.removeEventListener('animationend', callback);
-        this.setState({ caseMeasurements: newValue });
-      };
-
-      element.addEventListener('animationend', callback);
-      element.classList.add('shift');
+      this.animationsPromise = waitForAnimation(element, 'shift');
+      await this.animationsPromise;
+      if (this.props.caseMeasurements === newValue) {
+        this.setState({ incrementText: newValue });
+      }
     }
   }
 
@@ -118,10 +116,10 @@ class CaseProgress extends Component {
             0
           </div>
           <div
-            className={this.getIncrementClass(this.props.caseMeasurements)}
+            className={this.getIncrementClass(this.state.caseMeasurements)}
             ref={this.incrementRef}
           >
-            +{this.state.caseMeasurements}
+            +{this.state.incrementText}
           </div>
         </div>
         <div className="icon caseSelect" onClick={this.caseSelect}>
