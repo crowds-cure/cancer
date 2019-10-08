@@ -83,8 +83,6 @@ class CaseProgress extends Component {
       return;
     } else if (newValue === 0) {
       this.animationsPromise = waitForAnimation(element, 'slideOut');
-      await this.animationsPromise;
-      this.setState({ incrementText: newValue });
     } else if (newValue === 1 && newValue > oldValue) {
       this.setState({ incrementText: newValue });
       this.animationsPromise = waitForAnimation(element, 'slideIn');

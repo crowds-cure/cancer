@@ -91,7 +91,20 @@
     height: calc(100% - 68px);
   }
 
-  .Viewer .ViewportOverlay {
+  .Viewer .ViewportOverlay .overlay-element:not(.top-left) {
+    display: none;
+  }
+
+  .Viewer .ViewportOverlay .overlay-element.top-left {
+    left: unset;
+    right: 40px;
+    top: 4px;
+  }
+
+  .Viewer
+    .ViewportOverlay
+    .overlay-element.top-left
+    > span:not(.loadingProgress) {
     display: none;
   }
 
@@ -145,6 +158,11 @@
 @media (max-width: screen-min) {
   .Viewer .viewport-section {
     height: calc(100% - 48px);
+  }
+
+  .Viewer .ViewportOverlay .overlay-element.top-left {
+    left: 10px;
+    top: 50px;
   }
 
   .Viewer .SessionControl {
