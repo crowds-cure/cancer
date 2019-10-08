@@ -60,6 +60,7 @@ class CornerstoneViewport extends Component {
     this.displayScrollbar = stack.imageIds.length > 1;
     this.state.viewport = cornerstone.getDefaultViewport(null, undefined);
 
+    this.updateLabelHandler = this.updateLabelHandler.bind(this);
     this.onImageRendered = this.onImageRendered.bind(this);
     this.onNewImage = this.onNewImage.bind(this);
     this.onWindowResize = this.onWindowResize.bind(this);
@@ -165,6 +166,55 @@ class CornerstoneViewport extends Component {
       bidirectionalAddLabelShow: true
     });
   };
+
+  updateLabelHandler() {
+    this.hideExtraButtons();
+
+    const { currentLesion, toolData } = this.props;
+    let index = currentLesion >= 0 ? currentLesion - 1 : toolData.length - 1;
+    const currentToolData = toolData[index];
+
+    const { imageId } = currentToolData;
+    const toolState = cornerstoneTools.globalImageIdSpecificToolStateManager.saveToolState();
+    const toolStateData = toolState[imageId][currentToolData.toolType].data;
+
+    let measurementData;
+    toolStateData.forEach(data => {
+      if (data._id === currentToolData._id) {
+        data.active = true;
+        measurementData = data;
+      } else {
+        data.active = false;
+      }
+    });
+
+    cornerstoneTools.globalImageIdSpecificToolStateManager.restoreToolState(
+      toolState
+    );
+
+    console.log(
+      '>>>>UPDATED',
+      currentLesion,
+      index,
+      currentToolData,
+      toolState,
+      toolStateData,
+      measurementData
+    );
+
+    if (measurementData) {
+      this.bidirectional = {
+        measurementData,
+        eventData: null,
+        labellingDoneCallback: () => {
+          cornerstone.updateImage(this.element);
+          this.props.labelDoneCallback();
+        },
+        skipButton: true,
+        editDescription: false
+      };
+    }
+  }
 
   onContextMenu(event) {
     // Preventing the default behaviour for right-click is essential to
@@ -444,47 +494,20 @@ class CornerstoneViewport extends Component {
     }
 
     const { showLabelSelectTree } = this.props;
-    if (
+    const showStateChanged =
       showLabelSelectTree &&
-      showLabelSelectTree !== prevProps.showLabelSelectTree
-    ) {
-      const toolState = cornerstoneTools.getToolState(
-        this.element,
-        'Bidirectional'
-      ).data;
-      const dataIndex = this.props.currentLesion || toolState.length - 1;
-      const measurementData = toolState[dataIndex];
-      if (measurementData) {
-        this.bidirectionalToolLabellingCallback(
-          measurementData,
-          null,
-          () => {
-            cornerstone.updateImage(this.element);
-            this.props.labelDoneCallback();
-          },
-          { skipButton: true }
-        );
-      }
+      showLabelSelectTree !== prevProps.showLabelSelectTree;
+    const currentLesionChanged =
+      this.props.currentLesion !== prevProps.currentLesion;
+    console.log('>>>>CHANGED', showStateChanged, currentLesionChanged);
+    if (currentLesionChanged || showStateChanged) {
+      this.updateLabelHandler();
     }
 
-    if (this.props.currentLesion !== prevProps.currentLesion) {
+    if (currentLesionChanged) {
       const currentToolData = this.props.toolData[this.props.currentLesion - 1];
       if (currentToolData) {
         const { imageId } = currentToolData;
-        const toolState = cornerstoneTools.globalImageIdSpecificToolStateManager.saveToolState();
-        const toolData = toolState[imageId][currentToolData.toolType].data;
-
-        toolData.forEach(data => {
-          if (data._id === currentToolData._id) {
-            data.active = true;
-          } else {
-            data.active = false;
-          }
-        });
-
-        cornerstoneTools.globalImageIdSpecificToolStateManager.restoreToolState(
-          toolState
-        );
 
         if (this.state.imageId === imageId) {
           cornerstone.setViewport(this.element, currentToolData.viewport);

@@ -97,7 +97,7 @@ class Viewer extends Component {
     document.body.classList.remove('fixed-page');
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
     if (
       prevProps.caseData.data &&
       this.props.caseData.data.studyInstanceUid !==
@@ -110,6 +110,10 @@ class Viewer extends Component {
 
     if (this.state.showLabelSelectTree && !this.state.hasMeasurements) {
       this.setState({ showLabelSelectTree: false });
+    }
+
+    if (this.state.currentLesion !== prevState.currentLesion) {
+      this.setState({ lesionSelected: this.state.currentLesion });
     }
   }
 
@@ -204,6 +208,11 @@ class Viewer extends Component {
     ];
   }
 
+  getCurrentLesion(state) {
+    const { lesionSelected, currentLesion } = state;
+    return lesionSelected >= 0 ? lesionSelected : currentLesion;
+  }
+
   render() {
     if (!this.props.collection) {
       return <Redirect to="/" />;
@@ -223,7 +232,7 @@ class Viewer extends Component {
         <div key={index} className="viewport">
           {item ? (
             <CornerstoneViewport
-              currentLesion={this.state.lesionSelected}
+              currentLesion={this.getCurrentLesion(this.state)}
               toolData={this.state.toolData}
               measurementsAddedOrRemoved={this.measurementsAddedOrRemoved}
               measurementsChanged={this.measurementsChanged}
