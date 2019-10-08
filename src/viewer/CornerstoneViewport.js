@@ -192,16 +192,6 @@ class CornerstoneViewport extends Component {
       toolState
     );
 
-    console.log(
-      '>>>>UPDATED',
-      currentLesion,
-      index,
-      currentToolData,
-      toolState,
-      toolStateData,
-      measurementData
-    );
-
     if (measurementData) {
       this.bidirectional = {
         measurementData,
@@ -499,7 +489,6 @@ class CornerstoneViewport extends Component {
       showLabelSelectTree !== prevProps.showLabelSelectTree;
     const currentLesionChanged =
       this.props.currentLesion !== prevProps.currentLesion;
-    console.log('>>>>CHANGED', showStateChanged, currentLesionChanged);
     if (currentLesionChanged || showStateChanged) {
       this.updateLabelHandler();
     }

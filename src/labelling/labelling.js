@@ -2,7 +2,9 @@ import { Component } from 'react';
 import React from 'react';
 import PropTypes from 'prop-types';
 import SelectTree from '../select-tree/SelectTree.js';
-import { labelItems, descriptionItems } from './labellingData.js';
+// [label-description]
+// import { labelItems, descriptionItems } from './labellingData.js';
+import { labelItems } from './labellingData.js';
 import { CSSTransition } from 'react-transition-group';
 import cloneDeep from 'lodash.clonedeep';
 
@@ -31,7 +33,8 @@ class Labelling extends Component {
       editDescription: props.editDescription,
       editLocation: !props.editDescription,
       location: measurementData.location,
-      description: measurementData.description,
+      // [label-description]
+      // description: measurementData.description,
       justCreated: true,
       componentStyle
     };
@@ -51,12 +54,13 @@ class Labelling extends Component {
         treeItems = labelItems;
         selectTreeTitle = `${this.state.location ? 'Edit' : 'Add'} Label`;
         showSelectTree = true;
-      } else if (this.state.editDescription) {
-        treeItems = descriptionItems;
-        selectTreeTitle = `${
-          this.state.description ? 'Edit' : 'Add'
-        } Description`;
-        showSelectTree = true;
+        // [label-description]
+        // } else if (this.state.editDescription) {
+        //   treeItems = descriptionItems;
+        //   selectTreeTitle = `${
+        //     this.state.description ? 'Edit' : 'Add'
+        //   } Description`;
+        //   showSelectTree = true;
       } else {
         showButtons = true;
       }
@@ -104,8 +108,11 @@ class Labelling extends Component {
               </div>
               <div className="textArea">
                 {this.state.location && this.state.location}
+                {/* [label-description]
                 {this.state.description && ` (${this.state.description})`}
+                */}
               </div>
+              {/* [label-description]
               <div className="commonButtons">
                 <button
                   className="commonButton"
@@ -116,6 +123,7 @@ class Labelling extends Component {
                     : 'Add Description'}
                 </button>
               </div>
+              */}
             </>
           )}
         </div>
@@ -207,14 +215,15 @@ class Labelling extends Component {
     });
   };
 
-  descriptionUpdate = () => {
-    if (this.setTimeout) {
-      clearTimeout(this.setTimeout);
-    }
-    this.setState({
-      editDescription: true
-    });
-  };
+  // [label-description]
+  // descriptionUpdate = () => {
+  //   if (this.setTimeout) {
+  //     clearTimeout(this.setTimeout);
+  //   }
+  //   this.setState({
+  //     editDescription: true
+  //   });
+  // };
 
   componentDidMount = () => {
     document.addEventListener('touchstart', this.onTouchStart);
@@ -234,26 +243,34 @@ class Labelling extends Component {
     levelTwoItem,
     stillSelecting
   ) => {
-    let { location, description } = cloneDeep(this.state);
+    // [label-description]
+    // let { location, description } = cloneDeep(this.state);
+    let { location } = cloneDeep(this.state);
 
     if (this.state.editLocation) {
       location = levelOneItem.label;
-    } else {
-      description = levelOneItem.label;
     }
 
-    const descriptionText = description ? ` (${description})` : '';
-    const textLine = location + descriptionText;
+    // [label-description]
+    // else {
+    //   description = levelOneItem.label;
+    // }
 
-    if (description) {
-      this.props.measurementData.description = description;
-    }
+    // [label-description]
+    // const descriptionText = description ? ` (${description})` : '';
+    // const textLine = location + descriptionText;
+    // if (description) {
+    //   this.props.measurementData.description = description;
+    // }
+    // this.props.measurementData.additionalData = [textLine];
+
     this.props.measurementData.location = location;
-    this.props.measurementData.additionalData = [textLine];
+    this.props.measurementData.additionalData = [location];
 
     this.setState({
       location,
-      description,
+      // [label-description]
+      // description,
       editDescription: false,
       editLocation: false
     });
