@@ -47,34 +47,35 @@ let defaultDropdownItems = [
         options
       );
     }
-  },
-  {
-    actionType: 'bidirectionalDescription',
-    action: ({ nearbyToolData, eventData }) => {
-      const element = eventData.element;
-      const { tool, toolType } = nearbyToolData;
-
-      const doneCallback = () => {
-        cornerstone.updateImage(element);
-      };
-
-      const options = {
-        skipButton: true,
-        editDescription: true
-      };
-
-      const ToolInstance = cornerstoneTools.getToolForElement(
-        element,
-        toolType
-      );
-      ToolInstance.configuration.getMeasurementLocationCallback(
-        tool,
-        eventData,
-        doneCallback,
-        options
-      );
-    }
   }
+  // [label-description]
+  // {
+  //   actionType: 'bidirectionalDescription',
+  //   action: ({ nearbyToolData, eventData }) => {
+  //     const element = eventData.element;
+  //     const { tool, toolType } = nearbyToolData;
+
+  //     const doneCallback = () => {
+  //       cornerstone.updateImage(element);
+  //     };
+
+  //     const options = {
+  //       skipButton: true,
+  //       editDescription: true
+  //     };
+
+  //     const ToolInstance = cornerstoneTools.getToolForElement(
+  //       element,
+  //       toolType
+  //     );
+  //     ToolInstance.configuration.getMeasurementLocationCallback(
+  //       tool,
+  //       eventData,
+  //       doneCallback,
+  //       options
+  //     );
+  //   }
+  // }
 ];
 
 function getNearbyToolData(element, coords, toolTypes) {
@@ -145,17 +146,18 @@ function getDropdownItems(eventData, isTouchEvent = false) {
         item.text = `${nearbyToolData.tool.location ? 'Edit' : 'Add'} Label`;
       }
 
-      if (item.actionType === 'bidirectionalDescription') {
-        if (
-          nearbyToolData.toolType !== 'Bidirectional' ||
-          !nearbyToolData.tool.location
-        ) {
-          return;
-        }
-        item.text = `${
-          nearbyToolData.tool.description ? 'Edit' : 'Add'
-        } Description`;
-      }
+      // [label-description]
+      // if (item.actionType === 'bidirectionalDescription') {
+      //   if (
+      //     nearbyToolData.toolType !== 'Bidirectional' ||
+      //     !nearbyToolData.tool.location
+      //   ) {
+      //     return;
+      //   }
+      //   item.text = `${
+      //     nearbyToolData.tool.description ? 'Edit' : 'Add'
+      //   } Description`;
+      // }
 
       dropdownItems.push(item);
     });
