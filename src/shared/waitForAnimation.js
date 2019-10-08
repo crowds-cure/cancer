@@ -1,3 +1,16 @@
+function getDurationInMs(durationString) {
+  if (typeof durationString !== 'string') {
+    return 0;
+  }
+
+  const duration = parseFloat(durationString);
+  if (durationString.indexOf('ms') >= 0) {
+    return duration;
+  } else {
+    return duration * 1000;
+  }
+}
+
 export default function waitForAnimation(element, className = '') {
   return new Promise(resolve => {
     if (className) {
@@ -5,12 +18,12 @@ export default function waitForAnimation(element, className = '') {
     }
 
     const style = window.getComputedStyle(element, null);
-    const hasAnimation =
-      style && !!style.getPropertyValue('animation-duration');
+    const duration = style && style.getPropertyValue('animation-duration');
+    const durationMs = getDurationInMs(duration);
 
-    if (hasAnimation) {
+    if (durationMs > 0) {
       const animationCallback = event => {
-        if (event.target !== element) {
+        if (event && event.target !== element) {
           return;
         }
 
@@ -19,9 +32,11 @@ export default function waitForAnimation(element, className = '') {
           element.classList.remove(className);
         }
 
+        clearTimeout(timeout);
         resolve();
       };
 
+      const timeout = setTimeout(animationCallback, durationMs);
       element.addEventListener('animationend', animationCallback);
     } else {
       if (className) {
