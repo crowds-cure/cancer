@@ -33,29 +33,29 @@ class SessionSummary extends Component {
     const badges = [];
 
     // TODO: [layout] replace with real badges
-    for (let i = 1; i <= 3; i++) {
-      const id = `example0${i}`;
-      const currentBadge = achievements[id];
-      const { completed, description, imgActive, imgInactive } = currentBadge;
-      const achievementImg = completed ? imgActive : imgInactive;
-      badges.push(
-        <div className="badgeWrapper col-16 col-xs-8 col-sm-third" key={id}>
-          <div className="badge">
-            <AchievementBadge img={achievementImg} description={description} />
-            <div className="progress">
-              {id === 'example03' ? (
-                <div className="badgeProgress">
-                  <div className="badgeProgressValue" />
-                </div>
-              ) : (
-                <div className="badgeEarned">Badge earned</div>
-              )}
-              <div className="badgeDescription">{description}</div>
+    Object.keys(achievements)
+      .splice(0, 3)
+      .forEach(id => {
+        const currentBadge = achievements[id];
+        const { description, img } = currentBadge;
+        badges.push(
+          <div className="badgeWrapper col-16 col-xs-8 col-sm-third" key={id}>
+            <div className="badge">
+              <AchievementBadge img={img} description={description} />
+              <div className="progress">
+                {id === 'example03' ? (
+                  <div className="badgeProgress">
+                    <div className="badgeProgressValue" />
+                  </div>
+                ) : (
+                  <div className="badgeEarned">Badge earned</div>
+                )}
+                <div className="badgeDescription">{description}</div>
+              </div>
             </div>
           </div>
-        </div>
-      );
-    }
+        );
+      });
 
     return badges;
   }

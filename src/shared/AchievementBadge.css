@@ -3,14 +3,22 @@
 @value borderWidth: 4px;
 
 .AchievementBadge {
-  display: inline-block;
-}
-
-.AchievementBadge img {
   background-color: backgroundColor;
   border: borderWidth solid borderColor;
   border-radius: 50%;
+  display: inline-block;
   height: 68px;
-  vertical-align: top;
+  overflow: hidden;
   width: 68px;
+}
+
+.AchievementBadge.inactive {
+  filter: saturate(0);
+}
+
+.AchievementBadge img {
+  height: 100%;
+  padding: 15%;
+  vertical-align: top;
+  width: 100%;
 }
