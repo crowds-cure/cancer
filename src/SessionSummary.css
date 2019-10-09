@@ -106,7 +106,7 @@
   text-align: center;
 }
 
-.SessionSummary .earnedBadgesSection .AchievementBadge img {
+.SessionSummary .earnedBadgesSection .AchievementBadge {
   background-color: transparent;
   border: 0;
   height: 100px;

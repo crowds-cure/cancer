@@ -16,6 +16,7 @@
   cursor: pointer;
   margin-bottom: 10px;
   position: relative;
+  z-index: 0;
 }
 
 .CaseTypeCard .imageContainer {
