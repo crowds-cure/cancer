@@ -29,7 +29,8 @@ function initializeTools(tools) {
   Array.from(tools).forEach(tool => {
     const apiTool = cornerstoneTools[`${tool.name}Tool`];
     if (apiTool) {
-      cornerstoneTools.addTool(apiTool, tool.configuration);
+      const { configuration } = tool;
+      cornerstoneTools.addTool(apiTool, { configuration });
     } else {
       throw new Error(`Tool not found: ${tool.name}Tool`);
     }
