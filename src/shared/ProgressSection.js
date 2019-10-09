@@ -25,6 +25,8 @@ class ProgressSection extends Component {
   constructor(props) {
     super(props);
 
+    this.preventAnimations = false;
+
     this.incrementRef = React.createRef();
     this.bigNumberRef = React.createRef();
 
@@ -76,6 +78,10 @@ class ProgressSection extends Component {
     const ranksToIterate = Array.from(ranks);
 
     const animateRank = () => {
+      if (this.preventAnimations) {
+        return;
+      }
+
       const currentRank = ranksToIterate.shift();
 
       ReactTooltip.hide();
@@ -89,18 +95,20 @@ class ProgressSection extends Component {
 
       this.setState({ rank: currentRank });
       setTimeout(() => {
+        if (this.preventAnimations) {
+          return;
+        }
+
         this.setState({ progressValue: bigNumber });
-        animateNumber(
-          bigNumberElement,
-          this,
-          bigNumber,
-          'bigNumber',
-          3000,
-          () => {
-            this.setState({ bigNumber });
-            setTimeout(() => animateRank(), 300);
+        const valueFrom = this.state.bigNumber;
+        animateNumber(bigNumberElement, bigNumber, valueFrom, 3000, () => {
+          if (this.preventAnimations) {
+            return;
           }
-        );
+
+          this.setState({ bigNumber });
+          setTimeout(() => animateRank(), 300);
+        });
       }, 2000);
 
       incrementElement.innerText = `+${increment}`;
@@ -151,6 +159,10 @@ class ProgressSection extends Component {
     }
 
     return ranks;
+  }
+
+  componentWillUnmount() {
+    this.preventAnimations = true;
   }
 
   componentDidMount() {

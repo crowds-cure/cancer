@@ -2,27 +2,20 @@ import animate from './animate';
 
 export default function animateNumber(
   element,
-  context,
-  propsKeyOrValue,
-  stateKey,
+  valueTo,
+  valueFrom = 0,
   duration = 1000,
   callback = () => {}
 ) {
-  let propsValue = propsKeyOrValue;
-  if (typeof propsValue === 'string') {
-    propsValue = context.props[propsKeyOrValue] || 0;
-  }
-
-  const oldValue = context.state[stateKey] || 0;
-  if (oldValue === propsValue) {
+  if (valueTo === valueFrom) {
     return;
   }
 
   let updated = false;
 
   animate(duration, progress => {
-    const diff = propsValue - oldValue;
-    const result = oldValue + diff * progress;
+    const diff = valueTo - valueFrom;
+    const result = valueFrom + diff * progress;
     const newValue = Math.floor(result);
 
     const currentValue = parseInt(element.innerText, 10);
@@ -32,9 +25,8 @@ export default function animateNumber(
     }
 
     if (progress === 1 && !updated) {
-      context.setState({ stateKey: propsValue });
       updated = true;
-      callback();
+      callback(valueTo);
     }
   });
 }

@@ -6,9 +6,8 @@ import Logo from './Logo.js';
 import iconUserDefault from '../images/general/icon-user-default.svg';
 
 class SimpleHeaderSection extends Component {
-  render() {
-    const isDashboard = this.props.page === 'dashboard';
-    const infoSection = (
+  renderInfoSection() {
+    return (
       <>
         <div className="userSection">
           <img
@@ -19,7 +18,7 @@ class SimpleHeaderSection extends Component {
           <span className="username">{this.props.username}</span>
         </div>
         <div className="actionSection">
-          <Link to={this.props.leaderboardLink} className="leaderboardButton">
+          <Link to="/leaderboard" className="leaderboardButton">
             Leaderboard
           </Link>
           <span className="logoutButton" onClick={this.logout}>
@@ -28,10 +27,14 @@ class SimpleHeaderSection extends Component {
         </div>
       </>
     );
+  }
+
+  render() {
+    const isDashboard = this.props.page === 'dashboard';
     return (
       <div className="simpleHeader">
         <Logo />
-        {isDashboard && infoSection}
+        {isDashboard && this.renderInfoSection()}
       </div>
     );
   }

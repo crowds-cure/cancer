@@ -8,11 +8,17 @@ class StatisticsCard extends Component {
   constructor(props) {
     super(props);
 
+    this.preventAnimations = false;
+
     this.state = {
       number: props.number || 0
     };
 
     this.numberRef = React.createRef();
+  }
+
+  componentWillUnmount() {
+    this.preventAnimations = true;
   }
 
   componentDidUpdate(prevProps) {
@@ -22,7 +28,15 @@ class StatisticsCard extends Component {
 
     const element = this.numberRef.current;
 
-    animateNumber(element, this, 'number', 'number', 3000);
+    const valueFrom = this.state.number;
+    const valueTo = this.props.number;
+    animateNumber(element, valueTo, valueFrom, 3000, () => {
+      if (this.preventAnimations) {
+        return;
+      }
+
+      this.setState({ valueTo });
+    });
   }
 
   render() {

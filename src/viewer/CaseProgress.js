@@ -14,6 +14,7 @@ class CaseProgress extends Component {
   constructor(props) {
     super(props);
 
+    this.preventAnimations = false;
     this.animationsPromise = Promise.resolve();
 
     this.state = {
@@ -53,18 +54,18 @@ class CaseProgress extends Component {
     this.props.history.push('/session-summary');
   }
 
+  componentWillUnmount() {
+    this.preventAnimations = true;
+  }
+
   componentDidUpdate() {
     const sessionElement = this.sessionRef.current;
 
     if (this.state.sessionMeasurements !== this.props.sessionMeasurements) {
       this.setState({ sessionMeasurements: this.props.sessionMeasurements });
-      animateNumber(
-        sessionElement,
-        this,
-        'sessionMeasurements',
-        'sessionMeasurements',
-        1000
-      );
+      const valueFrom = this.state.sessionMeasurements;
+      const valueTo = this.props.sessionMeasurements;
+      animateNumber(sessionElement, valueTo, valueFrom);
     }
 
     const oldIncrementValue = this.state.caseMeasurements;
@@ -76,6 +77,10 @@ class CaseProgress extends Component {
 
   async animateIncrement(oldValue, newValue) {
     await this.animationsPromise;
+    if (this.preventAnimations) {
+      return;
+    }
+
     this.setState({ caseMeasurements: newValue });
 
     const element = this.incrementRef.current;
@@ -89,7 +94,8 @@ class CaseProgress extends Component {
     } else {
       this.animationsPromise = waitForAnimation(element, 'shift');
       await this.animationsPromise;
-      if (this.props.caseMeasurements === newValue) {
+      const { caseMeasurements } = this.props;
+      if (!this.preventAnimations && caseMeasurements === newValue) {
         this.setState({ incrementText: newValue });
       }
     }
