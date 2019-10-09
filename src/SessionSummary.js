@@ -17,6 +17,8 @@ class SessionSummary extends Component {
   constructor(props) {
     super(props);
 
+    this.preventAnimations = false;
+
     this.state = {
       score: this.props.current,
       sessionTotal: 0
@@ -59,14 +61,20 @@ class SessionSummary extends Component {
   }
 
   componentDidMount() {
-    const sessionTotalElement = this.sessionTotalRef.current;
+    const element = this.sessionTotalRef.current;
+    const valueFrom = this.state.sessionTotal;
+    const valueTo = this.props.measurementsInCurrentSession;
+    animateNumber(element, valueTo, valueFrom, 1000, () => {
+      if (this.preventAnimations) {
+        return;
+      }
 
-    animateNumber(
-      sessionTotalElement,
-      this,
-      'measurementsInCurrentSession',
-      'sessionTotal'
-    );
+      this.setState({ sessionTotal: valueTo });
+    });
+  }
+
+  componentWillUnmount() {
+    this.preventAnimations = true;
   }
 
   handleClickDashboard = () => {

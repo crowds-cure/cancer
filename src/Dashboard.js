@@ -123,7 +123,6 @@ class Dashboard extends Component {
 
   render() {
     const versionString = `${version} - ${sha}`;
-    const leaderboardLink = '/leaderboard';
 
     return (
       <div className="Dashboard">
@@ -131,7 +130,6 @@ class Dashboard extends Component {
           <SimpleHeaderSection
             username={this.props.username}
             page="dashboard"
-            leaderboardLink={leaderboardLink}
           />
           <div className="container">
             <div className="row">

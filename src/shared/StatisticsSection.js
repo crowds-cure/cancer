@@ -16,14 +16,27 @@ class StatisticsSection extends Component {
       communityStats: {}
     };
 
+    this.isSubscribed = true;
+  }
+
+  componentDidMount() {
+    this.isSubscribed = true;
     getCommunityStats().then(communityStats => {
-      this.setState({
-        communityStats
-      });
+      if (this.isSubscribed) {
+        this.setState({ communityStats });
+      }
     });
   }
 
+  componentWillUnmount() {
+    this.isSubscribed = false;
+  }
+
   render() {
+    if (!this.isSubscribed) {
+      return '';
+    }
+
     const { communityStats } = this.state;
 
     const {
