@@ -3,6 +3,7 @@ import React from 'react';
 import Modal from 'react-modal';
 import ReactTooltip from 'react-tooltip';
 import AchievementBadge from './AchievementBadge.js';
+import AchievementDetails from './AchievementDetails.js';
 import InfoBox from './InfoBox.js';
 import { achievements } from '../achievements.js';
 import './AchievementSection.css';
@@ -124,54 +125,8 @@ class AchievementSection extends Component {
 
   getDetailedBadge(id) {
     const { achievements } = this.state;
-    const compactBadgeElement = this.getCompactBadge(id);
-    const { description, completed } = achievements[id];
-    const className = completed ? 'active' : 'inactive';
-
-    // TODO: [layout] Define title, dateEarned, currentValue and maxValue
-    const title = 'Badge title';
-    const dateEarned = 'Earned 9 Aug, 2018 - 7:22 PM';
-    let hasProgress = false;
-    let currentValue;
-    let maxValue;
-
-    if (id === 'timeSessionWeek90m') {
-      hasProgress = true;
-      currentValue = 68;
-      maxValue = 90;
-    } else if (id === 'day50Measurements') {
-      hasProgress = true;
-      currentValue = 16;
-      maxValue = 50;
-    }
-
-    const progressPercent = (currentValue / maxValue) * 100;
-    const currentClass = progressPercent <= 50 ? 'after' : '';
-    const currentStyle = {
-      width: `${progressPercent}%`
-    };
-
-    return (
-      <div key={id} className={`AchievementDetails ${className}`}>
-        {compactBadgeElement}
-        <div className="info">
-          <div className="title">{title}</div>
-          <div className="description">{description}</div>
-          {hasProgress ? (
-            <div className="progress">
-              <div className={`current ${currentClass}`} style={currentStyle}>
-                <span className="value">
-                  {currentValue}/{maxValue}
-                </span>
-              </div>
-            </div>
-          ) : (
-            ''
-          )}
-        </div>
-        <div className="date">{dateEarned}</div>
-      </div>
-    );
+    const achievement = achievements[id];
+    return <AchievementDetails id={id} achievement={achievement} />;
   }
 
   getAchievementsBadges(achievementsList, isDetailed = false) {

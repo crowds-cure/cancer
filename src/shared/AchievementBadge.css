@@ -13,7 +13,7 @@
 }
 
 .AchievementBadge.inactive {
-  filter: saturate(0);
+  filter: grayscale(1);
 }
 
 .AchievementBadge img {
