@@ -126,7 +126,7 @@ class AchievementSection extends Component {
   getDetailedBadge(id) {
     const { achievements } = this.state;
     const achievement = achievements[id];
-    return <AchievementDetails id={id} achievement={achievement} />;
+    return <AchievementDetails key={id} id={id} achievement={achievement} />;
   }
 
   getAchievementsBadges(achievementsList, isDetailed = false) {

@@ -7,23 +7,9 @@ import './AchievementDetails.css';
 import AchievementBadge from './AchievementBadge.js';
 
 class AchievementDetails extends Component {
-  getBadge(id, achievement) {
-    const { description, completed, img } = achievement;
-    const className = completed ? 'active' : 'inactive';
-    return (
-      <AchievementBadge
-        key={id}
-        className={className}
-        img={img}
-        description={description}
-      />
-    );
-  }
-
   render() {
     const { id, achievement } = this.props;
-    const compactBadgeElement = this.getBadge(id, achievement);
-    const { description, completed } = achievement;
+    const { description, completed, img } = achievement;
     const className = completed ? 'active' : 'inactive';
 
     // TODO: [layout] Define title, dateEarned, currentValue and maxValue
@@ -50,8 +36,8 @@ class AchievementDetails extends Component {
     };
 
     return (
-      <div key={id} className={`AchievementDetails ${className}`}>
-        {compactBadgeElement}
+      <div className={`AchievementDetails ${className}`}>
+        <AchievementBadge className={className} img={img} />
         <div className="info">
           <div className="title">{title}</div>
           <div className="description">{description}</div>
