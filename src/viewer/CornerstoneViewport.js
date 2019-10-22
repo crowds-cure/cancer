@@ -87,7 +87,7 @@ class CornerstoneViewport extends Component {
       cornerstone.resize(this.element, true);
 
       this.setState({
-        viewportHeight: `${this.element.clientHeight - 20}px`
+        viewportHeight: `${this.element.clientHeight - 46}px`
       });
     }, 300);
 
@@ -383,7 +383,7 @@ class CornerstoneViewport extends Component {
       window.addEventListener(EVENT_RESIZE, this.onWindowResize);
 
       this.setState({
-        viewportHeight: `${this.element.clientHeight - 20}px`
+        viewportHeight: `${this.element.clientHeight - 46}px`
       });
 
       this.doneLoadingHandler();
