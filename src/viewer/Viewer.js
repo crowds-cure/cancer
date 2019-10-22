@@ -33,6 +33,7 @@ import NotificationManager from './notifications/NotificationManager';
 
 // TODO: [layout] REMOVE
 import example1Badge from '../images/general/badge-example-1.svg';
+import getAnnotationBoundingBox from './lib/getAnnotationBoundingBox.js';
 window.nm = NotificationManager;
 window.testIcon = example1Badge;
 
@@ -115,6 +116,46 @@ class Viewer extends Component {
     if (this.state.currentLesion !== prevState.currentLesion) {
       this.setState({ lesionSelected: this.state.currentLesion });
     }
+  }
+
+  zoomIntoLesion() {
+    const { toolData, currentLesion } = this.state;
+    const measurementData = toolData[currentLesion - 1];
+    if (!measurementData) {
+      return;
+    }
+
+    const boundingBox = getAnnotationBoundingBox(measurementData.handles);
+    if (!boundingBox) {
+      return;
+    }
+
+    // Calculate the new viewport translation and scale
+    const enabledElement = cornerstone.getEnabledElements()[0];
+    const { element } = enabledElement;
+    const image = cornerstone.getImage(element);
+    const defaultViewport = cornerstone.getDefaultViewportForImage(
+      element,
+      image
+    );
+    const viewport = cornerstone.getViewport(element);
+    const width = boundingBox.xEnd - boundingBox.xStart;
+    const height = boundingBox.yEnd - boundingBox.yStart;
+    const xScale = image.width / width;
+    const yScale = image.height / height;
+    const newScale = xScale < yScale ? xScale : yScale;
+    const imageMidX = image.width / 2;
+    const imageMidY = image.height / 2;
+    const annotationMidX = boundingBox.xStart + width / 2;
+    const annotationMidY = boundingBox.yStart + height / 2;
+
+    // Update the viewport translation and scale
+    viewport.scale = defaultViewport.scale * newScale * 0.75;
+    viewport.translation.x = imageMidX - annotationMidX;
+    viewport.translation.y = imageMidY - annotationMidY;
+
+    // Update the viewport with the new configuration
+    cornerstone.setViewport(element, viewport);
   }
 
   getNextCase() {
