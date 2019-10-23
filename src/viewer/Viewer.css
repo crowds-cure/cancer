@@ -1,6 +1,6 @@
 @value globals: "../GlobalStyles.css";
-@value defaultColor, uiBlack from globals;
-@value screen-min, screen-xs-max, screen-sm-max from globals;
+@value activeColor, defaultColor, uiBlack from globals;
+@value screen-min, screen-xs, screen-xs-max, screen-sm-max from globals;
 
 .Viewer {
   height: 100%;
@@ -34,6 +34,30 @@
   left: 16px;
   position: fixed;
   top: 40px;
+}
+
+.Viewer .ViewportControl .MagnifyToggle {
+  background-color: #00d5ae;
+  border-radius: 9px;
+  color: #100e44;
+  display: none;
+  font-weight: 600;
+  height: 36px;
+  line-height: 36px;
+  text-align: center;
+  transition: color 0.3s ease, box-shadow 0.3s ease, text-shadow 0.3s ease;
+  width: 80px;
+}
+
+.Viewer .ViewportControl .MagnifyToggle.disabled {
+  display: none;
+}
+
+.Viewer .ViewportControl .MagnifyToggle.active {
+  color: #ffffff;
+  box-shadow: inset 0 0 200px rgba(0, 0, 0, 0.5),
+    inset 2px 2px 2px rgba(0, 0, 0, 0.5);
+  text-shadow: 2px 2px 2px uiBlack;
 }
 
 .Viewer .MeasurementControl {
@@ -83,6 +107,18 @@
 
   .Viewer .SessionControl {
     top: 22px;
+  }
+}
+
+@media (min-width: screen-xs) and (max-width: screen-xs-max) {
+  .Viewer .ViewportControl .MagnifyToggle {
+    bottom: 8px;
+    display: block;
+    height: 45px;
+    line-height: 45px;
+    left: 160px;
+    position: fixed;
+    width: 100px;
   }
 }
 
@@ -249,9 +285,18 @@
 
   .Viewer .ViewportControl {
     background-color: transparent;
-    height: 40px;
+    flex-wrap: wrap;
+    height: auto;
     padding: 0;
+    padding-right: 28px;
     top: 48px;
+    width: auto;
+  }
+
+  .Viewer .ViewportControl .MagnifyToggle {
+    display: block;
+    margin-left: auto;
+    margin-right: 6px;
   }
 
   .Viewer .ToolbarSection .presetSelected {

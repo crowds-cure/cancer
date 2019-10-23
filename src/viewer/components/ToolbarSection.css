@@ -137,6 +137,10 @@
 }
 
 @media (max-width: screen-min) {
+  .ToolbarSection {
+    width: auto;
+  }
+
   .ToolbarSection .wlPresets,
   .ToolbarSection .tools {
     border: 0;

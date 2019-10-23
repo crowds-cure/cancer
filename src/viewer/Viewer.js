@@ -57,6 +57,8 @@ class Viewer extends Component {
 
     this.state = {
       loading: true,
+      magnificationActive: false,
+      previousViewport: null,
       showLabelSelectTree: false,
       feedback: [],
       hasMeasurements: false,
@@ -64,6 +66,8 @@ class Viewer extends Component {
       toolData: []
     };
 
+    this.toggleMagnification = this.toggleMagnification.bind(this);
+    this.zoomIntoLesion = this.zoomIntoLesion.bind(this);
     this.getNextCase = this.getNextCase.bind(this);
     this.skipCase = this.skipCase.bind(this);
     this.saveCase = this.saveCase.bind(this);
@@ -116,6 +120,27 @@ class Viewer extends Component {
     if (this.state.currentLesion !== prevState.currentLesion) {
       this.setState({ lesionSelected: this.state.currentLesion });
     }
+  }
+
+  toggleMagnification() {
+    const { currentLesion } = this.state;
+    const magnificationActive = !this.state.magnificationActive;
+    const newState = {
+      magnificationActive,
+      lesionSelected: currentLesion
+    };
+
+    const enabledElement = cornerstone.getEnabledElements()[0];
+    const { element } = enabledElement;
+    if (magnificationActive) {
+      newState.previousViewport = cornerstone.getViewport(element);
+      this.zoomIntoLesion();
+    } else {
+      cornerstone.setViewport(element, this.state.previousViewport);
+      newState.previousViewport = null;
+    }
+
+    this.setState(newState);
   }
 
   zoomIntoLesion() {
@@ -254,6 +279,17 @@ class Viewer extends Component {
     return lesionSelected >= 0 ? lesionSelected : currentLesion;
   }
 
+  getMagnifyClassName(state) {
+    let className = 'MagnifyToggle';
+    if (!state.currentLesion) {
+      className += ' disabled';
+    } else if (state.magnificationActive) {
+      className += ' active';
+    }
+
+    return className;
+  }
+
   render() {
     if (!this.props.collection) {
       return <Redirect to="/" />;
@@ -305,6 +341,12 @@ class Viewer extends Component {
             number={this.state.currentLesion}
             onLabelClick={this.toggleLabelSelectTree}
           />
+          <div
+            className={this.getMagnifyClassName(this.state)}
+            onClick={this.toggleMagnification}
+          >
+            <span>Magnify</span>
+          </div>
         </div>
         <div className="SessionControl">
           <CaseProgress
