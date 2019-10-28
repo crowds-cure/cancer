@@ -264,10 +264,10 @@ class Labelling extends Component {
     // if (description) {
     //   this.props.measurementData.description = description;
     // }
-    // this.props.measurementData.additionalData = [textLine];
+    // this.props.measurementData.labels = [textLine];
 
     this.props.measurementData.location = location;
-    this.props.measurementData.additionalData = [location];
+    this.props.measurementData.labels = [location];
 
     this.setState({
       location,
