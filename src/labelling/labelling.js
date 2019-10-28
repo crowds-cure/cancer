@@ -40,6 +40,8 @@ class Labelling extends Component {
     };
 
     this.mainElement = React.createRef();
+
+    this.selectTreeSelectCalback = this.selectTreeSelectCalback.bind(this);
   }
 
   render() {
