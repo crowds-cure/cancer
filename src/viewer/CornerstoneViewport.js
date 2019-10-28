@@ -287,7 +287,9 @@ class CornerstoneViewport extends Component {
             getMeasurementLocationCallback: this
               .bidirectionalToolLabellingCallback,
             shadow: true,
-            drawHandlesOnHover: true
+            drawHandlesOnHover: true,
+            touchMagnifySize: Math.floor(element.clientWidth / 2),
+            touchMagnificationLevel: 1
           }
         },
         { name: 'Wwwc' },
