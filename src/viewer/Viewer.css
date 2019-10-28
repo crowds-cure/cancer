@@ -79,6 +79,10 @@
   top: 19px;
 }
 
+.Viewer .ViewportOverlay {
+  pointer-events: none;
+}
+
 .Viewer .ViewportOverlay .top-left {
   top: 10px;
 }
