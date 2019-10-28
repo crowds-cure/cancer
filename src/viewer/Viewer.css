@@ -92,6 +92,21 @@
   right: 32px;
 }
 
+.Viewer .magnifyTool {
+  border: 4px #ffffff solid;
+  border-radius: 50%;
+  box-shadow: 2px 2px 10px #1e1e1e;
+  cursor: none;
+  display: none;
+  /* TODO: [layout]
+   * The `overflow: hidden` declaration is not working for android when using 50% radius.
+   * This is making the magnifying glass to be shaped as a square.
+   * See: https://stackoverflow.com/questions/21584679
+   */
+  overflow: hidden;
+  z-index: 100;
+}
+
 @media (max-width: screen-sm-max) {
   .Viewer .viewport-section {
     height: calc(100% - 100px);
@@ -194,6 +209,9 @@
 @media (max-width: screen-min) {
   .Viewer .viewport-section {
     height: calc(100% - 48px);
+    position: relative;
+    top: 48px;
+    z-index: auto;
   }
 
   .Viewer .ViewportOverlay .overlay-element.top-left {
