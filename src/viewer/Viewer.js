@@ -83,6 +83,7 @@ class Viewer extends Component {
     this.onKeyDown = this.onKeyDown.bind(this);
     this.toggleLabelSelectTree = this.toggleLabelSelectTree.bind(this);
     this.labelDoneCallback = this.labelDoneCallback.bind(this);
+    this.onImageChanged = this.onImageChanged.bind(this);
   }
 
   componentDidMount() {
@@ -122,6 +123,13 @@ class Viewer extends Component {
     }
   }
 
+  onImageChanged() {
+    this.setState({
+      magnificationActive: false,
+      previousViewport: null
+    });
+  }
+
   toggleMagnification() {
     const { currentLesion } = this.state;
     const magnificationActive = !this.state.magnificationActive;
@@ -130,14 +138,27 @@ class Viewer extends Component {
       lesionSelected: currentLesion
     };
 
+    const newImageEvent = cornerstone.EVENTS.NEW_IMAGE;
     const enabledElement = cornerstone.getEnabledElements()[0];
     const { element } = enabledElement;
+    const currentViewport = cornerstone.getViewport(element);
     if (magnificationActive) {
-      newState.previousViewport = cornerstone.getViewport(element);
+      newState.previousViewport = {
+        scale: currentViewport.scale,
+        translation: {
+          x: currentViewport.translation.x,
+          y: currentViewport.translation.y
+        }
+      };
+
       this.zoomIntoLesion();
+      element.addEventListener(newImageEvent, this.onImageChanged);
     } else {
-      cornerstone.setViewport(element, this.state.previousViewport);
+      const { previousViewport } = this.state;
+      const newViewport = Object.assign(currentViewport, previousViewport);
+      cornerstone.setViewport(element, newViewport);
       newState.previousViewport = null;
+      element.removeEventListener(newImageEvent, this.onImageChanged);
     }
 
     this.setState(newState);
