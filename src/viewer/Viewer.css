@@ -336,11 +336,16 @@
     position: fixed;
     right: 6px !important;
     top: unset !important;
+    white-space: nowrap;
     width: auto;
   }
 
   .Viewer .select-tree {
     width: 100%;
+  }
+
+  .Viewer .addLabelButton {
+    display: none;
   }
 
   /* TODO [layout] REMOVE */
