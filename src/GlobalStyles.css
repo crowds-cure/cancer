@@ -36,7 +36,7 @@
 @value progressBackgroundColor: primaryBackgroundColor;
 @value progressPrimaryColor: activeColor;
 @value progressSecondaryColor: secondaryColor;
-@value imageSliderColor: #163239;
+@value imageSliderColor: #472e93;
 
 /* Screen resolutions */
 @value 640w: 640px;

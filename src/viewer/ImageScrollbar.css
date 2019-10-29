@@ -35,12 +35,13 @@ input.imageSlider::-moz-focus-outer {
 }
 
 input.imageSlider::-webkit-slider-thumb {
-  cursor: -webkit-grab;
   background: imageSliderColor;
-  -webkit-appearance: none;
-  width: 45px;
-  height: 20px;
+  border: 0;
   border-radius: 10px;
+  cursor: -webkit-grab;
+  height: 20px;
+  width: 45px;
+  -webkit-appearance: none;
 }
 
 input.imageSlider::-webkit-slider-thumb:active {
