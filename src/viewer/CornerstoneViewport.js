@@ -29,8 +29,13 @@ function initializeTools(tools) {
   Array.from(tools).forEach(tool => {
     const apiTool = cornerstoneTools[`${tool.name}Tool`];
     if (apiTool) {
+      let options;
       const { configuration } = tool;
-      cornerstoneTools.addTool(apiTool, { configuration });
+      if (configuration) {
+        options = { configuration };
+      }
+
+      cornerstoneTools.addTool(apiTool, options);
     } else {
       throw new Error(`Tool not found: ${tool.name}Tool`);
     }
@@ -318,19 +323,13 @@ class CornerstoneViewport extends Component {
       - Two-finger Pan
       - Three (or more) finger Stack Scroll
       */
-      cornerstoneTools.setToolActive('PanMultiTouch', {
+      const touchOptions = {
         mouseButtonMask: 0,
         isTouchActive: true
-      });
-      cornerstoneTools.setToolActive('ZoomTouchPinch', {
-        mouseButtonMask: 0,
-        isTouchActive: true
-      });
-
-      cornerstoneTools.setToolActive('StackScrollMultiTouch', {
-        mouseButtonMask: 0,
-        isTouchActive: true
-      });
+      };
+      cornerstoneTools.setToolActive('PanMultiTouch', touchOptions);
+      cornerstoneTools.setToolActive('ZoomTouchPinch', touchOptions);
+      cornerstoneTools.setToolActive('StackScrollMultiTouch', touchOptions);
 
       cornerstoneTools.stackPrefetch.setConfiguration({
         maxImagesToPrefetch: Infinity,
