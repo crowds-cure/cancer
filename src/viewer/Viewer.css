@@ -183,8 +183,9 @@
   }
 
   .Viewer .ViewportOverlay .overlay-element.top-left {
-    left: 10px;
-    top: 50px;
+    bottom: 50px;
+    left: 12px;
+    top: auto;
   }
 
   .Viewer .SessionControl {
@@ -192,16 +193,23 @@
   }
 
   .Viewer .SessionControl .CaseControlButtons {
-    bottom: 6px;
-    right: 6px;
+    bottom: 0;
+    display: flex;
+    padding: 0 12px 8px;
+    right: 0;
+    width: 100%;
+  }
+
+  .Viewer .SessionControl .CaseControlButtons > div {
+    flex-grow: 1;
   }
 
   .Viewer .SessionControl .CaseControlButtons .feedback-button,
   .Viewer .SessionControl .CaseControlButtons button.complete-case {
-    font-size: 14px;
-    height: 36px;
-    line-height: 36px;
-    width: 86px;
+    font-size: 15px;
+    height: 38px;
+    line-height: 38px;
+    width: 100%;
   }
 
   .Viewer .SessionControl .CaseControlButtons .feedback-button {
@@ -217,7 +225,7 @@
   }
 
   .Viewer .SessionControl .CaseControlButtons .CaseFeedback .feedback-options {
-    left: -72px;
+    left: 0;
   }
 
   .Viewer
