@@ -4,10 +4,28 @@ import './MeasurementControl.css';
 import PropTypes from 'prop-types';
 
 class MeasurementControl extends Component {
+  getControlClassName(props) {
+    let className = 'MeasurementControl noselect';
+    if (props.disabled) {
+      className += ' disabled';
+    }
+
+    return className;
+  }
+
+  getMagnifyClassName(props) {
+    let className = 'magnify';
+    if (props.magnificationActive) {
+      className += ' active';
+    }
+
+    return className;
+  }
+
   render() {
     return (
-      <div className="MeasurementControl noselect">
-        <div className={this.props.disabled ? 'controls disabled' : 'controls'}>
+      <div className={this.getControlClassName(this.props)}>
+        <div className="controls">
           <span
             className="previous arrow-container"
             onClick={this.props.previous}
@@ -18,9 +36,15 @@ class MeasurementControl extends Component {
           <span className="next arrow-container" onClick={this.props.next}>
             <span className="right-arrow arrow" />
           </span>
-          <span className="label" onClick={this.props.onLabelClick}>
-            Label
-          </span>
+        </div>
+        <div className="label" onClick={this.props.onLabelClick}>
+          Label
+        </div>
+        <div
+          className={this.getMagnifyClassName(this.props)}
+          onClick={this.props.onMagnifyClick}
+        >
+          Magnify
         </div>
         <div className="lesions">lesions</div>
       </div>

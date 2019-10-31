@@ -300,17 +300,6 @@ class Viewer extends Component {
     return lesionSelected >= 0 ? lesionSelected : currentLesion;
   }
 
-  getMagnifyClassName(state) {
-    let className = 'MagnifyToggle';
-    if (!state.currentLesion) {
-      className += ' disabled';
-    } else if (state.magnificationActive) {
-      className += ' active';
-    }
-
-    return className;
-  }
-
   render() {
     if (!this.props.collection) {
       return <Redirect to="/" />;
@@ -361,13 +350,9 @@ class Viewer extends Component {
             next={this.next}
             number={this.state.currentLesion}
             onLabelClick={this.toggleLabelSelectTree}
+            onMagnifyClick={this.toggleMagnification}
+            magnificationActive={this.state.magnificationActive}
           />
-          <div
-            className={this.getMagnifyClassName(this.state)}
-            onClick={this.toggleMagnification}
-          >
-            <span>Magnify</span>
-          </div>
         </div>
         <div className="SessionControl">
           <CaseProgress

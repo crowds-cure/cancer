@@ -37,7 +37,8 @@
 }
 
 @media (min-width: screen-xs) {
-  .MeasurementControl .controls .label {
+  .MeasurementControl .label,
+  .MeasurementControl .magnify {
     display: none;
   }
 
@@ -60,27 +61,26 @@
     transition: 0.15s all ease;
   }
 
-  .MeasurementControl .controls.disabled .arrow-container {
+  .MeasurementControl.disabled .arrow-container {
     background-color: #262548;
     cursor: not-allowed;
   }
 
-  .MeasurementControl .controls.disabled .arrow-container > .arrow {
+  .MeasurementControl.disabled .arrow-container > .arrow {
     border: 7px solid #3a5874;
     border-top-color: transparent;
     border-bottom-color: transparent;
   }
 
-  .MeasurementControl .controls:not(.disabled) .arrow-container:hover {
+  .MeasurementControl:not(.disabled) .arrow-container:hover {
     background-color: #0f373b;
   }
 
-  .MeasurementControl .controls:not(.disabled) .arrow-container:active {
+  .MeasurementControl:not(.disabled) .arrow-container:active {
     background-color: activeColor;
   }
 
-  .MeasurementControl
-    .controls:not(.disabled)
+  .MeasurementControl:not(.disabled)
     .arrow-container:active
     > .arrow {
     border: 7px solid uiBlack;
@@ -88,11 +88,11 @@
     border-bottom-color: transparent;
   }
 
-  .MeasurementControl .controls.disabled .arrow-container > .left-arrow {
+  .MeasurementControl.disabled .arrow-container > .left-arrow {
     border-left: 0px;
   }
 
-  .MeasurementControl .controls.disabled .arrow-container > .right-arrow {
+  .MeasurementControl.disabled .arrow-container > .right-arrow {
     border-right: 0px;
   }
 
@@ -116,15 +116,13 @@
     width: 22px;
   }
 
-  .MeasurementControl
-    .controls:not(.disabled)
+  .MeasurementControl:not(.disabled)
     .arrow-container:active
     > .left-arrow {
     border-left: 0px;
   }
 
-  .MeasurementControl
-    .controls:not(.disabled)
+  .MeasurementControl:not(.disabled)
     .arrow-container:active
     > .right-arrow {
     border-right: 0px;
@@ -132,43 +130,71 @@
 }
 
 @media (max-width: screen-min) {
-  .MeasurementControl .controls {
+  .MeasurementControl {
+    display: flex;
+    white-space: nowrap;
+    width: 100%;
+  }
+
+  .MeasurementControl .controls,
+  .MeasurementControl .label,
+  .MeasurementControl .magnify {
     background-color: rgba(0, 0, 0, 0.8);
     border: 1px solid #16daac;
     border-radius: 9px;
-    display: table;
-    height: 36px;
+    color: #ffffff;
+    display: block;
+    flex-grow: 1;
+    font-size: 15px;
+    font-weight: 600;
+    height: 38px;
+    line-height: 38px;
+    margin: 0 2%;
     overflow: hidden;
     padding: 0;
+    text-align: center;
+  }
+
+  .MeasurementControl .label,
+  .MeasurementControl .magnify {
+    padding: 0 8px;
+  }
+
+  .MeasurementControl .magnify.active {
+    color: activeColor;
+  }
+
+  .MeasurementControl .controls {
+    display: flex;
   }
 
   .MeasurementControl .controls .number {
-    display: none;
+    color: #a8a8a8;
+    flex-grow: 1;
+    font-size: 25px;
+    font-weight: normal;
+    line-height: 38px;
+    margin: 0;
+    text-align: center;
+    vertical-align: top;
   }
 
-  .MeasurementControl .controls .arrow-container {
+  .MeasurementControl .controls > span {
     background-color: transparent !important;
     display: inline-block;
     height: 100%;
+    padding: 0 4px;
     position: relative;
-    width: 34px;
+    min-width: 38px;
   }
 
-  .MeasurementControl .controls .arrow-container:not(:last-child) {
+  .MeasurementControl .controls > span:not(:last-child) {
     border-right: 1px solid #16daac;
-    width: 35px;
   }
 
-  .MeasurementControl .controls .label {
-    color: #ffffff;
-    display: inline-block;
-    font-size: 14px;
-    font-weight: 600;
-    height: 34px;
-    line-height: 34px;
-    padding: 0 8px;
-    vertical-align: top;
-    width: auto;
+  .MeasurementControl .controls .arrow-container {
+    flex-grow: 0;
+    flex-shrink: 1;
   }
 
   .MeasurementControl .controls .arrow-container > .arrow {
@@ -193,8 +219,7 @@
     transform: translate(calc(-50% - 3px), -50%) rotate(-45deg);
   }
 
-  .MeasurementControl .controls.disabled .arrow-container > .arrow,
-  .MeasurementControl .controls.disabled .label {
-    opacity: 0.5;
+  .MeasurementControl.disabled {
+    display: none;
   }
 }
