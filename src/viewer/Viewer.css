@@ -271,17 +271,31 @@
 
   .Viewer .SessionControl .CaseProgress .sessionCount {
     flex-grow: 1;
+    min-width: 100px;
     width: auto;
   }
 
   .Viewer .SessionControl .CaseProgress .caseSelect > div,
   .Viewer .SessionControl .CaseProgress .endSession > div {
-    display: none;
+    font-size: 15px;
+    font-weight: 600;
+    margin: 0 10px 0 0;
+    text-align: left;
+  }
+
+  .Viewer .SessionControl .CaseProgress .caseSelect > svg,
+  .Viewer .SessionControl .CaseProgress .endSession > svg {
+    min-width: 24px;
+    margin: 0 10px;
   }
 
   .Viewer .SessionControl .CaseProgress .caseSelect,
   .Viewer .SessionControl .CaseProgress .endSession {
-    width: 70px;
+    align-items: center;
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+    width: auto;
   }
 
   .Viewer .SessionControl .CaseProgress .sessionCount,
@@ -312,7 +326,7 @@
     padding: 0;
     padding-right: 28px;
     top: 48px;
-    width: auto;
+    width: 100%;
   }
 
   .Viewer .ViewportControl .MagnifyToggle {
