@@ -138,22 +138,26 @@
 
 @media (max-width: screen-min) {
   .ToolbarSection {
-    width: auto;
+    display: flex;
+    padding-top: 5px;
+    width: 100%;
   }
 
   .ToolbarSection .wlPresets,
   .ToolbarSection .tools {
     border: 0;
-    display: table;
-    margin-left: 2px;
-    margin-top: 5px;
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-around;
     padding: 0;
     white-space: nowrap;
   }
 
   .ToolbarSection .ToolbarButton {
     height: 40px;
-    width: 36px;
+    max-width: 40px;
+    min-width: 36px;
+    width: auto;
   }
 
   .ToolbarSection .ToolbarButton svg {
