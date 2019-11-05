@@ -39,6 +39,8 @@
 .CaseFeedback .feedback-button:not(:disabled):active,
 .CaseFeedback .feedback-button[active='true'] {
   background-color: #140046;
+  position: relative;
+  z-index: 30;
 }
 
 .CaseFeedback .arrow {

@@ -83,7 +83,7 @@ class Viewer extends Component {
     this.onKeyDown = this.onKeyDown.bind(this);
     this.toggleLabelSelectTree = this.toggleLabelSelectTree.bind(this);
     this.labelDoneCallback = this.labelDoneCallback.bind(this);
-    this.onImageChanged = this.onImageChanged.bind(this);
+    this.onNewImage = this.onNewImage.bind(this);
   }
 
   componentDidMount() {
@@ -123,10 +123,11 @@ class Viewer extends Component {
     }
   }
 
-  onImageChanged() {
+  onNewImage() {
     this.setState({
       magnificationActive: false,
-      previousViewport: null
+      previousViewport: null,
+      lesionSelected: 0
     });
   }
 
@@ -138,7 +139,6 @@ class Viewer extends Component {
       lesionSelected: currentLesion
     };
 
-    const newImageEvent = cornerstone.EVENTS.NEW_IMAGE;
     const enabledElement = cornerstone.getEnabledElements()[0];
     const { element } = enabledElement;
     const currentViewport = cornerstone.getViewport(element);
@@ -152,13 +152,11 @@ class Viewer extends Component {
       };
 
       this.zoomIntoLesion();
-      element.addEventListener(newImageEvent, this.onImageChanged);
     } else {
       const { previousViewport } = this.state;
       const newViewport = Object.assign(currentViewport, previousViewport);
       cornerstone.setViewport(element, newViewport);
       newState.previousViewport = null;
-      element.removeEventListener(newImageEvent, this.onImageChanged);
     }
 
     this.setState(newState);
@@ -297,6 +295,8 @@ class Viewer extends Component {
 
   getCurrentLesion(state) {
     const { lesionSelected, currentLesion } = state;
+    return lesionSelected;
+
     return lesionSelected >= 0 ? lesionSelected : currentLesion;
   }
 
@@ -327,6 +327,7 @@ class Viewer extends Component {
               activeTool={activeTool}
               showLabelSelectTree={this.state.showLabelSelectTree}
               labelDoneCallback={this.labelDoneCallback}
+              onNewImage={this.onNewImage}
             />
           ) : (
             <LoadingIndicator />
@@ -532,6 +533,7 @@ class Viewer extends Component {
       previousLesion = currentLesion - 1;
     }
 
+    // TODO: [layout] make it work with a single lesion
     this.setState({
       currentLesion: previousLesion,
       lesionSelected: previousLesion
@@ -552,6 +554,7 @@ class Viewer extends Component {
       nextLesion = currentLesion + 1;
     }
 
+    // TODO: [layout] make it work with a single lesion
     this.setState({
       currentLesion: nextLesion,
       lesionSelected: nextLesion

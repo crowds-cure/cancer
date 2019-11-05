@@ -76,6 +76,8 @@ class CornerstoneViewport extends Component {
     this.doneLoadingHandler = this.doneLoadingHandler.bind(this);
     this.onMouseClick = this.onMouseClick.bind(this);
     this.onTouchPress = this.onTouchPress.bind(this);
+    this.focusCurrentLesion = this.focusCurrentLesion.bind(this);
+    this.updateScrollbarValue = this.updateScrollbarValue.bind(this);
     this.onMeasurementAddedOrRemoved = this.onMeasurementAddedOrRemoved.bind(
       this
     );
@@ -92,7 +94,7 @@ class CornerstoneViewport extends Component {
       cornerstone.resize(this.element, true);
 
       this.setState({
-        viewportHeight: `${this.element.clientHeight - 46}px`
+        viewportHeight: `${this.element.clientHeight - 50}px`
       });
     }, 300);
 
@@ -240,6 +242,12 @@ class CornerstoneViewport extends Component {
     this.setState({
       imageId: image.imageId
     });
+
+    this.updateScrollbarValue();
+
+    if (this.props.onNewImage) {
+      this.props.onNewImage();
+    }
   }
 
   componentDidMount() {
@@ -384,7 +392,7 @@ class CornerstoneViewport extends Component {
       window.addEventListener(EVENT_RESIZE, this.onWindowResize);
 
       this.setState({
-        viewportHeight: `${this.element.clientHeight - 46}px`
+        viewportHeight: `${this.element.clientHeight - 50}px`
       });
 
       this.doneLoadingHandler();
@@ -500,37 +508,41 @@ class CornerstoneViewport extends Component {
     }
 
     if (currentLesionChanged) {
-      const currentToolData = this.props.toolData[this.props.currentLesion - 1];
-      if (currentToolData) {
-        const { imageId } = currentToolData;
+      this.focusCurrentLesion();
+    }
+  }
 
-        if (this.state.imageId === imageId) {
-          cornerstone.setViewport(this.element, currentToolData.viewport);
-          cornerstone.updateImage(this.element);
-        } else {
-          cornerstone.loadAndCacheImage(imageId).then(image => {
-            try {
-              cornerstone.getEnabledElement(this.element);
-            } catch (error) {
-              // Handle cases where the user ends the session before the image is displayed.
-              console.error(error);
-              return;
-            }
+  focusCurrentLesion() {
+    const currentToolData = this.props.toolData[this.props.currentLesion - 1];
+    if (currentToolData) {
+      const { imageId } = currentToolData;
 
-            cornerstone.displayImage(
-              this.element,
-              image,
-              currentToolData.viewport
-            );
-
-            this.setState({
-              imageId
-            });
-          });
-        }
-      } else {
+      if (this.state.imageId === imageId) {
+        cornerstone.setViewport(this.element, currentToolData.viewport);
         cornerstone.updateImage(this.element);
+      } else {
+        cornerstone.loadAndCacheImage(imageId).then(image => {
+          try {
+            cornerstone.getEnabledElement(this.element);
+          } catch (error) {
+            // Handle cases where the user ends the session before the image is displayed.
+            console.error(error);
+            return;
+          }
+
+          cornerstone.displayImage(
+            this.element,
+            image,
+            currentToolData.viewport
+          );
+
+          this.setState({
+            imageId
+          });
+        });
       }
+    } else {
+      cornerstone.updateImage(this.element);
     }
   }
 
@@ -572,6 +584,25 @@ class CornerstoneViewport extends Component {
       stack,
       imageScrollbarValue: stack.currentImageIdIndex
     });
+  }
+
+  updateScrollbarValue() {
+    const { element } = this;
+    const stackData = cornerstoneTools.getToolState(element, 'stack');
+    const stack = stackData.data[0];
+    const { imageIds } = stack;
+
+    stack.currentImageIdIndex = imageIds.indexOf(this.state.imageId);
+    if (stack.currentImageIdIndex === this.state.imageScrollbarValue) {
+      return;
+    }
+
+    this.setState({
+      stack,
+      imageScrollbarValue: stack.currentImageIdIndex
+    });
+
+    this.hideExtraButtons();
   }
 
   onImageLoaded(event) {
