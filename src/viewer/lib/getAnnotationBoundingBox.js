@@ -27,6 +27,9 @@ export default function getAnnotationBoundingBox(handlesObject) {
     yEnd = Math.max(yEnd, handle.y);
   });
 
+  xStart = xStart === Infinity ? 0 : xStart;
+  yStart = yStart === Infinity ? 0 : yStart;
+
   return {
     xStart,
     yStart,
