@@ -22,6 +22,10 @@ class MeasurementControl extends Component {
     return className;
   }
 
+  getNumber(number) {
+    return number || '';
+  }
+
   render() {
     return (
       <div className={this.getControlClassName(this.props)}>
@@ -32,7 +36,7 @@ class MeasurementControl extends Component {
           >
             <span className="left-arrow arrow" />
           </span>
-          <span className="number">{this.props.number}</span>
+          <span className="number">{this.getNumber(this.props.number)}</span>
           <span className="next arrow-container" onClick={this.props.next}>
             <span className="right-arrow arrow" />
           </span>

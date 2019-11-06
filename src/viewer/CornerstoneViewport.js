@@ -507,7 +507,10 @@ class CornerstoneViewport extends Component {
       this.updateLabelHandler();
     }
 
-    if (currentLesionChanged) {
+    const focusState = this.props.currentLesionFocused;
+    const previousFocusState = prevProps.currentLesionFocused
+    const shallFocus = focusState && previousFocusState !== focusState;
+    if (shallFocus || currentLesionChanged) {
       this.focusCurrentLesion();
     }
   }
@@ -717,7 +720,9 @@ CornerstoneViewport.propTypes = {
   activeTool: PropTypes.string.isRequired,
   viewportData: PropTypes.object.isRequired,
   showLabelSelectTree: PropTypes.bool,
-  labelDoneCallback: PropTypes.func
+  labelDoneCallback: PropTypes.func,
+  currentLesionFocused: PropTypes.bool,
+  magnificationActive: PropTypes.bool
 };
 
 export default CornerstoneViewport;
