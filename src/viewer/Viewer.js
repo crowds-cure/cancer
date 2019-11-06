@@ -60,6 +60,7 @@ class Viewer extends Component {
       magnificationActive: false,
       previousViewport: null,
       showLabelSelectTree: false,
+      currentLesionFocused: false,
       feedback: [],
       hasMeasurements: false,
       currentLesion: 0,
@@ -74,6 +75,7 @@ class Viewer extends Component {
     this.isSaveEnabled = this.isSaveEnabled.bind(this);
     this.isSkipEnabled = this.isSkipEnabled.bind(this);
     this.feedbackChanged = this.feedbackChanged.bind(this);
+    this.focusCurrentLesion = this.focusCurrentLesion.bind(this);
     this.measurementsAddedOrRemoved = this.measurementsAddedOrRemoved.bind(
       this
     );
@@ -117,26 +119,20 @@ class Viewer extends Component {
     if (this.state.showLabelSelectTree && !this.state.hasMeasurements) {
       this.setState({ showLabelSelectTree: false });
     }
-
-    if (this.state.currentLesion !== prevState.currentLesion) {
-      this.setState({ lesionSelected: this.state.currentLesion });
-    }
   }
 
   onNewImage() {
     this.setState({
       magnificationActive: false,
       previousViewport: null,
-      lesionSelected: 0
+      currentLesionFocused: false
     });
   }
 
   toggleMagnification() {
-    const { currentLesion } = this.state;
     const magnificationActive = !this.state.magnificationActive;
     const newState = {
-      magnificationActive,
-      lesionSelected: currentLesion
+      magnificationActive
     };
 
     const enabledElement = cornerstone.getEnabledElements()[0];
@@ -151,15 +147,22 @@ class Viewer extends Component {
         }
       };
 
-      this.zoomIntoLesion();
+      this.focusCurrentLesion();
+
+      const event = cornerstone.EVENTS.IMAGE_RENDERED;
+      const callback = () => {
+        element.removeEventListener(event, callback);
+        this.zoomIntoLesion();
+        this.setState(newState);
+      };
+      element.addEventListener(event, callback);
     } else {
       const { previousViewport } = this.state;
       const newViewport = Object.assign(currentViewport, previousViewport);
       cornerstone.setViewport(element, newViewport);
       newState.previousViewport = null;
+      this.setState(newState);
     }
-
-    this.setState(newState);
   }
 
   zoomIntoLesion() {
@@ -293,13 +296,6 @@ class Viewer extends Component {
     ];
   }
 
-  getCurrentLesion(state) {
-    const { lesionSelected, currentLesion } = state;
-    return lesionSelected;
-
-    return lesionSelected >= 0 ? lesionSelected : currentLesion;
-  }
-
   render() {
     if (!this.props.collection) {
       return <Redirect to="/" />;
@@ -319,10 +315,12 @@ class Viewer extends Component {
         <div key={index} className="viewport">
           {item ? (
             <CornerstoneViewport
-              currentLesion={this.getCurrentLesion(this.state)}
+              currentLesion={this.state.currentLesion}
               toolData={this.state.toolData}
               measurementsAddedOrRemoved={this.measurementsAddedOrRemoved}
               measurementsChanged={this.measurementsChanged}
+              currentLesionFocused={this.state.currentLesionFocused}
+              magnificationActive={this.state.magnificationActive}
               viewportData={item}
               activeTool={activeTool}
               showLabelSelectTree={this.state.showLabelSelectTree}
@@ -353,6 +351,7 @@ class Viewer extends Component {
             onLabelClick={this.toggleLabelSelectTree}
             onMagnifyClick={this.toggleMagnification}
             magnificationActive={this.state.magnificationActive}
+            focusCurrentLesion={this.focusCurrentLesion}
           />
         </div>
         <div className="SessionControl">
@@ -533,10 +532,10 @@ class Viewer extends Component {
       previousLesion = currentLesion - 1;
     }
 
-    // TODO: [layout] make it work with a single lesion
     this.setState({
       currentLesion: previousLesion,
-      lesionSelected: previousLesion
+      magnificationActive: false,
+      previousViewport: null
     });
   }
 
@@ -554,10 +553,10 @@ class Viewer extends Component {
       nextLesion = currentLesion + 1;
     }
 
-    // TODO: [layout] make it work with a single lesion
     this.setState({
       currentLesion: nextLesion,
-      lesionSelected: nextLesion
+      magnificationActive: false,
+      previousViewport: null
     });
   }
 
@@ -575,8 +574,15 @@ class Viewer extends Component {
     }
   }
 
+  focusCurrentLesion() {
+    this.setState({
+      currentLesionFocused: true
+    });
+  }
+
   toggleLabelSelectTree() {
     if (this.state.hasMeasurements) {
+      this.focusCurrentLesion();
       this.setState({ showLabelSelectTree: !this.state.showLabelSelectTree });
     }
   }
