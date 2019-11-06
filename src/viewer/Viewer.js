@@ -33,7 +33,6 @@ import NotificationManager from './notifications/NotificationManager';
 
 // TODO: [layout] REMOVE
 import example1Badge from '../images/general/badge-example-1.svg';
-import getAnnotationBoundingBox from './lib/getAnnotationBoundingBox.js';
 window.nm = NotificationManager;
 window.testIcon = example1Badge;
 
@@ -58,7 +57,6 @@ class Viewer extends Component {
     this.state = {
       loading: true,
       magnificationActive: false,
-      previousViewport: null,
       showLabelSelectTree: false,
       currentLesionFocused: false,
       feedback: [],
@@ -68,7 +66,6 @@ class Viewer extends Component {
     };
 
     this.toggleMagnification = this.toggleMagnification.bind(this);
-    this.zoomIntoLesion = this.zoomIntoLesion.bind(this);
     this.getNextCase = this.getNextCase.bind(this);
     this.skipCase = this.skipCase.bind(this);
     this.saveCase = this.saveCase.bind(this);
@@ -123,86 +120,8 @@ class Viewer extends Component {
 
   onNewImage() {
     this.setState({
-      magnificationActive: false,
-      previousViewport: null,
       currentLesionFocused: false
     });
-  }
-
-  toggleMagnification() {
-    const magnificationActive = !this.state.magnificationActive;
-    const newState = {
-      magnificationActive
-    };
-
-    const enabledElement = cornerstone.getEnabledElements()[0];
-    const { element } = enabledElement;
-    const currentViewport = cornerstone.getViewport(element);
-    if (magnificationActive) {
-      newState.previousViewport = {
-        scale: currentViewport.scale,
-        translation: {
-          x: currentViewport.translation.x,
-          y: currentViewport.translation.y
-        }
-      };
-
-      this.focusCurrentLesion();
-
-      const event = cornerstone.EVENTS.IMAGE_RENDERED;
-      const callback = () => {
-        element.removeEventListener(event, callback);
-        this.zoomIntoLesion();
-        this.setState(newState);
-      };
-      element.addEventListener(event, callback);
-    } else {
-      const { previousViewport } = this.state;
-      const newViewport = Object.assign(currentViewport, previousViewport);
-      cornerstone.setViewport(element, newViewport);
-      newState.previousViewport = null;
-      this.setState(newState);
-    }
-  }
-
-  zoomIntoLesion() {
-    const { toolData, currentLesion } = this.state;
-    const measurementData = toolData[currentLesion - 1];
-    if (!measurementData) {
-      return;
-    }
-
-    const boundingBox = getAnnotationBoundingBox(measurementData.handles);
-    if (!boundingBox) {
-      return;
-    }
-
-    // Calculate the new viewport translation and scale
-    const enabledElement = cornerstone.getEnabledElements()[0];
-    const { element } = enabledElement;
-    const image = cornerstone.getImage(element);
-    const defaultViewport = cornerstone.getDefaultViewportForImage(
-      element,
-      image
-    );
-    const viewport = cornerstone.getViewport(element);
-    const width = boundingBox.xEnd - boundingBox.xStart;
-    const height = boundingBox.yEnd - boundingBox.yStart;
-    const xScale = image.width / width;
-    const yScale = image.height / height;
-    const newScale = xScale < yScale ? xScale : yScale;
-    const imageMidX = image.width / 2;
-    const imageMidY = image.height / 2;
-    const annotationMidX = boundingBox.xStart + width / 2;
-    const annotationMidY = boundingBox.yStart + height / 2;
-
-    // Update the viewport translation and scale
-    viewport.scale = defaultViewport.scale * newScale * 0.75;
-    viewport.translation.x = imageMidX - annotationMidX;
-    viewport.translation.y = imageMidY - annotationMidY;
-
-    // Update the viewport with the new configuration
-    cornerstone.setViewport(element, viewport);
   }
 
   getNextCase() {
@@ -534,8 +453,7 @@ class Viewer extends Component {
 
     this.setState({
       currentLesion: previousLesion,
-      magnificationActive: false,
-      previousViewport: null
+      magnificationActive: false
     });
   }
 
@@ -555,8 +473,7 @@ class Viewer extends Component {
 
     this.setState({
       currentLesion: nextLesion,
-      magnificationActive: false,
-      previousViewport: null
+      magnificationActive: false
     });
   }
 
@@ -578,6 +495,11 @@ class Viewer extends Component {
     this.setState({
       currentLesionFocused: true
     });
+  }
+
+  toggleMagnification() {
+    const magnificationActive = !this.state.magnificationActive;
+    this.setState({ magnificationActive });
   }
 
   toggleLabelSelectTree() {

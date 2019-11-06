@@ -5,6 +5,7 @@ import * as cornerstone from 'cornerstone-core';
 import * as cornerstoneTools from 'cornerstone-tools';
 import './lib/initCornerstone.js';
 import debounce from './lib/debounce.js';
+import getAnnotationBoundingBox from './lib/getAnnotationBoundingBox.js';
 import ImageScrollbar from './ImageScrollbar.js';
 import ViewportOverlay from './ViewportOverlay.js';
 import ToolContextMenu from './ToolContextMenu.js';
@@ -42,6 +43,17 @@ function initializeTools(tools) {
   });
 }
 
+const waitForImageRendering = (element) => {
+  return new Promise((resolve, reject) => {
+    const event = cornerstone.EVENTS.IMAGE_RENDERED;
+    const callback = () => {
+      element.removeEventListener(event, callback);
+      resolve();
+    };
+    element.addEventListener(event, callback);
+  });
+};
+
 const scrollToIndex = cornerstoneTools.import('util/scrollToIndex');
 
 class CornerstoneViewport extends Component {
@@ -60,7 +72,8 @@ class CornerstoneViewport extends Component {
       viewportHeight: '100%',
       isLoading: true,
       imageScrollbarValue: 0,
-      numImagesLoaded: 0
+      numImagesLoaded: 0,
+      previousViewport: null
     };
 
     this.displayScrollbar = stack.imageIds.length > 1;
@@ -77,6 +90,8 @@ class CornerstoneViewport extends Component {
     this.onMouseClick = this.onMouseClick.bind(this);
     this.onTouchPress = this.onTouchPress.bind(this);
     this.focusCurrentLesion = this.focusCurrentLesion.bind(this);
+    this.toggleMagnification = this.toggleMagnification.bind(this);
+    this.getZoomedLesionViewport = this.getZoomedLesionViewport.bind(this);
     this.updateScrollbarValue = this.updateScrollbarValue.bind(this);
     this.onMeasurementAddedOrRemoved = this.onMeasurementAddedOrRemoved.bind(
       this
@@ -507,45 +522,145 @@ class CornerstoneViewport extends Component {
       this.updateLabelHandler();
     }
 
+    const { magnificationActive } = this.props;
+    const magnificationChanged = magnificationActive !== prevProps.magnificationActive;
     const focusState = this.props.currentLesionFocused;
     const previousFocusState = prevProps.currentLesionFocused
-    const shallFocus = focusState && previousFocusState !== focusState;
-    if (shallFocus || currentLesionChanged) {
+    const shallFocus = (
+      (focusState && previousFocusState !== focusState) ||
+      currentLesionChanged
+    );
+
+    if (magnificationChanged) {
+      if (magnificationActive) {
+        const currentViewport = cornerstone.getViewport(this.element);
+        this.setState({ previousViewport: {
+          scale: currentViewport.scale,
+          translation: {
+            x: currentViewport.translation.x,
+            y: currentViewport.translation.y
+          }
+        } });
+
+        this.toggleMagnification(true);
+        this.focusCurrentLesion();
+      } else {
+        this.toggleMagnification(false);
+      }
+    } else if (shallFocus) {
       this.focusCurrentLesion();
     }
   }
 
-  focusCurrentLesion() {
+  toggleMagnification(magnificationActive) {
+    const { element } = this;
+    const currentViewport = cornerstone.getViewport(element);
+    let newState = {};
+    const { previousViewport } = this.state;
+    if (magnificationActive) {
+      // Store the current viewport for restoring it later
+      newState.previousViewport = {
+        scale: currentViewport.scale,
+        translation: {
+          x: currentViewport.translation.x,
+          y: currentViewport.translation.y
+        }
+      };
+
+      this.setState(newState);
+    } else {
+      if (previousViewport && previousViewport.scale !== currentViewport.scale) {
+        const newViewport = Object.assign(currentViewport, previousViewport);
+        cornerstone.setViewport(element, newViewport);
+      } else {
+        const img = cornerstone.getImage(element);
+        const viewport = cornerstone.getDefaultViewportForImage(element, img);
+        const newViewport = Object.assign(currentViewport, {
+          scale: viewport.scale,
+          translation: viewport.translation
+        });
+        cornerstone.setViewport(element, newViewport);
+      }
+
+      cornerstone.updateImage(element);
+      newState.previousViewport = null;
+      this.setState(newState);
+    }
+  }
+
+  getZoomedLesionViewport() {
+    const { toolData, currentLesion } = this.props;
+    const measurementData = toolData[currentLesion - 1];
+    const { element } = this;
+    const viewport = cornerstone.getViewport(element);
+    if (!measurementData) {
+      return viewport;
+    }
+
+    const boundingBox = getAnnotationBoundingBox(measurementData.handles);
+    if (!boundingBox) {
+      return viewport;
+    }
+
+    // Calculate the new viewport translation and scale
+    const image = cornerstone.getImage(element);
+    const defaultViewport = cornerstone.getDefaultViewportForImage(
+      element,
+      image
+    );
+    const width = boundingBox.xEnd - boundingBox.xStart;
+    const height = boundingBox.yEnd - boundingBox.yStart;
+
+    if (!width || !height) {
+      return viewport;
+    }
+
+    const xScale = image.width / width;
+    const yScale = image.height / height;
+    const newScale = xScale < yScale ? xScale : yScale;
+    const imageMidX = image.width / 2;
+    const imageMidY = image.height / 2;
+    const annotationMidX = boundingBox.xStart + width / 2;
+    const annotationMidY = boundingBox.yStart + height / 2;
+
+    // Update the viewport translation and scale
+    viewport.scale = defaultViewport.scale * newScale * 0.75;
+    viewport.translation.x = imageMidX - annotationMidX;
+    viewport.translation.y = imageMidY - annotationMidY;
+
+    return viewport;
+  }
+
+  focusCurrentLesion(update) {
+    const { element } = this;
     const currentToolData = this.props.toolData[this.props.currentLesion - 1];
+
     if (currentToolData) {
       const { imageId } = currentToolData;
+      let viewport = currentToolData.viewport;
+      if (this.props.magnificationActive) {
+        viewport = Object.assign({}, viewport, this.getZoomedLesionViewport());
+      }
 
       if (this.state.imageId === imageId) {
-        cornerstone.setViewport(this.element, currentToolData.viewport);
-        cornerstone.updateImage(this.element);
+        cornerstone.setViewport(element, viewport);
+        cornerstone.updateImage(element);
       } else {
         cornerstone.loadAndCacheImage(imageId).then(image => {
           try {
-            cornerstone.getEnabledElement(this.element);
+            cornerstone.getEnabledElement(element);
           } catch (error) {
             // Handle cases where the user ends the session before the image is displayed.
             console.error(error);
             return;
           }
 
-          cornerstone.displayImage(
-            this.element,
-            image,
-            currentToolData.viewport
-          );
-
-          this.setState({
-            imageId
-          });
+          cornerstone.displayImage(element, image, viewport);
+          this.setState({ imageId });
         });
       }
     } else {
-      cornerstone.updateImage(this.element);
+      cornerstone.updateImage(element);
     }
   }
 
