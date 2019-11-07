@@ -811,6 +811,8 @@ class CornerstoneViewport extends Component {
     if (this.props.setCurrentLesion && currentLesion) {
       this.props.setCurrentLesion(currentLesion);
     }
+
+    this.activateMeasurement(measurementData);
   }
 
   onMouseClick(event) {
