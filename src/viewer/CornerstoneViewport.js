@@ -88,6 +88,7 @@ class CornerstoneViewport extends Component {
     this.startLoadingHandler = this.startLoadingHandler.bind(this);
     this.doneLoadingHandler = this.doneLoadingHandler.bind(this);
     this.onMouseClick = this.onMouseClick.bind(this);
+    this.focusLesion = this.focusLesion.bind(this);
     this.onTouchPress = this.onTouchPress.bind(this);
     this.focusCurrentLesion = this.focusCurrentLesion.bind(this);
     this.toggleMagnification = this.toggleMagnification.bind(this);
@@ -96,6 +97,7 @@ class CornerstoneViewport extends Component {
     this.onMeasurementAddedOrRemoved = this.onMeasurementAddedOrRemoved.bind(
       this
     );
+    this.onMeasurementModified = this.onMeasurementModified.bind(this);
     this.onCloseToolContextMenu = this.onCloseToolContextMenu.bind(this);
     this.imageSliderOnInputCallback = this.imageSliderOnInputCallback.bind(
       this
@@ -190,6 +192,29 @@ class CornerstoneViewport extends Component {
     });
   };
 
+  activateMeasurement(currentToolData) {
+    const { globalImageIdSpecificToolStateManager } = cornerstoneTools;
+    let measurementData = currentToolData;
+    const toolState = globalImageIdSpecificToolStateManager.saveToolState();
+    Object.keys(toolState).forEach(toolStateKey => {
+      const imageState = toolState[toolStateKey];
+      const toolData = imageState[currentToolData.toolType].data || [];
+      toolData.forEach(data => {
+        if (data._id === currentToolData._id) {
+          data.active = true;
+          measurementData = data;
+        } else {
+          data.active = false;
+          data.activeTouch = false;
+        }
+      });
+    });
+
+    globalImageIdSpecificToolStateManager.restoreToolState(toolState);
+
+    return measurementData;
+  }
+
   updateLabelHandler() {
     this.hideExtraButtons();
 
@@ -201,24 +226,7 @@ class CornerstoneViewport extends Component {
       return;
     }
 
-    const { imageId } = currentToolData;
-    const toolState = cornerstoneTools.globalImageIdSpecificToolStateManager.saveToolState();
-    const toolStateData = toolState[imageId][currentToolData.toolType].data;
-
-    let measurementData;
-    toolStateData.forEach(data => {
-      if (data._id === currentToolData._id) {
-        data.active = true;
-        measurementData = data;
-      } else {
-        data.active = false;
-      }
-    });
-
-    cornerstoneTools.globalImageIdSpecificToolStateManager.restoreToolState(
-      toolState
-    );
-
+    const measurementData = this.activateMeasurement(currentToolData);
     if (measurementData) {
       this.bidirectional = {
         measurementData,
@@ -395,6 +403,11 @@ class CornerstoneViewport extends Component {
       );
 
       element.addEventListener(
+        cornerstoneTools.EVENTS.MEASUREMENT_MODIFIED,
+        this.onMeasurementModified
+      );
+
+      element.addEventListener(
         cornerstoneTools.EVENTS.MOUSE_CLICK,
         this.onMouseClick
       );
@@ -436,6 +449,11 @@ class CornerstoneViewport extends Component {
     element.removeEventListener(
       cornerstoneTools.EVENTS.MEASUREMENT_REMOVED,
       this.onMeasurementAddedOrRemoved
+    );
+
+    element.removeEventListener(
+      cornerstoneTools.EVENTS.MEASUREMENT_MODIFIED,
+      this.onMeasurementModified
     );
 
     element.removeEventListener(
@@ -631,11 +649,14 @@ class CornerstoneViewport extends Component {
     return viewport;
   }
 
-  focusCurrentLesion(update) {
+  focusCurrentLesion() {
     const { element } = this;
-    const currentToolData = this.props.toolData[this.props.currentLesion - 1];
+    const { toolData, currentLesion } = this.props;
+    const currentToolData = toolData[currentLesion - 1];
 
     if (currentToolData) {
+      this.activateMeasurement(currentToolData);
+
       const { imageId } = currentToolData;
       let viewport = currentToolData.viewport;
       if (this.props.magnificationActive) {
@@ -778,8 +799,25 @@ class CornerstoneViewport extends Component {
     }
   }
 
+  onMeasurementModified(event) {
+    const { toolData } = this.props;
+    const { measurementData } = event.detail;
+    if (!measurementData || measurementData.toolType !== 'Bidirectional') {
+      return;
+    }
+
+    const data = toolData.find(m => m._id === measurementData._id);
+    const currentLesion = toolData.indexOf(data) + 1;
+    if (this.props.setCurrentLesion && currentLesion) {
+      this.props.setCurrentLesion(currentLesion);
+    }
+  }
+
   onMouseClick(event) {
-    if (event.detail.event.which === 3) {
+    const { which } = event.detail.event;
+    if (which === 1) {
+      this.focusLesion(event);
+    } else if (which === 3) {
       this.setState({
         toolContextMenuData: {
           eventData: event.detail,
@@ -787,6 +825,22 @@ class CornerstoneViewport extends Component {
         }
       });
     }
+  }
+
+  focusLesion(event) {
+    const { element } = this;
+    const filter = tool => tool.name === 'Bidirectional';
+    const toolInterface = cornerstoneTools.store.state.tools.find(filter);
+    const coords = event.detail.currentPoints.canvas;
+    this.props.toolData.every((measurementData, index) => {
+      if (toolInterface.pointNearTool(element, measurementData, coords)) {
+        measurementData.active = true;
+        this.props.setCurrentLesion(index + 1);
+        return false;
+      }
+
+      return true;
+    });
   }
 
   onTouchPress(event) {
@@ -837,7 +891,8 @@ CornerstoneViewport.propTypes = {
   showLabelSelectTree: PropTypes.bool,
   labelDoneCallback: PropTypes.func,
   currentLesionFocused: PropTypes.bool,
-  magnificationActive: PropTypes.bool
+  magnificationActive: PropTypes.bool,
+  setCurrentLesion: PropTypes.func
 };
 
 export default CornerstoneViewport;
