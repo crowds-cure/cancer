@@ -36,7 +36,9 @@ class MeasurementControl extends Component {
           >
             <span className="left-arrow arrow" />
           </span>
-          <span className="number">{this.getNumber(this.props.number)}</span>
+          <span className="number" onClick={this.props.focusCurrentLesion}>
+            {this.getNumber(this.props.number)}
+          </span>
           <span className="next arrow-container" onClick={this.props.next}>
             <span className="right-arrow arrow" />
           </span>
@@ -57,9 +59,14 @@ class MeasurementControl extends Component {
 }
 
 MeasurementControl.propTypes = {
-  number: PropTypes.number.isRequired,
+  disabled: PropTypes.bool,
   previous: PropTypes.func.isRequired,
-  next: PropTypes.func.isRequired
+  next: PropTypes.func.isRequired,
+  number: PropTypes.number.isRequired,
+  onLabelClick: PropTypes.func,
+  onMagnifyClick: PropTypes.func,
+  magnificationActive: PropTypes.bool,
+  focusCurrentLesion: PropTypes.func
 };
 
 export default MeasurementControl;
