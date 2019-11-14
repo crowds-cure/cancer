@@ -151,7 +151,8 @@ class Viewer extends Component {
         '7FE00010'
       ].BulkDataURI.replace('http://', 'https://');
 
-      const imageId = 'wadors:' + instance['7FE00010'].BulkDataURI;
+      const imageId =
+        'wadors:' + instance['7FE00010'].BulkDataURI + '/frames/1';
 
       const instanceLowerCaseKeys = {};
       Object.keys(instance).forEach(key => {
