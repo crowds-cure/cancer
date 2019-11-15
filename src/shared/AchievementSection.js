@@ -42,7 +42,44 @@ class AchievementSection extends Component {
     });
   }
 
-  getMostRecentAchievements(limit) {
+  getSingleBadge(badge) {
+    return (
+      <div className="singleBadge" onClick={this.toggleModal}>
+        {badge}
+      </div>
+    );
+  }
+
+  renderSingleBadges(badges) {
+    const viewAll = (
+      <div
+        className="col-4 col-xs-16 viewAll"
+        onClick={this.toggleModal}
+      >
+        <span>View <br className="d-xs-none" />all</span>
+        <span className="d-none d-xs-inline"> badges</span>
+      </div>
+    );
+
+    const colValue = 12 / badges.length;
+    const badgeElements = [];
+    badges.forEach(badge => {
+      badgeElements.push(
+        <div className={`col-${colValue} col-xs`}>
+          {this.getSingleBadge(badge)}
+        </div>
+      );
+    });
+
+    return (
+      <div class="badgesSingle col-16 d-flex flex-wrap">
+        {badgeElements}
+        {viewAll}
+      </div>
+    );
+  }
+
+  getMostRecentAchievements() {
     const { achievements } = this.state;
 
     const sortedAchievementKeys = Object.keys(achievements).sort(
@@ -50,61 +87,64 @@ class AchievementSection extends Component {
         (achievements[b].completed || false) -
         (achievements[a].completed || false)
     );
-    const slicedAchievementKeys = sortedAchievementKeys.slice(0, limit);
-
-    const recentAchievements = {};
-    slicedAchievementKeys.forEach(achievementKey => {
-      recentAchievements[achievementKey] = achievements[achievementKey];
+    const achievementKeys = sortedAchievementKeys.filter(key => {
+      return achievements[key].completed;
     });
 
-    // TODO: [layout] Remove
-    Object.keys(recentAchievements).forEach(id => {
-      achievements[id].completed = true;
+    const recentAchievements = {};
+    achievementKeys.forEach(achievementKey => {
+      recentAchievements[achievementKey] = achievements[achievementKey];
     });
 
     const badges = this.getAchievementsBadges(recentAchievements);
 
     return (
-      <div className="d-flex no-gutters badgesContent">
-        <div className="col-md d-none d-md-block">
-          <div className="singleBadge" onClick={this.toggleModal}>
-            {badges[4]}
+      <div className={`d-flex no-gutters badgesContent badges-${badges.length}`}>
+        {badges.length > 4 ? (
+          <div className="col-md d-none d-md-block">
+            {this.getSingleBadge(badges[4])}
           </div>
-        </div>
-        <div className="col-xs-5 col-md d-none d-xs-block">
-          <div className="singleBadge" onClick={this.toggleModal}>
-            {badges[3]}
-          </div>
-        </div>
-        <div className="col-16 col-xs-11 col-md">
-          <div
-            className="row no-gutters badgesGroup"
-            onClick={this.toggleModal}
-          >
-            <div className="col-2 col-xs-3">{badges[2]}</div>
-            <div className="col-2 col-xs-3">{badges[1]}</div>
-            <div className="col-4 col-xs-5">{badges[0]}</div>
-            <div className="col-5 d-xs-none">
-              <div className="moreBadges">+{badges.length - 3}</div>
+        ) : ''}
+        {badges.length > 3 ? (
+          <>
+            <div className="col-xs-5 col-md d-none d-xs-block">
+              {this.getSingleBadge(badges[3])}
             </div>
-            <div className="col-xs-5 d-none d-md-none d-xs-block">
-              <div className="moreBadges">+{badges.length - 4}</div>
+            <div className="badgesWrapper col-16 col-xs-11 col-md">
+              <div
+                className="row no-gutters badgesGroup"
+                onClick={this.toggleModal}
+              >
+                <div className="col-2 col-xs-3">{badges[2]}</div>
+                <div className="col-2 col-xs-3">{badges[1]}</div>
+                <div className="col-4 col-xs-5">{badges[0]}</div>
+                <div className="col-5 d-xs-none">
+                  <div className="moreBadges">+{badges.length - 3}</div>
+                </div>
+                {badges.length > 4 ? (
+                  <div className="col-xs-5 d-none d-md-none d-xs-block">
+                    <div className="moreBadges">+{badges.length - 4}</div>
+                  </div>
+                ) : ''}
+                {badges.length > 5 ? (
+                  <div className="col-md-5 d-none d-md-block">
+                    <div className="moreBadges">+{badges.length - 5}</div>
+                  </div>
+                ) : ''}
+                <div className="col-3 d-xs-none viewAll">
+                  <span>
+                    View
+                    <br />
+                    all
+                  </span>
+                </div>
+                <div className="col-xs-16 d-none d-xs-block viewAll">
+                  View all badges
+                </div>
+              </div>
             </div>
-            <div className="col-md-5 d-none d-md-block">
-              <div className="moreBadges">+{badges.length - 5}</div>
-            </div>
-            <div className="col-3 d-xs-none viewAll">
-              <span>
-                View
-                <br />
-                all
-              </span>
-            </div>
-            <div className="col-xs-16 d-none d-xs-block viewAll">
-              View earned badges
-            </div>
-          </div>
-        </div>
+          </>
+        ) : this.renderSingleBadges(badges)}
       </div>
     );
   }
@@ -148,7 +188,7 @@ class AchievementSection extends Component {
   render() {
     const { achievements } = this.state;
 
-    const mostRecentAchievements = this.getMostRecentAchievements(6);
+    const mostRecentAchievements = this.getMostRecentAchievements();
     const allAchievements = this.getAchievementsBadges(achievements, true);
 
     return (

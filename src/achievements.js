@@ -30,61 +30,7 @@ import weekMeasurements250Badge from './images/achievements/week-measurements-25
 import weekMeasurements50Badge from './images/achievements/week-measurements-50.svg';
 import weekMeasurements500Badge from './images/achievements/week-measurements-500.svg';
 
-// import example1Badge from './images/general/badge-example-1.svg';
-// import example2Badge from './images/general/badge-example-2.svg';
-// import example3Badge from './images/general/badge-example-3.svg';
-
 const achievements = {
-  // TODO: [layout] Change all badges icons
-  // example01: {
-  //   img: example1Badge,
-  //   description: 'Example badge description 01'
-  // },
-  // example02: {
-  //   img: example2Badge,
-  //   description: 'Example badge description 02'
-  // },
-  // example03: {
-  //   img: example3Badge,
-  //   description: 'Example badge description 03'
-  // },
-  // example04: {
-  //   img: example1Badge,
-  //   description: 'Example badge description 04'
-  // },
-  // example05: {
-  //   img: example2Badge,
-  //   description: 'Example badge description 05'
-  // },
-  // example06: {
-  //   img: example3Badge,
-  //   description: 'Example badge description 06'
-  // },
-  // example07: {
-  //   img: example1Badge,
-  //   description: 'Example badge description 07'
-  // },
-  // example08: {
-  //   img: example2Badge,
-  //   description: 'Example badge description 08'
-  // },
-  // example09: {
-  //   img: example3Badge,
-  //   description: 'Example badge description 09'
-  // },
-  // example10: {
-  //   img: example1Badge,
-  //   description: 'Example badge description 10'
-  // },
-  // example11: {
-  //   img: example2Badge,
-  //   description: 'Example badge description 11'
-  // },
-  // example12: {
-  //   img: example3Badge,
-  //   description: 'Example badge description 12'
-  // }
-
   collectionAllCases: {
     img: collectionAllCasesBadge,
     description: 'Complete all cases in a collection'

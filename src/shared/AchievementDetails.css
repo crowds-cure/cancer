@@ -28,6 +28,7 @@
 
 .AchievementDetails .info .title {
   color: #ffffff;
+  display: none; /* TODO: [layout] put back when each badge has unique name */
   font-size: 18px;
   font-weight: 600;
 }
@@ -40,6 +41,7 @@
   background-color: #28008c;
   border: 1px solid #40297b;
   border-radius: 8px;
+  display: none; /* TODO: [layout] put back when each badge has progress */
   height: 16px;
   margin-top: 5px;
   overflow: hidden;
@@ -72,6 +74,7 @@
 }
 
 .AchievementDetails .date {
+  display: none; /* TODO: [layout] put back when storing badge earned date */
   font-size: 15px;
   position: absolute;
   right: 20px;

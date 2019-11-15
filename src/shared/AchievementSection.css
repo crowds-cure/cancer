@@ -1,6 +1,6 @@
 @value globals: "../GlobalStyles.css";
 @value primaryBackgroundColor, textPrimaryColor, uiBlack from globals;
-@value screen-xs, screen-sm, screen-md, screen-lg from globals;
+@value screen-min, screen-xs, screen-sm, screen-md, screen-lg from globals;
 
 @value boxContentBg: #1577b0;
 @value boxHeaderBg: #00588a;
@@ -38,11 +38,38 @@
 
 .AchievementSection .viewAll {
   color: textColor;
+  cursor: pointer;
   font-size: 18px;
   font-weight: 600;
   padding-top: 10px;
   text-align: center;
   transition: color 0.3s ease;
+}
+
+.AchievementSection .badgesSingle .viewAll {
+  align-self: center;
+}
+
+.AchievementSection .badgesContent.badges-0 {
+  height: 100%;
+  min-height: 94px;
+  padding-top: 0;
+}
+
+.AchievementSection .badgesContent.badges-0 .viewAll {
+  flex: 0 0 100%;
+  max-width: 100%;
+  width: 100%;
+}
+
+.AchievementSection .badgesContent.badges-0 .viewAll br {
+  display: none;
+}
+
+@media (max-width: screen-min) {
+  .AchievementSection .badgesSingle .viewAll {
+    padding-top: 0;
+  }
 }
 
 @media (min-width: screen-xs) {
@@ -70,6 +97,11 @@
 }
 
 @media (min-width: screen-sm) {
+  .AchievementSection.InfoBox .boxContent {
+    height: 188px;
+  }
+
+  .AchievementSection .viewAll:hover,
   .AchievementSection .badgesGroup:hover .viewAll,
   .AchievementSection .badgesGroup:hover .moreBadges {
     color: textPrimaryColor;
@@ -89,6 +121,10 @@
 }
 
 @media (min-width: screen-md) {
+  .AchievementSection.InfoBox .boxContent {
+    height: 218px;
+  }
+
   .AchievementSection .badgesContent {
     margin: 0 auto;
     max-width: 540px;

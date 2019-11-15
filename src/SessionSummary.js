@@ -32,30 +32,31 @@ class SessionSummary extends Component {
   getSessionBadges(current) {
     const badges = [];
 
-    // TODO: [layout] replace with real badges
-    Object.keys(achievements)
-      .splice(0, 3)
-      .forEach(id => {
-        const currentBadge = achievements[id];
-        const { description, img } = currentBadge;
-        badges.push(
-          <div className="badgeWrapper col-16 col-xs-8 col-sm-third" key={id}>
-            <div className="badge">
-              <AchievementBadge img={img} description={description} />
-              <div className="progress">
-                {id === 'example03' ? (
-                  <div className="badgeProgress">
-                    <div className="badgeProgressValue" />
-                  </div>
-                ) : (
-                  <div className="badgeEarned">Badge earned</div>
-                )}
-                <div className="badgeDescription">{description}</div>
-              </div>
+    // TODO: [layout] replace with real earned badges
+    // const earnedBadges = Object.keys(achievements).splice(0, 3);
+    const earnedBadges = [];
+
+    earnedBadges.forEach(id => {
+      const currentBadge = achievements[id];
+      const { description, img } = currentBadge;
+      badges.push(
+        <div className="badgeWrapper col-16 col-xs-8 col-sm-third" key={id}>
+          <div className="badge">
+            <AchievementBadge img={img} description={description} />
+            <div className="progress">
+              {id === 'example03' ? (
+                <div className="badgeProgress">
+                  <div className="badgeProgressValue" />
+                </div>
+              ) : (
+                <div className="badgeEarned">Badge earned</div>
+              )}
+              <div className="badgeDescription">{description}</div>
             </div>
           </div>
-        );
-      });
+        </div>
+      );
+    });
 
     return badges;
   }

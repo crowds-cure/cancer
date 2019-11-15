@@ -29,12 +29,6 @@ import LoadingIndicator from '../shared/LoadingIndicator.js';
 import './Viewer.css';
 
 import NotificationContainer from './notifications/NotificationContainer';
-import NotificationManager from './notifications/NotificationManager';
-
-// TODO: [layout] REMOVE
-import example1Badge from '../images/general/badge-example-1.svg';
-window.nm = NotificationManager;
-window.testIcon = example1Badge;
 
 const EVENT_KEYDOWN = 'keydown';
 
@@ -50,9 +44,6 @@ const hotkeyFunctions = {
 class Viewer extends Component {
   constructor(props) {
     super(props);
-
-    // TODO: [layout] REMOVE
-    window.viewer = this;
 
     this.state = {
       loading: true,
