@@ -43,17 +43,6 @@ function initializeTools(tools) {
   });
 }
 
-const waitForImageRendering = (element) => {
-  return new Promise((resolve, reject) => {
-    const event = cornerstone.EVENTS.IMAGE_RENDERED;
-    const callback = () => {
-      element.removeEventListener(event, callback);
-      resolve();
-    };
-    element.addEventListener(event, callback);
-  });
-};
-
 const scrollToIndex = cornerstoneTools.import('util/scrollToIndex');
 
 class CornerstoneViewport extends Component {
@@ -61,9 +50,6 @@ class CornerstoneViewport extends Component {
     super(props);
 
     const stack = props.viewportData.stack;
-
-    // TODO: [layout] REMOVE
-    window.cv = this;
 
     // TODO: Allow viewport as a prop
     this.state = {
@@ -324,8 +310,10 @@ class CornerstoneViewport extends Component {
               .bidirectionalToolLabellingCallback,
             shadow: true,
             drawHandlesOnHover: true,
-            touchMagnifySize: Math.floor(element.clientWidth / 2),
-            touchMagnificationLevel: 1
+            // Uncomment to activate magnifying glass for bidirecitonal tool
+            // touchMagnifySize: Math.floor(element.clientWidth / 2),
+            // touchMagnificationLevel: 1
+            // drawActiveTouchHandles: true
           }
         },
         { name: 'Wwwc' },
@@ -661,6 +649,9 @@ class CornerstoneViewport extends Component {
       let viewport = currentToolData.viewport;
       if (this.props.magnificationActive) {
         viewport = Object.assign({}, viewport, this.getZoomedLesionViewport());
+      } else {
+        viewport.translation.x = 0;
+        viewport.translation.y = 0;
       }
 
       if (this.state.imageId === imageId) {

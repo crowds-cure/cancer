@@ -37,6 +37,3 @@ export default function getAnnotationBoundingBox(handlesObject) {
     yEnd
   };
 }
-
-// TODO: [layout] REMOVE
-window.getAnnotationBoundingBox = getAnnotationBoundingBox;
