@@ -19,7 +19,6 @@
   left: 0;
   position: fixed;
   width: 100%;
-  z-index: 0;
 }
 
 .Viewer .viewport-section .viewport {
@@ -163,14 +162,13 @@
   .Viewer .MeasurementControl {
     bottom: 8px;
     padding: 0;
+    padding-right: 360px;
     position: fixed;
     left: 0;
   }
 
   .Viewer .MeasurementControl .lesions {
-    bottom: auto;
-    text-shadow: 1px 1px uiBlack;
-    top: -20px;
+    display: none;
   }
 }
 
@@ -287,10 +285,6 @@
     margin: 0;
     padding-right: 32px;
     top: 100px;
-  }
-
-  .Viewer .MeasurementControl .lesions {
-    display: none;
   }
 
   .Viewer .ViewportControl {

@@ -1,6 +1,6 @@
 @value globals: "../GlobalStyles.css";
 @value activeColor, uiBlack from globals;
-@value screen-min, screen-xs from globals;
+@value screen-min, screen-xs, screen-xs-max, screen-sm from globals;
 
 .MeasurementControl {
   display: table;
@@ -36,8 +36,37 @@
   width: 100%;
 }
 
-@media (min-width: screen-xs) {
-  .MeasurementControl .label,
+.MeasurementControl.disabled .label {
+  display: none;
+}
+
+@media (min-width: screen-sm) {
+  .MeasurementControl .label {
+    background-color: #00d5ae;
+    border: 0;
+    border-radius: 9px;
+    color: #100e44;
+    cursor: pointer;
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+    height: 38px;
+    line-height: 38px;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    right: -100%;
+    text-align: center;
+    top: 13px;
+    transition: background-color 0.3s ease;
+    width: 100px;
+  }
+
+  .MeasurementControl .label:hover {
+    background-color: #ffffff;
+  }
+
   .MeasurementControl .magnify {
     display: none;
   }
@@ -129,7 +158,7 @@
   }
 }
 
-@media (max-width: screen-min) {
+@media (max-width: screen-xs-max) {
   .MeasurementControl {
     display: flex;
     white-space: nowrap;
