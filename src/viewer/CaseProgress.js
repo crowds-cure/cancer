@@ -130,13 +130,13 @@ class CaseProgress extends Component {
           <svg>
             <use xlinkHref="/icons.svg#icon-grid" />
           </svg>
-          <div>Case<br className="d-xs-none"/>select</div>
+          <div>Case<br className="d-xs-none"/> select</div>
         </div>
         <div className="icon endSession" onClick={this.endSession}>
           <svg>
             <use xlinkHref="/icons.svg#icon-complete" />
           </svg>
-          <div>End<br className="d-xs-none"/>session</div>
+          <div>End<br className="d-xs-none"/> session</div>
         </div>
       </div>
     );
