@@ -32,14 +32,16 @@ class ActivityProgressSection extends Component {
           current={this.state.current}
           measurementsInCurrentSession={this.state.measurementsInCurrentSession}
         />
-        <div className="d-none d-md-block leaderboardRank">
-          <div className="position">18</div>
-          <div className="description">
-            Leaderboard
-            <br />
-            Rank
+        {this.props.rank ? (
+          <div className="d-none d-md-block leaderboardRank">
+            <div className="position">{this.props.rank}</div>
+            <div className="description">
+              Leaderboard
+              <br />
+              Rank
+            </div>
           </div>
-        </div>
+        ) : ''}
       </InfoBox>
     );
   }
