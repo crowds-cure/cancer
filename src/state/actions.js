@@ -8,6 +8,10 @@ export const incrementNumMeasurementsInSession = num => ({
   num
 });
 
+export const resetSession = () => ({
+  type: 'RESET_SESSION'
+});
+
 export const setTotalCompleteCollection = num => ({
   type: 'TOTAL_COMPLETE_COLLECTION',
   num

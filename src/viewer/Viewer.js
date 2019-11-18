@@ -92,6 +92,8 @@ class Viewer extends Component {
 
     document.body.removeEventListener(EVENT_KEYDOWN, this.onKeyDown);
     document.body.classList.remove('fixed-page');
+
+    this.props.resetSession();
   }
 
   componentDidUpdate(prevProps, prevState) {
