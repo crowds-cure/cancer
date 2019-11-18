@@ -113,7 +113,8 @@ class Dashboard extends Component {
       });
 
       this.setState({
-        current: userStats.current
+        current: userStats.current,
+        rank: userStats.rank
       });
     });
 
@@ -143,7 +144,10 @@ class Dashboard extends Component {
               <div className="col-16 order-0 col-lg-6">
                 <div className="row">
                   <div className="col-16 col-sm-8 col-lg-16">
-                    <ActivityProgressSection current={this.state.current} />
+                    <ActivityProgressSection
+                      current={this.state.current}
+                      rank={this.state.rank}
+                    />
                   </div>
                   <div className="col-16 col-sm-8 col-lg-16">
                     <AchievementSection />

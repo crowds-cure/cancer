@@ -65,14 +65,14 @@ class AchievementSection extends Component {
     const badgeElements = [];
     badges.forEach(badge => {
       badgeElements.push(
-        <div className={`col-${colValue} col-xs`}>
+        <div key={badge.key} className={`col-${colValue} col-xs`}>
           {this.getSingleBadge(badge)}
         </div>
       );
     });
 
     return (
-      <div class="badgesSingle col-16 d-flex flex-wrap">
+      <div className="badgesSingle col-16 d-flex flex-wrap">
         {badgeElements}
         {viewAll}
       </div>
@@ -197,7 +197,7 @@ class AchievementSection extends Component {
 
         <Modal
           isOpen={this.state.showAchievementsModal}
-          contentLabel="All Achievements"
+          contentLabel="All Badges"
           onRequestClose={this.toggleModal}
           styles={modalDialogStyles}
           className="Modal"
@@ -205,7 +205,7 @@ class AchievementSection extends Component {
           closeTimeoutMS={200}
           onAfterOpen={ReactTooltip.rebuild}
         >
-          <h1>All Achievements</h1>
+          <h1>All Badges</h1>
           <div className="Achievements">{allAchievements}</div>
           <span className="modal-close" onClick={this.toggleModal}>
             Close
