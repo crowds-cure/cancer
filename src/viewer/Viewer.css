@@ -308,7 +308,9 @@
   }
 
   .Viewer .ToolbarSection .tool-Pan,
-  .Viewer .ToolbarSection .tool-Zoom {
+  .Viewer .ToolbarSection .tool-Zoom,
+  .Viewer .ToolbarSection .tool-StackScroll,
+  .Viewer .ToolbarSection .tool-reset {
     display: none;
   }
 
