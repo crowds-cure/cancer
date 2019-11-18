@@ -3,7 +3,8 @@ import {
   fetchCaseRequest,
   fetchCaseSuccess,
   fetchCaseFailure,
-  incrementNumMeasurementsInSession
+  incrementNumMeasurementsInSession,
+  resetSession
 } from './state/actions.js';
 import Viewer from './viewer/Viewer.js';
 
@@ -31,7 +32,8 @@ const mapDispatchToProps = dispatch => {
     fetchCaseSuccess: response => dispatch(fetchCaseSuccess(response)),
     fetchCaseFailure: error => dispatch(fetchCaseFailure(error)),
     incrementNumMeasurementsInSession: num =>
-      dispatch(incrementNumMeasurementsInSession(num))
+      dispatch(incrementNumMeasurementsInSession(num)),
+    resetSession: () => dispatch(resetSession())
   };
 };
 
