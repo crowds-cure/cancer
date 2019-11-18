@@ -90,10 +90,6 @@
   transform-origin: 50% 0%;
 }
 
-.badgeName {
-  text-align: center;
-}
-
 .rankBadge.not-received img {
   opacity: 0.25;
 }

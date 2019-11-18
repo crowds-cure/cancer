@@ -2,6 +2,20 @@
 @value textPrimaryColor, textSecondaryColor, textActiveColor from globals;
 @value screen-min, screen-xs-max, screen-sm from globals;
 
+.Modal .rankBadge {
+  margin: 20px 0;
+}
+
+.Modal .rankBadge .badgeName,
+.Modal .rankBadge .badgeRequirement {
+  margin: 0;
+  text-align: center;
+}
+
+.Modal .rankBadge .badgeName {
+  color: #ffffff;
+}
+
 .ProgressSection .title {
   font-weight: bold;
   font-size: 18px;
