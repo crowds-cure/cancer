@@ -213,10 +213,13 @@ class CornerstoneViewport extends Component {
     }
 
     const measurementData = this.activateMeasurement(currentToolData);
+    const { end } = measurementData.handles;
+    const canvas = cornerstone.pixelToCanvas(this.element, end);
+    const eventData = { currentPoints: { canvas } };
     if (measurementData) {
       this.bidirectional = {
         measurementData,
-        eventData: null,
+        eventData,
         labellingDoneCallback: () => {
           cornerstone.updateImage(this.element);
           this.props.labelDoneCallback();
@@ -804,6 +807,7 @@ class CornerstoneViewport extends Component {
     }
 
     this.activateMeasurement(measurementData);
+    this.updateLabelHandler();
   }
 
   onMouseClick(event) {
