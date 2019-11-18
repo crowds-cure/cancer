@@ -63,8 +63,9 @@ class ProgressSection extends Component {
 
       return (
         <div key={badge.name} className={className}>
-          <img src={badge.img} alt={badge.name} data-tip={badge.description} />
+          <img src={badge.img} alt={badge.name} />
           <h4 className="badgeName">{badge.name}</h4>
+          <h6 className="badgeRequirement">{badge.description}</h6>
         </div>
       );
     });
