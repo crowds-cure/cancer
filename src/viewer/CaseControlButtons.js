@@ -34,7 +34,7 @@ class CaseControlButtons extends Component {
             disabled={!this.props.saveEnabled}
             onClick={this.props.saveCase}
           >
-            <span>Complete Case</span>
+            <span>Complete case</span>
           </button>
         </div>
       </div>
