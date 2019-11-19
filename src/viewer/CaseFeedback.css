@@ -23,7 +23,7 @@
   line-height: buttonHeight;
   text-align: center;
   transition: background-color 0.3s ease;
-  width: 146px;
+  width: 116px;
 }
 
 .CaseFeedback .feedback-button:disabled {
@@ -46,7 +46,7 @@
 .CaseFeedback .arrow {
   display: inline-block;
   height: 0;
-  margin-left: 10px;
+  margin: 0 6px;
   position: relative;
   right: 0px;
   transition: transform 0.3s ease;

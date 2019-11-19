@@ -106,6 +106,13 @@
     bottom: -24px;
     text-shadow: 1px 1px uiBlack;
   }
+
+  .ToolbarSection .tool-Pan,
+  .ToolbarSection .tool-Zoom,
+  .ToolbarSection .tool-StackScroll,
+  .ToolbarSection .tool-reset {
+    display: none !important;
+  }
 }
 
 @media (min-width: screen-xs) and (max-width: screen-xs-max) {
@@ -119,12 +126,20 @@
     flex-grow: 1;
   }
 
+  .ToolbarSection .wlPresets {
+    flex-basis: 66%;
+  }
+
+  .ToolbarSection .tools {
+    flex-basis: 34%;
+  }
+
   .ToolbarSection .wlPresets .ToolbarButton {
-    min-width: 50%;
+    min-width: 25%;
   }
 
   .ToolbarSection .tools .ToolbarButton {
-    min-width: 33%;
+    min-width: 50%;
   }
 
   .ToolbarSection .ToolbarButton svg {

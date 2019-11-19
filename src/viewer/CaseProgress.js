@@ -28,6 +28,7 @@ class CaseProgress extends Component {
 
     this.caseSelect = this.caseSelect.bind(this);
     this.endSession = this.endSession.bind(this);
+    this.showInstructions = this.showInstructions.bind(this);
   }
 
   caseSelect = () => {
@@ -52,6 +53,11 @@ class CaseProgress extends Component {
     });
 
     this.props.history.push('/session-summary');
+  }
+
+  showInstructions() {
+    // TODO: [layout-instructions] implement
+    console.log('TODO: Shall open a modal');
   }
 
   componentWillUnmount() {
@@ -128,15 +134,21 @@ class CaseProgress extends Component {
         </div>
         <div className="icon caseSelect" onClick={this.caseSelect}>
           <svg>
-            <use xlinkHref="/icons.svg#icon-grid" />
+            <use xlinkHref="/icons.svg#icon-case-select" />
           </svg>
           <div>Case<br className="d-xs-none"/> select</div>
         </div>
         <div className="icon endSession" onClick={this.endSession}>
           <svg>
-            <use xlinkHref="/icons.svg#icon-complete" />
+            <use xlinkHref="/icons.svg#icon-end-session" />
           </svg>
           <div>End<br className="d-xs-none"/> session</div>
+        </div>
+        <div className="icon instructions" onClick={this.showInstructions}>
+          <svg>
+            <use xlinkHref="/icons.svg#icon-help" />
+          </svg>
+          <div>Help</div>
         </div>
       </div>
     );
