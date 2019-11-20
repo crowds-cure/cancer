@@ -12,6 +12,8 @@ import ConnectedSessionSummary from './ConnectedSessionSummary.js';
 import ScreenshotQA from './ScreenshotQA.js';
 import Leaderboard from './Leaderboard.js';
 import StatisticsPage from './StatisticsPage.js';
+import LogoutTimeoutService from './LogoutTimeoutService.js';
+import { init } from 'rollbar';
 //import TestPage from './TestPage.js';
 
 const reload = () => window.location.reload();
@@ -29,10 +31,14 @@ class App extends Component {
     this.unlisten = this.props.history.listen((location, action) => {
       setContext(window.location.pathname);
     });
+
+    LogoutTimeoutService.init();
   }
 
   componentWillUnmount() {
     this.unlisten();
+
+    LogoutTimeoutService.destroy();
   }
 
   render() {
