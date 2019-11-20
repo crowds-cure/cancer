@@ -5,7 +5,7 @@ import getAvailableCases from './getAvailableCases';
 // Returns the status the measurement documents for the user for a collection
 // (only return datasets that have been skipped less than skipThreshold)
 //
-async function annotatorCollectionMeasurements(collection, annotatorID) {
+async function annotatorCollectionMeasurements(collection, annotatorID, caseToIgnore) {
   // get all available cases for this collection
   const availableCasesPromise = getAvailableCases(collection);
 
@@ -31,26 +31,31 @@ async function annotatorCollectionMeasurements(collection, annotatorID) {
     // first build table of all cases in collection
     const cases = {};
     results[0].forEach(row => {
-      cases[row.key[1]] = { measurements: 0, measured: false, skipped: false };
+      if (row.key[1] !== caseToIgnore) {
+        cases[row.key[1]] = { measurements: 0, measured: false, skipped: false };
+      }
     });
 
     // now mark all the ones measured or skipped by this annotator
     results[1].rows.forEach(row => {
-      cases[row.doc.caseData._id].measured = true;
-      cases[row.doc.caseData._id].skipped = true;
+      const entry = cases[row.doc.caseData._id];
+      if (entry) {
+        entry.measured = true;
+        entry.skipped = true;
+      }
     });
 
     return cases;
   });
 }
 
-async function getNextCaseForAnnotator(collection, annotatorID) {
+async function getNextCaseForAnnotator(collection, annotatorID, caseToIgnore) {
   // this logic returns the caseData for a case that the user
   // has not already measured and that has not been skipped more
   // than five times and has the least measurements of the cases
   // in the collection.
   //
-  const cases = await annotatorCollectionMeasurements(collection, annotatorID);
+  const cases = await annotatorCollectionMeasurements(collection, annotatorID, caseToIgnore);
 
   // sort keys by number of measurments
   const keys = Object.keys(cases);
@@ -63,7 +68,8 @@ async function getNextCaseForAnnotator(collection, annotatorID) {
   const leastMeasuredCaseIndices = [];
   let leastMeasuredCount = undefined;
   for (let index = 0; index < keys.length; index++) {
-    const caseData = cases[keys[index]];
+    const key = keys[index];
+    const caseData = cases[key];
     if (!caseData.measured && !caseData.skipped) {
       if (leastMeasuredCaseIndices.length === 0) {
         leastMeasuredCaseIndices.push(index);

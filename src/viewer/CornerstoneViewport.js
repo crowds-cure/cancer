@@ -15,6 +15,7 @@ import './CornerstoneViewport.css';
 import guid from './lib/guid.js';
 
 import cloneDeep from 'lodash.clonedeep';
+import getImageIdsForSeries from './lib/getImageIdsForSeries.js';
 
 const EVENT_RESIZE = 'resize';
 const loadIndicatorDelay = 45;
@@ -59,7 +60,8 @@ class CornerstoneViewport extends Component {
       isLoading: true,
       imageScrollbarValue: 0,
       numImagesLoaded: 0,
-      previousViewport: null
+      previousViewport: null,
+      prefetchImages: false
     };
 
     this.displayScrollbar = stack.imageIds.length > 1;
@@ -430,6 +432,8 @@ class CornerstoneViewport extends Component {
   }
 
   componentWillUnmount() {
+    this.stopPrefetching = true;
+
     const element = this.element;
     element.removeEventListener(
       cornerstone.EVENTS.IMAGE_RENDERED,
@@ -479,6 +483,10 @@ class CornerstoneViewport extends Component {
   }
 
   componentDidUpdate(prevProps) {
+    if (prevProps.prefetchedCase !== this.props.prefetchedCase) {
+      this.setState({ prefetchImages: true });
+    }
+
     // TODO: Add a real object shallow comparison here?
     if (
       this.state.stack.imageIds[0] !== this.props.viewportData.stack.imageIds[0]
@@ -754,9 +762,32 @@ class CornerstoneViewport extends Component {
   }
 
   onImageLoaded(event) {
-    this.setState({
-      numImagesLoaded: this.state.numImagesLoaded + 1
-    });
+    const { numImagesLoaded } = this.state;
+    const newValue = numImagesLoaded + 1;
+    this.setState({ numImagesLoaded: newValue });
+
+    const { viewportData } = this.props;
+    const total = viewportData.stack.imageIds.length;
+    if (newValue === total) {
+      if (this.state.prefetchImages) {
+        this.setState({ prefetchImages: false });
+        const { seriesData } = this.props.prefetchedCase;
+        const imageIdsToPrefetch = getImageIdsForSeries(seriesData);
+        const loadNext = () => {
+          if (!imageIdsToPrefetch.length || this.stopPrefetching) {
+            return;
+          }
+
+          const imageId = imageIdsToPrefetch.shift();
+          console.warn('>>>> PREFETCHING IMAGE', imageId);
+          cornerstone.loadAndCacheImage(imageId).then(loadNext, loadNext);
+        }
+
+        if (this.props.viewportData === viewportData) {
+          loadNext();
+        }
+      }
+    }
   }
 
   startLoadingHandler() {
