@@ -13,7 +13,6 @@ import ScreenshotQA from './ScreenshotQA.js';
 import Leaderboard from './Leaderboard.js';
 import StatisticsPage from './StatisticsPage.js';
 import LogoutTimeoutService from './LogoutTimeoutService.js';
-import { init } from 'rollbar';
 //import TestPage from './TestPage.js';
 
 const reload = () => window.location.reload();
