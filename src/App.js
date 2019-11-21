@@ -36,12 +36,12 @@ const routes = [
   { path: '/viewer', name: 'viewer', Component: ConnectedViewer },
   {
     path: '/session-summary',
-    name: 'viewer',
+    name: 'summary',
     Component: ConnectedSessionSummary
   },
-  { path: '/screenshot-qa', name: 'viewer', Component: ScreenshotQA },
-  { path: '/leaderboard', name: 'viewer', Component: Leaderboard },
-  { path: '/stats', name: 'viewer', Component: StatisticsPage }
+  { path: '/screenshot-qa', name: 'qa', Component: ScreenshotQA },
+  { path: '/leaderboard', name: 'leaderboard', Component: Leaderboard },
+  { path: '/stats', name: 'stats', Component: StatisticsPage }
 ];
 
 const getComponent = (Component, props, componentsReady) => {
