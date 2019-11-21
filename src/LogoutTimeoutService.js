@@ -7,7 +7,10 @@ const LogoutTimeoutService = new function() {
     'resize',
     'focus',
     'keydown',
-    'keyup'
+    'keyup',
+    'touchstart',
+    'touchmove',
+    'touchend'
   ];
 
   const routesToSkipTimeout = ['/leaderboard'];
