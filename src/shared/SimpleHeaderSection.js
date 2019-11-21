@@ -15,12 +15,15 @@ class SimpleHeaderSection extends Component {
             src={iconUserDefault}
             alt={this.props.username}
           />
-          <span className="username">{this.props.username}</span>
+          <span className="username">inconsequential.elephant.seal</span>
         </div>
         <div className="actionSection">
           <Link to="/leaderboard" className="leaderboardButton">
             Leaderboard
           </Link>
+          <a href="https://www.crowds-cure.org/privacy" target="privacy" className="privacyButton">
+            Privacy
+          </a>
           <span className="logoutButton" onClick={this.logout}>
             Logout
           </span>

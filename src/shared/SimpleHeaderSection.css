@@ -1,24 +1,27 @@
 @value globals: "../GlobalStyles.css";
 @value textActiveColor, hoverColor, uiUsernameText, dashboardInfo-lg from globals;
-@value screen-xs, screen-sm, screen-md, screen-lg from globals;
+@value screen-min, screen-xs, screen-sm, screen-md, screen-lg from globals;
 
-@value iconSize: 30px;
+@value iconSize: 36px;
+@value iconSize-xs: 36px;
 @value iconSize-sm: 42px;
 @value iconSize-md: 60px;
 @value iconSize-lg: 60px;
 
-@value headerPadding: 15px 10px;
+@value headerPadding: 15px 20px;
 @value headerPadding-sm: 10px 35px;
 @value headerPadding-md: 16px 60px;
 @value headerPadding-lg: 30px 80px;
 
-@value headerHeight: 60px;
+@value headerHeight: 158px;
+@value headerHeight-xs: 94px;
 @value headerHeight-sm: 94px;
 @value headerHeight-md: 130px;
 @value headerHeight-lg: 140px;
 
 .simpleHeader {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .simpleHeader .userIcon {
@@ -31,8 +34,10 @@
 }
 
 .simpleHeader .userSection .username {
-  font-weight: normal;
   color: uiUsernameText;
+  font-size: 17px;
+  font-weight: normal;
+  padding-left: 10px;
 }
 
 .simpleHeader .userSection > * {
@@ -55,18 +60,18 @@
 }
 
 .simpleHeader .Logo {
-  font-size: 17px;
+  font-size: 20px;
   line-height: iconSize;
-}
-
-.simpleHeader .userSection .username,
-.simpleHeader .actionSection > * {
-  display: none;
+  white-space: nowrap;
 }
 
 .simpleHeader .userSection {
   flex-grow: 1;
-  text-align: right;
+  white-space: nowrap;
+}
+
+.simpleHeader .actionSection {
+  white-space: nowrap;
 }
 
 .simpleHeader .userIcon {
@@ -76,14 +81,32 @@
 }
 
 @media (min-width: screen-xs) {
-  .simpleHeader .userSection .username,
-  .simpleHeader .actionSection > * {
-    display: inline-block;
-    line-height: iconSize;
+  .simpleHeader {
+    height: headerHeight-xs;
+  }
+
+  .simpleHeader .Logo {
+    display: block;
+    font-size: 24px;
+    line-height: 32px;
+    text-align: center;
+    width: 100%;
   }
 
   .simpleHeader .userSection .username {
-    padding-left: 6px;
+    max-width: 250px;
+  }
+
+  .simpleHeader .userSection .username,
+  .simpleHeader .actionSection > * {
+    display: inline-block;
+    line-height: iconSize-xs;
+  }
+
+  .simpleHeader .userIcon {
+    border-radius: calc(iconSize-xs / 2);
+    height: iconSize-xs;
+    width: iconSize-xs;
   }
 
   .simpleHeader .actionSection {
@@ -98,17 +121,12 @@
 @media (min-width: screen-sm) {
   .simpleHeader {
     align-content: stretch;
-    flex-wrap: wrap;
     height: headerHeight-sm;
     padding: headerPadding-sm;
   }
 
-  .simpleHeader .Logo {
-    display: block;
-    font-size: 24px;
-    line-height: 32px;
-    text-align: center;
-    width: 100%;
+  .simpleHeader .userSection .username {
+    max-width: unset;
   }
 
   .simpleHeader .userSection .username,
@@ -122,10 +140,6 @@
 
   .simpleHeader .actionSection > *:hover {
     color: hoverColor;
-  }
-
-  .simpleHeader .userSection {
-    text-align: left;
   }
 
   .simpleHeader .userSection .userIcon {
@@ -173,11 +187,52 @@
     flex-wrap: nowrap;
     height: headerHeight-lg;
     padding: headerPadding-lg;
+    position: relative;
   }
 
   .simpleHeader .Logo {
     line-height: iconSize-md;
     text-align: left;
     width: calc(62.8% + 10px);
+  }
+
+  .simpleHeader .actionSection {
+    padding: 0;
+    position: absolute;
+    left: calc(62.8% + 71px);
+    top: 90px;
+  }
+
+  .simpleHeader .actionSection > * {
+    height: 32px;
+    line-height: 32px;
+    margin-left: 0;
+    margin-right: 28px;
+  }
+}
+
+@media (max-width: screen-min) {
+  .simpleHeader .Logo,
+  .simpleHeader .userSection,
+  .simpleHeader .actionSection {
+    flex-basis: 100%;
+  }
+
+  .simpleHeader .userSection {
+    margin: 15px 0;
+  }
+
+  .simpleHeader .userSection .username {
+    line-height: iconSize;
+    padding-left: 6px;
+  }
+
+  .simpleHeader .actionSection {
+    margin-bottom: 4px;
+  }
+
+  .simpleHeader .actionSection > * {
+    margin-left: 0;
+    margin-right: 28px;
   }
 }
