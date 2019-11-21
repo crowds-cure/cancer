@@ -1,6 +1,6 @@
 // Retrieve the tool state manager for this element
 import guid from './guid.js';
-import getUsername from './getUsername.js';
+import getProfile from './getProfile.js';
 import dataURItoBlob from './dataUriToBlob.js';
 import { getDB } from '../../db.js';
 import * as cornerstone from 'cornerstone-core';
@@ -96,13 +96,17 @@ function saveAttachment(measurement, response) {
 
 async function saveMeasurementToDatabase(caseData, measurements, feedback) {
   const measurementsDB = getDB('measurements');
-  const annotator = await getUsername();
+  const {
+    name: annotatorPrincipalName = '',
+    username: annotator = ''
+  } = await getProfile();
 
   const promises = measurements.map(async measurement => {
     const doc = {
       _id: guid(),
       measurement,
       annotator,
+      annotatorPrincipalName,
       skip: false,
       feedback,
       caseData: caseData.data,
