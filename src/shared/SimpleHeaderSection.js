@@ -15,7 +15,7 @@ class SimpleHeaderSection extends Component {
             src={iconUserDefault}
             alt={this.props.username}
           />
-          <span className="username">inconsequential.elephant.seal</span>
+          <span className="username">{this.props.username}</span>
         </div>
         <div className="actionSection">
           <Link to="/leaderboard" className="leaderboardButton">
