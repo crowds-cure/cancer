@@ -19,3 +19,21 @@ body.fixed-page {
   position: fixed;
   overflow: hidden;
 }
+
+.component-transition-enter-active {
+  opacity: 0.5;
+}
+
+.component-transition-enter-done {
+  opacity: 1;
+  transition: opacity 300ms ease-in;
+}
+
+.component-transition-exit-active {
+  opacity: 1;
+  transition: opacity 300ms ease-out;
+}
+
+.component-transition-exit-done {
+  opacity: 0.5;
+}

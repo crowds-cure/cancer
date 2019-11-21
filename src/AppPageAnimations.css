@@ -1,8 +1,10 @@
 @value globals: "./GlobalStyles.css";
 @value uiBlack from globals;
 
-@value defaultTiming: cubic-bezier(0.25, 0.1, 0.25, 1);
-@value dashboardAnimation: 1s defaultTiming;
+@value defaultTiming: ease-out;
+@value dashboardTiming: ease;
+@value dashboardAnimation: 1s dashboardTiming;
+@value defaultAnimation: 1s defaultTiming;
 
 .transition-group,
 .route-section {
@@ -21,20 +23,10 @@
 }
 
 /* Dashboard exit animations */
-@keyframes dashboardBackgroundExit {
-  0% {
-    background-color: #140046;
-  }
-  100% {
-    background-color: transparent;
-  }
-}
-
-@keyframes dashboardHeaderExit {
+@keyframes simpleFade {
   0% {
     opacity: 1;
   }
-  33%,
   100% {
     opacity: 0;
   }
@@ -104,61 +96,69 @@
   }
 }
 
-.fade-exit.fade-exit-active .Dashboard {
-  animation: dashboardBackgroundExit dashboardAnimation;
+.fade-exit.fade-exit-active.Dashboard .simpleHeader {
+  animation: simpleFade dashboardAnimation;
 }
 
-.fade-exit.fade-exit-active .Dashboard .simpleHeader {
-  animation: dashboardHeaderExit dashboardAnimation;
-}
-
-.fade-exit.fade-exit-active .Dashboard .CaseTypeSection {
+.fade-exit.fade-exit-active.Dashboard .CaseTypeSection {
   animation: dashboardCasesExit dashboardAnimation;
 }
 
-.fade-exit.fade-exit-active .Dashboard .ActivityProgressSection {
+.fade-exit.fade-exit-active.Dashboard .ActivityProgressSection {
   animation: dashboardScoreExit dashboardAnimation;
 }
 
-.fade-exit.fade-exit-active .Dashboard .AchievementSection {
+.fade-exit.fade-exit-active.Dashboard .AchievementSection {
   animation: dashboardBadgesExit dashboardAnimation;
 }
 
-.fade-exit.fade-exit-active .Dashboard .StatisticsSection {
+.fade-exit.fade-exit-active.Dashboard .StatisticsSection {
   animation: dashboardCommunityExit dashboardAnimation;
 }
 
 /* Dashboard enter animations */
 /* TODO [layout] Create separate animations for dashboard enter */
-.fade-enter.fade-enter-active:last-child .Dashboard .simpleHeader {
-  animation: dashboardHeaderExit dashboardAnimation reverse;
+.fade-enter.fade-enter-active.Dashboard .simpleHeader {
+  animation: simpleFade dashboardAnimation reverse;
 }
 
-.fade-enter.fade-enter-active:last-child .Dashboard .CaseTypeSection {
+.fade-enter.fade-enter-active.Dashboard .CaseTypeSection {
   animation: dashboardCasesExit dashboardAnimation reverse;
 }
 
-.fade-enter.fade-enter-active:last-child .Dashboard .ActivityProgressSection {
+.fade-enter.fade-enter-active.Dashboard .ActivityProgressSection {
   animation: dashboardScoreExit dashboardAnimation reverse;
 }
 
-.fade-enter.fade-enter-active:last-child .Dashboard .AchievementSection {
+.fade-enter.fade-enter-active.Dashboard .AchievementSection {
   animation: dashboardBadgesExit dashboardAnimation reverse;
 }
 
-.fade-enter.fade-enter-active:last-child .Dashboard .StatisticsSection {
+.fade-enter.fade-enter-active.Dashboard .StatisticsSection {
   animation: dashboardCommunityExit dashboardAnimation reverse;
 }
 
 /* Dashboard states */
-.fade-exit-done .Dashboard .CaseTypeSection,
-.fade-enter .Dashboard .CaseTypeSection {
+.fade-enter:not(.fade-enter-active).Dashboard .CaseTypeSection,
+.fade-exit-done.Dashboard .CaseTypeSection {
   opacity: 0;
   transform: translateY(400px);
 }
 
-.fade-exit-done .Dashboard .simpleHeader,
-.fade-enter .Dashboard .simpleHeader {
+.fade-enter:not(.fade-enter-active).Dashboard .simpleHeader,
+.fade-exit-done.Dashboard .simpleHeader {
+  opacity: 0;
+}
+
+.fade-enter:not(.Dashboard) > * {
+  animation: simpleFade defaultAnimation reverse;
+}
+
+.fade-enter ~ .fade-exit > * {
+  animation: simpleFade defaultAnimation;
+}
+
+.fade-exit-done:not(.Dashboard) > * {
   opacity: 0;
 }
 
@@ -169,27 +169,4 @@
 
 .route-section:first-child:not(:last-child) {
   z-index: -1 !important;
-}
-
-/* Non-dashboard pages */
-@keyframes nonDashboardFade {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-.fade-exit.fade-exit-active > *:not(.Dashboard) > * {
-  animation: nonDashboardFade 1s ease reverse;
-}
-
-.fade-enter.fade-enter-active:last-child > *:not(.Dashboard) > * {
-  animation: nonDashboardFade 1s ease;
-}
-
-.fade-exit-done > *:not(.Dashboard) > *,
-.fade-enter > *:not(.Dashboard) > * {
-  opacity: 0;
 }
