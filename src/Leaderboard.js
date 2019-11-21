@@ -57,12 +57,14 @@ class Leaderboard extends Component {
     return topAnnotatorsLimited.map((item, index) => {
       const rank = startIndex + index + 1;
       const name = item.name;
+      const principalName = item.principalName;
       const score = item.value;
       return (
         <LeaderboardItem
           key={'individual' + rank}
           rank={rank}
           name={name}
+          principalName={principalName}
           score={score}
         />
       );
