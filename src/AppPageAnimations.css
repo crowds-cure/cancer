@@ -3,8 +3,9 @@
 
 @value defaultTiming: ease-out;
 @value dashboardTiming: ease;
-@value dashboardAnimation: 1s dashboardTiming;
+@value dashboardAnimation: 1s defaultTiming;
 @value defaultAnimation: 1s defaultTiming;
+@value defaultEnterAnimation: 2s defaultTiming;
 
 .transition-group,
 .route-section {
@@ -26,6 +27,21 @@
 @keyframes simpleFade {
   0% {
     opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes deepFade {
+  0% {
+    opacity: 1;
+  }
+  33% {
+    opacity: 0.5;
+  }
+  66% {
+    opacity: 0.25;
   }
   100% {
     opacity: 0;
@@ -119,7 +135,7 @@
 /* Dashboard enter animations */
 /* TODO [layout] Create separate animations for dashboard enter */
 .fade-enter.fade-enter-active.Dashboard .simpleHeader {
-  animation: simpleFade dashboardAnimation reverse;
+  animation: deepFade defaultEnterAnimation reverse;
 }
 
 .fade-enter.fade-enter-active.Dashboard .CaseTypeSection {
@@ -154,19 +170,15 @@
   animation: simpleFade defaultAnimation reverse;
 }
 
-.fade-enter ~ .fade-exit > * {
-  animation: simpleFade defaultAnimation;
+.fade-enter ~ .fade-exit > *,
+.fade-exit:first-child > * {
+  animation: deepFade defaultAnimation;
+}
+
+.fade-enter.fade-enter-active ~ .fade-exit {
+  animation: deepFade defaultAnimation;
 }
 
 .fade-exit-done:not(.Dashboard) > * {
   opacity: 0;
-}
-
-/* z-index control */
-.route-section:last-child {
-  z-index: 2 !important;
-}
-
-.route-section:first-child:not(:last-child) {
-  z-index: -1 !important;
 }
