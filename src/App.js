@@ -16,6 +16,7 @@ import ConnectedSessionSummary from './ConnectedSessionSummary.js';
 import ScreenshotQA from './ScreenshotQA.js';
 import Leaderboard from './Leaderboard.js';
 import StatisticsPage from './StatisticsPage.js';
+import LogoutTimeoutService from './LogoutTimeoutService.js';
 //import TestPage from './TestPage.js';
 
 const reload = () => window.location.reload();
@@ -98,12 +99,16 @@ class App extends Component {
         componentsReady: true
       });
     });
+
+    LogoutTimeoutService.init();
   }
 
   componentWillUnmount() {
     if (typeof this.historyListen === 'fucntion') {
       this.historyListen();
     }
+
+    LogoutTimeoutService.destroy();
   }
 
   render() {

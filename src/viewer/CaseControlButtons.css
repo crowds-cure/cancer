@@ -22,7 +22,7 @@
   padding: 0;
   transition: opacity 0.3s ease, background-color 0.3s ease;
   vertical-align: middle;
-  width: 154px;
+  width: 130px;
 }
 
 .CaseControlButtons button.complete-case {

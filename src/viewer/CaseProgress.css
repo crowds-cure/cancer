@@ -11,7 +11,7 @@
   height: 68px;
   padding: 9px 11px;
   position: relative;
-  width: 146px;
+  width: 150px;
 }
 
 .CaseProgress .sessionCount .value {
@@ -79,6 +79,28 @@
 
   .CaseProgress .icon:hover div {
     color: hoverColor;
+  }
+
+  .CaseProgress .icon.endSession {
+    border-radius: 0 9px 9px 0;
+  }
+
+  .CaseProgress .icon.instructions {
+    align-items: center;
+    background: none;
+    border: 0;
+    border-radius: 0;
+    bottom: -14px;
+    display: flex;
+    margin: 0;
+    position: absolute;
+    right: 14px;
+    transition: color 0.3s ease;
+    width: auto;
+  }
+
+  .CaseProgress .icon.instructions svg {
+    margin: 0 8px 0 0;
   }
 }
 

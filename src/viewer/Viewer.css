@@ -154,7 +154,7 @@
     background-color: #15125e;
     height: 68px;
     left: 0;
-    padding-right: 326px;
+    padding-right: 416px;
     top: 0;
     width: 100%;
   }
@@ -245,22 +245,19 @@
     width: auto;
   }
 
-  .Viewer .SessionControl .CaseProgress .caseSelect > div,
-  .Viewer .SessionControl .CaseProgress .endSession > div {
+  .Viewer .SessionControl .CaseProgress .icon > div {
     font-size: 15px;
     font-weight: 600;
     margin: 0 10px 0 0;
     text-align: left;
   }
 
-  .Viewer .SessionControl .CaseProgress .caseSelect > svg,
-  .Viewer .SessionControl .CaseProgress .endSession > svg {
+  .Viewer .SessionControl .CaseProgress .icon > svg {
     min-width: 24px;
     margin: 0 10px;
   }
 
-  .Viewer .SessionControl .CaseProgress .caseSelect,
-  .Viewer .SessionControl .CaseProgress .endSession {
+  .Viewer .SessionControl .CaseProgress .icon {
     align-items: center;
     display: flex;
     flex-grow: 1;
@@ -269,8 +266,7 @@
   }
 
   .Viewer .SessionControl .CaseProgress .sessionCount,
-  .Viewer .SessionControl .CaseProgress .caseSelect,
-  .Viewer .SessionControl .CaseProgress .endSession {
+  .Viewer .SessionControl .CaseProgress .icon {
     height: 48px;
   }
 
@@ -301,13 +297,6 @@
     display: none;
   }
 
-  .Viewer .ToolbarSection .tool-Pan,
-  .Viewer .ToolbarSection .tool-Zoom,
-  .Viewer .ToolbarSection .tool-StackScroll,
-  .Viewer .ToolbarSection .tool-reset {
-    display: none;
-  }
-
   .Viewer .labellingComponent {
     bottom: 50px;
     left: 6px !important;
@@ -323,6 +312,18 @@
   }
 
   .Viewer .addLabelButton {
+    display: none;
+  }
+}
+
+@media (max-width: 400px) {
+  .Viewer .SessionControl .CaseProgress .icon.instructions > div {
+    display: none;
+  }
+}
+
+@media (max-width: 360px) {
+  .Viewer .SessionControl .CaseProgress .icon > div {
     display: none;
   }
 }
