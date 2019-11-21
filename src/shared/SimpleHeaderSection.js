@@ -21,6 +21,9 @@ class SimpleHeaderSection extends Component {
           <Link to="/leaderboard" className="leaderboardButton">
             Leaderboard
           </Link>
+          <a href="https://www.crowds-cure.org/privacy" target="privacy" className="privacyButton">
+            Privacy
+          </a>
           <span className="logoutButton" onClick={this.logout}>
             Logout
           </span>
