@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router';
+import { withRouter, matchPath } from 'react-router';
 import { Route, BrowserRouter as Router } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group';
 import './App.css';
@@ -31,8 +31,8 @@ function setRollbarContext(context) {
 
 const routes = [
   // can combine paths into array once react-router-dom is at least v4.4.x (or v5.0.0 as per distributor)
-  { path: '/dashboard', name: 'dashboard', Component: ConnectedDashboard },
   { path: '/', name: 'home', Component: ConnectedDashboard },
+  { path: '/dashboard', name: 'dashboard', Component: ConnectedDashboard },
   { path: '/viewer', name: 'viewer', Component: ConnectedViewer },
   {
     path: '/session-summary',
@@ -112,32 +112,49 @@ class App extends Component {
   }
 
   render() {
-    const { auth, store } = this.props;
+    const {
+      auth,
+      store,
+      location: { pathname }
+    } = this.props;
     const { componentsReady } = this.state;
+
+    const notFoundRoute = !routes.find(route =>
+      matchPath(pathname, {
+        path: route.path,
+        exact: true
+      })
+    );
 
     return (
       <Router>
-        <section className="route-section">
-          {routes.map(({ path, Component, HOC }) => (
-            <Route key={path} exact path={path}>
-              {({ match }) => (
-                <CSSTransition
-                  in={match !== null}
-                  timeout={{ enter: 2000, exit: 1000 }}
-                  classNames="fade"
-                  appear
-                  unmountOnExit
-                >
-                  {getComponent(Component, { auth, store }, componentsReady)}
-                </CSSTransition>
-              )}
-            </Route>
-          ))}
-          <Route path="/silent-refresh.html" onEnter={reload} />
-          <Route path="/logout-redirect.html" onEnter={reload} />
-          {/*<Route exact path="/playground" component={TestPage} />*/}
-          <Route render={() => <div> Sorry, this page does not exist. </div>} />
-        </section>
+        <div className="route-container">
+          <section className="route-section">
+            {routes.map(({ path, Component, HOC }) => (
+              <Route key={path} exact path={path}>
+                {({ match }) => (
+                  <CSSTransition
+                    in={match !== null}
+                    timeout={{ enter: 2000, exit: 1000 }}
+                    classNames="fade"
+                    appear
+                    unmountOnExit
+                  >
+                    {getComponent(Component, { auth, store }, componentsReady)}
+                  </CSSTransition>
+                )}
+              </Route>
+            ))}
+            <Route path="/silent-refresh.html" onEnter={reload} />
+            <Route path="/logout-redirect.html" onEnter={reload} />
+            {/*<Route exact path="/playground" component={TestPage} />*/}
+            {notFoundRoute && (
+              <Route
+                render={() => <div> Sorry, this page does not exist. </div>}
+              />
+            )}
+          </section>
+        </div>
       </Router>
     );
   }

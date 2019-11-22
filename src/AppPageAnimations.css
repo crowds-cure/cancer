@@ -7,20 +7,19 @@
 @value defaultAnimation: 1s defaultTiming;
 @value defaultEnterAnimation: 2s defaultTiming;
 
-.transition-group,
-.route-section {
-  height: 100%;
-  width: 100%;
-}
-
-.transition-group {
+.route-container {
+  width: inherit;
+  height: inherit;
   position: relative;
 }
 
 .route-section {
+  width: 100%;
+  height: 100%;
   left: 0;
   position: absolute;
   top: 0;
+  overflow-y: hidden;
 }
 
 /* Dashboard exit animations */
