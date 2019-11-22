@@ -104,7 +104,7 @@ class App extends Component {
   }
 
   componentWillUnmount() {
-    if (typeof this.historyListen === 'fucntion') {
+    if (typeof this.historyListen === 'function') {
       this.historyListen();
     }
 
