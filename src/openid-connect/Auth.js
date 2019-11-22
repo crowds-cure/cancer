@@ -16,7 +16,7 @@ export default class Auth {
       scope: 'email profile openid',
       revokeAccessTokenOnSignout: true,
       extraQueryParams: {
-        kc_idp_hint: 'crowds-cure-cancer-auth0-oidc',
+        kc_idp_hint: 'crowds-cure-cancer-cognito-oidc',
         client_id: 'crowds-cure-cancer'
       }
     };
