@@ -1,15 +1,19 @@
 import guid from './guid.js';
-import getUsername from './getUsername.js';
+import getProfile from './getProfile.js';
 import { getDB } from '../../db.js';
 
 async function saveSkipToDatabase(caseData, feedback) {
   const measurementsDB = getDB('measurements');
-  const annotator = getUsername();
+  const {
+    name: annotatorPrincipalName = '',
+    username: annotator = ''
+  } = await getProfile();
 
   const doc = {
     _id: guid(),
     skip: true,
     annotator,
+    annotatorPrincipalName,
     feedback,
     caseData: caseData.data,
     date: Math.floor(Date.now() / 1000),

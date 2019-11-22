@@ -24,8 +24,7 @@ async function getTopAnnotators(limit = 10) {
   measByAnno = measByAnno.filter(a => a.key !== null);
 
   // TODO: Sort in the View
-  // TODO: check it might not be really necessary (could use query param instead)
-  measByAnno.sort((a, b) => b.value.name - a.value.name);
+  measByAnno = measByAnno.sort((a, b) => b.value.count - a.value.count);
 
   const annotators = measByAnno.map(instance => {
     const { key, value } = instance;
