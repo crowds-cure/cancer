@@ -140,8 +140,7 @@ class CornerstoneViewport extends Component {
             height={this.state.viewportHeight}
           />
         )}
-        {(this.state.bidirectionalAddLabelShow ||
-          this.props.showLabelSelectTree) && (
+        {(this.state.bidirectionalAddLabelShow) && (
           <Labelling
             measurementData={this.bidirectional.measurementData}
             eventData={this.bidirectional.eventData}
@@ -201,7 +200,7 @@ class CornerstoneViewport extends Component {
     return measurementData;
   }
 
-  updateLabelHandler(skipButton = false) {
+  updateLabelHandler(originElement) {
     const { currentLesion, toolData } = this.props;
     let index = currentLesion >= 0 ? currentLesion - 1 : toolData.length - 1;
     const currentToolData = toolData[index];
@@ -211,10 +210,20 @@ class CornerstoneViewport extends Component {
     }
 
     const measurementData = this.activateMeasurement(currentToolData);
-    const { end } = measurementData.handles;
-    const canvas = cornerstone.pixelToCanvas(this.element, end);
-    const eventData = { currentPoints: { canvas } };
     if (measurementData) {
+      const eventData = { currentPoints: {} };
+      if (originElement) {
+        const boundingRect = originElement.getBoundingClientRect();
+        eventData.currentPoints.canvas = {
+          x: boundingRect.left - 50,
+          y: -20,
+        };
+      } else {
+        const { end } = measurementData.handles;
+        const canvas = cornerstone.pixelToCanvas(this.element, end);
+        eventData.currentPoints.canvas = canvas;
+      }
+
       this.bidirectional = {
         measurementData,
         eventData,
@@ -223,13 +232,12 @@ class CornerstoneViewport extends Component {
           this.props.labelDoneCallback();
           this.hideExtraButtons();
         },
-        skipButton: skipButton || !!measurementData.location,
+        skipButton: true,
         editDescription: false
       };
 
-      if (skipButton) {
-        this.hideExtraButtons();
-      }
+      this.hideExtraButtons();
+      this.setState({ bidirectionalAddLabelShow: true });
     }
   }
 
@@ -524,14 +532,18 @@ class CornerstoneViewport extends Component {
       });
     }
 
-    const { showLabelSelectTree } = this.props;
+    const { labelSelectTreeOrigin } = this.props;
     const showStateChanged =
-      showLabelSelectTree &&
-      showLabelSelectTree !== prevProps.showLabelSelectTree;
+      labelSelectTreeOrigin &&
+      labelSelectTreeOrigin !== prevProps.labelSelectTreeOrigin;
     const currentLesionChanged =
       this.props.currentLesion !== prevProps.currentLesion;
-    if (currentLesionChanged || showStateChanged) {
-      this.updateLabelHandler(showLabelSelectTree);
+    if (showStateChanged) {
+      this.updateLabelHandler(labelSelectTreeOrigin);
+    }
+
+    if (currentLesionChanged) {
+      this.setState({ bidirectionalAddLabelShow: false });
     }
 
     const { magnificationActive } = this.props;
@@ -810,7 +822,6 @@ class CornerstoneViewport extends Component {
     }
 
     this.activateMeasurement(measurementData);
-    this.updateLabelHandler(false);
     if (measurementData.location) {
       this.hideExtraButtons();
     }
@@ -891,7 +902,7 @@ CornerstoneViewport.propTypes = {
   measurementsChanged: PropTypes.func.isRequired,
   activeTool: PropTypes.string.isRequired,
   viewportData: PropTypes.object.isRequired,
-  showLabelSelectTree: PropTypes.bool,
+  labelSelectTreeOrigin: PropTypes.object,
   labelDoneCallback: PropTypes.func,
   currentLesionFocused: PropTypes.bool,
   magnificationActive: PropTypes.bool,

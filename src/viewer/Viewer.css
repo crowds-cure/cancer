@@ -170,6 +170,11 @@
   .Viewer .MeasurementControl .lesions {
     display: none;
   }
+
+  .Viewer .labellingComponent {
+    bottom: 52px;
+    top: unset !important;
+  }
 }
 
 @media (max-width: screen-min) {
