@@ -323,7 +323,7 @@ class CornerstoneViewport extends Component {
             getMeasurementLocationCallback: this
               .bidirectionalToolLabellingCallback,
             shadow: true,
-            drawHandlesOnHover: true,
+            drawHandlesOnHover: true
             // Uncomment to activate magnifying glass for bidirecitonal tool
             // touchMagnifySize: Math.floor(element.clientWidth / 2),
             // touchMagnificationLevel: 1
@@ -547,24 +547,24 @@ class CornerstoneViewport extends Component {
     }
 
     const { magnificationActive } = this.props;
-    const magnificationChanged = magnificationActive !== prevProps.magnificationActive;
+    const magnificationChanged =
+      magnificationActive !== prevProps.magnificationActive;
     const focusState = this.props.currentLesionFocused;
-    const previousFocusState = prevProps.currentLesionFocused
-    const shallFocus = (
-      (focusState && previousFocusState !== focusState) ||
-      currentLesionChanged
-    );
+    const previousFocusState = prevProps.currentLesionFocused;
+    const shallFocus = focusState && previousFocusState !== focusState;
 
     if (magnificationChanged) {
       if (magnificationActive) {
         const currentViewport = cornerstone.getViewport(this.element);
-        this.setState({ previousViewport: {
-          scale: currentViewport.scale,
-          translation: {
-            x: currentViewport.translation.x,
-            y: currentViewport.translation.y
+        this.setState({
+          previousViewport: {
+            scale: currentViewport.scale,
+            translation: {
+              x: currentViewport.translation.x,
+              y: currentViewport.translation.y
+            }
           }
-        } });
+        });
 
         this.toggleMagnification(true);
         this.focusCurrentLesion();
@@ -593,7 +593,10 @@ class CornerstoneViewport extends Component {
 
       this.setState(newState);
     } else {
-      if (previousViewport && previousViewport.scale !== currentViewport.scale) {
+      if (
+        previousViewport &&
+        previousViewport.scale !== currentViewport.scale
+      ) {
         const newViewport = Object.assign(currentViewport, previousViewport);
         cornerstone.setViewport(element, newViewport);
       } else {

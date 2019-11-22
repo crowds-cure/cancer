@@ -87,7 +87,7 @@
 }
 .labelling-exit.labelling-exit-active {
   opacity: 0;
-  transition: opacity 500ms linear;
+  transition: opacity 3000ms linear;
 }
 .labelling-exit-done {
   opacity: 0;
