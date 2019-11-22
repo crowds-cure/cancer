@@ -198,23 +198,23 @@ class CaseProgress extends Component {
         <ul>
           <li>
             <p>
-              Detailed results will be posted after RSNA. Visit The Cancer Imaging Archive{' '}
+              Detailed results will be posted after RSNA. Visit{' '}
               <a
                 target="_blank"
                 rel="noopener noreferrer"
                 href="https://www.cancerimagingarchive.net/"
               >
                 Cancer Imaging Archive
-              </a>
-              {' '}to view results from{' '}
+              </a>{' '}
+              to view results from{' '}
               <a
                 target="_blank"
                 rel="noopener noreferrer"
                 href="https://doi.org/10.7937/K9/TCIA.2018.OW73VLO2"
               >
                 RSNA 2017
-              </a>
-              {' '}and{' '}
+              </a>{' '}
+              and{' '}
               <a
                 target="_blank"
                 rel="noopener noreferrer"
@@ -227,16 +227,15 @@ class CaseProgress extends Component {
           </li>
           <li>
             <p>
-              Interested in donating data to this project? Please visit
-              the{' '}
+              Interested in donating data to this project? Please visit the{' '}
               <a
                 target="_blank"
                 rel="noopener noreferrer"
                 href="http://www.cancerimagingarchive.net/primary-data/"
               >
                 TCIA website
-              </a>
-              {' '}to find out how.
+              </a>{' '}
+              to find out how.
             </p>
           </li>
         </ul>
@@ -266,15 +265,24 @@ class CaseProgress extends Component {
           <svg>
             <use xlinkHref="/icons.svg#icon-case-select" />
           </svg>
-          <div>Case<br className="d-xs-none"/> select</div>
+          <div>
+            Case
+            <br className="d-xs-none" /> select
+          </div>
         </div>
         <div className="icon endSession" onClick={this.endSession}>
           <svg>
             <use xlinkHref="/icons.svg#icon-end-session" />
           </svg>
-          <div>End<br className="d-xs-none"/> session</div>
+          <div>
+            End
+            <br className="d-xs-none" /> session
+          </div>
         </div>
-        <div className="icon instructions" onClick={this.toggleInstructionsModal}>
+        <div
+          className="icon instructions"
+          onClick={this.toggleInstructionsModal}
+        >
           <svg>
             <use xlinkHref="/icons.svg#icon-help" />
           </svg>
