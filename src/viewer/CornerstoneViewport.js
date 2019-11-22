@@ -201,9 +201,7 @@ class CornerstoneViewport extends Component {
     return measurementData;
   }
 
-  updateLabelHandler() {
-    this.hideExtraButtons();
-
+  updateLabelHandler(skipButton = false) {
     const { currentLesion, toolData } = this.props;
     let index = currentLesion >= 0 ? currentLesion - 1 : toolData.length - 1;
     const currentToolData = toolData[index];
@@ -223,10 +221,15 @@ class CornerstoneViewport extends Component {
         labellingDoneCallback: () => {
           cornerstone.updateImage(this.element);
           this.props.labelDoneCallback();
+          this.hideExtraButtons();
         },
-        skipButton: true,
+        skipButton,
         editDescription: false
       };
+
+      if (skipButton) {
+        this.hideExtraButtons();
+      }
     }
   }
 
@@ -528,7 +531,7 @@ class CornerstoneViewport extends Component {
     const currentLesionChanged =
       this.props.currentLesion !== prevProps.currentLesion;
     if (currentLesionChanged || showStateChanged) {
-      this.updateLabelHandler();
+      this.updateLabelHandler(showLabelSelectTree);
     }
 
     const { magnificationActive } = this.props;
@@ -807,7 +810,7 @@ class CornerstoneViewport extends Component {
     }
 
     this.activateMeasurement(measurementData);
-    this.updateLabelHandler();
+    this.updateLabelHandler(false);
   }
 
   onMouseClick(event) {
