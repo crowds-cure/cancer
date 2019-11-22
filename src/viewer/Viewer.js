@@ -48,7 +48,7 @@ class Viewer extends Component {
     this.state = {
       loading: true,
       magnificationActive: false,
-      showLabelSelectTree: false,
+      labelSelectTreeOrigin: null,
       currentLesionFocused: false,
       feedback: [],
       hasMeasurements: false,
@@ -107,8 +107,8 @@ class Viewer extends Component {
       this.getNextCase();
     }
 
-    if (this.state.showLabelSelectTree && !this.state.hasMeasurements) {
-      this.setState({ showLabelSelectTree: false });
+    if (this.state.labelSelectTreeOrigin && !this.state.hasMeasurements) {
+      this.setState({ labelSelectTreeOrigin: null });
     }
   }
 
@@ -236,7 +236,7 @@ class Viewer extends Component {
               magnificationActive={this.state.magnificationActive}
               viewportData={item}
               activeTool={activeTool}
-              showLabelSelectTree={this.state.showLabelSelectTree}
+              labelSelectTreeOrigin={this.state.labelSelectTreeOrigin}
               labelDoneCallback={this.labelDoneCallback}
               onNewImage={this.onNewImage}
               setCurrentLesion={this.setCurrentLesion}
@@ -503,15 +503,17 @@ class Viewer extends Component {
     this.setState({ magnificationActive });
   }
 
-  toggleLabelSelectTree() {
-    if (this.state.hasMeasurements) {
+  toggleLabelSelectTree(event) {
+    const { hasMeasurements, labelSelectTreeOrigin } = this.state;
+    if (hasMeasurements) {
       this.focusCurrentLesion();
-      this.setState({ showLabelSelectTree: !this.state.showLabelSelectTree });
+      const newValue = labelSelectTreeOrigin ? null : event.target;
+      this.setState({ labelSelectTreeOrigin: newValue });
     }
   }
 
   labelDoneCallback() {
-    this.setState({ showLabelSelectTree: false });
+    this.setState({ labelSelectTreeOrigin: null });
   }
 }
 
