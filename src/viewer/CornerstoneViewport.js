@@ -223,7 +223,7 @@ class CornerstoneViewport extends Component {
           this.props.labelDoneCallback();
           this.hideExtraButtons();
         },
-        skipButton,
+        skipButton: skipButton || !!measurementData.location,
         editDescription: false
       };
 
@@ -811,6 +811,9 @@ class CornerstoneViewport extends Component {
 
     this.activateMeasurement(measurementData);
     this.updateLabelHandler(false);
+    if (measurementData.location) {
+      this.hideExtraButtons();
+    }
   }
 
   onMouseClick(event) {
