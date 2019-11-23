@@ -28,7 +28,7 @@ import LoadingIndicator from '../shared/LoadingIndicator.js';
 
 import './Viewer.css';
 
-import NotificationContainer from './notifications/NotificationContainer';
+import NotificationContainer from '../notifications/NotificationContainer';
 
 const EVENT_KEYDOWN = 'keydown';
 
