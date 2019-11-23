@@ -5,6 +5,7 @@ import {
   getTopTeamsByWeek
 } from './getTopAnnotators';
 import getProfile from '../viewer/lib/getProfile';
+import NotificationService from '../notifications/NotificationService';
 
 async function getMaxWithTwoGroupLevelForUser(db, dbView, username) {
   const result = await db.query(dbView, {
@@ -260,6 +261,9 @@ async function determineAchievementsForUser(totalCompleteCollection) {
   if (achievementStatus.topTeamNumberInRSNA18Week === 3) {
     achievements.push('rsna18Group3');
   }
+
+  NotificationService.updateAchievementStatus(achievementStatus);
+  NotificationService.updateAchievements(achievements);
 
   return achievements;
 }
