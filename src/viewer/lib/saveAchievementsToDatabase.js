@@ -1,7 +1,7 @@
 import guid from './guid.js';
 import getProfile from './getProfile.js';
 import { getDB } from '../../db.js';
-import determineAchievementsForUser from '../../shared/determineAchievementsForUser';
+import determineAchievementsForUser, {  } from '../../shared/determineAchievementsForUser';
 
 async function saveAchievementsToDatabase(totalCompleteCollection) {
   const achievementsDB = getDB('achievements');

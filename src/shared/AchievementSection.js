@@ -9,6 +9,7 @@ import { achievements } from '../achievements.js';
 import './AchievementSection.css';
 import '../shared/Modal.css';
 import getAchievementsForUser from './getAchievementsForUser';
+import NotificationService from '../notifications/NotificationService';
 
 const modalDialogStyles = {
   content: {
@@ -39,6 +40,7 @@ class AchievementSection extends Component {
       this.setState({
         achievements
       });
+      NotificationService.updateAchievements(achievementKeys, true);
     });
   }
 
