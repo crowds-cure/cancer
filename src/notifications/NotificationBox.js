@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 
 import './NotificationBox.css';
 
-import halo1 from '../../images/general/halo1.svg';
-import halo2 from '../../images/general/halo2.svg';
-import halo3 from '../../images/general/halo3.svg';
+import halo1 from '../images/general/halo1.svg';
+import halo2 from '../images/general/halo2.svg';
+import halo3 from '../images/general/halo3.svg';
 
 class NotificationBox extends React.Component {
   static propTypes = {

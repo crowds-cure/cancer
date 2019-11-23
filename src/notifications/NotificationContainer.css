@@ -1,4 +1,4 @@
-@value globals: "../../GlobalStyles.css";
+@value globals: "../GlobalStyles.css";
 @value screen-min, screen-xs-max, screen-sm-max from globals;
 
 .NotificationContainer {

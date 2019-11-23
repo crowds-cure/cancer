@@ -6,6 +6,7 @@ import ActivityProgressSection from './shared/ActivityProgressSection.js';
 import CaseTypeSection from './shared/CaseTypeSection.js';
 import SimpleHeaderSection from './shared/SimpleHeaderSection.js';
 import AchievementSection from './shared/AchievementSection.js';
+import NotificationContainer from './notifications/NotificationContainer';
 import ReactTooltip from 'react-tooltip';
 
 import './Dashboard.css';
@@ -127,6 +128,7 @@ class Dashboard extends Component {
 
     return (
       <div className="Dashboard">
+        <NotificationContainer />
         <div className="layoutGroup">
           <SimpleHeaderSection
             username={this.props.username}
