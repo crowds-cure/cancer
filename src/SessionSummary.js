@@ -9,6 +9,7 @@ import ProgressSection from './shared/ProgressSection.js';
 import PropTypes from 'prop-types';
 import Logo from './shared/Logo';
 import AchievementBadge from './shared/AchievementBadge.js';
+import NotificationService from './notifications/NotificationService';
 
 import { achievements } from './achievements.js';
 import animateNumber from './shared/animateNumber';
@@ -29,33 +30,49 @@ class SessionSummary extends Component {
     this.handleClickDashboard = this.handleClickDashboard.bind(this);
   }
 
-  getSessionBadges(current) {
-    const badges = [];
+  getBadgeBox(key, img, description, progressValue) {
+    let progressStyle;
+    if (progressValue !== undefined) {
+      progressStyle = { width: `${progressValue}%` };
+    }
 
-    // TODO: [layout] replace with real earned badges
-    // const earnedBadges = Object.keys(achievements).splice(0, 3);
-    const earnedBadges = [];
-
-    earnedBadges.forEach(id => {
-      const currentBadge = achievements[id];
-      const { description, img } = currentBadge;
-      badges.push(
-        <div className="badgeWrapper col-16 col-xs-8 col-sm-third" key={id}>
-          <div className="badge">
-            <AchievementBadge img={img} description={description} />
-            <div className="progress">
-              {id === 'example03' ? (
-                <div className="badgeProgress">
-                  <div className="badgeProgressValue" />
-                </div>
-              ) : (
-                <div className="badgeEarned">Badge earned</div>
-              )}
-              <div className="badgeDescription">{description}</div>
-            </div>
+    return (
+      <div className="badgeWrapper col-16 col-xs-8 col-sm-third" key={key}>
+        <div className="badge">
+          <AchievementBadge img={img} description={description} />
+          <div className="progress">
+            {progressStyle ? (
+              <div className="badgeProgress">
+                <div className="badgeProgressValue" style={progressStyle} />
+              </div>
+            ) : (
+              <div className="badgeEarned">Badge earned</div>
+            )}
+            <div className="badgeDescription">{description}</div>
           </div>
         </div>
-      );
+      </div>
+    );
+  }
+
+  getSessionBadges(current) {
+    const badges = [];
+    const earnedBadges = NotificationService.dumpEarned();
+
+    earnedBadges.forEach(key => {
+      const currentBadge = achievements[key];
+      const { description, img } = currentBadge;
+      const badgeBox = this.getBadgeBox(key, img, description);
+      badges.push(badgeBox);
+    });
+
+    const alertAchievements = NotificationService.getAlertAchievements();
+    alertAchievements.forEach(key => {
+      const currentBadge = achievements[key];
+      const { description, img } = currentBadge;
+      const progress = NotificationService.getAchievementProgress(key).percent;
+      const badgeBox = this.getBadgeBox(key, img, description, progress);
+      badges.push(badgeBox);
     });
 
     return badges;

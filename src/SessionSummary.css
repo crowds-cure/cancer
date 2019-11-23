@@ -143,7 +143,6 @@
   background-color: #00d5ae;
   border-radius: 6.5px;
   height: 100%;
-  width: 70%; /* TODO: [layout] Use value from style on .js */
 }
 
 .SessionSummary .LogoutSection {
