@@ -10,6 +10,7 @@ import saveAchievementsToDatabase from './lib/saveAchievementsToDatabase';
 import animateNumber from '../shared/animateNumber';
 import waitForAnimation from '../shared/waitForAnimation';
 import InstructionsModal from '../shared/InstructionsModal';
+import ProgressSection from '../shared/ProgressSection';
 
 class CaseProgress extends Component {
   constructor(props) {
@@ -138,6 +139,12 @@ class CaseProgress extends Component {
             ref={this.incrementRef}
           >
             +{this.state.incrementText}
+          </div>
+          <div className="totalScore">
+            <ProgressSection
+              current={this.props.current + this.props.sessionMeasurements}
+              measurementsInCurrentSession={this.props.sessionMeasurements}
+            />
           </div>
         </div>
         <div className="icon caseSelect" onClick={this.caseSelect}>
