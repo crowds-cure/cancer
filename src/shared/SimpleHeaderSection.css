@@ -159,6 +159,10 @@
     font-size: 24px;
     padding-left: 12px;
   }
+
+  .simpleHeader .actionSection > * {
+    margin-left: 28px;
+  }
 }
 
 @media (min-width: screen-md) {
