@@ -91,6 +91,10 @@ class NotificationService {
 
     let wait = 0;
     alerts.forEach(details => {
+      if (this.alerted.has(details)) {
+        return;
+      }
+
       const { img, min, alertTitle, alertMessage } = details;
       let current = this.totalMeasurements;
       if (!details.type) {
@@ -112,6 +116,7 @@ class NotificationService {
     const toNotify = [];
     diff.forEach(details => {
       this.earned.add(details);
+      this.sessionEarned.add(details);
       toNotify.push(details);
     });
 
@@ -126,6 +131,7 @@ class NotificationService {
       if (current >= min && current < max) {
         toNotify.unshift(details);
         this.earned.add(details);
+        this.sessionEarned.add(details);
         return false;
       }
 
@@ -174,7 +180,7 @@ class NotificationService {
 
     Object.keys(achievementsDetails).forEach(key => {
       const details = achievementsDetails[key];
-      if (!details || this.alerted.has(details)) {
+      if (!details) {
         return;
       }
 
@@ -199,8 +205,7 @@ class NotificationService {
     return sessionEarned;
   }
 
-  getAchievementProgress(achievementKey) {
-    const details = achievementsDetails[achievementKey];
+  getAchievementProgress(details) {
     if (!details.statusKey) {
       return null;
     }
@@ -211,7 +216,7 @@ class NotificationService {
       const currentDetails = achievementsDetails[key];
       if (
         (details.statusKey !== currentDetails.statusKey) ||
-        achievementKey === key
+        details === currentDetails
       ) {
         return;
       }
