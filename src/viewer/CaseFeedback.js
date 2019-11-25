@@ -155,7 +155,7 @@ class CaseFeedback extends Component {
 }
 
 CaseFeedback.propTypes = {
-  label: PropTypes.string.isRequired,
+  label: PropTypes.any.isRequired,
   skipEnabled: PropTypes.bool.isRequired,
   skipCase: PropTypes.func.isRequired,
   feedbackChanged: PropTypes.func.isRequired,
