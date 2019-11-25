@@ -42,7 +42,7 @@
   display: inline-block;
   fill: activeColor;
   height: 24px;
-  margin: 12px 0 4px;
+  margin: 12px 0 7px;
   stroke: activeColor;
   width: 24px;
 }
@@ -55,7 +55,157 @@
   text-align: center;
 }
 
+/* Increment label */
+
+.CaseProgress .sessionCount .increment {
+  background-color: #00d5ae;
+  border: 3px solid uiBlack;
+  border-radius: 24px;
+  color: #15125e;
+  font-size: 21px;
+  font-weight: 600;
+  height: 35px;
+  line-height: 29px;
+  opacity: 0;
+  padding: 0 12px;
+  position: absolute;
+  top: 0;
+  transform: translate(-60%, -60%);
+  transition: opacity 0.3s linear;
+  left: 0;
+}
+
+.CaseProgress .sessionCount .increment.visible {
+  opacity: 1;
+}
+
+.CaseProgress .sessionCount .increment.slideIn {
+  animation: slideIn 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.CaseProgress .sessionCount .increment.shift {
+  animation: shiftInOut 0.3s ease-in;
+}
+
+.CaseProgress .sessionCount .increment.slideOut {
+  animation: slideOut 0.3s ease;
+}
+
+/* Total Score */
+
+.CaseProgress .totalScore {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 64px;
+}
+
+.CaseProgress .ProgressSection .progressBarContainer {
+  display: none;
+}
+
+.CaseProgress .ProgressSection .numberCases {
+  display: flex;
+  flex-direction: column;
+}
+
+.CaseProgress .ProgressSection .rankBadgeContainer {
+  margin-top: -15px;
+  position: relative;
+}
+
+.CaseProgress .ProgressSection .rankBadgeContainer:before {
+  background-color: #000000;
+  border: solid 1px #6c57ae;
+  border-radius: 6.5px;
+  bottom: 4px;
+  color: #ffffff;
+  content: 'TOTAL';
+  display: block;
+  font-size: 9px;
+  font-weight: 600;
+  height: 15px;
+  left: 50%;
+  line-height: 13px;
+  pointer-events: none;
+  position: absolute;
+  text-align: center;
+  transform: translateX(-50%);
+  width: 41px;
+}
+
+.CaseProgress .ProgressSection .rankBadge:hover {
+  transform: none;
+}
+
+.CaseProgress .ProgressSection .rankBadge img {
+  height: 64px;
+  vertical-align: top;
+  width: 64px;
+}
+
+.CaseProgress .ProgressSection .currentPoints {
+  margin: -9px 0 0;
+  text-align: center;
+}
+
+.CaseProgress .ProgressSection .currentPoints .value {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 28px;
+}
+
+.CaseProgress .ProgressSection .currentPoints .value .maxWidth {
+  display: none;
+}
+
+.CaseProgress .ProgressSection .currentPoints .value .visible {
+  position: initial;
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translate(-60%, 33px);
+  }
+  100% {
+    transform: translate(-60%, -60%);
+  }
+}
+
+@keyframes slideOut {
+  0% {
+    transform: translate(-60%, -60%);
+  }
+  50% {
+    transform: translate(-60%, 20%);
+  }
+  100% {
+    transform: translate(-60%, -200%);
+  }
+}
+
+@keyframes shiftInOut {
+  0% {
+    transform: translate(-60%, -60%);
+  }
+  50% {
+    transform: translate(-80%, -60%);
+  }
+  100% {
+    transform: translate(-60%, -60%);
+  }
+}
+
 @media (min-width: screen-sm) {
+  .CaseProgress .sessionCount {
+    width: 180px;
+  }
+
+  .CaseProgress .totalScore {
+    display: block;
+  }
+
   .CaseProgress .icon svg {
     transition: fill 0.3s ease, stroke 0.3s ease;
   }
@@ -101,74 +251,5 @@
 
   .CaseProgress .icon.instructions svg {
     margin: 0 8px 0 0;
-  }
-}
-
-/* Increment label */
-
-.CaseProgress .sessionCount .increment {
-  background-color: #00d5ae;
-  border: 3px solid uiBlack;
-  border-radius: 24px;
-  color: #15125e;
-  font-size: 21px;
-  font-weight: 600;
-  height: 35px;
-  line-height: 29px;
-  opacity: 0;
-  padding: 0 12px;
-  position: absolute;
-  top: 0;
-  transform: translate(-60%, -60%);
-  transition: opacity 0.3s linear;
-  left: 0;
-}
-
-.CaseProgress .sessionCount .increment.visible {
-  opacity: 1;
-}
-
-.CaseProgress .sessionCount .increment.slideIn {
-  animation: slideIn 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-}
-
-.CaseProgress .sessionCount .increment.shift {
-  animation: shiftInOut 0.3s ease-in;
-}
-
-.CaseProgress .sessionCount .increment.slideOut {
-  animation: slideOut 0.3s ease;
-}
-
-@keyframes slideIn {
-  0% {
-    transform: translate(-60%, 33px);
-  }
-  100% {
-    transform: translate(-60%, -60%);
-  }
-}
-
-@keyframes slideOut {
-  0% {
-    transform: translate(-60%, -60%);
-  }
-  50% {
-    transform: translate(-60%, 20%);
-  }
-  100% {
-    transform: translate(-60%, -200%);
-  }
-}
-
-@keyframes shiftInOut {
-  0% {
-    transform: translate(-60%, -60%);
-  }
-  50% {
-    transform: translate(-80%, -60%);
-  }
-  100% {
-    transform: translate(-60%, -60%);
   }
 }

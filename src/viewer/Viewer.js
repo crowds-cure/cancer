@@ -277,6 +277,7 @@ class Viewer extends Component {
             caseMeasurements={this.state.toolData.length}
             sessionStart={this.props.sessionStart}
             totalCompleteCollection={this.props.totalCompleteCollection}
+            current={this.props.current}
           />
           <CaseControlButtons
             feedbackChanged={this.feedbackChanged}

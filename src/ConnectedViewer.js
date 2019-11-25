@@ -22,7 +22,8 @@ const mapStateToProps = state => {
     measurementsInCurrentSession: state.session.measurementsInCurrentSession,
     totalCompleteCollection: state.session.totalCompleteCollection,
     collection: state.collection.name,
-    sessionStart: state.session.start
+    sessionStart: state.session.start,
+    current: state.user.current
   };
 };
 
