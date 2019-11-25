@@ -8,7 +8,8 @@
 @value iconSize-md: 60px;
 @value iconSize-lg: 60px;
 
-@value headerPadding: 15px 20px;
+@value headerPadding: 15px 12px;
+@value headerPadding-xs: 10px 12px;
 @value headerPadding-sm: 10px 35px;
 @value headerPadding-md: 16px 60px;
 @value headerPadding-lg: 30px 80px;
@@ -22,6 +23,7 @@
 .simpleHeader {
   display: flex;
   flex-wrap: wrap;
+  padding: headerPadding;
 }
 
 .simpleHeader .userIcon {
@@ -54,6 +56,10 @@
   text-decoration: none;
 }
 
+.simpleHeader .actionSection > *:first-child {
+  margin-left: 0 !important;
+}
+
 .simpleHeader {
   height: headerHeight;
   padding: headerPadding;
@@ -83,6 +89,7 @@
 @media (min-width: screen-xs) {
   .simpleHeader {
     height: headerHeight-xs;
+    padding: headerPadding-xs;
   }
 
   .simpleHeader .Logo {
@@ -94,7 +101,7 @@
   }
 
   .simpleHeader .userSection .username {
-    max-width: 250px;
+    max-width: 210px;
   }
 
   .simpleHeader .userSection .username,
@@ -110,11 +117,11 @@
   }
 
   .simpleHeader .actionSection {
-    padding-right: 10px;
+    padding-right: 5px;
   }
 
   .simpleHeader .actionSection > * {
-    margin-left: 28px;
+    margin-left: 20px;
   }
 }
 
@@ -228,11 +235,14 @@
   }
 
   .simpleHeader .actionSection {
+    display: flex;
+    justify-content: space-between;
     margin-bottom: 4px;
+    padding-right: 5px;
+    max-width: 360px;
   }
 
   .simpleHeader .actionSection > * {
-    margin-left: 0;
-    margin-right: 28px;
+    margin: 0;
   }
 }

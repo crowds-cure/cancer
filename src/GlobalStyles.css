@@ -94,6 +94,12 @@
   opacity: 0.25;
 }
 
+.link {
+  border: 0;
+  background-color: transparent;
+  padding: 0;
+}
+
 @media (min-width: 2048w) {
   .Dashboard > .layoutGroup {
     transform: scale(calc(2048 / 1920));
