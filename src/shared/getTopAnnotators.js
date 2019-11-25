@@ -11,7 +11,7 @@ async function getTopAnnotators(limit = 10) {
   // of annotators we will have in the near future this is not required
   // (remember, we are fetching hundreds of CT images all the time, so
   // a few dozen lines of json is nothing!)
-  const result = await measurementsDB.query('by/annotators', {
+  const result = await measurementsDB.query('by/annotatorsInfo', {
     reduce: true,
     group: true,
     level: 'exact'
@@ -24,12 +24,14 @@ async function getTopAnnotators(limit = 10) {
   measByAnno = measByAnno.filter(a => a.key !== null);
 
   // TODO: Sort in the View
-  measByAnno.sort((a, b) => b.value - a.value);
+  measByAnno = measByAnno.sort((a, b) => b.value.count - a.value.count);
 
-  const annotators = measByAnno.map(r => {
+  const annotators = measByAnno.map(instance => {
+    const { key, value } = instance;
     return {
-      name: r.key,
-      value: r.value
+      name: key,
+      principalName: value.principalName,
+      value: value.count
     };
   });
 

@@ -5,15 +5,16 @@ import './LeaderboardItem.css';
 
 class LeaderboardItem extends Component {
   render() {
+    const { name, principalName, score, rank } = this.props;
+    const nameToDisplay = principalName || name;
+
     return (
       <div className="LeaderboardItem">
-        <div className="rank">{this.props.rank}</div>
-        <div className="name" title={this.props.name}>
-          {this.props.name}
+        <div className="rank">{rank}</div>
+        <div className="name" title={nameToDisplay}>
+          {nameToDisplay}
         </div>
-        <div className="score">
-          {this.props.score && this.props.score.toLocaleString()}
-        </div>
+        <div className="score">{score && score.toLocaleString()}</div>
       </div>
     );
   }
@@ -22,7 +23,8 @@ class LeaderboardItem extends Component {
 LeaderboardItem.propTypes = {
   score: PropTypes.number,
   rank: PropTypes.number,
-  name: PropTypes.string
+  name: PropTypes.string,
+  principalName: PropTypes.string
 };
 
 export default LeaderboardItem;
