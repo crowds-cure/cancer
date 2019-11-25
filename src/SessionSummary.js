@@ -59,19 +59,17 @@ class SessionSummary extends Component {
     const badges = [];
     const earnedBadges = NotificationService.dumpSessionEarned();
 
-    earnedBadges.forEach(key => {
-      const currentBadge = achievements[key];
-      const { description, img } = currentBadge;
-      const badgeBox = this.getBadgeBox(key, img, description);
+    earnedBadges.forEach(details => {
+      const { description, img } = details;
+      const badgeBox = this.getBadgeBox(img, img, description);
       badges.push(badgeBox);
     });
 
-    const alertAchievements = NotificationService.getAlertAchievements();
-    alertAchievements.forEach(key => {
-      const currentBadge = achievements[key];
-      const { description, img } = currentBadge;
-      const progress = NotificationService.getAchievementProgress(key).percent;
-      const badgeBox = this.getBadgeBox(key, img, description, progress);
+    const achievementAlerts = NotificationService.getAchievementAlerts();
+    achievementAlerts.forEach(details => {
+      const { description, img } = details;
+      const { percent } = NotificationService.getAchievementProgress(details);
+      const badgeBox = this.getBadgeBox(img, img, description, percent);
       badges.push(badgeBox);
     });
 
