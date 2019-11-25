@@ -201,11 +201,16 @@ class CornerstoneViewport extends Component {
   }
 
   updateLabelHandler(originElement) {
-    const { currentLesion, toolData } = this.props;
+    const { currentLesion, toolData, displayLabelSelectTree } = this.props;
     let index = currentLesion >= 0 ? currentLesion - 1 : toolData.length - 1;
     const currentToolData = toolData[index];
 
     if (!currentToolData) {
+      return;
+    }
+
+    if (!displayLabelSelectTree) {
+      this.setState({ bidirectionalAddLabelShow: false });
       return;
     }
 
@@ -532,13 +537,15 @@ class CornerstoneViewport extends Component {
       });
     }
 
-    const { labelSelectTreeOrigin } = this.props;
-    const showStateChanged =
-      labelSelectTreeOrigin &&
-      labelSelectTreeOrigin !== prevProps.labelSelectTreeOrigin;
+    const { labelSelectTreeOrigin, displayLabelSelectTree } = this.props;
+
     const currentLesionChanged =
       this.props.currentLesion !== prevProps.currentLesion;
-    if (showStateChanged) {
+
+    const currentDisplayLabel =
+      displayLabelSelectTree !== prevProps.displayLabelSelectTree;
+
+    if (currentLesionChanged || currentDisplayLabel) {
       this.updateLabelHandler(labelSelectTreeOrigin);
     }
 
@@ -906,6 +913,7 @@ CornerstoneViewport.propTypes = {
   activeTool: PropTypes.string.isRequired,
   viewportData: PropTypes.object.isRequired,
   labelSelectTreeOrigin: PropTypes.object,
+  displayLabelSelectTree: PropTypes.boolean,
   labelDoneCallback: PropTypes.func,
   currentLesionFocused: PropTypes.bool,
   magnificationActive: PropTypes.bool,

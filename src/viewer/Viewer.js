@@ -49,6 +49,7 @@ class Viewer extends Component {
       loading: true,
       magnificationActive: false,
       labelSelectTreeOrigin: null,
+      displayLabelSelectTree: false,
       currentLesionFocused: false,
       feedback: [],
       hasMeasurements: false,
@@ -109,6 +110,15 @@ class Viewer extends Component {
 
     if (this.state.labelSelectTreeOrigin && !this.state.hasMeasurements) {
       this.setState({ labelSelectTreeOrigin: null });
+    }
+
+    // Force closing labelSelectTree on user interactions not related to label
+    if (
+      prevState.displayLabelSelectTree === this.state.displayLabelSelectTree &&
+      this.state.displayLabelSelectTree &&
+      (this.state.labelSelectTreeOrigin === null || this.state.hasMeasurements)
+    ) {
+      this.setState({ displayLabelSelectTree: false });
     }
   }
 
@@ -237,6 +247,7 @@ class Viewer extends Component {
               viewportData={item}
               activeTool={activeTool}
               labelSelectTreeOrigin={this.state.labelSelectTreeOrigin}
+              displayLabelSelectTree={this.state.displayLabelSelectTree}
               labelDoneCallback={this.labelDoneCallback}
               onNewImage={this.onNewImage}
               setCurrentLesion={this.setCurrentLesion}
@@ -504,16 +515,26 @@ class Viewer extends Component {
   }
 
   toggleLabelSelectTree(event) {
-    const { hasMeasurements, labelSelectTreeOrigin } = this.state;
+    const {
+      hasMeasurements,
+      displayLabelSelectTree: _displayLabelSelectTree
+    } = this.state;
     if (hasMeasurements) {
       this.focusCurrentLesion();
-      const newValue = labelSelectTreeOrigin ? null : event.target;
-      this.setState({ labelSelectTreeOrigin: newValue });
+      const newValue = event.target;
+      const displayLabelSelectTree = !_displayLabelSelectTree;
+      this.setState({
+        labelSelectTreeOrigin: newValue,
+        displayLabelSelectTree
+      });
     }
   }
 
   labelDoneCallback() {
-    this.setState({ labelSelectTreeOrigin: null });
+    this.setState({
+      labelSelectTreeOrigin: null,
+      displayLabelSelectTree: false
+    });
   }
 }
 
