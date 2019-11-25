@@ -40,7 +40,7 @@ class AchievementSection extends Component {
       this.setState({
         achievements
       });
-      NotificationService.updateAchievements(achievementKeys, true);
+      NotificationService.setAchievements(achievementKeys);
     });
   }
 

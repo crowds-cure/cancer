@@ -59,7 +59,7 @@ async function saveAchievementsToDatabase(totalCompleteCollection) {
   // Distinct achievements
   doc.achievements = [...new Set(doc.achievements)];
 
-  achievementsDB.put(doc);
+  await achievementsDB.put(doc);
 }
 
 export default saveAchievementsToDatabase;

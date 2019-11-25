@@ -57,7 +57,7 @@ class SessionSummary extends Component {
 
   getSessionBadges(current) {
     const badges = [];
-    const earnedBadges = NotificationService.dumpEarned();
+    const earnedBadges = NotificationService.dumpSessionEarned();
 
     earnedBadges.forEach(key => {
       const currentBadge = achievements[key];

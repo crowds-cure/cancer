@@ -16,7 +16,10 @@ const BADGE_TYPES = {
     description: '< 10 Cases',
     img: rank01NewbieBadge,
     min: 0,
-    max: 10
+    max: 10,
+    alertDiff: 5,
+    alertTitle: 'Keep going!',
+    alertMessage: diff => `${diff} more measurements to earn a new badge`
   },
   NUM_CASES_NOVICE: {
     type: 'NUM_CASES_NOVICE',
@@ -24,7 +27,10 @@ const BADGE_TYPES = {
     description: '10 to 25 Cases',
     img: rank02NoviceBadge,
     min: 10,
-    max: 25
+    max: 25,
+    alertDiff: 5,
+    alertTitle: 'Keep going!',
+    alertMessage: diff => `${diff} more measurements to earn a new badge`
   },
   NUM_CASES_ROOKIE: {
     type: 'NUM_CASES_ROOKIE',
@@ -32,7 +38,10 @@ const BADGE_TYPES = {
     description: '25 to 50 Cases',
     img: rank03RookieBadge,
     min: 25,
-    max: 50
+    max: 50,
+    alertDiff: 5,
+    alertTitle: 'Keep going!',
+    alertMessage: diff => `${diff} more measurements to earn a new badge`
   },
   NUM_CASES_INTERMEDIATE: {
     type: 'NUM_CASES_INTERMEDIATE',
@@ -40,7 +49,10 @@ const BADGE_TYPES = {
     description: '50 to 100 Cases',
     img: rank04IntermediateBadge,
     min: 50,
-    max: 100
+    max: 100,
+    alertDiff: 5,
+    alertTitle: 'Keep going!',
+    alertMessage: diff => `${diff} more measurements to earn a new badge`
   },
   NUM_CASES_PROFICIENT: {
     type: 'NUM_CASES_PROFICIENT',
@@ -48,7 +60,10 @@ const BADGE_TYPES = {
     description: '100 to 200 Cases',
     img: rank05ProficientBadge,
     min: 100,
-    max: 200
+    max: 200,
+    alertDiff: 10,
+    alertTitle: 'Keep going!',
+    alertMessage: diff => `${diff} more measurements to earn a new badge`
   },
   NUM_CASES_EXPERIENCED: {
     type: 'NUM_CASES_EXPERIENCED',
@@ -56,7 +71,10 @@ const BADGE_TYPES = {
     description: '200 to 300 Cases',
     img: rank06ExperiencedBadge,
     min: 200,
-    max: 300
+    max: 300,
+    alertDiff: 25,
+    alertTitle: 'Keep going!',
+    alertMessage: diff => `${diff} more measurements to earn a new badge`
   },
   NUM_CASES_ADVANCED: {
     type: 'NUM_CASES_ADVANCED',
@@ -64,7 +82,10 @@ const BADGE_TYPES = {
     description: '300 to 400 Cases',
     img: rank07AdvancedBadge,
     min: 300,
-    max: 400
+    max: 400,
+    alertDiff: 25,
+    alertTitle: 'Keep going!',
+    alertMessage: diff => `${diff} more measurements to earn a new badge`
   },
   NUM_CASES_SENIOR: {
     type: 'NUM_CASES_SENIOR',
@@ -72,7 +93,10 @@ const BADGE_TYPES = {
     description: '400 to 500 Cases',
     img: rank08SeniorBadge,
     min: 400,
-    max: 500
+    max: 500,
+    alertDiff: 25,
+    alertTitle: 'Keep going!',
+    alertMessage: diff => `${diff} more measurements to earn a new badge`
   },
   NUM_CASES_EXPERT: {
     type: 'NUM_CASES_EXPERT',
@@ -80,7 +104,10 @@ const BADGE_TYPES = {
     description: '500 to 1000 Cases',
     img: rank09ExpertBadge,
     min: 500,
-    max: 1000
+    max: 1000,
+    alertDiff: 25,
+    alertTitle: 'Keep going!',
+    alertMessage: diff => `${diff} more measurements to earn a new badge`
   },
   NUM_CASES_GURU: {
     type: 'NUM_CASES_GURU',
@@ -88,7 +115,10 @@ const BADGE_TYPES = {
     description: '1000+ Cases',
     img: rank10GuruBadge,
     min: 1000,
-    max: 2000
+    max: 2000,
+    alertDiff: 100,
+    alertTitle: 'Keep going!',
+    alertMessage: diff => `${diff} more measurements to earn a new badge`
   }
 };
 

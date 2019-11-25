@@ -1,7 +1,7 @@
 import { EventEmitter } from 'events';
 
 export const Types = Object.freeze({
-  POPUP: 'popup',
+  TOAST: 'toast',
   BOX: 'box'
 });
 
@@ -26,7 +26,7 @@ class NotificationManager extends EventEmitter {
     options={}
   }) {
     const defaultOptions = {
-      type: Types.POPUP,
+      type: Types.TOAST,
       timeout: 5000,
       onClick: () => {}
     };
@@ -61,8 +61,8 @@ class NotificationManager extends EventEmitter {
     return notification;
   }
 
-  popup(title, message, icon, options={}) {
-    options.type = Types.POPUP;
+  toast(title, message, icon, options={}) {
+    options.type = Types.TOAST;
     return this.create({
       title,
       message,

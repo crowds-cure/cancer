@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
 import { Types as NotificationTypes } from './NotificationManager';
-import NotificationPopup from './NotificationPopup';
+import NotificationToast from './NotificationToast';
 import NotificationBox from './NotificationBox';
 import waitForAnimation from '../shared/waitForAnimation';
 
 class Notification extends React.Component {
   static propTypes = {
-    type: PropTypes.oneOf([NotificationTypes.POPUP, NotificationTypes.BOX]),
+    type: PropTypes.oneOf([NotificationTypes.TOAST, NotificationTypes.BOX]),
     title: PropTypes.node,
     message: PropTypes.node,
     icon: PropTypes.node,
@@ -85,7 +85,7 @@ class Notification extends React.Component {
       return <NotificationBox title={title} message={message} icon={icon} />;
     }
 
-    return <NotificationPopup title={title} message={message} icon={icon} />;
+    return <NotificationToast title={title} message={message} icon={icon} />;
   }
 
   render() {

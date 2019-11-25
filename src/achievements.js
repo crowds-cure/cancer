@@ -66,7 +66,7 @@ const achievements = {
   day10Measurements: {
     img: day10MeasurementsBadge,
     description: '10 measurements in a day',
-    value: 10,
+    min: 10,
     statusKey: 'maxMeasurementsInDay',
     alertDiff: 5,
     alertTitle: 'Keep going!',
@@ -75,7 +75,7 @@ const achievements = {
   day25Measurements: {
     img: day25MeasurementsBadge,
     description: '25 measurements in a day',
-    value: 25,
+    min: 25,
     statusKey: 'maxMeasurementsInDay',
     alertDiff: 5,
     alertTitle: 'Keep going!',
@@ -84,7 +84,7 @@ const achievements = {
   day50Measurements: {
     img: day50MeasurementsBadge,
     description: '50 measurements in a day',
-    value: 50,
+    min: 50,
     statusKey: 'maxMeasurementsInDay',
     alertDiff: 5,
     alertTitle: 'Keep going!',
@@ -93,7 +93,7 @@ const achievements = {
   day75Measurements: {
     img: day75MeasurementsBadge,
     description: '75 measurements in a day',
-    value: 75,
+    min: 75,
     statusKey: 'maxMeasurementsInDay',
     alertDiff: 5,
     alertTitle: 'Keep going!',
@@ -102,7 +102,7 @@ const achievements = {
   day100Measurements: {
     img: day100MeasurementsBadge,
     description: '100 measurements in a day',
-    value: 100,
+    min: 100,
     statusKey: 'maxMeasurementsInDay',
     alertDiff: 10,
     alertTitle: 'Keep going!',
@@ -111,7 +111,7 @@ const achievements = {
   day200Measurements: {
     img: day200MeasurementsBadge,
     description: '200 measurements in a day',
-    value: 200,
+    min: 200,
     statusKey: 'maxMeasurementsInDay',
     alertDiff: 25,
     alertTitle: 'Keep going!',
@@ -120,7 +120,7 @@ const achievements = {
   sessionMeasurements25: {
     img: sessionMeasurements25Badge,
     description: '25 measurements in a session',
-    value: 25,
+    min: 25,
     statusKey: 'maxMeasurementsInSession',
     alertDiff: 5,
     alertTitle: 'Keep going!',
@@ -129,7 +129,7 @@ const achievements = {
   sessionMeasurements50: {
     img: sessionMeasurements50Badge,
     description: '50 measurements in a session',
-    value: 50,
+    min: 50,
     statusKey: 'maxMeasurementsInSession',
     alertDiff: 5,
     alertTitle: 'Keep going!',
@@ -138,7 +138,7 @@ const achievements = {
   sessionMeasurements75: {
     img: sessionMeasurements75Badge,
     description: '75 measurements in a session',
-    value: 75,
+    min: 75,
     statusKey: 'maxMeasurementsInSession',
     alertDiff: 5,
     alertTitle: 'Keep going!',
@@ -147,7 +147,7 @@ const achievements = {
   sessionMeasurements100: {
     img: sessionMeasurements100Badge,
     description: '100 measurements in a session',
-    value: 100,
+    min: 100,
     statusKey: 'maxMeasurementsInSession',
     alertDiff: 10,
     alertTitle: 'Keep going!',
@@ -156,7 +156,7 @@ const achievements = {
   sessionMeasurements200: {
     img: sessionMeasurements200Badge,
     description: '200 measurements in a session',
-    value: 200,
+    min: 200,
     statusKey: 'maxMeasurementsInSession',
     alertDiff: 25,
     alertTitle: 'Keep going!',
@@ -165,7 +165,7 @@ const achievements = {
   weekMeasurements50: {
     img: weekMeasurements50Badge,
     description: '50 measurements in a week',
-    value: 50,
+    min: 50,
     statusKey: 'maxMeasurementsInWeek',
     alertDiff: 5,
     alertTitle: 'Keep going!',
@@ -174,7 +174,7 @@ const achievements = {
   weekMeasurements100: {
     img: weekMeasurements100Badge,
     description: '100 measurements in a week',
-    value: 100,
+    min: 100,
     statusKey: 'maxMeasurementsInWeek',
     alertDiff: 10,
     alertTitle: 'Keep going!',
@@ -183,7 +183,7 @@ const achievements = {
   weekMeasurements250: {
     img: weekMeasurements250Badge,
     description: '250 measurements in a week',
-    value: 250,
+    min: 250,
     statusKey: 'maxMeasurementsInWeek',
     alertDiff: 25,
     alertTitle: 'Keep going!',
@@ -192,7 +192,7 @@ const achievements = {
   weekMeasurements500: {
     img: weekMeasurements500Badge,
     description: '500 measurements in a week',
-    value: 500,
+    min: 500,
     statusKey: 'maxMeasurementsInWeek',
     alertDiff: 50,
     alertTitle: 'Keep going!',

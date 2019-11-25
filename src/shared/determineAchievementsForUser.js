@@ -140,7 +140,7 @@ async function getAchievementStatusForUser() {
   };
 }
 
-async function determineAchievementsForUser(totalCompleteCollection) {
+async function determineAchievementsForUser(totalCompleteCollection, totalMeasurements) {
   const achievements = [];
 
   const achievementStatus = await getAchievementStatusForUser();
@@ -262,8 +262,7 @@ async function determineAchievementsForUser(totalCompleteCollection) {
     achievements.push('rsna18Group3');
   }
 
-  NotificationService.updateAchievementStatus(achievementStatus);
-  NotificationService.updateAchievements(achievements);
+  NotificationService.update(totalMeasurements, achievementStatus, achievements);
 
   return achievements;
 }

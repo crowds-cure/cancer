@@ -338,19 +338,18 @@ class Viewer extends Component {
 
   saveCase() {
     const { caseData, totalCompleteCollection } = this.props;
+    const { feedback } = this.state;
 
     const measurements = this.getMeasurementData();
     this.props.incrementNumMeasurementsInSession(measurements.length);
 
-    saveMeasurementToDatabase(caseData, measurements, this.state.feedback).then(
-      () => {
-        this.getNextCase();
+    saveMeasurementToDatabase(caseData, measurements, feedback).then(() => {
+      this.getNextCase();
 
-        // Determine and save the earned achievements
-        // after measurements are saved to db
-        saveAchievementsToDatabase(totalCompleteCollection);
-      }
-    );
+      // Determine and save the earned achievements
+      // after measurements are saved to db
+      saveAchievementsToDatabase(totalCompleteCollection);
+    });
   }
 
   isSaveEnabled() {
