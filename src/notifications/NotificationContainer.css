@@ -29,7 +29,7 @@
     width: calc(100% - 10px);
   }
 
-  .NotificationContainer .NotificationPopup {
+  .NotificationContainer .NotificationToast {
     padding: 5px;
   }
 }

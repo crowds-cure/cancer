@@ -1,60 +1,143 @@
 import { achievements as achievementsDetails } from "../achievements";
+import { BADGE_TYPES as rankBadgesDetails } from "../badges";
 import NotificationManager from "./NotificationManager";
 
 class NotificationService {
 
   constructor() {
-    this.achievements = new Set();
+    this.totalMeasurements = 0;
+    this.achievements = [];
     this.achievementStatus = {};
     this.alerted = new Set();
     this.earned = new Set();
+    this.sessionEarned = new Set();
   }
 
-  updateAchievementStatus(achievementStatus, silent = false) {
-    this.achievementStatus = achievementStatus;
+  setTotalMeasurements(totalMeasurements) {
+    this.totalMeasurements = totalMeasurements;
 
-    if (silent) {
-      return;
-    }
-
-    let wait = 0;
-    const achievements = this.getAlertAchievements();
-    achievements.forEach(key => {
-      const details = achievementsDetails[key];
-      const { statusKey, img, value, alertTitle, alertMessage } = details;
-      const current = achievementStatus[statusKey];
-      if (!this.alerted.has(key)) {
-        const diff = value - current;
-        const opt = { wait, timeout: 7000 };
-        NotificationManager.popup(alertTitle, alertMessage(diff), img, opt);
-        this.alerted.add(key);
-        wait += 750;
+    Object.keys(rankBadgesDetails).forEach(key => {
+      const details = rankBadgesDetails[key];
+      if (totalMeasurements >= details.min) {
+        this.alerted.add(details);
+        this.earned.add(details);
       }
     });
   }
 
-  updateAchievements(achievements, silent = false) {
-    const oldArray = this.achievements;
+  setAchievements(achievements) {
+    this.achievements = Array.from(achievements);
 
-    this.achievements = new Set(achievements);
+    achievements.forEach(key => {
+      const details = achievementsDetails[key];
+      this.alerted.add(details);
+      this.earned.add(details);
+    });
+  }
 
-    if (silent) {
+  update(totalMeasurements, achievementStatus, achievements) {
+    this.totalMeasurements = totalMeasurements;
+    this.achievementStatus = achievementStatus;
+    this.achievements = Array.from(achievements);
+
+    this.processAlerts();
+    this.processEarnedBadges();
+  }
+
+  processAlerts() {
+    const rankBadgeAlert = this.getRankBadgeAlert();
+    const achievementAlerts = this.getAchievementAlerts();
+    const alerts = Array.from(achievementAlerts);
+    if (rankBadgeAlert) {
+      alerts.unshift(rankBadgeAlert);
+    }
+
+    let wait = 0;
+    alerts.forEach(details => {
+      const { img, min, alertTitle, alertMessage } = details;
+      let current = this.totalMeasurements;
+      if (!details.type) {
+        current = this.achievementStatus[details.statusKey];
+      }
+
+      const diff = min - current;
+      const opt = { wait, timeout: 7000 };
+      NotificationManager.toast(alertTitle, alertMessage(diff), img, opt);
+      this.alerted.add(details);
+      wait += 750;
+    });
+  }
+
+  processEarnedBadges() {
+    const mapFunction = key => achievementsDetails[key];
+    const newAchievements = this.achievements.map(mapFunction) || [];
+    const diff = newAchievements.filter(details => !this.earned.has(details));
+    const toNotify = [];
+    diff.forEach(details => {
+      this.earned.add(details);
+      toNotify.push(details);
+    });
+
+    Object.keys(rankBadgesDetails).every(key => {
+      const details = rankBadgesDetails[key];
+      if (this.earned.has(details)) {
+        return true;
+      }
+
+      const current = this.totalMeasurements;
+      const { min, max } = details;
+      if (current >= min && current < max) {
+        toNotify.unshift(details);
+        this.earned.add(details);
+        return false;
+      }
+
+      return true;
+    });
+
+    this.notifyEarnedBadges(toNotify);
+  }
+
+  notifyEarnedBadges(toNotify) {
+    if (!toNotify || !toNotify.length) {
       return;
     }
 
-    const diff = this.getAchievementsDifference(achievements, oldArray);
-    if (diff.length) {
-      diff.forEach(key => this.earned.add(key));
-      this.notifyEarnedAchievements(diff);
-    }
+    const details = toNotify.shift();
+    const { name, description, img } = details;
+    const text = name ? `${name} (${description})` : description;
+    const onRemove = () => this.notifyEarnedBadges(toNotify);
+    NotificationManager.box('Badge earned', text, img, { onRemove });
   }
 
-  getAlertAchievements() {
-    const achievements = [];
+  getRankBadgeAlert() {
+    let badgeToAlert;
+
+    Object.keys(rankBadgesDetails).forEach(key => {
+      const details = rankBadgesDetails[key];
+      if (!details || this.alerted.has(details)) {
+        return true;
+      }
+
+      const { min, alertDiff } = details;
+      const current = this.totalMeasurements;
+      if (current >= min - alertDiff && current < min) {
+        badgeToAlert = details;
+        return false;
+      }
+
+      return true;
+    });
+
+    return badgeToAlert;
+  }
+
+  getAchievementAlerts() {
+    const toAlert = [];
 
     Object.keys(achievementsDetails).forEach(key => {
       const details = achievementsDetails[key];
-      if (!details) {
+      if (!details || this.alerted.has(details)) {
         return;
       }
 
@@ -63,36 +146,20 @@ class NotificationService {
         return;
       }
 
-      const { value, alertDiff } = details;
+      const { min, alertDiff } = details;
       const current = this.achievementStatus[statusKey];
-      if (current >= value - alertDiff && current < value) {
-        achievements.push(key);
+      if (current >= min - alertDiff && current < min) {
+        toAlert.push(details);
       }
     });
 
-    return achievements;
+    return toAlert;
   }
 
-  notifyEarnedAchievements(achievements) {
-    const key = achievements.shift();
-    const { description, img } = achievementsDetails[key];
-    NotificationManager.box('Badge earned', description, img, {
-      onRemove: () => {
-        if (achievements.length) {
-          this.notifyEarnedAchievements(achievements);
-        }
-      }
-    });
-  }
-
-  getAchievementsDifference(newArray, oldArray) {
-    return newArray.filter(achievement => !oldArray.has(achievement));
-  }
-
-  dumpEarned() {
-    const earned = Array.from(this.earned);
-    this.earned = new Set();
-    return earned;
+  dumpSessionEarned() {
+    const sessionEarned = Array.from(this.sessionEarned);
+    this.sessionEarned = new Set();
+    return sessionEarned;
   }
 
   getAchievementProgress(achievementKey) {
@@ -112,13 +179,13 @@ class NotificationService {
         return;
       }
 
-      const { value } = currentDetails;
-      if (value > start && value < details.value) {
-        start = value;
+      const { min } = currentDetails;
+      if (min > start && min < details.min) {
+        start = min;
       }
     });
 
-    const end = details.value;
+    const end = details.min;
     return {
       start,
       end,

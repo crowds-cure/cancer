@@ -1,4 +1,4 @@
-.Notification.notification-popup {
+.Notification.notification-toast {
   align-items: center;
   background-color: #22193d;
   border-radius: 9px;
@@ -9,7 +9,7 @@
   width: 100%;
 }
 
-.Notification.notification-popup .icon {
+.Notification.notification-toast .icon {
   display: inline-block;
   height: 50px;
   margin-right: 15px;
@@ -18,13 +18,13 @@
   width: 50px;
 }
 
-.Notification.notification-popup .icon img {
+.Notification.notification-toast .icon img {
   width: 50px;
   height: 50px;
 }
 
 /* TODO: [layout] Change for SVG icon when available */
-.Notification.notification-popup .icon .default {
+.Notification.notification-toast .icon .default {
   background-color: #410988;
   color: #ffffff;
   border: 1px solid #ffffff;
@@ -37,22 +37,22 @@
   width: 50px;
 }
 
-.Notification.notification-popup .notificationText {
+.Notification.notification-toast .notificationText {
   font-size: 16px;
 }
 
-.Notification.notification-popup .notificationText .title {
+.Notification.notification-toast .notificationText .title {
   color: #ffffff;
   line-height: 1.31;
   margin: 0;
 }
 
-.Notification.notification-popup .notificationText .message {
+.Notification.notification-toast .notificationText .message {
   color: #aca2cd;
 }
 
-/* Popup fadeIn animation */
-@keyframes notificationPopupFadeIn {
+/* Toast fadeIn animation */
+@keyframes notificationToastFadeIn {
   0% {
     opacity: 0;
     transform: translateY(100%);
@@ -69,12 +69,12 @@
   }
 }
 
-.Notification.fadingIn.notification-popup {
-  animation: notificationPopupFadeIn 0.3s ease;
+.Notification.fadingIn.notification-toast {
+  animation: notificationToastFadeIn 0.3s ease;
 }
 
-/* Popup fadeOut animation */
-@keyframes notificationPopupFadeOut {
+/* Toast fadeOut animation */
+@keyframes notificationToastFadeOut {
   0% {
     opacity: 1;
     transform: translateY(0);
@@ -85,6 +85,6 @@
   }
 }
 
-.Notification.fadingOut.notification-popup {
-  animation: notificationPopupFadeOut 0.3s ease;
+.Notification.fadingOut.notification-toast {
+  animation: notificationToastFadeOut 0.3s ease;
 }

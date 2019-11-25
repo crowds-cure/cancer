@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './NotificationPopup.css';
+import './NotificationToast.css';
 
-class NotificationPopup extends React.Component {
+class NotificationToast extends React.Component {
   static propTypes = {
     title: PropTypes.node,
     message: PropTypes.node,
@@ -36,4 +36,4 @@ class NotificationPopup extends React.Component {
   }
 }
 
-export default NotificationPopup;
+export default NotificationToast;

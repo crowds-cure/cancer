@@ -18,6 +18,7 @@ import version from './version.js';
 import sha from './sha.js';
 import getUsername from './viewer/lib/getUsername.js';
 import annotatorCollectionStatus from './case/annotatorCollectionStatus.js';
+import NotificationService from './notifications/NotificationService.js';
 
 const customStyles = {
   content: {
@@ -118,6 +119,8 @@ class Dashboard extends Component {
         current: userStats.current,
         rank: userStats.rank
       });
+
+      NotificationService.setTotalMeasurements(userStats.current);
     });
 
     this.onClickInfo = this.onClickInfo.bind(this);
