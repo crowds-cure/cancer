@@ -43,7 +43,7 @@ class MeasurementControl extends Component {
             <span className="right-arrow arrow" />
           </span>
         </div>
-        <div className="label" onClick={this.props.onLabelClick}>
+        <div className="label" onClick={(e) => this.props.onLabelClick(e)}>
           Label
         </div>
         <div
