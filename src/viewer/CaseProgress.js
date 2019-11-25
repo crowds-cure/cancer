@@ -158,10 +158,8 @@ class CaseProgress extends Component {
           </li>
           <li>
             <p>
-              Label the lesion (e.g. liver, lung, etc.) and add a description
-              (e.g., ill-defined, confluent, necrotic, etc. if applicable).Use
-              the ‘previous’ and ‘next’ lesion buttons to review your
-              measurements.
+              Label the lesion (e.g. liver, lung, etc.) to add value. Use the
+              ‘previous’ and ‘next’ lesion buttons to review your measurements.
             </p>
           </li>
           <li>
@@ -181,9 +179,9 @@ class CaseProgress extends Component {
         <ul>
           <li>
             <p>
-              Log back in with your email to measure more cases. Measurements
-              can be made on any personal device; you are not restricted to
-              Crowds Cure Cancer workstations.
+              Log back in with your email or anonymous username to measure more
+              cases. Measurements can be made on any personal device; you are
+              not restricted to Crowds Cure Cancer workstations.
             </p>
           </li>
           <li>
@@ -198,14 +196,13 @@ class CaseProgress extends Component {
         <ul>
           <li>
             <p>
-              Detailed results will be posted after RSNA. Visit The Cancer
-              Imaging Archive{' '}
+              Detailed results will be posted after RSNA. Visit{' '}
               <a
                 target="_blank"
                 rel="noopener noreferrer"
                 href="https://www.cancerimagingarchive.net/"
               >
-                Cancer Imaging Archive
+                The Cancer Imaging Archive
               </a>{' '}
               to view results from{' '}
               <a
