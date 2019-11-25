@@ -16,12 +16,12 @@ class CaseControlButtons extends Component {
     return (
       <div className="CaseControlButtons">
         <CaseFeedback
-          label={(
+          label={
             <>
               <span className="d-xs-none">Case </span>
               <span>Feedback</span>
             </>
-          )}
+          }
           feedbackSelected={this.props.feedbackSelected}
           feedbackChanged={this.props.feedbackChanged}
           skipEnabled={this.props.skipEnabled}

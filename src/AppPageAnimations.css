@@ -1,0 +1,183 @@
+@value globals: "./GlobalStyles.css";
+@value uiBlack from globals;
+
+@value defaultTiming: ease-out;
+@value dashboardTiming: ease;
+@value dashboardAnimation: 1s defaultTiming;
+@value defaultAnimation: 1s defaultTiming;
+@value defaultEnterAnimation: 2s defaultTiming;
+
+.route-container {
+  width: inherit;
+  height: inherit;
+  position: relative;
+}
+
+.route-section {
+  width: 100%;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  overflow-y: hidden;
+}
+
+/* Dashboard exit animations */
+@keyframes simpleFade {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes deepFade {
+  0% {
+    opacity: 1;
+  }
+  33% {
+    opacity: 0.5;
+  }
+  66% {
+    opacity: 0.25;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes dashboardCasesExit {
+  0%,
+  13% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  51% {
+    opacity: 0;
+  }
+  58%,
+  100% {
+    opacity: 0;
+    transform: translateY(400px);
+  }
+}
+
+@keyframes dashboardCommunityExit {
+  0%,
+  20% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  57% {
+    opacity: 0;
+  }
+  66%,
+  100% {
+    opacity: 0;
+    transform: translateY(50%);
+  }
+}
+
+@keyframes dashboardBadgesExit {
+  0%,
+  28% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  64% {
+    opacity: 0;
+  }
+  72%,
+  100% {
+    opacity: 0;
+    transform: translateY(50%);
+  }
+}
+
+@keyframes dashboardScoreExit {
+  0%,
+  35% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  72% {
+    opacity: 0;
+  }
+  80%,
+  100% {
+    opacity: 0;
+    transform: translateY(50%);
+  }
+}
+
+.fade-exit.fade-exit-active.Dashboard .simpleHeader {
+  animation: simpleFade dashboardAnimation;
+}
+
+.fade-exit.fade-exit-active.Dashboard .CaseTypeSection {
+  animation: dashboardCasesExit dashboardAnimation;
+}
+
+.fade-exit.fade-exit-active.Dashboard .ActivityProgressSection {
+  animation: dashboardScoreExit dashboardAnimation;
+}
+
+.fade-exit.fade-exit-active.Dashboard .AchievementSection {
+  animation: dashboardBadgesExit dashboardAnimation;
+}
+
+.fade-exit.fade-exit-active.Dashboard .StatisticsSection {
+  animation: dashboardCommunityExit dashboardAnimation;
+}
+
+/* Dashboard enter animations */
+/* TODO [layout] Create separate animations for dashboard enter */
+.fade-enter.fade-enter-active.Dashboard .simpleHeader {
+  animation: deepFade defaultEnterAnimation reverse;
+}
+
+.fade-enter.fade-enter-active.Dashboard .CaseTypeSection {
+  animation: dashboardCasesExit dashboardAnimation reverse;
+}
+
+.fade-enter.fade-enter-active.Dashboard .ActivityProgressSection {
+  animation: dashboardScoreExit dashboardAnimation reverse;
+}
+
+.fade-enter.fade-enter-active.Dashboard .AchievementSection {
+  animation: dashboardBadgesExit dashboardAnimation reverse;
+}
+
+.fade-enter.fade-enter-active.Dashboard .StatisticsSection {
+  animation: dashboardCommunityExit dashboardAnimation reverse;
+}
+
+/* Dashboard states */
+.fade-enter:not(.fade-enter-active).Dashboard .CaseTypeSection,
+.fade-exit-done.Dashboard .CaseTypeSection {
+  opacity: 0;
+  transform: translateY(400px);
+}
+
+.fade-enter:not(.fade-enter-active).Dashboard .simpleHeader,
+.fade-exit-done.Dashboard .simpleHeader {
+  opacity: 0;
+}
+
+.fade-enter:not(.Dashboard) > * {
+  animation: simpleFade defaultAnimation reverse;
+}
+
+.fade-enter ~ .fade-exit > *,
+.fade-exit:first-child > * {
+  animation: deepFade defaultAnimation;
+}
+
+.fade-enter.fade-enter-active ~ .fade-exit {
+  animation: deepFade defaultAnimation;
+}
+
+.fade-exit-done:not(.Dashboard) > * {
+  opacity: 0;
+}

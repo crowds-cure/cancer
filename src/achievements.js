@@ -65,63 +65,147 @@ const achievements = {
   },
   day10Measurements: {
     img: day10MeasurementsBadge,
-    description: '10 measurements in a day'
+    description: '10 measurements in a day',
+    value: 10,
+    statusKey: 'maxMeasurementsInDay',
+    alertDiff: 5,
+    alertTitle: 'Keep going!',
+    alertMessage: diff => `${diff} more measurements today to earn this badge`
   },
   day25Measurements: {
     img: day25MeasurementsBadge,
-    description: '25 measurements in a day'
+    description: '25 measurements in a day',
+    value: 25,
+    statusKey: 'maxMeasurementsInDay',
+    alertDiff: 5,
+    alertTitle: 'Keep going!',
+    alertMessage: diff => `${diff} more measurements today to earn this badge`
   },
   day50Measurements: {
     img: day50MeasurementsBadge,
-    description: '50 measurements in a day'
+    description: '50 measurements in a day',
+    value: 50,
+    statusKey: 'maxMeasurementsInDay',
+    alertDiff: 5,
+    alertTitle: 'Keep going!',
+    alertMessage: diff => `${diff} more measurements today to earn this badge`
   },
   day75Measurements: {
     img: day75MeasurementsBadge,
-    description: '75 measurements in a day'
+    description: '75 measurements in a day',
+    value: 75,
+    statusKey: 'maxMeasurementsInDay',
+    alertDiff: 5,
+    alertTitle: 'Keep going!',
+    alertMessage: diff => `${diff} more measurements today to earn this badge`
   },
   day100Measurements: {
     img: day100MeasurementsBadge,
-    description: '100 measurements in a day'
+    description: '100 measurements in a day',
+    value: 100,
+    statusKey: 'maxMeasurementsInDay',
+    alertDiff: 10,
+    alertTitle: 'Keep going!',
+    alertMessage: diff => `${diff} more measurements today to earn this badge`
   },
   day200Measurements: {
     img: day200MeasurementsBadge,
-    description: '200 measurements in a day'
+    description: '200 measurements in a day',
+    value: 200,
+    statusKey: 'maxMeasurementsInDay',
+    alertDiff: 25,
+    alertTitle: 'Keep going!',
+    alertMessage: diff => `${diff} more measurements today to earn this badge`
   },
   sessionMeasurements25: {
     img: sessionMeasurements25Badge,
-    description: '25 measurements in a session'
+    description: '25 measurements in a session',
+    value: 25,
+    statusKey: 'maxMeasurementsInSession',
+    alertDiff: 5,
+    alertTitle: 'Keep going!',
+    alertMessage: diff =>
+      `${diff} more measurements in this session to earn this badge`
   },
   sessionMeasurements50: {
     img: sessionMeasurements50Badge,
-    description: '50 measurements in a session'
+    description: '50 measurements in a session',
+    value: 50,
+    statusKey: 'maxMeasurementsInSession',
+    alertDiff: 5,
+    alertTitle: 'Keep going!',
+    alertMessage: diff =>
+      `${diff} more measurements in this session to earn this badge`
   },
   sessionMeasurements75: {
     img: sessionMeasurements75Badge,
-    description: '75 measurements in a session'
+    description: '75 measurements in a session',
+    value: 75,
+    statusKey: 'maxMeasurementsInSession',
+    alertDiff: 5,
+    alertTitle: 'Keep going!',
+    alertMessage: diff =>
+      `${diff} more measurements in this session to earn this badge`
   },
   sessionMeasurements100: {
     img: sessionMeasurements100Badge,
-    description: '100 measurements in a session'
+    description: '100 measurements in a session',
+    value: 100,
+    statusKey: 'maxMeasurementsInSession',
+    alertDiff: 10,
+    alertTitle: 'Keep going!',
+    alertMessage: diff =>
+      `${diff} more measurements in this session to earn this badge`
   },
   sessionMeasurements200: {
     img: sessionMeasurements200Badge,
-    description: '200 measurements in a session'
+    description: '200 measurements in a session',
+    value: 200,
+    statusKey: 'maxMeasurementsInSession',
+    alertDiff: 25,
+    alertTitle: 'Keep going!',
+    alertMessage: diff =>
+      `${diff} more measurements in this session to earn this badge`
   },
   weekMeasurements50: {
     img: weekMeasurements50Badge,
-    description: '50 measurements in a week'
+    description: '50 measurements in a week',
+    value: 50,
+    statusKey: 'maxMeasurementsInWeek',
+    alertDiff: 5,
+    alertTitle: 'Keep going!',
+    alertMessage: diff =>
+      `${diff} more measurements this week to earn this badge`
   },
   weekMeasurements100: {
     img: weekMeasurements100Badge,
-    description: '100 measurements in a week'
+    description: '100 measurements in a week',
+    value: 100,
+    statusKey: 'maxMeasurementsInWeek',
+    alertDiff: 10,
+    alertTitle: 'Keep going!',
+    alertMessage: diff =>
+      `${diff} more measurements this week to earn this badge`
   },
   weekMeasurements250: {
     img: weekMeasurements250Badge,
-    description: '250 measurements in a week'
+    description: '250 measurements in a week',
+    value: 250,
+    statusKey: 'maxMeasurementsInWeek',
+    alertDiff: 25,
+    alertTitle: 'Keep going!',
+    alertMessage: diff =>
+      `${diff} more measurements this week to earn this badge`
   },
   weekMeasurements500: {
     img: weekMeasurements500Badge,
-    description: '500 measurements in a week'
+    description: '500 measurements in a week',
+    value: 500,
+    statusKey: 'maxMeasurementsInWeek',
+    alertDiff: 50,
+    alertTitle: 'Keep going!',
+    alertMessage: diff =>
+      `${diff} more measurements this week to earn this badge`
   },
   timeSession15: {
     img: timeSession15Badge,
@@ -137,7 +221,7 @@ const achievements = {
   },
   timeSession90: {
     img: timeSession90Badge,
-    description: '30 minute active session'
+    description: '90 minute active session'
   },
   timeSessionWeek90m: {
     img: timeSession90mBadge,

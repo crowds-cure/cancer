@@ -5,7 +5,7 @@ import classnames from 'classnames';
 import { Types as NotificationTypes } from './NotificationManager';
 import NotificationPopup from './NotificationPopup';
 import NotificationBox from './NotificationBox';
-import waitForAnimation from '../../shared/waitForAnimation';
+import waitForAnimation from '../shared/waitForAnimation';
 
 class Notification extends React.Component {
   static propTypes = {

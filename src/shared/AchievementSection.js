@@ -9,6 +9,7 @@ import { achievements } from '../achievements.js';
 import './AchievementSection.css';
 import '../shared/Modal.css';
 import getAchievementsForUser from './getAchievementsForUser';
+import NotificationService from '../notifications/NotificationService';
 
 const modalDialogStyles = {
   content: {
@@ -39,6 +40,7 @@ class AchievementSection extends Component {
       this.setState({
         achievements
       });
+      NotificationService.updateAchievements(achievementKeys, true);
     });
   }
 
@@ -52,11 +54,11 @@ class AchievementSection extends Component {
 
   renderSingleBadges(badges) {
     const viewAll = (
-      <div
-        className="col-4 col-xs-16 viewAll"
-        onClick={this.toggleModal}
-      >
-        <span>View <br className="d-xs-none" />all</span>
+      <div className="col-4 col-xs-16 viewAll" onClick={this.toggleModal}>
+        <span>
+          View <br className="d-xs-none" />
+          all
+        </span>
         <span className="d-none d-xs-inline"> badges</span>
       </div>
     );
@@ -99,12 +101,16 @@ class AchievementSection extends Component {
     const badges = this.getAchievementsBadges(recentAchievements);
 
     return (
-      <div className={`d-flex no-gutters badgesContent badges-${badges.length}`}>
+      <div
+        className={`d-flex no-gutters badgesContent badges-${badges.length}`}
+      >
         {badges.length > 4 ? (
           <div className="col-md d-none d-md-block">
             {this.getSingleBadge(badges[4])}
           </div>
-        ) : ''}
+        ) : (
+          ''
+        )}
         {badges.length > 3 ? (
           <>
             <div className="col-xs-5 col-md d-none d-xs-block">
@@ -125,12 +131,16 @@ class AchievementSection extends Component {
                   <div className="col-xs-5 d-none d-md-none d-xs-block">
                     <div className="moreBadges">+{badges.length - 4}</div>
                   </div>
-                ) : ''}
+                ) : (
+                  ''
+                )}
                 {badges.length > 5 ? (
                   <div className="col-md-5 d-none d-md-block">
                     <div className="moreBadges">+{badges.length - 5}</div>
                   </div>
-                ) : ''}
+                ) : (
+                  ''
+                )}
                 <div className="col-3 d-xs-none viewAll">
                   <span>
                     View
@@ -144,7 +154,9 @@ class AchievementSection extends Component {
               </div>
             </div>
           </>
-        ) : this.renderSingleBadges(badges)}
+        ) : (
+          this.renderSingleBadges(badges)
+        )}
       </div>
     );
   }
