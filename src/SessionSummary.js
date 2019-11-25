@@ -11,7 +11,6 @@ import Logo from './shared/Logo';
 import AchievementBadge from './shared/AchievementBadge.js';
 import NotificationService from './notifications/NotificationService';
 
-import { achievements } from './achievements.js';
 import animateNumber from './shared/animateNumber';
 
 class SessionSummary extends Component {
