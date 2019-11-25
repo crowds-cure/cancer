@@ -29,6 +29,7 @@ import LoadingIndicator from '../shared/LoadingIndicator.js';
 import './Viewer.css';
 
 import NotificationContainer from '../notifications/NotificationContainer';
+import NotificationService from '../notifications/NotificationService.js';
 
 const EVENT_KEYDOWN = 'keydown';
 
@@ -110,6 +111,8 @@ class Viewer extends Component {
     if (this.state.labelSelectTreeOrigin && !this.state.hasMeasurements) {
       this.setState({ labelSelectTreeOrigin: null });
     }
+
+    NotificationService.setCaseMeasurements(this.state.toolData.length);
   }
 
   onNewImage() {

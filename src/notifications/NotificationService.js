@@ -1,11 +1,13 @@
 import { achievements as achievementsDetails } from "../achievements";
 import { BADGE_TYPES as rankBadgesDetails } from "../badges";
+import { caseNotifications as caseNotificationsDetails } from "../caseNotifications";
 import NotificationManager from "./NotificationManager";
 
 class NotificationService {
 
   constructor() {
-    this.totalMeasurements = 0;
+    this.totalMeasurements = NaN;
+    this.caseMeasurements = 0;
     this.achievements = [];
     this.achievementStatus = {};
     this.alerted = new Set();
@@ -23,6 +25,14 @@ class NotificationService {
         this.earned.add(details);
       }
     });
+
+    Object.keys(caseNotificationsDetails).forEach(key => {
+      const details = caseNotificationsDetails[key];
+      if (totalMeasurements >= details.min) {
+        this.alerted.add(details);
+        this.earned.add(details);
+      }
+    });
   }
 
   setAchievements(achievements) {
@@ -35,6 +45,12 @@ class NotificationService {
     });
   }
 
+  setCaseMeasurements(caseMeasurements) {
+    this.caseMeasurements = caseMeasurements;
+
+    this.processCaseAlerts();
+  }
+
   update(totalMeasurements, achievementStatus, achievements) {
     this.totalMeasurements = totalMeasurements;
     this.achievementStatus = achievementStatus;
@@ -42,6 +58,27 @@ class NotificationService {
 
     this.processAlerts();
     this.processEarnedBadges();
+  }
+
+  processCaseAlerts() {
+    const currentValue = this.totalMeasurements + this.caseMeasurements;
+    if (isNaN(currentValue)) {
+      return;
+    }
+
+    let wait = 0;
+    Object.keys(caseNotificationsDetails).forEach(key => {
+      const details = caseNotificationsDetails[key];
+      if (this.alerted.has(details) || currentValue < details.min) {
+        return;
+      }
+
+      const { img, alertTitle, alertMessage } = details;
+      const opt = { wait, timeout: 7000 };
+      NotificationManager.toast(alertTitle, alertMessage, img, opt);
+      this.alerted.add(details);
+      wait += 750;
+    });
   }
 
   processAlerts() {
