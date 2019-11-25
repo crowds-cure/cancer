@@ -198,7 +198,7 @@ class CaseProgress extends Component {
         <ul>
           <li>
             <p>
-              Detailed results will be posted after RSNA. Visit{' '}
+              Detailed results will be posted after RSNA. Visit The{' '}
               <a
                 target="_blank"
                 rel="noopener noreferrer"

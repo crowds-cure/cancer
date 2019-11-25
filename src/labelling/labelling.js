@@ -72,11 +72,7 @@ class Labelling extends Component {
       <CSSTransition
         in={this.state.displayComponent}
         appear={true}
-        timeout={{
-          appear: 500,
-          enter: 500,
-          exit: 3000
-        }}
+        timeout={500}
         classNames="labelling"
         onExited={() => {
           this.props.labellingDoneCallback();
