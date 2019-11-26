@@ -20,7 +20,6 @@ import saveSkipToDatabase from './lib/saveSkipToDatabase.js';
 import saveAchievementsToDatabase from './lib/saveAchievementsToDatabase.js';
 
 import * as cornerstone from 'cornerstone-core';
-import * as cornerstoneWADOImageLoader from 'cornerstone-wado-image-loader';
 import * as cornerstoneTools from 'cornerstone-tools';
 
 import viewerCommands from './lib/viewerCommands.js';
@@ -30,6 +29,7 @@ import './Viewer.css';
 
 import NotificationContainer from '../notifications/NotificationContainer';
 import NotificationService from '../notifications/NotificationService.js';
+import getImageIdsForSeries from './lib/getImageIdsForSeries.js';
 
 const EVENT_KEYDOWN = 'keydown';
 
@@ -133,12 +133,9 @@ class Viewer extends Component {
       toolData: []
     });
 
-    clearOldCornerstoneCacheData();
+    clearOldCornerstoneCacheData(this.state.prefetchedCase);
 
-    function nextCaseResolver(nextCase) {
-      console.log('next case', nextCase);
-      props.fetchCaseSuccess(nextCase);
-    }
+    const username = getUsername();
 
     function nextCaseRejector(args) {
       // when there is no valid next case
@@ -147,60 +144,33 @@ class Viewer extends Component {
       props.fetchCaseFailure(args);
     }
 
-    return getNextCase(this.props.collection, getUsername())
-      .then(nextCaseResolver, nextCaseRejector)
-      .then(() => {
-        this.setState({
-          loading: false
-        });
-      });
+    const nextCaseResolver = (nextCase) => {
+      console.log('next case', nextCase);
+      props.fetchCaseSuccess(nextCase);
+      this.setState({ loading: false });
+
+      // Prefetch next case ignoring the current to prevent loading it twice
+      const caseToIgnore = nextCase.data._id;
+      getNextCase(this.props.collection, username, caseToIgnore)
+        .then(
+          prefetchedCase => this.setState({ prefetchedCase }),
+          nextCaseRejector
+        );
+    }
+
+    const { prefetchedCase } = this.state;
+    if (prefetchedCase) {
+      nextCaseResolver(prefetchedCase);
+      return Promise.resolve(prefetchedCase);
+    }
+
+    return getNextCase(this.props.collection, username)
+      .then(nextCaseResolver, nextCaseRejector);
   }
 
   getViewportData() {
     const seriesData = this.props.caseData.seriesData;
-    if (!seriesData || !seriesData.length) {
-      return [];
-    }
-
-    let seriesInstances = seriesData[0];
-
-    // Broken in IE?
-    if (typeof seriesInstances === 'string') {
-      seriesInstances = JSON.parse(seriesInstances);
-    }
-
-    let imageIds = seriesInstances.map(instance => {
-      // TODO: use this
-      //const numberOfFrames = instance['00280008'].Value;
-
-      instance['7FE00010'].BulkDataURI = instance[
-        '7FE00010'
-      ].BulkDataURI.replace('http://', 'https://');
-
-      const imageId =
-        'wadors:' + instance['7FE00010'].BulkDataURI + '/frames/1';
-
-      const instanceLowerCaseKeys = {};
-      Object.keys(instance).forEach(key => {
-        instanceLowerCaseKeys[key.toLowerCase()] = instance[key];
-      });
-
-      cornerstoneWADOImageLoader.wadors.metaDataManager.add(
-        imageId,
-        instanceLowerCaseKeys
-      );
-
-      return imageId;
-    });
-
-    imageIds = imageIds.sort((a, b) => {
-      const instanceA = cornerstone.metaData.get('instance', a);
-      const instanceB = cornerstone.metaData.get('instance', b);
-      const instanceNumberA = instanceA['00200013'].Value[0];
-      const instanceNumberB = instanceB['00200013'].Value[0];
-
-      return instanceNumberA - instanceNumberB;
-    });
+    const imageIds = getImageIdsForSeries(seriesData);
 
     return [
       {
@@ -243,6 +213,7 @@ class Viewer extends Component {
               labelDoneCallback={this.labelDoneCallback}
               onNewImage={this.onNewImage}
               setCurrentLesion={this.setCurrentLesion}
+              prefetchedCase={this.state.prefetchedCase}
             />
           ) : (
             <LoadingIndicator />
