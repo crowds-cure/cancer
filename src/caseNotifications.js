@@ -1,3 +1,5 @@
+import notificationOnFire from './images/general/notification-on-fire.svg';
+
 const caseNotifications = {
   noMeasurements: {
     min: 0,
@@ -10,6 +12,7 @@ const caseNotifications = {
     alertMessage: 'Label the lesion to add more value to the data'
   },
   NUM_CASES_ROOKIE: {
+    img: notificationOnFire,
     min: 35,
     alertDiff: 0,
     alertTitle: 'You’re on fire!',
