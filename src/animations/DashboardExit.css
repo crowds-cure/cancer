@@ -1,0 +1,110 @@
+@value globals: "../GlobalStyles.css";
+@value uiBlack from globals;
+
+@value defaultTiming: ease-out;
+@value dashboardAnimation: 1s defaultTiming;
+
+@keyframes dashboardTopNavExit {
+  0% {
+    opacity: 1;
+  }
+  35%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes dashboardCasesExit {
+  0%,
+  13% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  51% {
+    opacity: 0;
+  }
+  58%,
+  100% {
+    opacity: 0;
+    transform: translateY(400px);
+  }
+}
+
+@keyframes dashboardCommunityExit {
+  0%,
+  20% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  57% {
+    opacity: 0;
+  }
+  66%,
+  100% {
+    opacity: 0;
+    transform: translateY(50%);
+  }
+}
+
+@keyframes dashboardBadgesExit {
+  0%,
+  28% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  64% {
+    opacity: 0;
+  }
+  72%,
+  100% {
+    opacity: 0;
+    transform: translateY(50%);
+  }
+}
+
+@keyframes dashboardScoreExit {
+  0%,
+  35% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  72% {
+    opacity: 0;
+  }
+  80%,
+  100% {
+    opacity: 0;
+    transform: translateY(50%);
+  }
+}
+
+.fade-exit.fade-exit-active.Dashboard .simpleHeader {
+  animation: dashboardTopNavExit dashboardAnimation;
+}
+
+.fade-exit.fade-exit-active.Dashboard .CaseTypeSection {
+  animation: dashboardCasesExit dashboardAnimation;
+}
+
+.fade-exit.fade-exit-active.Dashboard .ActivityProgressSection {
+  animation: dashboardScoreExit dashboardAnimation;
+}
+
+.fade-exit.fade-exit-active.Dashboard .AchievementSection {
+  animation: dashboardBadgesExit dashboardAnimation;
+}
+
+.fade-exit.fade-exit-active.Dashboard .StatisticsSection {
+  animation: dashboardCommunityExit dashboardAnimation;
+}
+
+
+/* Dashboard states */
+.fade-enter:not(.fade-enter-active).Dashboard .CaseTypeSection {
+  opacity: 0;
+  transform: translateY(400px);
+}
+
+.fade-enter:not(.fade-enter-active).Dashboard .simpleHeader {
+  opacity: 0;
+}

@@ -1,0 +1,96 @@
+@value globals: "../GlobalStyles.css";
+@value uiBlack from globals;
+
+@value defaultTiming: ease-out;
+@value dashboardAnimation: 1s defaultTiming 1s;
+
+@keyframes dashboardTopNavEnter {
+  0%,
+  40% {
+    opacity: 0;
+  }
+  82%,
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes dashboardCasesEnter {
+  0%,
+  55% {
+    opacity: 0;
+    transform: translateY(400px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes dashboardCommunityEnter {
+  0%,
+  40% {
+    opacity: 0;
+    transform: translateY(50%);
+  }
+  82%,
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes dashboardBadgesEnter {
+  0%,
+  16% {
+    opacity: 0;
+    transform: translateY(50%);
+  }
+  60%,
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes dashboardScoreEnter {
+  0% {
+    opacity: 0;
+    transform: translateY(50%);
+  }
+  43%, 100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-enter.fade-enter-active.Dashboard .simpleHeader {
+  animation: dashboardTopNavEnter dashboardAnimation;
+}
+
+.fade-enter.fade-enter-active.Dashboard .CaseTypeSection {
+  animation: dashboardCasesEnter dashboardAnimation;
+}
+
+.fade-enter.fade-enter-active.Dashboard .ActivityProgressSection {
+  animation: dashboardScoreEnter dashboardAnimation;
+}
+
+.fade-enter.fade-enter-active.Dashboard .AchievementSection {
+  animation: dashboardBadgesEnter dashboardAnimation;
+}
+
+.fade-enter.fade-enter-active.Dashboard .StatisticsSection {
+  animation: dashboardCommunityEnter dashboardAnimation;
+}
+
+
+/* Dashboard states */
+.fade-enter:not(.fade-enter-active).Dashboard .CaseTypeSection {
+  opacity: 0;
+  transform: translateY(400px);
+}
+
+.fade-enter:not(.fade-enter-active).Dashboard .simpleHeader {
+  opacity: 0;
+}

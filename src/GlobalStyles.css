@@ -74,6 +74,10 @@
 @value gutter: 12.5px;
 @value negativeGutter: -12.5px;
 
+body {
+  background-color: primaryBackgroundColor;
+}
+
 .noselect {
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */
