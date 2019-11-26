@@ -578,11 +578,18 @@ class CornerstoneViewport extends Component {
       this.setState({ bidirectionalAddLabelShow: false });
     }
 
-    const { magnificationActive } = this.props;
-    const magnificationChanged = magnificationActive !== prevProps.magnificationActive;
+    const { magnificationActive, toolData } = this.props;
+    const magnificationChanged =
+      magnificationActive !== prevProps.magnificationActive;
+    const prevLength = (prevProps.toolData && prevProps.toolData.length) || 0;
+    const currentLength = (toolData && toolData.length) || 0;
+    const measurementWasDeleted = prevLength > currentLength;
     const focusState = this.props.currentLesionFocused;
     const previousFocusState = prevProps.currentLesionFocused;
-    const shallFocus = focusState && previousFocusState !== focusState;
+    const shallFocus = (
+      (focusState && previousFocusState !== focusState) ||
+      (currentLesionChanged && !measurementWasDeleted)
+    );
 
     if (magnificationChanged) {
       if (magnificationActive) {
