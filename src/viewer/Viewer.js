@@ -82,7 +82,10 @@ class Viewer extends Component {
   componentDidMount() {
     document.body.addEventListener(EVENT_KEYDOWN, this.onKeyDown);
 
-    this.getNextCase();
+    // there is no stand alone viewer. Flow comes from dashboard to viewer.
+    if (this.props.collection) {
+      this.getNextCase();
+    }
 
     // We need to prevent scrolling / elastic banding
     // of the viewer page by the browser
@@ -154,19 +157,18 @@ class Viewer extends Component {
       props.fetchCaseFailure(args);
     }
 
-    const nextCaseResolver = (nextCase) => {
+    const nextCaseResolver = nextCase => {
       console.log('next case', nextCase);
       props.fetchCaseSuccess(nextCase);
       this.setState({ loading: false });
 
       // Prefetch next case ignoring the current to prevent loading it twice
       const caseToIgnore = nextCase.data._id;
-      getNextCase(this.props.collection, username, caseToIgnore)
-        .then(
-          prefetchedCase => this.setState({ prefetchedCase }),
-          nextCaseRejector
-        );
-    }
+      getNextCase(this.props.collection, username, caseToIgnore).then(
+        prefetchedCase => this.setState({ prefetchedCase }),
+        nextCaseRejector
+      );
+    };
 
     const { prefetchedCase } = this.state;
     if (prefetchedCase) {
@@ -174,8 +176,10 @@ class Viewer extends Component {
       return Promise.resolve(prefetchedCase);
     }
 
-    return getNextCase(this.props.collection, username)
-      .then(nextCaseResolver, nextCaseRejector);
+    return getNextCase(this.props.collection, username).then(
+      nextCaseResolver,
+      nextCaseRejector
+    );
   }
 
   getViewportData() {
