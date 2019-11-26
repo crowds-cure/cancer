@@ -3,7 +3,8 @@ import { withRouter, matchPath } from 'react-router';
 import { Route, BrowserRouter as Router } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group';
 import './App.css';
-import './AppPageAnimations.css';
+import './animations/DashboardExit.css';
+import './animations/DashboardEnter.css';
 import './grid-16.css';
 
 import Auth from './openid-connect/Auth.js';
