@@ -101,12 +101,6 @@ async function getAchievementStatusForUser() {
     'by/annotatorWeek',
     username
   );
-
-  const maxMeasurementsInSession = await getValueWithOneGroupLevelForUser(
-    sessionsDB,
-    'by/usernameMaxCases',
-    username
-  );
   const maxSessionDurationInMin = await getValueWithOneGroupLevelForUser(
     sessionsDB,
     'by/usernameMaxSessionDurationInMin',
@@ -131,7 +125,6 @@ async function getAchievementStatusForUser() {
   return {
     maxMeasurementsInDay, // Max number of total measurements in a day
     maxMeasurementsInWeek, // Max number of total measurements in a week
-    maxMeasurementsInSession, // Max number of total measurements in a session
     maxSessionDurationInMin, // Max session duration in minutes all time
     totalSessionDurationInMinInWeek, // Total session duration in minutes in a week
     topIndivNumberInRSNA18Day, // Top Leaderboard Individual Number in a day of RSNA 2018
@@ -182,23 +175,6 @@ async function determineAchievementsForUser(totalCompleteCollection, totalMeasur
   }
   if (achievementStatus.maxMeasurementsInWeek >= 500) {
     achievements.push('weekMeasurements500');
-  }
-
-  // Productivity Badges - Session
-  if (achievementStatus.maxMeasurementsInSession >= 25) {
-    achievements.push('sessionMeasurements25');
-  }
-  if (achievementStatus.maxMeasurementsInSession >= 50) {
-    achievements.push('sessionMeasurements50');
-  }
-  if (achievementStatus.maxMeasurementsInSession >= 75) {
-    achievements.push('sessionMeasurements75');
-  }
-  if (achievementStatus.maxMeasurementsInSession >= 100) {
-    achievements.push('sessionMeasurements100');
-  }
-  if (achievementStatus.maxMeasurementsInSession >= 200) {
-    achievements.push('sessionMeasurements200');
   }
 
   // Persistence Badges - Session
