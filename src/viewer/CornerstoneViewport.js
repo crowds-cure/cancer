@@ -52,16 +52,28 @@ class CornerstoneViewport extends Component {
 
     const stack = props.viewportData.stack;
 
+    // Get the number of cached images
+    const { cachedImages } = cornerstone.imageCache;
+    let numImagesLoaded = 0;
+    const cachedImageIds = new Set(cachedImages.map(cache => cache.imageId));
+    stack.imageIds.forEach(imageId => {
+      if (cachedImageIds.has(imageId)) {
+        numImagesLoaded++;
+      }
+    });
+
+    const isLoading = numImagesLoaded / stack.imageIds.length < 0.1;
+
     // TODO: Allow viewport as a prop
     this.state = {
       stack,
       imageId: stack.imageIds[0],
       viewportHeight: '100%',
-      isLoading: true,
+      isLoading,
       imageScrollbarValue: 0,
-      numImagesLoaded: 0,
+      numImagesLoaded,
       previousViewport: null,
-      prefetchImages: false
+      prefetchImages: !isLoading
     };
 
     this.displayScrollbar = stack.imageIds.length > 1;
@@ -72,6 +84,7 @@ class CornerstoneViewport extends Component {
     this.onNewImage = this.onNewImage.bind(this);
     this.onWindowResize = this.onWindowResize.bind(this);
     this.onImageLoaded = this.onImageLoaded.bind(this);
+    this.startPrefetching = this.startPrefetching.bind(this);
     this.onStackScroll = this.onStackScroll.bind(this);
     this.startLoadingHandler = this.startLoadingHandler.bind(this);
     this.doneLoadingHandler = this.doneLoadingHandler.bind(this);
@@ -286,6 +299,11 @@ class CornerstoneViewport extends Component {
       this.onImageLoaded
     );
 
+    cornerstone.events.addEventListener(
+      cornerstone.EVENTS.IMAGE_LOAD_FAILED,
+      this.onImageLoaded
+    );
+
     // Load the first image in the stack
     cornerstone.loadAndCacheImage(this.state.imageId).then(image => {
       try {
@@ -480,11 +498,17 @@ class CornerstoneViewport extends Component {
       cornerstone.EVENTS.IMAGE_LOADED,
       this.onImageLoaded
     );
+
+    cornerstone.events.removeEventListener(
+      cornerstone.EVENTS.IMAGE_LOAD_FAILED,
+      this.onImageLoaded
+    );
   }
 
   componentDidUpdate(prevProps) {
     if (prevProps.prefetchedCase !== this.props.prefetchedCase) {
       this.setState({ prefetchImages: true });
+      this.startPrefetching();
     }
 
     // TODO: Add a real object shallow comparison here?
@@ -761,33 +785,40 @@ class CornerstoneViewport extends Component {
     this.hideExtraButtons();
   }
 
-  onImageLoaded(event) {
+  startPrefetching() {
+    if (!this.state.prefetchImages) {
+      return;
+    }
+
+    const { numImagesLoaded } = this.state;
+    const { viewportData } = this.props;
+    const total = viewportData.stack.imageIds.length;
+    if (numImagesLoaded !== total) {
+      return;
+    }
+
+    this.setState({ prefetchImages: false });
+    const { seriesData } = this.props.prefetchedCase;
+    const imageIdsToPrefetch = getImageIdsForSeries(seriesData);
+    const loadNext = () => {
+      if (!imageIdsToPrefetch.length || this.stopPrefetching) {
+        return;
+      }
+
+      const imageId = imageIdsToPrefetch.shift();
+      cornerstone.loadAndCacheImage(imageId).then(loadNext, loadNext);
+    }
+
+    if (this.props.viewportData === viewportData) {
+      loadNext();
+    }
+  }
+
+  onImageLoaded() {
     const { numImagesLoaded } = this.state;
     const newValue = numImagesLoaded + 1;
     this.setState({ numImagesLoaded: newValue });
-
-    const { viewportData } = this.props;
-    const total = viewportData.stack.imageIds.length;
-    if (newValue === total) {
-      if (this.state.prefetchImages) {
-        this.setState({ prefetchImages: false });
-        const { seriesData } = this.props.prefetchedCase;
-        const imageIdsToPrefetch = getImageIdsForSeries(seriesData);
-        const loadNext = () => {
-          if (!imageIdsToPrefetch.length || this.stopPrefetching) {
-            return;
-          }
-
-          const imageId = imageIdsToPrefetch.shift();
-          console.warn('>>>> PREFETCHING IMAGE', imageId);
-          cornerstone.loadAndCacheImage(imageId).then(loadNext, loadNext);
-        }
-
-        if (this.props.viewportData === viewportData) {
-          loadNext();
-        }
-      }
-    }
+    this.startPrefetching();
   }
 
   startLoadingHandler() {

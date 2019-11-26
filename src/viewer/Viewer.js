@@ -133,9 +133,7 @@ class Viewer extends Component {
       toolData: []
     });
 
-    window.viewer = this; // TODO: [prefecth] REMOVE
-    // TODO: [prefecth] Clear the cache of all images except the prefetched ones
-    // clearOldCornerstoneCacheData();
+    clearOldCornerstoneCacheData(this.state.prefetchedCase);
 
     const username = getUsername();
 
@@ -149,6 +147,7 @@ class Viewer extends Component {
     const nextCaseResolver = (nextCase) => {
       console.log('next case', nextCase);
       props.fetchCaseSuccess(nextCase);
+      this.setState({ loading: false });
 
       const caseToIgnore = nextCase.data._id;
       getNextCase(this.props.collection, username, caseToIgnore)
@@ -160,14 +159,12 @@ class Viewer extends Component {
 
     const { prefetchedCase } = this.state;
     if (prefetchedCase) {
-      this.setState({ loading: false });
       nextCaseResolver(prefetchedCase);
       return Promise.resolve(prefetchedCase);
     }
 
     return getNextCase(this.props.collection, username)
-      .then(nextCaseResolver, nextCaseRejector)
-      .then(() => this.setState({ loading: false }));
+      .then(nextCaseResolver, nextCaseRejector);
   }
 
   getViewportData() {
