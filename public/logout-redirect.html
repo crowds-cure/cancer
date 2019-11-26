@@ -7,13 +7,13 @@
 <body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.7/es5-shim.min.js"></script>
     <script type="text/javascript" src='es6-shim.min.js'></script>
-    <script type="text/javascript" src='oidc-client.min.js'></script>
+    <script type="text/javascript" src='oidc-client.slim.min.js'></script>
     <script type="text/javascript" src='polyfill.min.js'></script>
     <script type="text/javascript">
-      new UserManager().signoutRedirectCallback().then(function() {
-        // TODO: Keycloak + Auth0 is not properly logging out both sessions?
-        // This is a hacky hardcoded workaround. This could also be added as a component to the React application rather than a static page.
-        var path = 'https://www.crowds-cure.org';
+      new Oidc.UserManager().signoutRedirectCallback().then(function() {
+        // AWS Cognito does not support back-channel logout, so we are
+        // forced to do this
+        var path = 'https://crowds-cure.org';
         var client_id = '3i081bm30gmq4lssdv18pj8pqr';
         var url = 'https://authz.crowds-cure.org/logout?client_id=' + client_id + '&logout_uri=' + path;
 

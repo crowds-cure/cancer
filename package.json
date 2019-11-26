@@ -20,7 +20,7 @@
     "lint-staged": "^8.0.4",
     "lodash.clonedeep": "^4.5.0",
     "lodash.orderby": "^4.5.0",
-    "oidc-client": "^1.5.4",
+    "oidc-client": "^1.9.1",
     "pouchdb-browser": "^7.0.0",
     "pouchdb-find": "^7.0.0",
     "prettier": "^1.14.3",
