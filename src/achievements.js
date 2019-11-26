@@ -12,11 +12,6 @@ import rsna18Group1Badge from './images/achievements/rsna18-group-1.svg';
 import rsna18Group2Badge from './images/achievements/rsna18-group-2.svg';
 import rsna18Group3Badge from './images/achievements/rsna18-group-3.svg';
 import rsna18TopBadge from './images/achievements/rsna18-top.svg';
-import sessionMeasurements100Badge from './images/achievements/session-measurements-100.svg';
-import sessionMeasurements200Badge from './images/achievements/session-measurements-200.svg';
-import sessionMeasurements25Badge from './images/achievements/session-measurements-25.svg';
-import sessionMeasurements50Badge from './images/achievements/session-measurements-50.svg';
-import sessionMeasurements75Badge from './images/achievements/session-measurements-75.svg';
 import timeSession15Badge from './images/achievements/time-session-15.svg';
 import timeSession30Badge from './images/achievements/time-session-30.svg';
 import timeSession3hBadge from './images/achievements/time-session-3h.svg';
@@ -116,51 +111,6 @@ const achievements = {
     alertDiff: 25,
     alertTitle: 'Keep going!',
     alertMessage: diff => `${diff} more measurements today to earn this badge`
-  },
-  sessionMeasurements25: {
-    img: sessionMeasurements25Badge,
-    description: '25 measurements in a session',
-    min: 25,
-    statusKey: 'maxMeasurementsInSession',
-    alertDiff: 5,
-    alertTitle: 'Keep going!',
-    alertMessage: diff => `${diff} more measurements in this session to earn this badge`
-  },
-  sessionMeasurements50: {
-    img: sessionMeasurements50Badge,
-    description: '50 measurements in a session',
-    min: 50,
-    statusKey: 'maxMeasurementsInSession',
-    alertDiff: 5,
-    alertTitle: 'Keep going!',
-    alertMessage: diff => `${diff} more measurements in this session to earn this badge`
-  },
-  sessionMeasurements75: {
-    img: sessionMeasurements75Badge,
-    description: '75 measurements in a session',
-    min: 75,
-    statusKey: 'maxMeasurementsInSession',
-    alertDiff: 5,
-    alertTitle: 'Keep going!',
-    alertMessage: diff => `${diff} more measurements in this session to earn this badge`
-  },
-  sessionMeasurements100: {
-    img: sessionMeasurements100Badge,
-    description: '100 measurements in a session',
-    min: 100,
-    statusKey: 'maxMeasurementsInSession',
-    alertDiff: 10,
-    alertTitle: 'Keep going!',
-    alertMessage: diff => `${diff} more measurements in this session to earn this badge`
-  },
-  sessionMeasurements200: {
-    img: sessionMeasurements200Badge,
-    description: '200 measurements in a session',
-    min: 200,
-    statusKey: 'maxMeasurementsInSession',
-    alertDiff: 25,
-    alertTitle: 'Keep going!',
-    alertMessage: diff => `${diff} more measurements in this session to earn this badge`
   },
   weekMeasurements50: {
     img: weekMeasurements50Badge,

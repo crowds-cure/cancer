@@ -35,7 +35,10 @@ class AchievementSection extends Component {
 
     getAchievementsForUser().then(achievementKeys => {
       achievementKeys.forEach(achievementKey => {
-        achievements[achievementKey].completed = true;
+        const achievement = achievements[achievementKey];
+        if (achievement) {
+          achievements[achievementKey].completed = true;
+        }
       });
       this.setState({
         achievements
