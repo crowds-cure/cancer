@@ -913,7 +913,7 @@ CornerstoneViewport.propTypes = {
   activeTool: PropTypes.string.isRequired,
   viewportData: PropTypes.object.isRequired,
   labelSelectTreeOrigin: PropTypes.object,
-  displayLabelSelectTree: PropTypes.boolean,
+  displayLabelSelectTree: PropTypes.bool,
   labelDoneCallback: PropTypes.func,
   currentLesionFocused: PropTypes.bool,
   magnificationActive: PropTypes.bool,

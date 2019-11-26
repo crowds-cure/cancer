@@ -543,7 +543,8 @@ Viewer.propTypes = {
   caseData: PropTypes.object.isRequired,
   isFetching: PropTypes.bool.isRequired,
   activeTool: PropTypes.string.isRequired,
-  measurementsInCurrentSession: PropTypes.number.isRequired
+  measurementsInCurrentSession: PropTypes.number.isRequired,
+  displayLabelSelectTree: PropTypes.bool
 };
 
 export default Viewer;
