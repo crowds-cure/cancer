@@ -27,13 +27,9 @@ import LoadingIndicator from '../shared/LoadingIndicator.js';
 
 import './Viewer.css';
 
-<<<<<<< HEAD
 import NotificationContainer from '../notifications/NotificationContainer';
 import NotificationService from '../notifications/NotificationService.js';
-=======
-import NotificationContainer from './notifications/NotificationContainer';
 import getImageIdsForSeries from './lib/getImageIdsForSeries.js';
->>>>>>> Initial implementation for next case prefetching
 
 const EVENT_KEYDOWN = 'keydown';
 
