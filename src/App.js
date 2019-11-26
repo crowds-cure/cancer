@@ -3,8 +3,11 @@ import { withRouter, matchPath } from 'react-router';
 import { Route, BrowserRouter as Router } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group';
 import './App.css';
-import './animations/DashboardExit.css';
+import './animations/AnimationsCommon.css';
 import './animations/DashboardEnter.css';
+import './animations/DashboardExit.css';
+import './animations/ViewerEnter.css';
+import './animations/ViewerExit.css';
 import './grid-16.css';
 
 import Auth from './openid-connect/Auth.js';
@@ -32,9 +35,9 @@ function setRollbarContext(context) {
 
 const routes = [
   // can combine paths into array once react-router-dom is at least v4.4.x (or v5.0.0 as per distributor)
+  { path: '/viewer', name: 'viewer', Component: ConnectedViewer },
   { path: '/', name: 'home', Component: ConnectedDashboard },
   { path: '/dashboard', name: 'dashboard', Component: ConnectedDashboard },
-  { path: '/viewer', name: 'viewer', Component: ConnectedViewer },
   {
     path: '/session-summary',
     name: 'summary',

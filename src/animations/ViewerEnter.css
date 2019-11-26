@@ -1,0 +1,63 @@
+@value globals: "../GlobalStyles.css";
+@value screen-xs, screen-sm from globals;
+
+@value defaultTiming: ease-out;
+@value viewerAnimation: 1s defaultTiming 1s;
+
+@keyframes viewerViewportEnter {
+  0% {
+    opacity: 0;
+  }
+  32%,
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes viewerToolsEnter {
+  0% {
+    opacity: 0;
+    transform: translateY(-90px);
+  }
+  32%,
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes viewerSessionControlEnter {
+  0%,
+  22% {
+    opacity: 0;
+    transform: translateY(-80%);
+  }
+  54%,
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-enter.fade-enter-active.Viewer .Logo,
+.fade-enter.fade-enter-active.Viewer .ViewportControl {
+  animation: viewerToolsEnter viewerAnimation;
+  opacity: 0;
+  transform: translateY(-90px);
+}
+
+@media (min-width: screen-sm) {
+  .fade-enter.fade-enter-active.Viewer .SessionControl {
+    animation: viewerSessionControlEnter viewerAnimation;
+    opacity: 0;
+    transform: translateY(-80%);
+  }
+}
+
+@media (min-width: screen-xs) {
+  .fade-enter.fade-enter-active.Viewer .viewport-section,
+  .fade-enter.fade-enter-active.Viewer .LoadingIndicator {
+    animation: viewerViewportEnter viewerAnimation;
+    opacity: 0;
+  }
+}

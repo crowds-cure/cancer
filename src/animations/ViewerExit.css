@@ -1,0 +1,72 @@
+@value globals: "../GlobalStyles.css";
+@value primaryBackgroundColor, uiBlack from globals;
+@value screen-xs, screen-sm from globals;
+
+@value defaultTiming: ease-out;
+@value viewerAnimation: 1s defaultTiming;
+
+@keyframes viewerBackgroundExit {
+  0% {
+    background-color: uiBlack;
+  }
+  100% {
+    background-color: primaryBackgroundColor;
+  }
+}
+
+@keyframes viewerViewportExit {
+  0% {
+    opacity: 1;
+  }
+  32%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes viewerToolsExit {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  32%,
+  100% {
+    opacity: 0;
+    transform: translateY(-90px);
+  }
+}
+
+@keyframes viewerSessionControlExit {
+  0%,
+  8% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  40%,
+  100% {
+    opacity: 0;
+    transform: translateY(-80%);
+  }
+}
+
+.fade-exit.fade-exit-active.Viewer {
+  animation: viewerBackgroundExit viewerAnimation;
+}
+
+.fade-exit.fade-exit-active.Viewer .Logo,
+.fade-exit.fade-exit-active.Viewer .ViewportControl {
+  animation: viewerToolsExit viewerAnimation;
+}
+
+@media (min-width: screen-sm) {
+  .fade-exit.fade-exit-active.Viewer .SessionControl {
+    animation: viewerSessionControlExit viewerAnimation;
+  }
+}
+
+@media (min-width: screen-xs) {
+  .fade-exit.fade-exit-active.Viewer .viewport-section,
+  .fade-exit.fade-exit-active.Viewer .LoadingIndicator {
+    animation: viewerViewportExit viewerAnimation;
+  }
+}

@@ -3,6 +3,7 @@
 @value screen-min, screen-xs-max, screen-sm-max from globals;
 
 .Viewer {
+  background-color: uiBlack;
   height: 100%;
   width: 100%;
 }
