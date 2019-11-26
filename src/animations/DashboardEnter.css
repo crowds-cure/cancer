@@ -1,6 +1,3 @@
-@value globals: "../GlobalStyles.css";
-@value uiBlack from globals;
-
 @value defaultTiming: ease-out;
 @value dashboardAnimation: 1s defaultTiming 1s;
 
@@ -66,31 +63,29 @@
 
 .fade-enter.fade-enter-active.Dashboard .simpleHeader {
   animation: dashboardTopNavEnter dashboardAnimation;
+  opacity: 0;
 }
 
 .fade-enter.fade-enter-active.Dashboard .CaseTypeSection {
   animation: dashboardCasesEnter dashboardAnimation;
-}
-
-.fade-enter.fade-enter-active.Dashboard .ActivityProgressSection {
-  animation: dashboardScoreEnter dashboardAnimation;
-}
-
-.fade-enter.fade-enter-active.Dashboard .AchievementSection {
-  animation: dashboardBadgesEnter dashboardAnimation;
-}
-
-.fade-enter.fade-enter-active.Dashboard .StatisticsSection {
-  animation: dashboardCommunityEnter dashboardAnimation;
-}
-
-
-/* Dashboard states */
-.fade-enter:not(.fade-enter-active).Dashboard .CaseTypeSection {
   opacity: 0;
   transform: translateY(400px);
 }
 
-.fade-enter:not(.fade-enter-active).Dashboard .simpleHeader {
+.fade-enter.fade-enter-active.Dashboard .ActivityProgressSection {
+  animation: dashboardScoreEnter dashboardAnimation;
   opacity: 0;
+  transform: translateY(50%);
+}
+
+.fade-enter.fade-enter-active.Dashboard .AchievementSection {
+  animation: dashboardBadgesEnter dashboardAnimation;
+  opacity: 0;
+  transform: translateY(50%);
+}
+
+.fade-enter.fade-enter-active.Dashboard .StatisticsSection {
+  animation: dashboardCommunityEnter dashboardAnimation;
+  opacity: 0;
+  transform: translateY(50%);
 }

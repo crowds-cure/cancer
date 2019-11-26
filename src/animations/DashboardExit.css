@@ -1,5 +1,5 @@
 @value globals: "../GlobalStyles.css";
-@value uiBlack from globals;
+@value primaryBackgroundColor, uiBlack from globals;
 
 @value defaultTiming: ease-out;
 @value dashboardAnimation: 1s defaultTiming;
@@ -78,6 +78,15 @@
   }
 }
 
+@keyframes dashboardToViewerBackground {
+  0% {
+    background-color: primaryBackgroundColor;
+  }
+  100% {
+    background-color: uiBlack;
+  }
+}
+
 .fade-exit.fade-exit-active.Dashboard .simpleHeader {
   animation: dashboardTopNavExit dashboardAnimation;
 }
@@ -98,13 +107,6 @@
   animation: dashboardCommunityExit dashboardAnimation;
 }
 
-
-/* Dashboard states */
-.fade-enter:not(.fade-enter-active).Dashboard .CaseTypeSection {
-  opacity: 0;
-  transform: translateY(400px);
-}
-
-.fade-enter:not(.fade-enter-active).Dashboard .simpleHeader {
-  opacity: 0;
+.fade-enter.Viewer ~ .fade-exit.fade-exit-active.Dashboard {
+  animation: dashboardToViewerBackground dashboardAnimation;
 }
