@@ -149,6 +149,7 @@ class Viewer extends Component {
       props.fetchCaseSuccess(nextCase);
       this.setState({ loading: false });
 
+      // Prefetch next case ignoring the current to prevent loading it twice
       const caseToIgnore = nextCase.data._id;
       getNextCase(this.props.collection, username, caseToIgnore)
         .then(

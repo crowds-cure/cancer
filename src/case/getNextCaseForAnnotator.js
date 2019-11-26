@@ -1,10 +1,16 @@
 import { getDB } from '../db.js';
 import getAvailableCases from './getAvailableCases';
 
-//
-// Returns the status the measurement documents for the user for a collection
-// (only return datasets that have been skipped less than skipThreshold)
-//
+/**
+ * Returns the status the measurement documents for the user for a collection
+ * (only return datasets that have been skipped less than skipThreshold)
+ * `caseToIgnore` is used by prefetching in order to prevent the viewer from
+ * loading the same case twice
+ * 
+ * @param {*} collection Cases collection
+ * @param {*} annotatorID ID of the annotator
+ * @param {*} caseToIgnore Case to be ignored
+ */
 async function annotatorCollectionMeasurements(collection, annotatorID, caseToIgnore) {
   // get all available cases for this collection
   const availableCasesPromise = getAvailableCases(collection);
