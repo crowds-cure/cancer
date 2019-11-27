@@ -10,6 +10,15 @@ import cloneDeep from 'lodash.clonedeep';
 
 import './labelling.css';
 
+const getComponentStyle = eventData => {
+  const componentStyle = {};
+  if (eventData && eventData.currentPoints) {
+    componentStyle.left = eventData.currentPoints.canvas.x + 50;
+    componentStyle.top = eventData.currentPoints.canvas.y;
+  }
+
+  return componentStyle;
+};
 class Labelling extends Component {
   static defaultProps = {
     measurementData: {},
@@ -22,11 +31,7 @@ class Labelling extends Component {
     super(props);
     const { measurementData, eventData } = props;
 
-    const componentStyle = {};
-    if (eventData && eventData.currentPoints) {
-      componentStyle.left = eventData.currentPoints.canvas.x + 50;
-      componentStyle.top = eventData.currentPoints.canvas.y;
-    }
+    const componentStyle = getComponentStyle(eventData);
 
     this.state = {
       displayComponent: true,
@@ -147,6 +152,18 @@ class Labelling extends Component {
   };
 
   componentDidUpdate = () => {
+    const { eventData } = this.props;
+
+    const componentStyle = getComponentStyle(eventData);
+    if (
+      componentStyle.left !== this.state.componentStyle.left ||
+      componentStyle.top !== this.state.componentStyle.top
+    ) {
+      this.setState({
+        componentStyle
+      });
+    }
+
     this.positioningOverlay();
   };
 
@@ -157,6 +174,7 @@ class Labelling extends Component {
       offsetHeight,
       offsetLeft
     } = this.mainElement.current;
+
     const componentStyle = cloneDeep(this.state.componentStyle);
 
     if (!offsetParent) {
