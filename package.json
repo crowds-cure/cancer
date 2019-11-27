@@ -38,6 +38,7 @@
     "react-transition-group": "^2.5.0",
     "redux": "^4.0.1",
     "rollbar": "^2.5.0",
+    "underscore": "^1.9.1",
     "whatwg-fetch": "^3.0.0"
   },
   "husky": {
