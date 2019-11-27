@@ -48,6 +48,9 @@ class NotificationService {
   setCaseMeasurements(caseMeasurements) {
     this.caseMeasurements = caseMeasurements;
 
+    const rankBadgeAlert = this.getRankBadgeAlert();
+    const alerts = rankBadgeAlert ? [rankBadgeAlert] : [];
+    this.processAlerts(alerts);
     this.processCaseAlerts();
   }
 
@@ -56,7 +59,7 @@ class NotificationService {
     this.achievementStatus = achievementStatus;
     this.achievements = Array.from(achievements);
 
-    this.processAlerts();
+    this.processAlerts(this.getAchievementAlerts());
     this.processEarnedBadges();
   }
 
@@ -81,14 +84,7 @@ class NotificationService {
     });
   }
 
-  processAlerts() {
-    const rankBadgeAlert = this.getRankBadgeAlert();
-    const achievementAlerts = this.getAchievementAlerts();
-    const alerts = Array.from(achievementAlerts);
-    if (rankBadgeAlert) {
-      alerts.unshift(rankBadgeAlert);
-    }
-
+  processAlerts(alerts) {
     let wait = 0;
     alerts.forEach(details => {
       if (this.alerted.has(details)) {
@@ -96,8 +92,10 @@ class NotificationService {
       }
 
       const { img, min, alertTitle, alertMessage } = details;
-      let current = this.totalMeasurements;
-      if (!details.type) {
+      let current;
+      if (details.type) {
+        current = this.totalMeasurements + this.caseMeasurements;
+      } else {
         current = this.achievementStatus[details.statusKey];
       }
 
@@ -163,7 +161,7 @@ class NotificationService {
       }
 
       const { min, alertDiff } = details;
-      const current = this.totalMeasurements;
+      const current = this.totalMeasurements + this.caseMeasurements;
       if (current >= min - alertDiff && current < min) {
         badgeToAlert = details;
         return false;

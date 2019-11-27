@@ -3,8 +3,8 @@
 
 .NotificationContainer {
   position: fixed;
-  right: 366px;
-  top: 38px;
+  right: 400px;
+  top: 45px;
   width: 330px;
   z-index: 150;
 }
