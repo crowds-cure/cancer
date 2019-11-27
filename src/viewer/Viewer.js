@@ -82,7 +82,10 @@ class Viewer extends Component {
   componentDidMount() {
     document.body.addEventListener(EVENT_KEYDOWN, this.onKeyDown);
 
-    this.getNextCase();
+    // there is no stand alone viewer. Flow comes from dashboard to viewer.
+    if (this.props.collection) {
+      this.getNextCase();
+    }
 
     // We need to prevent scrolling / elastic banding
     // of the viewer page by the browser
