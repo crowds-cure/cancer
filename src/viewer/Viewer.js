@@ -154,19 +154,18 @@ class Viewer extends Component {
       props.fetchCaseFailure(args);
     }
 
-    const nextCaseResolver = (nextCase) => {
+    const nextCaseResolver = nextCase => {
       console.log('next case', nextCase);
       props.fetchCaseSuccess(nextCase);
       this.setState({ loading: false });
 
       // Prefetch next case ignoring the current to prevent loading it twice
       const caseToIgnore = nextCase.data._id;
-      getNextCase(this.props.collection, username, caseToIgnore)
-        .then(
-          prefetchedCase => this.setState({ prefetchedCase }),
-          nextCaseRejector
-        );
-    }
+      getNextCase(this.props.collection, username, caseToIgnore).then(
+        prefetchedCase => this.setState({ prefetchedCase }),
+        nextCaseRejector
+      );
+    };
 
     const { prefetchedCase } = this.state;
     if (prefetchedCase) {
@@ -174,8 +173,10 @@ class Viewer extends Component {
       return Promise.resolve(prefetchedCase);
     }
 
-    return getNextCase(this.props.collection, username)
-      .then(nextCaseResolver, nextCaseRejector);
+    return getNextCase(this.props.collection, username).then(
+      nextCaseResolver,
+      nextCaseRejector
+    );
   }
 
   getViewportData() {
@@ -378,6 +379,7 @@ class Viewer extends Component {
   measurementsAddedOrRemoved(action, imageId, toolType, measurementData) {
     let updatedToolData = this.state.toolData;
     let currentLesion = this.state.currentLesion;
+    let currentLesionFocused;
 
     if (action === 'added') {
       updatedToolData.push({
@@ -386,12 +388,16 @@ class Viewer extends Component {
         ...measurementData
       });
 
+      currentLesionFocused = true;
+
       currentLesion = updatedToolData.length;
     } else {
       const index = updatedToolData.findIndex(
         data => data._id === measurementData._id
       );
       updatedToolData.splice(index, 1);
+
+      currentLesionFocused = false;
     }
 
     const hasMeasurements = this.state.toolData.length > 0;
@@ -407,7 +413,8 @@ class Viewer extends Component {
     this.setState({
       hasMeasurements,
       toolData: updatedToolData,
-      currentLesion
+      currentLesion,
+      currentLesionFocused
     });
   }
 

@@ -155,7 +155,7 @@ class CornerstoneViewport extends Component {
             height={this.state.viewportHeight}
           />
         )}
-        {(this.state.bidirectionalAddLabelShow) && (
+        {this.state.bidirectionalAddLabelShow && (
           <Labelling
             measurementData={this.bidirectional.measurementData}
             eventData={this.bidirectional.eventData}
@@ -236,7 +236,7 @@ class CornerstoneViewport extends Component {
         const boundingRect = originElement.getBoundingClientRect();
         eventData.currentPoints.canvas = {
           x: boundingRect.left - 50,
-          y: -20,
+          y: -20
         };
       } else {
         const { end } = measurementData.handles;
@@ -348,7 +348,7 @@ class CornerstoneViewport extends Component {
             getMeasurementLocationCallback: this
               .bidirectionalToolLabellingCallback,
             shadow: true,
-            drawHandlesOnHover: true,
+            drawHandlesOnHover: true
             // Uncomment to activate magnifying glass for bidirecitonal tool
             // touchMagnifySize: Math.floor(element.clientWidth / 2),
             // touchMagnificationLevel: 1
@@ -585,24 +585,23 @@ class CornerstoneViewport extends Component {
     }
 
     const { magnificationActive } = this.props;
-    const magnificationChanged = magnificationActive !== prevProps.magnificationActive;
-    const focusState = this.props.currentLesionFocused;
-    const previousFocusState = prevProps.currentLesionFocused
-    const shallFocus = (
-      (focusState && previousFocusState !== focusState) ||
-      currentLesionChanged
-    );
+    const magnificationChanged =
+      magnificationActive !== prevProps.magnificationActive;
+
+    const shallFocus = this.props.currentLesionFocused;
 
     if (magnificationChanged) {
       if (magnificationActive) {
         const currentViewport = cornerstone.getViewport(this.element);
-        this.setState({ previousViewport: {
-          scale: currentViewport.scale,
-          translation: {
-            x: currentViewport.translation.x,
-            y: currentViewport.translation.y
+        this.setState({
+          previousViewport: {
+            scale: currentViewport.scale,
+            translation: {
+              x: currentViewport.translation.x,
+              y: currentViewport.translation.y
+            }
           }
-        } });
+        });
 
         this.toggleMagnification(true);
         this.focusCurrentLesion();
@@ -631,7 +630,10 @@ class CornerstoneViewport extends Component {
 
       this.setState(newState);
     } else {
-      if (previousViewport && previousViewport.scale !== currentViewport.scale) {
+      if (
+        previousViewport &&
+        previousViewport.scale !== currentViewport.scale
+      ) {
         const newViewport = Object.assign(currentViewport, previousViewport);
         cornerstone.setViewport(element, newViewport);
       } else {
@@ -813,7 +815,7 @@ class CornerstoneViewport extends Component {
 
       const imageId = imageIdsToPrefetch.shift();
       cornerstone.loadAndCacheImage(imageId).then(loadNext, loadNext);
-    }
+    };
 
     if (this.props.viewportData === viewportData) {
       loadNext();
