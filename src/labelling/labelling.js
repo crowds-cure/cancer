@@ -51,6 +51,8 @@ class Labelling extends Component {
     let selectTreeTitle = '';
     let treeItems = {};
 
+    const { displayComponent } = this.state;
+
     if (!showAddLabel) {
       if (this.state.editLocation) {
         treeItems = labelItems;
@@ -70,12 +72,17 @@ class Labelling extends Component {
 
     return (
       <CSSTransition
-        in={this.state.displayComponent}
+        in={displayComponent}
         appear={true}
         timeout={500}
         classNames="labelling"
         onExited={() => {
           this.props.labellingDoneCallback();
+        }}
+        onEntered={() => {
+          if (displayComponent) {
+            this.fadeOutAndLeave();
+          }
         }}
       >
         <div
@@ -189,12 +196,13 @@ class Labelling extends Component {
   };
 
   fadeOutAndLeave = () => {
+    console.log('set timer');
     // Wait for 1 sec to dismiss the labelling component
     this.fadeOutTimer = setTimeout(() => {
       this.setState({
         displayComponent: false
       });
-    }, 1000);
+    }, 3000);
   };
 
   fadeOutAndLeaveFast = () => {
