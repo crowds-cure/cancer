@@ -4,12 +4,6 @@ import PropTypes from 'prop-types';
 import './Logo.css';
 
 class Logo extends Component {
-  constructor(props) {
-    super(props);
-
-    this.onClick = this.onClick.bind(this);
-  }
-
   static contextTypes = {
     router: PropTypes.shape({
       history: PropTypes.shape({
@@ -29,9 +23,9 @@ class Logo extends Component {
     );
   }
 
-  onClick() {
+  onClick = () => {
     this.context.router.history.push('/');
-  }
+  };
 }
 
 export default Logo;

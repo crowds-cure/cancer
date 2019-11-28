@@ -41,15 +41,13 @@ class ProgressSection extends Component {
       rank: initialRank,
       showRanksModal: false
     };
-
-    this.toggleModal = this.toggleModal.bind(this);
   }
 
-  toggleModal(e) {
+  toggleModal = e => {
     e.preventDefault();
     this.setState({ showRanksModal: !this.state.showRanksModal });
     ReactTooltip.hide();
-  }
+  };
 
   getAllRankBadges(current) {
     const badges = Object.keys(BADGE_TYPES).map(type => {

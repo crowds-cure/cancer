@@ -25,8 +25,6 @@ class SessionSummary extends Component {
     };
 
     this.sessionTotalRef = React.createRef();
-
-    this.handleClickDashboard = this.handleClickDashboard.bind(this);
   }
 
   getBadgeBox(key, img, description, progressValue) {

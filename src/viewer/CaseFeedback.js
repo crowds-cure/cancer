@@ -6,18 +6,17 @@ import './CaseFeedback.css';
 import Checkbox from '../shared/Checkbox.js';
 
 class CaseFeedback extends Component {
-  constructor(props) {
-    super(props);
+  static propTypes = {
+    label: PropTypes.any.isRequired,
+    skipEnabled: PropTypes.bool.isRequired,
+    skipCase: PropTypes.func.isRequired,
+    feedbackChanged: PropTypes.func.isRequired,
+    feedbackSelected: PropTypes.array.isRequired
+  };
 
-    this.state = {
-      isOpen: false
-    };
-
-    this.updateSelectedOptions = this.updateSelectedOptions.bind(this);
-    this.openDropdown = this.openDropdown.bind(this);
-    this.skipCase = this.skipCase.bind(this);
-    this.closeDropdown = this.closeDropdown.bind(this);
-  }
+  state = {
+    isOpen: false
+  };
 
   static defaultProps = {
     label: 'Feedback'
@@ -123,7 +122,7 @@ class CaseFeedback extends Component {
     );
   }
 
-  updateSelectedOptions(event) {
+  updateSelectedOptions = event => {
     const option = event.target.id;
     const selected = new Set(this.props.feedbackSelected);
 
@@ -134,32 +133,24 @@ class CaseFeedback extends Component {
     }
 
     this.props.feedbackChanged(Array.from(selected));
-  }
+  };
 
-  openDropdown() {
+  openDropdown = () => {
     this.setState({
       isOpen: !this.state.isOpen
     });
-  }
+  };
 
-  closeDropdown() {
+  closeDropdown = () => {
     this.setState({
       isOpen: false
     });
-  }
+  };
 
-  skipCase() {
+  skipCase = () => {
     this.closeDropdown();
     this.props.skipCase();
-  }
+  };
 }
-
-CaseFeedback.propTypes = {
-  label: PropTypes.any.isRequired,
-  skipEnabled: PropTypes.bool.isRequired,
-  skipCase: PropTypes.func.isRequired,
-  feedbackChanged: PropTypes.func.isRequired,
-  feedbackSelected: PropTypes.array.isRequired
-};
 
 export default CaseFeedback;

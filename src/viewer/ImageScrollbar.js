@@ -4,11 +4,10 @@ import './ImageScrollbar.css';
 import PropTypes from 'prop-types';
 
 class ImageScrollbar extends Component {
-  constructor(props) {
-    super(props);
-
-    this.onChange = this.onChange.bind(this);
-  }
+  static propTypes = {
+    value: PropTypes.number.isRequired,
+    onInputCallback: PropTypes.func.isRequired
+  };
 
   render() {
     this.style = {
@@ -33,15 +32,10 @@ class ImageScrollbar extends Component {
     );
   }
 
-  onChange(event) {
+  onChange = event => {
     const intValue = parseInt(event.target.value, 10);
     this.props.onInputCallback(intValue);
-  }
+  };
 }
-
-ImageScrollbar.propTypes = {
-  value: PropTypes.number.isRequired,
-  onInputCallback: PropTypes.func.isRequired
-};
 
 export default ImageScrollbar;

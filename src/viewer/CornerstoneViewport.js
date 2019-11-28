@@ -52,6 +52,19 @@ function initializeTools(tools) {
 const scrollToIndex = cornerstoneTools.import('util/scrollToIndex');
 
 class CornerstoneViewport extends Component {
+  static propTypes = {
+    measurementsAddedOrRemoved: PropTypes.func.isRequired,
+    measurementsChanged: PropTypes.func.isRequired,
+    activeTool: PropTypes.string.isRequired,
+    viewportData: PropTypes.object.isRequired,
+    labelSelectTreeOrigin: PropTypes.object,
+    displayLabelSelectTree: PropTypes.boolean,
+    labelDoneCallback: PropTypes.func,
+    currentLesionFocused: PropTypes.bool,
+    magnificationActive: PropTypes.bool,
+    setCurrentLesion: PropTypes.func
+  };
+
   constructor(props) {
     super(props);
 
@@ -86,31 +99,6 @@ class CornerstoneViewport extends Component {
 
     this.state.viewportVoi = defaultViewport.voi;
     this.state.roundedViewportScale = roundScale(defaultViewport.scale);
-
-    this.updateLabelHandler = this.updateLabelHandler.bind(this);
-    this.onImageRendered = this.onImageRendered.bind(this);
-    this.onNewImage = this.onNewImage.bind(this);
-    this.onWindowResize = this.onWindowResize.bind(this);
-    this.onImageLoaded = this.onImageLoaded.bind(this);
-    this.startPrefetching = this.startPrefetching.bind(this);
-    this.onStackScroll = this.onStackScroll.bind(this);
-    this.startLoadingHandler = this.startLoadingHandler.bind(this);
-    this.doneLoadingHandler = this.doneLoadingHandler.bind(this);
-    this.onMouseClick = this.onMouseClick.bind(this);
-    this.focusLesion = this.focusLesion.bind(this);
-    this.onTouchPress = this.onTouchPress.bind(this);
-    this.focusCurrentLesion = this.focusCurrentLesion.bind(this);
-    this.toggleMagnification = this.toggleMagnification.bind(this);
-    this.getZoomedLesionViewport = this.getZoomedLesionViewport.bind(this);
-    this.updateScrollbarValue = this.updateScrollbarValue.bind(this);
-    this.onMeasurementAddedOrRemoved = this.onMeasurementAddedOrRemoved.bind(
-      this
-    );
-    this.onMeasurementModified = this.onMeasurementModified.bind(this);
-    this.onCloseToolContextMenu = this.onCloseToolContextMenu.bind(this);
-    this.imageSliderOnInputCallback = this.imageSliderOnInputCallback.bind(
-      this
-    );
 
     this.loadHandlerTimeout = 25;
     loadHandlerManager.setStartLoadHandler(this.startLoadingHandler);
@@ -201,7 +189,7 @@ class CornerstoneViewport extends Component {
     });
   };
 
-  activateMeasurement(currentToolData) {
+  activateMeasurement = currentToolData => {
     const { globalImageIdSpecificToolStateManager } = cornerstoneTools;
     let measurementData = currentToolData;
     const toolState = globalImageIdSpecificToolStateManager.saveToolState();
@@ -222,9 +210,9 @@ class CornerstoneViewport extends Component {
     globalImageIdSpecificToolStateManager.restoreToolState(toolState);
 
     return measurementData;
-  }
+  };
 
-  updateLabelHandler(originElement) {
+  updateLabelHandler = originElement => {
     const { currentLesion, toolData, displayLabelSelectTree } = this.props;
     let index = currentLesion >= 0 ? currentLesion - 1 : toolData.length - 1;
     const currentToolData = toolData[index];
@@ -268,19 +256,19 @@ class CornerstoneViewport extends Component {
       this.hideExtraButtons();
       this.setState({ bidirectionalAddLabelShow: true });
     }
-  }
+  };
 
-  onContextMenu(event) {
+  onContextMenu = event => {
     // Preventing the default behaviour for right-click is essential to
     // allow right-click tools to work.
     event.preventDefault();
-  }
+  };
 
-  onWindowResize() {
+  onWindowResize = () => {
     this.debouncedResize();
-  }
+  };
 
-  onImageRendered(event) {
+  onImageRendered = event => {
     const currentViewport = cornerstone.getViewport(this.element);
     const { viewportVoi, roundedViewportScale } = this.state;
     const nextScale = roundScale(currentViewport.scale);
@@ -295,9 +283,9 @@ class CornerstoneViewport extends Component {
         roundedViewportScale: nextScale
       });
     }
-  }
+  };
 
-  onNewImage() {
+  onNewImage = () => {
     const image = cornerstone.getImage(this.element);
 
     this.setState({
@@ -309,7 +297,7 @@ class CornerstoneViewport extends Component {
     if (this.props.onNewImage) {
       this.props.onNewImage();
     }
-  }
+  };
 
   componentDidMount() {
     const element = this.element;
@@ -631,7 +619,7 @@ class CornerstoneViewport extends Component {
     }
   }
 
-  toggleMagnification(magnificationActive) {
+  toggleMagnification = magnificationActive => {
     const { element } = this;
     const currentViewport = cornerstone.getViewport(element);
     let newState = {};
@@ -668,9 +656,9 @@ class CornerstoneViewport extends Component {
       newState.previousViewport = null;
       this.setState(newState);
     }
-  }
+  };
 
-  getZoomedLesionViewport() {
+  getZoomedLesionViewport = () => {
     const { toolData, currentLesion } = this.props;
     const measurementData = toolData[currentLesion - 1];
     const { element } = this;
@@ -711,9 +699,9 @@ class CornerstoneViewport extends Component {
     viewport.translation.y = imageMidY - annotationMidY;
 
     return viewport;
-  }
+  };
 
-  focusCurrentLesion() {
+  focusCurrentLesion = () => {
     const { element } = this;
     const { toolData, currentLesion } = this.props;
     const currentToolData = toolData[currentLesion - 1];
@@ -750,7 +738,7 @@ class CornerstoneViewport extends Component {
     } else {
       cornerstone.updateImage(element);
     }
-  }
+  };
 
   setActiveTool = activeTool => {
     const leftMouseTools = ['Bidirectional', 'Wwwc', 'StackScroll'];
@@ -779,7 +767,7 @@ class CornerstoneViewport extends Component {
     });
   };
 
-  onStackScroll(event) {
+  onStackScroll = event => {
     const element = event.currentTarget;
     const stackData = cornerstoneTools.getToolState(element, 'stack');
     const stack = stackData.data[0];
@@ -790,9 +778,9 @@ class CornerstoneViewport extends Component {
       stack,
       imageScrollbarValue: stack.currentImageIdIndex
     });
-  }
+  };
 
-  updateScrollbarValue() {
+  updateScrollbarValue = () => {
     const { element } = this;
     const stackData = cornerstoneTools.getToolState(element, 'stack');
     const stack = stackData.data[0];
@@ -809,7 +797,7 @@ class CornerstoneViewport extends Component {
     });
 
     this.hideExtraButtons();
-  }
+  };
 
   startPrefetching() {
     if (!this.state.prefetchImages) {
@@ -840,14 +828,14 @@ class CornerstoneViewport extends Component {
     }
   }
 
-  onImageLoaded() {
+  onImageLoaded = () => {
     const { numImagesLoaded } = this.state;
     const newValue = numImagesLoaded + 1;
     this.setState({ numImagesLoaded: newValue });
     this.startPrefetching();
-  }
+  };
 
-  startLoadingHandler() {
+  startLoadingHandler = () => {
     //console.log('startLoadingHandler');
     clearTimeout(this.loadHandlerTimeout);
     this.loadHandlerTimeout = setTimeout(() => {
@@ -855,16 +843,16 @@ class CornerstoneViewport extends Component {
         isLoading: true
       });
     }, loadIndicatorDelay);
-  }
+  };
 
-  doneLoadingHandler() {
+  doneLoadingHandler = () => {
     clearTimeout(this.loadHandlerTimeout);
     this.setState({
       isLoading: false
     });
-  }
+  };
 
-  onMeasurementAddedOrRemoved(event) {
+  onMeasurementAddedOrRemoved = event => {
     const { toolType, measurementData } = event.detail;
 
     // TODO: Pass in as prop?
@@ -894,9 +882,9 @@ class CornerstoneViewport extends Component {
         measurementData
       );
     }
-  }
+  };
 
-  onMeasurementModified(event) {
+  onMeasurementModified = event => {
     const { toolData } = this.props;
     const { measurementData } = event.detail;
     if (!measurementData || measurementData.toolType !== 'Bidirectional') {
@@ -913,9 +901,9 @@ class CornerstoneViewport extends Component {
     if (measurementData.location) {
       this.hideExtraButtons();
     }
-  }
+  };
 
-  onMouseClick(event) {
+  onMouseClick = event => {
     const { which } = event.detail.event;
     if (which === 1) {
       this.focusLesion(event);
@@ -927,9 +915,9 @@ class CornerstoneViewport extends Component {
         }
       });
     }
-  }
+  };
 
-  focusLesion(event) {
+  focusLesion = event => {
     const { element } = this;
     const filter = tool => tool.name === 'Bidirectional';
     const toolInterface = cornerstoneTools.store.state.tools.find(filter);
@@ -943,24 +931,24 @@ class CornerstoneViewport extends Component {
 
       return true;
     });
-  }
+  };
 
-  onTouchPress(event) {
+  onTouchPress = event => {
     this.setState({
       toolContextMenuData: {
         eventData: event.detail,
         isTouchEvent: true
       }
     });
-  }
+  };
 
-  onCloseToolContextMenu() {
+  onCloseToolContextMenu = () => {
     this.setState({
       toolContextMenuData: null
     });
-  }
+  };
 
-  imageSliderOnInputCallback(value) {
+  imageSliderOnInputCallback = value => {
     this.setState({
       imageScrollbarValue: value
     });
@@ -971,7 +959,7 @@ class CornerstoneViewport extends Component {
     //this.slideTimeout = setTimeout(() => {
     scrollToIndex(this.element, value);
     //}, this.slideTimeoutTime);
-  }
+  };
 
   hideExtraButtons = () => {
     if (this.state.bidirectionalAddLabelShow === true) {
@@ -984,18 +972,5 @@ class CornerstoneViewport extends Component {
     });
   };
 }
-
-CornerstoneViewport.propTypes = {
-  measurementsAddedOrRemoved: PropTypes.func.isRequired,
-  measurementsChanged: PropTypes.func.isRequired,
-  activeTool: PropTypes.string.isRequired,
-  viewportData: PropTypes.object.isRequired,
-  labelSelectTreeOrigin: PropTypes.object,
-  displayLabelSelectTree: PropTypes.boolean,
-  labelDoneCallback: PropTypes.func,
-  currentLesionFocused: PropTypes.bool,
-  magnificationActive: PropTypes.bool,
-  setCurrentLesion: PropTypes.func
-};
 
 export default CornerstoneViewport;

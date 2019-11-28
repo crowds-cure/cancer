@@ -40,15 +40,6 @@ export default class Auth {
 
     this.oidcUserManager = new Oidc.UserManager(settings);
 
-    this.getProfile = this.getProfile.bind(this);
-    this.handleAuthentication = this.handleAuthentication.bind(this);
-    this.isAuthenticated = this.isAuthenticated.bind(this);
-    this.login = this.login.bind(this);
-    this.logout = this.logout.bind(this);
-    this.setSession = this.setSession.bind(this);
-    this.handleSilentRenewError = this.handleSilentRenewError.bind(this);
-    this.handleUserLoaded = this.handleUserLoaded.bind(this);
-
     this.oidcUserManager.events.addSilentRenewError(
       this.handleSilentRenewError
     );
@@ -92,15 +83,15 @@ export default class Auth {
     return new URL(relativeUrl, window.location.href).href;
   }
 
-  handleSilentRenewError(error) {
+  handleSilentRenewError = error => {
     if (error.error === 'login_required') {
       this.logout();
     }
-  }
+  };
 
-  getProfile() {
+  getProfile = () => {
     return this.profile;
-  }
+  };
 
   async processSignInResponse() {
     await this.oidcUserManager.signinRedirectCallback();
@@ -108,7 +99,7 @@ export default class Auth {
     Auth.removeHash();
   }
 
-  async handleAuthentication() {
+  handleAuthentication = async () => {
     if (Auth.urlHasSignInResponse() === false) {
       throw new Error('SignIn response is not present in the location.');
     }
@@ -117,26 +108,29 @@ export default class Auth {
     const authResult = await this.oidcUserManager.getUser();
 
     this.setSession(authResult);
-  }
+  };
 
-  async handleUserLoaded() {
+  handleUserLoaded = async () => {
     const authResult = await this.oidcUserManager.getUser();
 
     this.setSession(authResult);
-  }
+  };
 
-  isAuthenticated() {
+  isAuthenticated = () => {
     return new Date().getTime() < this.expiresAt;
-  }
+  };
 
-  login(args) {
+  login = args => {
     args.extraQueryParams =
       args.extraQueryParams || this.extraQueryParams || {};
     args.extraQueryParams.hash = window.location.hash;
-    return this.oidcUserManager.signinRedirect(args);
-  }
 
-  logout() {
+    debugger;
+
+    return this.oidcUserManager.signinRedirect(args);
+  };
+
+  logout = () => {
     // clear tokens and expiration
     this.idToken = null;
     this.accessToken = null;
@@ -144,9 +138,9 @@ export default class Auth {
     this.profile = null;
 
     return this.oidcUserManager.signoutRedirect();
-  }
+  };
 
-  setSession(authResult) {
+  setSession = authResult => {
     this.idToken = authResult.id_token;
     this.accessToken = authResult.access_token;
     this.profile = authResult.profile;
@@ -164,5 +158,5 @@ export default class Auth {
         }
       }
     });
-  }
+  };
 }
