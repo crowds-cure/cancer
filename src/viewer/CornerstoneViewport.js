@@ -13,6 +13,7 @@ import LoadingIndicator from '../shared/LoadingIndicator.js';
 import Labelling from '../labelling/labelling.js';
 import './CornerstoneViewport.css';
 import guid from './lib/guid.js';
+import _ from 'underscore';
 
 import cloneDeep from 'lodash.clonedeep';
 import getImageIdsForSeries from './lib/getImageIdsForSeries.js';
@@ -26,6 +27,10 @@ function setToolsPassive(tools) {
     cornerstoneTools.setToolPassive(tool);
   });
 }
+// TODO: Round the value to 2 decimals
+const roundScale = scale => {
+  return Math.round(scale * 100) / 100;
+};
 
 function initializeTools(tools) {
   Array.from(tools).forEach(tool => {
@@ -77,7 +82,10 @@ class CornerstoneViewport extends Component {
     };
 
     this.displayScrollbar = stack.imageIds.length > 1;
-    this.state.viewport = cornerstone.getDefaultViewport(null, undefined);
+    const defaultViewport = cornerstone.getDefaultViewport(null, undefined);
+
+    this.state.viewportVoi = defaultViewport.voi;
+    this.state.roundedViewportScale = roundScale(defaultViewport.scale);
 
     this.updateLabelHandler = this.updateLabelHandler.bind(this);
     this.onImageRendered = this.onImageRendered.bind(this);
@@ -141,8 +149,9 @@ class CornerstoneViewport extends Component {
           {isLoading ? <LoadingIndicator /> : ''}
           <canvas className="cornerstone-canvas" />
           <ViewportOverlay
+            viewportVoi={this.state.viewportVoi}
+            roundedViewportScale={this.state.roundedViewportScale}
             stack={this.state.stack}
-            viewport={this.state.viewport}
             imageId={this.state.imageId}
             numImagesLoaded={this.state.numImagesLoaded}
           />
@@ -271,12 +280,21 @@ class CornerstoneViewport extends Component {
     this.debouncedResize();
   }
 
-  onImageRendered() {
-    const viewport = cornerstone.getViewport(this.element);
+  onImageRendered(event) {
+    const currentViewport = cornerstone.getViewport(this.element);
+    const { viewportVoi, roundedViewportScale } = this.state;
+    const nextScale = roundScale(currentViewport.scale);
+    const nextViewportVoi = currentViewport.voi;
 
-    this.setState({
-      viewport
-    });
+    if (
+      !_.isEqual(nextScale, roundedViewportScale) ||
+      !_.isEqual(viewportVoi, nextViewportVoi)
+    ) {
+      this.setState({
+        viewportVoi: nextViewportVoi,
+        roundedViewportScale: nextScale
+      });
+    }
   }
 
   onNewImage() {
