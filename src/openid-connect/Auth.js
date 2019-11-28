@@ -125,8 +125,6 @@ export default class Auth {
       args.extraQueryParams || this.extraQueryParams || {};
     args.extraQueryParams.hash = window.location.hash;
 
-    debugger;
-
     return this.oidcUserManager.signinRedirect(args);
   };
 

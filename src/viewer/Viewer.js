@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Redirect } from 'react-router-dom';
+import { Redirect, withRouter } from 'react-router-dom';
 
 import Logo from '../shared/Logo.js';
 import CornerstoneViewport from './CornerstoneViewport.js';
@@ -507,4 +507,4 @@ class Viewer extends Component {
   };
 }
 
-export default Viewer;
+export default withRouter(Viewer);
