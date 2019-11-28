@@ -45,8 +45,6 @@ class Labelling extends Component {
     };
 
     this.mainElement = React.createRef();
-
-    this.selectTreeSelectCalback = this.selectTreeSelectCalback.bind(this);
   }
 
   render() {
@@ -105,7 +103,7 @@ class Labelling extends Component {
           {showSelectTree && (
             <SelectTree
               items={treeItems}
-              onSelected={this.selectTreeSelectCalback}
+              onSelected={this.selectTreeSelectCallback}
               selectTreeFirstTitle={selectTreeTitle}
               componentMaxHeight={this.state.componentMaxHeight}
             />
@@ -265,7 +263,7 @@ class Labelling extends Component {
     this.isTouchScreen = true;
   };
 
-  selectTreeSelectCalback = (
+  selectTreeSelectCallback = (
     event,
     levelOneItem,
     levelTwoItem,

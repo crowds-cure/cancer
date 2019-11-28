@@ -122,9 +122,6 @@ class Dashboard extends Component {
 
       NotificationService.setTotalMeasurements(userStats.current);
     });
-
-    this.onClickInfo = this.onClickInfo.bind(this);
-    this.toggleModal = this.toggleModal.bind(this);
   }
 
   render() {
@@ -189,13 +186,13 @@ class Dashboard extends Component {
     );
   }
 
-  toggleModal() {
+  toggleModal = () => {
     this.setState({
       showDetailsModal: !this.state.showDetailsModal
     });
-  }
+  };
 
-  onClickInfo(event, item) {
+  onClickInfo = (event, item) => {
     event.preventDefault();
     event.stopPropagation();
 
@@ -215,7 +212,7 @@ class Dashboard extends Component {
     );
 
     this.setState({ collectionDescription, showDetailsModal: true });
-  }
+  };
 
   logout() {
     window.auth.logout();

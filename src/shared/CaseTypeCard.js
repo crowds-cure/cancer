@@ -6,12 +6,19 @@ import PropTypes from 'prop-types';
 //import getAuthorizationHeader from '../openid-connect/getAuthorizationHeader.js';
 //import SecuredImage from './SecuredImage.js';
 
-class CaseTypeCard extends Component {
-  constructor(props) {
-    super(props);
+const placeholderUndefined = props => props.placeholder === undefined;
 
-    this.onClick = this.onClick.bind(this);
-  }
+class CaseTypeCard extends Component {
+  static propTypes = {
+    placeholder: PropTypes.number,
+    click: requiredIf(PropTypes.func, placeholderUndefined),
+    name: requiredIf(PropTypes.string, placeholderUndefined),
+    type: requiredIf(PropTypes.string, placeholderUndefined),
+    description: requiredIf(PropTypes.string, placeholderUndefined),
+    img: requiredIf(PropTypes.string, placeholderUndefined),
+    inCollection: requiredIf(PropTypes.number, placeholderUndefined),
+    byAnnotator: requiredIf(PropTypes.number, placeholderUndefined)
+  };
 
   render() {
     const { placeholder } = this.props;
@@ -86,25 +93,13 @@ class CaseTypeCard extends Component {
     );
   }
 
-  onClick() {
+  onClick = () => {
     if (this.props.inCollection === this.props.byAnnotator) {
       return;
     }
 
     this.props.click(this.props.name);
-  }
+  };
 }
-
-const condition = props => props.placeholder === undefined;
-CaseTypeCard.propTypes = {
-  placeholder: PropTypes.number,
-  click: requiredIf(PropTypes.func, condition),
-  name: requiredIf(PropTypes.string, condition),
-  type: requiredIf(PropTypes.string, condition),
-  description: requiredIf(PropTypes.string, condition),
-  img: requiredIf(PropTypes.string, condition),
-  inCollection: requiredIf(PropTypes.number, condition),
-  byAnnotator: requiredIf(PropTypes.number, condition)
-};
 
 export default CaseTypeCard;

@@ -6,12 +6,6 @@ import Notification from './Notification';
 import './NotificationContainer.css';
 
 class NotificationContainer extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.handleNotificationsUpdate = this.handleNotificationsUpdate.bind(this);
-  }
-
   state = {
     notifications: []
   };
@@ -26,9 +20,9 @@ class NotificationContainer extends React.Component {
     NotificationManager.removeListener(event, this.handleNotificationsUpdate);
   };
 
-  handleNotificationsUpdate(notifications) {
+  handleNotificationsUpdate = notifications => {
     this.setState({ notifications });
-  }
+  };
 
   handleRequestHide = notification => {
     NotificationManager.remove(notification.id);
