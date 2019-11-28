@@ -6,11 +6,14 @@ import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 class CaseTypeSection extends Component {
-  constructor(props) {
-    super(props);
+  static contextTypes = {
+    store: PropTypes.object.isRequired
+  };
 
-    this.onClick = this.onClick.bind(this);
-  }
+  static propTypes = {
+    isLoading: PropTypes.bool.isRequired,
+    types: PropTypes.array.isRequired
+  };
 
   render() {
     const { isLoading, types } = this.props;
@@ -41,7 +44,7 @@ class CaseTypeSection extends Component {
     );
   }
 
-  onClick(name) {
+  onClick = name => {
     this.context.store.dispatch({
       type: 'SET_SELECTED_COLLECTION',
       collection: name
@@ -53,16 +56,7 @@ class CaseTypeSection extends Component {
     });
 
     this.props.history.push('/viewer');
-  }
+  };
 }
-
-CaseTypeSection.contextTypes = {
-  store: PropTypes.object.isRequired
-};
-
-CaseTypeSection.propTypes = {
-  isLoading: PropTypes.bool.isRequired,
-  types: PropTypes.array.isRequired
-};
 
 export default withRouter(CaseTypeSection);

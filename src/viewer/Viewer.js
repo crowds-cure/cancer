@@ -43,41 +43,26 @@ const hotkeyFunctions = {
 };
 
 class Viewer extends Component {
-  constructor(props) {
-    super(props);
+  static propTypes = {
+    collection: PropTypes.string,
+    caseData: PropTypes.object.isRequired,
+    isFetching: PropTypes.bool.isRequired,
+    activeTool: PropTypes.string.isRequired,
+    measurementsInCurrentSession: PropTypes.number.isRequired,
+    displayLabelSelectTree: PropTypes.bool
+  };
 
-    this.state = {
-      loading: true,
-      magnificationActive: false,
-      labelSelectTreeOrigin: null,
-      displayLabelSelectTree: false,
-      currentLesionFocused: false,
-      feedback: [],
-      hasMeasurements: false,
-      currentLesion: 0,
-      toolData: []
-    };
-
-    this.toggleMagnification = this.toggleMagnification.bind(this);
-    this.getNextCase = this.getNextCase.bind(this);
-    this.skipCase = this.skipCase.bind(this);
-    this.saveCase = this.saveCase.bind(this);
-    this.isSaveEnabled = this.isSaveEnabled.bind(this);
-    this.isSkipEnabled = this.isSkipEnabled.bind(this);
-    this.feedbackChanged = this.feedbackChanged.bind(this);
-    this.focusCurrentLesion = this.focusCurrentLesion.bind(this);
-    this.measurementsAddedOrRemoved = this.measurementsAddedOrRemoved.bind(
-      this
-    );
-    this.measurementsChanged = this.measurementsChanged.bind(this);
-    this.previous = this.previous.bind(this);
-    this.next = this.next.bind(this);
-    this.onKeyDown = this.onKeyDown.bind(this);
-    this.toggleLabelSelectTree = this.toggleLabelSelectTree.bind(this);
-    this.labelDoneCallback = this.labelDoneCallback.bind(this);
-    this.onNewImage = this.onNewImage.bind(this);
-    this.setCurrentLesion = this.setCurrentLesion.bind(this);
-  }
+  state = {
+    loading: true,
+    magnificationActive: false,
+    labelSelectTreeOrigin: null,
+    displayLabelSelectTree: false,
+    currentLesionFocused: false,
+    feedback: [],
+    hasMeasurements: false,
+    currentLesion: 0,
+    toolData: []
+  };
 
   componentDidMount() {
     document.body.addEventListener(EVENT_KEYDOWN, this.onKeyDown);
@@ -128,13 +113,13 @@ class Viewer extends Component {
     NotificationService.setCaseMeasurements(this.state.toolData.length);
   }
 
-  onNewImage() {
+  onNewImage = () => {
     this.setState({
       currentLesionFocused: false
     });
-  }
+  };
 
-  getNextCase() {
+  getNextCase = () => {
     const props = this.props;
     console.log('asking for the next case');
     props.fetchCaseRequest();
@@ -180,7 +165,7 @@ class Viewer extends Component {
       nextCaseResolver,
       nextCaseRejector
     );
-  }
+  };
 
   getViewportData() {
     const seriesData = this.props.caseData.seriesData;
@@ -326,7 +311,7 @@ class Viewer extends Component {
     return toolData;
   }
 
-  saveCase() {
+  saveCase = () => {
     const { caseData, totalCompleteCollection } = this.props;
     const { feedback } = this.state;
 
@@ -340,14 +325,14 @@ class Viewer extends Component {
       // after measurements are saved to db
       saveAchievementsToDatabase(totalCompleteCollection);
     });
-  }
+  };
 
-  isSaveEnabled() {
+  isSaveEnabled = () => {
     // Do not allow saving unless at least one measurement exists
     return this.state.hasMeasurements === true;
-  }
+  };
 
-  skipCase() {
+  skipCase = () => {
     //const stack = cornerstoneTools.getToolState(element, "stack");
     // const sliceIndex = stack.data[0].currentImageIdIndex;
     //instanceUID: window.rsnaCrowdQuantCaseStudy.instanceUIDs[sliceIndex],
@@ -363,23 +348,23 @@ class Viewer extends Component {
       // after skips are saved to db
       saveAchievementsToDatabase(totalCompleteCollection);
     });
-  }
+  };
 
-  isSkipEnabled() {
+  isSkipEnabled = () => {
     // Do not allow skipping unless at least one feedback
     // option has been selected
     return this.state.feedback && this.state.feedback.length > 0;
-  }
+  };
 
-  feedbackChanged(feedback) {
+  feedbackChanged = feedback => {
     // The CaseFeedback component calls this callback with
     // an Array which describes which options are selected.
     this.setState({
       feedback
     });
-  }
+  };
 
-  measurementsAddedOrRemoved(action, imageId, toolType, measurementData) {
+  measurementsAddedOrRemoved = (action, imageId, toolType, measurementData) => {
     let updatedToolData = this.state.toolData;
     let currentLesion = this.state.currentLesion;
     let currentLesionFocused;
@@ -419,15 +404,15 @@ class Viewer extends Component {
       currentLesion,
       currentLesionFocused
     });
-  }
+  };
 
-  measurementsChanged() {
+  measurementsChanged = () => {
     console.log('changed');
     // TODO: Get VOI of image, in case it has changed
     // TODO: Update this.state.toolData;
-  }
+  };
 
-  previous() {
+  previous = () => {
     const { currentLesion, toolData } = this.state;
     const numberOfLesions = toolData.length;
     if (numberOfLesions === 0) {
@@ -446,9 +431,9 @@ class Viewer extends Component {
       currentLesionFocused: true,
       magnificationActive: false
     });
-  }
+  };
 
-  next() {
+  next = () => {
     const { currentLesion, toolData } = this.state;
     const numberOfLesions = toolData.length;
     if (numberOfLesions === 0) {
@@ -467,9 +452,9 @@ class Viewer extends Component {
       currentLesionFocused: true,
       magnificationActive: false
     });
-  }
+  };
 
-  onKeyDown(event) {
+  onKeyDown = event => {
     const hotkeyFn = hotkeyFunctions[event.key];
     if (hotkeyFn) {
       hotkeyFn();
@@ -481,24 +466,24 @@ class Viewer extends Component {
       // and stop event from bubbling
       return false;
     }
-  }
+  };
 
-  setCurrentLesion(currentLesion) {
+  setCurrentLesion = currentLesion => {
     this.setState({ currentLesion });
-  }
+  };
 
-  focusCurrentLesion() {
+  focusCurrentLesion = () => {
     this.setState({
       currentLesionFocused: true
     });
-  }
+  };
 
-  toggleMagnification() {
+  toggleMagnification = () => {
     const magnificationActive = !this.state.magnificationActive;
     this.setState({ magnificationActive });
-  }
+  };
 
-  toggleLabelSelectTree(event) {
+  toggleLabelSelectTree = event => {
     const {
       hasMeasurements,
       displayLabelSelectTree: _displayLabelSelectTree
@@ -512,23 +497,14 @@ class Viewer extends Component {
         displayLabelSelectTree
       });
     }
-  }
+  };
 
-  labelDoneCallback() {
+  labelDoneCallback = () => {
     this.setState({
       labelSelectTreeOrigin: null,
       displayLabelSelectTree: false
     });
-  }
+  };
 }
-
-Viewer.propTypes = {
-  collection: PropTypes.string,
-  caseData: PropTypes.object.isRequired,
-  isFetching: PropTypes.bool.isRequired,
-  activeTool: PropTypes.string.isRequired,
-  measurementsInCurrentSession: PropTypes.number.isRequired,
-  displayLabelSelectTree: PropTypes.bool
-};
 
 export default Viewer;

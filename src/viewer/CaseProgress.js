@@ -28,17 +28,13 @@ class CaseProgress extends Component {
 
     this.sessionRef = React.createRef();
     this.incrementRef = React.createRef();
-
-    this.caseSelect = this.caseSelect.bind(this);
-    this.endSession = this.endSession.bind(this);
-    this.toggleInstructionsModal = this.toggleInstructionsModal.bind(this);
   }
 
   caseSelect = () => {
     this.props.history.push('/');
   };
 
-  endSession() {
+  endSession = () => {
     const savedStartTime = this.props.sessionStart;
     const start = Math.round(savedStartTime / 1000);
     const end = Math.round(Date.now() / 1000);
@@ -56,12 +52,12 @@ class CaseProgress extends Component {
     });
 
     this.props.history.push('/session-summary');
-  }
+  };
 
-  toggleInstructionsModal() {
+  toggleInstructionsModal = () => {
     const currentValue = this.state.showInstructionsModal;
     this.setState({ showInstructionsModal: !currentValue });
-  }
+  };
 
   componentWillUnmount() {
     this.preventAnimations = true;
@@ -129,7 +125,9 @@ class CaseProgress extends Component {
             visible={this.state.showInstructionsModal}
             toggle={this.toggleInstructionsModal}
           />
-        ) : ''}
+        ) : (
+          ''
+        )}
         <div className="sessionCount">
           <div className="value" ref={this.sessionRef}>
             0
