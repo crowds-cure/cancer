@@ -167,7 +167,7 @@ class Viewer extends Component {
     );
   };
 
-  getViewportData() {
+  getViewportData = () => {
     const seriesData = this.props.caseData.seriesData;
     const imageIds = getImageIdsForSeries(seriesData);
 
@@ -179,7 +179,7 @@ class Viewer extends Component {
         }
       }
     ];
-  }
+  };
 
   render() {
     if (!this.props.collection) {
