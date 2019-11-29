@@ -154,6 +154,7 @@ class CornerstoneViewport extends Component {
         )}
         {this.state.bidirectionalAddLabelShow && (
           <Labelling
+            labelSelectTreeOrigin={this.props.labelSelectTreeOrigin}
             measurementData={this.bidirectional.measurementData}
             eventData={this.bidirectional.eventData}
             labellingDoneCallback={this.bidirectional.labellingDoneCallback}
@@ -582,12 +583,15 @@ class CornerstoneViewport extends Component {
     const currentDisplayLabel =
       displayLabelSelectTree !== prevProps.displayLabelSelectTree;
 
-    if (currentLesionChanged || currentDisplayLabel) {
-      this.updateLabelHandler(labelSelectTreeOrigin);
-    }
-
     if (currentLesionChanged) {
       this.setState({ bidirectionalAddLabelShow: false });
+    }
+
+    if (currentLesionChanged || currentDisplayLabel) {
+      // ensure bidirectionalAddLabelShow is false before updating LabelHandler
+      this.setState({ bidirectionalAddLabelShow: false }, () => {
+        this.updateLabelHandler(labelSelectTreeOrigin);
+      });
     }
 
     const { magnificationActive } = this.props;

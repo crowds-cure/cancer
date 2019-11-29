@@ -10,6 +10,20 @@ import cloneDeep from 'lodash.clonedeep';
 
 import './labelling.css';
 
+let timerToLeave;
+const setTimerToLeave = callback => {
+  clearTimerToLeave();
+  timerToLeave = setTimeout(() => {
+    callback();
+  }, 3000);
+};
+
+const clearTimerToLeave = () => {
+  if (timerToLeave) {
+    clearTimeout(timerToLeave);
+  }
+};
+
 const getComponentStyle = eventData => {
   const componentStyle = {};
   if (eventData && eventData.currentPoints) {
@@ -80,12 +94,11 @@ class Labelling extends Component {
         timeout={500}
         classNames="labelling"
         onExited={() => {
+          clearTimerToLeave();
           this.props.labellingDoneCallback();
         }}
         onEntered={() => {
-          if (displayComponent) {
-            this.fadeOutAndLeave();
-          }
+          setTimerToLeave(() => this.setState({ displayComponent: false }));
         }}
       >
         <div
@@ -149,16 +162,17 @@ class Labelling extends Component {
     }
   };
 
-  componentDidUpdate = () => {
-    const { eventData } = this.props;
+  componentDidUpdate = (prevProps, prevState) => {
+    if (!this.state.displayComponent) {
+      clearTimerToLeave();
+    }
 
-    const componentStyle = getComponentStyle(eventData);
-    if (
-      componentStyle.left !== this.state.componentStyle.left ||
-      componentStyle.top !== this.state.componentStyle.top
-    ) {
-      this.setState({
-        componentStyle
+    if (prevProps.labelSelectTreeOrigin !== this.props.labelSelectTreeOrigin) {
+      const { eventData } = this.props;
+      const componentStyle = getComponentStyle(eventData);
+
+      this.setState({ componentStyle }, () => {
+        setTimerToLeave(() => this.setState({ displayComponent: false }));
       });
     }
 
@@ -212,13 +226,7 @@ class Labelling extends Component {
   };
 
   fadeOutAndLeave = () => {
-    console.log('set timer');
-    // Wait for 1 sec to dismiss the labelling component
-    this.fadeOutTimer = setTimeout(() => {
-      this.setState({
-        displayComponent: false
-      });
-    }, 3000);
+    setTimerToLeave(() => this.setState({ displayComponent: false }));
   };
 
   fadeOutAndLeaveFast = () => {
@@ -228,11 +236,7 @@ class Labelling extends Component {
   };
 
   clearFadeOutTimer = () => {
-    if (!this.fadeOutTimer) {
-      return;
-    }
-
-    clearTimeout(this.fadeOutTimer);
+    clearTimerToLeave();
   };
 
   showLabelling = () => {
