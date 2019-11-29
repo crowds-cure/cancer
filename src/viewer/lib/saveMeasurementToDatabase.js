@@ -98,7 +98,8 @@ async function saveMeasurementToDatabase(caseData, measurements, feedback) {
   const measurementsDB = getDB('measurements');
   const {
     name: annotatorPrincipalName = '',
-    username: annotator = ''
+    username: annotator = '',
+    team: teamName = ''
   } = await getProfile();
 
   const promises = measurements.map(async measurement => {
@@ -107,6 +108,7 @@ async function saveMeasurementToDatabase(caseData, measurements, feedback) {
       measurement,
       annotator,
       annotatorPrincipalName,
+      teamName,
       skip: false,
       feedback,
       caseData: caseData.data,
