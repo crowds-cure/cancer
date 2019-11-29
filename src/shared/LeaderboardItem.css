@@ -7,7 +7,7 @@
   display: flex;
   flex: 1 1;
   margin: 0 16px;
-  padding: 5px 0;
+  padding: 0;
   width: calc(50% - 32px);
 }
 
@@ -37,13 +37,47 @@
 }
 
 .LeaderboardItem .name {
-  flex: 1;
-  display: block;
   align-items: center;
+  align-self: stretch;
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+.LeaderboardItem .name > span:first-child {
   color: #ffffff;
   font-size: 26px;
   font-weight: normal;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.LeaderboardItem .name > span {
+  width: 50%;
+}
+
+.LeaderboardItem .team {
+  align-items: center;
+  background-color: #2b195b;
+  display: flex;
+  height: 100%;
+}
+
+.LeaderboardItem .team span {
+  color: #d4d1de;
+  display: block;
+  display: -webkit-box;
+  font-size: 20px;
+  font-weight: normal;
+  line-height: 1.15;
+  max-height: 46px;
+  opacity: 0.8;
+  overflow: hidden;
+  padding: 0 16px;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  /* autoprefixer: off */
+  -webkit-box-orient: vertical;
+  /* autoprefixer: on */
 }

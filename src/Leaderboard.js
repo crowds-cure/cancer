@@ -50,8 +50,7 @@ class Leaderboard extends Component {
   getTopIndividualLeaderboardItems() {
     return this.state.topAnnotators.map((item, index) => {
       const rank = index + 1;
-      const name = item.name;
-      const principalName = item.principalName;
+      const { name, principalName, teamName } = item;
       const score = item.value;
       return (
         <LeaderboardItem
@@ -59,6 +58,7 @@ class Leaderboard extends Component {
           rank={rank}
           name={name}
           principalName={principalName}
+          teamName={teamName}
           score={score}
         />
       );

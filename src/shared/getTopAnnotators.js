@@ -31,6 +31,7 @@ async function getTopAnnotators(limit = 10) {
     return {
       name: key,
       principalName: value.principalName,
+      teamName: value.teamName,
       value: value.count
     };
   });

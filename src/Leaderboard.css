@@ -56,6 +56,15 @@
   flex-basis: 28%;
 }
 
+.Leaderboard .sectionIndividuals .LeaderboardItem {
+  min-height: 66px;
+}
+
+
+.Leaderboard .sectionTeams .LeaderboardItem {
+  min-height: 56px;
+}
+
 @media (max-height: 820px), (max-width: 1365px) {
   .Leaderboard {
     display: block;
@@ -99,6 +108,29 @@
   }
 
   .Leaderboard .LeaderboardItem {
+    width: calc(100% - 32px);
+  }
+}
+
+@media (max-width: 1023px) {
+  .Leaderboard .LeaderboardItem .name {
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .Leaderboard .LeaderboardItem .name > span {
     width: 100%;
+  }
+
+  .Leaderboard .LeaderboardItem .name .team {
+    background-color: transparent;
+    height: auto;
+  }
+
+  .Leaderboard .LeaderboardItem .name .team span {
+    display: block;
+    padding: 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 }
