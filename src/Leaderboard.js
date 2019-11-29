@@ -1,8 +1,10 @@
 import { Component } from 'react';
 import React from 'react';
-import SimpleHeaderSection from './shared/SimpleHeaderSection';
+import Logo from './shared/Logo.js';
 import LeaderboardItem from './shared/LeaderboardItem';
 import { getTopAnnotators, getTopTeams } from './shared/getTopAnnotators';
+import leaderboardIndividuals from './images/general/leaderboard-individuals.svg';
+import leaderboardTeams from './images/general/leaderboard-teams.svg';
 import './Leaderboard.css';
 
 import TEAM_LABELS from './shared/teams.js';
@@ -45,17 +47,9 @@ class Leaderboard extends Component {
     });
   }
 
-  getTopIndividualLeaderboardItems(startIndex, endIndex) {
-    // Useful for testing scrolling limits
-    //startIndex = 0
-    //endIndex = 8
-
-    const topAnnotatorsLimited = this.state.topAnnotators.slice(
-      startIndex,
-      endIndex
-    );
-    return topAnnotatorsLimited.map((item, index) => {
-      const rank = startIndex + index + 1;
+  getTopIndividualLeaderboardItems() {
+    return this.state.topAnnotators.map((item, index) => {
+      const rank = index + 1;
       const name = item.name;
       const principalName = item.principalName;
       const score = item.value;
@@ -71,14 +65,9 @@ class Leaderboard extends Component {
     });
   }
 
-  getTopTeamLeaderboardItems(startIndex, endIndex) {
-    // Useful for testing scrolling limits
-    //startIndex = 0
-    //endIndex = 5
-
-    const topTeamsLimited = this.state.topTeams.slice(startIndex, endIndex);
-    return topTeamsLimited.map((item, index) => {
-      const rank = startIndex + index + 1;
+  getTopTeamLeaderboardItems() {
+    return this.state.topTeams.map((item, index) => {
+      const rank = index + 1;
       const name = TEAM_LABELS[item.name] || '';
       const score = item.value;
       return (
@@ -92,68 +81,26 @@ class Leaderboard extends Component {
     });
   }
 
-  getTopIndividualLeaderboardItemRows() {
-    const columnLimit = 8;
-    const numAnnotators = this.state.topAnnotators.length;
-    // Useful for testing scrolling limits
-    // const numAnnotators = 50
-
-    // Create an index array for individual groups by column limit as 0, 8, 16, so on
-    const indexes = [];
-    for (let i = 0; i < numAnnotators; i = i + columnLimit) {
-      indexes.push(i);
-    }
-
-    return indexes.map(index => (
-      <div key={'individualRow' + index} className="col-sm-16 col-lg-5">
-        {this.getTopIndividualLeaderboardItems(index, index + columnLimit)}
-      </div>
-    ));
-  }
-
-  getTopTeamLeaderboardItemRows() {
-    const columnLimit = 5;
-    const numTeams = this.state.topTeams.length;
-    // Useful for testing scrolling limits
-    // const numTeams = 50
-
-    // Create an index array for top groups by column limit as 0, 5, 10, so on
-    const indexes = [];
-    for (let i = 0; i < numTeams; i = i + columnLimit) {
-      indexes.push(i);
-    }
-
-    return indexes.map(index => (
-      <div key={'teamRow' + index} className="col-sm-16 col-lg-8">
-        {this.getTopTeamLeaderboardItems(index, index + columnLimit)}
-      </div>
-    ));
-  }
-
   render() {
     return (
       <div className="Leaderboard">
-        <SimpleHeaderSection />
-        <div className="top-individuals">
-          <div className="row title-container">
-            <div className="col-sm-15 title"> TOP INDIVIDUALS</div>
-          </div>
-          <div className="row top-individuals-container">
-            <div className="col-sm-15 content">
-              <div className="row">
-                {this.getTopIndividualLeaderboardItemRows()}
-              </div>
-            </div>
+        <Logo />
+        <div className="section sectionIndividuals">
+          <h2>
+            <img src={leaderboardIndividuals} alt="Individuals" />
+            <span>Top Individuals</span>
+          </h2>
+          <div className="list">
+            {this.getTopIndividualLeaderboardItems()}
           </div>
         </div>
-        <div className="top-groups">
-          <div className="row title-container">
-            <div className="col-sm-15 title"> TOP GROUPS</div>
-          </div>
-          <div className="row top-groups-container">
-            <div className="col-sm-15">
-              <div className="row">{this.getTopTeamLeaderboardItemRows()}</div>
-            </div>
+        <div className="section sectionTeams">
+          <h2>
+            <img src={leaderboardTeams} alt="Teams" />
+            <span>Top Teams</span>
+          </h2>
+          <div className="list">
+            {this.getTopTeamLeaderboardItems()}
           </div>
         </div>
       </div>

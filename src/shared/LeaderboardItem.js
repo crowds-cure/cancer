@@ -11,10 +11,10 @@ class LeaderboardItem extends Component {
     return (
       <div className="LeaderboardItem">
         <div className="rank">{rank}</div>
+        <div className="score">{score && score.toLocaleString()}</div>
         <div className="name" title={nameToDisplay}>
           {nameToDisplay}
         </div>
-        <div className="score">{score && score.toLocaleString()}</div>
       </div>
     );
   }

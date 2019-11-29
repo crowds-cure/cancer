@@ -1,43 +1,104 @@
 @value globals: "./GlobalStyles.css";
-@value primaryBackgroundColor from globals;
+@value primaryBackgroundColor, activeColor from globals;
 
 .Leaderboard {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   height: 100%;
-  background-color: primaryBackgroundColor;
-  overflow-y: auto;
-  padding-bottom: 15px;
+  padding: 5px 24px 50px;
+  width: 100%;
 }
 
-.Leaderboard .title-container {
-  justify-content: space-evenly;
-  margin: 10px auto;
+.Leaderboard .Logo {
+  display: none;
+  font-size: 32px;
+  white-space: nowrap;
 }
 
-.Leaderboard .title {
-  font-style: italic;
-  color: #317bb1;
-  font-size: 40px;
-  font-weight: 600;
-  padding-left: 0;
+.Leaderboard .section {
+  padding-top: 20px;
+  position: relative;
 }
 
-.top-individuals,
-.top-groups {
-  margin-top: 50px;
+.Leaderboard .section h2 {
+  color: activeColor;
+  display: flex;
+  font-size: 36px;
+  font-weight: normal;
+  line-height: 50px;
+  margin: 0;
+  white-space: nowrap;
 }
 
-.top-individuals-container,
-.top-groups-container {
-  margin: 0 auto;
-  justify-content: space-evenly;
+.Leaderboard .section h2 img {
+  margin: 0 16px;
 }
 
-.top-individuals-container {
-  max-height: 410px;
-  overflow-y: auto;
+.Leaderboard .list {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  flex-wrap: wrap;
+  height: calc(100% - 90px);
+  left: 0;
+  overflow: hidden;
+  position: absolute;
+  top: 90px;
+  width: 100%;
 }
 
-.top-groups-container {
-  max-height: 260px;
-  overflow-y: auto;
+.Leaderboard .sectionIndividuals {
+  flex-basis: 68%;
+}
+
+.Leaderboard .sectionTeams {
+  flex-basis: 28%;
+}
+
+@media (max-height: 820px), (max-width: 1365px) {
+  .Leaderboard {
+    display: block;
+    overflow-y: scroll;
+  }
+
+  .Leaderboard .Logo {
+    display: block;
+    margin: 20px 16px 0;
+  }
+
+  .Leaderboard .section {
+    margin-top: 20px;
+  }
+
+  .Leaderboard .list {
+    margin-top: 20px;
+    position: initial;
+  }
+
+  .Leaderboard .sectionIndividuals .list {
+    height: 610px;
+  }
+
+  .Leaderboard .sectionIndividuals .LeaderboardItem:nth-child(n+21) {
+    display: none;
+  }
+
+  .Leaderboard .sectionTeams .list {
+    height: 190px;
+  }
+
+  .Leaderboard .sectionTeams .LeaderboardItem:nth-child(n+7) {
+    display: none;
+  }
+}
+
+@media (max-width: 1365px) {
+  .Leaderboard .section .list {
+    height: unset;
+  }
+
+  .Leaderboard .LeaderboardItem {
+    width: 100%;
+  }
 }
