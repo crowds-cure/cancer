@@ -151,7 +151,7 @@ class Viewer extends Component {
       const caseToIgnore = nextCase.data._id;
       getNextCase(this.props.collection, username, caseToIgnore).then(
         prefetchedCase => this.setState({ prefetchedCase }),
-        nextCaseRejector
+        () => console.log('Last case in collection - no case to prefetch')
       );
     };
 
