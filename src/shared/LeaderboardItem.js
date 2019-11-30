@@ -5,16 +5,22 @@ import './LeaderboardItem.css';
 
 class LeaderboardItem extends Component {
   render() {
-    const { name, principalName, score, rank } = this.props;
+    const { name, principalName, score, rank, teamName } = this.props;
     const nameToDisplay = principalName || name;
 
     return (
       <div className="LeaderboardItem">
         <div className="rank">{rank}</div>
-        <div className="name" title={nameToDisplay}>
-          {nameToDisplay}
-        </div>
         <div className="score">{score && score.toLocaleString()}</div>
+        <div className="name" title={nameToDisplay}>
+          <span>{nameToDisplay}</span>
+          {teamName ? (
+            <span className="team" title={teamName}>
+              <span>{teamName}</span>
+            </span>
+          ) : ''}
+        </div>
+
       </div>
     );
   }

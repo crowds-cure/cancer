@@ -1,41 +1,83 @@
-.LeaderboardItem {
-  display: flex;
-  width: 100%;
-  margin: 5px auto;
-}
+@value globals: "../GlobalStyles.css";
+@value activeColor from globals;
 
-.LeaderboardItem .score {
-  width: 100px;
-  color: #7cf4fe;
-  padding: 5px 10px;
-  text-align: center;
-  background-color: #33316d;
-  font-size: 30px;
-  font-weight: 600;
+.LeaderboardItem {
+  align-items: center;
+  border-bottom: solid 1px #58438d;
+  display: flex;
+  flex: 1 1;
+  margin: 0 16px;
+  padding: 0;
+  width: calc(50% - 32px);
 }
 
 .LeaderboardItem .rank {
-  display: flex;
   align-items: center;
-  justify-content: center;
-  width: 50px;
-  color: #ffffff;
   background-color: #6c0ad6;
-  font-size: 24px;
+  border-radius: 5px;
+  color: #ffffff;
+  display: flex;
+  font-size: 31px;
   font-weight: 600;
+  justify-content: center;
+  margin-right: 10px;
+  min-height: 43px;
+  min-width: 50px;
+  text-align: center;
+  width: 50px;
+}
+
+.LeaderboardItem .score {
+  color: activeColor;
+  font-size: 43px;
+  font-weight: 600;
+  margin-right: 10px;
+  min-width: 120px;
+  width: 120px;
 }
 
 .LeaderboardItem .name {
-  flex: 1;
-  display: block;
   align-items: center;
+  align-self: stretch;
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+.LeaderboardItem .name > span:first-child {
   color: #ffffff;
-  background-color: #33316d;
-  padding: 5px 10px;
-  font-size: 24px;
-  min-width: 200px;
-  width: 200px;
+  font-size: 26px;
+  font-weight: normal;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.LeaderboardItem .name > span {
+  width: 50%;
+}
+
+.LeaderboardItem .team {
+  align-items: center;
+  background-color: #2b195b;
+  display: flex;
+  height: 100%;
+}
+
+.LeaderboardItem .team span {
+  color: #d4d1de;
+  display: block;
+  display: -webkit-box;
+  font-size: 20px;
+  font-weight: normal;
+  line-height: 1.15;
+  max-height: 46px;
+  opacity: 0.8;
+  overflow: hidden;
+  padding: 0 16px;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  /* autoprefixer: off */
+  -webkit-box-orient: vertical;
+  /* autoprefixer: on */
 }
