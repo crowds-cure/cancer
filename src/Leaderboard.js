@@ -6,6 +6,7 @@ import { getTopAnnotators, getTopTeams } from './shared/getTopAnnotators';
 import leaderboardIndividuals from './images/general/leaderboard-individuals.svg';
 import leaderboardTeams from './images/general/leaderboard-teams.svg';
 import './Leaderboard.css';
+import './LeaderboardFit.css';
 
 import TEAM_LABELS from './shared/teams.js';
 
@@ -81,9 +82,18 @@ class Leaderboard extends Component {
     });
   }
 
+  getClassName = () => {
+    let className = 'Leaderboard';
+    if (this.props.fitScreen) {
+      className += ' fitScreen';
+    }
+
+    return className;
+  }
+
   render() {
     return (
-      <div className="Leaderboard">
+      <div className={this.getClassName()}>
         <Logo />
         <div className="section sectionIndividuals">
           <h2>

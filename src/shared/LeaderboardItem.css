@@ -53,8 +53,9 @@
   white-space: nowrap;
 }
 
-.LeaderboardItem .name > span {
-  width: 50%;
+.LeaderboardItem .name > span:last-child {
+  flex-basis: 45%;
+  min-width: 45%;
 }
 
 .LeaderboardItem .team {
