@@ -9,10 +9,11 @@ async function saveSessionStatisticsToDatabase(currentSession) {
   // TODO: Check 'currentSession'. If start / end dates are very short
   // we may not want to send this to the database
 
-  const { occupation, team, experience, username } = getProfile();
+  const { auth_time, occupation, team, experience, username } = getProfile();
 
   const doc = {
     _id: guid(),
+    sessionId: auth_time,
     username,
     occupation,
     team,
