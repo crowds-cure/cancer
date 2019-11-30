@@ -1,6 +1,6 @@
 @value globals: "./GlobalStyles.css";
 @value activeColor, screen-min, screen-sm-max from globals;
-@value screen-md, screen-md-max from globals;
+@value screen-md, screen-md-max, screen-lg from globals;
 
 .Leaderboard {
   overflow-y: scroll;
@@ -69,6 +69,12 @@
     flex-direction: column;
     flex-wrap: wrap;
     overflow: hidden;
+  }
+}
+
+@media (min-width: screen-lg) {
+  .Leaderboard .LeaderboardItem .name > span:first-child {
+    flex-grow: 1;
   }
 }
 
