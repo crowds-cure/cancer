@@ -1,0 +1,57 @@
+.Leaderboard.fitScreen {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  overflow-y: hidden;
+  padding-bottom: 20px;
+  width: 100%;
+}
+
+.Leaderboard.fitScreen .Logo {
+  display: none;
+}
+
+.Leaderboard.fitScreen .section {
+  margin-top: 0;
+}
+
+.Leaderboard.fitScreen .list {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  flex-wrap: wrap;
+  height: calc(100% - 80px);
+  left: 0;
+  margin-top: 0;
+  overflow: hidden;
+  position: absolute;
+  top: 80px;
+  width: 100%;
+}
+
+.Leaderboard.fitScreen .sectionIndividuals {
+  flex-basis: 75%;
+}
+
+.Leaderboard.fitScreen .sectionTeams {
+  flex-basis: 25%;
+}
+
+.Leaderboard.fitScreen .sectionIndividuals .LeaderboardItem:nth-child(n+21) {
+  display: flex;
+}
+
+.Leaderboard.fitScreen .sectionTeams .LeaderboardItem:nth-child(n+7) {
+  display: flex;
+}
+
+@media (max-height: 600px) {
+  .Leaderboard.fitScreen .sectionTeams {
+    display: none;
+  }
+
+  .Leaderboard.fitScreen .sectionIndividuals {
+    flex-basis: 100%;
+  }
+}

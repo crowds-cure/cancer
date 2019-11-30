@@ -45,6 +45,7 @@ const routes = [
   },
   { path: '/screenshot-qa', name: 'qa', Component: ScreenshotQA },
   { path: '/leaderboard', name: 'leaderboard', Component: Leaderboard },
+  { path: '/leaderboard-fit', name: 'leaderboard-fit', Component: Leaderboard, props: { fitScreen: true } },
   { path: '/stats', name: 'stats', Component: StatisticsPage }
 ];
 
@@ -130,11 +131,16 @@ class App extends Component {
       })
     );
 
+    const renderComponent = (Component, props = {}) => {
+      const extendedProps = Object.assign({ auth, store }, props);
+      return getComponent(Component, extendedProps, componentsReady);
+    };
+
     return (
       <Router>
         <div className="route-container">
           <section className="route-section">
-            {routes.map(({ path, Component, HOC }) => (
+            {routes.map(({ path, Component, props }) => (
               <Route key={path} exact path={path}>
                 {({ match }) => (
                   <CSSTransition
@@ -144,7 +150,7 @@ class App extends Component {
                     appear
                     unmountOnExit
                   >
-                    {getComponent(Component, { auth, store }, componentsReady)}
+                    {renderComponent(Component, props)}
                   </CSSTransition>
                 )}
               </Route>
