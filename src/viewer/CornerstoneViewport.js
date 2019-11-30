@@ -32,6 +32,13 @@ const roundScale = scale => {
   return Math.round(scale * 100) / 100;
 };
 
+const hasToolCreatedOrRemoved = (prevToolData, toolData) => {
+  const currentToolDataLength = prevToolData.length;
+  const previousToolDataLength = toolData.length;
+
+  return Math.abs(currentToolDataLength - previousToolDataLength) === 1;
+};
+
 function initializeTools(tools) {
   Array.from(tools).forEach(tool => {
     const apiTool = cornerstoneTools[`${tool.name}Tool`];
@@ -610,12 +617,16 @@ class CornerstoneViewport extends Component {
         });
 
         this.toggleMagnification(true);
-        this.focusCurrentLesion();
+        this.focusCurrentLesion(true);
       } else {
         this.toggleMagnification(false);
       }
     } else if (shallFocus) {
-      this.focusCurrentLesion();
+      const hasCreatedOrRemoved = hasToolCreatedOrRemoved(
+        prevProps.toolData,
+        this.props.toolData
+      );
+      this.focusCurrentLesion(magnificationActive || hasCreatedOrRemoved);
     }
   }
 
@@ -701,7 +712,7 @@ class CornerstoneViewport extends Component {
     return viewport;
   };
 
-  focusCurrentLesion = () => {
+  focusCurrentLesion = preserveMagnification => {
     const { element } = this;
     const { toolData, currentLesion } = this.props;
     const currentToolData = toolData[currentLesion - 1];
@@ -711,7 +722,8 @@ class CornerstoneViewport extends Component {
 
       const { imageId } = currentToolData;
       let viewport = currentToolData.viewport;
-      if (this.props.magnificationActive) {
+
+      if (preserveMagnification) {
         viewport = Object.assign({}, viewport, this.getZoomedLesionViewport());
       } else {
         viewport.translation.x = 0;

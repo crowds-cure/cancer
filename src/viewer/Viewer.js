@@ -365,7 +365,7 @@ class Viewer extends Component {
   };
 
   measurementsAddedOrRemoved = (action, imageId, toolType, measurementData) => {
-    let updatedToolData = this.state.toolData;
+    let updatedToolData = [...this.state.toolData];
     let currentLesion = this.state.currentLesion;
     let currentLesionFocused;
 
@@ -388,13 +388,13 @@ class Viewer extends Component {
       currentLesionFocused = false;
     }
 
-    const hasMeasurements = this.state.toolData.length > 0;
+    const hasMeasurements = updatedToolData.length > 0;
 
     if (currentLesion === 0 && hasMeasurements) {
       currentLesion = 1;
     } else if (!hasMeasurements) {
       currentLesion = 0;
-    } else if (currentLesion > this.state.toolData.length) {
+    } else if (currentLesion > updatedToolData.length) {
       currentLesion = currentLesion - 1;
     }
 
