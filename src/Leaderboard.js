@@ -48,12 +48,21 @@ class Leaderboard extends Component {
     });
   }
 
+  getUserTeamLabel(teamName) {
+    const hiddenLabels = [undefined, 'notApplicable', 'none'];
+    if (hiddenLabels.indexOf(teamName) >= 0) {
+      return '';
+    }
+
+    return TEAM_LABELS[teamName] || '';
+  }
+
   getTopIndividualLeaderboardItems() {
     return this.state.topAnnotators.map((item, index) => {
       const rank = index + 1;
       const { name, principalName, teamName } = item;
       const score = item.value;
-      const teamLabel = TEAM_LABELS[teamName] || '';
+      const teamLabel = this.getUserTeamLabel(teamName);
       return (
         <LeaderboardItem
           key={'individual' + rank}
