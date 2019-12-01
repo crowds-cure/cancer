@@ -28,7 +28,7 @@ class NotificationService {
 
     Object.keys(caseNotificationsDetails).forEach(key => {
       const details = caseNotificationsDetails[key];
-      if (totalMeasurements >= details.min) {
+      if (totalMeasurements && totalMeasurements >= details.min) {
         this.alerted.add(details);
         this.earned.add(details);
       }
