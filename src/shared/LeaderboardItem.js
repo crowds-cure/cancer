@@ -14,7 +14,7 @@ class LeaderboardItem extends Component {
         <div className="score">{score && score.toLocaleString()}</div>
         <div className="name" title={nameToDisplay}>
           <span>{nameToDisplay}</span>
-          {teamName ? (
+          {teamName && teamName !== 'notApplicable' ? (
             <span className="team" title={teamName}>
               <span>{teamName}</span>
             </span>
