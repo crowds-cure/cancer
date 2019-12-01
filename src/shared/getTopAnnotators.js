@@ -30,22 +30,10 @@ async function getTopAnnotators(limit = 10) {
   const annotators = measByAnno.map(instance => {
     const { key, value } = instance;
 
-    // Note: This is a workaround because we are saving values to db, not labels
-    const teamObj = residencyProgram.find(a => a.value === value.teamName);
-    let teamName;
-    if (
-      teamObj &&
-      teamObj.value &&
-      teamObj.label &&
-      teamObj.value !== 'notApplicable'
-    ) {
-      teamName = teamObj.label;
-    }
-
     return {
       name: key,
       principalName: value.principalName,
-      teamName,
+      teamName: value.teamName,
       value: value.count
     };
   });
@@ -100,21 +88,9 @@ async function getTopTeams(limit = 10) {
 
   return topTeams
     .map(topT => {
-      // Note: This is a workaround because we are saving values to db, not labels
-      const teamObj = residencyProgram.find(a => a.value === topT[1]);
-      let teamName;
-      if (
-        teamObj &&
-        teamObj.value &&
-        teamObj.value !== 'notApplicable' &&
-        teamObj.label
-      ) {
-        teamName = teamObj.label;
-      }
-
       return {
         name: topT[0],
-        value: teamName
+        value: topT[1]
       };
     })
     .slice(0, limit);
