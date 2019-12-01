@@ -53,13 +53,14 @@ class Leaderboard extends Component {
       const rank = index + 1;
       const { name, principalName, teamName } = item;
       const score = item.value;
+      const teamLabel = TEAM_LABELS[teamName] || '';
       return (
         <LeaderboardItem
           key={'individual' + rank}
           rank={rank}
           name={name}
           principalName={principalName}
-          teamName={teamName}
+          teamLabel={teamLabel}
           score={score}
         />
       );

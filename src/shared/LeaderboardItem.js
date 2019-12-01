@@ -4,8 +4,17 @@ import PropTypes from 'prop-types';
 import './LeaderboardItem.css';
 
 class LeaderboardItem extends Component {
+  shallDisplayTeamLabel(teamLabel) {
+    const hiddenLabels = ['Not Applicable', 'Undefined', 'None'];
+    if (hiddenLabels.indexOf(teamLabel) >= 0) {
+      return false;
+    }
+
+    return !!teamLabel;
+  }
+
   render() {
-    const { name, principalName, score, rank, teamName } = this.props;
+    const { name, principalName, score, rank, teamLabel } = this.props;
     const nameToDisplay = principalName || name;
 
     return (
@@ -14,9 +23,9 @@ class LeaderboardItem extends Component {
         <div className="score">{score && score.toLocaleString()}</div>
         <div className="name" title={nameToDisplay}>
           <span>{nameToDisplay}</span>
-          {teamName && teamName !== 'notApplicable' ? (
-            <span className="team" title={teamName}>
-              <span>{teamName}</span>
+          {this.shallDisplayTeamLabel(teamLabel) ? (
+            <span className="team" title={teamLabel}>
+              <span>{teamLabel}</span>
             </span>
           ) : ''}
         </div>
