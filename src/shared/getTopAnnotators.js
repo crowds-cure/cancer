@@ -1,4 +1,5 @@
 import { getDB } from '../db';
+import residencyProgram from './residencyProgram.js';
 
 async function getTopAnnotators(limit = 10) {
   const measurementsDB = getDB('measurements');
@@ -28,10 +29,23 @@ async function getTopAnnotators(limit = 10) {
 
   const annotators = measByAnno.map(instance => {
     const { key, value } = instance;
+
+    // Note: This is a workaround because we are saving values to db, not labels
+    const teamObj = residencyProgram.find(a => a.value === value.teamName);
+    let teamName;
+    if (
+      teamObj &&
+      teamObj.value &&
+      teamObj.label &&
+      teamObj.value !== 'notApplicable'
+    ) {
+      teamName = teamObj.label;
+    }
+
     return {
       name: key,
       principalName: value.principalName,
-      teamName: value.teamName,
+      teamName,
       value: value.count
     };
   });
@@ -50,43 +64,25 @@ async function getTopTeams(limit = 10) {
   // of annotators we will have in the near future this is not required
   // (remember, we are fetching hundreds of CT images all the time, so
   // a few dozen lines of json is nothing!)
-  const annotatorPromise = measurementsDB.query('by/annotators', {
+  const annotatorPromise = measurementsDB.query('by/annotatorsInfo', {
     reduce: true,
     group: true,
     level: 'exact'
   });
 
-  const sessionsDB = getDB('sessions');
-  const teamUsernamePromise = sessionsDB.query('by/teamUsername', {
-    reduce: true,
-    group: true,
-    group_level: 2
-  });
-
-  const topTeams = await Promise.all([
-    annotatorPromise,
-    teamUsernamePromise
-  ]).then(results => {
+  const topTeams = await Promise.all([annotatorPromise]).then(results => {
     console.log(`getTopTeams results`, results);
 
     const annotators = results[0].rows;
-    const teamUsers = results[1].rows;
-
-    // make a map from user to team
-    const userTeam = {};
-    Object.values(teamUsers).forEach(teamUser => {
-      userTeam[teamUser.key[1]] = teamUser.key[0];
-    });
-    console.log('userTeam', userTeam);
 
     const teamAnnotations = {};
     Object.values(annotators).forEach(annotations => {
-      const user = annotations.key;
-      const team = userTeam[user];
-      const score = annotations.value;
+      const team = annotations.value.teamName;
+      const score = annotations.value.count;
       teamAnnotations[team] = teamAnnotations[team] || 0;
       teamAnnotations[team] += score;
     });
+
     const teamRanking = [];
     const teamsToIgnore = ['notApplicable', 'undefined', 'null', ' '];
     Object.keys(teamAnnotations).forEach(teamName => {
@@ -104,9 +100,21 @@ async function getTopTeams(limit = 10) {
 
   return topTeams
     .map(topT => {
+      // Note: This is a workaround because we are saving values to db, not labels
+      const teamObj = residencyProgram.find(a => a.value === topT[1]);
+      let teamName;
+      if (
+        teamObj &&
+        teamObj.value &&
+        teamObj.value !== 'notApplicable' &&
+        teamObj.label
+      ) {
+        teamName = teamObj.label;
+      }
+
       return {
         name: topT[0],
-        value: topT[1]
+        value: teamName
       };
     })
     .slice(0, limit);
@@ -277,9 +285,21 @@ async function getTopTeamsByWeek(limit = 10, week) {
 
   return topTeams
     .map(topT => {
+      // Note: This is a workaround because we are saving values to db, not labels
+      const teamObj = residencyProgram.find(a => a.value === topT[1]);
+      let teamName;
+      if (
+        teamObj &&
+        teamObj.value &&
+        teamObj.value !== 'notApplicable' &&
+        teamObj.label
+      ) {
+        teamName = teamObj.label;
+      }
+
       return {
         name: topT[0],
-        value: topT[1]
+        value: teamName
       };
     })
     .slice(0, limit);
