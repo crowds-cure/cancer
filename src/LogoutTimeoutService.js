@@ -14,7 +14,7 @@ const LogoutTimeoutService = new function() {
   ];
 
   const routesToSkipTimeout = ['/leaderboard'];
-  const logoutTimeoutIn = 10 * 60 * 1000; // 10 mins
+  const logoutTimeoutIn = 5 * 60 * 1000; // 5 mins
 
   const isValidRouteToLogout = () => {
     const { pathname } = (window || {}).location || {};
