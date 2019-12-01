@@ -6,12 +6,14 @@ async function saveSkipToDatabase(caseData, feedback) {
   const measurementsDB = getDB('measurements');
   const {
     name: annotatorPrincipalName = '',
-    username: annotator = ''
+    username: annotator = '',
+    team: teamName = ''
   } = await getProfile();
 
   const doc = {
     _id: guid(),
     skip: true,
+    teamName,
     annotator,
     annotatorPrincipalName,
     feedback,
