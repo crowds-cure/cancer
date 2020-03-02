@@ -1,0 +1,3514 @@
+{
+  "docs": [
+    {
+      "Collection": "CPTAC-UCEC",
+      "SubjectID": "C3L-00771",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.6450.2626.691012400763437538016718776441",
+          "StudyDescription": "Abdomen^ABD_PEL_WITH (Adult)",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.6450.2626.205700001836977203495955709351",
+              "SeriesDescription": "SOFT TISSUE",
+              "NumberOfImages": 94
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-UCEC",
+      "SubjectID": "C3L-00938",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.6450.2626.142855460979879285429637018865",
+          "StudyDescription": "CT THORAX WITH CONTRAST",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.6450.2626.969722976888390674310134114140",
+              "SeriesDescription": "CHEST ABDOMEN PELVIS",
+              "NumberOfImages": 270
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-UCEC",
+      "SubjectID": "C3L-00947",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.6450.2626.207643928709693209129175150940",
+          "StudyDescription": "CT ABDOMEN AND PELVIS WITH CONTRAST",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.6450.2626.149528252522540515405945191935",
+              "SeriesDescription": "5MM AXIAL",
+              "NumberOfImages": 97
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-UCEC",
+      "SubjectID": "C3L-00961",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.6450.2626.809300942963203137864789278471",
+          "StudyDescription": "CTABDPELW",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.6450.2626.317958908668757458079239354236",
+              "SeriesDescription": "AXIALS5 X 5",
+              "NumberOfImages": 93
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-UCEC",
+      "SubjectID": "C3L-00962",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.6450.2626.188550180493792372165153925927",
+          "StudyDescription": "CT ABDOMEN AND PELVIS WITH AND WITHOUT CONTRAST",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.6450.2626.206626914317976412344638497210",
+              "SeriesDescription": "DELAY ABDOMEN",
+              "NumberOfImages": 95
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-UCEC",
+      "SubjectID": "C3L-00962",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.6450.2626.188550180493792372165153925927",
+          "StudyDescription": "CT ABDOMEN AND PELVIS WITH AND WITHOUT CONTRAST",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.6450.2626.309816090474237402807615134132",
+              "SeriesDescription": "CAP 5MM SOFT",
+              "NumberOfImages": 119
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-UCEC",
+      "SubjectID": "C3L-01246",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.6450.2626.967845617438214712145537331881",
+          "StudyDescription": "CT THORAX WITH CONTRAS",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.6450.2626.875817478198874440245764580626",
+              "SeriesDescription": "5mm",
+              "NumberOfImages": 164
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-UCEC",
+      "SubjectID": "C3L-01247",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.6450.2626.208151376698023858615816901720",
+          "StudyDescription": "CT CAP WITH",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.6450.2626.170692303901948079290428319871",
+              "SeriesDescription": "CAP 5MM SOFT",
+              "NumberOfImages": 123
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-UCEC",
+      "SubjectID": "C3L-01247",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.6450.2626.208151376698023858615816901720",
+          "StudyDescription": "CT CAP WITH",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.6450.2626.747957582739313470858300413857",
+              "SeriesDescription": "DELAY ABDOMEN",
+              "NumberOfImages": 93
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-UCEC",
+      "SubjectID": "C3L-01732",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.6450.2626.100700675127478975676044465626",
+          "StudyDescription": "CT ABDOMEN PELVIS WITH",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.6450.2626.246032608851600385507133272852",
+              "SeriesDescription": "Recon 2:DR 30% Neph phase thru pelvi",
+              "NumberOfImages": 76
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-UCEC",
+      "SubjectID": "C3L-01744",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.6450.2626.173314636910490476033724315999",
+          "StudyDescription": "CT CHEST ABDOMEN PELVI",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.6450.2626.256334111606532510523733903012",
+              "SeriesDescription": "CHEST ABD PEL",
+              "NumberOfImages": 209
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-UCEC",
+      "SubjectID": "C3L-02399",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.6450.2626.281124705870688952043505088769",
+          "StudyDescription": "CT CAP",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.6450.2626.715843341539020957542826796038",
+              "SeriesDescription": "CAP 5MM SOFT",
+              "NumberOfImages": 119
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-UCEC",
+      "SubjectID": "C3N-00520",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.270071326086866885547612334167",
+          "StudyDescription": "Abdomen^BRZUCH (Adult)",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.146234129138977534019664411273",
+              "SeriesDescription": "Abdomen5.0B30f",
+              "NumberOfImages": 58
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-UCEC",
+      "SubjectID": "C3N-00520",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.270071326086866885547612334167",
+          "StudyDescription": "Abdomen^BRZUCH (Adult)",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.229724382181517858063799633809",
+              "SeriesDescription": "Venous Phase5.0B30f",
+              "NumberOfImages": 78
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-UCEC",
+      "SubjectID": "C3N-00520",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.270071326086866885547612334167",
+          "StudyDescription": "Abdomen^BRZUCH (Adult)",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.771576070714780039504432536562",
+              "SeriesDescription": "Arterial Phase5.0B30f",
+              "NumberOfImages": 58
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-UCEC",
+      "SubjectID": "C3N-00729",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7085.2626.290767319769896645657710726154",
+          "StudyDescription": "CT ABDOMEN W AND W/O AND CHEST/PELVIS W IV CONTRAST",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7085.2626.106800137320950870150015285994",
+              "SeriesDescription": "ABD/PEL3.0I40f1",
+              "NumberOfImages": 137
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-UCEC",
+      "SubjectID": "C3N-00729",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7085.2626.290767319769896645657710726154",
+          "StudyDescription": "CT ABDOMEN W AND W/O AND CHEST/PELVIS W IV CONTRAST",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7085.2626.458324287780274717621230797046",
+              "SeriesDescription": "CHEST3.0I40f2",
+              "NumberOfImages": 102
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-UCEC",
+      "SubjectID": "C3N-00732",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7085.2626.516657155938666334599803966375",
+          "StudyDescription": "CT ABDOMEN/PELVIS W IV AND ORAL CONTRAST",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7085.2626.333441789555064875806274328553",
+              "SeriesDescription": "A/P3.0B31f",
+              "NumberOfImages": 163
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-UCEC",
+      "SubjectID": "C3N-00734",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7085.2626.530721211546371663086573559407",
+          "StudyDescription": "CT CHEST ABDOMEN PELVIS W IV CONTRAST",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7085.2626.183013810123674734067396988189",
+              "SeriesDescription": "CHEST3.0B40f",
+              "NumberOfImages": 113
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-UCEC",
+      "SubjectID": "C3N-00734",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7085.2626.530721211546371663086573559407",
+          "StudyDescription": "CT CHEST ABDOMEN PELVIS W IV CONTRAST",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7085.2626.843937073923484147625934797916",
+              "SeriesDescription": "ABD/PELVIS3.0B30f",
+              "NumberOfImages": 168
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-UCEC",
+      "SubjectID": "C3N-00743",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4801.2626.764921041005474451168824591200",
+          "StudyDescription": "CT ABDOMEN AND PELVIS",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4801.2626.137096055013071906585163945205",
+              "SeriesDescription": "40% ASIR",
+              "NumberOfImages": 374
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-UCEC",
+      "SubjectID": "C3N-00866",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4801.2626.152991518859835512248866858217",
+          "StudyDescription": "CT Abdomen and Pelvis Without Contrast",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4801.2626.570843491061959582821453237501",
+              "SeriesDescription": 3.75,
+              "NumberOfImages": 88
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-UCEC",
+      "SubjectID": "C3N-00872",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.236297739954578258352997177536",
+          "StudyDescription": "Abdomen^BrzuchMiednica (Adult)",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.106605509321152968961418804701",
+              "SeriesDescription": "BRZUCH MIED5.0B30f",
+              "NumberOfImages": 94
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-UCEC",
+      "SubjectID": "C3N-00872",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.236297739954578258352997177536",
+          "StudyDescription": "Abdomen^BrzuchMiednica (Adult)",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.228735515688857890824109590400",
+              "SeriesDescription": "Venous phase5.0B30f",
+              "NumberOfImages": 94
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-UCEC",
+      "SubjectID": "C3N-01003",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.999281834991363903000965758121",
+          "StudyDescription": "Abdomen^BRZUCH (Adult)",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.146655446322852496386649369461",
+              "SeriesDescription": "Venous Phase5.0B30f",
+              "NumberOfImages": 62
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-UCEC",
+      "SubjectID": "C3N-01003",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.999281834991363903000965758121",
+          "StudyDescription": "Abdomen^BRZUCH (Adult)",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.211014260748976632732363968563",
+              "SeriesDescription": "Arterial Phase5.0B30f",
+              "NumberOfImages": 62
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-UCEC",
+      "SubjectID": "C3N-01008",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.237010167723748567721013518649",
+          "StudyDescription": "Abdomen^BrzuchMiednica (Adult)",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.134171813590447245573584255138",
+              "SeriesDescription": "BRZUCH MIED5.0B30f",
+              "NumberOfImages": 102
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-UCEC",
+      "SubjectID": "C3N-01008",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.237010167723748567721013518649",
+          "StudyDescription": "Abdomen^BrzuchMiednica (Adult)",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.156415579877851839987333454905",
+              "SeriesDescription": "Venous phase5.0B30f",
+              "NumberOfImages": 101
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-UCEC",
+      "SubjectID": "C3N-01171",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.466187306220544796714523130057",
+          "StudyDescription": "Abdomen^BrzuchMiednica (Adult)",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.166367490297676365533076527113",
+              "SeriesDescription": "Venous phase5.0B30f",
+              "NumberOfImages": 101
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-UCEC",
+      "SubjectID": "C3N-01172",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.239721132111583530161412890801",
+          "StudyDescription": "Abdomen^Brzuch_3fazy_Adult (Adult)",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.132589642337916152288065344115",
+              "SeriesDescription": "Venous phase5.0B30f",
+              "NumberOfImages": 57
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-UCEC",
+      "SubjectID": "C3N-01341",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.195033543834914150985021690272",
+          "StudyDescription": "Abdomen^Brzuch_3fazy_Adult (Adult)",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.199076936350850723897570879024",
+              "SeriesDescription": "Venous phase5.0B30f",
+              "NumberOfImages": 60
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-UCEC",
+      "SubjectID": "C3N-01342",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.212577989827553176330503522006",
+          "StudyDescription": "Abdomen^Brzuch_3fazy_Adult (Adult)",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.315402805205692666916726816906",
+              "SeriesDescription": "Venous phase5.0B30f",
+              "NumberOfImages": 65
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-UCEC",
+      "SubjectID": "C3N-01346",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.293665903142457581490353534076",
+          "StudyDescription": "Abdomen^Brzuch_3fazy_Adult (Adult)",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.988492381004531730436463033117",
+              "SeriesDescription": "Venous phase5.0B30f",
+              "NumberOfImages": 65
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-UCEC",
+      "SubjectID": "C3N-01349",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.196330480031434901815324832087",
+          "StudyDescription": "Abdomen^BrzuchMiednica (Adult)",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.996351055929072290290472608687",
+              "SeriesDescription": "Venous phase5.0B30fiMAR",
+              "NumberOfImages": 101
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-UCEC",
+      "SubjectID": "C3N-01510",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7085.2626.119810816975757991614926263086",
+          "StudyDescription": "CT CHEST ABDOMEN PELVIS W IV CONTRAST",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7085.2626.181556144618490396811193288796",
+              "SeriesDescription": "CHEST3.0I40f2",
+              "NumberOfImages": 82
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-UCEC",
+      "SubjectID": "C3N-01510",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7085.2626.119810816975757991614926263086",
+          "StudyDescription": "CT CHEST ABDOMEN PELVIS W IV CONTRAST",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7085.2626.186575867312262391517337474433",
+              "SeriesDescription": "ABD/PEL3.0I40f1",
+              "NumberOfImages": 151
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-UCEC",
+      "SubjectID": "C3N-01843",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.2932.1975.286163095845630643212362400137",
+          "StudyDescription": "",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.2932.1975.418372966873638205513928459920",
+              "SeriesDescription": "Body 5.0 Venous/Phase CE",
+              "NumberOfImages": 115
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-UCEC",
+      "SubjectID": "C3N-01871",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.889424849454987474834413338549",
+          "StudyDescription": "Abdomen^Brzuch_3fazy_Adult (Adult)",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.143333592061540367967432673618",
+              "SeriesDescription": "Venous phase5.0B30f",
+              "NumberOfImages": 68
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-UCEC",
+      "SubjectID": "C3N-01874",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.993908584890728956370034462128",
+          "StudyDescription": "Abdomen^BrzuchMiednica_ (Adult)",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.123812948208178023694240039889",
+              "SeriesDescription": "Venous phase5.0B30f",
+              "NumberOfImages": 98
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-UCEC",
+      "SubjectID": "C3N-01875",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.165499798146135086280648052830",
+          "StudyDescription": "Abdomen^Brzuch_3fazy_Adult (Adult)",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.166569739262069734537759207031",
+              "SeriesDescription": "Venous phase5.0B30f",
+              "NumberOfImages": 55
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-UCEC",
+      "SubjectID": "C3N-01876",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.332243207923115392849573395441",
+          "StudyDescription": "Abdomen^Brzuch_3fazy_Adult (Adult)",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.181707673728533998197902625259",
+              "SeriesDescription": "Venous phase5.0B30f",
+              "NumberOfImages": 62
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-UCEC",
+      "SubjectID": "C3N-01877",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.588816763760227852703736612242",
+          "StudyDescription": "Abdomen^Brzuch_3fazy_Adult (Adult)",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.127464139664787832819120457493",
+              "SeriesDescription": "Venous phase5.0B30f",
+              "NumberOfImages": 56
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-UCEC",
+      "SubjectID": "C3N-01878",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.215385921227437994607826861983",
+          "StudyDescription": "Abdomen^BrzuchMiednica_ (Adult)",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.552306995540807113189697911232",
+              "SeriesDescription": "Venous phase5.0B30f",
+              "NumberOfImages": 100
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-UCEC",
+      "SubjectID": "C3N-02012",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7085.2626.193761554619335381230164859355",
+          "StudyDescription": "CT PELVIS W IV CONTRAST",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7085.2626.317558302523691636342751498531",
+              "SeriesDescription": "PELVIS3.0B31f",
+              "NumberOfImages": 94
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-UCEC",
+      "SubjectID": "C3N-02274",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.322048254776719123217975770619",
+          "StudyDescription": "Abdomen^BrzuchMiednica_ (Adult)",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.747535527922771050406149091937",
+              "SeriesDescription": "Venous phase5.0B30f",
+              "NumberOfImages": 113
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-UCEC",
+      "SubjectID": "C3N-02639",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.317120625827458974337512312375",
+          "StudyDescription": "Abdomen^Brzuch_3fazy_Adult (Adult)",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.896099536709107356983798300589",
+              "SeriesDescription": "Venous phase5.0B30f",
+              "NumberOfImages": 65
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-UCEC",
+      "SubjectID": "C3N-02678",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.114458460915300425179441578495",
+          "StudyDescription": "Abdomen^Brzuch_3fazy_Adult (Adult)",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.219141397286888822047176241446",
+              "SeriesDescription": "Venous phase5.0B30f",
+              "NumberOfImages": 51
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-UCEC",
+      "SubjectID": "C3N-02789",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7085.2626.315048091260390938035234632249",
+          "StudyDescription": "Thorax^3_CHEST_ABD_PELV_BMI_SM (Adult)",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7085.2626.172141566967740391113157735015",
+              "SeriesDescription": "ABD3.0B31f",
+              "NumberOfImages": 141
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-UCEC",
+      "SubjectID": "C3N-02789",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7085.2626.315048091260390938035234632249",
+          "StudyDescription": "Thorax^3_CHEST_ABD_PELV_BMI_SM (Adult)",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7085.2626.202812447865554596297808371559",
+              "SeriesDescription": "MEDIASTINUM 3.0B30f",
+              "NumberOfImages": 97
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-UCEC",
+      "SubjectID": "C3N-02947",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7085.2626.255274206900916916836077152939",
+          "StudyDescription": "Thorax^CHEST_ABD_PELVIS (Adult)",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7085.2626.205008773768004986245949537041",
+              "SeriesDescription": "CHEST3.0I40f2",
+              "NumberOfImages": 101
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-UCEC",
+      "SubjectID": "C3N-02947",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7085.2626.255274206900916916836077152939",
+          "StudyDescription": "Thorax^CHEST_ABD_PELVIS (Adult)",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7085.2626.338235059497711806423177660850",
+              "SeriesDescription": "ABD/PEL3.0I40f1",
+              "NumberOfImages": 156
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-UCEC",
+      "SubjectID": "C3N-02979",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.221887871764789333958049108298",
+          "StudyDescription": "Abdomen^Brzuch_3fazy_Adult (Adult)",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.174482057693206917557937814144",
+              "SeriesDescription": "Venous phase5.0B30f",
+              "NumberOfImages": 56
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-UCEC",
+      "SubjectID": "C3N-03044",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4801.5885.208180815032715070388894288661",
+          "StudyDescription": "CT Chest Abdomen and Pelvis With Contrast",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4801.5885.185181587578756274493688776528",
+              "SeriesDescription": "C/A/P 3.75",
+              "NumberOfImages": 228
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-UCEC",
+      "SubjectID": "C3N-03044",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4801.5885.137423465625709771601265004154",
+          "StudyDescription": "CT Chest Abdomen and Pelvis With Contrast",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4801.5885.404810988081562588676249310250",
+              "SeriesDescription": "C/A/P 3.75",
+              "NumberOfImages": 239
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-SAR",
+      "SubjectID": "C3L-01038",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.2692.1975.466281579415888402964581942992",
+          "StudyDescription": "ABDOMEN",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.2692.1975.294776707341100585185431564738",
+              "SeriesDescription": "",
+              "NumberOfImages": 138
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-SAR",
+      "SubjectID": "C3L-03166",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.6450.2626.666453532728842597866299286669",
+          "StudyDescription": "CT LEFT FEMUR WITH",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.6450.2626.259592778654320496233083050335",
+              "SeriesDescription": "",
+              "NumberOfImages": 108
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-SAR",
+      "SubjectID": "C3L-03960",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.6450.2626.275600596167984572892658683554",
+          "StudyDescription": "CT ABDOMEN AND PELVIS WITH AND WITHOUT CONTRAST",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.6450.2626.241050775095168278280994574098",
+              "SeriesDescription": "ABD PELVIS",
+              "NumberOfImages": 97
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-PDA",
+      "SubjectID": "C3L-00189",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.1078.3273.382194720873684027956624363347",
+          "StudyDescription": "CT ABDOMEN & PELVIS ENHANCED=AB",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.1078.3273.237403885871508799148445839510",
+              "SeriesDescription": "A/P C+ 5mm",
+              "NumberOfImages": 203
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-PDA",
+      "SubjectID": "C3L-00395",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.1078.3273.379853879295196145901394269408",
+          "StudyDescription": "CT ABDOMEN NONENH & ENHANCED=AB",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.1078.3273.118728365638643556704822628107",
+              "SeriesDescription": "2.5 PV ABD/PEL",
+              "NumberOfImages": 251
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-PDA",
+      "SubjectID": "C3L-00401",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.1078.3273.272150880395270376537665904173",
+          "StudyDescription": "CT ABDOMEN NONENH & ENHANCED-BODY",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.1078.3273.115222332781781993819030355720",
+              "SeriesDescription": "VENOUS ABD/PELVIS 2.5MM",
+              "NumberOfImages": 220
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-PDA",
+      "SubjectID": "C3L-00599",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.1078.3273.287741448107606200044766549226",
+          "StudyDescription": "CT ABDOMEN & PELVIS ENHANCED=AB",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.1078.3273.528962902788862099299752483230",
+              "SeriesDescription": "ABD/PELENHANCED 5/2.5mm",
+              "NumberOfImages": 194
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-PDA",
+      "SubjectID": "C3L-00622",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.1078.3273.332173697029923487520510304273",
+          "StudyDescription": "CT ABDOMEN & PELVIS ENHANCED=AB",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.1078.3273.315624904514516160808418405218",
+              "SeriesDescription": "LUNG",
+              "NumberOfImages": 27
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-PDA",
+      "SubjectID": "C3L-00625",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.1078.3273.139985412320418407316296670477",
+          "StudyDescription": "CT ABDOMEN NONENH & ENHANCED=AB",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.1078.3273.284434159400355227660618151357",
+              "SeriesDescription": "VENOUS ABD/PELVIS",
+              "NumberOfImages": 188
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-PDA",
+      "SubjectID": "C3L-00622",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.1078.3273.332173697029923487520510304273",
+          "StudyDescription": "CT ABDOMEN & PELVIS ENHANCED=AB",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.1078.3273.594167590708523329502623766431",
+              "SeriesDescription": "53 ABD AXIAL 5X5",
+              "NumberOfImages": 109
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-PDA",
+      "SubjectID": "C3L-01036",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.2692.1975.144537276817786584861405462125",
+          "StudyDescription": "",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.2692.1975.316395956495787551712930855540",
+              "SeriesDescription": "Body 5.0 CE",
+              "NumberOfImages": 97
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-PDA",
+      "SubjectID": "C3L-01687",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.1078.3273.260713905558341142623441071761",
+          "StudyDescription": "CT ABDOMEN + PELVIS AUGMENTED=AB",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.1078.3273.213790906566744759915339361743",
+              "SeriesDescription": "AXIAL ABDOMEN PELVIS",
+              "NumberOfImages": 156
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-PDA",
+      "SubjectID": "C3L-01689",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.1078.3273.268358539799811717807471676672",
+          "StudyDescription": "CT ABDOMEN NONENH & ENHANCED=AB",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.1078.3273.915857074693225456170997227676",
+              "SeriesDescription": "2.5 PV ABD/PEL",
+              "NumberOfImages": 254
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-PDA",
+      "SubjectID": "C3L-01702",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.1078.3273.314237833757629861904050585914",
+          "StudyDescription": "CT ABDOMEN + PELVIS AUGMENTED=AB",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.1078.3273.131311021981995758635378138770",
+              "SeriesDescription": "AXIAL ABDOMEN PELVIS",
+              "NumberOfImages": 135
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-PDA",
+      "SubjectID": "C3L-01703",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.1078.3273.209638829076525895910314623080",
+          "StudyDescription": "CT ABDOMEN NONENH & ENHANCED=AB",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.1078.3273.333652539049780430799840370124",
+              "SeriesDescription": "VENOUS ABD/PELVIS 2.5MM",
+              "NumberOfImages": 230
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-PDA",
+      "SubjectID": "C3L-02112",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.1078.3273.131112255180298386283634139859",
+          "StudyDescription": "CT ABDOMEN & PELVIS ENHANCED=AB",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.1078.3273.188027662353723452733595883901",
+              "SeriesDescription": "AX VENOUS A/P 5/2.5MM",
+              "NumberOfImages": 179
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-PDA",
+      "SubjectID": "C3L-02115",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.1078.3273.579950355873141726715743328300",
+          "StudyDescription": "CT ABDOMEN NONENH & ENHANCED=AB",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.1078.3273.312739775979845199043660712627",
+              "SeriesDescription": "2.5 ARTERIAL ABDOMEN",
+              "NumberOfImages": 173
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-PDA",
+      "SubjectID": "C3L-02115",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.1078.3273.579950355873141726715743328300",
+          "StudyDescription": "CT ABDOMEN NONENH & ENHANCED=AB",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.1078.3273.938425541646737853915548574217",
+              "SeriesDescription": "CHEST STD 5",
+              "NumberOfImages": 62
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-PDA",
+      "SubjectID": "C3L-02116",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.1078.3273.586682128687324196098719578398",
+          "StudyDescription": "CT ABDOMEN & PELVIS ENHANCED=AB",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.1078.3273.120161010587544422997245693551",
+              "SeriesDescription": "ABD/PELENHANCED 5/2.5mm",
+              "NumberOfImages": 209
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-PDA",
+      "SubjectID": "C3L-02116",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.1078.3273.586682128687324196098719578398",
+          "StudyDescription": "CT ABDOMEN & PELVIS ENHANCED=AB",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.1078.3273.333365863028379139765817577353",
+              "SeriesDescription": "LUNG",
+              "NumberOfImages": 25
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-PDA",
+      "SubjectID": "C3L-02118",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.1078.3273.174242804485878810313629125277",
+          "StudyDescription": "CT CHEST ABDOMEN & PELVIS ENHANCED=AB",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.1078.3273.271004288421252179812272544893",
+              "SeriesDescription": "38 CHEST AXIAL 5X5",
+              "NumberOfImages": 58
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-PDA",
+      "SubjectID": "C3L-02118",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.1078.3273.174242804485878810313629125277",
+          "StudyDescription": "CT CHEST ABDOMEN & PELVIS ENHANCED=AB",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.1078.3273.282104996038162526040733366160",
+              "SeriesDescription": "ABD AXIAL 5X2",
+              "NumberOfImages": 92
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-PDA",
+      "SubjectID": "C3L-02606",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.1078.3273.696976040174217674027926575397",
+          "StudyDescription": "CT CHEST ABDOMEN & PELVIS ENHANCED=AB",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.1078.3273.121497034251766040723671772840",
+              "SeriesDescription": "ABD PEL AXIAL ST 3MM",
+              "NumberOfImages": 136
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-PDA",
+      "SubjectID": "C3L-02606",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.1078.3273.696976040174217674027926575397",
+          "StudyDescription": "CT CHEST ABDOMEN & PELVIS ENHANCED=AB",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.1078.3273.268918978023902271328197689321",
+              "SeriesDescription": "CHEST SOFT TISSUE 3MM",
+              "NumberOfImages": 107
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-PDA",
+      "SubjectID": "C3L-02613",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.1078.3273.193346692073394313791090771429",
+          "StudyDescription": "CT ABDOMEN NONENH & ENHANCED=AB",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.1078.3273.297968607422600505130001497690",
+              "SeriesDescription": "LUNG 5X5",
+              "NumberOfImages": 13
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-PDA",
+      "SubjectID": "C3L-02613",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.1078.3273.193346692073394313791090771429",
+          "StudyDescription": "CT ABDOMEN NONENH & ENHANCED=AB",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.1078.3273.318390387516429528571766938804",
+              "SeriesDescription": "61 VENOUS ABD AXIAL 3X2",
+              "NumberOfImages": 215
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-PDA",
+      "SubjectID": "C3L-02890",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.1078.3273.208590771532145884562399668202",
+          "StudyDescription": "CT ABDOMEN NONENH & ENHANCED=AB",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.1078.3273.271141209378346285855652349011",
+              "SeriesDescription": "61 VENOUS ABD AXIAL 3X2",
+              "NumberOfImages": 217
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-PDA",
+      "SubjectID": "C3L-02890",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.1078.3273.208590771532145884562399668202",
+          "StudyDescription": "CT ABDOMEN NONENH & ENHANCED=AB",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.1078.3273.290869574137142184020032644909",
+              "SeriesDescription": "LUNG 5X5",
+              "NumberOfImages": 25
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-PDA",
+      "SubjectID": "C3L-03123",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.1078.3273.298999466671227840807204532556",
+          "StudyDescription": "CT ABDOMEN +/- AUGMENT=AB",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.1078.3273.253659253587241192987818798973",
+              "SeriesDescription": "Venous/Phase Axial",
+              "NumberOfImages": 69
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-PDA",
+      "SubjectID": "C3L-03350",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.1078.3273.126512275858764206644486954375",
+          "StudyDescription": "CT CHEST ABDOMEN & PELVIS ENHANCED=AB",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.1078.3273.229071156808614932171034087401",
+              "SeriesDescription": "61 VENOUS ABD AXIAL 3X2",
+              "NumberOfImages": 258
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-PDA",
+      "SubjectID": "C3L-03350",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.1078.3273.126512275858764206644486954375",
+          "StudyDescription": "CT CHEST ABDOMEN & PELVIS ENHANCED=AB",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.1078.3273.272031510217076415248963165348",
+              "SeriesDescription": "38 CHEST AXIAL 5X5",
+              "NumberOfImages": 58
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-PDA",
+      "SubjectID": "C3L-03624",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.1078.3273.169235434741974313451821290484",
+          "StudyDescription": "CT ABDOMEN NONENH & ENHANCED=AB",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.1078.3273.142579097345306818125431430053",
+              "SeriesDescription": "VENOUS ABD/PELVIS 5/2.5",
+              "NumberOfImages": 152
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-PDA",
+      "SubjectID": "C3L-03635",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.1078.3707.210305565637800701040521086823",
+          "StudyDescription": "CT ABDOMEN & PELVIS ENHANCED=AB",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.1078.3707.112793168304085143489488641551",
+              "SeriesDescription": "PV ABD/PEL 2.5MM",
+              "NumberOfImages": 12
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-PDA",
+      "SubjectID": "C3L-03639",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.1078.3707.249966304594680029097984239242",
+          "StudyDescription": "CT ABDOMEN NONENH & ENHANCED=AB",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.1078.3707.210588007148164973746252349519",
+              "SeriesDescription": "VENOUS A/P THINS",
+              "NumberOfImages": 31
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-PDA",
+      "SubjectID": "C3L-03743",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.2857.3273.217658252544362628018391397434",
+          "StudyDescription": "CT ABDOMEN WO+W CONTRAST",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.2857.3273.763873604368773090782703713954",
+              "SeriesDescription": "VENOUS ST",
+              "NumberOfImages": 104
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-PDA",
+      "SubjectID": "C3N-00198",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7085.2626.822645453932810382886582736291",
+          "StudyDescription": "CT ABDOMEN W IV CONTRAST",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7085.2626.168480840630370295958226892277",
+              "SeriesDescription": "Abd/PANC 2.0 B31f",
+              "NumberOfImages": 71
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-PDA",
+      "SubjectID": "C3N-00249",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7085.2626.300036405768886346261819580052",
+          "StudyDescription": "CT CHEST W IV CONTRAST",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7085.2626.176520109931701354483419993926",
+              "SeriesDescription": "CHEST3.0B40f",
+              "NumberOfImages": 102
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-PDA",
+      "SubjectID": "C3N-00302",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.187887287595062235569464754966",
+          "StudyDescription": "Abdomen^KLP_JB_M (Adult)",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.113363645165512170963316559181",
+              "SeriesDescription": "KLP/JB/M",
+              "NumberOfImages": 135
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-PDA",
+      "SubjectID": "C3N-00303",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.104195637171680242918289513479",
+          "StudyDescription": "TK j.brzusznej/mied malej BK i min 2 fazy ZK",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.228476454931090952243913193877",
+              "SeriesDescription": "KONTRAST",
+              "NumberOfImages": 256
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-PDA",
+      "SubjectID": "C3N-00513",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.326475895352529292866632899138",
+          "StudyDescription": "BRZUCH+C",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.278368140789985033169275679549",
+              "SeriesDescription": "portal",
+              "NumberOfImages": 399
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-PDA",
+      "SubjectID": "C3N-00518",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.152280616270940957074825755505",
+          "StudyDescription": "Abdomen^JAMA_BRZUSZNA_WIELO_FAZ (Adult)",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.104386655669578826656699930336",
+              "SeriesDescription": "Contrast3.0B41s",
+              "NumberOfImages": 123
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-PDA",
+      "SubjectID": "C3N-00957",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7085.2626.288556932699345417840865580178",
+          "StudyDescription": "CT ABDOMEN/PELVIS W IV CONTRAST",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7085.2626.294094797027934123470728849520",
+              "SeriesDescription": "LUNG 3.0B70f",
+              "NumberOfImages": 36
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-PDA",
+      "SubjectID": "C3N-00957",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7085.2626.288556932699345417840865580178",
+          "StudyDescription": "CT ABDOMEN/PELVIS W IV CONTRAST",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7085.2626.844407029514937074618033906988",
+              "SeriesDescription": "PANCREAS Arterial2.0I40f1",
+              "NumberOfImages": 129
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-PDA",
+      "SubjectID": "C3N-00957",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7085.2626.288556932699345417840865580178",
+          "StudyDescription": "CT ABDOMEN/PELVIS W IV CONTRAST",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7085.2626.984361307626903829562789406767",
+              "SeriesDescription": "PANCREAS Venous 3.0I40f1",
+              "NumberOfImages": 145
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-PDA",
+      "SubjectID": "C3N-01165",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.171904689848389372373212057884",
+          "StudyDescription": "Abdomen^J_BRZUSZNA_3_FAZY (Adult)",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.100402908238601198913327073948",
+              "SeriesDescription": "F.ZYLNA5.0B41s",
+              "NumberOfImages": 79
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-PDA",
+      "SubjectID": "C3N-01165",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.171904689848389372373212057884",
+          "StudyDescription": "Abdomen^J_BRZUSZNA_3_FAZY (Adult)",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.162565832080098911519289346680",
+              "SeriesDescription": "J. BRZUSZNA5.0B41s",
+              "NumberOfImages": 79
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-PDA",
+      "SubjectID": "C3N-01165",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.171904689848389372373212057884",
+          "StudyDescription": "Abdomen^J_BRZUSZNA_3_FAZY (Adult)",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.233973575227965710161496181391",
+              "SeriesDescription": "F. TETNICZA5.0B41s",
+              "NumberOfImages": 79
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-PDA",
+      "SubjectID": "C3N-01166",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.596745801241198867454121634845",
+          "StudyDescription": "Abdomen^BRZUCH_BOLUS_FAZA_TRZUSTKA (Adult)",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.259644109226269188844156139586",
+              "SeriesDescription": "Abdomen5.0B30f",
+              "NumberOfImages": 63
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-PDA",
+      "SubjectID": "C3N-01166",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.596745801241198867454121634845",
+          "StudyDescription": "Abdomen^BRZUCH_BOLUS_FAZA_TRZUSTKA (Adult)",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.302779496526320042445740025201",
+              "SeriesDescription": "Abdomen +K21.0B20f",
+              "NumberOfImages": 174
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-PDA",
+      "SubjectID": "C3N-01167",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.296603705380307731709741019444",
+          "StudyDescription": "Abdomen^BRZUCH_BOLUS (Adult)",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.117033170136578348651019906583",
+              "SeriesDescription": "Abdomen +K21.0B20f",
+              "NumberOfImages": 161
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-PDA",
+      "SubjectID": "C3N-01381",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.193851200941263260398416877900",
+          "StudyDescription": "TK jamy brzusznej",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.126723788722643085043784682635",
+              "SeriesDescription": "Std",
+              "NumberOfImages": 86
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-PDA",
+      "SubjectID": "C3N-01381",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.193851200941263260398416877900",
+          "StudyDescription": "TK jamy brzusznej",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.195707059948805634576815747650",
+              "SeriesDescription": "Tetnicza",
+              "NumberOfImages": 171
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-PDA",
+      "SubjectID": "C3N-01382",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.321921581379809068219350851775",
+          "StudyDescription": "TK jamy brzusznej lub miednicy malej bez kontrastu i z kontraste",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.312062799391610984774159607245",
+              "SeriesDescription": "Tk miekka 5.0 CEII Faza",
+              "NumberOfImages": 75
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-PDA",
+      "SubjectID": "C3N-01383",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.175163519878951205692111413750",
+          "StudyDescription": "JB",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.194485831632775639144630354444",
+              "SeriesDescription": "T miekka FC17",
+              "NumberOfImages": 61
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-PDA",
+      "SubjectID": "C3N-01383",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.175163519878951205692111413750",
+          "StudyDescription": "JB",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.234711017119773034080730627898",
+              "SeriesDescription": "T miekka FC17",
+              "NumberOfImages": 91
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-PDA",
+      "SubjectID": "C3N-01383",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.175163519878951205692111413750",
+          "StudyDescription": "JB",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.306305483437170788583280949028",
+              "SeriesDescription": "T miekka FC17",
+              "NumberOfImages": 88
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-PDA",
+      "SubjectID": "C3N-01900",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.169391583962999379678551500250",
+          "StudyDescription": "TK J BRZUSZNEJ",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.322108234427537500312736026954",
+              "SeriesDescription": "J.BRZUSZNA Z KONTR",
+              "NumberOfImages": 47
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-PDA",
+      "SubjectID": "C3N-02592",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.195032503893401601863702238054",
+          "StudyDescription": "TK- j. brzuszna z kontr.",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.879611076177009012361201941155",
+              "SeriesDescription": "po iv tetnicza",
+              "NumberOfImages": 86
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-PDA",
+      "SubjectID": "C3N-02971",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7085.2626.256404623014926450440901790134",
+          "StudyDescription": "Abdomen^DUAL_PHASE_PANC (Adult)",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7085.2626.180954086578970008488722763048",
+              "SeriesDescription": "VENOUS3.0B30f",
+              "NumberOfImages": 147
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-PDA",
+      "SubjectID": "C3N-03039",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4801.5885.127446994386628980433644027932",
+          "StudyDescription": "CT ABDOMEN AND PELVIS",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4801.5885.131843470719943624841970718181",
+              "SeriesDescription": "ABD / PELVIS I+ 40 ASIR",
+              "NumberOfImages": 378
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-LUAD",
+      "SubjectID": "C3N-00293",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.422733137947743982883007841898",
+          "StudyDescription": "TK - KLP",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.164776163136916365621928035448",
+              "SeriesDescription": "PO KONTRASCIE",
+              "NumberOfImages": 126
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-LUAD",
+      "SubjectID": "C3N-00704",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4801.5885.610251451472160601239529900233",
+          "StudyDescription": "CT CHEST WITH CONTRAST",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4801.5885.216385156052618926628903883042",
+              "SeriesDescription": "CHEST 40 ASIR",
+              "NumberOfImages": 245
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-LUAD",
+      "SubjectID": "C3N-00704",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4801.5885.610251451472160601239529900233",
+          "StudyDescription": "CT CHEST WITH CONTRAST",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4801.5885.256365077398659288336841863043",
+              "SeriesDescription": "Std",
+              "NumberOfImages": 123
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-LUAD",
+      "SubjectID": "C3N-00737",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7085.2626.120588048020841000618579105062",
+          "StudyDescription": "CT CHEST W IV CONTRAST",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7085.2626.700012005616379600543713462679",
+              "SeriesDescription": "CHEST3.0B30f",
+              "NumberOfImages": 120
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-LUAD",
+      "SubjectID": "C3N-02451",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7085.2626.180376629949556486305956173762",
+          "StudyDescription": "Thorax^CHEST_ROUTINE (Adult)",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7085.2626.169354262811305262282831414253",
+              "SeriesDescription": "CHEST3.0I40f2",
+              "NumberOfImages": 103
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-LUAD",
+      "SubjectID": "C3N-02672",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.131371811545979621256901587054",
+          "StudyDescription": "KT KLATKI PIERSIOWEJ ZE WZMOCNIENIEM KONTRASTOWYM",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.982407398233104514337931023193",
+              "SeriesDescription": "Chest 2mm",
+              "NumberOfImages": 131
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-LUAD",
+      "SubjectID": "C3N-02721",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.2932.1975.186597934614303135291851027476",
+          "StudyDescription": "Thorax^01_ThoraxNative (Adult)",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.2932.1975.139344037244157968824624956143",
+              "SeriesDescription": "Thorax Contr5.0B31f",
+              "NumberOfImages": 76
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-LUAD",
+      "SubjectID": "C3N-02950",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7085.2626.287436905189564547977927877721",
+          "StudyDescription": "Thorax^01_CHEST_ROUTINE (Adult)",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7085.2626.958915666011494802591848933156",
+              "SeriesDescription": "ThoraxRoutine3.0B31f",
+              "NumberOfImages": 30
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-LUAD",
+      "SubjectID": "C3N-02973",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7085.2626.314825732538217563075916220027",
+          "StudyDescription": "Thorax^CHEST (Adult)",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7085.2626.278936996173440598411355762731",
+              "SeriesDescription": "CHEST3.0I70f2",
+              "NumberOfImages": 108
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-LUAD",
+      "SubjectID": "C3N-03038",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4801.5885.606190902708804632251378406348",
+          "StudyDescription": "CT CHEST WITH CONTRAST",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4801.5885.305700397243539863103211647304",
+              "SeriesDescription": "2.5 MM STD, iDose (3)",
+              "NumberOfImages": 143
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-LUAD",
+      "SubjectID": "C3N-03420",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.111367826218582681866767687243",
+          "StudyDescription": "KT KLATKI PIERSIOWEJ ZE WZMOCNIENIEM KONTRASTOWYM",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.269886867861435245651584457132",
+              "SeriesDescription": "Chest 2mm",
+              "NumberOfImages": 106
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-LUAD",
+      "SubjectID": "C3N-03764",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.157763688399882503143880354793",
+          "StudyDescription": "KL.P BEZ I Z CE",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.427724865681024132730397035988",
+              "SeriesDescription": "STND 2.5 MM +CE",
+              "NumberOfImages": 139
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-LSCC",
+      "SubjectID": "C3L-01000",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.2692.1975.673079780724926389963058818628",
+          "StudyDescription": "MSKT organov grudnoy k",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.2692.1975.248198844905096910369237195297",
+              "SeriesDescription": "STD 1.25mm",
+              "NumberOfImages": 497
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-LSCC",
+      "SubjectID": "C3N-00247",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7085.2626.258626612405225511766549337110",
+          "StudyDescription": "CT CHEST W IV CONTRAST",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7085.2626.173394284264464143187591490560",
+              "SeriesDescription": "CHEST 3.0B31f",
+              "NumberOfImages": 107
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-LSCC",
+      "SubjectID": "C3N-00309",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.558870256974949833132739658951",
+          "StudyDescription": "TOMOGRAFIA KLATKI PIER",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.326578186203080701386110685495",
+              "SeriesDescription": "C",
+              "NumberOfImages": 63
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-LSCC",
+      "SubjectID": "C3N-00497",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.157415452250904845171934690964",
+          "StudyDescription": "TOMOGRAFIA KLATKI PIER",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.216083731978528151846607648117",
+              "SeriesDescription": "c",
+              "NumberOfImages": 67
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-LSCC",
+      "SubjectID": "C3N-00839",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.2932.1975.239068392697899867359206588229",
+          "StudyDescription": "",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.2932.1975.175520851288282549105432008733",
+              "SeriesDescription": "Body 5.0",
+              "NumberOfImages": 69
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-LSCC",
+      "SubjectID": "C3N-02300",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.111277410495276503670203922859",
+          "StudyDescription": "Thorax^KLATKA_PIERSIOWA_kontrast (Adult)",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.237643285855541805303289726886",
+              "SeriesDescription": "srodpiersie+C5.0I31f3",
+              "NumberOfImages": 75
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-LSCC",
+      "SubjectID": "C3N-02300",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.111277410495276503670203922859",
+          "StudyDescription": "Thorax^KLATKA_PIERSIOWA_kontrast (Adult)",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.285740635532017567530783757629",
+              "SeriesDescription": "plucne+C5.0B50f",
+              "NumberOfImages": 75
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-LSCC",
+      "SubjectID": "C3N-02494",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4801.5885.135432707744076194966456906497",
+          "StudyDescription": "CT Chest With Contrast",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4801.5885.148647290459489525080906012106",
+              "SeriesDescription": "CHEST",
+              "NumberOfImages": 240
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-LSCC",
+      "SubjectID": "C3N-03425",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.903784812858440711092236905812",
+          "StudyDescription": "KT klatki piersiowej bez i z CE z ujeciem nadbrzusza",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.311761492242890245022688440590",
+              "SeriesDescription": "2.5 MM STND",
+              "NumberOfImages": 138
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-LSCC",
+      "SubjectID": "C3N-04162",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.2932.1975.279338306642143195189248745888",
+          "StudyDescription": "",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.2932.1975.283724586529264347808137918981",
+              "SeriesDescription": "Body 1.0 Venous /Phase CE",
+              "NumberOfImages": 594
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-HNSCC",
+      "SubjectID": "C3N-03042",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4801.5885.594353147834094850451029338969",
+          "StudyDescription": "CT NECK WITH CONTRAST",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4801.5885.158425225636913079027212080655",
+              "SeriesDescription": "Start inferior to Orbits I+",
+              "NumberOfImages": 201
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-HNSCC",
+      "SubjectID": "C3N-03042",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4801.5885.960224049552947903002534891651",
+          "StudyDescription": "CT MAXILLOFACIAL WITH CONTRAST",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4801.5885.210151376285386958551254523456",
+              "SeriesDescription": "I+ 1.25mm soft tissue",
+              "NumberOfImages": 156
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-HNSCC",
+      "SubjectID": "C3N-03042",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4801.5885.239036450629614749201868579487",
+          "StudyDescription": "CT CHEST WITH CONTRAST",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4801.5885.335142465405872958786330243855",
+              "SeriesDescription": "CHEST",
+              "NumberOfImages": 251
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-HNSCC",
+      "SubjectID": "C3N-03045",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4801.5885.266064856732345275483244351897",
+          "StudyDescription": "CT Neck With Contrast",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4801.5885.144993426825235708026051533667",
+              "SeriesDescription": "1.5 STD, iDose (1)",
+              "NumberOfImages": 185
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-HNSCC",
+      "SubjectID": "C3N-03045",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4801.5885.282820641426199541415771062652",
+          "StudyDescription": "CT Neck With Contrast",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4801.5885.230813544927667373804747950040",
+              "SeriesDescription": "Start sup to orbit 1.25mm std",
+              "NumberOfImages": 246
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-HNSCC",
+      "SubjectID": "C3N-03226",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.2932.1975.575044165189229082046403989051",
+          "StudyDescription": "",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.2932.1975.129808666714529317002794048811",
+              "SeriesDescription": "Neck 1.0 CE",
+              "NumberOfImages": 376
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-HNSCC",
+      "SubjectID": "C3N-03226",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.2932.1975.575044165189229082046403989051",
+          "StudyDescription": "",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.2932.1975.138298963112478507286976641736",
+              "SeriesDescription": "Venous Phase Sft Tissue 1.0 CE",
+              "NumberOfImages": 462
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-HNSCC",
+      "SubjectID": "C3N-03612",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.2932.1975.307664574884029099638730060898",
+          "StudyDescription": "03. Neck, Chest CE",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.2932.1975.128230284700785849348539429434",
+              "SeriesDescription": "CONTRAST",
+              "NumberOfImages": 457
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-HNSCC",
+      "SubjectID": "C3N-03612",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.2932.1975.307664574884029099638730060898",
+          "StudyDescription": "03. Neck, Chest CE",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.2932.1975.129473498273697263092679904204",
+              "SeriesDescription": "delay 240 sec",
+              "NumberOfImages": 457
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-HNSCC",
+      "SubjectID": "C3N-03612",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.2932.1975.307664574884029099638730060898",
+          "StudyDescription": "03. Neck, Chest CE",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.2932.1975.132625920955743958575826997971",
+              "SeriesDescription": "Thorax CE",
+              "NumberOfImages": 166
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-HNSCC",
+      "SubjectID": "C3N-03612",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.2932.1975.307664574884029099638730060898",
+          "StudyDescription": "03. Neck, Chest CE",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.2932.1975.168749256242147376506136991880",
+              "SeriesDescription": "Thorax (YB)",
+              "NumberOfImages": 826
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-HNSCC",
+      "SubjectID": "C3N-03612",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.2932.1975.307664574884029099638730060898",
+          "StudyDescription": "03. Neck, Chest CE",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.2932.1975.804196540465028363517992238152",
+              "SeriesDescription": "Thorax CE",
+              "NumberOfImages": 344
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-HNSCC",
+      "SubjectID": "C3N-03664",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.2932.1975.287584993847410981779765733283",
+          "StudyDescription": "02. Neck CE",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.2932.1975.118145241396644941068469175474",
+              "SeriesDescription": "delay 180 sec.",
+              "NumberOfImages": 452
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-HNSCC",
+      "SubjectID": "C3N-03889",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.2932.1975.119803882962116260091129803385",
+          "StudyDescription": "",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.2932.1975.126717792807951190299031822196",
+              "SeriesDescription": "Body 5.0 CE",
+              "NumberOfImages": 112
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-HNSCC",
+      "SubjectID": "C3N-03889",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.2932.1975.119803882962116260091129803385",
+          "StudyDescription": "",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.2932.1975.611176344048552267233264013885",
+              "SeriesDescription": "Body 5.0 CE",
+              "NumberOfImages": 111
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-HNSCC",
+      "SubjectID": "C3N-03889",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.2932.1975.246607516616201261463186316873",
+          "StudyDescription": "",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.2932.1975.617862615364812222545508911826",
+              "SeriesDescription": "Head 5.0",
+              "NumberOfImages": 30
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-HNSCC",
+      "SubjectID": "C3N-03933",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.2932.1975.327829688644949940773150504917",
+          "StudyDescription": "",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.2932.1975.273221149306114044017745568749",
+              "SeriesDescription": "Body 5.0",
+              "NumberOfImages": 113
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-HNSCC",
+      "SubjectID": "C3N-04611",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.2932.1975.331479594405951902696724221611",
+          "StudyDescription": "K Neck Contrast(Adult)",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.2932.1975.299779662574805552800174316070",
+              "SeriesDescription": "Thorax Native2,00Br40S4",
+              "NumberOfImages": 186
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-HNSCC",
+      "SubjectID": "C3N-04611",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.2932.1975.331479594405951902696724221611",
+          "StudyDescription": "K Neck Contrast(Adult)",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.2932.1975.991875747363589521780079446110",
+              "SeriesDescription": "Neck Venous1,50Br40S4",
+              "NumberOfImages": 275
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-CCRCC",
+      "SubjectID": "C3L-00610",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.6450.2626.226264899367629449474553210032",
+          "StudyDescription": "CT ABDOMEN AND PELVIS",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.6450.2626.243543549880431810932733797830",
+              "SeriesDescription": "5MM---150SEC POST INJ. DELAY",
+              "NumberOfImages": 61
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-CCRCC",
+      "SubjectID": "C3L-00792",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.6450.2626.165737737780362153809005994783",
+          "StudyDescription": "CT ABDOMEN AND PELVIS",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.6450.2626.283271425809761560802148608862",
+              "SeriesDescription": "ENHANCED ABD OR ABD/PEL",
+              "NumberOfImages": 86
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-CCRCC",
+      "SubjectID": "C3L-00815",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.6450.2626.966065509516020407887440775669",
+          "StudyDescription": "CT ABDOMEN AND PELVIS",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.6450.2626.147979492959581142502612945880",
+              "SeriesDescription": "HELICAL 5s",
+              "NumberOfImages": 89
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-CCRCC",
+      "SubjectID": "C3L-00817",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.6450.2626.301501056338332470451038402702",
+          "StudyDescription": "CTABDPELWX",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.6450.2626.121433793515886050718228160387",
+              "SeriesDescription": "AXIALS5 X 5 CONTRAST",
+              "NumberOfImages": 89
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-CCRCC",
+      "SubjectID": "C3L-01352",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.2857.3304.287518573238800862149841510584",
+          "StudyDescription": "CT ABDOMEN+PELVIS WO+W CONTRAST",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.2857.3304.106197819175244082371821666699",
+              "SeriesDescription": "2.5MM ADRENAL",
+              "NumberOfImages": 102
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-CCRCC",
+      "SubjectID": "C3L-01352",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.2857.3304.287518573238800862149841510584",
+          "StudyDescription": "CT ABDOMEN+PELVIS WO+W CONTRAST",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.2857.3304.239222061534769647580911799179",
+              "SeriesDescription": "2.5 standard",
+              "NumberOfImages": 116
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-CCRCC",
+      "SubjectID": "C3L-01459",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.6450.2626.216846840467517631134506083628",
+          "StudyDescription": "CT",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.6450.2626.142501103614876200330271549115",
+              "SeriesDescription": "AX THK PORTAL",
+              "NumberOfImages": 121
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-CCRCC",
+      "SubjectID": "C3L-01462",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.6450.2626.154795893527803558796490738192",
+          "StudyDescription": "CT ABDOMEN AND PELVIS",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.6450.2626.283427753326891757846368229726",
+              "SeriesDescription": "Venous",
+              "NumberOfImages": 85
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-CCRCC",
+      "SubjectID": "C3L-01464",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.6450.2626.213337406117018576387221748918",
+          "StudyDescription": "CTABDPELW",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.6450.2626.165142321187606195302374913526",
+              "SeriesDescription": "5 X 5 ABDOMEN/PELVIS",
+              "NumberOfImages": 98
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-CCRCC",
+      "SubjectID": "C3L-01464",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.6450.2626.265680316005866225941144690705",
+          "StudyDescription": "CT THORAXWITH CONTRAST",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.6450.2626.778332313541809265007476046367",
+              "SeriesDescription": "CHEST",
+              "NumberOfImages": 58
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-CCRCC",
+      "SubjectID": "C3L-01465",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.6450.2626.150806391223256240993392702813",
+          "StudyDescription": "CT Chest w/ Contrast",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.6450.2626.168743181821711095435146051649",
+              "SeriesDescription": "AX THK +C",
+              "NumberOfImages": 109
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-CCRCC",
+      "SubjectID": "C3L-01465",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.6450.2626.240854213793434621983061226123",
+          "StudyDescription": "CT Abd/Pelvis w/ Contrast",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.6450.2626.253411287373859074297992431765",
+              "SeriesDescription": "AX THK PORTAL",
+              "NumberOfImages": 227
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-CCRCC",
+      "SubjectID": "C3L-01954",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.6450.2626.419171025458818342446340457545",
+          "StudyDescription": "CT ABDOMEN PELVIS W WO IV CONTRAST",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.6450.2626.128067162434053625458129735145",
+              "SeriesDescription": "Axial Body CE",
+              "NumberOfImages": 119
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-CCRCC",
+      "SubjectID": "C3L-01954",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.6450.2626.176662132077753849523507721689",
+          "StudyDescription": "CT TRAUMA CHEST ABDOMEN PELVIS W IV CONTRAST",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.6450.2626.143462471571441681272830753215",
+              "SeriesDescription": "Axial Chest CE",
+              "NumberOfImages": 119
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-CCRCC",
+      "SubjectID": "C3L-01954",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.6450.2626.105963537820880479263759806578",
+          "StudyDescription": "CT CERVICAL SPINE WO IV CONTRAST",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.6450.2626.146549161537051943463480337978",
+              "SeriesDescription": "Axial Spine",
+              "NumberOfImages": 112
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-CCRCC",
+      "SubjectID": "C3L-01954",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.6450.2626.419171025458818342446340457545",
+          "StudyDescription": "CT ABDOMEN PELVIS W WO IV CONTRAST",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.6450.2626.334142568180197991852864404466",
+              "SeriesDescription": "Axial Body CE",
+              "NumberOfImages": 118
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-CCRCC",
+      "SubjectID": "C3L-01958",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.6450.2626.316236238591966133680679150166",
+          "StudyDescription": "CT ABDOMEN AND PELVIS",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.6450.2626.314350013794679924607725203038",
+              "SeriesDescription": "#REF!",
+              "NumberOfImages": 94
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-CCRCC",
+      "SubjectID": "C3L-01976",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.2857.3304.463818622716256392008151457873",
+          "StudyDescription": "CT ABDOMEN+PELVIS W CONTRAST",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.2857.3304.319582964259409452565516739579",
+              "SeriesDescription": "ABD/PEL ST ss40",
+              "NumberOfImages": 91
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-CCRCC",
+      "SubjectID": "C3L-02202",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.6450.2626.165635710938091588766181073093",
+          "StudyDescription": "CT ABDOMEN PELVIS W/O AND W",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.6450.2626.333165810229995441342898666487",
+              "SeriesDescription": "140SEC DELAY DIAPHRAGM TO CREST",
+              "NumberOfImages": 69
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-CCRCC",
+      "SubjectID": "C3L-02841",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.6450.2626.559083440848856473541095966545",
+          "StudyDescription": "CT ABDOMEN AND PELVIS WITH CONTRAST",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.6450.2626.182694957745140692213982292342",
+              "SeriesDescription": "A/P WITH 5.0 STND",
+              "NumberOfImages": 107
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-CCRCC",
+      "SubjectID": "C3N-00194",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7085.2626.111409368798599897845431735119",
+          "StudyDescription": "CT CHEST ABDOMEN PELVIS W IV CONTRAST",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7085.2626.198652105819616900702471781454",
+              "SeriesDescription": "ABD/PEL3.0B40f",
+              "NumberOfImages": 144
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-CCRCC",
+      "SubjectID": "C3N-00194",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7085.2626.111409368798599897845431735119",
+          "StudyDescription": "CT CHEST ABDOMEN PELVIS W IV CONTRAST",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7085.2626.272264660392623298138185226559",
+              "SeriesDescription": "CHEST3.0B40f",
+              "NumberOfImages": 142
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-CCRCC",
+      "SubjectID": "C3N-00246",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7085.2626.152122019025273337069783855932",
+          "StudyDescription": "CT CHEST W IV CONTRAST",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7085.2626.240369248030371145534803290408",
+              "SeriesDescription": "CHEST3.0I31f2",
+              "NumberOfImages": 92
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-CCRCC",
+      "SubjectID": "C3N-00312",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.200878115477689046776018183021",
+          "StudyDescription": "BRZUCH+C",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.162213661861017164035687013351",
+              "SeriesDescription": "portal",
+              "NumberOfImages": 229
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-CCRCC",
+      "SubjectID": "C3N-00313",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.246001443877018648850393456965",
+          "StudyDescription": "TK SPECJ. JAMY BRZUSZN",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.968544534598003390956010661428",
+              "SeriesDescription": "Recon 2: Przed kontrastem",
+              "NumberOfImages": 197
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-CCRCC",
+      "SubjectID": "C3N-00380",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.2932.1975.175300422983893052985650788295",
+          "StudyDescription": "",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.2932.1975.107182908568332911981662727956",
+              "SeriesDescription": "Body 5.0",
+              "NumberOfImages": 126
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-CCRCC",
+      "SubjectID": "C3N-00380",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.2932.1975.175300422983893052985650788295",
+          "StudyDescription": "",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.2932.1975.910572930556124851150566087175",
+              "SeriesDescription": "Body 5.0 Venous/Phase CE",
+              "NumberOfImages": 126
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-CCRCC",
+      "SubjectID": "C3N-00435",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.2932.1975.629609951658016630388934891908",
+          "StudyDescription": "Abdomen^08_Kidney_MultiPhase (Adult)",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.2932.1975.190666036404757012797279389470",
+              "SeriesDescription": "Venous Phase1.5B30f",
+              "NumberOfImages": 227
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-CCRCC",
+      "SubjectID": "C3N-00733",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7085.2626.109463790033600820984056938400",
+          "StudyDescription": "Abdomen^1_ABD_BMI_UNDER_30 (Adult)",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7085.2626.281803157992387411763394342207",
+              "SeriesDescription": "ABD3.0B31f",
+              "NumberOfImages": 141
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-CCRCC",
+      "SubjectID": "C3N-00733",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7085.2626.109463790033600820984056938400",
+          "StudyDescription": "Abdomen^1_ABD_BMI_UNDER_30 (Adult)",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7085.2626.307245013821291035288600848603",
+              "SeriesDescription": "MEDIASTINUM 3.0B30f",
+              "NumberOfImages": 104
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-CCRCC",
+      "SubjectID": "C3N-00953",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7085.2626.192997540292073877946622133586",
+          "StudyDescription": "CT ABDOMEN/PELVIS W AND W/O IV CONTRAST",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7085.2626.187580115709014280730997641712",
+              "SeriesDescription": "ABD ROUTINE3.0B31f",
+              "NumberOfImages": 114
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-CCRCC",
+      "SubjectID": "C3N-00953",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7085.2626.192997540292073877946622133586",
+          "StudyDescription": "CT ABDOMEN/PELVIS W AND W/O IV CONTRAST",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7085.2626.328191285537072639441393834220",
+              "SeriesDescription": "90 sec ABD3.0B31f",
+              "NumberOfImages": 79
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-CCRCC",
+      "SubjectID": "C3N-01524",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.2932.1975.277486652714623414151775226101",
+          "StudyDescription": "06. Chest, Abdomen CE",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.2932.1975.261165348935784178984596694177",
+              "SeriesDescription": "DELAY",
+              "NumberOfImages": 492
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-CCRCC",
+      "SubjectID": "C3N-01536",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.2932.1975.751408857468112004725454687389",
+          "StudyDescription": "06.Chest, Abdomen contrast",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.2932.1975.141513533230232999992165948904",
+              "SeriesDescription": "DELAY",
+              "NumberOfImages": 484
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-CCRCC",
+      "SubjectID": "C3N-01902",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.222099286184860400418289794105",
+          "StudyDescription": "Abdomen^JB_3FAZY_BOLUS (Adult)",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.3320.3273.162885330616923354364179578111",
+              "SeriesDescription": "JB5.0B41s",
+              "NumberOfImages": 86
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-CCRCC",
+      "SubjectID": "C3N-01989",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4801.5885.323034995171326259389995859562",
+          "StudyDescription": "CT Adrenal Mass",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4801.5885.260469781061118747076593832892",
+              "SeriesDescription": "CHEST",
+              "NumberOfImages": 228
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-CCRCC",
+      "SubjectID": "C3N-01989",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4801.5885.323034995171326259389995859562",
+          "StudyDescription": "CT Adrenal Mass",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.4801.5885.987248724692487727299867562286",
+              "SeriesDescription": "3.75mm Standard",
+              "NumberOfImages": 206
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-CCRCC",
+      "SubjectID": "C3N-02015",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7085.2626.265971496207574106995588002857",
+          "StudyDescription": "CT ABDOMEN W AND W/O IV CONTRAST",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.7085.2626.241290796655397384297058111354",
+              "SeriesDescription": "90 sec ABD3.0B31f",
+              "NumberOfImages": 109
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-CCRCC",
+      "SubjectID": "C3N-02063",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.2932.1975.260914098698391958405753322278",
+          "StudyDescription": "Abdomen^01_AbdNative_and_Contrast (Adult)",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.2932.1975.119021941081363082209663944287",
+              "SeriesDescription": "Venous Phase2.0B41s",
+              "NumberOfImages": 294
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Collection": "CPTAC-CCRCC",
+      "SubjectID": "C3N-02723",
+      "studies": [
+        {
+          "StudyInstanceUID": "1.3.6.1.4.1.14519.5.2.1.2932.1975.214566017323961752670709225866",
+          "StudyDescription": "",
+          "StudyDate": "00:00.0",
+          "series": [
+            {
+              "SeriesInstanceUID": "1.3.6.1.4.1.14519.5.2.1.2932.1975.152291675564226539389004167745",
+              "SeriesDescription": "Body 5.0CE",
+              "NumberOfImages": 94
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
