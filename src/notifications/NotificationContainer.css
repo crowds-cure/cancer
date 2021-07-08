@@ -24,9 +24,9 @@
 
 @media (max-width: screen-min) {
   .NotificationContainer {
-    right: 5px;
-    top: 4px;
-    width: calc(100% - 10px);
+    right: 8px;
+    top: 150px;
+    width: calc(100% - 16px);
   }
 
   .NotificationContainer .NotificationToast {
